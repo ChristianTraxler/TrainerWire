@@ -10,7 +10,8 @@
       "WebFetch(domain:pokemongo.com)",
       "WebFetch(domain:www.dexerto.com)",
       "WebFetch(domain:www.serebii.net)",
-      "WebFetch(domain:www.snacknap.com)"
+      "WebFetch(domain:www.snacknap.com)",
+      "WebFetch(domain:www.leekduck.com)"
     ]
   }
 }
