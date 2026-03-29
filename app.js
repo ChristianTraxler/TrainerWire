@@ -214,8 +214,13 @@ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e)
   darkMode = e.matches;
   render();
 });
+function updateThemeColor() {
+  const color = darkMode ? "#0e0e12" : "#FAFBFC";
+  document.querySelectorAll('meta[name="theme-color"]').forEach(m => m.setAttribute("content", color));
+}
 function toggleDarkMode() {
   darkMode = !darkMode;
+  updateThemeColor();
   const btn = document.getElementById("theme-toggle");
   if (btn) { btn.style.transform = "rotate(360deg) scale(1.2)"; setTimeout(() => { btn.style.transform = "rotate(0deg) scale(1)"; }, 400); }
   render();
@@ -1697,4 +1702,5 @@ setInterval(() => {
 }, 1000);
 
 // Initial render
+updateThemeColor();
 render();
