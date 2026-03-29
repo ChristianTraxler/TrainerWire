@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:pokemongohub.net)",
+      "WebFetch(domain:leekduck.com)",
+      "WebFetch(domain:cdn.leekduck.com)",
+      "WebFetch(domain:db.pokemongohub.net)",
+      "WebFetch(domain:pokemongo.fandom.com)",
+      "WebFetch(domain:pokemongo.com)",
+      "WebFetch(domain:www.dexerto.com)",
+      "WebFetch(domain:www.serebii.net)",
+      "WebFetch(domain:www.snacknap.com)"
+    ]
+  }
+}
