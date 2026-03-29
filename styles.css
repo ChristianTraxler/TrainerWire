@@ -27,3 +27,10 @@ html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; -webkit-fon
 
 button:active { transform: scale(0.97) !important; }
 button { transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+
+/* Card flip */
+.flip-card { cursor: pointer; position: relative; }
+.flip-card-front { position: relative; border-radius: 12px; overflow: hidden; }
+.flip-card-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px; overflow: hidden; opacity: 0; pointer-events: none; transition: opacity 0.3s ease !important; }
+.flip-card.flipped .flip-card-front { opacity: 0; pointer-events: none; transition: opacity 0.3s ease !important; }
+.flip-card.flipped .flip-card-back { opacity: 1; pointer-events: auto; }

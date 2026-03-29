@@ -11,7 +11,7 @@ const DEX = {
   "Trapinch":328,"Castform":351,"Absol":359,"Banette":354,"Regirock":377,"Latios":381,"Kyogre":382,
   "Groudon":383,"Empoleon":395,"Shinx":403,"Riolu":447,"Croagunk":453,"Blitzle":522,"Drilbur":529,
   "Minccino":572,"Dedenne":702,"Tapu Koko":785,"Tapu Lele":786,"Zeraora":807,"Rillaboom":812,
-  "Cinderace":815,"Silicobra":843,"Regidrago":895,"Pawmi":921,"Toedscool":948,"Tinkaton":959,
+  "Cinderace":815,"Silicobra":843,"Regidrago":895,"Pawmi":921,"Toedscool":948,"Tinkatink":957,"Tinkaton":959,
   "Wiglett":960,"Tauros":128,"Unown":201,"Gengar":94,"Gardevoir":282,"Sceptile":254,"Swampert":260,"Rayquaza":384,
   "Latios":381,"Salamence":373,"Dragonite":149,"Garchomp":445,"Mamoswine":473,"Weavile":461,
   "Darmanitan":555,"Kartana":798,"Landorus":645,"Giratina":487,"Raikou":243,"Electivire":466,
@@ -177,7 +177,7 @@ const SHINY_AVAILABLE = new Set([
   "Corsola","Dragonite","Salamence","Garchomp","Mamoswine","Weavile","Raikou","Electivire",
   "Excadrill","Metagross","Rhyperior","Tangrowth","Chandelure","Giratina","Darmanitan",
   "Regirock","Shuckle","Trapinch","Drilbur","Tauros","Cinderace","Rillaboom","Empoleon",
-  "Tinkaton","Toedscool","Ninetales","Silicobra","Zekrom","Kartana","Landorus",
+  "Tinkatink","Tinkaton","Toedscool","Ninetales","Silicobra","Zekrom","Kartana","Landorus",
   "Scorbunny","Mareep","Magnemite","Joltik",
   "Larvitar","Lileep","Stunfisk","Rockruff","Machamp","Hippowdon",
   "Regieleki","Houndoom","Dratini","Gligar","Stantler","Latias","Marowak","Wooloo","Wailmer","Regice",
@@ -185,7 +185,8 @@ const SHINY_AVAILABLE = new Set([
   "Rookidee","Spheal","Roggenrola","Bounsweet","Kabuto","Omanyte","Abra","Ralts",
   "Krabby","Hatenna","Darumaka","Eevee","Machop",
   "Hitmonchan","Hitmonlee","Drampa","Sableye","Falinks","Passimian","Beldum",
-  "Cryogonal","Chansey","Grookey"
+  "Cryogonal","Chansey","Grookey",
+  "Gyarados","Honedge","Dhelmise","Sinistea","Duraludon","Dreepy"
 ]);
 function isShinyEligible(name) {
   if (name.includes("\u2728")) return true;
@@ -422,7 +423,7 @@ const EVENTS = [
   { id: 51, title: "Community Day: Grookey", type: "Community Day", date: "2026-01-18", endDate: null, time: "2:00 PM – 5:00 PM", color: "#27AE60", icon: "\uD83C\uDF31", featured: false, summary: "Grookey takes the spotlight! Evolve to Rillaboom for the exclusive Charged Attack Frenzy Plant.", details: { bosses: ["Rillaboom with Frenzy Plant (exclusive Charged Move)"], bonuses: ["Boosted Shiny Grookey rate", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "Extra Special Trade (2–9 PM)", "Special Background encounters available"], tips: ["Frenzy Plant is the premier Grass Charged Move — Rillaboom benefits hugely.", "First Community Day of 2026 with the new yearly Special Background feature.", "Check in at Community Ambassador events for bonus Timed Research."] } },
   { id: 52, title: "Community Day: Vulpix & Alolan Vulpix", type: "Community Day", date: "2026-02-15", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E67E22", icon: "\uD83E\uDD8A", featured: false, summary: "Vulpix and Alolan Vulpix share the spotlight! Exclusive moves Energy Ball and Chilling Water.", details: { bosses: ["Ninetales with Energy Ball (exclusive)", "Alolan Ninetales with Chilling Water (exclusive)"], bonuses: ["Both forms spawning in the wild", "Boosted Shiny rates for both Vulpix forms", "3-hour Incense", "Standard Community Day bonuses"], tips: ["Alolan Ninetales with Chilling Water is excellent in PvP Great League.", "Dual-feature Community Days let you hunt two shinies at once.", "Prioritize Alolan Vulpix if you care about PvP meta relevance."] } },
   { id: 53, title: "Community Day: Scorbunny", type: "Community Day", url: "https://pokemongo.com/news/communityday-march-2026-scorbunny", date: "2026-03-14", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E74C3C", icon: "\uD83D\uDC30", featured: false, summary: "Scorbunny stars in March! Evolve Raboot to Cinderace for the exclusive Charged Attack Blast Burn.", details: { bosses: ["Cinderace with Blast Burn (exclusive Charged Move)"], bonuses: ["¼ Egg Hatch Distance", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "Extra Special Trade (2–9 PM)", "50% less Trade Stardust cost (2–9 PM)"], tips: ["Blast Burn is the best Fire Charged Move — makes Cinderace a solid Fire attacker.", "Evolve within 5 hours after the event ends to get the exclusive move.", "Overlaps with Pokémon Pokopia Celebration Event — double-dip on bonuses."] } },
-  { id: 4, title: "Community Day: Tinkatink", type: "Community Day", url: "https://pokemongo.com/news/communityday-april-2026-tinkatink", date: "2026-04-11", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E84393", icon: "\uD83D\uDD28", featured: true, summary: "Tinkatink takes the spotlight! Evolve to Tinkaton for the exclusive Charged Attack Gigaton Hammer.", details: { bosses: ["Tinkaton with Gigaton Hammer (exclusive Charged Move)"], bonuses: ["3× Catch Stardust", "2× Catch Candy", "2× chance for Candy XL", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "1 extra Special Trade (2–9 PM)", "50% less Trade Stardust cost (2–9 PM)"], tips: ["Evolve Tinkatuff during the event or up to 4 hours after (by 9 PM) for Gigaton Hammer.", "Stack Star Pieces with the 3× Stardust bonus — one of the best dust events.", "Tinkatink with Special Backgrounds from Field Research and Lure Modules.", "Take snapshots for Tinkatink photobomb encounters."] } },
+  { id: 4, title: "Community Day: Tinkatink", type: "Community Day", url: "https://pokemongo.com/news/communityday-april-2026-tinkatink", date: "2026-04-11", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E84393", icon: "\uD83D\uDD28", iconImg: "pokemon-images/pm957.icon.png", featured: true, summary: "Tinkatink takes the spotlight! Evolve to Tinkaton for the exclusive Charged Attack Gigaton Hammer.", details: { bosses: ["Tinkaton with Gigaton Hammer (exclusive Charged Move)"], bonuses: ["3× Catch Stardust", "2× Catch Candy", "2× chance for Candy XL", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "1 extra Special Trade (2–9 PM)", "50% less Trade Stardust cost (2–9 PM)"], tips: ["Evolve Tinkatuff during the event or up to 4 hours after (by 9 PM) for Gigaton Hammer.", "Stack Star Pieces with the 3× Stardust bonus — one of the best dust events.", "Tinkatink with Special Backgrounds from Field Research and Lure Modules.", "Take snapshots for Tinkatink photobomb encounters."] } },
   { id: 54, title: "Community Day: May 2026", type: "Community Day", date: "2026-05-09", endDate: null, time: "2:00 PM – 5:00 PM", color: "#636E72", icon: "\u2753", featured: false, summary: "May Community Day — date confirmed, featured Pokémon to be announced.", details: { bosses: ["Featured Pokémon: TBA"], bonuses: ["Standard Community Day bonuses expected", "Exclusive move for final evolution", "Boosted Shiny rate"], tips: ["Date is locked in — mark your calendar.", "Featured Pokémon usually announced 2–4 weeks before.", "Start stockpiling Poké Balls and Star Pieces."] } },
   { id: 55, title: "CD Classic: May 2026", type: "Community Day", date: "2026-05-16", endDate: null, time: "2:00 PM – 5:00 PM", color: "#636E72", icon: "\uD83D\uDD04", featured: false, summary: "May Community Day Classic — date confirmed, featured Pokémon to be announced.", details: { bosses: ["Featured Pokémon: TBA (past Community Day rerun)"], bonuses: ["Standard CD Classic bonuses expected", "Exclusive move available again"], tips: ["CD Classics bring back Pokémon and moves from past Community Days.", "Great chance to get an exclusive move you missed."] } },
   { id: 5, title: "Sustainability Week 2026", type: "Event", url: "https://pokemongo.com/news/sustainability-week-2026", date: "2026-04-14", endDate: "2026-04-20", time: "10:00 AM – 8:00 PM", color: "#27AE60", icon: "\uD83C\uDF3F", featured: true, summary: "Silicobra debuts! Galarian Corsola wearing pink sunglasses and Shiny Toedscool make first appearances.", details: { bosses: ["Silicobra (debut)", "Galarian Corsola wearing pink sunglasses", "Shiny Toedscool", "Seedot", "Castform", "Wiglett"], bonuses: ["Rotating Route spawns every 2 days", "Boosted Shiny Lapras, Togetic, Castform, Trubbish", "Toedscool in forested/grassy biomes", "Silicobra in desert-like biomes", "GO Pass milestone bonuses"], tips: ["Shiny Toedscool is brand new — check every one.", "Galarian Corsola in sunglasses is a top collector target.", "Route spawns rotate every 2 days — plan your priorities.", "Silicobra evolves into Sandaconda for 50 Candy."] } },
@@ -453,7 +454,7 @@ const ANNOUNCEMENTS = [
   { id: 2, date: "2026-03-27", title: "GO Pass: April — Lucky Trinket Returns", tag: "News", body: "April's GO Pass Deluxe includes the Lucky Trinket — instantly become Lucky Friends with any Great Friend or higher.", fullBody: "The April 2026 GO Pass is packed with rewards:", sections: [{ heading: "GO Pass (Free)", items: ["Available April 7 at 10 AM", "Rank up for Entei encounters", "Active until May 5", "May 2–3: No daily GO Points limit!"] }, { heading: "GO Pass Deluxe (Paid)", items: ["Lucky Trinket — instantly Lucky Friends with any Great Friend+", "Expires May 12", "Available on the Web Store"] }] },
   { id: 3, date: "2026-03-25", title: "Tinkatink Community Day — April 11", tag: "Alert", body: "3× Catch Stardust, 2× Candy, and exclusive Gigaton Hammer for Tinkaton.", fullBody: "Full breakdown:", sections: [{ heading: "Event Details", items: ["Saturday, April 11, 2:00–5:00 PM local", "Boosted Shiny Tinkatink", "Evolve for Gigaton Hammer (until 9 PM)"] }, { heading: "Bonuses (2–5 PM)", items: ["3× Catch Stardust", "2× Catch Candy", "2× Candy XL chance", "3-hour Incense"] }, { heading: "Extended (2–9 PM)", items: ["1-hour Lure Modules", "1 extra Special Trade", "50% less Trade Stardust"] }] },
   // { id: 4, date: "2026-03-23", title: "GO Bigger Replay Datamined for April 25", tag: "News", body: "Dataminers found Gigantamax Kanto Starters returning. New Gigantamax debuts possible.", fullBody: "The Pokémod Group datamined GO Bigger Replay:", sections: [{ heading: "What We Know", items: ["Scheduled for April 25", "Gigantamax Venusaur, Charizard, Blastoise expected", "Max Battle Day format: 2–5 PM"] }, { heading: "Unconfirmed", items: ["New Gigantamax debuts — 17 forms unreleased", "Shiny Gigantamax forms expected"] }] },
-  { id: 5, date: "2026-03-21", title: "Spotlight Hours → Daily Discoveries", tag: "Update", body: "Weekly Spotlight Hours ended. Daily Discoveries is the new recurring system.", fullBody: "The Memories in Motion season replaced Spotlight Hours:", sections: [{ heading: "What Changed", items: ["Weekly Tuesday Spotlight Hours removed", "Now only during specific events", "Daily Discoveries replaces them"] }, { heading: "Daily Discoveries", items: ["Double-Time Sundays — Incense/Lures last 2×", "Fast-Track Mondays — extra Power Spots", "Showcase Tuesdays — PokéStop Showcases", "GBL Thursdays — 10 sets, up to 4× Stardust", "Friendship Fridays — extra trades, Lucky boost"] }] },
+  { id: 5, date: "2026-03-21", title: "Spotlight Hours → Daily Discoveries", tag: "Update", url: "https://pokemongo.com/news/welcome-to-memories-in-motion", body: "Weekly Spotlight Hours ended. Daily Discoveries is the new recurring system.", fullBody: "The Memories in Motion season replaced Spotlight Hours:", sections: [{ heading: "What Changed", items: ["Weekly Tuesday Spotlight Hours removed", "Now only during specific events", "Daily Discoveries replaces them"] }, { heading: "Daily Discoveries", items: ["Double-Time Sundays — Incense/Lures last 2×", "Fast-Track Mondays — extra Power Spots", "Showcase Tuesdays — PokéStop Showcases", "GBL Thursdays — 10 sets, up to 4× Stardust", "Friendship Fridays — extra trades, Lucky boost"] }] },
   { id: 6, date: "2026-03-15", title: "GO Fest 2026 Tickets On Sale", tag: "Alert", body: "Tickets for Tokyo, Chicago, Copenhagen live. $33/day. Global finale July 11–12.", fullBody: "GO Fest 2026 celebrates 10 years of Pokémon GO:", sections: [{ heading: "Tokyo — May 29–Jun 1", items: ["Odaiba Seaside Park", "Citywide from May 25", "City Exploration Tickets"] }, { heading: "Chicago — Jun 5–7", items: ["Grant Park", "Hosted by Spark", "Tickets $33"] }, { heading: "Copenhagen — Jun 12–14", items: ["Fælledparken", "Hosted by Candela", "Shiny Paldean Tauros exclusive"] }, { heading: "Global — Jul 11–12", items: ["All trainers worldwide", "Zeraora via Special Research", "One per trainer across all events"] }] }
 ];
 
@@ -906,6 +907,12 @@ const RAID_BOSS_DATA = {
   "Chansey":{types:["Normal"],cp:"654–717"},
   "Regice":{types:["Ice"],cp:"1703–1784"},
   "Riolu":{types:["Fighting"]},
+  "Gyarados":{types:["Water","Flying"]},
+  "Honedge":{types:["Steel","Ghost"]},
+  "Dhelmise":{types:["Ghost","Grass"]},
+  "Sinistea":{types:["Ghost"]},
+  "Duraludon":{types:["Steel","Dragon"]},
+  "Dreepy":{types:["Dragon","Ghost"]},
   "Caterpie":{types:["Bug"],cp:"219–249"},
   "Charmander":{types:["Fire"],cp:"516–560"},
   "Bulbasaur":{types:["Grass","Poison"],cp:"590–637"},
@@ -926,6 +933,61 @@ const TYPE_COLORS = {
   "Psychic":"#F85888","Bug":"#A8B820","Rock":"#B8A038","Ghost":"#705898","Dragon":"#7038F8",
   "Dark":"#705848","Steel":"#B8B8D0","Fairy":"#EE99AC"
 };
+
+const TYPE_EFFECTIVENESS = {
+  "Normal":   { weak: ["Fighting"], resist: ["Ghost"], doubleResist: [] },
+  "Fire":     { weak: ["Water","Ground","Rock"], resist: ["Fire","Grass","Ice","Bug","Steel","Fairy"], doubleResist: [] },
+  "Water":    { weak: ["Electric","Grass"], resist: ["Fire","Water","Ice","Steel"], doubleResist: [] },
+  "Electric": { weak: ["Ground"], resist: ["Electric","Flying","Steel"], doubleResist: [] },
+  "Grass":    { weak: ["Fire","Ice","Poison","Flying","Bug"], resist: ["Water","Electric","Grass","Ground"], doubleResist: [] },
+  "Ice":      { weak: ["Fire","Fighting","Rock","Steel"], resist: ["Ice"], doubleResist: [] },
+  "Fighting": { weak: ["Flying","Psychic","Fairy"], resist: ["Bug","Rock","Dark"], doubleResist: [] },
+  "Poison":   { weak: ["Ground","Psychic"], resist: ["Grass","Fighting","Poison","Bug","Fairy"], doubleResist: [] },
+  "Ground":   { weak: ["Water","Grass","Ice"], resist: ["Poison","Rock","Electric"], doubleResist: [] },
+  "Flying":   { weak: ["Electric","Ice","Rock"], resist: ["Grass","Fighting","Bug","Ground"], doubleResist: [] },
+  "Psychic":  { weak: ["Bug","Ghost","Dark"], resist: ["Fighting","Psychic"], doubleResist: [] },
+  "Bug":      { weak: ["Fire","Flying","Rock"], resist: ["Grass","Fighting","Ground"], doubleResist: [] },
+  "Rock":     { weak: ["Water","Grass","Fighting","Ground","Steel"], resist: ["Normal","Fire","Poison","Flying"], doubleResist: [] },
+  "Ghost":    { weak: ["Ghost","Dark"], resist: ["Poison","Bug","Normal","Fighting"], doubleResist: [] },
+  "Dragon":   { weak: ["Ice","Dragon","Fairy"], resist: ["Fire","Water","Electric","Grass"], doubleResist: [] },
+  "Dark":     { weak: ["Fighting","Bug","Fairy"], resist: ["Ghost","Dark","Psychic"], doubleResist: [] },
+  "Steel":    { weak: ["Fire","Fighting","Ground"], resist: ["Normal","Grass","Ice","Flying","Psychic","Bug","Rock","Dragon","Steel","Fairy","Poison"], doubleResist: [] },
+  "Fairy":    { weak: ["Poison","Steel"], resist: ["Fighting","Bug","Dark","Dragon"], doubleResist: [] }
+};
+function getWeaknesses(types) {
+  if (!types || types.length === 0) return [];
+  const multipliers = {};
+  types.forEach(t => {
+    const eff = TYPE_EFFECTIVENESS[t];
+    if (!eff) return;
+    eff.weak.forEach(w => { multipliers[w] = (multipliers[w] || 1) * 1.6; });
+    eff.resist.forEach(r => { multipliers[r] = (multipliers[r] || 1) * 0.625; });
+  });
+  return Object.entries(multipliers)
+    .filter(([, v]) => v > 1)
+    .sort((a, b) => b[1] - a[1])
+    .map(([t, v]) => ({ type: t, multiplier: v }));
+}
+
+function getResistances(types) {
+  if (!types || types.length === 0) return [];
+  const multipliers = {};
+  types.forEach(t => {
+    const eff = TYPE_EFFECTIVENESS[t];
+    if (!eff) return;
+    eff.weak.forEach(w => { multipliers[w] = (multipliers[w] || 1) * 1.6; });
+    eff.resist.forEach(r => { multipliers[r] = (multipliers[r] || 1) * 0.625; });
+  });
+  return Object.entries(multipliers)
+    .filter(([, v]) => v < 1)
+    .sort((a, b) => a[1] - b[1])
+    .map(([t, v]) => ({ type: t, double: v < 0.5 }));
+}
+
+function flipCard(el) {
+  const card = el.closest('.flip-card') || el;
+  card.classList.toggle('flipped');
+}
 
 function getRaidBossData(name) {
   for (const [pkmn, data] of Object.entries(RAID_BOSS_DATA)) {
@@ -949,15 +1011,49 @@ function renderBossItem(item, color, th, cardLayout) {
     <div>CP <span style="font-weight:800;font-size:${cardLayout ? 15 : 16}px">${raidData.cp}</span></div>
     <div style="font-size:${cardLayout ? 11 : 13}px;color:${th.textSecondary}">\u2601\uFE0F ${raidData.weather}: <span style="font-weight:700">${raidData.cpBoost}</span></div>
   </div>` : "";
+  const weaknesses = raidData ? getWeaknesses(raidData.types) : [];
+  const resistances = raidData ? getResistances(raidData.types) : [];
+  const hasBack = weaknesses.length > 0 || resistances.length > 0;
+  const backContent = hasBack ? `
+    <div style="font-size:11px;font-weight:700;color:${th.textMuted};margin-bottom:16px;text-transform:uppercase;letter-spacing:0.5px">${esc(cleanRaidLabel(item))}</div>
+    ${weaknesses.length > 0 ? `<div style="margin-bottom:20px">
+      <div style="font-size:10px;font-weight:700;color:#E74C3C;letter-spacing:0.5px;margin-bottom:4px">WEAK TO</div>
+      <div style="display:flex;gap:3px;flex-wrap:wrap;${cardLayout ? "justify-content:center" : ""}">${weaknesses.map(w =>
+        `<span style="font-size:11px;font-weight:700;color:#fff;background:${TYPE_COLORS[w.type] || "#888"};padding:2px 7px;border-radius:8px">${w.type}${w.multiplier > 2 ? " 2\u00D7" : ""}</span>`
+      ).join("")}</div>
+    </div>` : ""}
+    ${resistances.length > 0 ? `<div>
+      <div style="font-size:10px;font-weight:700;color:#27AE60;letter-spacing:0.5px;margin-bottom:4px">RESISTS</div>
+      <div style="display:flex;gap:3px;flex-wrap:wrap;${cardLayout ? "justify-content:center" : ""}">${resistances.map(r =>
+        `<span style="font-size:11px;font-weight:700;color:#fff;background:${TYPE_COLORS[r.type] || "#888"};padding:2px 7px;border-radius:8px;opacity:${r.double ? "1" : "0.7"}">${r.type}${r.double ? " 2\u00D7" : ""}</span>`
+      ).join("")}</div>
+    </div>` : ""}
+    <div style="font-size:10px;color:${th.textFaint};margin-top:auto;padding-top:6px">Tap to flip back</div>
+  ` : "";
   if (cardLayout && pkmn) {
-    return `<div style="display:flex;flex-direction:column;align-items:center;padding:12px 8px;border-radius:12px;background:${th.accentBgSubtle(color)};border:1.5px solid ${th.border};font-size:13px;color:${th.textSecondary};line-height:1.45;text-align:center;flex:1;min-width:140px;max-width:200px">
+    const frontHTML = `<div style="display:flex;flex-direction:column;align-items:center;padding:12px 8px;font-size:13px;color:${th.textSecondary};line-height:1.45;text-align:center">
       ${imgEl}
       <div style="margin-top:6px;font-weight:700;color:${th.text};font-size:13px">${esc(cleanRaidLabel(item))}</div>
       ${typesHTML}${cpHTML}
     </div>`;
+    if (!hasBack) {
+      return `<div style="border-radius:12px;background:${th.accentBgSubtle(color)};border:1.5px solid ${th.border};flex:1;min-width:140px;max-width:200px">${frontHTML}</div>`;
+    }
+    return `<div class="flip-card" onclick="flipCard(this)" style="flex:1;min-width:140px;max-width:200px">
+      <div class="flip-card-front" style="background:${th.accentBgSubtle(color)};border:1.5px solid ${th.border}">${frontHTML}</div>
+      <div class="flip-card-back" style="background:${th.accentBgSubtle(color)};border:1.5px solid ${th.border};padding:14px 10px;display:flex;flex-direction:column;align-items:center;text-align:center">${backContent}</div>
+    </div>`;
   }
-  return `<div style="display:flex;align-items:center;gap:10px;padding:${pkmn ? "4px" : "7px"} 12px;border-radius:9px;background:${th.accentBgSubtle(color)};font-size:13.5px;color:${th.textSecondary};line-height:1.45;width:100%">${imgEl
+  // Row layout (mobile)
+  const frontRowHTML = `<div style="display:flex;align-items:center;gap:10px;padding:${pkmn ? "4px" : "7px"} 12px;font-size:13.5px;color:${th.textSecondary};line-height:1.45">${imgEl
     || `<div style="width:5px;height:5px;border-radius:50%;background:${color};flex-shrink:0"></div>`}<div><div>${esc(cleanRaidLabel(item))}</div>${typesHTML}${cpHTML}</div></div>`;
+  if (!hasBack) {
+    return `<div style="border-radius:9px;background:${th.accentBgSubtle(color)};width:100%">${frontRowHTML}</div>`;
+  }
+  return `<div class="flip-card" onclick="flipCard(this)" style="width:100%">
+    <div class="flip-card-front" style="background:${th.accentBgSubtle(color)};border-radius:9px">${frontRowHTML}</div>
+    <div class="flip-card-back" style="background:${th.accentBgSubtle(color)};border-radius:9px;padding:12px 14px;display:flex;flex-direction:column;${pkmn ? "" : "justify-content:center"}">${backContent}</div>
+  </div>`;
 }
 
 function renderDetailSection(title, emoji, items, color, th, showImages) {
@@ -982,10 +1078,8 @@ function renderDetailSection(title, emoji, items, color, th, showImages) {
   const tierKeys = Object.keys(tiered);
   // If no tiers found, render flat with card layout on tablet+
   if (tierKeys.length === 0) {
-    const useCards = breakpoint !== "mobile" || items.length <= 3;
-    const isMobileCards = breakpoint === "mobile" && useCards;
     return `<div><h4 style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>${emoji}</span> ${esc(title)}</h4>
-      <div style="display:flex;${useCards ? `flex-wrap:wrap;gap:8px${isMobileCards ? ";justify-content:center" : ""}` : "flex-direction:column;gap:5px"}">${items.map(item => renderBossItem(item, color, th, useCards)).join("")}</div></div>`;
+      <div style="display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${items.map(item => renderBossItem(item, color, th, breakpoint !== "mobile")).join("")}</div></div>`;
   }
   // Render with tier groupings
   let html = `<div><h4 style="margin:0 0 12px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>${emoji}</span> ${esc(title)}</h4>`;
@@ -1209,6 +1303,7 @@ function renderNewsDetail(announcement, th) {
       </div>
       <div style="padding:20px 20px 24px;display:flex;flex-direction:column;gap:20px">
         <p style="margin:0;font-size:14.5px;color:${th.textSecondary};line-height:1.65">${esc(announcement.fullBody)}</p>
+        ${announcement.url ? `<a href="${announcement.url}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:${th.tagText(announcement.tag)};text-decoration:none;padding:8px 14px;border:1.5px solid ${th.tagText(announcement.tag)}40;border-radius:10px;background:${th.tagBg(announcement.tag)};transition:all 0.2s ease" onmouseenter="this.style.borderColor='${th.tagText(announcement.tag)}'" onmouseleave="this.style.borderColor='${th.tagText(announcement.tag)}40'">\uD83D\uDD17 For more information, click here</a>` : ""}
         ${announcement.sections ? announcement.sections.map(s =>
           `<div><h4 style="margin:0 0 10px 0;font-size:14px;font-weight:700;color:${th.text}">${esc(s.heading)}</h4>
           <div style="display:flex;flex-direction:column;gap:5px">${s.items.map(item =>
@@ -1619,7 +1714,8 @@ function render() {
       });
       raidsTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
         <div style="text-align:center;padding:10px;font-size:14px;font-weight:600;color:${th.text}">Current Raid Bosses</div>
-        <div style="text-align:center;font-size:11px;color:${th.textMuted};font-weight:500;margin-top:-10px">Data sourced from LeekDuck.com</div>
+        <div style="text-align:center;font-size:11px;color:${th.textMuted};font-weight:500;margin-top:-10px">Data sourced from Pok\u00E9monGO.com, LeekDuck.com & Pok\u00E9monGOHUB.net</div>
+        <div style="text-align:center;font-size:12px;color:${th.textMuted};font-weight:600;margin-top:2px">Tap a Pok\u00E9mon to see its weaknesses & resistances</div>
         ${raidSectionsHTML}
       </div>`;
     }
@@ -1638,27 +1734,59 @@ function render() {
           <div style="padding:8px;display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${bosses.map(b => {
             const imgUrl = b.gmax ? `${PKM_CDN}pm${b.dex}.fGIGANTAMAX.icon.png` : `${PKM_CDN}pm${b.dex}.icon.png`;
             const pkmn = { url: imgUrl, shadow: false, dynamax: true };
-            let imgEl = pokemonImgHTML(pkmn, breakpoint !== "mobile" ? 120 : 150);
-            if (imgEl) imgEl = wrapShinySparkles(imgEl, b.name, breakpoint !== "mobile" ? 120 : 150);
+            const cardLayout = breakpoint !== "mobile";
+            const imgSize = cardLayout ? 120 : 150;
+            let imgEl = pokemonImgHTML(pkmn, imgSize);
+            if (imgEl) imgEl = wrapShinySparkles(imgEl, b.name, imgSize);
             const rd = getRaidBossData(b.name);
-            const typesEl = rd ? `<div style="display:flex;gap:4px;margin-top:4px;flex-wrap:wrap;${breakpoint !== "mobile" ? "justify-content:center" : ""}">${rd.types.map(t => `<span style="font-size:${breakpoint !== "mobile" ? 11 : 13}px;font-weight:700;color:#fff;background:${TYPE_COLORS[t] || "#888"};padding:2px 8px;border-radius:10px">${t}</span>`).join("")}</div>` : "";
-            const cpEl = rd && rd.cp ? `<div style="margin-top:5px;font-size:${breakpoint !== "mobile" ? 13 : 14}px;color:${th.text};line-height:1.6;${breakpoint !== "mobile" ? "text-align:center" : ""}">CP <span style="font-weight:800;font-size:${breakpoint !== "mobile" ? 15 : 16}px">${rd.cp}</span></div>` : "";
-            if (breakpoint !== "mobile") {
-              return `<div style="display:flex;flex-direction:column;align-items:center;padding:12px 8px;border-radius:12px;background:${th.accentBgSubtle(tierColor)};border:1.5px solid ${th.border};font-size:13px;color:${th.textSecondary};line-height:1.45;text-align:center;flex:1;min-width:140px;max-width:200px">
+            const typesEl = rd ? `<div style="display:flex;gap:4px;margin-top:4px;flex-wrap:wrap;${cardLayout ? "justify-content:center" : ""}">${rd.types.map(t => `<span style="font-size:${cardLayout ? 11 : 13}px;font-weight:700;color:#fff;background:${TYPE_COLORS[t] || "#888"};padding:2px 8px;border-radius:10px">${t}</span>`).join("")}</div>` : "";
+            const cpEl = rd && rd.cp ? `<div style="margin-top:5px;font-size:${cardLayout ? 13 : 14}px;color:${th.text};line-height:1.6;${cardLayout ? "text-align:center" : ""}">CP <span style="font-weight:800;font-size:${cardLayout ? 15 : 16}px">${rd.cp}</span></div>` : "";
+            const weaknesses = rd ? getWeaknesses(rd.types) : [];
+            const resistances = rd ? getResistances(rd.types) : [];
+            const hasBack = weaknesses.length > 0 || resistances.length > 0;
+            const backContent = hasBack ? `
+              <div style="font-size:11px;font-weight:700;color:${th.textMuted};margin-bottom:16px;text-transform:uppercase;letter-spacing:0.5px">${esc(b.name)}</div>
+              ${weaknesses.length > 0 ? `<div style="margin-bottom:20px">
+                <div style="font-size:10px;font-weight:700;color:#E74C3C;letter-spacing:0.5px;margin-bottom:4px">WEAK TO</div>
+                <div style="display:flex;gap:3px;flex-wrap:wrap;${cardLayout ? "justify-content:center" : ""}">${weaknesses.map(w =>
+                  `<span style="font-size:11px;font-weight:700;color:#fff;background:${TYPE_COLORS[w.type] || "#888"};padding:2px 7px;border-radius:8px">${w.type}${w.multiplier > 2 ? " 2\u00D7" : ""}</span>`
+                ).join("")}</div>
+              </div>` : ""}
+              ${resistances.length > 0 ? `<div>
+                <div style="font-size:10px;font-weight:700;color:#27AE60;letter-spacing:0.5px;margin-bottom:4px">RESISTS</div>
+                <div style="display:flex;gap:3px;flex-wrap:wrap;${cardLayout ? "justify-content:center" : ""}">${resistances.map(r =>
+                  `<span style="font-size:11px;font-weight:700;color:#fff;background:${TYPE_COLORS[r.type] || "#888"};padding:2px 7px;border-radius:8px;opacity:${r.double ? "1" : "0.7"}">${r.type}${r.double ? " 2\u00D7" : ""}</span>`
+                ).join("")}</div>
+              </div>` : ""}
+              <div style="font-size:10px;color:${th.textFaint};margin-top:auto;padding-top:6px">Tap to flip back</div>
+            ` : "";
+            if (cardLayout) {
+              const frontHTML = `<div style="display:flex;flex-direction:column;align-items:center;padding:12px 8px;font-size:13px;color:${th.textSecondary};line-height:1.45;text-align:center">
                 ${imgEl || ""}
                 <div style="margin-top:6px;font-weight:700;color:${th.text};font-size:13px">${esc(b.name)}</div>
                 ${typesEl}${cpEl}
               </div>`;
+              if (!hasBack) return `<div style="border-radius:12px;background:${th.accentBgSubtle(tierColor)};border:1.5px solid ${th.border};flex:1;min-width:140px;max-width:200px">${frontHTML}</div>`;
+              return `<div class="flip-card" onclick="flipCard(this)" style="flex:1;min-width:140px;max-width:200px">
+                <div class="flip-card-front" style="background:${th.accentBgSubtle(tierColor)};border:1.5px solid ${th.border}">${frontHTML}</div>
+                <div class="flip-card-back" style="background:${th.accentBgSubtle(tierColor)};border:1.5px solid ${th.border};padding:14px 10px;display:flex;flex-direction:column;align-items:center;text-align:center">${backContent}</div>
+              </div>`;
             }
-            return `<div style="display:flex;align-items:center;gap:10px;padding:4px 12px;border-radius:9px;background:${th.accentBgSubtle(tierColor)};font-size:13.5px;color:${th.textSecondary};line-height:1.45">
+            const frontRowHTML = `<div style="display:flex;align-items:center;gap:10px;padding:4px 12px;font-size:13.5px;color:${th.textSecondary};line-height:1.45">
               ${imgEl || ""}<div><div>${esc(b.name)}</div>${typesEl}${cpEl}</div>
+            </div>`;
+            if (!hasBack) return `<div style="border-radius:9px;background:${th.accentBgSubtle(tierColor)};width:100%">${frontRowHTML}</div>`;
+            return `<div class="flip-card" onclick="flipCard(this)" style="width:100%">
+              <div class="flip-card-front" style="background:${th.accentBgSubtle(tierColor)};border-radius:9px">${frontRowHTML}</div>
+              <div class="flip-card-back" style="background:${th.accentBgSubtle(tierColor)};border-radius:9px;padding:12px 14px;display:flex;flex-direction:column">${backContent}</div>
             </div>`;
           }).join("")}</div>
         </div>`;
       });
       maxTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
         <div style="text-align:center;padding:10px;font-size:14px;font-weight:600;color:${th.text}">Current Max Battle Bosses</div>
-        <div style="text-align:center;font-size:11px;color:${th.textMuted};font-weight:500;margin-top:-10px">Data sourced from LeekDuck.com</div>
+        <div style="text-align:center;font-size:11px;color:${th.textMuted};font-weight:500;margin-top:-10px">Data sourced from Pok\u00E9monGO.com, LeekDuck.com & Pok\u00E9monGOHUB.net</div>
+        <div style="text-align:center;font-size:12px;color:${th.textMuted};font-weight:600;margin-top:2px">Tap a Pok\u00E9mon to see its weaknesses & resistances</div>
         ${maxSectionsHTML}
       </div>`;
     }
@@ -1697,9 +1825,11 @@ function render() {
     ${COMMUNITY_NAME} \u00B7 Not affiliated with Niantic, The Pok\u00E9mon Company, or Nintendo
   </footer>`;
 
+  const scrollTopBtn = `<button id="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:${isMobile ? 20 : 28}px;right:${isMobile ? 16 : 28}px;width:${isMobile ? 44 : 48}px;height:${isMobile ? 44 : 48}px;border-radius:50%;background:linear-gradient(135deg,#E74C3C,#F39C12);border:none;box-shadow:0 4px 18px rgba(231,76,60,0.35);cursor:pointer;display:none;align-items:center;justify-content:center;z-index:200;transition:opacity 0.4s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);font-family:inherit;opacity:0;transform:translateY(20px) scale(0.8)" onmouseenter="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 24px rgba(231,76,60,0.5)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='0 4px 18px rgba(231,76,60,0.35)'"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg></button>`;
+
   document.getElementById("app").innerHTML = `<div style="min-height:100vh;display:flex;flex-direction:column;background:${th.bg};font-family:'Outfit','DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;color:${th.text};width:100%">
     ${headerHTML}${tickerHTML}<div style="flex:1">${content}</div>${footerHTML}
-  </div>`;
+  </div>${scrollTopBtn}`;
 }
 
 // --- COUNTDOWN TICK ---
@@ -1719,6 +1849,23 @@ setInterval(() => {
     if (event) el.innerHTML = renderMoveDeadlineBanner(event, th);
   });
 }, 1000);
+
+// Scroll-to-top button visibility
+window.addEventListener("scroll", () => {
+  const btn = document.getElementById("scroll-top-btn");
+  if (btn) {
+    if (window.scrollY > 300) {
+      btn.style.display = "flex";
+      void btn.offsetHeight;
+      btn.style.opacity = "1";
+      btn.style.transform = "translateY(0) scale(1)";
+    } else {
+      btn.style.opacity = "0";
+      btn.style.transform = "translateY(20px) scale(0.8)";
+      setTimeout(() => { if (window.scrollY <= 300 && btn) btn.style.display = "none"; }, 400);
+    }
+  }
+});
 
 // Initial render
 updateThemeColor();
