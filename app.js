@@ -169,9 +169,9 @@ function pokemonImgHTML(pkmn, size) {
   }
   return `<img src="${pkmn.url}" style="width:${size}px;height:${size}px;object-fit:contain;flex-shrink:0" onerror="this.style.display='none'" />`;
 }
-// function fourPointStar(s, color) {
-//   return `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="${color}" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C13 7 17 11 24 12C17 13 13 17 12 24C11 17 7 13 0 12C7 11 11 7 12 0Z"/></svg>`;
-// }
+function fourPointStar(s, color) {
+  return `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="${color}" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C13 7 17 11 24 12C17 13 13 17 12 24C11 17 7 13 0 12C7 11 11 7 12 0Z"/></svg>`;
+}
 const SHINY_AVAILABLE = new Set([
   "Pikachu","Chinchou","Dedenne","Pawmi","Castform","Seedot","Wiglett","Riolu",
   "Bulbasaur","Charmander","Squirtle","Ditto","Sudowoodo","Zorua","Lapras","Snorlax","Dragonite",
@@ -203,7 +203,14 @@ function isShinyEligible(name) {
 }
 function wrapShinySparkles(imgHTML, name, size) {
   if (!isShinyEligible(name)) return imgHTML;
-  const sparkles = `<div style="position:absolute;top:6%;right:10%;z-index:2;font-size:24px">\u2728</div>`;
+  const boosted = name.startsWith("\u2605");
+  const sparkles = boosted
+    ? `<div style="position:absolute;top:4%;right:8%;z-index:2">
+        <div style="position:absolute;top:0;left:0;animation:boostedShiny 1.8s ease-in-out infinite">${fourPointStar(10, "#FFD700")}</div>
+        <div style="position:absolute;top:10px;left:12px;animation:boostedShiny 1.8s ease-in-out 0.4s infinite">${fourPointStar(16, "#FFD700")}</div>
+        <div style="position:absolute;top:18px;left:4px;animation:boostedShiny 1.8s ease-in-out 0.8s infinite">${fourPointStar(8, "#FFD700")}</div>
+      </div>`
+    : `<div style="position:absolute;top:6%;right:10%;z-index:2;font-size:24px">\u2728</div>`;
   // If imgHTML is already wrapped in a relative div (shadow pokemon), inject sparkles into it
   if (imgHTML.includes("position:relative;width:")) {
     return imgHTML.replace(/<\/div>$/, `${sparkles}</div>`);
@@ -296,7 +303,7 @@ function t(dark) {
 
 // --- EVENT DATA ---
 const EVENTS = [
-  { id: 1, title: "A Shockingly Good Time", type: "Event", url: "https://pokemongo.com/news/a-shockingly-good-time", date: "2026-03-31", endDate: "2026-04-06", time: "10:00 AM – 8:00 PM", color: "#F1C40F", icon: "\u26A1", featured: false, summary: "Electric Pokémon extravaganza with daily Spotlight Hours, boosted Shiny odds for Pikachu, Chinchou, Dedenne, Pawmi, and more.", details: { bosses: ["Pikachu", "Chinchou", "Dedenne", "Pawmi", "Other Electric-types in the wild"], bonuses: ["Daily Spotlight Hour 6–7 PM featuring different Electric-types", "Boosted Shiny rates for event spawns", "Incense lasts twice as long", "GO Pass and GO Pass Deluxe rewards available"], spotlightHours: [
+  { id: 1, title: "A Shockingly Good Time", type: "Event", url: "https://pokemongo.com/news/a-shockingly-good-time", date: "2026-03-31", endDate: "2026-04-06", time: "10:00 AM – 8:00 PM", color: "#F1C40F", icon: "\u26A1", featured: false, summary: "Electric Pokémon extravaganza with daily Spotlight Hours, boosted Shiny odds for Pikachu, Chinchou, and Dedenne.", details: { bosses: ["★Pikachu", "★Chinchou", "★Dedenne", "Pawmi", "Other Electric-types in the wild"], bonuses: ["Daily Spotlight Hour 6–7 PM featuring different Electric-types", "Boosted Shiny rates for event spawns", "Incense lasts twice as long", "GO Pass and GO Pass Deluxe rewards available"], spotlightHours: [
       { date: "Tue, Mar 31", pokemon: "Mareep", shiny: true },
       { date: "Wed, Apr 1", pokemon: "Pikachu", shiny: true },
       { date: "Thu, Apr 2", pokemon: "Magnemite", shiny: true },
@@ -1010,7 +1017,7 @@ function getRaidBossData(name) {
   return null;
 }
 function cleanRaidLabel(name) {
-  return name.replace(/\s*\(\d★\s*(?:Raid|Shadow Raid)?\)|\s*\(Mega\)|\s*\(\d★\s*Max Battle.*?\)|\s*\(Research Breakthrough\)/g, "").trim();
+  return name.replace(/^★/, "").replace(/\s*\(\d★\s*(?:Raid|Shadow Raid)?\)|\s*\(Mega\)|\s*\(\d★\s*Max Battle.*?\)|\s*\(Research Breakthrough\)/g, "").trim();
 }
 function renderBossItem(item, color, th, cardLayout) {
   const pkmn = getPokemonImg(item);
@@ -1077,6 +1084,15 @@ function renderDetailSection(title, emoji, items, color, th, showImages) {
         `<div style="display:flex;align-items:center;gap:10px;padding:7px 12px;border-radius:9px;background:${th.accentBgSubtle(color)};font-size:13.5px;color:${th.textSecondary};line-height:1.45"><div style="width:5px;height:5px;border-radius:50%;background:${color};flex-shrink:0"></div>${esc(item)}</div>`
       ).join("")}</div></div>`;
   }
+  const hasBoosted = items.some(i => i.startsWith("\u2605"));
+  const legendHTML = hasBoosted ? `<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:8px;background:${th.accentBgSubtle("#FFD700")};border:1px solid ${th.countdownBorder("#FFD700")};align-self:flex-start;margin-bottom:8px">
+    <div style="position:relative;width:28px;height:26px;flex-shrink:0;top:-4px">
+      <div style="position:absolute;top:0;left:0;animation:boostedShiny 1.8s ease-in-out infinite">${fourPointStar(10, "#FFD700")}</div>
+      <div style="position:absolute;top:10px;left:12px;animation:boostedShiny 1.8s ease-in-out 0.4s infinite">${fourPointStar(16, "#FFD700")}</div>
+      <div style="position:absolute;top:18px;left:4px;animation:boostedShiny 1.8s ease-in-out 0.8s infinite">${fourPointStar(8, "#FFD700")}</div>
+    </div>
+    <span style="font-size:11px;font-weight:600;color:${th.textMuted}">= Boosted Shiny Rate</span>
+  </div>` : "";
   // Group items by raid tier
   const tiered = {};
   const untiered = [];
@@ -1092,11 +1108,12 @@ function renderDetailSection(title, emoji, items, color, th, showImages) {
   const tierKeys = Object.keys(tiered);
   // If no tiers found, render flat with card layout on tablet+
   if (tierKeys.length === 0) {
-    return `<div><h4 style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>${emoji}</span> ${esc(title)}</h4>
+    return `<div style="display:flex;flex-direction:column"><h4 style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>${emoji}</span> ${esc(title)}</h4>
+      ${legendHTML}
       <div style="display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${items.map(item => renderBossItem(item, color, th, breakpoint !== "mobile")).join("")}</div></div>`;
   }
   // Render with tier groupings
-  let html = `<div><h4 style="margin:0 0 12px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>${emoji}</span> ${esc(title)}</h4>`;
+  let html = `<div style="display:flex;flex-direction:column"><h4 style="margin:0 0 12px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>${emoji}</span> ${esc(title)}</h4>${legendHTML}`;
   // Untiered items first (wild spawns etc)
   if (untiered.length > 0) {
     html += `<div style="margin-bottom:12px">${tierKeys.length > 0 ? "" : ""}
