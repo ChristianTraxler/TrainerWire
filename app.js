@@ -672,7 +672,32 @@ function esc(str) {
 }
 
 // --- COUNTDOWN TIMER ---
-function renderCountdown(dateStr, color, over, th) {
+function getEndCountdown(ev) {
+  if (!ev) return null;
+  const endDate = ev.endDate || ev.date;
+  const { h, min } = parseEndHour(ev);
+  const end = new Date(endDate + "T00:00:00");
+  end.setHours(h, min, 59);
+  const diff = end - new Date();
+  if (diff <= 0) return null;
+  return { days: Math.floor(diff / 864e5), hours: Math.floor((diff % 864e5) / 36e5), minutes: Math.floor((diff % 36e5) / 6e4), seconds: Math.floor((diff % 6e4) / 1000) };
+}
+
+function renderCountdown(dateStr, color, over, th, ev) {
+  // If event is active, show countdown to end time
+  if (ev && isActive(ev)) {
+    const endCd = getEndCountdown(ev);
+    if (endCd) {
+      const units = endCd.days > 0
+        ? [["D", endCd.days], ["H", endCd.hours], ["M", endCd.minutes], ["S", endCd.seconds]]
+        : [["H", endCd.hours], ["M", endCd.minutes], ["S", endCd.seconds]];
+      return `<div style="display:flex;gap:4px;align-items:center">${units.map(([l, v], i) =>
+        `<div style="display:flex;align-items:center;gap:1px"><div style="background:${th.countdownBg("#2ECC71")};border:1.5px solid ${th.countdownBorder("#2ECC71")};border-radius:7px;padding:3px 6px;min-width:32px;text-align:center;font-weight:700;font-size:14px;font-variant-numeric:tabular-nums;color:#2ECC71;font-family:'JetBrains Mono',monospace;${l === "S" ? "animation:countdownTick 1s ease infinite;" : ""}">${String(v).padStart(2, "0")}</div><span style="font-size:9px;color:${th.textMuted};font-weight:600">${l}</span>${i < units.length - 1 ? `<span style="color:${th.border};font-weight:300;margin-left:1px;font-size:12px">:</span>` : ""}</div>`
+      ).join("")}</div>`;
+    }
+    return `<span style="font-size:12px;color:#2ECC71;font-weight:700">LIVE NOW</span>`;
+  }
+  if (ev && isOver(ev)) return `<span style="font-size:12px;color:${th.textMuted};font-weight:600">Event Over</span>`;
   const cd = getCountdown(dateStr);
   if (!cd && over) return `<span style="font-size:12px;color:${th.textMuted};font-weight:600">Event Over</span>`;
   if (!cd) return `<span style="font-size:12px;color:#2ECC71;font-weight:700">LIVE NOW</span>`;
@@ -1267,7 +1292,7 @@ function renderEventDetail(event, th) {
         <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center">
           <div style="font-size:13px;color:${th.textSecondary};font-weight:500">\uD83D\uDCC5 ${formatDateRange(event.date, event.endDate)}</div>
           <div style="font-size:13px;color:${th.textSecondary};font-weight:500">\uD83D\uDD50 ${esc(event.time)}</div>
-          <span class="countdown" data-date="${event.date}" data-color="${event.color}" data-over="${over}">${renderCountdown(event.date, event.color, over, th)}</span>
+          <span class="countdown" data-date="${event.date}" data-color="${event.color}" data-over="${over}" data-event-id="${event.id}">${renderCountdown(event.date, event.color, over, th, event)}</span>
         </div>
       </div>
       <div style="padding:20px 20px 24px;display:flex;flex-direction:column;gap:22px">
@@ -1382,7 +1407,7 @@ function renderEventCard(event, index, th) {
     <p style="margin:0;font-size:13.5px;color:${th.textSecondary};line-height:1.55">${esc(event.summary)}</p>
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
       <div style="font-size:12px;color:${th.textMuted};font-weight:500">\uD83D\uDCC5 ${formatDateRange(event.date, event.endDate)} \u00B7 ${esc(event.time)}</div>
-      ${!isPast ? `<span class="countdown" data-date="${event.date}" data-color="${event.color}" data-over="${isPast}">${renderCountdown(event.date, event.color, isPast, th)}</span>` : ""}
+      ${!isPast ? `<span class="countdown" data-date="${event.date}" data-color="${event.color}" data-over="${isPast}" data-event-id="${event.id}">${renderCountdown(event.date, event.color, isPast, th, event)}</span>` : ""}
     </div>
   </button>`;
 }
@@ -1572,7 +1597,7 @@ function render() {
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:${isMobile ? 10 : 16}px">
           <div><h2 style="margin:0 0 4px 0;font-size:${isMobile ? 18 : 24}px;font-weight:800;color:${th.text};display:flex;align-items:center;gap:8px">${ev.iconImg ? `<img src="${ev.iconImg}" style="width:${isMobile ? 60 : 72}px;height:${isMobile ? 60 : 72}px;object-fit:contain" onerror="this.outerHTML='${ev.icon}'" />` : ev.icon} ${esc(ev.title)}</h2>
           <div style="font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">${formatDateRange(ev.date, ev.endDate)} \u00B7 ${esc(ev.time)}</div></div>
-          <span class="countdown" data-date="${ev.endDate || ev.date}" data-color="#2ECC71" data-over="false">${renderCountdown(ev.endDate || ev.date, "#2ECC71", false, th)}</span>
+          <span class="countdown" data-date="${ev.endDate || ev.date}" data-color="#2ECC71" data-over="false" data-event-id="${ev.id}">${renderCountdown(ev.endDate || ev.date, "#2ECC71", false, th, ev)}</span>
         </div>
       </div>`;
     });
@@ -1589,7 +1614,7 @@ function render() {
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:${isMobile ? 10 : 16}px">
           <div><h2 style="margin:0 0 4px 0;font-size:${isMobile ? 18 : 24}px;font-weight:800;color:${th.text};display:flex;align-items:center;gap:8px">${hero.iconImg ? `<img src="${hero.iconImg}" style="width:${isMobile ? 36 : 42}px;height:${isMobile ? 36 : 42}px;object-fit:contain;margin-left:-4px" onerror="this.outerHTML='${hero.icon}'" />` : hero.icon} ${esc(hero.title)}</h2>
           <div style="font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">${formatDateRange(hero.date, hero.endDate)} \u00B7 ${esc(hero.time)}</div></div>
-          <span class="countdown" data-date="${hero.date}" data-color="${hero.color}" data-over="false">${renderCountdown(hero.date, hero.color, false, th)}</span>
+          <span class="countdown" data-date="${hero.date}" data-color="${hero.color}" data-over="false" data-event-id="${hero.id}">${renderCountdown(hero.date, hero.color, false, th, hero)}</span>
         </div>
       </div>`;
     }
@@ -1872,7 +1897,9 @@ setInterval(() => {
     const dateStr = el.dataset.date;
     const color = el.dataset.color;
     const over = el.dataset.over === "true";
-    el.innerHTML = renderCountdown(dateStr, color, over, th);
+    const eventId = el.dataset.eventId ? parseInt(el.dataset.eventId) : null;
+    const ev = eventId ? EVENTS.find(e => e.id === eventId) : null;
+    el.innerHTML = renderCountdown(dateStr, color, over, th, ev);
   });
   // Update move deadline banners
   document.querySelectorAll(".move-deadline").forEach(el => {
