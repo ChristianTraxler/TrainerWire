@@ -205,7 +205,7 @@ function wrapShinySparkles(imgHTML, name, size) {
   if (!isShinyEligible(name)) return imgHTML;
   const boosted = name.startsWith("\u2605");
   const sparkles = boosted
-    ? `<div style="position:absolute;top:4%;right:8%;z-index:2">
+    ? `<div style="position:absolute;top:6%;right:18%;z-index:2">
         <div style="position:absolute;top:0;left:0;animation:boostedShiny 1.8s ease-in-out infinite">${fourPointStar(10, "#FFD700")}</div>
         <div style="position:absolute;top:10px;left:12px;animation:boostedShiny 1.8s ease-in-out 0.4s infinite">${fourPointStar(16, "#FFD700")}</div>
         <div style="position:absolute;top:18px;left:4px;animation:boostedShiny 1.8s ease-in-out 0.8s infinite">${fourPointStar(8, "#FFD700")}</div>
@@ -305,11 +305,11 @@ function t(dark) {
 const EVENTS = [
   { id: 1, title: "A Shockingly Good Time", type: "Event", url: "https://pokemongo.com/news/a-shockingly-good-time", date: "2026-03-31", endDate: "2026-04-06", time: "10:00 AM – 8:00 PM", color: "#F1C40F", icon: "\u26A1", featured: false, summary: "Electric Pokémon extravaganza with daily Spotlight Hours, boosted Shiny odds for Pikachu, Chinchou, and Dedenne.", details: { bosses: ["★Pikachu", "★Chinchou", "★Dedenne", "Pawmi", "Other Electric-types in the wild"], bonuses: ["Daily Spotlight Hour 6–7 PM featuring different Electric-types", "Boosted Shiny rates for event spawns", "Incense lasts twice as long", "GO Pass and GO Pass Deluxe rewards available"], spotlightHours: [
       { date: "Tue, Mar 31", pokemon: "Mareep", shiny: true },
-      { date: "Wed, Apr 1", pokemon: "Pikachu", shiny: true },
+      { date: "Wed, Apr 1", pokemon: "Pikachu", shiny: true, boostedShiny: true },
       { date: "Thu, Apr 2", pokemon: "Magnemite", shiny: true },
-      { date: "Fri, Apr 3", pokemon: "Chinchou", shiny: true },
+      { date: "Fri, Apr 3", pokemon: "Chinchou", shiny: true, boostedShiny: true },
       { date: "Sat, Apr 4", pokemon: "Pawmi", shiny: true },
-      { date: "Sun, Apr 5", pokemon: "Dedenne", shiny: true },
+      { date: "Sun, Apr 5", pokemon: "Dedenne", shiny: true, boostedShiny: true },
       { date: "Mon, Apr 6", pokemon: "Joltik", shiny: true }
     ], tips: ["Spotlight Hours run every day of this event, not just Tuesday.", "Shiny Dedenne and Pawmi are the big targets — check every one.", "Activate Incense during Spotlight Hours for doubled duration + boosted spawns.", "GO Pass Deluxe is available on the Web Store for premium rewards."] } },
   // { id: 2, title: "April Fools 2026", type: "Event", date: "2026-04-01", endDate: null, time: "10:00 AM – 6:00 PM", color: "#9B59B6", icon: "\uD83C\uDCCF", featured: false, summary: "One-day April Fools surprise event. Expect trick spawns, disguised Pokémon, and limited-time shenanigans.", details: { bosses: ["Surprise spawns and disguised Pokémon (revealed day-of)"], bonuses: ["One-day-only event spawns", "Possible Ditto-themed encounters", "April Fools Field Research tasks"], tips: ["These events are always short — block out a couple hours.", "Keep an eye on social media for real-time spawn reports.", "Ditto often plays a role — catch everything that looks 'normal'.", "Don't transfer unusual catches until you've checked for Ditto."] } },
@@ -1283,7 +1283,7 @@ function renderEventDetail(event, th) {
             const pkmn = getPokemonImg(sh.pokemon);
             const shImgSize = breakpoint !== "mobile" ? 120 : 150;
             let imgEl = pokemonImgHTML(pkmn, shImgSize);
-            if (imgEl && sh.shiny) imgEl = wrapShinySparkles(imgEl, sh.pokemon, shImgSize);
+            if (imgEl && sh.shiny) imgEl = wrapShinySparkles(imgEl, sh.boostedShiny ? "\u2605" + sh.pokemon : sh.pokemon, shImgSize);
             const rd = getRaidBossData(sh.pokemon);
             const typeEl = rd ? `<div style="display:flex;gap:3px;margin-top:3px;${breakpoint !== "mobile" ? "justify-content:center" : ""};flex-wrap:wrap">${rd.types.map(t => `<span style="font-size:9px;font-weight:700;color:#fff;background:${TYPE_COLORS[t] || "#888"};padding:1px 6px;border-radius:8px">${t}</span>`).join("")}</div>` : "";
             if (breakpoint !== "mobile") {
