@@ -3,7 +3,25 @@ const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
 
 // --- POKEMON IMAGE LOOKUP ---
-const PKM_CDN = "assets/pokemon-images/";
+const IMG_BASE = "assets/pokemon-images";
+function getGenFolder(dex) {
+  if (dex <= 151) return "Gen-1_Kanto";
+  if (dex <= 251) return "Gen-2_Johto";
+  if (dex <= 386) return "Gen-3_Hoenn";
+  if (dex <= 493) return "Gen-4_Sinnoh";
+  if (dex <= 649) return "Gen-5_Unova";
+  if (dex <= 721) return "Gen-6_Kalos";
+  if (dex <= 809) return "Gen-7_Alola";
+  if (dex <= 898) return "Gen-8_Galar";
+  if (dex <= 905) return "Gen-8.5_Hisui";
+  return "Gen-9_Paldea";
+}
+function dexPad(d) { return String(d).padStart(4, "0"); }
+function natDexImg(dex, suffix) { return `${IMG_BASE}/National-Dex/regular/${getGenFolder(dex)}/${dexPad(dex)}${suffix || ""}.webp`; }
+function eventDexImg(dex, costume) { return `${IMG_BASE}/Event-Dex/regular/${getGenFolder(dex)}/${dexPad(dex)}_${costume}.webp`; }
+function megaImg(dex, suffix) { return `${IMG_BASE}/Mega/regular/${getGenFolder(dex)}/${dexPad(dex)}_${suffix || "mega"}.webp`; }
+function gmaxImg(dex) { return `${IMG_BASE}/Gigantamax/regular/Gen-8_Galar/${dexPad(dex)}_gigamax.webp`; }
+const GENDER_SUFFIX = {3:"-male",12:"-male",19:"-male",20:"-male",25:"-male",26:"-male",29:"-female",30:"-female",31:"-female",32:"-male",33:"-male",34:"-male",41:"-male",42:"-male",44:"-male",45:"-male",64:"-male",65:"-male",84:"-male",85:"-male",97:"-male",106:"-male",107:"-male",111:"-male",112:"-male",113:"-female",115:"-female",118:"-male",119:"-male",123:"-male",124:"-female",128:"-male",129:"-male",130:"-male",133:"-male",154:"-male",165:"-male",166:"-male",178:"-male",185:"-male",186:"-male",190:"-male",194:"-male",195:"-male",198:"-male",202:"-male",203:"-male",207:"-male",208:"-male",212:"-male",214:"-male",215:"-male",217:"-male",221:"-male",224:"-male",229:"-male",232:"-male",236:"-male",237:"-male",238:"-female",241:"-female",242:"-female",255:"-male",256:"-male",257:"-male",267:"-male",269:"-male",272:"-male",274:"-male",275:"-male",307:"-male",308:"-male",313:"-male",314:"-female",315:"-male",316:"-male",317:"-male",322:"-male",323:"-male",332:"-male",350:"-male",369:"-male",380:"-female",381:"-male",396:"-male",397:"-male",398:"-male",399:"-male",400:"-male",401:"-male",402:"-male",403:"-male",404:"-male",405:"-male",407:"-male",414:"-male",415:"-male",416:"-female",417:"-male",418:"-male",419:"-male",424:"-male",440:"-female",443:"-male",444:"-male",445:"-male",449:"-male",450:"-male",453:"-male",454:"-male",456:"-male",457:"-male",459:"-male",460:"-male",461:"-male",464:"-male",465:"-male",473:"-male",475:"-male",478:"-female",488:"-female",521:"-male",538:"-male",539:"-male",548:"-female",549:"-female",592:"-male",593:"-male",627:"-male",628:"-male",629:"-female",630:"-female",668:"-male",678:"-male",758:"-female",761:"-female",762:"-female",763:"-female",856:"-female",857:"-female",858:"-female",859:"-male",860:"-male",861:"-male",876:"-male",916:"-male",957:"-female",958:"-female",959:"-female"};
 const DEX = {
   "Venusaur":3,"Charizard":6,"Blastoise":9,"Butterfree":12,"Pikachu":25,"Ninetales":38,"Diglett":50,
   "Alakazam":65,"Aerodactyl":142,"Dragonite":149,"Mewtwo":150,"Chinchou":170,"Wooper":194,
@@ -29,120 +47,57 @@ const DEX = {
   "Hitmonlee":106,"Passimian":766,"Sableye":302,"Magnemite":81,"Mareep":179,"Raichu":26
 };
 function getPokemonImg(name) {
-  // Try to match known Pokemon names from the boss string
   const lower = name.toLowerCase();
-  // Skip non-Pokemon entries
   if (lower.includes("tba") || lower.includes("other ") || lower.includes("possible") || lower.includes("featured pok") || lower.includes("surprise") || lower.includes("steel-type") || lower.includes("10th anniversary") || lower.includes("raid bosses")) return null;
-  // Check for Mega
   const megaMatch = name.match(/Mega\s+(\w+)/);
-  if (megaMatch) {
-    const base = megaMatch[1];
-    const dex = DEX[base];
-    if (dex) return { url: `${PKM_CDN}pm${dex}.fMEGA.icon.png`, shadow: false };
-  }
-  // Check for Gigantamax (use Gigantamax image)
+  if (megaMatch) { const dex = DEX[megaMatch[1]]; if (dex) return { url: megaImg(dex, "mega"), shadow: false }; }
   const gmaxMatch = name.match(/Gigantamax\s+(\w+)/);
-  if (gmaxMatch) {
-    const base = gmaxMatch[1];
-    const dex = DEX[base];
-    if (dex) return { url: `${PKM_CDN}pm${dex}.fGIGANTAMAX.icon.png`, shadow: false };
-  }
-  // Check for Dynamax (use base form image)
+  if (gmaxMatch) { const dex = DEX[gmaxMatch[1]]; if (dex) return { url: gmaxImg(dex), shadow: false }; }
   const dmaxMatch = name.match(/Dynamax\s+(\w+)/);
-  if (dmaxMatch) {
-    const base = dmaxMatch[1];
-    const dex = DEX[base];
-    if (dex) return { url: `${PKM_CDN}pm${dex}.icon.png`, shadow: false };
-  }
-  // Check for Origin forme
+  if (dmaxMatch) { const dex = DEX[dmaxMatch[1]]; if (dex) return { url: natDexImg(dex, GENDER_SUFFIX[dex] || ""), shadow: false }; }
   if (lower.includes("origin")) {
-    const originMatch = name.match(/Origin\s+(\w+)/);
-    if (originMatch) {
-      const dex = DEX[originMatch[1]];
-      if (dex) return { url: `${PKM_CDN}pm${dex}.fORIGIN.icon.png`, shadow: false };
-    }
+    const m = name.match(/Origin\s+(\w+)/);
+    if (m) { const dex = DEX[m[1]]; if (dex) return { url: natDexImg(dex, "_ori"), shadow: false }; }
   }
-  // Check for Primal
   if (lower.includes("primal")) {
-    const primalMatch = name.match(/Primal\s+(\w+)/);
-    if (primalMatch) {
-      const dex = DEX[primalMatch[1]];
-      if (dex) return { url: `${PKM_CDN}pm${dex}.fPRIMAL.icon.png`, shadow: false };
-    }
+    const m = name.match(/Primal\s+(\w+)/);
+    if (m) { const dex = DEX[m[1]]; if (dex) return { url: megaImg(dex, "primal"), shadow: false }; }
   }
-  // Check for Therian
   if (lower.includes("therian")) {
-    const therMatch = name.match(/(\w+)\s*\(Therian\)/);
-    if (therMatch) {
-      const dex = DEX[therMatch[1]];
-      if (dex) return { url: `${PKM_CDN}pm${dex}.fTHERIAN.icon.png`, shadow: false };
-    }
+    const m = name.match(/(\w+)\s*\(Therian\)/);
+    if (m) { const dex = DEX[m[1]]; if (dex) return { url: natDexImg(dex, "_therian" + (GENDER_SUFFIX[dex] || "-male")), shadow: false }; }
   }
-  // Check for Corsola wearing sunglasses
   if (lower.includes("corsola") && lower.includes("sunglasses")) {
-    return { url: `assets/pokemon-images/pm222.fSPRING_2026.icon.png`, shadow: false };
+    return { url: eventDexImg(222, "spring_2026"), shadow: false };
   }
-  // Check for Galarian
   if (lower.includes("galarian")) {
-    const galMatch = name.match(/Galarian\s+(\w+)/);
-    if (galMatch) {
-      const dex = DEX[galMatch[1]];
-      if (dex) {
-        const galUrl = `${PKM_CDN}pm${dex}.fGALARIAN.icon.png`;
-        const galStdUrl = `${PKM_CDN}pm${dex}.fGALARIAN_STANDARD.icon.png`;
-        return { url: [555].includes(dex) ? galStdUrl : galUrl, shadow: lower.includes("shadow") };
-      }
-    }
+    const m = name.match(/Galarian\s+(\w+)/);
+    if (m) { const dex = DEX[m[1]]; if (dex) return { url: natDexImg(dex, "_galarian"), shadow: lower.includes("shadow") }; }
   }
-  // Check for Alolan
   if (lower.includes("alolan")) {
-    const aloMatch = name.match(/Alolan\s+(\w+)/);
-    if (aloMatch) {
-      const dex = DEX[aloMatch[1]];
-      if (dex) return { url: `${PKM_CDN}pm${dex}.fALOLA.icon.png`, shadow: lower.includes("shadow") };
-    }
+    const m = name.match(/Alolan\s+(\w+)/);
+    if (m) { const dex = DEX[m[1]]; if (dex) return { url: natDexImg(dex, "_alola"), shadow: lower.includes("shadow") }; }
   }
-  // Check for Shadow
   if (lower.includes("shadow")) {
-    const shadowMatch = name.match(/Shadow\s+(\w+)/);
-    if (shadowMatch) {
-      const dex = DEX[shadowMatch[1]];
-      if (dex) return { url: `${PKM_CDN}pm${dex}.icon.png`, shadow: true };
-    }
+    const m = name.match(/Shadow\s+(\w+)/);
+    if (m) { const dex = DEX[m[1]]; if (dex) return { url: natDexImg(dex, GENDER_SUFFIX[dex] || ""), shadow: true }; }
   }
-  // Check for Costume
   if (lower.includes("costume") || lower.includes("costumed")) {
-    const COSTUME_IMGS = {
-      "Dragonite": `${PKM_CDN}pm149.cFALL_2023.icon.png`,
-      "Butterfree": `${PKM_CDN}pm12.cFASHION_2021_NOEVOLVE.icon.png`,
-      "Diglett": `${PKM_CDN}pm50.cFALL_2022.icon.png`,
-      "Wooper": `${PKM_CDN}pm194.cFALL_2023.icon.png`,
-      "Sneasel": `${PKM_CDN}pm215.cFASHION_2021_NOEVOLVE.icon.png`,
-      "Kirlia": `${PKM_CDN}pokemon_icon_281_00_16.png`,
-      "Absol": `${PKM_CDN}pm359.cFALL_2022_NOEVOLVE.icon.png`,
-      "Shinx": `${PKM_CDN}pokemon_icon_403_01_16.png`,
-      "Croagunk": `${PKM_CDN}pm453.cFALL_2020_NOEVOLVE.icon.png`,
-      "Blitzle": `${PKM_CDN}pm522.cFASHION_2021_NOEVOLVE.icon.png`,
-      "Minccino": `${PKM_CDN}pm572.cFASHION_2025.icon.png`,
-      "Pikachu": `${PKM_CDN}pm25.cFASHION_2021_NOEVOLVE.icon.png`
-    };
-    const costumeMatch = name.match(/(?:Costume|Costumed)\s+(\w+)/);
-    if (costumeMatch) {
-      const costumeUrl = COSTUME_IMGS[costumeMatch[1]];
-      if (costumeUrl) return { url: costumeUrl, shadow: false };
-      const dex = DEX[costumeMatch[1]];
-      if (dex) return { url: `${PKM_CDN}pm${dex}.icon.png`, shadow: false };
+    const COSTUME_MAP = {"Dragonite":"fashion","Butterfree":"fashion-male","Diglett":"fashion","Wooper":"fashion-male","Sneasel":"fashion-male","Kirlia":"tophat","Absol":"fashion","Shinx":"tophat-male","Croagunk":"cap-male","Blitzle":"fashion","Minccino":"fashion","Pikachu":"party-male"};
+    const m = name.match(/(?:Costume|Costumed)\s+(\w+)/);
+    if (m) {
+      const costume = COSTUME_MAP[m[1]]; const dex = DEX[m[1]];
+      if (dex && costume) return { url: eventDexImg(dex, costume), shadow: false };
+      if (dex) return { url: natDexImg(dex, GENDER_SUFFIX[dex] || ""), shadow: false };
     }
   }
-  // Check for Paldean Tauros
   if (lower.includes("paldean tauros")) {
-    if (lower.includes("blaze")) return { url: `assets/pokemon-images/pm128.fPALDEA_BLAZE.icon.png`, shadow: false };
-    if (lower.includes("aqua")) return { url: `${PKM_CDN}pm${DEX["Tauros"]}.fPALDEA_AQUA.icon.png`, shadow: false };
-    return { url: `${PKM_CDN}pm${DEX["Tauros"]}.fPALDEA_COMBAT.icon.png`, shadow: false };
+    if (lower.includes("blaze")) return { url: natDexImg(128, "_blaze"), shadow: false };
+    if (lower.includes("aqua")) return { url: natDexImg(128, "_aqua"), shadow: false };
+    return { url: natDexImg(128, "_combat"), shadow: false };
   }
-  // Direct match (check longest names first like "Tapu Koko")
   for (const [pkmn, dex] of Object.entries(DEX).sort((a, b) => b[0].length - a[0].length)) {
-    if (name.includes(pkmn)) return { url: `${PKM_CDN}pm${dex}.icon.png`, shadow: false };
+    if (name.includes(pkmn)) return { url: natDexImg(dex, GENDER_SUFFIX[dex] || ""), shadow: false };
   }
   return null;
 }
@@ -163,7 +118,7 @@ function pokemonImgHTML(pkmn, size) {
   }
   if (pkmn.dynamax) {
     return `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0">
-      <img src="https://www.snacknap.com/assets/img/dynamax.png?v=2" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85" />
+      <img src="assets/pokemon-images/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85" />
       <img src="${pkmn.url}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
     </div>`;
   }
@@ -436,7 +391,7 @@ const EVENTS = [
   { id: 51, title: "Community Day: Grookey", type: "Community Day", date: "2026-01-18", endDate: null, time: "2:00 PM – 5:00 PM", color: "#27AE60", icon: "\uD83C\uDF31", featured: false, summary: "Grookey takes the spotlight! Evolve to Rillaboom for the exclusive Charged Attack Frenzy Plant.", details: { bosses: ["Rillaboom with Frenzy Plant (exclusive Charged Move)"], bonuses: ["Boosted Shiny Grookey rate", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "Extra Special Trade (2–9 PM)", "Special Background encounters available"], tips: ["Frenzy Plant is the premier Grass Charged Move — Rillaboom benefits hugely.", "First Community Day of 2026 with the new yearly Special Background feature.", "Check in at Community Ambassador events for bonus Timed Research."] } },
   { id: 52, title: "Community Day: Vulpix & Alolan Vulpix", type: "Community Day", date: "2026-02-15", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E67E22", icon: "\uD83E\uDD8A", featured: false, summary: "Vulpix and Alolan Vulpix share the spotlight! Exclusive moves Energy Ball and Chilling Water.", details: { bosses: ["Ninetales with Energy Ball (exclusive)", "Alolan Ninetales with Chilling Water (exclusive)"], bonuses: ["Both forms spawning in the wild", "Boosted Shiny rates for both Vulpix forms", "3-hour Incense", "Standard Community Day bonuses"], tips: ["Alolan Ninetales with Chilling Water is excellent in PvP Great League.", "Dual-feature Community Days let you hunt two shinies at once.", "Prioritize Alolan Vulpix if you care about PvP meta relevance."] } },
   { id: 53, title: "Community Day: Scorbunny", type: "Community Day", url: "https://pokemongo.com/news/communityday-march-2026-scorbunny", date: "2026-03-14", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E74C3C", icon: "\uD83D\uDC30", featured: false, summary: "Scorbunny stars in March! Evolve Raboot to Cinderace for the exclusive Charged Attack Blast Burn.", details: { bosses: ["Cinderace with Blast Burn (exclusive Charged Move)"], bonuses: ["¼ Egg Hatch Distance", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "Extra Special Trade (2–9 PM)", "50% less Trade Stardust cost (2–9 PM)"], tips: ["Blast Burn is the best Fire Charged Move — makes Cinderace a solid Fire attacker.", "Evolve within 5 hours after the event ends to get the exclusive move.", "Overlaps with Pokémon Pokopia Celebration Event — double-dip on bonuses."] } },
-  { id: 4, title: "Community Day: Tinkatink", type: "Community Day", url: "https://pokemongo.com/news/communityday-april-2026-tinkatink", date: "2026-04-11", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E84393", icon: "\uD83D\uDD28", iconImg: "assets/pokemon-images/pm957.icon.png", featured: true, summary: "Tinkatink takes the spotlight! Evolve to Tinkaton for the exclusive Charged Attack Gigaton Hammer.", details: { bosses: ["Tinkaton with Gigaton Hammer (exclusive Charged Move)"], bonuses: ["3× Catch Stardust", "2× Catch Candy", "2× chance for Candy XL", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "1 extra Special Trade (2–9 PM)", "50% less Trade Stardust cost (2–9 PM)"], tips: ["Evolve Tinkatuff during the event or up to 4 hours after (by 9 PM) for Gigaton Hammer.", "Stack Star Pieces with the 3× Stardust bonus — one of the best dust events.", "Tinkatink with Special Backgrounds from Field Research and Lure Modules.", "Take snapshots for Tinkatink photobomb encounters."] } },
+  { id: 4, title: "Community Day: Tinkatink", type: "Community Day", url: "https://pokemongo.com/news/communityday-april-2026-tinkatink", date: "2026-04-11", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E84393", icon: "\uD83D\uDD28", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-9_Paldea/0957-female.webp", featured: true, summary: "Tinkatink takes the spotlight! Evolve to Tinkaton for the exclusive Charged Attack Gigaton Hammer.", details: { bosses: ["Tinkaton with Gigaton Hammer (exclusive Charged Move)"], bonuses: ["3× Catch Stardust", "2× Catch Candy", "2× chance for Candy XL", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "1 extra Special Trade (2–9 PM)", "50% less Trade Stardust cost (2–9 PM)"], tips: ["Evolve Tinkatuff during the event or up to 4 hours after (by 9 PM) for Gigaton Hammer.", "Stack Star Pieces with the 3× Stardust bonus — one of the best dust events.", "Tinkatink with Special Backgrounds from Field Research and Lure Modules.", "Take snapshots for Tinkatink photobomb encounters."] } },
   { id: 54, title: "Community Day: May 2026", type: "Community Day", date: "2026-05-09", endDate: null, time: "2:00 PM – 5:00 PM", color: "#636E72", icon: "\u2753", featured: false, summary: "May Community Day — date confirmed, featured Pokémon to be announced.", details: { bosses: ["Featured Pokémon: TBA"], bonuses: ["Standard Community Day bonuses expected", "Exclusive move for final evolution", "Boosted Shiny rate"], tips: ["Date is locked in — mark your calendar.", "Featured Pokémon usually announced 2–4 weeks before.", "Start stockpiling Poké Balls and Star Pieces."] } },
   { id: 55, title: "CD Classic: May 2026", type: "Community Day", date: "2026-05-16", endDate: null, time: "2:00 PM – 5:00 PM", color: "#636E72", icon: "\uD83D\uDD04", featured: false, summary: "May Community Day Classic — date confirmed, featured Pokémon to be announced.", details: { bosses: ["Featured Pokémon: TBA (past Community Day rerun)"], bonuses: ["Standard CD Classic bonuses expected", "Exclusive move available again"], tips: ["CD Classics bring back Pokémon and moves from past Community Days.", "Great chance to get an exclusive move you missed."] } },
   { id: 5, title: "Sustainability Week 2026", type: "Event", url: "https://pokemongo.com/news/sustainability-week-2026", date: "2026-04-14", endDate: "2026-04-20", time: "10:00 AM – 8:00 PM", color: "#27AE60", icon: "\uD83C\uDF3F", featured: true, summary: "Silicobra debuts! G. Corsola w/ pink sunglasses and Shiny Toedscool make first appearances.", details: { bosses: ["Silicobra (debut)", "G. Corsola w/ pink sunglasses", "Shiny Toedscool", "Seedot", "Castform", "Wiglett"], bonuses: ["Rotating Route spawns every 2 days", "Boosted Shiny Lapras, Togetic, Castform, Trubbish", "Toedscool in forested/grassy biomes", "Silicobra in desert-like biomes", "GO Pass milestone bonuses"], tips: ["Shiny Toedscool is brand new — check every one.", "Galarian Corsola in sunglasses is a top collector target.", "Route spawns rotate every 2 days — plan your priorities.", "Silicobra evolves into Sandaconda for 50 Candy."] } },
@@ -452,7 +407,7 @@ const EVENTS = [
   { id: 60, title: "Pok\u00E9mon Pokopia Celebration", type: "Event", url: "https://pokemongo.com/news/pokemon-pokopia-celebration-event-2026", date: "2026-03-10", endDate: "2026-03-16", time: "10:00 AM \u2013 8:00 PM", color: "#E056A0", icon: "\uD83C\uDFAD", featured: false, summary: "Costumed Ditto debuts wearing a hat and cap! Boosted Shiny Sudowoodo and Zorua. Kanto starters, Lapras, Snorlax, and Dragonite in 3-Star Raids. Free Ditto Eye Mask avatar item.", details: { bosses: ["Ditto wearing a hat (debut)", "Ditto wearing a cap (debut)", "Sudowoodo (boosted Shiny)", "Zorua (boosted Shiny)", "Bulbasaur", "Charmander", "Squirtle", "Pikachu", "Lapras (3\u2605 Raid)", "Snorlax (3\u2605 Raid)", "Dragonite (3\u2605 Raid)"], bonuses: ["2\u00D7 XP for spinning Pok\u00E9Stops", "10\u00D7 XP for spinning a Pok\u00E9Stop for the first time", "Boosted Shiny rates for Sudowoodo and Zorua", "Collection Challenges with themed rewards", "Free Ditto Eye Mask avatar item in shop", "Event-themed stickers from Pok\u00E9Stops, Gyms, and Gifts"], tips: ["Catch everything \u2014 costumed Ditto transforms and hides among wild spawns.", "Shiny Zorua is extremely rare normally, take advantage of the boosted rates.", "Spin new Pok\u00E9Stops for 10\u00D7 XP \u2014 great time to explore new areas.", "Overlaps with Scorbunny Community Day on March 14."] } },
   { id: 61, title: "Bug Out 2026", type: "Event", url: "https://pokemongo.com/news/bug-out-2026", date: "2026-03-17", endDate: "2026-03-23", time: "10:00 AM \u2013 8:00 PM", color: "#2ECC71", icon: "\uD83D\uDC1B", featured: false, summary: "Blipbug, Dottler, and Orbeetle debut! Shiny Sizzlipede released. Rotating Lure spawns with Pinsir, Scizor, and Kleavor in 3-Star Raids.", details: { bosses: ["Blipbug (debut)", "Sizzlipede (Shiny debut)", "Caterpie", "Dwebble", "Nymble", "Scyther", "Blipbug (1\u2605 Raid)", "Pinsir (3\u2605 Raid)", "Scizor (3\u2605 Raid)", "Kleavor (3\u2605 Raid)", "Paras (Lures Mar 17\u201319)", "Cutiefly (Lures Mar 19\u201321)", "Combee (Lures Mar 21\u201323)"], bonuses: ["2\u00D7 XP for Nice Throws or better (GO Pass Tier 1)", "2\u00D7 Catch Candy (GO Pass Tier 2)", "3\u00D7 Catch Candy (GO Pass Deluxe Tier 2)", "Rotating Lure Module spawns every 2 days", "GO Pass Deluxe $4.99 or Deluxe + 6 Ranks $6.99", "Boosted Shiny rates for Lure Pok\u00E9mon"], tips: ["Blipbug evolves to Dottler (25 Candy) then Orbeetle (100 Candy) \u2014 stock up.", "Shiny Sizzlipede is brand new \u2014 check every one you see.", "Pinsir, Scizor, and Kleavor in 3-Star Raids can all be Shiny.", "Paras, Combee, and Cutiefly from Lures have boosted Shiny rates.", "GO Pass rewards expire March 25 at 8 PM."] } },
   { id: 29, title: "Max Battle Day: Gigantamax Pikachu", type: "Max Battle", date: "2026-03-28", endDate: null, time: "2:00 PM – 5:00 PM", color: "#F1C40F", icon: "\u26A1", featured: false, summary: "Gigantamax Pikachu debuted in 6-Star Max Battles! Pikachu caught from Max Battles cannot evolve. Shiny Gigantamax Pikachu was available.", details: { bosses: ["Gigantamax Pikachu (6\u2605 Max Battle debut)"], bonuses: ["2× Max Particles from exploring (12 AM – 5 PM)", "Increased Max Particle storage limit", "3 Special Trades for the day", "Power Spots refreshed more frequently", "Gigantamax Pikachu on all Power Spots", "Remote Raid limit increased to 20 (Mar 27 5 PM – Mar 28 8 PM PDT)"], tips: ["Gigantamax Pikachu cannot evolve — it's a standalone collector Pokémon.", "As a pure Electric-type, Ground-type counters were the way to go.", "Paid Timed Research ($4.99) rewarded 1 Max Mushroom, 25,000 XP, 6,400 Max Particles, and 2× XP from Max Battles.", "Coordinating with a full group of 4 was essential for 6-Star difficulty."] } },
-  { id: 63, title: "Max Monday: D-Max Woobat", type: "Max Battle", date: "2026-03-30", endDate: null, time: "6:00 AM – 9:00 PM", color: "#A890F0", icon: "\uD83D\uDCA5", iconImg: "assets/pokemon-images/pm527.icon.png", featured: false, summary: "Dynamax Woobat featured at Power Spots this week.", details: { bosses: ["Dynamax Woobat"], bonuses: ["Max Monday: 6 AM – 9 PM Mar 30", "Power Spots all week", "Extra Power Spots on Monday"], tips: ["Woobat evolves into Swoobat with high friendship.", "Max Mondays have more Power Spots."] } },
+  { id: 63, title: "Max Monday: D-Max Woobat", type: "Max Battle", date: "2026-03-30", endDate: null, time: "6:00 AM – 9:00 PM", color: "#A890F0", icon: "\uD83D\uDCA5", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-5_Unova/0527.webp", featured: false, summary: "Dynamax Woobat featured at Power Spots this week.", details: { bosses: ["Dynamax Woobat"], bonuses: ["Max Monday: 6 AM – 9 PM Mar 30", "Power Spots all week", "Extra Power Spots on Monday"], tips: ["Woobat evolves into Swoobat with high friendship.", "Max Mondays have more Power Spots."] } },
   { id: 30, title: "Dynamax Trapinch (Debut)", type: "Max Battle", date: "2026-04-06", endDate: "2026-04-12", time: "Max Monday: 6–7 PM", color: "#E67E22", icon: "\uD83C\uDFDC\uFE0F", featured: false, summary: "Dynamax Trapinch debuts at Power Spots.", details: { bosses: ["Dynamax Trapinch (debut)"], bonuses: ["Max Monday: 6–7 PM Apr 6", "Power Spots all week", "Extra Power Spots on Monday"], tips: ["Trapinch evolves into Flygon.", "Max Mondays have more Power Spots."] } },
   { id: 31, title: "Dynamax Drilbur", type: "Max Battle", date: "2026-04-13", endDate: "2026-04-19", time: "Max Monday: 6–7 PM", color: "#6D4C41", icon: "\u26CF\uFE0F", featured: false, summary: "Dynamax Drilbur at Power Spots. Excadrill is top-tier.", details: { bosses: ["Dynamax Drilbur"], bonuses: ["Max Monday: 6–7 PM Apr 13", "Power Spots all week"], tips: ["Excadrill is top Ground AND Steel attacker.", "Overlaps with Sustainability Week."] } },
   { id: 32, title: "Dynamax Regirock (Debut)", type: "Max Battle", date: "2026-04-20", endDate: "2026-04-26", time: "Max Monday: 6–7 PM", color: "#D4A574", icon: "\uD83E\uDEA8", featured: true, summary: "Dynamax Regirock debuts at Power Spots! Another Legendary Regi joins the Dynamax roster.", details: { bosses: ["Dynamax Regirock (debut)"], bonuses: ["Max Monday: 6–7 PM Apr 20", "Power Spots all week"], tips: ["Headline event — expect higher difficulty.", "Coordinate with your local group.", "Coordinate with your local group for max rewards."] } },
@@ -849,7 +804,7 @@ function renderRaidHeads(tier) {
   const color = darkMode ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.85)";
   return `<div style="display:flex;gap:2px;align-items:center;margin-left:auto">${Array(count).fill(raidHeadIcon(20, color)).join("")}</div>`;
 }
-const TIER_EGGS = { "1-Star Raids": "https://cdn.leekduck.com/assets/img/icons/raid-battles/1-star.png", "3-Star Raids": "https://cdn.leekduck.com/assets/img/icons/raid-battles/3-star.png", "5-Star Raids": "https://cdn.leekduck.com/assets/img/icons/raid-battles/5-star.png", "Mega Raids": "https://cdn.leekduck.com/assets/img/icons/raid-battles/mega.png", "Shadow Raids": "https://cdn.leekduck.com/assets/img/icons/raid-battles/5-star.png", "Shadow 1-Star Raids": "https://cdn.leekduck.com/assets/img/icons/raid-battles/1-star.png", "Shadow 3-Star Raids": "https://cdn.leekduck.com/assets/img/icons/raid-battles/3-star.png", "Shadow 5-Star Raids": "https://cdn.leekduck.com/assets/img/icons/raid-battles/5-star.png" };
+const TIER_EGGS = { "1-Star Raids": "assets/pokemon-images/Raid-Eggs/1-star.png", "3-Star Raids": "assets/pokemon-images/Raid-Eggs/3-star.png", "5-Star Raids": "assets/pokemon-images/Raid-Eggs/5-star.png", "Mega Raids": "assets/pokemon-images/Raid-Eggs/mega.png", "Shadow Raids": "assets/pokemon-images/Raid-Eggs/5-star.png", "Shadow 1-Star Raids": "assets/pokemon-images/Raid-Eggs/1-star.png", "Shadow 3-Star Raids": "assets/pokemon-images/Raid-Eggs/3-star.png", "Shadow 5-Star Raids": "assets/pokemon-images/Raid-Eggs/5-star.png" };
 const RAID_BOSS_DATA = {
   "Regidrago":{types:["Dragon"],cp:"1831–1916",cpBoost:"2289–2395",weather:"Windy"},
   "Kyogre":{types:["Water"],cp:"2260–2351",cpBoost:"2825–2939",weather:"Rainy"},
@@ -1806,7 +1761,7 @@ function render() {
             <span style="font-size:12px;font-weight:700;color:${th.text};letter-spacing:0.5px;text-transform:uppercase">${tier}</span>
           </div>
           <div style="padding:8px;display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${bosses.map(b => {
-            const imgUrl = b.gmax ? `${PKM_CDN}pm${b.dex}.fGIGANTAMAX.icon.png` : `${PKM_CDN}pm${b.dex}.icon.png`;
+            const imgUrl = b.gmax ? gmaxImg(b.dex) : natDexImg(b.dex, GENDER_SUFFIX[b.dex] || "");
             const pkmn = { url: imgUrl, shadow: false, dynamax: true };
             const cardLayout = breakpoint !== "mobile";
             const imgSize = cardLayout ? 120 : 150;
@@ -1988,7 +1943,7 @@ function renderSidebar(th) {
   return `<div id="sidebar-overlay" onclick="closeSidebar()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:998;opacity:0;pointer-events:none;transition:opacity 0.3s ease"></div>
   <nav id="sidebar" style="position:fixed;top:0;left:0;width:260px;height:100%;background:${th.surface};border-right:1.5px solid ${th.border};z-index:999;transform:translateX(-100%);transition:transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;overflow-y:auto">
     <div style="padding:24px 20px;border-bottom:1.5px solid ${th.border};display:flex;align-items:center;gap:12px">
-      <img src="assets/trainerwire-logo.PNG" style="width:50px;height:50px;object-fit:contain" alt="TrainerWire" />
+      <img src="assets/trainerwire-logo.PNG" style="width:80px;height:80px;object-fit:contain" alt="TrainerWire" />
       <div>
         <div style="font-size:16px;font-weight:800;color:${th.text}">TrainerWire</div>
         <div style="font-size:10px;color:${th.textMuted};font-weight:500">Pok\u00E9mon GO Hub</div>
