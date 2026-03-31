@@ -23,28 +23,15 @@ function megaImg(dex, suffix) { return `${IMG_BASE}/Mega/regular/${getGenFolder(
 function gmaxImg(dex) { return `${IMG_BASE}/Gigantamax/regular/Gen-8_Galar/${dexPad(dex)}_gigamax.webp`; }
 const GENDER_SUFFIX = {3:"-male",12:"-male",19:"-male",20:"-male",25:"-male",26:"-male",29:"-female",30:"-female",31:"-female",32:"-male",33:"-male",34:"-male",41:"-male",42:"-male",44:"-male",45:"-male",64:"-male",65:"-male",84:"-male",85:"-male",97:"-male",106:"-male",107:"-male",111:"-male",112:"-male",113:"-female",115:"-female",118:"-male",119:"-male",123:"-male",124:"-female",128:"-male",129:"-male",130:"-male",133:"-male",154:"-male",165:"-male",166:"-male",178:"-male",185:"-male",186:"-male",190:"-male",194:"-male",195:"-male",198:"-male",202:"-male",203:"-male",207:"-male",208:"-male",212:"-male",214:"-male",215:"-male",217:"-male",221:"-male",224:"-male",229:"-male",232:"-male",236:"-male",237:"-male",238:"-female",241:"-female",242:"-female",255:"-male",256:"-male",257:"-male",267:"-male",269:"-male",272:"-male",274:"-male",275:"-male",307:"-male",308:"-male",313:"-male",314:"-female",315:"-male",316:"-male",317:"-male",322:"-male",323:"-male",332:"-male",350:"-male",369:"-male",380:"-female",381:"-male",396:"-male",397:"-male",398:"-male",399:"-male",400:"-male",401:"-male",402:"-male",403:"-male",404:"-male",405:"-male",407:"-male",414:"-male",415:"-male",416:"-female",417:"-male",418:"-male",419:"-male",424:"-male",440:"-female",443:"-male",444:"-male",445:"-male",449:"-male",450:"-male",453:"-male",454:"-male",456:"-male",457:"-male",459:"-male",460:"-male",461:"-male",464:"-male",465:"-male",473:"-male",475:"-male",478:"-female",488:"-female",521:"-male",538:"-male",539:"-male",548:"-female",549:"-female",592:"-male",593:"-male",627:"-male",628:"-male",629:"-female",630:"-female",668:"-male",678:"-male",758:"-female",761:"-female",762:"-female",763:"-female",856:"-female",857:"-female",858:"-female",859:"-male",860:"-male",861:"-male",876:"-male",916:"-male",957:"-female",958:"-female",959:"-female"};
 const DEX = {
-  "Venusaur":3,"Charizard":6,"Blastoise":9,"Butterfree":12,"Pikachu":25,"Ninetales":38,"Diglett":50,
-  "Alakazam":65,"Aerodactyl":142,"Dragonite":149,"Mewtwo":150,"Chinchou":170,"Wooper":194,
-  "Shuckle":213,"Sneasel":215,"Corsola":222,"Seedot":273,"Kirlia":281,"Manectric":310,"Sharpedo":319,
-  "Trapinch":328,"Castform":351,"Absol":359,"Banette":354,"Regirock":377,"Latios":381,"Kyogre":382,
-  "Groudon":383,"Empoleon":395,"Shinx":403,"Riolu":447,"Croagunk":453,"Blitzle":522,"Drilbur":529,
-  "Minccino":572,"Dedenne":702,"Tapu Koko":785,"Tapu Lele":786,"Zeraora":807,"Rillaboom":812,
-  "Cinderace":815,"Silicobra":843,"Regidrago":895,"Pawmi":921,"Toedscool":948,"Tinkatink":957,"Tinkaton":959,
-  "Wiglett":960,"Tauros":128,"Unown":201,"Gengar":94,"Gardevoir":282,"Sceptile":254,"Swampert":260,"Rayquaza":384,
-  "Latios":381,"Salamence":373,"Dragonite":149,"Garchomp":445,"Mamoswine":473,"Weavile":461,
-  "Darmanitan":555,"Kartana":798,"Landorus":645,"Giratina":487,"Raikou":243,"Electivire":466,
-  "Excadrill":530,"Metagross":376,"Rhyperior":464,"Tangrowth":465,"Chandelure":609,"Zekrom":644,"Ditto":132,"Sudowoodo":185,"Zorua":570,"Bulbasaur":1,"Charmander":4,"Squirtle":7,
-  "Lapras":131,"Snorlax":143,"Blipbug":824,"Sizzlipede":850,"Caterpie":10,"Dwebble":557,
-  "Nymble":919,"Paras":46,"Cutiefly":742,"Combee":415,"Scorbunny":813,"Cinderace":815,"Pinsir":127,"Scyther":123,"Scizor":212,"Kleavor":900,
-  "Larvitar":246,"Lileep":345,"Stunfisk":618,"Rockruff":744,"Machamp":68,"Hippowdon":450,
-  "Bombirdier":962,"Regieleki":894,"Houndoom":229,"Dratini":147,"Gligar":207,"Cacnea":331,
-  "Joltik":595,"Marowak":105,"Stantler":234,"Latias":380,"Gyarados":130,"Honedge":679,"Dhelmise":781,"Sinistea":854,"Duraludon":884,"Dreepy":885,
-  "Wooloo":831,"Sobble":816,"Wailmer":320,"Falinks":870,"Regice":378,"Meowth":52,"Kingler":99,
-  "Abra":63,"Bounsweet":761,"Gastly":92,"Growlithe":58,"Hatenna":856,"Inkay":686,"Kabuto":140,
-  "Krabby":98,"Omanyte":138,"Pidove":519,"Ralts":280,"Roggenrola":524,"Rookidee":821,
-  "Skwovet":819,"Spheal":363,"Trubbish":568,"Woobat":527,"Darumaka":554,"Eevee":133,
-  "Machop":66,"Beldum":374,"Chansey":113,"Cryogonal":615,"Drampa":780,"Hitmonchan":107,
-  "Hitmonlee":106,"Passimian":766,"Sableye":302,"Magnemite":81,"Mareep":179,"Raichu":26
+  "Bulbasaur":1,"Ivysaur":2,"Venusaur":3,"Charmander":4,"Charmeleon":5,"Charizard":6,"Squirtle":7,"Wartortle":8,"Blastoise":9,"Caterpie":10,"Metapod":11,"Butterfree":12,"Weedle":13,"Kakuna":14,"Beedrill":15,"Pidgey":16,"Pidgeotto":17,"Pidgeot":18,"Rattata":19,"Raticate":20,"Spearow":21,"Fearow":22,"Ekans":23,"Arbok":24,"Pikachu":25,"Raichu":26,"Sandshrew":27,"Sandslash":28,"Nidoran":29,"Nidorina":30,"Nidoqueen":31,"Nidorino":33,"Nidoking":34,"Clefairy":35,"Clefable":36,"Vulpix":37,"Ninetales":38,"Jigglypuff":39,"Wigglytuff":40,"Zubat":41,"Golbat":42,"Oddish":43,"Gloom":44,"Vileplume":45,"Paras":46,"Parasect":47,"Venonat":48,"Venomoth":49,"Diglett":50,"Dugtrio":51,"Meowth":52,"Persian":53,"Psyduck":54,"Golduck":55,"Mankey":56,"Primeape":57,"Growlithe":58,"Arcanine":59,"Poliwag":60,"Poliwhirl":61,"Poliwrath":62,"Abra":63,"Kadabra":64,"Alakazam":65,"Machop":66,"Machoke":67,"Machamp":68,"Bellsprout":69,"Weepinbell":70,"Victreebel":71,"Tentacool":72,"Tentacruel":73,"Geodude":74,"Graveler":75,"Golem":76,"Ponyta":77,"Rapidash":78,"Slowpoke":79,"Slowbro":80,"Magnemite":81,"Magneton":82,"Farfetchd":83,"Doduo":84,"Dodrio":85,"Seel":86,"Dewgong":87,"Grimer":88,"Muk":89,"Shellder":90,"Cloyster":91,"Gastly":92,"Haunter":93,"Gengar":94,"Onix":95,"Drowzee":96,"Hypno":97,"Krabby":98,"Kingler":99,"Voltorb":100,"Electrode":101,"Exeggcute":102,"Exeggutor":103,"Cubone":104,"Marowak":105,"Hitmonlee":106,"Hitmonchan":107,"Lickitung":108,"Koffing":109,"Weezing":110,"Rhyhorn":111,"Rhydon":112,"Chansey":113,"Tangela":114,"Kangaskhan":115,"Horsea":116,"Seadra":117,"Goldeen":118,"Seaking":119,"Staryu":120,"Starmie":121,"Mr. Mime":122,"Scyther":123,"Jynx":124,"Electabuzz":125,"Magmar":126,"Pinsir":127,"Tauros":128,"Magikarp":129,"Gyarados":130,"Lapras":131,"Ditto":132,"Eevee":133,"Vaporeon":134,"Jolteon":135,"Flareon":136,"Porygon":137,"Omanyte":138,"Omastar":139,"Kabuto":140,"Kabutops":141,"Aerodactyl":142,"Snorlax":143,"Articuno":144,"Zapdos":145,"Moltres":146,"Dratini":147,"Dragonair":148,"Dragonite":149,"Mewtwo":150,"Mew":151,
+  "Chikorita":152,"Bayleef":153,"Meganium":154,"Cyndaquil":155,"Quilava":156,"Typhlosion":157,"Totodile":158,"Croconaw":159,"Feraligatr":160,"Sentret":161,"Furret":162,"Hoothoot":163,"Noctowl":164,"Ledyba":165,"Ledian":166,"Spinarak":167,"Ariados":168,"Crobat":169,"Chinchou":170,"Lanturn":171,"Pichu":172,"Cleffa":173,"Igglybuff":174,"Togepi":175,"Togetic":176,"Natu":177,"Xatu":178,"Mareep":179,"Flaaffy":180,"Ampharos":181,"Bellossom":182,"Marill":183,"Azumarill":184,"Sudowoodo":185,"Politoed":186,"Hoppip":187,"Skiploom":188,"Jumpluff":189,"Aipom":190,"Sunkern":191,"Sunflora":192,"Yanma":193,"Wooper":194,"Quagsire":195,"Espeon":196,"Umbreon":197,"Murkrow":198,"Slowking":199,"Misdreavus":200,"Unown":201,"Wobbuffet":202,"Girafarig":203,"Pineco":204,"Forretress":205,"Dunsparce":206,"Gligar":207,"Steelix":208,"Snubbull":209,"Granbull":210,"Qwilfish":211,"Scizor":212,"Shuckle":213,"Heracross":214,"Sneasel":215,"Teddiursa":216,"Ursaring":217,"Slugma":218,"Magcargo":219,"Swinub":220,"Piloswine":221,"Corsola":222,"Remoraid":223,"Octillery":224,"Delibird":225,"Mantine":226,"Skarmory":227,"Houndour":228,"Houndoom":229,"Kingdra":230,"Phanpy":231,"Donphan":232,"Porygon2":233,"Stantler":234,"Smeargle":235,"Tyrogue":236,"Hitmontop":237,"Smoochum":238,"Elekid":239,"Magby":240,"Miltank":241,"Blissey":242,"Raikou":243,"Entei":244,"Suicune":245,"Larvitar":246,"Pupitar":247,"Tyranitar":248,"Lugia":249,"Ho-Oh":250,"Celebi":251,
+  "Treecko":252,"Grovyle":253,"Sceptile":254,"Torchic":255,"Combusken":256,"Blaziken":257,"Mudkip":258,"Marshtomp":259,"Swampert":260,"Poochyena":261,"Mightyena":262,"Zigzagoon":263,"Linoone":264,"Wurmple":265,"Silcoon":266,"Beautifly":267,"Cascoon":268,"Dustox":269,"Lotad":270,"Lombre":271,"Ludicolo":272,"Seedot":273,"Nuzleaf":274,"Shiftry":275,"Taillow":276,"Swellow":277,"Wingull":278,"Pelipper":279,"Ralts":280,"Kirlia":281,"Gardevoir":282,"Surskit":283,"Masquerain":284,"Shroomish":285,"Breloom":286,"Slakoth":287,"Vigoroth":288,"Slaking":289,"Nincada":290,"Ninjask":291,"Shedinja":292,"Whismur":293,"Loudred":294,"Exploud":295,"Makuhita":296,"Hariyama":297,"Azurill":298,"Nosepass":299,"Skitty":300,"Delcatty":301,"Sableye":302,"Mawile":303,"Aron":304,"Lairon":305,"Aggron":306,"Meditite":307,"Medicham":308,"Electrike":309,"Manectric":310,"Plusle":311,"Minun":312,"Volbeat":313,"Illumise":314,"Roselia":315,"Gulpin":316,"Swalot":317,"Carvanha":318,"Sharpedo":319,"Wailmer":320,"Wailord":321,"Numel":322,"Camerupt":323,"Torkoal":324,"Spoink":325,"Grumpig":326,"Spinda":327,"Trapinch":328,"Vibrava":329,"Flygon":330,"Cacnea":331,"Cacturne":332,"Swablu":333,"Altaria":334,"Zangoose":335,"Seviper":336,"Lunatone":337,"Solrock":338,"Barboach":339,"Whiscash":340,"Corphish":341,"Crawdaunt":342,"Baltoy":343,"Claydol":344,"Lileep":345,"Cradily":346,"Anorith":347,"Armaldo":348,"Feebas":349,"Milotic":350,"Castform":351,"Kecleon":352,"Shuppet":353,"Banette":354,"Duskull":355,"Dusclops":356,"Tropius":357,"Chimecho":358,"Absol":359,"Wynaut":360,"Snorunt":361,"Glalie":362,"Spheal":363,"Sealeo":364,"Walrein":365,"Clamperl":366,"Huntail":367,"Gorebyss":368,"Relicanth":369,"Luvdisc":370,"Bagon":371,"Shelgon":372,"Salamence":373,"Beldum":374,"Metang":375,"Metagross":376,"Regirock":377,"Regice":378,"Registeel":379,"Latias":380,"Latios":381,"Kyogre":382,"Groudon":383,"Rayquaza":384,"Jirachi":385,"Deoxys":386,
+  "Turtwig":387,"Grotle":388,"Torterra":389,"Chimchar":390,"Monferno":391,"Infernape":392,"Piplup":393,"Prinplup":394,"Empoleon":395,"Starly":396,"Staravia":397,"Staraptor":398,"Bidoof":399,"Bibarel":400,"Kricketot":401,"Kricketune":402,"Shinx":403,"Luxio":404,"Luxray":405,"Budew":406,"Roserade":407,"Cranidos":408,"Rampardos":409,"Shieldon":410,"Bastiodon":411,"Burmy":412,"Wormadam":413,"Mothim":414,"Combee":415,"Vespiquen":416,"Pachirisu":417,"Buizel":418,"Floatzel":419,"Cherubi":420,"Cherrim":421,"Shellos":422,"Gastrodon":423,"Ambipom":424,"Drifloon":425,"Drifblim":426,"Buneary":427,"Lopunny":428,"Mismagius":429,"Honchkrow":430,"Glameow":431,"Purugly":432,"Chingling":433,"Stunky":434,"Skuntank":435,"Bronzor":436,"Bronzong":437,"Bonsly":438,"Mime Jr.":439,"Happiny":440,"Chatot":441,"Spiritomb":442,"Gible":443,"Gabite":444,"Garchomp":445,"Munchlax":446,"Riolu":447,"Lucario":448,"Hippopotas":449,"Hippowdon":450,"Skorupi":451,"Drapion":452,"Croagunk":453,"Toxicroak":454,"Carnivine":455,"Finneon":456,"Lumineon":457,"Mantyke":458,"Snover":459,"Abomasnow":460,"Weavile":461,"Magnezone":462,"Lickilicky":463,"Rhyperior":464,"Tangrowth":465,"Electivire":466,"Magmortar":467,"Togekiss":468,"Yanmega":469,"Leafeon":470,"Glaceon":471,"Gliscor":472,"Mamoswine":473,"Porygon-Z":474,"Gallade":475,"Probopass":476,"Dusknoir":477,"Froslass":478,"Rotom":479,"Uxie":480,"Mesprit":481,"Azelf":482,"Dialga":483,"Palkia":484,"Heatran":485,"Regigigas":486,"Giratina":487,"Cresselia":488,"Phione":489,"Manaphy":490,"Darkrai":491,"Shaymin":492,"Arceus":493,
+  "Victini":494,"Snivy":495,"Servine":496,"Serperior":497,"Tepig":498,"Pignite":499,"Emboar":500,"Oshawott":501,"Dewott":502,"Samurott":503,"Patrat":504,"Watchog":505,"Lillipup":506,"Herdier":507,"Stoutland":508,"Purrloin":509,"Liepard":510,"Pansage":511,"Simisage":512,"Pansear":513,"Simisear":514,"Panpour":515,"Simipour":516,"Munna":517,"Musharna":518,"Pidove":519,"Tranquill":520,"Unfezant":521,"Blitzle":522,"Zebstrika":523,"Roggenrola":524,"Boldore":525,"Gigalith":526,"Woobat":527,"Swoobat":528,"Drilbur":529,"Excadrill":530,"Audino":531,"Timburr":532,"Gurdurr":533,"Conkeldurr":534,"Tympole":535,"Palpitoad":536,"Seismitoad":537,"Throh":538,"Sawk":539,"Sewaddle":540,"Swadloon":541,"Leavanny":542,"Venipede":543,"Whirlipede":544,"Scolipede":545,"Cottonee":546,"Whimsicott":547,"Petilil":548,"Lilligant":549,"Basculin":550,"Sandile":551,"Krokorok":552,"Krookodile":553,"Darumaka":554,"Darmanitan":555,"Maractus":556,"Dwebble":557,"Crustle":558,"Scraggy":559,"Scrafty":560,"Sigilyph":561,"Yamask":562,"Cofagrigus":563,"Tirtouga":564,"Carracosta":565,"Archen":566,"Archeops":567,"Trubbish":568,"Garbodor":569,"Zorua":570,"Zoroark":571,"Minccino":572,"Cinccino":573,"Gothita":574,"Gothorita":575,"Gothitelle":576,"Solosis":577,"Duosion":578,"Reuniclus":579,"Ducklett":580,"Swanna":581,"Vanillite":582,"Vanillish":583,"Vanilluxe":584,"Deerling":585,"Sawsbuck":586,"Emolga":587,"Karrablast":588,"Escavalier":589,"Foongus":590,"Amoonguss":591,"Frillish":592,"Jellicent":593,"Alomomola":594,"Joltik":595,"Galvantula":596,"Ferroseed":597,"Ferrothorn":598,"Klink":599,"Klang":600,"Klinklang":601,"Tynamo":602,"Eelektrik":603,"Eelektross":604,"Elgyem":605,"Beheeyem":606,"Litwick":607,"Lampent":608,"Chandelure":609,"Axew":610,"Fraxure":611,"Haxorus":612,"Cubchoo":613,"Beartic":614,"Cryogonal":615,"Shelmet":616,"Accelgor":617,"Stunfisk":618,"Mienfoo":619,"Mienshao":620,"Druddigon":621,"Golett":622,"Golurk":623,"Pawniard":624,"Bisharp":625,"Bouffalant":626,"Rufflet":627,"Braviary":628,"Vullaby":629,"Mandibuzz":630,"Heatmor":631,"Durant":632,"Deino":633,"Zweilous":634,"Hydreigon":635,"Larvesta":636,"Volcarona":637,"Cobalion":638,"Terrakion":639,"Virizion":640,"Tornadus":641,"Thundurus":642,"Reshiram":643,"Zekrom":644,"Landorus":645,"Kyurem":646,"Keldeo":647,"Meloetta":648,"Genesect":649,
+  "Chespin":650,"Quilladin":651,"Chesnaught":652,"Fennekin":653,"Braixen":654,"Delphox":655,"Froakie":656,"Frogadier":657,"Greninja":658,"Bunnelby":659,"Diggersby":660,"Fletchling":661,"Fletchinder":662,"Talonflame":663,"Scatterbug":664,"Spewpa":665,"Vivillon":666,"Litleo":667,"Pyroar":668,"Skiddo":672,"Gogoat":673,"Pancham":674,"Pangoro":675,"Furfrou":676,"Espurr":677,"Meowstic":678,"Honedge":679,"Doublade":680,"Aegislash":681,"Spritzee":682,"Aromatisse":683,"Swirlix":684,"Slurpuff":685,"Inkay":686,"Malamar":687,"Binacle":688,"Barbaracle":689,"Skrelp":690,"Dragalge":691,"Clauncher":692,"Clawitzer":693,"Helioptile":694,"Heliolisk":695,"Tyrunt":696,"Tyrantrum":697,"Amaura":698,"Aurorus":699,"Sylveon":700,"Hawlucha":701,"Dedenne":702,"Carbink":703,"Goomy":704,"Sliggoo":705,"Goodra":706,"Klefki":707,"Phantump":708,"Trevenant":709,"Pumpkaboo":710,"Gourgeist":711,"Bergmite":712,"Avalugg":713,"Noibat":714,"Noivern":715,"Xerneas":716,"Yveltal":717,"Zygarde":718,"Diancie":719,"Hoopa":720,"Volcanion":721,
+  "Rowlet":722,"Dartrix":723,"Decidueye":724,"Litten":725,"Torracat":726,"Incineroar":727,"Popplio":728,"Brionne":729,"Primarina":730,"Pikipek":731,"Trumbeak":732,"Toucannon":733,"Yungoos":734,"Gumshoos":735,"Grubbin":736,"Charjabug":737,"Vikavolt":738,"Crabrawler":739,"Crabominable":740,"Oricorio":741,"Cutiefly":742,"Ribombee":743,"Rockruff":744,"Lycanroc":745,"Wishiwashi":746,"Mareanie":747,"Toxapex":748,"Mudbray":749,"Mudsdale":750,"Dewpider":751,"Araquanid":752,"Fomantis":753,"Lurantis":754,"Morelull":755,"Shiinotic":756,"Salandit":757,"Salazzle":758,"Stufful":759,"Bewear":760,"Bounsweet":761,"Steenee":762,"Tsareena":763,"Comfey":764,"Oranguru":765,"Passimian":766,"Wimpod":767,"Golisopod":768,"Sandygast":769,"Palossand":770,"Pyukumuku":771,"Type: Null":772,"Silvally":773,"Minior":774,"Komala":775,"Turtonator":776,"Togedemaru":777,"Mimikyu":778,"Bruxish":779,"Drampa":780,"Dhelmise":781,"Jangmo-o":782,"Hakamo-o":783,"Kommo-o":784,"Tapu Koko":785,"Tapu Lele":786,"Tapu Bulu":787,"Tapu Fini":788,"Cosmog":789,"Cosmoem":790,"Solgaleo":791,"Lunala":792,"Nihilego":793,"Buzzwole":794,"Pheromosa":795,"Xurkitree":796,"Celesteela":797,"Kartana":798,"Guzzlord":799,"Necrozma":800,"Magearna":801,"Marshadow":802,"Poipole":803,"Naganadel":804,"Stakataka":805,"Blacephalon":806,"Zeraora":807,"Meltan":808,"Melmetal":809,
+  "Grookey":810,"Thwackey":811,"Rillaboom":812,"Scorbunny":813,"Raboot":814,"Cinderace":815,"Sobble":816,"Drizzile":817,"Inteleon":818,"Skwovet":819,"Greedent":820,"Rookidee":821,"Corvisquire":822,"Corviknight":823,"Blipbug":824,"Dottler":825,"Orbeetle":826,"Nickit":827,"Thievul":828,"Gossifleur":829,"Eldegoss":830,"Wooloo":831,"Dubwool":832,"Chewtle":833,"Drednaw":834,"Yamper":835,"Boltund":836,"Rolycoly":837,"Carkol":838,"Coalossal":839,"Applin":840,"Flapple":841,"Appletun":842,"Silicobra":843,"Sandaconda":844,"Cramorant":845,"Arrokuda":846,"Barraskewda":847,"Toxel":848,"Toxtricity":849,"Sizzlipede":850,"Centiskorch":851,"Clobbopus":852,"Grapploct":853,"Sinistea":854,"Polteageist":855,"Hatenna":856,"Hattrem":857,"Hatterene":858,"Impidimp":859,"Morgrem":860,"Grimmsnarl":861,"Obstagoon":862,"Perrserker":863,"Cursola":864,"Sirfetchd":865,"Mr. Rime":866,"Runerigus":867,"Milcery":868,"Alcremie":869,"Falinks":870,"Pincurchin":871,"Snom":872,"Frosmoth":873,"Stonjourner":874,"Eiscue":875,"Indeedee":876,"Morpeko":877,"Cufant":878,"Copperajah":879,"Dracozolt":880,"Arctozolt":881,"Dracovish":882,"Arctovish":883,"Duraludon":884,"Dreepy":885,"Drakloak":886,"Dragapult":887,"Zacian":888,"Zamazenta":889,"Eternatus":890,"Kubfu":891,"Urshifu":892,"Zarude":893,"Regieleki":894,"Regidrago":895,"Glastrier":896,"Spectrier":897,"Calyrex":898,"Wyrdeer":899,"Kleavor":900,"Ursaluna":901,"Basculegion":902,"Sneasler":903,"Overqwil":904,"Enamorus":905,
+  "Sprigatito":906,"Floragato":907,"Meowscarada":908,"Fuecoco":909,"Crocalor":910,"Skeledirge":911,"Quaxly":912,"Quaxwell":913,"Quaquaval":914,"Lechonk":915,"Oinkologne":916,"Tarountula":917,"Spidops":918,"Nymble":919,"Lokix":920,"Pawmi":921,"Pawmo":922,"Pawmot":923,"Tandemaus":924,"Maushold":925,"Fidough":926,"Dachsbun":927,"Smoliv":928,"Dolliv":929,"Arboliva":930,"Squawkabilly":931,"Nacli":932,"Naclstack":933,"Garganacl":934,"Charcadet":935,"Armarouge":936,"Ceruledge":937,"Tadbulb":938,"Bellibolt":939,"Wattrel":940,"Kilowattrel":941,"Maschiff":942,"Mabosstiff":943,"Shroodle":944,"Grafaiai":945,"Bramblin":946,"Brambleghast":947,"Toedscool":948,"Toedscruel":949,"Klawf":950,"Capsakid":951,"Scovillain":952,"Rellor":953,"Rabsca":954,"Flittle":955,"Espathra":956,"Tinkatink":957,"Tinkatuff":958,"Tinkaton":959,"Wiglett":960,"Wugtrio":961,"Bombirdier":962,"Finizen":963,"Palafin":964,"Varoom":965,"Revavroom":966,"Cyclizar":967,"Orthworm":968,"Glimmet":969,"Glimmora":970,"Greavard":971,"Houndstone":972,"Flamigo":973,"Cetoddle":974,"Cetitan":975,"Veluza":976,"Dondozo":977,"Tatsugiri":978,"Annihilape":979,"Clodsire":980,"Farigiraf":981,"Dudunsparce":982,"Kingambit":983,"Great Tusk":984,"Scream Tail":985,"Brute Bonnet":986,"Flutter Mane":987,"Slither Wing":988,"Sandy Shocks":989,"Iron Treads":990,"Iron Bundle":991,"Iron Hands":992,"Iron Jugulis":993,"Iron Moth":994,"Iron Thorns":995,"Frigibax":996,"Arctibax":997,"Baxcalibur":998,"Gimmighoul":999,"Gholdengo":1000,"Wo-Chien":1001,"Chien-Pao":1002,"Ting-Lu":1003,"Chi-Yu":1004,"Roaring Moon":1005,"Iron Valiant":1006,"Koraidon":1007,"Miraidon":1008,"Walking Wake":1009,"Iron Leaves":1010,"Dipplin":1011,"Poltchageist":1012,"Sinistcha":1013,"Okidogi":1014,"Munkidori":1015,"Fezandipiti":1016,"Ogerpon":1017,"Archaludon":1018,"Hydrapple":1019,"Gouging Fire":1020,"Raging Bolt":1021,"Iron Boulder":1022,"Iron Crown":1023,"Terapagos":1024,"Pecharunt":1025
 };
 function getPokemonImg(name) {
   const lower = name.toLowerCase();
@@ -391,7 +378,7 @@ const EVENTS = [
   { id: 51, title: "Community Day: Grookey", type: "Community Day", date: "2026-01-18", endDate: null, time: "2:00 PM – 5:00 PM", color: "#27AE60", icon: "\uD83C\uDF31", featured: false, summary: "Grookey takes the spotlight! Evolve to Rillaboom for the exclusive Charged Attack Frenzy Plant.", details: { bosses: ["Rillaboom with Frenzy Plant (exclusive Charged Move)"], bonuses: ["Boosted Shiny Grookey rate", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "Extra Special Trade (2–9 PM)", "Special Background encounters available"], tips: ["Frenzy Plant is the premier Grass Charged Move — Rillaboom benefits hugely.", "First Community Day of 2026 with the new yearly Special Background feature.", "Check in at Community Ambassador events for bonus Timed Research."] } },
   { id: 52, title: "Community Day: Vulpix & Alolan Vulpix", type: "Community Day", date: "2026-02-15", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E67E22", icon: "\uD83E\uDD8A", featured: false, summary: "Vulpix and Alolan Vulpix share the spotlight! Exclusive moves Energy Ball and Chilling Water.", details: { bosses: ["Ninetales with Energy Ball (exclusive)", "Alolan Ninetales with Chilling Water (exclusive)"], bonuses: ["Both forms spawning in the wild", "Boosted Shiny rates for both Vulpix forms", "3-hour Incense", "Standard Community Day bonuses"], tips: ["Alolan Ninetales with Chilling Water is excellent in PvP Great League.", "Dual-feature Community Days let you hunt two shinies at once.", "Prioritize Alolan Vulpix if you care about PvP meta relevance."] } },
   { id: 53, title: "Community Day: Scorbunny", type: "Community Day", url: "https://pokemongo.com/news/communityday-march-2026-scorbunny", date: "2026-03-14", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E74C3C", icon: "\uD83D\uDC30", featured: false, summary: "Scorbunny stars in March! Evolve Raboot to Cinderace for the exclusive Charged Attack Blast Burn.", details: { bosses: ["Cinderace with Blast Burn (exclusive Charged Move)"], bonuses: ["¼ Egg Hatch Distance", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "Extra Special Trade (2–9 PM)", "50% less Trade Stardust cost (2–9 PM)"], tips: ["Blast Burn is the best Fire Charged Move — makes Cinderace a solid Fire attacker.", "Evolve within 5 hours after the event ends to get the exclusive move.", "Overlaps with Pokémon Pokopia Celebration Event — double-dip on bonuses."] } },
-  { id: 4, title: "Community Day: Tinkatink", type: "Community Day", url: "https://pokemongo.com/news/communityday-april-2026-tinkatink", date: "2026-04-11", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E84393", icon: "\uD83D\uDD28", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-9_Paldea/0957-female.webp", featured: true, summary: "Tinkatink takes the spotlight! Evolve to Tinkaton for the exclusive Charged Attack Gigaton Hammer.", details: { bosses: ["Tinkaton with Gigaton Hammer (exclusive Charged Move)"], bonuses: ["3× Catch Stardust", "2× Catch Candy", "2× chance for Candy XL", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "1 extra Special Trade (2–9 PM)", "50% less Trade Stardust cost (2–9 PM)"], tips: ["Evolve Tinkatuff during the event or up to 4 hours after (by 9 PM) for Gigaton Hammer.", "Stack Star Pieces with the 3× Stardust bonus — one of the best dust events.", "Tinkatink with Special Backgrounds from Field Research and Lure Modules.", "Take snapshots for Tinkatink photobomb encounters."] } },
+  { id: 4, title: "Community Day: Tinkatink", type: "Community Day", url: "https://pokemongo.com/news/communityday-april-2026-tinkatink", date: "2026-04-11", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E84393", icon: "\uD83D\uDD28", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-9_Paldea/0957-female.webp", featured: true, summary: "Tinkatink takes the spotlight! Evolve to Tinkaton for the exclusive Charged Attack Gigaton Hammer.", details: { bosses: ["Tinkaton"], bonuses: ["3× Catch Stardust", "2× Catch Candy", "2× chance for Candy XL", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "1 extra Special Trade (2–9 PM)", "50% less Trade Stardust cost (2–9 PM)"], tips: ["Evolve Tinkatuff during the event or up to 4 hours after (by 9 PM) for Gigaton Hammer.", "Stack Star Pieces with the 3× Stardust bonus — one of the best dust events.", "Tinkatink with Special Backgrounds from Field Research and Lure Modules.", "Take snapshots for Tinkatink photobomb encounters."] } },
   { id: 54, title: "Community Day: May 2026", type: "Community Day", date: "2026-05-09", endDate: null, time: "2:00 PM – 5:00 PM", color: "#636E72", icon: "\u2753", featured: false, summary: "May Community Day — date confirmed, featured Pokémon to be announced.", details: { bosses: ["Featured Pokémon: TBA"], bonuses: ["Standard Community Day bonuses expected", "Exclusive move for final evolution", "Boosted Shiny rate"], tips: ["Date is locked in — mark your calendar.", "Featured Pokémon usually announced 2–4 weeks before.", "Start stockpiling Poké Balls and Star Pieces."] } },
   { id: 55, title: "CD Classic: May 2026", type: "Community Day", date: "2026-05-16", endDate: null, time: "2:00 PM – 5:00 PM", color: "#636E72", icon: "\uD83D\uDD04", featured: false, summary: "May Community Day Classic — date confirmed, featured Pokémon to be announced.", details: { bosses: ["Featured Pokémon: TBA (past Community Day rerun)"], bonuses: ["Standard CD Classic bonuses expected", "Exclusive move available again"], tips: ["CD Classics bring back Pokémon and moves from past Community Days.", "Great chance to get an exclusive move you missed."] } },
   { id: 5, title: "Sustainability Week 2026", type: "Event", url: "https://pokemongo.com/news/sustainability-week-2026", date: "2026-04-14", endDate: "2026-04-20", time: "10:00 AM – 8:00 PM", color: "#27AE60", icon: "\uD83C\uDF3F", featured: true, summary: "Silicobra debuts! G. Corsola w/ pink sunglasses and Shiny Toedscool make first appearances.", details: { bosses: ["Silicobra (debut)", "G. Corsola w/ pink sunglasses", "Shiny Toedscool", "Seedot", "Castform", "Wiglett"], bonuses: ["Rotating Route spawns every 2 days", "Boosted Shiny Lapras, Togetic, Castform, Trubbish", "Toedscool in forested/grassy biomes", "Silicobra in desert-like biomes", "GO Pass milestone bonuses"], tips: ["Shiny Toedscool is brand new — check every one.", "Galarian Corsola in sunglasses is a top collector target.", "Route spawns rotate every 2 days — plan your priorities.", "Silicobra evolves into Sandaconda for 50 Candy."] } },
@@ -536,7 +523,7 @@ let state = {
   selectedNews: null,
   filter: "All",
   newsFilter: "All",
-  tab: "events",
+  tab: "home",
   openYears: {},
   openNewsYears: {},
   heroRendered: false,
@@ -544,6 +531,114 @@ let state = {
   calYear: new Date().getFullYear(),
   calSelectedDay: null
 };
+
+// --- NEST MIGRATION ---
+const NEST_EPOCH = new Date("2024-01-04T00:00:00Z").getTime(); // known migration Thursday
+const NEST_CYCLE = 14 * 24 * 60 * 60 * 1000; // 14 days in ms
+function getNextNestMigration() {
+  const now = Date.now();
+  const elapsed = now - NEST_EPOCH;
+  const remaining = NEST_CYCLE - (elapsed % NEST_CYCLE);
+  return new Date(now + remaining);
+}
+function renderNestCountdown() {
+  const next = getNextNestMigration();
+  const diff = next.getTime() - Date.now();
+  if (diff <= 0) return "";
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  const estStr = next.toLocaleString("en-US", { timeZone: "America/New_York", weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit", hour12: true });
+  return `${d > 0 ? `${d}d ` : ""}${h}h ${m}m ${s}s<span style="margin-left:8px;font-weight:500;opacity:0.7">(${estStr} EST)</span>`;
+}
+
+// --- SUPABASE NESTS ---
+const SUPABASE_URL = "https://elbwqcbvmnjafbfkbuew.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVsYndxY2J2bW5qYWZiZmtidWV3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5ODM2MDYsImV4cCI6MjA5MDU1OTYwNn0.G0PtC2msAkGY6bBJMHKVXDP9PSDDUMid01np9d8N2wQ";
+function getReporterId() {
+  let id = localStorage.getItem("trainerwire_reporter_id");
+  if (!id) { id = crypto.randomUUID(); localStorage.setItem("trainerwire_reporter_id", id); }
+  return id;
+}
+let _nestsCache = [];
+async function loadNestsFromSupabase() {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/nests?select=*&order=created_at.desc`, {
+      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` }
+    });
+    if (res.ok) _nestsCache = await res.json();
+  } catch {}
+  return _nestsCache;
+}
+function loadNests() { return _nestsCache; }
+
+// --- SUPABASE REALTIME ---
+function subscribeToNests() {
+  const ws = new WebSocket(`${SUPABASE_URL.replace("https://","wss://")}/realtime/v1/websocket?apikey=${SUPABASE_KEY}&vsn=1.0.0`);
+  let heartbeat;
+  ws.onopen = () => {
+    ws.send(JSON.stringify({ topic: "realtime:public:nests", event: "phx_join", payload: { config: { broadcast: { self: true }, postgres_changes: [{ event: "*", schema: "public", table: "nests" }] } }, ref: "1" }));
+    heartbeat = setInterval(() => ws.send(JSON.stringify({ topic: "phoenix", event: "heartbeat", payload: {}, ref: "hb" })), 30000);
+  };
+  ws.onmessage = (e) => {
+    const msg = JSON.parse(e.data);
+    if (msg.event === "postgres_changes") {
+      loadNestsFromSupabase().then(() => { if (state.tab === "nests") render(); });
+    }
+  };
+  ws.onclose = () => { clearInterval(heartbeat); setTimeout(subscribeToNests, 3000); };
+}
+subscribeToNests();
+async function geocodeLocation(query) {
+  try {
+    const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`, {
+      headers: { "User-Agent": "TrainerWire/1.0" }
+    });
+    const data = await res.json();
+    if (data.length > 0) return { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) };
+  } catch {}
+  return null;
+}
+function useMyLocation() {
+  if (!navigator.geolocation) return;
+  const btn = document.getElementById("nest-gps-btn");
+  if (btn) { btn.textContent = "Locating..."; btn.disabled = true; }
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      window._nestGPS = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      if (btn) { btn.textContent = "\u2705 Location set"; btn.disabled = false; }
+    },
+    () => { if (btn) { btn.textContent = "\u274C Failed \u2014 try again"; btn.disabled = false; } },
+    { enableHighAccuracy: true, timeout: 10000 }
+  );
+}
+async function insertNest(pokemon, location) {
+  const reporterId = getReporterId();
+  let lat = null, lng = null;
+  if (window._nestGPS) {
+    lat = window._nestGPS.lat;
+    lng = window._nestGPS.lng;
+    window._nestGPS = null;
+  } else {
+    const geo = await geocodeLocation(location);
+    if (geo) { lat = geo.lat; lng = geo.lng; }
+  }
+  await fetch(`${SUPABASE_URL}/rest/v1/nests`, {
+    method: "POST",
+    headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, "Content-Type": "application/json", Prefer: "return=minimal", "x-reporter-id": reporterId },
+    body: JSON.stringify({ pokemon, location, reporter_id: reporterId, lat, lng })
+  });
+  await loadNestsFromSupabase();
+}
+async function deleteNest(id) {
+  const reporterId = getReporterId();
+  await fetch(`${SUPABASE_URL}/rest/v1/nests?id=eq.${id}`, {
+    method: "DELETE",
+    headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, "x-reporter-id": reporterId }
+  });
+  await loadNestsFromSupabase();
+}
 
 // --- UTILITY FUNCTIONS ---
 function getCountdown(d, ev) {
@@ -1428,13 +1523,27 @@ function goBackNews() {
 function goHome() {
   state.selectedEvent = null;
   state.selectedNews = null;
-  state.tab = "events";
-  state.heroRendered = false;
+  state.tab = "home";
   render();
 }
 
 function setTab(tab) {
   state.tab = tab;
+  state.selectedEvent = null;
+  state.selectedNews = null;
+  if (tab === "nests") { loadNestsFromSupabase().then(() => render()); }
+  render();
+}
+
+async function addNest() {
+  const pokemon = document.getElementById("nest-pokemon").value.trim();
+  const location = document.getElementById("nest-location").value.trim();
+  if (!pokemon || !location) return;
+  await insertNest(pokemon, location);
+  render();
+}
+async function removeNest(id) {
+  await deleteNest(id);
   render();
 }
 
@@ -1603,7 +1712,7 @@ function render() {
 
     // Events tab
     let eventsTabHTML = "";
-    if (state.tab === "events") {
+    if (state.tab === "events" || state.tab === "home") {
       const pillsHTML = renderFilterPills(state.filter, EVENT_TYPES, "setFilter", th);
       let listHTML = "";
       if (upcomingEvents.length === 0 && archiveYears.length === 0) {
@@ -1826,8 +1935,163 @@ function render() {
       calendarTabHTML = renderCalendar(th);
     }
 
+    // Tools tab
+    let toolsTabHTML = "";
+    if (state.tab === "tools") {
+      toolsTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
+        <div style="text-align:center;padding:10px">
+          <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text}">\uD83D\uDEE0\uFE0F PoGO Tools</h2>
+          <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Helpful tools and resources for Pok\u00E9mon GO trainers</p>
+        </div>
+        <a href="https://godex.site" target="_blank" rel="noopener noreferrer" style="display:flex;${isMobile ? "flex-direction:column" : "flex-direction:row;align-items:center"};gap:${isMobile ? 16 : 20}px;padding:${isMobile ? "20px 18px" : "24px 28px"};background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;text-decoration:none;transition:all 0.25s ease;box-shadow:${th.shadow}" onmouseenter="this.style.borderColor='#2ECC71';this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 25px rgba(46,204,113,0.15)'" onmouseleave="this.style.borderColor='${th.border}';this.style.transform='translateY(0)';this.style.boxShadow='${th.shadow}'">
+          <div style="width:${isMobile ? "100%" : "80px"};display:flex;${isMobile ? "justify-content:center" : "justify-content:center;flex-shrink:0"}">
+            <img src="https://godex.site/images/icons/android-icon-192x192.webp" style="width:${isMobile ? 64 : 72}px;height:${isMobile ? 64 : 72}px;border-radius:18px;object-fit:contain" alt="GOdex" />
+          </div>
+          <div style="flex:1;${isMobile ? "text-align:center" : ""}">
+            <div style="display:flex;align-items:center;gap:8px;${isMobile ? "justify-content:center" : ""}">
+              <h3 style="margin:0;font-size:${isMobile ? 18 : 22}px;font-weight:800;color:${th.text}">GOdex</h3>
+              <span style="font-size:10px;font-weight:700;color:#2ECC71;background:${th.accentBg("#2ECC71")};padding:2px 8px;border-radius:20px">FREE</span>
+            </div>
+            <p style="margin:8px 0 0 0;font-size:${isMobile ? 13 : 14}px;color:${th.textSecondary};line-height:1.6">Your online Pok\u00E9dex checklist for Pok\u00E9mon GO. Track your National Dex, Shiny Dex, Event Dex, Lucky Dex, Shadow collection, and more \u2014 all in one place.</p>
+            <p style="margin:10px 0 0 0;font-size:${isMobile ? 13 : 14}px;color:${th.textSecondary};line-height:1.6">Perfect for coordinating trades with your local community. Mark what you have and what you need, then compare lists with other trainers to find trade matches. Whether you\u2019re hunting for Shiny Event Pikachu or filling out your Hundo Dex, GOdex keeps you organized.</p>
+            <p style="margin:10px 0 0 0;font-size:${isMobile ? 13 : 14}px;color:${th.textSecondary};line-height:1.6">\uD83D\uDD12 Sign in with Google or Discord to save your progress and access your collection across all your devices.</p>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;${isMobile ? "justify-content:center" : ""}">
+              ${["National Dex","Shiny Dex","Event Dex","Lucky Dex","Shadow","Purified","Hundos","Trade Tracking"].map(tag =>
+                `<span style="font-size:10px;font-weight:700;color:${th.textMuted};background:${th.accentBgSubtle("#2ECC71")};border:1px solid ${th.countdownBorder("#2ECC71")};padding:3px 10px;border-radius:20px">${tag}</span>`
+              ).join("")}
+            </div>
+            <div style="margin-top:14px;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#2ECC71">Visit godex.site \u2192</div>
+          </div>
+        </a>
+        <div style="display:flex;${isMobile ? "flex-direction:column" : "flex-direction:row;align-items:center"};gap:${isMobile ? 16 : 20}px;padding:${isMobile ? "20px 18px" : "24px 28px"};background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;transition:all 0.25s ease;box-shadow:${th.shadow}" onmouseenter="this.style.borderColor='#3498DB';this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 25px rgba(52,152,219,0.15)'" onmouseleave="this.style.borderColor='${th.border}';this.style.transform='translateY(0)';this.style.boxShadow='${th.shadow}'">
+          <div style="width:${isMobile ? "100%" : "80px"};display:flex;${isMobile ? "justify-content:center" : "justify-content:center;flex-shrink:0"}">
+            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/33/3c/86/333c86bf-3564-63d9-06e6-8f6b73687377/AppIcon-0-0-1x_U007emarketing-0-5-85-220.png/512x512bb.jpg" style="width:${isMobile ? 64 : 72}px;height:${isMobile ? 64 : 72}px;border-radius:18px;object-fit:contain" alt="Poke Genie" />
+          </div>
+          <div style="flex:1;${isMobile ? "text-align:center" : ""}">
+            <div style="display:flex;align-items:center;gap:8px;${isMobile ? "justify-content:center" : ""}">
+              <h3 style="margin:0;font-size:${isMobile ? 18 : 22}px;font-weight:800;color:${th.text}">Poke Genie</h3>
+              <span style="font-size:10px;font-weight:700;color:#3498DB;background:${th.accentBg("#3498DB")};padding:2px 8px;border-radius:20px">FREE</span>
+            </div>
+            <p style="margin:8px 0 0 0;font-size:${isMobile ? 13 : 14}px;color:${th.textSecondary};line-height:1.6">The ultimate companion app for Pok\u00E9mon GO. IV checker, raid host & join, PvP rankings, battle simulator, and more \u2014 all from your phone.</p>
+            <p style="margin:10px 0 0 0;font-size:${isMobile ? 13 : 14}px;color:${th.textSecondary};line-height:1.6">Scan your Pok\u00E9mon to instantly check IVs, find the best PvP and raid attackers, and join remote raids with trainers worldwide through the built-in raid lobby system.</p>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;${isMobile ? "justify-content:center" : ""}">
+              ${["IV Checker","Raid Hosting","PvP Rankings","Battle Simulator","Remote Raids","Pok\u00E9dex"].map(tag =>
+                `<span style="font-size:10px;font-weight:700;color:${th.textMuted};background:${th.accentBgSubtle("#3498DB")};border:1px solid ${th.countdownBorder("#3498DB")};padding:3px 10px;border-radius:20px">${tag}</span>`
+              ).join("")}
+            </div>
+            <div style="display:flex;gap:12px;margin-top:14px;${isMobile ? "justify-content:center" : ""}">
+              <a href="https://pokegenie.net" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#3498DB;text-decoration:none">Visit pokegenie.net \u2192</a>
+              <a href="https://apps.apple.com/us/app/poke-genie-remote-raid-iv-pvp/id1143920524" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#3498DB;text-decoration:none">App Store \u2192</a>
+              <a href="https://play.google.com/store/apps/details?id=com.cjin.pokegenie.standard" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#3498DB;text-decoration:none">Google Play \u2192</a>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    }
+
+    let nestsTabHTML = "";
+    if (state.tab === "nests") {
+      const nests = loadNests();
+      const inputStyle = `width:100%;padding:${isMobile ? "12px 14px" : "14px 16px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.bg};color:${th.text};font-size:${isMobile ? 14 : 15}px;font-family:inherit;outline:none;box-sizing:border-box`;
+      nestsTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
+        <div style="text-align:center;padding:10px">
+          <img src="assets/pokemon-images/icons/ic_grass.png" style="width:${isMobile ? 48 : 60}px;height:${isMobile ? 48 : 60}px;object-fit:contain;margin-bottom:6px" alt="Nests" />
+          <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text}">Nests</h2>
+          <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Track and report local Pok\u00E9mon nests in your area</p>
+        </div>
+        <div style="padding:${isMobile ? "14px 16px" : "16px 20px"};background:${th.accentBgSubtle("#2ECC71")};border:1.5px solid ${th.countdownBorder("#2ECC71")};border-radius:${isMobile ? 14 : 16}px;text-align:center">
+          <div style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:#2ECC71;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px">\uD83D\uDD04 Next Nest Migration</div>
+          <div id="nest-migration-countdown" style="font-size:${isMobile ? 18 : 22}px;font-weight:800;color:${th.text};font-variant-numeric:tabular-nums">${renderNestCountdown()}</div>
+        </div>
+        <div style="padding:${isMobile ? "20px 18px" : "24px 28px"};background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;box-shadow:${th.shadow}">
+          <h3 style="margin:0 0 12px 0;font-size:${isMobile ? 16 : 18}px;font-weight:800;color:${th.text}">\uD83D\uDCD6 How Nests Work</h3>
+          <p style="margin:0 0 10px 0;font-size:${isMobile ? 13 : 14}px;color:${th.textSecondary};line-height:1.6">In Pok\u00E9mon GO, <strong style="color:${th.text}">nests</strong> are real-world locations \u2014 typically parks, playgrounds, and landmarks \u2014 where a specific Pok\u00E9mon species spawns more frequently than usual.</p>
+          <p style="margin:0 0 10px 0;font-size:${isMobile ? 13 : 14}px;color:${th.textSecondary};line-height:1.6"><strong style="color:${th.text}">Nest migrations</strong> happen every two weeks (typically on Thursdays at 00:00 UTC). When a migration occurs, every nest worldwide shifts to a different Pok\u00E9mon species.</p>
+          <p style="margin:0 0 10px 0;font-size:${isMobile ? 13 : 14}px;color:${th.textSecondary};line-height:1.6"><strong style="color:${th.text}">Tips for finding nests:</strong></p>
+          <ul style="margin:0;padding-left:20px;font-size:${isMobile ? 13 : 14}px;color:${th.textSecondary};line-height:1.8">
+            <li>Look for areas with multiple Pok\u00E9Stops and green patches on the in-game map</li>
+            <li>Visit the same park multiple times \u2014 if the same species keeps appearing, it\u2019s likely a nest</li>
+            <li>Nests typically spawn 1\u20133 species at higher-than-normal rates</li>
+            <li>Events can temporarily override nest spawns</li>
+            <li>Not all Pok\u00E9mon can be nest species \u2014 legendaries, babies, and rare spawns are excluded</li>
+          </ul>
+        </div>
+        <div style="padding:${isMobile ? "20px 18px" : "24px 28px"};background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;box-shadow:${th.shadow}">
+          <h3 style="margin:0 0 16px 0;font-size:${isMobile ? 16 : 18}px;font-weight:800;color:${th.text}">\u2795 Report a Nest</h3>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <input id="nest-pokemon" placeholder="Pok\u00E9mon species (e.g. Magikarp)" style="${inputStyle}" />
+            <input id="nest-location" placeholder="Location name or address (e.g. Central Park)" style="${inputStyle}" />
+            <button id="nest-gps-btn" onclick="useMyLocation()" style="padding:${isMobile ? "10px" : "12px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:${isMobile ? 13 : 14}px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.2s ease" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${th.surface}'">\uD83D\uDCCD Use My Current Location</button>
+            <button onclick="addNest()" style="padding:${isMobile ? "12px" : "14px"};border-radius:12px;border:none;background:#2ECC71;color:#fff;font-size:${isMobile ? 14 : 15}px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.2s ease" onmouseenter="this.style.background='#27AE60';this.style.transform='translateY(-1px)'" onmouseleave="this.style.background='#2ECC71';this.style.transform='translateY(0)'">Report Nest</button>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:${isMobile ? 10 : 12}px">
+          <h3 style="margin:0;font-size:${isMobile ? 16 : 18}px;font-weight:800;color:${th.text}">\uD83D\uDCCD Reported Nests${nests.length ? ` (${nests.length})` : ""}</h3>
+          ${nests.length === 0 ? `<div style="padding:${isMobile ? "30px 18px" : "40px 28px"};background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;text-align:center;box-shadow:${th.shadow}">
+            <div style="font-size:36px;margin-bottom:12px">\uD83C\uDFDE\uFE0F</div>
+            <p style="margin:0;font-size:${isMobile ? 13 : 14}px;color:${th.textMuted}">No nests reported yet. Be the first to report one!</p>
+          </div>` : nests.map(n => {
+            const img = getPokemonImg(n.pokemon);
+            const isOwner = n.reporter_id === getReporterId();
+            const hasCoords = n.lat != null && n.lng != null;
+            const mapUrl = hasCoords ? `https://www.openstreetmap.org/?mlat=${n.lat}&mlon=${n.lng}#map=16/${n.lat}/${n.lng}` : null;
+            const bbox = hasCoords ? `${n.lng-0.008},${n.lat-0.004},${n.lng+0.008},${n.lat+0.004}` : null;
+            return `<div style="padding:${isMobile ? "14px 16px" : "16px 20px"};background:${th.surface};border:1.5px solid ${th.border};border-radius:16px;box-shadow:${th.shadow}">
+              <div style="display:flex;align-items:center;gap:${isMobile ? 12 : 16}px">
+                <div style="width:${isMobile ? 90 : 100}px;height:${isMobile ? 90 : 100}px;border-radius:20px;background:${th.accentBgSubtle("#2ECC71")};display:flex;align-items:center;justify-content:center;flex-shrink:0">${img ? `<img src="${esc(img.url)}" style="width:${isMobile ? 74 : 84}px;height:${isMobile ? 74 : 84}px;object-fit:contain" alt="${esc(n.pokemon)}" onerror="this.style.display='none';this.parentElement.innerHTML='\\uD83C\\uDF33'" />` : `<span style="font-size:${isMobile ? 38 : 44}px">\uD83C\uDF33</span>`}</div>
+                <div style="flex:1;min-width:0">
+                  <div style="font-size:${isMobile ? 14 : 16}px;font-weight:700;color:${th.text}">${esc(n.pokemon)}</div>
+                  <div style="font-size:${isMobile ? 13 : 14}px;color:${th.textSecondary};margin-top:3px">\uD83D\uDCCD ${esc(n.location)}</div>
+                  <div style="font-size:${isMobile ? 11 : 12}px;color:${th.textMuted};margin-top:2px">Reported ${n.date_reported}</div>
+                </div>
+                ${isOwner ? `<button onclick="removeNest(${n.id})" style="width:32px;height:32px;border-radius:8px;border:1.5px solid ${th.border};background:${th.surface};color:${th.textMuted};font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s ease" onmouseenter="this.style.borderColor='#E74C3C';this.style.color='#E74C3C'" onmouseleave="this.style.borderColor='${th.border}';this.style.color='${th.textMuted}'">\u2715</button>` : ""}
+              </div>
+              ${hasCoords ? `<div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1.5px solid ${th.border}">
+                <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${n.lat},${n.lng}" style="width:100%;height:${isMobile ? 140 : 160}px;border:none;display:block"></iframe>
+                <a href="${mapUrl}" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:${th.surface};text-decoration:none;transition:background 0.15s ease" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${th.surface}'">
+                  <span style="font-size:${isMobile ? 11 : 12}px;font-weight:600;color:${th.textMuted}">Open in Maps</span>
+                  <span style="font-size:12px;color:#2ECC71">\u2192</span>
+                </a>
+              </div>` : ""}
+            </div>`;
+          }).join("")}
+        </div>
+      </div>`;
+    }
+
+    const welcomeHTML = state.tab === "home" ? `<div style="border-radius:${isMobile ? 18 : 24}px;padding:${isMobile ? "24px 18px" : "32px 28px"};background:linear-gradient(135deg,${th.heroBg("#E74C3C")},${th.heroBg("#F39C12")});border:1.5px solid ${th.border};overflow:hidden;position:relative;animation:fadeSlideUp 0.5s cubic-bezier(0.25,0.46,0.45,0.94)">
+        <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:${isMobile ? 14 : 18}px">
+          <img src="assets/trainerwire-logo.PNG" style="width:${isMobile ? 278 : 327}px;height:${isMobile ? 278 : 327}px;object-fit:contain;margin-top:${isMobile ? -40 : -50}px" alt="TrainerWire" />
+          <h2 style="margin:-52px 0 0 0;font-size:${isMobile ? 18 : 24}px;font-weight:800;color:${th.text};line-height:1.2">Welcome to TrainerWire</h2>
+          <p style="margin:4px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Your one-stop hub for everything Pok\u00E9mon GO</p>
+        </div>
+        <p style="margin:${isMobile ? 30 : 40}px 0 ${isMobile ? 14 : 18}px 0;font-size:${isMobile ? 13 : 14.5}px;color:${th.textSecondary};line-height:1.65;${isMobile ? "text-align:center" : ""}">Stay up to date with live Events, Raid Bosses, Max Battles, Community Days, and GO Fest updates \u2014 all in one place.</p>
+        <div style="display:grid;grid-template-columns:repeat(${isMobile ? 2 : 4},1fr);gap:${isMobile ? 8 : 10}px">
+          <button onclick="setTab('events')" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:${isMobile ? "12px 8px" : "14px 10px"};border-radius:14px;background:${th.surface};border:1.5px solid ${th.border};cursor:pointer;font-family:inherit;transition:all 0.2s ease" onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 16px rgba(0,0,0,0.1)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+            <span style="font-size:${isMobile ? 22 : 28}px">\uD83D\uDCC5</span>
+            <span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${th.text}">Events</span>
+            <span style="font-size:${isMobile ? 9 : 10}px;color:${th.textMuted};text-align:center">Live & upcoming events</span>
+          </button>
+          <button onclick="setTab('raids')" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:${isMobile ? "12px 8px" : "14px 10px"};border-radius:14px;background:${th.surface};border:1.5px solid ${th.border};cursor:pointer;font-family:inherit;transition:all 0.2s ease" onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 16px rgba(0,0,0,0.1)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+            <span style="font-size:${isMobile ? 22 : 28}px">\u2694\uFE0F</span>
+            <span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${th.text}">Raids</span>
+            <span style="font-size:${isMobile ? 9 : 10}px;color:${th.textMuted};text-align:center">Current raid bosses</span>
+          </button>
+          <button onclick="setTab('max')" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:${isMobile ? "12px 8px" : "14px 10px"};border-radius:14px;background:${th.surface};border:1.5px solid ${th.border};cursor:pointer;font-family:inherit;transition:all 0.2s ease" onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 16px rgba(0,0,0,0.1)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+            <span style="font-size:${isMobile ? 22 : 28}px">\uD83D\uDCA5</span>
+            <span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${th.text}">Max Battles</span>
+            <span style="font-size:${isMobile ? 9 : 10}px;color:${th.textMuted};text-align:center">Dynamax & Gigantamax</span>
+          </button>
+          <button onclick="setTab('news')" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:${isMobile ? "12px 8px" : "14px 10px"};border-radius:14px;background:${th.surface};border:1.5px solid ${th.border};cursor:pointer;font-family:inherit;transition:all 0.2s ease" onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 16px rgba(0,0,0,0.1)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+            <span style="font-size:${isMobile ? 22 : 28}px">\uD83D\uDCE2</span>
+            <span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${th.text}">News</span>
+            <span style="font-size:${isMobile ? 9 : 10}px;color:${th.textMuted};text-align:center">Updates & announcements</span>
+          </button>
+        </div>
+      </div>` : "";
+
     content = `<main style="padding:${mainPad};display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
-      ${liveHTML}${heroHTML}${tabsHTML}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${newsTabHTML}
+      ${welcomeHTML}${!["home","tools","nests"].includes(state.tab) ? `${liveHTML}${heroHTML}${tabsHTML}` : ""}${state.tab === "home" ? `${liveHTML}${heroHTML}${tabsHTML}` : ""}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${newsTabHTML}${toolsTabHTML}${nestsTabHTML}
     </main>`;
     if (hero || activeEvents.length > 0) state.heroRendered = true;
   }
@@ -1841,6 +2105,11 @@ function render() {
       <div><div style="font-size:${isMobile ? 16 : 20}px;font-weight:800;color:${th.text};letter-spacing:-0.3px;line-height:1.2">${COMMUNITY_NAME}</div>
       <div style="font-size:${isMobile ? 10 : 12}px;color:${th.textMuted};font-weight:500;letter-spacing:0.2px">${COMMUNITY_TAGLINE}</div></div>
     </div></div>
+    ${isDesktop ? `<nav style="display:flex;align-items:center;gap:4px">
+      ${[["goHome()","Home"],["setTab('events')","Events"],["setTab('calendar')","Calendar"],["setTab('raids')","Raids"],["setTab('max')","Max Battles"],["setTab('news')","News"],["setTab('nests')","Nests"],["setTab('tools')","PoGO Tools"]].map(([fn, label]) =>
+        `<button onclick="${fn || ''}" style="padding:7px 14px;border-radius:10px;border:none;background:${(label === "Home" && state.tab === "home") || (label === "Events" && state.tab === "events" && !state.selectedEvent) || (label === "Calendar" && state.tab === "calendar") || (label === "Raids" && state.tab === "raids") || (label === "Max Battles" && state.tab === "max") || (label === "News" && state.tab === "news") || (label === "Nests" && state.tab === "nests") ? th.accentBgSubtle("#E74C3C") : "transparent"};color:${th.text};font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.15s ease;white-space:nowrap" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${(label === "Events" && state.tab === "events") || (label === "Calendar" && state.tab === "calendar") || (label === "Raids" && state.tab === "raids") || (label === "Max Battles" && state.tab === "max") || (label === "News" && state.tab === "news") || (label === "Nests" && state.tab === "nests") ? th.accentBgSubtle("#E74C3C") : "transparent"}'">${label}</button>`
+      ).join("")}
+    </nav>` : ""}
     <button id="theme-toggle" onclick="toggleDarkMode()" style="background:${darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.06)"};border:1.5px solid ${th.border};border-radius:50%;width:${isMobile ? 36 : 40}px;height:${isMobile ? 36 : 40}px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:${isMobile ? 18 : 20}px;transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);flex-shrink:0"
       onmouseenter="this.style.transform='scale(1.12)';this.style.boxShadow='0 4px 15px ${darkMode ? "rgba(255,200,50,0.2)" : "rgba(0,0,0,0.15)"}';"
       onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none';">${darkMode ? "\u2600\uFE0F" : "\uD83C\uDF19"}</button>
@@ -1877,6 +2146,9 @@ setInterval(() => {
     const ev = eventId ? EVENTS.find(e => e.id === eventId) : null;
     el.innerHTML = renderCountdown(dateStr, color, over, th, ev);
   });
+  // Update nest migration countdown
+  const nestEl = document.getElementById("nest-migration-countdown");
+  if (nestEl) nestEl.innerHTML = renderNestCountdown();
   // Update move deadline banners
   document.querySelectorAll(".move-deadline").forEach(el => {
     const eventId = parseInt(el.dataset.eventId);
@@ -1923,6 +2195,7 @@ function closeSidebar() {
 }
 function sidebarNav(tab) {
   closeSidebar();
+  if (tab === "home") { goHome(); return; }
   state.selectedEvent = null;
   state.selectedNews = null;
   state.tab = tab;
@@ -1933,11 +2206,14 @@ function sidebarNav(tab) {
 function renderSidebar(th) {
   if (breakpoint === "desktop") return "";
   const tabs = [
+    { id: "home", icon: "\uD83C\uDFE0", label: "Home" },
     { id: "events", icon: "\uD83D\uDCC5", label: "Events" },
     { id: "calendar", icon: "\uD83D\uDDD3\uFE0F", label: "Calendar" },
     { id: "raids", icon: "\u2694\uFE0F", label: "Raids" },
     { id: "max", icon: "\uD83D\uDCA5", label: "Max Battles" },
-    { id: "news", icon: "\uD83D\uDCE2", label: "News" }
+    { id: "news", icon: "\uD83D\uDCE2", label: "News" },
+    { id: "nests", icon: "\uD83C\uDF33", label: "Nests" },
+    { id: "tools", icon: "\uD83D\uDEE0\uFE0F", label: "PoGO Tools" }
   ];
   return `<div id="sidebar-overlay" onclick="closeSidebar()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:998;opacity:0;pointer-events:none;transition:opacity 0.3s ease"></div>
   <nav id="sidebar" style="position:fixed;top:0;left:0;width:260px;height:100%;background:${th.surface};border-right:1.5px solid ${th.border};z-index:999;transform:translateX(-100%);transition:transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;overflow-y:auto">
@@ -1997,4 +2273,5 @@ document.addEventListener("touchend", (e) => {
 
 // Initial render
 updateThemeColor();
+loadNestsFromSupabase().then(() => render());
 render();
