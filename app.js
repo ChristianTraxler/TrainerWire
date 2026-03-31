@@ -2212,7 +2212,7 @@ function renderSidebar(th) {
     { id: "raids", icon: "\u2694\uFE0F", label: "Raids" },
     { id: "max", icon: "\uD83D\uDCA5", label: "Max Battles" },
     { id: "news", icon: "\uD83D\uDCE2", label: "News" },
-    { id: "nests", icon: "\uD83C\uDF33", label: "Nests" },
+    { id: "nests", icon: "\uD83C\uDF33", iconImg: "assets/pokemon-images/icons/ic_grass.png", label: "Nests" },
     { id: "tools", icon: "\uD83D\uDEE0\uFE0F", label: "PoGO Tools" }
   ];
   return `<div id="sidebar-overlay" onclick="closeSidebar()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:998;opacity:0;pointer-events:none;transition:opacity 0.3s ease"></div>
@@ -2228,7 +2228,7 @@ function renderSidebar(th) {
       ${tabs.map(t => `<button onclick="sidebarNav('${t.id}')" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;border:none;background:${state.tab === t.id ? th.accentBgSubtle("#E74C3C") : "transparent"};cursor:pointer;font-family:inherit;transition:background 0.15s ease;width:100%;text-align:left"
         onmouseenter="this.style.background='${th.surfaceHover}'"
         onmouseleave="this.style.background='${state.tab === t.id ? th.accentBgSubtle("#E74C3C") : "transparent"}'">
-        <span style="font-size:20px">${t.icon}</span>
+        ${t.iconImg ? `<img src="${t.iconImg}" style="width:28px;height:28px;object-fit:contain" alt="${t.label}" />` : `<span style="font-size:20px">${t.icon}</span>`}
         <span style="font-size:14px;font-weight:${state.tab === t.id ? "700" : "600"};color:${state.tab === t.id ? th.text : th.textSecondary}">${t.label}</span>
       </button>`).join("")}
     </div>
