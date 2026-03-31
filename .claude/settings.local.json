@@ -13,7 +13,10 @@
       "WebFetch(domain:www.snacknap.com)",
       "WebFetch(domain:www.leekduck.com)",
       "WebFetch(domain:pokemongo.gamepress.gg)",
-      "WebFetch(domain:godex.site)"
+      "WebFetch(domain:godex.site)",
+      "Bash(ls /Users/christiantraxler/Desktop/Current-Projects/Pokémon-GO-Event-Hub/pokemon-images/National-Dex/regular/*.webp)",
+      "Bash(find /Users/christiantraxler/Desktop/Current-Projects/Pokémon-GO-Event-Hub/ -type f -name *.webp)",
+      "Bash(ls \"/Users/christiantraxler/Desktop/Current-Projects/Pokémon-GO-Event-Hub/assets/pokemon-images/pm895\"*)"
     ]
   }
 }

@@ -3,7 +3,7 @@ const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
 
 // --- POKEMON IMAGE LOOKUP ---
-const PKM_CDN = "https://cdn.leekduck.com/assets/img/pokemon_icons/";
+const PKM_CDN = "assets/pokemon-images/";
 const DEX = {
   "Venusaur":3,"Charizard":6,"Blastoise":9,"Butterfree":12,"Pikachu":25,"Ninetales":38,"Diglett":50,
   "Alakazam":65,"Aerodactyl":142,"Dragonite":149,"Mewtwo":150,"Chinchou":170,"Wooper":194,
@@ -80,7 +80,7 @@ function getPokemonImg(name) {
   }
   // Check for Corsola wearing sunglasses
   if (lower.includes("corsola") && lower.includes("sunglasses")) {
-    return { url: `pokemon-images/pm222.fSPRING_2026.icon.png`, shadow: false };
+    return { url: `assets/pokemon-images/pm222.fSPRING_2026.icon.png`, shadow: false };
   }
   // Check for Galarian
   if (lower.includes("galarian")) {
@@ -136,7 +136,7 @@ function getPokemonImg(name) {
   }
   // Check for Paldean Tauros
   if (lower.includes("paldean tauros")) {
-    if (lower.includes("blaze")) return { url: `pokemon-images/pm128.fPALDEA_BLAZE.icon.png`, shadow: false };
+    if (lower.includes("blaze")) return { url: `assets/pokemon-images/pm128.fPALDEA_BLAZE.icon.png`, shadow: false };
     if (lower.includes("aqua")) return { url: `${PKM_CDN}pm${DEX["Tauros"]}.fPALDEA_AQUA.icon.png`, shadow: false };
     return { url: `${PKM_CDN}pm${DEX["Tauros"]}.fPALDEA_COMBAT.icon.png`, shadow: false };
   }
@@ -313,7 +313,7 @@ const EVENTS = [
       { date: "Mon, Apr 6", pokemon: "Joltik", shiny: true }
     ], tips: ["Spotlight Hours run every day of this event, not just Tuesday.", "Shiny Dedenne and Pawmi are the big targets — check every one.", "Activate Incense during Spotlight Hours for doubled duration + boosted spawns.", "GO Pass Deluxe is available on the Web Store for premium rewards."] } },
   // { id: 2, title: "April Fools 2026", type: "Event", date: "2026-04-01", endDate: null, time: "10:00 AM – 6:00 PM", color: "#9B59B6", icon: "\uD83C\uDCCF", featured: false, summary: "One-day April Fools surprise event. Expect trick spawns, disguised Pokémon, and limited-time shenanigans.", details: { bosses: ["Surprise spawns and disguised Pokémon (revealed day-of)"], bonuses: ["One-day-only event spawns", "Possible Ditto-themed encounters", "April Fools Field Research tasks"], tips: ["These events are always short — block out a couple hours.", "Keep an eye on social media for real-time spawn reports.", "Ditto often plays a role — catch everything that looks 'normal'.", "Don't transfer unusual catches until you've checked for Ditto."] } },
-  { id: 3, title: "Fashion Raid Day", type: "Raid", url: "https://pokemongo.com/news/fashion-raid-day-2026", date: "2026-04-04", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E91E63", icon: "\uD83D\uDC57", featured: true, summary: "Costumed Pokémon take over raids! Dragonite, Butterfree, Diglett, Wooper, Sneasel, Kirlia, Absol, Shinx, Croagunk, Blitzle, and Minccino in costume.", details: { bosses: ["Costume Dragonite (3\u2605 Raid)", "Costume Absol (3\u2605 Raid)", "Costume Butterfree (3\u2605 Raid)", "Costume Kirlia (3\u2605 Raid)", "Costume Blitzle (1\u2605 Raid)", "Costume Croagunk (1\u2605 Raid)", "Costume Diglett (1\u2605 Raid)", "Costume Minccino (1\u2605 Raid)", "Costume Shinx (1\u2605 Raid)", "Costume Sneasel (1\u2605 Raid)", "Costume Wooper (1\u2605 Raid)"], bonuses: ["Up to 6 free Raid Passes from spinning Gym Photo Discs", "Remote Raid Pass limit increased to 20 (Apr 3 5 PM \u2013 Apr 4 8 PM PDT)", "Boosted Shiny rates for all costumed raid Pok\u00E9mon", "Costumed Pok\u00E9mon appearing more frequently in raids for 3 hours"], ticketPrice: "$4.99", ticketBonuses: ["Up to 14 Raid Passes from spinning Gym Photo Discs (vs 6 free)", "50% more XP from Raid Battles", "2\u00D7 Stardust from Raid Battles", "Increased chance of Rare Candy XL from Raid Battles", "Ultra Ticket Box $4.99 (ticket + Premium Battle Pass)", "Tickets giftable to Great Friends or higher"], tips: ["Costume Dragonite and Absol are the rarest \u2014 prioritize those raids.", "These costumed forms can't evolve \u2014 collector items only.", "Ultra Ticket Box is Web Store exclusive.", "Plan a raid route with your group ahead of time."], counters: { label: "Costume Dragonite (Dragon/Flying)", pokemon: [{ name: "Mega Gardevoir", fast: "Charm", charged: "Dazzling Gleam" }, { name: "Shadow Mamoswine", fast: "Powder Snow", charged: "Avalanche" }, { name: "Mega Rayquaza", fast: "Dragon Tail", charged: "Dragon Ascent", chargedNote: "Signature" }, { name: "Shadow Salamence", fast: "Dragon Tail", charged: "Outrage" }, { name: "Galarian Darmanitan", fast: "Ice Fang", charged: "Avalanche" }, { name: "Shadow Weavile", fast: "Ice Shard", charged: "Avalanche" }] } } },
+  { id: 3, title: "Fashion Raid Day", type: "Raid", url: "https://pokemongo.com/news/fashion-raid-day-2026", date: "2026-04-04", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E91E63", icon: "\uD83D\uDC57", iconImg: "assets/pokemon-images/pm149.cFALL_2023.icon.png", featured: true, summary: "Costumed Pokémon take over raids! Dragonite, Butterfree, Diglett, Wooper, Sneasel, Kirlia, Absol, Shinx, Croagunk, Blitzle, and Minccino in costume.", details: { bosses: ["Costume Dragonite (3\u2605 Raid)", "Costume Absol (3\u2605 Raid)", "Costume Butterfree (3\u2605 Raid)", "Costume Kirlia (3\u2605 Raid)", "Costume Blitzle (1\u2605 Raid)", "Costume Croagunk (1\u2605 Raid)", "Costume Diglett (1\u2605 Raid)", "Costume Minccino (1\u2605 Raid)", "Costume Shinx (1\u2605 Raid)", "Costume Sneasel (1\u2605 Raid)", "Costume Wooper (1\u2605 Raid)"], bonuses: ["Up to 6 free Raid Passes from spinning Gym Photo Discs", "Remote Raid Pass limit increased to 20 (Apr 3 5 PM \u2013 Apr 4 8 PM PDT)", "Boosted Shiny rates for all costumed raid Pok\u00E9mon", "Costumed Pok\u00E9mon appearing more frequently in raids for 3 hours"], ticketPrice: "$4.99", ticketBonuses: ["Up to 14 Raid Passes from spinning Gym Photo Discs (vs 6 free)", "50% more XP from Raid Battles", "2\u00D7 Stardust from Raid Battles", "Increased chance of Rare Candy XL from Raid Battles", "Ultra Ticket Box $4.99 (ticket + Premium Battle Pass)", "Tickets giftable to Great Friends or higher"], tips: ["Costume Dragonite and Absol are the rarest \u2014 prioritize those raids.", "These costumed forms can't evolve \u2014 collector items only.", "Ultra Ticket Box is Web Store exclusive.", "Plan a raid route with your group ahead of time."], counters: { label: "Costume Dragonite (Dragon/Flying)", pokemon: [{ name: "Mega Gardevoir", fast: "Charm", charged: "Dazzling Gleam" }, { name: "Shadow Mamoswine", fast: "Powder Snow", charged: "Avalanche" }, { name: "Mega Rayquaza", fast: "Dragon Tail", charged: "Dragon Ascent", chargedNote: "Signature" }, { name: "Shadow Salamence", fast: "Dragon Tail", charged: "Outrage" }, { name: "Galarian Darmanitan", fast: "Ice Fang", charged: "Avalanche" }, { name: "Shadow Weavile", fast: "Ice Shard", charged: "Avalanche" }] } } },
   // Historical Community Days
   ...[
     ["Sprigatito","2025-01-05","Frenzy Plant → Meowscarada","\uD83C\uDF31","#27AE60","3× Stardust, 2× Candy"],
@@ -436,11 +436,11 @@ const EVENTS = [
   { id: 51, title: "Community Day: Grookey", type: "Community Day", date: "2026-01-18", endDate: null, time: "2:00 PM – 5:00 PM", color: "#27AE60", icon: "\uD83C\uDF31", featured: false, summary: "Grookey takes the spotlight! Evolve to Rillaboom for the exclusive Charged Attack Frenzy Plant.", details: { bosses: ["Rillaboom with Frenzy Plant (exclusive Charged Move)"], bonuses: ["Boosted Shiny Grookey rate", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "Extra Special Trade (2–9 PM)", "Special Background encounters available"], tips: ["Frenzy Plant is the premier Grass Charged Move — Rillaboom benefits hugely.", "First Community Day of 2026 with the new yearly Special Background feature.", "Check in at Community Ambassador events for bonus Timed Research."] } },
   { id: 52, title: "Community Day: Vulpix & Alolan Vulpix", type: "Community Day", date: "2026-02-15", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E67E22", icon: "\uD83E\uDD8A", featured: false, summary: "Vulpix and Alolan Vulpix share the spotlight! Exclusive moves Energy Ball and Chilling Water.", details: { bosses: ["Ninetales with Energy Ball (exclusive)", "Alolan Ninetales with Chilling Water (exclusive)"], bonuses: ["Both forms spawning in the wild", "Boosted Shiny rates for both Vulpix forms", "3-hour Incense", "Standard Community Day bonuses"], tips: ["Alolan Ninetales with Chilling Water is excellent in PvP Great League.", "Dual-feature Community Days let you hunt two shinies at once.", "Prioritize Alolan Vulpix if you care about PvP meta relevance."] } },
   { id: 53, title: "Community Day: Scorbunny", type: "Community Day", url: "https://pokemongo.com/news/communityday-march-2026-scorbunny", date: "2026-03-14", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E74C3C", icon: "\uD83D\uDC30", featured: false, summary: "Scorbunny stars in March! Evolve Raboot to Cinderace for the exclusive Charged Attack Blast Burn.", details: { bosses: ["Cinderace with Blast Burn (exclusive Charged Move)"], bonuses: ["¼ Egg Hatch Distance", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "Extra Special Trade (2–9 PM)", "50% less Trade Stardust cost (2–9 PM)"], tips: ["Blast Burn is the best Fire Charged Move — makes Cinderace a solid Fire attacker.", "Evolve within 5 hours after the event ends to get the exclusive move.", "Overlaps with Pokémon Pokopia Celebration Event — double-dip on bonuses."] } },
-  { id: 4, title: "Community Day: Tinkatink", type: "Community Day", url: "https://pokemongo.com/news/communityday-april-2026-tinkatink", date: "2026-04-11", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E84393", icon: "\uD83D\uDD28", iconImg: "pokemon-images/pm957.icon.png", featured: true, summary: "Tinkatink takes the spotlight! Evolve to Tinkaton for the exclusive Charged Attack Gigaton Hammer.", details: { bosses: ["Tinkaton with Gigaton Hammer (exclusive Charged Move)"], bonuses: ["3× Catch Stardust", "2× Catch Candy", "2× chance for Candy XL", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "1 extra Special Trade (2–9 PM)", "50% less Trade Stardust cost (2–9 PM)"], tips: ["Evolve Tinkatuff during the event or up to 4 hours after (by 9 PM) for Gigaton Hammer.", "Stack Star Pieces with the 3× Stardust bonus — one of the best dust events.", "Tinkatink with Special Backgrounds from Field Research and Lure Modules.", "Take snapshots for Tinkatink photobomb encounters."] } },
+  { id: 4, title: "Community Day: Tinkatink", type: "Community Day", url: "https://pokemongo.com/news/communityday-april-2026-tinkatink", date: "2026-04-11", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E84393", icon: "\uD83D\uDD28", iconImg: "assets/pokemon-images/pm957.icon.png", featured: true, summary: "Tinkatink takes the spotlight! Evolve to Tinkaton for the exclusive Charged Attack Gigaton Hammer.", details: { bosses: ["Tinkaton with Gigaton Hammer (exclusive Charged Move)"], bonuses: ["3× Catch Stardust", "2× Catch Candy", "2× chance for Candy XL", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "1 extra Special Trade (2–9 PM)", "50% less Trade Stardust cost (2–9 PM)"], tips: ["Evolve Tinkatuff during the event or up to 4 hours after (by 9 PM) for Gigaton Hammer.", "Stack Star Pieces with the 3× Stardust bonus — one of the best dust events.", "Tinkatink with Special Backgrounds from Field Research and Lure Modules.", "Take snapshots for Tinkatink photobomb encounters."] } },
   { id: 54, title: "Community Day: May 2026", type: "Community Day", date: "2026-05-09", endDate: null, time: "2:00 PM – 5:00 PM", color: "#636E72", icon: "\u2753", featured: false, summary: "May Community Day — date confirmed, featured Pokémon to be announced.", details: { bosses: ["Featured Pokémon: TBA"], bonuses: ["Standard Community Day bonuses expected", "Exclusive move for final evolution", "Boosted Shiny rate"], tips: ["Date is locked in — mark your calendar.", "Featured Pokémon usually announced 2–4 weeks before.", "Start stockpiling Poké Balls and Star Pieces."] } },
   { id: 55, title: "CD Classic: May 2026", type: "Community Day", date: "2026-05-16", endDate: null, time: "2:00 PM – 5:00 PM", color: "#636E72", icon: "\uD83D\uDD04", featured: false, summary: "May Community Day Classic — date confirmed, featured Pokémon to be announced.", details: { bosses: ["Featured Pokémon: TBA (past Community Day rerun)"], bonuses: ["Standard CD Classic bonuses expected", "Exclusive move available again"], tips: ["CD Classics bring back Pokémon and moves from past Community Days.", "Great chance to get an exclusive move you missed."] } },
   { id: 5, title: "Sustainability Week 2026", type: "Event", url: "https://pokemongo.com/news/sustainability-week-2026", date: "2026-04-14", endDate: "2026-04-20", time: "10:00 AM – 8:00 PM", color: "#27AE60", icon: "\uD83C\uDF3F", featured: true, summary: "Silicobra debuts! G. Corsola w/ pink sunglasses and Shiny Toedscool make first appearances.", details: { bosses: ["Silicobra (debut)", "G. Corsola w/ pink sunglasses", "Shiny Toedscool", "Seedot", "Castform", "Wiglett"], bonuses: ["Rotating Route spawns every 2 days", "Boosted Shiny Lapras, Togetic, Castform, Trubbish", "Toedscool in forested/grassy biomes", "Silicobra in desert-like biomes", "GO Pass milestone bonuses"], tips: ["Shiny Toedscool is brand new — check every one.", "Galarian Corsola in sunglasses is a top collector target.", "Route spawns rotate every 2 days — plan your priorities.", "Silicobra evolves into Sandaconda for 50 Candy."] } },
-  { id: 6, title: "Replay: Riolu Hatch Day", type: "Event", url: "https://pokemongo.com/en/news/replay-riolu-hatch-day-2026", date: "2026-04-18", endDate: null, time: "11:00 AM – 5:00 PM", color: "#3498DB", icon: "\uD83E\uDD5A", iconImg: "pokemon-images/eggs/egg-2.png", featured: false, summary: "Riolu Hatch Day returns! Boosted Shiny Riolu odds from eggs.", details: { bosses: ["Riolu"], bonuses: ["Riolu eggs with boosted Shiny odds", "Timed Research", "Overlaps with Sustainability Week"], paidResearch: { price: "$1.99", rewards: ["1/4 Egg Hatch Distance during event", "1 Star Piece", "2 Super Incubators"], note: "Tasks must be completed and rewards claimed before 5:00 PM local time on April 18." }, tips: ["Clear egg slots before the event.", "Use Super Incubators during the 6-hour window.", "Shiny Riolu/Lucario is one of the most coveted shinies."] } },
+  { id: 6, title: "Replay: Riolu Hatch Day", type: "Event", url: "https://pokemongo.com/en/news/replay-riolu-hatch-day-2026", date: "2026-04-18", endDate: null, time: "11:00 AM – 5:00 PM", color: "#3498DB", icon: "\uD83E\uDD5A", iconImg: "assets/pokemon-images/eggs/egg-2.png", featured: false, summary: "Riolu Hatch Day returns! Boosted Shiny Riolu odds from eggs.", details: { bosses: ["Riolu"], bonuses: ["Riolu eggs with boosted Shiny odds", "Timed Research", "Overlaps with Sustainability Week"], paidResearch: { price: "$1.99", rewards: ["1/4 Egg Hatch Distance during event", "1 Star Piece", "2 Super Incubators"], note: "Tasks must be completed and rewards claimed before 5:00 PM local time on April 18." }, tips: ["Clear egg slots before the event.", "Use Super Incubators during the 6-hour window.", "Shiny Riolu/Lucario is one of the most coveted shinies."] } },
   // { id: 7, title: "Max Battle Day: GO Bigger Replay", type: "Max Battle", date: "2026-04-25", endDate: null, time: "2:00 PM – 5:00 PM", color: "#8E44AD", icon: "\uD83D\uDCA5", featured: true, summary: "Gigantamax Kanto Starters return! Venusaur, Charizard, and Blastoise at Power Spots.", details: { bosses: ["Gigantamax Venusaur", "Gigantamax Charizard", "Gigantamax Blastoise", "Possible new Gigantamax forms"], bonuses: ["Boosted Power Spot spawns", "Shiny Gigantamax forms available", "Boosted Max Particles"], tips: ["Shiny Gigantamax Charizard is the coolest Charizard design.", "Coordinate 4-player groups.", "Farm Max Particles during the event."] } },
   { id: 8, title: "Steeled Resolve", type: "Event", url: "https://pokemongo.com/news/steeled-resolve-2026", urlDisabled: true, date: "2026-04-28", endDate: "2026-05-04", time: "10:00 AM – 8:00 PM", color: "#95A5A6", icon: "\uD83D\uDEE1\uFE0F", featured: false, summary: "Steel-type event closing out April. 'Steeled Resolve: Taken Over' sub-event begins April 30.", details: { bosses: ["Steel-type featured spawns (details TBA)"], bonuses: ["Steel-type wild spawns", "Event Field Research", "Steeled Resolve: Taken Over begins April 30"], tips: ["Stock Steel-type candy.", "'Steeled Resolve: Taken Over' likely involves Team GO Rocket.", "Shadow Latios continues in Shadow Raids."] } },
   { id: 20, title: "5\u2605 Raid: Regidrago", type: "Raid", date: "2026-04-01", endDate: "2026-04-07", time: "Raid Hour: Wed Apr 1, 6–7 PM", color: "#E74C3C", icon: "\uD83D\uDC09", featured: false, summary: "Regidrago in 5-Star Raids. Mega Manectric in Mega Raids. Shadow Latios weekends.", details: { bosses: ["Regidrago (5\u2605)", "Mega Manectric (Mega)", "Shadow Latios (weekends through May 5)"], bonuses: ["Raid Hour: Wednesday 6–7 PM"], tips: ["Weak to Fairy, Ice, Dragon.", "Shadow Latios on weekends — bring Purified Gems."], counters: { label: "Regidrago (Dragon)", pokemon: [{ name: "Mega Rayquaza", fast: "Dragon Tail", charged: "Dragon Ascent", chargedNote: "Signature" }, { name: "Shadow Salamence", fast: "Dragon Tail", charged: "Outrage" }, { name: "Shadow Dragonite", fast: "Dragon Tail", charged: "Outrage" }, { name: "Mega Gardevoir", fast: "Charm", charged: "Dazzling Gleam" }, { name: "Shadow Garchomp", fast: "Dragon Tail", charged: "Outrage" }, { name: "Mega Latios", fast: "Dragon Breath", charged: "Dragon Claw" }] }, catchCP: [{ name: "Regidrago", normal: "1831–1916", boosted: "2289–2395", weather: "Windy" }] } },
@@ -452,7 +452,7 @@ const EVENTS = [
   { id: 60, title: "Pok\u00E9mon Pokopia Celebration", type: "Event", url: "https://pokemongo.com/news/pokemon-pokopia-celebration-event-2026", date: "2026-03-10", endDate: "2026-03-16", time: "10:00 AM \u2013 8:00 PM", color: "#E056A0", icon: "\uD83C\uDFAD", featured: false, summary: "Costumed Ditto debuts wearing a hat and cap! Boosted Shiny Sudowoodo and Zorua. Kanto starters, Lapras, Snorlax, and Dragonite in 3-Star Raids. Free Ditto Eye Mask avatar item.", details: { bosses: ["Ditto wearing a hat (debut)", "Ditto wearing a cap (debut)", "Sudowoodo (boosted Shiny)", "Zorua (boosted Shiny)", "Bulbasaur", "Charmander", "Squirtle", "Pikachu", "Lapras (3\u2605 Raid)", "Snorlax (3\u2605 Raid)", "Dragonite (3\u2605 Raid)"], bonuses: ["2\u00D7 XP for spinning Pok\u00E9Stops", "10\u00D7 XP for spinning a Pok\u00E9Stop for the first time", "Boosted Shiny rates for Sudowoodo and Zorua", "Collection Challenges with themed rewards", "Free Ditto Eye Mask avatar item in shop", "Event-themed stickers from Pok\u00E9Stops, Gyms, and Gifts"], tips: ["Catch everything \u2014 costumed Ditto transforms and hides among wild spawns.", "Shiny Zorua is extremely rare normally, take advantage of the boosted rates.", "Spin new Pok\u00E9Stops for 10\u00D7 XP \u2014 great time to explore new areas.", "Overlaps with Scorbunny Community Day on March 14."] } },
   { id: 61, title: "Bug Out 2026", type: "Event", url: "https://pokemongo.com/news/bug-out-2026", date: "2026-03-17", endDate: "2026-03-23", time: "10:00 AM \u2013 8:00 PM", color: "#2ECC71", icon: "\uD83D\uDC1B", featured: false, summary: "Blipbug, Dottler, and Orbeetle debut! Shiny Sizzlipede released. Rotating Lure spawns with Pinsir, Scizor, and Kleavor in 3-Star Raids.", details: { bosses: ["Blipbug (debut)", "Sizzlipede (Shiny debut)", "Caterpie", "Dwebble", "Nymble", "Scyther", "Blipbug (1\u2605 Raid)", "Pinsir (3\u2605 Raid)", "Scizor (3\u2605 Raid)", "Kleavor (3\u2605 Raid)", "Paras (Lures Mar 17\u201319)", "Cutiefly (Lures Mar 19\u201321)", "Combee (Lures Mar 21\u201323)"], bonuses: ["2\u00D7 XP for Nice Throws or better (GO Pass Tier 1)", "2\u00D7 Catch Candy (GO Pass Tier 2)", "3\u00D7 Catch Candy (GO Pass Deluxe Tier 2)", "Rotating Lure Module spawns every 2 days", "GO Pass Deluxe $4.99 or Deluxe + 6 Ranks $6.99", "Boosted Shiny rates for Lure Pok\u00E9mon"], tips: ["Blipbug evolves to Dottler (25 Candy) then Orbeetle (100 Candy) \u2014 stock up.", "Shiny Sizzlipede is brand new \u2014 check every one you see.", "Pinsir, Scizor, and Kleavor in 3-Star Raids can all be Shiny.", "Paras, Combee, and Cutiefly from Lures have boosted Shiny rates.", "GO Pass rewards expire March 25 at 8 PM."] } },
   { id: 29, title: "Max Battle Day: Gigantamax Pikachu", type: "Max Battle", date: "2026-03-28", endDate: null, time: "2:00 PM – 5:00 PM", color: "#F1C40F", icon: "\u26A1", featured: false, summary: "Gigantamax Pikachu debuted in 6-Star Max Battles! Pikachu caught from Max Battles cannot evolve. Shiny Gigantamax Pikachu was available.", details: { bosses: ["Gigantamax Pikachu (6\u2605 Max Battle debut)"], bonuses: ["2× Max Particles from exploring (12 AM – 5 PM)", "Increased Max Particle storage limit", "3 Special Trades for the day", "Power Spots refreshed more frequently", "Gigantamax Pikachu on all Power Spots", "Remote Raid limit increased to 20 (Mar 27 5 PM – Mar 28 8 PM PDT)"], tips: ["Gigantamax Pikachu cannot evolve — it's a standalone collector Pokémon.", "As a pure Electric-type, Ground-type counters were the way to go.", "Paid Timed Research ($4.99) rewarded 1 Max Mushroom, 25,000 XP, 6,400 Max Particles, and 2× XP from Max Battles.", "Coordinating with a full group of 4 was essential for 6-Star difficulty."] } },
-  { id: 63, title: "Max Monday: D-Max Woobat", type: "Max Battle", date: "2026-03-30", endDate: null, time: "6:00 AM – 9:00 PM", color: "#A890F0", icon: "\uD83D\uDCA5", iconImg: "pokemon-images/pm527.icon.png", featured: false, summary: "Dynamax Woobat featured at Power Spots this week.", details: { bosses: ["Dynamax Woobat"], bonuses: ["Max Monday: 6 AM – 9 PM Mar 30", "Power Spots all week", "Extra Power Spots on Monday"], tips: ["Woobat evolves into Swoobat with high friendship.", "Max Mondays have more Power Spots."] } },
+  { id: 63, title: "Max Monday: D-Max Woobat", type: "Max Battle", date: "2026-03-30", endDate: null, time: "6:00 AM – 9:00 PM", color: "#A890F0", icon: "\uD83D\uDCA5", iconImg: "assets/pokemon-images/pm527.icon.png", featured: false, summary: "Dynamax Woobat featured at Power Spots this week.", details: { bosses: ["Dynamax Woobat"], bonuses: ["Max Monday: 6 AM – 9 PM Mar 30", "Power Spots all week", "Extra Power Spots on Monday"], tips: ["Woobat evolves into Swoobat with high friendship.", "Max Mondays have more Power Spots."] } },
   { id: 30, title: "Dynamax Trapinch (Debut)", type: "Max Battle", date: "2026-04-06", endDate: "2026-04-12", time: "Max Monday: 6–7 PM", color: "#E67E22", icon: "\uD83C\uDFDC\uFE0F", featured: false, summary: "Dynamax Trapinch debuts at Power Spots.", details: { bosses: ["Dynamax Trapinch (debut)"], bonuses: ["Max Monday: 6–7 PM Apr 6", "Power Spots all week", "Extra Power Spots on Monday"], tips: ["Trapinch evolves into Flygon.", "Max Mondays have more Power Spots."] } },
   { id: 31, title: "Dynamax Drilbur", type: "Max Battle", date: "2026-04-13", endDate: "2026-04-19", time: "Max Monday: 6–7 PM", color: "#6D4C41", icon: "\u26CF\uFE0F", featured: false, summary: "Dynamax Drilbur at Power Spots. Excadrill is top-tier.", details: { bosses: ["Dynamax Drilbur"], bonuses: ["Max Monday: 6–7 PM Apr 13", "Power Spots all week"], tips: ["Excadrill is top Ground AND Steel attacker.", "Overlaps with Sustainability Week."] } },
   { id: 32, title: "Dynamax Regirock (Debut)", type: "Max Battle", date: "2026-04-20", endDate: "2026-04-26", time: "Max Monday: 6–7 PM", color: "#D4A574", icon: "\uD83E\uDEA8", featured: true, summary: "Dynamax Regirock debuts at Power Spots! Another Legendary Regi joins the Dynamax roster.", details: { bosses: ["Dynamax Regirock (debut)"], bonuses: ["Max Monday: 6–7 PM Apr 20", "Power Spots all week"], tips: ["Headline event — expect higher difficulty.", "Coordinate with your local group.", "Coordinate with your local group for max rewards."] } },
@@ -591,8 +591,16 @@ let state = {
 };
 
 // --- UTILITY FUNCTIONS ---
-function getCountdown(d) {
-  const diff = new Date(d + "T10:00:00") - new Date();
+function getCountdown(d, ev) {
+  let target;
+  if (ev) {
+    const { h, min } = parseStartHour(ev);
+    target = new Date(d + "T00:00:00");
+    target.setHours(h === 0 && min === 0 ? 10 : h, h === 0 && min === 0 ? 0 : min, 0);
+  } else {
+    target = new Date(d + "T10:00:00");
+  }
+  const diff = target - new Date();
   if (diff <= 0) return null;
   return { days: Math.floor(diff / 864e5), hours: Math.floor((diff % 864e5) / 36e5), minutes: Math.floor((diff % 36e5) / 6e4), seconds: Math.floor((diff % 6e4) / 1000) };
 }
@@ -698,7 +706,7 @@ function renderCountdown(dateStr, color, over, th, ev) {
     return `<span style="font-size:12px;color:#2ECC71;font-weight:700">LIVE NOW</span>`;
   }
   if (ev && isOver(ev)) return `<span style="font-size:12px;color:${th.textMuted};font-weight:600">Event Over</span>`;
-  const cd = getCountdown(dateStr);
+  const cd = getCountdown(dateStr, ev);
   if (!cd && over) return `<span style="font-size:12px;color:${th.textMuted};font-weight:600">Event Over</span>`;
   if (!cd) return `<span style="font-size:12px;color:#2ECC71;font-weight:700">LIVE NOW</span>`;
   const units = [["D", cd.days], ["H", cd.hours], ["M", cd.minutes], ["S", cd.seconds]];
@@ -1374,11 +1382,16 @@ function renderNewsDetail(announcement, th) {
 
 // --- EVENT CARD ---
 function renderEventCard(event, index, th) {
-  const days = daysUntil(event.date);
   const active = isActive(event);
   const isPast = isOver(event);
-  const daysLabel = days === 0 ? "TODAY" : days === 1 ? "TOMORROW" : `${days}d`;
-  const daysColor = days <= 3 ? "#E74C3C" : days <= 7 ? "#F39C12" : th.textMuted;
+  const today = new Date();
+  const eventStart = new Date(event.date + "T00:00:00");
+  const endDate = event.endDate || event.date;
+  const eventEnd = new Date(endDate + "T23:59:59");
+  const isToday = today >= eventStart && today <= eventEnd && !active;
+  const calendarDays = Math.ceil((eventStart - new Date(today.getFullYear(), today.getMonth(), today.getDate())) / 864e5);
+  const daysLabel = isToday ? "TODAY" : calendarDays === 0 ? "TODAY" : calendarDays === 1 ? "TOMORROW" : `${calendarDays}d`;
+  const daysColor = calendarDays <= 3 ? "#E74C3C" : calendarDays <= 7 ? "#F39C12" : th.textMuted;
   return `<button onclick="selectEvent(${event.id})" style="display:flex;flex-direction:column;gap:12px;padding:18px 18px 16px;background:${th.cardBg(active, event.color)};border:1.5px solid ${th.cardBorder(active, event.color)};border-radius:16px;cursor:pointer;text-align:left;transition:all 0.25s cubic-bezier(0.25,0.46,0.45,0.94);opacity:${isPast ? 0.5 : 1};width:100%;box-shadow:${th.shadow};position:relative;overflow:hidden;font-family:inherit;animation:fadeSlideUp 0.4s cubic-bezier(0.25,0.46,0.45,0.94) ${index * 0.06}s both"
     onmouseenter="this.style.borderColor='${event.color}60';this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 25px ${event.color}18';"
     onmouseleave="this.style.borderColor='${th.cardBorder(active, event.color)}';this.style.transform='translateY(0)';this.style.boxShadow='${th.shadow}';">
@@ -1402,7 +1415,7 @@ function renderEventCard(event, index, th) {
           </div>
         </div>
       </div>
-      ${!isPast && !active && days <= 60 ? `<div style="font-size:11px;font-weight:700;white-space:nowrap;padding-top:2px;color:${daysColor}">${daysLabel}</div>` : ""}
+      ${!isPast && !active && calendarDays >= 0 && calendarDays <= 60 ? `<div style="font-size:11px;font-weight:700;white-space:nowrap;padding-top:2px;color:${daysColor}">${daysLabel}</div>` : ""}
     </div>
     <p style="margin:0;font-size:13.5px;color:${th.textSecondary};line-height:1.55">${esc(event.summary)}</p>
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
@@ -1612,7 +1625,11 @@ function render() {
           \u23F1 Coming Up Next
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:${isMobile ? 10 : 16}px">
-          <div><h2 style="margin:0 0 4px 0;font-size:${isMobile ? 18 : 24}px;font-weight:800;color:${th.text};display:flex;align-items:center;gap:8px">${hero.iconImg ? `<img src="${hero.iconImg}" style="width:${isMobile ? 36 : 42}px;height:${isMobile ? 36 : 42}px;object-fit:contain;margin-left:-4px" onerror="this.outerHTML='${hero.icon}'" />` : hero.icon} ${esc(hero.title)}</h2>
+          <div><h2 style="margin:0 0 4px 0;font-size:${isMobile ? 18 : 24}px;font-weight:800;color:${th.text};display:flex;align-items:center;gap:8px">${(() => {
+            if (hero.iconImg) return `<img src="${hero.iconImg}" style="width:${isMobile ? 36 : 42}px;height:${isMobile ? 36 : 42}px;object-fit:contain;margin-left:-4px" onerror="this.outerHTML='${hero.icon}'" />`;
+            const heroPkmn = (hero.type === "Raid" || hero.type === "Max Battle") && hero.details && hero.details.bosses && hero.details.bosses[0] ? getPokemonImg(hero.details.bosses[0]) : null;
+            return heroPkmn ? `<img src="${heroPkmn.url}" style="width:${isMobile ? 36 : 42}px;height:${isMobile ? 36 : 42}px;object-fit:contain" onerror="this.outerHTML='${hero.icon}'" />` : hero.icon;
+          })()} ${esc(hero.title)}</h2>
           <div style="font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">${formatDateRange(hero.date, hero.endDate)} \u00B7 ${esc(hero.time)}</div></div>
           <span class="countdown" data-date="${hero.date}" data-color="${hero.color}" data-over="false" data-event-id="${hero.id}">${renderCountdown(hero.date, hero.color, false, th, hero)}</span>
         </div>
@@ -1862,11 +1879,13 @@ function render() {
 
   // Header
   const headerHTML = `<header style="padding:${isMobile ? "14px 18px" : "16px 32px"};border-bottom:1.5px solid ${th.border};background:${th.headerBg};backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;width:100%;display:flex;align-items:center;justify-content:space-between">
+    <div style="display:flex;align-items:center;gap:${isMobile ? 6 : 14}px">
+    ${isMobile ? `<button onclick="toggleSidebar()" style="background:none;border:none;cursor:pointer;padding:6px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="${th.text}" stroke-width="2.5" stroke-linecap="round"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg></button>` : ""}
     <div onclick="goHome()" style="cursor:pointer;display:flex;align-items:center;gap:${isMobile ? 10 : 14}px">
-      <div style="width:${isMobile ? 34 : 40}px;height:${isMobile ? 34 : 40}px;border-radius:${isMobile ? 9 : 11}px;background:linear-gradient(135deg,#E74C3C,#F39C12);display:flex;align-items:center;justify-content:center;font-size:${isMobile ? 13 : 15}px;color:#fff;font-weight:800;letter-spacing:-0.5px">TW</div>
+      <img src="assets/trainerwire-logo.PNG" style="width:${isMobile ? 80 : 95}px;height:${isMobile ? 80 : 95}px;object-fit:contain;margin:-20px 0" alt="TrainerWire" />
       <div><div style="font-size:${isMobile ? 16 : 20}px;font-weight:800;color:${th.text};letter-spacing:-0.3px;line-height:1.2">${COMMUNITY_NAME}</div>
       <div style="font-size:${isMobile ? 10 : 12}px;color:${th.textMuted};font-weight:500;letter-spacing:0.2px">${COMMUNITY_TAGLINE}</div></div>
-    </div>
+    </div></div>
     <button id="theme-toggle" onclick="toggleDarkMode()" style="background:${darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.06)"};border:1.5px solid ${th.border};border-radius:50%;width:${isMobile ? 36 : 40}px;height:${isMobile ? 36 : 40}px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:${isMobile ? 18 : 20}px;transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);flex-shrink:0"
       onmouseenter="this.style.transform='scale(1.12)';this.style.boxShadow='0 4px 15px ${darkMode ? "rgba(255,200,50,0.2)" : "rgba(0,0,0,0.15)"}';"
       onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none';">${darkMode ? "\u2600\uFE0F" : "\uD83C\uDF19"}</button>
@@ -1884,7 +1903,9 @@ function render() {
 
   const scrollTopBtn = `<button id="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:${isMobile ? 20 : 28}px;right:${isMobile ? 16 : 28}px;width:${isMobile ? 44 : 48}px;height:${isMobile ? 44 : 48}px;border-radius:50%;background:linear-gradient(135deg,#E74C3C,#F39C12);border:none;box-shadow:0 4px 18px rgba(231,76,60,0.35);cursor:pointer;display:none;align-items:center;justify-content:center;z-index:200;transition:opacity 0.4s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);font-family:inherit;opacity:0;transform:translateY(20px) scale(0.8)" onmouseenter="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 24px rgba(231,76,60,0.5)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='0 4px 18px rgba(231,76,60,0.35)'"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg></button>`;
 
-  document.getElementById("app").innerHTML = `<div style="min-height:100vh;display:flex;flex-direction:column;background:${th.bg};font-family:'Outfit','DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;color:${th.text};width:100%">
+  const sidebarHTML = renderSidebar(th);
+
+  document.getElementById("app").innerHTML = `${sidebarHTML}<div style="min-height:100vh;display:flex;flex-direction:column;background:${th.bg};font-family:'Outfit','DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;color:${th.text};width:100%">
     ${headerHTML}${tickerHTML}<div style="flex:1">${content}</div>${footerHTML}
   </div>${scrollTopBtn}`;
 }
@@ -1925,6 +1946,100 @@ window.addEventListener("scroll", () => {
     }
   }
 });
+
+// --- SIDEBAR ---
+let sidebarOpen = false;
+function toggleSidebar() {
+  sidebarOpen = !sidebarOpen;
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("sidebar-overlay");
+  if (sidebarOpen) {
+    sidebar.style.transform = "translateX(0)";
+    overlay.style.opacity = "1";
+    overlay.style.pointerEvents = "auto";
+  } else {
+    sidebar.style.transform = "translateX(-100%)";
+    overlay.style.opacity = "0";
+    overlay.style.pointerEvents = "none";
+  }
+}
+function closeSidebar() {
+  if (sidebarOpen) toggleSidebar();
+}
+function sidebarNav(tab) {
+  closeSidebar();
+  state.selectedEvent = null;
+  state.selectedNews = null;
+  state.tab = tab;
+  render();
+  window.scrollTo(0, 0);
+}
+
+function renderSidebar(th) {
+  const isMobile = breakpoint === "mobile";
+  if (!isMobile) return "";
+  const tabs = [
+    { id: "events", icon: "\uD83D\uDCC5", label: "Events" },
+    { id: "calendar", icon: "\uD83D\uDDD3\uFE0F", label: "Calendar" },
+    { id: "raids", icon: "\u2694\uFE0F", label: "Raids" },
+    { id: "max", icon: "\uD83D\uDCA5", label: "Max Battles" },
+    { id: "news", icon: "\uD83D\uDCE2", label: "News" }
+  ];
+  return `<div id="sidebar-overlay" onclick="closeSidebar()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:998;opacity:0;pointer-events:none;transition:opacity 0.3s ease"></div>
+  <nav id="sidebar" style="position:fixed;top:0;left:0;width:260px;height:100%;background:${th.surface};border-right:1.5px solid ${th.border};z-index:999;transform:translateX(-100%);transition:transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;overflow-y:auto">
+    <div style="padding:24px 20px;border-bottom:1.5px solid ${th.border};display:flex;align-items:center;gap:12px">
+      <img src="assets/trainerwire-logo.PNG" style="width:50px;height:50px;object-fit:contain" alt="TrainerWire" />
+      <div>
+        <div style="font-size:16px;font-weight:800;color:${th.text}">TrainerWire</div>
+        <div style="font-size:10px;color:${th.textMuted};font-weight:500">Pok\u00E9mon GO Hub</div>
+      </div>
+    </div>
+    <div style="padding:12px 8px;display:flex;flex-direction:column;gap:2px">
+      ${tabs.map(t => `<button onclick="sidebarNav('${t.id}')" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;border:none;background:${state.tab === t.id ? th.accentBgSubtle("#E74C3C") : "transparent"};cursor:pointer;font-family:inherit;transition:background 0.15s ease;width:100%;text-align:left"
+        onmouseenter="this.style.background='${th.surfaceHover}'"
+        onmouseleave="this.style.background='${state.tab === t.id ? th.accentBgSubtle("#E74C3C") : "transparent"}'">
+        <span style="font-size:20px">${t.icon}</span>
+        <span style="font-size:14px;font-weight:${state.tab === t.id ? "700" : "600"};color:${state.tab === t.id ? th.text : th.textSecondary}">${t.label}</span>
+      </button>`).join("")}
+    </div>
+    <div style="margin-top:auto;padding:16px 20px;border-top:1.5px solid ${th.border}">
+      <div style="font-size:11px;color:${th.textFaint};text-align:center">${COMMUNITY_NAME} \u00B7 v1.0</div>
+    </div>
+  </nav>`;
+}
+
+// --- SWIPE GESTURES ---
+let touchStartX = 0;
+let touchStartY = 0;
+let touchStartTime = 0;
+
+document.addEventListener("touchstart", (e) => {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+  touchStartTime = Date.now();
+}, { passive: true });
+
+document.addEventListener("touchend", (e) => {
+  const touchEndX = e.changedTouches[0].clientX;
+  const touchEndY = e.changedTouches[0].clientY;
+  const deltaX = touchEndX - touchStartX;
+  const deltaY = touchEndY - touchStartY;
+  const elapsed = Date.now() - touchStartTime;
+
+  // Must be a quick horizontal swipe (not a scroll)
+  if (elapsed > 500 || Math.abs(deltaX) < 80 || Math.abs(deltaY) > Math.abs(deltaX) * 0.7) return;
+
+  if (deltaX > 0) {
+    // Swipe right — go back or open sidebar
+    if (sidebarOpen) return;
+    if (state.selectedEvent) { goBack(); }
+    else if (state.selectedNews) { goBackNews(); }
+    else if (touchStartX < 30) { toggleSidebar(); }
+  } else {
+    // Swipe left — close sidebar
+    if (sidebarOpen) closeSidebar();
+  }
+}, { passive: true });
 
 // Initial render
 updateThemeColor();
