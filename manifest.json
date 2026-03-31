@@ -1,0 +1,27 @@
+{
+  "name": "TrainerWire",
+  "short_name": "TrainerWire",
+  "description": "Your Local Pokemon GO Event & News Center",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0e0e12",
+  "theme_color": "#0e0e12",
+  "icons": [
+    {
+      "src": "assets/trainerwire-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/trainerwire-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/trainerwire-logo.PNG",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
