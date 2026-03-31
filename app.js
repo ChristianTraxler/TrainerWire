@@ -1872,7 +1872,7 @@ function render() {
       onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none';">${darkMode ? "\u2600\uFE0F" : "\uD83C\uDF19"}</button>
   </header>`;
 
-  const tickerText = "\u26A1 GO Fest 2026: Global \u2014 Newton, NC \u00B7 Southside Park \u00B7 July 11\u201312, 2026 \u00B7 Time TBA \u00B7 Join your local trainers for a weekend of raids, shinies & community fun! Stay tuned for more details!";
+  const tickerText = "\u26A1 GO Fest 2026: Global \u2014 Newton, NC \u00B7 Southside Park \u00B7 July 11\u201312, 2026 \u00B7 Time TBA \u00B7 Join your local trainers for a weekend full of raids, shiny hunting & community fun! Stay tuned for more details!";
   const tickerContent = `${tickerText} \u00A0\u00A0\u00A0\u2728\u00A0\u00A0\u00A0 ${tickerText} \u00A0\u00A0\u00A0\u2728\u00A0\u00A0\u00A0 `;
   const tickerHTML = `<div style="overflow:hidden;white-space:nowrap;background:linear-gradient(90deg,#E74C3C,#F39C12);width:100%;position:relative">
     <div style="display:inline-block;animation:tickerScroll 60s linear infinite;padding:7px 0;font-size:${isMobile ? 11 : 13}px;font-weight:600;color:#fff;letter-spacing:0.3px">${tickerContent}${tickerContent}</div>

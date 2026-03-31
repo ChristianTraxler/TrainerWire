@@ -12,7 +12,8 @@
       "WebFetch(domain:www.serebii.net)",
       "WebFetch(domain:www.snacknap.com)",
       "WebFetch(domain:www.leekduck.com)",
-      "WebFetch(domain:pokemongo.gamepress.gg)"
+      "WebFetch(domain:pokemongo.gamepress.gg)",
+      "WebFetch(domain:godex.site)"
     ]
   }
 }
