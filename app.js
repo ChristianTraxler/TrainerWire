@@ -33,6 +33,119 @@ const DEX = {
   "Grookey":810,"Thwackey":811,"Rillaboom":812,"Scorbunny":813,"Raboot":814,"Cinderace":815,"Sobble":816,"Drizzile":817,"Inteleon":818,"Skwovet":819,"Greedent":820,"Rookidee":821,"Corvisquire":822,"Corviknight":823,"Blipbug":824,"Dottler":825,"Orbeetle":826,"Nickit":827,"Thievul":828,"Gossifleur":829,"Eldegoss":830,"Wooloo":831,"Dubwool":832,"Chewtle":833,"Drednaw":834,"Yamper":835,"Boltund":836,"Rolycoly":837,"Carkol":838,"Coalossal":839,"Applin":840,"Flapple":841,"Appletun":842,"Silicobra":843,"Sandaconda":844,"Cramorant":845,"Arrokuda":846,"Barraskewda":847,"Toxel":848,"Toxtricity":849,"Sizzlipede":850,"Centiskorch":851,"Clobbopus":852,"Grapploct":853,"Sinistea":854,"Polteageist":855,"Hatenna":856,"Hattrem":857,"Hatterene":858,"Impidimp":859,"Morgrem":860,"Grimmsnarl":861,"Obstagoon":862,"Perrserker":863,"Cursola":864,"Sirfetchd":865,"Mr. Rime":866,"Runerigus":867,"Milcery":868,"Alcremie":869,"Falinks":870,"Pincurchin":871,"Snom":872,"Frosmoth":873,"Stonjourner":874,"Eiscue":875,"Indeedee":876,"Morpeko":877,"Cufant":878,"Copperajah":879,"Dracozolt":880,"Arctozolt":881,"Dracovish":882,"Arctovish":883,"Duraludon":884,"Dreepy":885,"Drakloak":886,"Dragapult":887,"Zacian":888,"Zamazenta":889,"Eternatus":890,"Kubfu":891,"Urshifu":892,"Zarude":893,"Regieleki":894,"Regidrago":895,"Glastrier":896,"Spectrier":897,"Calyrex":898,"Wyrdeer":899,"Kleavor":900,"Ursaluna":901,"Basculegion":902,"Sneasler":903,"Overqwil":904,"Enamorus":905,
   "Sprigatito":906,"Floragato":907,"Meowscarada":908,"Fuecoco":909,"Crocalor":910,"Skeledirge":911,"Quaxly":912,"Quaxwell":913,"Quaquaval":914,"Lechonk":915,"Oinkologne":916,"Tarountula":917,"Spidops":918,"Nymble":919,"Lokix":920,"Pawmi":921,"Pawmo":922,"Pawmot":923,"Tandemaus":924,"Maushold":925,"Fidough":926,"Dachsbun":927,"Smoliv":928,"Dolliv":929,"Arboliva":930,"Squawkabilly":931,"Nacli":932,"Naclstack":933,"Garganacl":934,"Charcadet":935,"Armarouge":936,"Ceruledge":937,"Tadbulb":938,"Bellibolt":939,"Wattrel":940,"Kilowattrel":941,"Maschiff":942,"Mabosstiff":943,"Shroodle":944,"Grafaiai":945,"Bramblin":946,"Brambleghast":947,"Toedscool":948,"Toedscruel":949,"Klawf":950,"Capsakid":951,"Scovillain":952,"Rellor":953,"Rabsca":954,"Flittle":955,"Espathra":956,"Tinkatink":957,"Tinkatuff":958,"Tinkaton":959,"Wiglett":960,"Wugtrio":961,"Bombirdier":962,"Finizen":963,"Palafin":964,"Varoom":965,"Revavroom":966,"Cyclizar":967,"Orthworm":968,"Glimmet":969,"Glimmora":970,"Greavard":971,"Houndstone":972,"Flamigo":973,"Cetoddle":974,"Cetitan":975,"Veluza":976,"Dondozo":977,"Tatsugiri":978,"Annihilape":979,"Clodsire":980,"Farigiraf":981,"Dudunsparce":982,"Kingambit":983,"Great Tusk":984,"Scream Tail":985,"Brute Bonnet":986,"Flutter Mane":987,"Slither Wing":988,"Sandy Shocks":989,"Iron Treads":990,"Iron Bundle":991,"Iron Hands":992,"Iron Jugulis":993,"Iron Moth":994,"Iron Thorns":995,"Frigibax":996,"Arctibax":997,"Baxcalibur":998,"Gimmighoul":999,"Gholdengo":1000,"Wo-Chien":1001,"Chien-Pao":1002,"Ting-Lu":1003,"Chi-Yu":1004,"Roaring Moon":1005,"Iron Valiant":1006,"Koraidon":1007,"Miraidon":1008,"Walking Wake":1009,"Iron Leaves":1010,"Dipplin":1011,"Poltchageist":1012,"Sinistcha":1013,"Okidogi":1014,"Munkidori":1015,"Fezandipiti":1016,"Ogerpon":1017,"Archaludon":1018,"Hydrapple":1019,"Gouging Fire":1020,"Raging Bolt":1021,"Iron Boulder":1022,"Iron Crown":1023,"Terapagos":1024,"Pecharunt":1025
 };
+const DEX_BY_NUM = {};
+for (const [name, num] of Object.entries(DEX)) DEX_BY_NUM[num] = name;
+const REGIONS = [
+  { folder: "Gen-1_Kanto", label: "Gen 1 \u2014 Kanto", start: 1, end: 151 },
+  { folder: "Gen-2_Johto", label: "Gen 2 \u2014 Johto", start: 152, end: 251 },
+  { folder: "Gen-3_Hoenn", label: "Gen 3 \u2014 Hoenn", start: 252, end: 386 },
+  { folder: "Gen-4_Sinnoh", label: "Gen 4 \u2014 Sinnoh", start: 387, end: 493 },
+  { folder: "Gen-5_Unova", label: "Gen 5 \u2014 Unova", start: 494, end: 649 },
+  { folder: "Gen-6_Kalos", label: "Gen 6 \u2014 Kalos", start: 650, end: 721 },
+  { folder: "Gen-7_Alola", label: "Gen 7 \u2014 Alola", start: 722, end: 809 },
+  { folder: "Gen-8_Galar", label: "Gen 8 \u2014 Galar", start: 810, end: 898 },
+  { folder: "Gen-8.5_Hisui", label: "Gen 8.5 \u2014 Hisui", start: 899, end: 905 },
+  { folder: "Gen-9_Paldea", label: "Gen 9 \u2014 Paldea", start: 906, end: 1025 }
+];
+const POKEMON_FORMS = {
+  19:[{l:"Alola",f:"0019_alola"}],20:[{l:"Alola",f:"0020_alola"}],26:[{l:"Alola",f:"0026_alola"}],27:[{l:"Alola",f:"0027_alola"}],28:[{l:"Alola",f:"0028_alola"}],37:[{l:"Alola",f:"0037_alola"}],38:[{l:"Alola",f:"0038_alola"}],50:[{l:"Alola",f:"0050_alola"}],51:[{l:"Alola",f:"0051_alola"}],52:[{l:"Alola",f:"0052_alola"}],53:[{l:"Alola",f:"0053_alola"}],74:[{l:"Alola",f:"0074_alola"}],75:[{l:"Alola",f:"0075_alola"}],76:[{l:"Alola",f:"0076_alola"}],88:[{l:"Alola",f:"0088_alola"}],89:[{l:"Alola",f:"0089_alola"}],103:[{l:"Alola",f:"0103_alola"}],105:[{l:"Alola",f:"0105_alola"}],
+  201:[{l:"A",f:"0201_a"},{l:"B",f:"0201_b"},{l:"C",f:"0201_c"},{l:"D",f:"0201_d"},{l:"E",f:"0201_e"},{l:"F",f:"0201_f"},{l:"G",f:"0201_g"},{l:"H",f:"0201_h"},{l:"I",f:"0201_i"},{l:"J",f:"0201_j"},{l:"K",f:"0201_k"},{l:"L",f:"0201_l"},{l:"M",f:"0201_m"},{l:"N",f:"0201_n"},{l:"O",f:"0201_o"},{l:"P",f:"0201_p"},{l:"Q",f:"0201_q"},{l:"R",f:"0201_r"},{l:"S",f:"0201_s"},{l:"T",f:"0201_t"},{l:"U",f:"0201_u"},{l:"V",f:"0201_v"},{l:"W",f:"0201_w"},{l:"X",f:"0201_x"},{l:"Y",f:"0201_y"},{l:"Z",f:"0201_z"},{l:"!",f:"0201_zem"},{l:"?",f:"0201_zim"}],
+  327:[{l:"Pattern 1",f:"0327_01"},{l:"Pattern 2",f:"0327_02"},{l:"Pattern 3",f:"0327_03"},{l:"Pattern 4",f:"0327_04"},{l:"Pattern 5",f:"0327_05"},{l:"Pattern 6",f:"0327_06"},{l:"Pattern 7",f:"0327_07"},{l:"Pattern 8",f:"0327_08"},{l:"Pattern 9",f:"0327_09"}],
+  351:[{l:"Rainy",f:"0351_rain"},{l:"Snowy",f:"0351_snow"},{l:"Sunny",f:"0351_sun"}],
+  386:[{l:"Attack",f:"0386_attack"},{l:"Defense",f:"0386_defense"},{l:"Speed",f:"0386_speed"}],
+  412:[{l:"Plant",f:"0412_plant"},{l:"Sandy",f:"0412_sandy"},{l:"Trash",f:"0412_trash"}],
+  413:[{l:"Plant",f:"0413_plant-female"},{l:"Sandy",f:"0413_sandy-female"},{l:"Trash",f:"0413_trash-female"}],
+  421:[{l:"Overcast",f:"0421_over"},{l:"Sunshine",f:"0421_sun"}],
+  422:[{l:"East Sea",f:"0422_east"},{l:"West Sea",f:"0422_west"}],
+  423:[{l:"East Sea",f:"0423_east"},{l:"West Sea",f:"0423_west"}],
+  479:[{l:"Fan",f:"0479_fan"},{l:"Frost",f:"0479_frost"},{l:"Heat",f:"0479_heat"},{l:"Mow",f:"0479_mow"},{l:"Wash",f:"0479_wash"}],
+  483:[{l:"Origin",f:"0483_origin"}],484:[{l:"Origin",f:"0484_origin"}],
+  487:[{l:"Altered",f:"0487_alt"},{l:"Origin",f:"0487_ori"}],
+  492:[{l:"Land",f:"0492_land"},{l:"Sky",f:"0492_sky"}],
+  550:[{l:"Blue-Striped",f:"0550_blue"},{l:"Red-Striped",f:"0550_red"}],
+  585:[{l:"Autumn",f:"0585_autumn"},{l:"Spring",f:"0585_spring"},{l:"Summer",f:"0585_summer"},{l:"Winter",f:"0585_winter"}],
+  586:[{l:"Autumn",f:"0586_autumn"},{l:"Spring",f:"0586_spring"},{l:"Summer",f:"0586_summer"},{l:"Winter",f:"0586_winter"}],
+  641:[{l:"Incarnate",f:"0641_incarnate-male"},{l:"Therian",f:"0641_therian-male"}],
+  642:[{l:"Incarnate",f:"0642_incarnate-male"},{l:"Therian",f:"0642_therian-male"}],
+  645:[{l:"Incarnate",f:"0645_incarnate-male"},{l:"Therian",f:"0645_therian-male"}],
+  646:[{l:"Black",f:"0646_black"},{l:"White",f:"0646_white"}],
+  647:[{l:"Resolute",f:"0647_resolute"}],
+  649:[{l:"Burn",f:"0649_burn"},{l:"Chill",f:"0649_chill"},{l:"Douse",f:"0649_douse"},{l:"Shock",f:"0649_shock"}],
+  666:[{l:"Archipelago",f:"0666_archipelago"},{l:"Continental",f:"0666_continental"},{l:"Elegant",f:"0666_elegant"},{l:"Garden",f:"0666_garden"},{l:"High Plains",f:"0666_highplains"},{l:"Icy Snow",f:"0666_icysnow"},{l:"Jungle",f:"0666_jungle"},{l:"Marine",f:"0666_marine"},{l:"Meadow",f:"0666_meadow"},{l:"Modern",f:"0666_modern"},{l:"Monsoon",f:"0666_monsoon"},{l:"Ocean",f:"0666_ocean"},{l:"Polar",f:"0666_polar"},{l:"River",f:"0666_river"},{l:"Sandstorm",f:"0666_sandstorm"},{l:"Savanna",f:"0666_savanna"},{l:"Sun",f:"0666_sun"},{l:"Tundra",f:"0666_tundra"}],
+  669:[{l:"Blue",f:"0669_blue-female"},{l:"Orange",f:"0669_orange-female"},{l:"Red",f:"0669_red-female"},{l:"White",f:"0669_white-female"},{l:"Yellow",f:"0669_yellow-female"}],
+  670:[{l:"Blue",f:"0670_blue-female"},{l:"Orange",f:"0670_orange-female"},{l:"Red",f:"0670_red-female"},{l:"White",f:"0670_white-female"},{l:"Yellow",f:"0670_yellow-female"}],
+  671:[{l:"Blue",f:"0671_blue-female"},{l:"Orange",f:"0671_orange-female"},{l:"Red",f:"0671_red-female"},{l:"White",f:"0671_white-female"},{l:"Yellow",f:"0671_yellow-female"}],
+  676:[{l:"Dandy",f:"0676_dandy"},{l:"Debutante",f:"0676_debutante"},{l:"Diamond",f:"0676_diamond"},{l:"Heart",f:"0676_heart"},{l:"Kabuki",f:"0676_kabuki"},{l:"La Reine",f:"0676_lareine"},{l:"Matron",f:"0676_matron"},{l:"Pharaoh",f:"0676_pharaoh"},{l:"Star",f:"0676_star"}],
+  681:[{l:"Blade",f:"0681_blade"}],
+  710:[{l:"Small",f:"0710a_small"},{l:"Average",f:"0710b_average"},{l:"Large",f:"0710c_large"},{l:"Super",f:"0710d_super"}],
+  711:[{l:"Small",f:"0711a_small"},{l:"Average",f:"0711b_average"},{l:"Large",f:"0711c_large"},{l:"Super",f:"0711d_super"}],
+  718:[{l:"10%",f:"0718_010"},{l:"50%",f:"0718_050"},{l:"100%",f:"0718_100"}],
+  720:[{l:"Confined",f:"0720_confined"},{l:"Unbound",f:"0720_unbound"}],
+  741:[{l:"Baile",f:"0741_baile"},{l:"Pa'u",f:"0741_pau"},{l:"Pom-Pom",f:"0741_pom"},{l:"Sensu",f:"0741_sensu"}],
+  745:[{l:"Dusk",f:"0745_dusk"},{l:"Midday",f:"0745_midday"},{l:"Midnight",f:"0745_midnight"}],
+  746:[{l:"School",f:"0746_school"}],
+  800:[{l:"Dawn Wings",f:"0800_dawn"},{l:"Dusk Mane",f:"0800_dusk"}],
+  849:[{l:"Amped",f:"0849_amped"},{l:"Low Key",f:"0849_lowkey"}],
+  854:[{l:"Antique",f:"0854_antique"}],855:[{l:"Antique",f:"0855_antique"}],
+  888:[{l:"Crowned Sword",f:"0888_sword"}],889:[{l:"Crowned Shield",f:"0889_shield"}],
+  892:[{l:"Rapid Strike",f:"0892_rapid"},{l:"Single Strike",f:"0892_single"}],
+  905:[{l:"Incarnate",f:"0905_incarnate-female"},{l:"Therian",f:"0905_therian-female"}],
+  925:[{l:"Family of Four",f:"0925_four"},{l:"Family of Three",f:"0925_three"}],
+  978:[{l:"Curly",f:"0978_curly"},{l:"Droopy",f:"0978_droopy"},{l:"Stretchy",f:"0978_stretchy"}],
+  982:[{l:"Two-Segment",f:"0982_2segment"},{l:"Three-Segment",f:"0982_3segment"}],
+  1012:[{l:"Artisan",f:"1012_artisan"},{l:"Counterfeit",f:"1012_counterfeit"}],
+  1013:[{l:"Masterpiece",f:"1013_masterpiece"},{l:"Unremarkable",f:"1013_unremarkable"}]
+};
+function formImgUrl(dex, filename) { return `${IMG_BASE}/National-Dex/regular/${getGenFolder(dex)}/${filename}.webp`; }
+
+// --- POKEMON DETAIL VIEW ---
+const STAT_COLORS = {hp:"#FF5959",attack:"#F5AC78",defense:"#FAE078","special-attack":"#9DB7F5","special-defense":"#A7DB8D",speed:"#FA92B2"};
+const STAT_LABELS = {hp:"HP",attack:"Attack",defense:"Defense","special-attack":"Sp. Atk","special-defense":"Sp. Def",speed:"Speed"};
+const _pokeCache = {};
+async function fetchPokemonData(dexNum) {
+  const key = `pokemon_${dexNum}`;
+  if (_pokeCache[key]) return _pokeCache[key];
+  const [pokeRes, speciesRes] = await Promise.all([fetch(`https://pokeapi.co/api/v2/pokemon/${dexNum}`), fetch(`https://pokeapi.co/api/v2/pokemon-species/${dexNum}`)]);
+  if (!pokeRes.ok || !speciesRes.ok) throw new Error(`Failed to fetch #${dexNum}`);
+  const [poke, species] = await Promise.all([pokeRes.json(), speciesRes.json()]);
+  const flavorEntry = species.flavor_text_entries.find(e => e.language.name === "en");
+  const genusEntry = species.genera.find(e => e.language.name === "en");
+  const result = { name: species.names?.find(n => n.language.name === "en")?.name || poke.name, dexNum, types: poke.types.map(t => t.type.name), height: poke.height, weight: poke.weight, flavorText: flavorEntry?.flavor_text.replace(/[\f\n\r]/g, " ") || "", genus: genusEntry?.genus || "", stats: poke.stats.map(s => ({ name: s.stat.name, value: s.base_stat })), evolutionChainUrl: species.evolution_chain?.url || null };
+  _pokeCache[key] = result;
+  return result;
+}
+function _fmtName(n) { return n.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" "); }
+function _parseTrigger(details) {
+  if (!details || !details.length) return "";
+  const d = details[0]; const p = [];
+  switch (d.trigger?.name) {
+    case "level-up": p.push(d.min_level ? `Level ${d.min_level}` : "Level up"); if (d.min_happiness) p.push(`(Happiness ${d.min_happiness})`); if (d.time_of_day) p.push(`(${d.time_of_day})`); if (d.known_move) p.push(`(knows ${_fmtName(d.known_move.name)})`); if (d.known_move_type) p.push(`(knows ${d.known_move_type.name} move)`); if (d.location) p.push(`(at ${_fmtName(d.location.name)})`); if (d.needs_overworld_rain) p.push("(rain)"); if (d.turn_upside_down) p.push("(upside down)"); break;
+    case "use-item": p.push(`Use ${_fmtName(d.item?.name || "item")}`); break;
+    case "trade": p.push("Trade"); if (d.held_item) p.push(`(holding ${_fmtName(d.held_item.name)})`); break;
+    default: if (d.trigger?.name) p.push(_fmtName(d.trigger.name));
+  }
+  return p.join(" ");
+}
+async function fetchEvolutionChain(dexNum) {
+  const ck = `evo_${dexNum}`;
+  if (_pokeCache[ck]) return _pokeCache[ck];
+  const data = await fetchPokemonData(dexNum);
+  if (!data.evolutionChainUrl) { _pokeCache[ck] = []; return []; }
+  const res = await fetch(data.evolutionChainUrl);
+  if (!res.ok) throw new Error("Failed to fetch evolution chain");
+  const chain = await res.json();
+  const stages = [];
+  function walk(node, depth) {
+    const num = parseInt(node.species.url.split("/").filter(Boolean).pop(), 10);
+    stages.push({ name: _fmtName(node.species.name), dexNum: num, trigger: _parseTrigger(node.evolution_details), depth });
+    for (const child of node.evolves_to) walk(child, depth + 1);
+  }
+  walk(chain.chain, 0);
+  _pokeCache[ck] = stages;
+  return stages;
+}
+function pokemonImgUrl(dex) { return natDexImg(dex, GENDER_SUFFIX[dex] || ""); }
+
 function getPokemonImg(name) {
   const lower = name.toLowerCase();
   if (lower.includes("tba") || lower.includes("other ") || lower.includes("possible") || lower.includes("featured pok") || lower.includes("surprise") || lower.includes("steel-type") || lower.includes("10th anniversary") || lower.includes("raid bosses")) return null;
@@ -529,7 +642,10 @@ let state = {
   heroRendered: false,
   calMonth: new Date().getMonth(),
   calYear: new Date().getFullYear(),
-  calSelectedDay: null
+  calSelectedDay: null,
+  pokedexDetail: null,
+  pokedexDetailData: null,
+  pokedexDetailEvolutions: null
 };
 
 // --- NEST MIGRATION ---
@@ -590,6 +706,47 @@ function subscribeToNests() {
   ws.onclose = () => { clearInterval(heartbeat); setTimeout(subscribeToNests, 3000); };
 }
 subscribeToNests();
+
+// --- POKEMON AUTOCOMPLETE ---
+const DEX_NAMES = Object.keys(DEX).sort();
+function onPokemonInput(e) {
+  const val = e.target.value.trim().toLowerCase();
+  const dropdown = document.getElementById("nest-pokemon-dropdown");
+  if (!dropdown || val.length < 1) { if (dropdown) dropdown.style.display = "none"; return; }
+  const matches = DEX_NAMES.filter(n => n.toLowerCase().startsWith(val)).slice(0, 8);
+  if (matches.length === 0 || (matches.length === 1 && matches[0].toLowerCase() === val)) {
+    dropdown.style.display = "none"; return;
+  }
+  const th = t(darkMode);
+  dropdown.innerHTML = matches.map(m => {
+    const img = getPokemonImg(m);
+    const imgHTML = img ? `<img src="${esc(img.url)}" style="width:32px;height:32px;object-fit:contain" onerror="this.style.display='none'" />` : `<span style="font-size:20px">\uD83D\uDCE6</span>`;
+    return `<div onclick="selectPokemon('${m.replace(/'/g, "\\'")}')" style="display:flex;align-items:center;gap:10px;padding:8px 14px;cursor:pointer;font-size:14px;color:${th.text};transition:background 0.1s ease" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='transparent'">${imgHTML}<span>${esc(m)}</span></div>`;
+  }).join("");
+  dropdown.style.display = "block";
+}
+function selectPokemon(name) {
+  document.getElementById("nest-pokemon").value = name;
+  document.getElementById("nest-pokemon-dropdown").style.display = "none";
+}
+
+// --- NEST MIGRATION AUTO-CLEAR ---
+function getCurrentMigrationId() {
+  return Math.floor((Date.now() - NEST_EPOCH) / NEST_CYCLE);
+}
+let _lastMigrationId = getCurrentMigrationId();
+async function checkNestMigration() {
+  const currentId = getCurrentMigrationId();
+  if (currentId > _lastMigrationId) {
+    _lastMigrationId = currentId;
+    await fetch(`${SUPABASE_URL}/rest/v1/nests?id=gt.0`, {
+      method: "DELETE",
+      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` }
+    });
+    _nestsCache = [];
+    if (state.tab === "nests") render();
+  }
+}
 async function geocodeLocation(query) {
   try {
     const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`, {
@@ -1515,6 +1672,33 @@ function goBack() {
   render();
 }
 
+function searchPokedex(val) {
+  const query = val.trim().toLowerCase();
+  const resultsEl = document.getElementById("dex-search-results");
+  if (!resultsEl || query.length < 1) { if (resultsEl) resultsEl.style.display = "none"; return; }
+  const th = t(darkMode);
+  const matches = DEX_NAMES.filter(n => n.toLowerCase().includes(query)).slice(0, 12);
+  if (matches.length === 0) { resultsEl.innerHTML = `<div style="padding:12px;text-align:center;color:${th.textMuted};font-size:13px">No Pok\u00E9mon found</div>`; resultsEl.style.display = "block"; return; }
+  resultsEl.innerHTML = matches.map(m => {
+    const dex = DEX[m];
+    const img = pokemonImgUrl(dex);
+    return `<div onclick="openPokemonDetail(${dex});document.getElementById('dex-search').value='';document.getElementById('dex-search-results').style.display='none'" style="display:flex;align-items:center;gap:10px;padding:8px 14px;cursor:pointer;transition:background 0.1s ease" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='transparent'">
+      <img src="${img}" style="width:36px;height:36px;object-fit:contain" onerror="this.style.opacity='0.3'" />
+      <div><div style="font-size:14px;font-weight:600;color:${th.text}">${esc(m)}</div><div style="font-size:11px;color:${th.textMuted}">#${String(dex).padStart(4,"0")}</div></div>
+    </div>`;
+  }).join("");
+  resultsEl.style.display = "block";
+}
+
+function toggleDexRegion(id) {
+  const el = document.getElementById(id);
+  const arrow = document.getElementById(id + '-arrow');
+  const open = el.dataset.open === 'true';
+  el.dataset.open = open ? 'false' : 'true';
+  el.style.display = open ? 'none' : 'grid';
+  arrow.style.transform = open ? 'rotate(-90deg)' : 'rotate(0deg)';
+}
+
 function goBackNews() {
   state.selectedNews = null;
   render();
@@ -1531,8 +1715,158 @@ function setTab(tab) {
   state.tab = tab;
   state.selectedEvent = null;
   state.selectedNews = null;
+  state.pokedexDetail = null;
   if (tab === "nests") { loadNestsFromSupabase().then(() => render()); }
   render();
+}
+
+async function openPokemonDetail(dexNum) {
+  // Save which regions are open
+  state.pokedexOpenRegions = {};
+  for (let i = 0; i < REGIONS.length; i++) {
+    const el = document.getElementById(`dex-region-${i}`);
+    if (el) state.pokedexOpenRegions[i] = el.dataset.open === 'true';
+  }
+  state.pokedexDetail = dexNum;
+  state.pokedexDetailData = null;
+  state.pokedexDetailEvolutions = null;
+  render();
+  try {
+    const [data, evolutions] = await Promise.all([fetchPokemonData(dexNum), fetchEvolutionChain(dexNum)]);
+    state.pokedexDetailData = data;
+    state.pokedexDetailEvolutions = evolutions;
+  } catch (err) { console.error("Failed to load Pokemon detail:", err); }
+  render();
+}
+function closePokemonDetail() {
+  const dex = state.pokedexDetail;
+  const openRegions = state.pokedexOpenRegions || {};
+  state.pokedexDetail = null;
+  state.pokedexDetailData = null;
+  state.pokedexDetailEvolutions = null;
+  render();
+  // Restore open regions
+  requestAnimationFrame(() => {
+    for (let i = 0; i < REGIONS.length; i++) {
+      if (openRegions[i]) {
+        const el = document.getElementById(`dex-region-${i}`);
+        const arrow = document.getElementById(`dex-region-${i}-arrow`);
+        if (el && el.dataset.open === 'false') {
+          el.style.display = 'grid';
+          el.dataset.open = 'true';
+          if (arrow) arrow.style.transform = 'rotate(0deg)';
+        }
+      }
+    }
+    // Scroll to the region the Pokemon belongs to
+    if (dex) {
+      const regionIdx = REGIONS.findIndex(r => dex >= r.start && dex <= r.end);
+      if (regionIdx >= 0) {
+        const regionEl = document.getElementById(`dex-region-${regionIdx}`);
+        if (regionEl) regionEl.parentElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  });
+}
+
+function showFormModal(imgSrc, label) {
+  const overlay = document.createElement("div");
+  overlay.id = "form-modal";
+  overlay.style.cssText = "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;animation:fadeIn 0.2s ease";
+  overlay.onclick = () => overlay.remove();
+  overlay.innerHTML = `<img src="${imgSrc}" style="max-width:85vw;max-height:65vh;object-fit:contain;filter:drop-shadow(0 8px 30px rgba(0,0,0,0.5));animation:scaleIn 0.25s ease" />
+    <div style="margin-top:16px;font-size:20px;font-weight:700;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.5)">${label}</div>`;
+  document.body.appendChild(overlay);
+}
+
+function renderPokemonDetail(data, evolutions, th, isMobile) {
+  if (!data) {
+    return `<div style="padding:24px;text-align:center;color:${th.textMuted}">
+      <div style="font-size:32px;margin-bottom:12px">\uD83D\uDD04</div>
+      <div style="font-size:16px;font-weight:600">Loading Pok\u00E9mon data...</div>
+    </div>`;
+  }
+  function typeColor(t) { return TYPE_COLORS[t.charAt(0).toUpperCase() + t.slice(1)] || "#888"; }
+  const dexStr = "#" + String(data.dexNum).padStart(4, "0");
+  const primaryColor = typeColor(data.types[0]);
+  const typeBadges = data.types.map(t => `<span style="display:inline-block;padding:4px 14px;border-radius:20px;background:${typeColor(t)};color:#fff;font-size:13px;font-weight:600;text-transform:capitalize;margin-right:6px;text-shadow:0 1px 2px rgba(0,0,0,0.3)">${t}</span>`).join("");
+  const heightM = (data.height / 10).toFixed(1);
+  const weightKg = (data.weight / 10).toFixed(1);
+  const statBars = data.stats.map(s => {
+    const pct = Math.min((s.value / 255) * 100, 100);
+    const color = STAT_COLORS[s.name] || primaryColor;
+    const label = STAT_LABELS[s.name] || s.name;
+    return `<div style="display:flex;align-items:center;margin-bottom:6px;gap:8px">
+      <div style="width:70px;text-align:right;font-size:12px;font-weight:600;color:${th.textSecondary};flex-shrink:0">${label}</div>
+      <div style="width:32px;text-align:right;font-size:13px;font-weight:700;color:${th.text};flex-shrink:0">${s.value}</div>
+      <div style="flex:1;height:10px;background:${th.border};border-radius:5px;overflow:hidden">
+        <div style="width:${pct}%;height:100%;background:${color};border-radius:5px"></div>
+      </div>
+    </div>`;
+  }).join("");
+  const totalStats = data.stats.reduce((sum, s) => sum + s.value, 0);
+  let evoHtml = "";
+  if (evolutions && evolutions.length > 1) {
+    const evoItems = evolutions.map((evo, i) => {
+      const isActive = evo.dexNum === data.dexNum;
+      const arrow = i > 0 && evo.trigger ? `<div style="display:flex;flex-direction:column;align-items:center;margin:0 4px;flex-shrink:0">
+        <div style="font-size:18px;color:${th.textMuted}">\u2192</div>
+        <div style="font-size:10px;color:${th.textSecondary};text-align:center;max-width:80px;line-height:1.2">${esc(evo.trigger)}</div>
+      </div>` : "";
+      return `${arrow}<div onclick="openPokemonDetail(${evo.dexNum})" style="display:flex;flex-direction:column;align-items:center;cursor:pointer;padding:8px;border-radius:12px;background:${isActive ? th.accentBgSubtle(primaryColor) : "transparent"};border:2px solid ${isActive ? primaryColor : "transparent"};transition:all 0.2s;flex-shrink:0" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${isActive ? th.accentBgSubtle(primaryColor) : "transparent"}'">
+        <img src="${pokemonImgUrl(evo.dexNum)}" style="width:56px;height:56px;object-fit:contain" onerror="this.style.opacity='0.3'" />
+        <div style="font-size:11px;font-weight:${isActive ? 700 : 500};color:${isActive ? th.text : th.textSecondary};margin-top:4px">${esc(evo.name)}</div>
+        <div style="font-size:10px;color:${th.textMuted}">#${String(evo.dexNum).padStart(4, "0")}</div>
+      </div>`;
+    }).join("");
+    evoHtml = `<div style="margin-top:20px">
+      <div style="font-size:14px;font-weight:700;color:${th.text};margin-bottom:10px">Evolution Chain</div>
+      <div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px;padding:12px;background:${th.surface};border-radius:12px;border:1px solid ${th.border}">${evoItems}</div>
+    </div>`;
+  }
+  const pad = isMobile ? "16px" : "24px";
+  return `<div style="padding:${pad};max-width:480px;margin:0 auto">
+    <button onclick="closePokemonDetail()" style="display:flex;align-items:center;gap:6px;background:none;border:none;color:${th.textSecondary};font-size:14px;font-weight:600;cursor:pointer;padding:8px 0;margin-bottom:12px;font-family:inherit" onmouseenter="this.style.color='${th.text}'" onmouseleave="this.style.color='${th.textSecondary}'">\u2190 Back to Pok\u00E9Dex</button>
+    <div style="text-align:center;padding:20px 0;background:linear-gradient(135deg,${primaryColor}22,${primaryColor}08);border-radius:16px;margin-bottom:16px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:8px;right:12px;font-size:28px;font-weight:800;color:${primaryColor};opacity:0.7">${dexStr}</div>
+      <img src="${pokemonImgUrl(data.dexNum)}" style="width:${isMobile ? 140 : 180}px;height:${isMobile ? 140 : 180}px;object-fit:contain;filter:drop-shadow(0 4px 12px ${primaryColor}40)" onerror="this.style.opacity='0.3'" />
+    </div>
+    <div style="text-align:center;margin-bottom:16px">
+      <div style="font-size:12px;font-weight:700;color:${th.textMuted};letter-spacing:1px">${dexStr}</div>
+      <div style="font-size:24px;font-weight:800;color:${th.text};margin:2px 0;text-transform:capitalize">${esc(data.name)}</div>
+      <div style="font-size:13px;color:${th.textSecondary};font-style:italic;margin-bottom:10px">${esc(data.genus)}</div>
+      <div>${typeBadges}</div>
+    </div>
+    <div style="display:flex;justify-content:center;gap:24px;padding:12px;background:${th.surface};border-radius:12px;border:1px solid ${th.border};margin-bottom:16px">
+      <div style="text-align:center"><div style="font-size:11px;font-weight:600;color:${th.textMuted};text-transform:uppercase;letter-spacing:0.5px">Height</div><div style="font-size:16px;font-weight:700;color:${th.text}">${heightM} m</div></div>
+      <div style="width:1px;background:${th.border}"></div>
+      <div style="text-align:center"><div style="font-size:11px;font-weight:600;color:${th.textMuted};text-transform:uppercase;letter-spacing:0.5px">Weight</div><div style="font-size:16px;font-weight:700;color:${th.text}">${weightKg} kg</div></div>
+    </div>
+    ${data.flavorText ? `<div style="padding:14px;background:${th.surface};border-radius:12px;border:1px solid ${th.border};margin-bottom:16px;font-size:13px;color:${th.textSecondary};line-height:1.6;font-style:italic;text-align:center">"${esc(data.flavorText)}"</div>` : ""}
+    <div style="margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div style="font-size:14px;font-weight:700;color:${th.text}">Base Stats</div>
+        <div style="font-size:12px;color:${th.textMuted};font-weight:600">Total: ${totalStats}</div>
+      </div>
+      <div style="padding:14px;background:${th.surface};border-radius:12px;border:1px solid ${th.border}">${statBars}</div>
+    </div>
+    ${evoHtml}
+    ${(() => {
+      const forms = POKEMON_FORMS[data.dexNum];
+      if (!forms || forms.length === 0) return "";
+      const formCards = forms.map(fm => {
+        const fSrc = formImgUrl(data.dexNum, fm.f);
+        return `<div onclick="showFormModal('${fSrc}','${esc(fm.l)}')" style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px;border-radius:12px;background:${th.accentBgSubtle(primaryColor)};border:1px solid ${th.border};cursor:pointer;transition:transform 0.15s ease,box-shadow 0.15s ease" onmouseenter="this.style.transform='scale(1.05)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none'">
+          <img src="${fSrc}" style="width:${isMobile ? 56 : 64}px;height:${isMobile ? 56 : 64}px;object-fit:contain" onerror="this.style.opacity='0.3'" />
+          <span style="font-size:${isMobile ? 10 : 11}px;font-weight:600;color:${th.textSecondary};text-align:center">${esc(fm.l)}</span>
+        </div>`;
+      }).join("");
+      return `<div style="margin-top:20px">
+        <div style="font-size:14px;font-weight:700;color:${th.text};margin-bottom:10px">Forms</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(${isMobile ? 70 : 80}px,1fr));gap:8px">${formCards}</div>
+      </div>`;
+    })()}
+  </div>`;
 }
 
 async function addNest() {
@@ -1989,6 +2323,55 @@ function render() {
       </div>`;
     }
 
+    let pokedexTabHTML = "";
+    if (state.tab === "pokedex") {
+      const gridCols = isMobile ? "repeat(auto-fill,minmax(80px,1fr))" : "repeat(auto-fill,minmax(110px,1fr))";
+      const imgSize = isMobile ? 60 : 80;
+      const regionsHTML = REGIONS.map((r, idx) => {
+        let cards = "";
+        for (let d = r.start; d <= r.end; d++) {
+          const name = DEX_BY_NUM[d];
+          if (!name) continue;
+          const suffix = GENDER_SUFFIX[d] || "";
+          const imgSrc = natDexImg(d, suffix);
+          cards += `<div onclick="openPokemonDetail(${d})" style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;cursor:pointer;border-radius:12px;transition:background 0.15s ease" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='transparent'">
+            <img src="${imgSrc}" style="width:${imgSize}px;height:${imgSize}px;object-fit:contain" onerror="this.style.opacity='0.2'" loading="lazy" />
+            <span style="font-size:${isMobile ? 9 : 11}px;font-weight:600;color:${th.textSecondary};text-align:center;line-height:1.2">#${d} ${esc(name)}</span>
+          </div>`;
+        }
+        const regionId = `dex-region-${idx}`;
+        const isFirst = idx === 0;
+        return `<div style="background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 16 : 18}px;box-shadow:${th.shadow}">
+          <button class="dex-toggle" onclick="toggleDexRegion('${regionId}')" style="width:100%;padding:${isMobile ? "14px 16px" : "16px 20px"};background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:inherit;box-sizing:border-box">
+            <span class="dex-toggle" style="font-size:${isMobile ? 16 : 18}px;font-weight:800;color:${th.text}">${r.label}</span>
+            <span class="dex-toggle" id="${regionId}-arrow" style="font-size:14px;color:${th.textMuted};transition:transform 0.3s ease !important;display:inline-block;transform:rotate(${isFirst ? "0" : "-90"}deg);flex-shrink:0">\u25BC</span>
+          </button>
+          <div id="${regionId}" data-open="${isFirst ? "true" : "false"}" style="display:${isFirst ? "grid" : "none"};grid-template-columns:${gridCols};gap:${isMobile ? 4 : 8}px;padding:${isMobile ? "8px 10px 14px" : "8px 16px 18px"}">
+            ${cards}
+          </div>
+        </div>`;
+      }).join("");
+      if (state.pokedexDetail) {
+        const detailData = state.pokedexDetailData;
+        const detailEvos = state.pokedexDetailEvolutions;
+        pokedexTabHTML = renderPokemonDetail(detailData, detailEvos, th, isMobile);
+      } else {
+        pokedexTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
+          <div style="text-align:center;padding:10px">
+            <img src="assets/pokemon-images/Items/Main1.webp" style="width:${isMobile ? 48 : 60}px;height:${isMobile ? 48 : 60}px;object-fit:contain;margin-bottom:6px" alt="PokeDex" />
+            <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text}">National Pok\u00E9Dex</h2>
+            <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">All 1,025 Pok\u00E9mon sorted by region</p>
+          </div>
+          <div style="position:relative;max-width:400px;margin:0 auto">
+            <input id="dex-search" placeholder="Search Pok\u00E9mon..." oninput="searchPokedex(this.value)" autocomplete="off" style="width:100%;padding:${isMobile ? "12px 14px 12px 40px" : "14px 16px 14px 44px"};border-radius:14px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:${isMobile ? 14 : 15}px;font-family:inherit;outline:none;box-sizing:border-box" />
+            <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;pointer-events:none">\uD83D\uDD0D</span>
+            <div id="dex-search-results" style="display:none;position:absolute;top:100%;left:0;right:0;max-height:300px;overflow-y:auto;background:${th.surface};border:1.5px solid ${th.border};border-radius:12px;margin-top:4px;z-index:100;box-shadow:0 8px 24px rgba(0,0,0,0.2)"></div>
+          </div>
+          ${regionsHTML}
+        </div>`;
+      }
+    }
+
     let nestsTabHTML = "";
     if (state.tab === "nests") {
       const nests = loadNests();
@@ -2019,7 +2402,10 @@ function render() {
         <div style="padding:${isMobile ? "20px 18px" : "24px 28px"};background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;box-shadow:${th.shadow}">
           <h3 style="margin:0 0 16px 0;font-size:${isMobile ? 16 : 18}px;font-weight:800;color:${th.text}">\u2795 Report a Nest</h3>
           <div style="display:flex;flex-direction:column;gap:12px">
-            <input id="nest-pokemon" placeholder="Pok\u00E9mon species (e.g. Magikarp)" style="${inputStyle}" />
+            <div style="position:relative">
+              <input id="nest-pokemon" placeholder="Pok\u00E9mon species (e.g. Magikarp)" style="${inputStyle}" oninput="onPokemonInput(event)" autocomplete="off" />
+              <div id="nest-pokemon-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;max-height:240px;overflow-y:auto;background:${th.surface};border:1.5px solid ${th.border};border-radius:12px;margin-top:4px;z-index:100;box-shadow:0 8px 24px rgba(0,0,0,0.2)"></div>
+            </div>
             <input id="nest-location" placeholder="Location name or address (e.g. Central Park)" style="${inputStyle}" />
             <button id="nest-gps-btn" onclick="useMyLocation()" style="padding:${isMobile ? "10px" : "12px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:${isMobile ? 13 : 14}px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.2s ease" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${th.surface}'">\uD83D\uDCCD Use My Current Location</button>
             <button onclick="addNest()" style="padding:${isMobile ? "12px" : "14px"};border-radius:12px;border:none;background:#2ECC71;color:#fff;font-size:${isMobile ? 14 : 15}px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.2s ease" onmouseenter="this.style.background='#27AE60';this.style.transform='translateY(-1px)'" onmouseleave="this.style.background='#2ECC71';this.style.transform='translateY(0)'">Report Nest</button>
@@ -2091,7 +2477,7 @@ function render() {
       </div>` : "";
 
     content = `<main style="padding:${mainPad};display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
-      ${welcomeHTML}${!["home","tools","nests"].includes(state.tab) ? `${liveHTML}${heroHTML}${tabsHTML}` : ""}${state.tab === "home" ? `${liveHTML}${heroHTML}${tabsHTML}` : ""}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${newsTabHTML}${toolsTabHTML}${nestsTabHTML}
+      ${welcomeHTML}${!["home","tools","nests","pokedex"].includes(state.tab) ? `${liveHTML}${heroHTML}${tabsHTML}` : ""}${state.tab === "home" ? `${liveHTML}${heroHTML}${tabsHTML}` : ""}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${newsTabHTML}${pokedexTabHTML}${toolsTabHTML}${nestsTabHTML}
     </main>`;
     if (hero || activeEvents.length > 0) state.heroRendered = true;
   }
@@ -2106,8 +2492,11 @@ function render() {
       <div style="font-size:${isMobile ? 10 : 12}px;color:${th.textMuted};font-weight:500;letter-spacing:0.2px">${COMMUNITY_TAGLINE}</div></div>
     </div></div>
     ${isDesktop ? `<nav style="display:flex;align-items:center;gap:4px">
-      ${[["goHome()","Home"],["setTab('events')","Events"],["setTab('calendar')","Calendar"],["setTab('raids')","Raids"],["setTab('max')","Max Battles"],["setTab('news')","News"],["setTab('nests')","Nests"],["setTab('tools')","PoGO Tools"]].map(([fn, label]) =>
-        `<button onclick="${fn || ''}" style="padding:7px 14px;border-radius:10px;border:none;background:${(label === "Home" && state.tab === "home") || (label === "Events" && state.tab === "events" && !state.selectedEvent) || (label === "Calendar" && state.tab === "calendar") || (label === "Raids" && state.tab === "raids") || (label === "Max Battles" && state.tab === "max") || (label === "News" && state.tab === "news") || (label === "Nests" && state.tab === "nests") ? th.accentBgSubtle("#E74C3C") : "transparent"};color:${th.text};font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.15s ease;white-space:nowrap" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${(label === "Events" && state.tab === "events") || (label === "Calendar" && state.tab === "calendar") || (label === "Raids" && state.tab === "raids") || (label === "Max Battles" && state.tab === "max") || (label === "News" && state.tab === "news") || (label === "Nests" && state.tab === "nests") ? th.accentBgSubtle("#E74C3C") : "transparent"}'">${label}</button>`
+      ${[["goHome()","Home"],["setTab('events')","Events"],["setTab('calendar')","Calendar"],["setTab('raids')","Raids"],["setTab('max')","Max Battles"],["setTab('news')","News"],["setTab('pokedex')","Pok\u00E9Dex"],["setTab('nests')","Nests"],["setTab('tools')","PoGO Tools"]].map(([fn, label]) => {
+        const tabMap = {"Home":"home","Events":"events","Calendar":"calendar","Raids":"raids","Max Battles":"max","News":"news","Pok\u00E9Dex":"pokedex","Nests":"nests","PoGO Tools":"tools"};
+        const isActive = state.tab === tabMap[label];
+        return `<button onclick="${fn || ''}" style="padding:7px 14px;border-radius:10px;border:${isActive ? "1.5px solid #E74C3C" : "1.5px solid transparent"};background:${isActive ? th.accentBg("#E74C3C") : "transparent"};color:${isActive ? "#E74C3C" : th.text};font-size:13px;font-weight:${isActive ? "700" : "600"};cursor:pointer;font-family:inherit;transition:all 0.15s ease;white-space:nowrap" onmouseenter="this.style.background='${isActive ? th.accentBg("#E74C3C") : th.surfaceHover}'" onmouseleave="this.style.background='${isActive ? th.accentBg("#E74C3C") : "transparent"}'">${label}</button>`;
+      }
       ).join("")}
     </nav>` : ""}
     <button id="theme-toggle" onclick="toggleDarkMode()" style="background:${darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.06)"};border:1.5px solid ${th.border};border-radius:50%;width:${isMobile ? 36 : 40}px;height:${isMobile ? 36 : 40}px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:${isMobile ? 18 : 20}px;transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);flex-shrink:0"
@@ -2146,9 +2535,10 @@ setInterval(() => {
     const ev = eventId ? EVENTS.find(e => e.id === eventId) : null;
     el.innerHTML = renderCountdown(dateStr, color, over, th, ev);
   });
-  // Update nest migration countdown
+  // Update nest migration countdown & check for migration reset
   const nestEl = document.getElementById("nest-migration-countdown");
   if (nestEl) nestEl.innerHTML = renderNestCountdown();
+  checkNestMigration();
   // Update move deadline banners
   document.querySelectorAll(".move-deadline").forEach(el => {
     const eventId = parseInt(el.dataset.eventId);
@@ -2212,6 +2602,7 @@ function renderSidebar(th) {
     { id: "raids", icon: "\u2694\uFE0F", label: "Raids" },
     { id: "max", icon: "\uD83D\uDCA5", label: "Max Battles" },
     { id: "news", icon: "\uD83D\uDCE2", label: "News" },
+    { id: "pokedex", icon: "\uD83D\uDCD6", iconImg: "assets/pokemon-images/Items/Main1.webp", label: "Pok\u00E9Dex" },
     { id: "nests", icon: "\uD83C\uDF33", iconImg: "assets/pokemon-images/icons/ic_grass.png", label: "Nests" },
     { id: "tools", icon: "\uD83D\uDEE0\uFE0F", label: "PoGO Tools" }
   ];
@@ -2229,7 +2620,7 @@ function renderSidebar(th) {
         onmouseenter="this.style.background='${th.surfaceHover}'"
         onmouseleave="this.style.background='${state.tab === t.id ? th.accentBgSubtle("#E74C3C") : "transparent"}'">
         ${t.iconImg ? `<img src="${t.iconImg}" style="width:28px;height:28px;object-fit:contain" alt="${t.label}" />` : `<span style="font-size:20px">${t.icon}</span>`}
-        <span style="font-size:14px;font-weight:${state.tab === t.id ? "700" : "600"};color:${state.tab === t.id ? th.text : th.textSecondary}">${t.label}</span>
+        <span style="font-size:16px;font-weight:${state.tab === t.id ? "700" : "600"};color:${state.tab === t.id ? th.text : th.textSecondary}">${t.label}</span>
       </button>`).join("")}
     </div>
     <div style="margin-top:auto;padding:16px 20px;border-top:1.5px solid ${th.border}">
