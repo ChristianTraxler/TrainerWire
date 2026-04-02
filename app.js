@@ -791,6 +791,33 @@ const STORE_ITEM_VALUES = {
 
 const ESTIMATED_VALUE_ITEMS = new Set(["Ultra Ball", "GO Pass Deluxe", "Fashion Raid Day Ticket", "PokéCoin"]);
 
+const ITEM_IMAGES = {
+  "Remote Raid Pass": "remote-raid-pass.png",
+  "Premium Battle Pass": "premium-raid-pass.png",
+  "Egg Incubator": "EggIncubatorIAP_Activated.png",
+  "Super Incubator": "super_incubator.webp",
+  "Lucky Egg": "luckyegg.png",
+  "Star Piece": "starpiece.png",
+  "Max Revive": "Max-revive.png",
+  "Max Potion": "Max-potion.png",
+  "Ultra Ball": "ultraball_sprite.png",
+  "Silver Pinap Berry": "Silver-pinap-berry.png",
+  "Golden Razz Berry": "Golden-razz-berry.png",
+  "Max Particle Pack": "mp_pack.png",
+  "Max Mushroom": "max_mushrooms.webp",
+  "Link Charge": "link_charge.webp",
+  "GO Pass Deluxe": "go_pass_deluxe.webp",
+  "Fashion Raid Day Ticket": "item_1608_hd.png",
+  "Pok\u00E9mon Storage Upgrade": "pokemonstorageupgrade.1.png",
+  "Item Bag Upgrade": "itemstorageupgrade.1.png",
+  "Pok\u00E9Coin": "pokecoin.png"
+};
+const ITEM_IMAGES_MULTI = {
+  "Egg Incubator": { 3: "limited_incubatorx3.png" },
+  "Max Particle Pack": { 3: "mp_pack_mulit.png", 6: "mp_pack_mulit.png" },
+  "Star Piece": { 8: "starpiece.8.png" }
+};
+
 const WEB_STORE_BOXES = [
   {
     name: "GO Pass Deluxe: A Shockingly Good Time Ultra Box",
@@ -1084,7 +1111,7 @@ function calcBoxValue(box) {
   return { totalValue, savings, savingsPct, rating, ratingColor };
 }
 
-const STORE_CATEGORIES = ["All", "Event Bundle", "Raid", "Max", "Item", "Upgrade"];
+const STORE_CATEGORIES = ["All", "Event Bundle", "Raid", "Max", "Item", "Upgrade", "Pok\u00E9Coins"];
 
 const EVENT_TYPES = ["All", "Event", "Raid", "Max Battle", "Community Day", "GO Fest"];
 
@@ -2143,6 +2170,15 @@ function getPokemonOfTheDay() {
   return dex;
 }
 
+// Auto-update Pokemon of the Day at midnight
+function schedulePotdUpdate() {
+  const now = new Date();
+  const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 1);
+  const msUntilMidnight = midnight.getTime() - now.getTime();
+  setTimeout(() => { render(); schedulePotdUpdate(); }, msUntilMidnight);
+}
+schedulePotdUpdate();
+
 function searchPokedex(val) {
   const query = val.trim().toLowerCase();
   const resultsEl = document.getElementById("dex-search-results");
@@ -2570,6 +2606,85 @@ function handleGuideScroll(el) {
   fade.style.opacity = distFromBottom < 10 ? "0" : "1";
 }
 
+function renderCoinTiers(th, isMobile) {
+  const tiers = [
+    { coins: 110, bonus: 10, price: 0.99, img: "Item_COIN_HANDFUL_01.png", label: "Handful" },
+    { coins: 600, bonus: 50, price: 4.99, img: "Item_COIN_STACK_01.png", label: "Stack" },
+    { coins: 1300, bonus: 100, price: 9.99, img: "Item_COIN_POUCH_01.png", label: "Pouch" },
+    { coins: 2700, bonus: 200, price: 19.99, img: "Item_COIN_BOX_01.png", label: "Box" },
+    { coins: 5600, bonus: 400, price: 39.99, img: "Item_COIN_BUCKET_01.png", label: "Bucket" },
+    { coins: 15500, bonus: 1000, price: 99.99, img: "Item_COIN_HEAP_01.png", label: "Heap" }
+  ];
+  const baseRate = tiers[0].price / (tiers[0].coins + tiers[0].bonus);
+  const bestVal = tiers.reduce(function(best, t) { var v = (t.coins + t.bonus) / t.price; return v > best ? v : best; }, 0);
+  var imgSize = isMobile ? 48 : 56;
+  return tiers.map(function(tier, i) {
+    var total = tier.coins + tier.bonus;
+    var centsPerCoin = (tier.price / total * 100).toFixed(2);
+    var coinsPerDollar = (total / tier.price).toFixed(1);
+    var isBest = (total / tier.price) === bestVal;
+    var savingsPct = ((1 - (tier.price / total) / baseRate) * 100).toFixed(0);
+    var rating, ratingColor;
+    if (savingsPct >= 25) { rating = "Best Value"; ratingColor = "#2ECC71"; }
+    else if (savingsPct >= 15) { rating = "Great"; ratingColor = "#3498DB"; }
+    else if (savingsPct >= 5) { rating = "Good"; ratingColor = "#F39C12"; }
+    else { rating = "Base Rate"; ratingColor = th.textMuted; }
+    var cheaperHTML = i > 0 ? '<span style="font-size:' + (isMobile ? 10 : 11) + 'px;font-weight:700;color:#2ECC71">' + savingsPct + '% cheaper</span>' : "";
+    var bonusColor = "#F39C12";
+    var borderColor = isBest ? "#2ECC71" : th.border;
+    var ratingIcon = isBest ? "\uD83C\uDFC6" : savingsPct >= 15 ? "\u2705" : savingsPct >= 5 ? "\u2696\uFE0F" : "\u26AA";
+    return '<div style="background:' + th.surface + ';border:1.5px solid ' + borderColor + ';border-radius:' + (isMobile ? 18 : 20) + 'px;overflow:hidden;transition:all 0.25s ease;box-shadow:' + th.shadow + '"'
+      + ' onmouseenter="this.style.borderColor=\'' + ratingColor + '\';this.style.transform=\'translateY(-3px)\';this.style.boxShadow=\'0 8px 25px ' + ratingColor + '22\'"'
+      + ' onmouseleave="this.style.borderColor=\'' + borderColor + '\';this.style.transform=\'translateY(0)\';this.style.boxShadow=\'' + th.shadow + '\'">'
+      + '<div style="padding:' + (isMobile ? "16px 16px 12px" : "20px 24px 16px") + ';display:flex;flex-direction:column;gap:10px">'
+        // Title row with image, name, price
+        + '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">'
+          + '<div style="display:flex;align-items:center;gap:' + (isMobile ? 10 : 12) + 'px;flex:1;min-width:0">'
+            + '<img src="assets/pokemon-images/Items/' + tier.img + '" style="width:' + imgSize + 'px;height:' + imgSize + 'px;object-fit:contain;flex-shrink:0" alt="' + tier.label + '" />'
+            + '<div>'
+              + '<h3 style="margin:0;font-size:' + (isMobile ? 15 : 17) + 'px;font-weight:800;color:' + th.text + ';line-height:1.3">' + tier.coins.toLocaleString() + ' Pok\u00E9Coins</h3>'
+              + '<div style="display:flex;align-items:center;gap:6px;margin-top:6px;flex-wrap:wrap">'
+                + '<span style="font-size:9px;font-weight:700;color:' + bonusColor + ';background:' + th.accentBg(bonusColor) + ';padding:3px 8px;border-radius:20px">+' + tier.bonus.toLocaleString() + ' BONUS</span>'
+                + (isBest ? '<span style="font-size:9px;font-weight:800;color:#fff;background:linear-gradient(135deg,#2ECC71,#27AE60);padding:3px 10px;border-radius:20px;letter-spacing:0.5px">\uD83C\uDFC6 BEST VALUE</span>' : "")
+              + '</div>'
+            + '</div>'
+          + '</div>'
+          + '<div style="text-align:right;flex-shrink:0">'
+            + '<div style="font-size:' + (isMobile ? 22 : 26) + "px;font-weight:900;color:" + th.text + ";font-family:'JetBrains Mono',monospace\">$" + tier.price.toFixed(2) + '</div>'
+          + '</div>'
+        + '</div>'
+        // Rating bar
+        + '<div style="display:flex;align-items:center;gap:' + (isMobile ? 8 : 12) + 'px;padding:' + (isMobile ? "10px 12px" : "12px 16px") + ';border-radius:14px;background:' + th.accentBg(ratingColor) + ';border:1px solid ' + ratingColor + '33">'
+          + '<span style="font-size:' + (isMobile ? 20 : 24) + 'px">' + ratingIcon + '</span>'
+          + '<div>'
+            + '<div style="font-size:' + (isMobile ? 14 : 16) + 'px;font-weight:800;color:' + ratingColor + '">' + rating + '</div>'
+            + '<div style="font-size:' + (isMobile ? 11 : 12) + 'px;color:' + th.textSecondary + ';font-weight:600">' + total.toLocaleString() + ' total coins \u00B7 ' + centsPerCoin + '\u00A2/coin</div>'
+          + '</div>'
+        + '</div>'
+        // Details
+        + '<div style="display:flex;flex-direction:column">'
+          + '<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid ' + th.border + '">'
+            + '<span style="font-size:' + (isMobile ? 12 : 13) + 'px;font-weight:600;color:' + th.text + '">' + tier.coins.toLocaleString() + 'x Pok\u00E9Coins</span>'
+            + '<span style="font-size:' + (isMobile ? 11 : 12) + "px;font-weight:700;color:" + th.textSecondary + ";font-family:'JetBrains Mono',monospace\">base</span>"
+          + '</div>'
+          + '<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid ' + th.border + '">'
+            + '<span style="font-size:' + (isMobile ? 12 : 13) + 'px;font-weight:600;color:' + th.text + '">' + tier.bonus.toLocaleString() + 'x Web Store Bonus Coins</span>'
+            + '<span style="font-size:' + (isMobile ? 11 : 12) + 'px;font-weight:700;color:' + bonusColor + '">FREE</span>'
+          + '</div>'
+        + '</div>'
+        // Bottom stats
+        + '<div style="display:flex;align-items:center;justify-content:space-between;padding-top:4px">'
+          + '<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">'
+            + '<span style="font-size:' + (isMobile ? 10 : 11) + 'px;font-weight:700;color:' + th.textSecondary + ";font-family:'JetBrains Mono',monospace;background:" + th.accentBgSubtle("#888") + ';padding:3px 8px;border-radius:8px">' + coinsPerDollar + ' coins/$</span>'
+            + cheaperHTML
+          + '</div>'
+          + '<span style="font-size:' + (isMobile ? 11 : 12) + 'px;font-weight:600;color:' + th.textMuted + '">' + total.toLocaleString() + ' total</span>'
+        + '</div>'
+      + '</div>'
+    + '</div>';
+  }).join("");
+}
+
 function setNewsFilter(f) {
   state.newsFilter = f;
   state.openNewsYears = {};
@@ -2986,7 +3101,8 @@ function render() {
     // Store tab
     let storeTabHTML = "";
     if (state.tab === "store") {
-      const filteredBoxes = state.storeFilter === "All" ? WEB_STORE_BOXES : WEB_STORE_BOXES.filter(b => b.category === state.storeFilter);
+      const isCoinsFilter = state.storeFilter === "Pok\u00E9Coins";
+      const filteredBoxes = isCoinsFilter ? [] : state.storeFilter === "All" ? WEB_STORE_BOXES : WEB_STORE_BOXES.filter(b => b.category === state.storeFilter);
       const sortedBoxes = [...filteredBoxes].sort((a, b) => {
         const va = calcBoxValue(a), vb = calcBoxValue(b);
         return vb.savingsPct - va.savingsPct;
@@ -3001,8 +3117,11 @@ function render() {
           const unitVal = STORE_ITEM_VALUES[item.name] || 0;
           const totalVal = unitVal * item.qty;
           const isEstimated = ESTIMATED_VALUE_ITEMS.has(item.name);
+          const multiImgs = ITEM_IMAGES_MULTI[item.name];
+          const itemImg = (multiImgs && multiImgs[item.qty]) || ITEM_IMAGES[item.name];
           return `<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid ${th.border}">
             <div style="display:flex;align-items:center;gap:8px">
+              ${itemImg ? `<img src="assets/pokemon-images/Items/${itemImg}" style="width:30px;height:30px;object-fit:contain;flex-shrink:0" alt="${item.name}" />` : ""}
               <span style="font-size:${isMobile ? 12 : 13}px;font-weight:600;color:${th.text}">${item.qty}x ${item.name}</span>
               ${item.note ? `<span style="font-size:10px;color:${th.textMuted};font-weight:500">(${item.note})</span>` : ""}
             </div>
@@ -3099,7 +3218,24 @@ function render() {
             `<span style="font-size:${isMobile ? 10 : 11}px;font-weight:700;color:${r.color};display:flex;align-items:center;gap:4px">${r.icon} ${r.label}</span>`
           ).join(`<span style="color:${th.textFaint}">\u00B7</span>`)}
         </div>
-        <div style="display:grid;grid-template-columns:${isMobile ? "1fr" : "repeat(auto-fill,minmax(380px,1fr))"};gap:${isMobile ? 14 : 18}px">${boxCardsHTML}</div>
+        ${!isCoinsFilter ? `<div style="display:grid;grid-template-columns:${isMobile ? "1fr" : "repeat(auto-fill,minmax(380px,1fr))"};gap:${isMobile ? 14 : 18}px">${boxCardsHTML}</div>` : ""}
+        ${state.storeFilter === "All" ? `<div style="display:flex;align-items:center;gap:${isMobile ? 12 : 16}px;margin:${isMobile ? "6px 0" : "10px 0"}"><hr style="flex:1;border:none;border-top:1.5px solid ${th.border}"><span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${th.textMuted};white-space:nowrap">Pok\u00E9Coins</span><hr style="flex:1;border:none;border-top:1.5px solid ${th.border}"></div>` : ""}
+        ${state.storeFilter === "All" || isCoinsFilter ? `<div id="coin-breakdown" style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
+          <div style="display:flex;align-items:center;gap:${isMobile ? 10 : 14}px;padding:0 4px">
+            <img src="assets/pokemon-images/Items/pokecoin.png" style="width:${isMobile ? 36 : 44}px;height:${isMobile ? 36 : 44}px;object-fit:contain" alt="Pok\u00E9Coin" />
+            <div>
+              <h3 style="margin:0;font-size:${isMobile ? 18 : 22}px;font-weight:800;color:${th.text}">Pok\u00E9Coin Breakdown</h3>
+              <p style="margin:2px 0 0 0;font-size:${isMobile ? 11 : 12}px;color:${th.textMuted};font-weight:500">Web store prices with bonus coins included</p>
+            </div>
+          </div>
+          <p style="margin:0;font-size:${isMobile ? 12 : 13}px;color:${th.textSecondary};line-height:1.6;padding:0 4px">The web store offers bonus Pok\u00E9Coins on top of what you\u2019d get in the app. Bigger packs give you more coins per dollar. Here\u2019s how each option stacks up:</p>
+          <div style="display:grid;grid-template-columns:${isMobile ? "1fr" : "repeat(auto-fill,minmax(380px,1fr))"};gap:${isMobile ? 14 : 18}px">
+            ${renderCoinTiers(th, isMobile)}
+          </div>
+          <div style="padding:${isMobile ? "10px 12px" : "12px 16px"};border-radius:10px;background:${th.accentBg("#2ECC71")};border:1px solid #2ECC7133">
+            <p style="margin:0;font-size:${isMobile ? 11 : 12}px;color:${th.textSecondary};line-height:1.6"><strong style="color:${th.text}">Tip:</strong> The $99.99 pack gives you the most coins per dollar at 16,500 total. But if that\u2019s too much at once, the $19.99 and $39.99 packs are still a solid value. The $0.99 pack has the worst rate \u2014 avoid buying coins in small amounts if you can.</p>
+          </div>
+        </div>` : ""}
       </div>`;
     }
 
