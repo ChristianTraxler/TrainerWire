@@ -1,6 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
+const APP_VERSION = "2.0";
 
 // --- POKEMON IMAGE LOOKUP ---
 const IMG_BASE = "assets/pokemon-images";
@@ -3200,18 +3201,18 @@ function render() {
                 ${box.category === "Event Bundle" ? `<img src="assets/pokemon-images/icons/image.gif" style="width:${isMobile ? 36 : 42}px;height:${isMobile ? 36 : 42}px;object-fit:contain" alt="Bundle" />` : ""}
               </div>
             </div>
-            <div style="display:flex;align-items:center;gap:${isMobile ? 8 : 12}px;padding:${isMobile ? "10px 12px" : "12px 16px"};border-radius:14px;background:${th.accentBg(v.ratingColor)};border:1px solid ${v.ratingColor}33">
+            ${box.category !== "Event Bundle" ? `<div style="display:flex;align-items:center;gap:${isMobile ? 8 : 12}px;padding:${isMobile ? "10px 12px" : "12px 16px"};border-radius:14px;background:${th.accentBg(v.ratingColor)};border:1px solid ${v.ratingColor}33">
               <span style="font-size:${isMobile ? 20 : 24}px">${ratingIcon}</span>
               <div>
                 <div style="font-size:${isMobile ? 14 : 16}px;font-weight:800;color:${v.ratingColor}">${v.rating}</div>
                 <div style="font-size:${isMobile ? 11 : 12}px;color:${th.textSecondary};font-weight:600">${v.savingsPct >= 0 ? "Save" : "Overpay"} ${Math.abs(v.savingsPct).toFixed(0)}% \u00B7 Value: $${v.totalValue.toFixed(2)}</div>
               </div>
-            </div>
+            </div>` : ""}
             <div style="display:flex;flex-direction:column">${itemsHTML}</div>
-            <div style="display:flex;align-items:center;justify-content:space-between;padding-top:4px">
+            ${box.category !== "Event Bundle" ? `<div style="display:flex;align-items:center;justify-content:space-between;padding-top:4px">
               <span style="font-size:${isMobile ? 11 : 12}px;color:${th.textMuted};font-weight:600">Total Item Value</span>
               <span style="font-size:${isMobile ? 14 : 15}px;font-weight:800;color:${v.savingsPct >= 0 ? "#2ECC71" : "#E74C3C"};font-family:'JetBrains Mono',monospace">${v.savingsPct >= 0 ? "+" : "-"}$${Math.abs(v.savings).toFixed(2)}</span>
-            </div>
+            </div>` : ""}
           </div>
         </div>`;
       }).join("");
@@ -3613,7 +3614,7 @@ function renderSidebar(th) {
       </button>`).join("")}
     </div>
     <div style="margin-top:auto;padding:16px 20px;border-top:1.5px solid ${th.border}">
-      <div style="font-size:11px;color:${th.textFaint};text-align:center">${COMMUNITY_NAME} \u00B7 v1.0</div>
+      <div style="font-size:11px;color:${th.textFaint};text-align:center">${COMMUNITY_NAME} \u00B7 v${APP_VERSION}</div>
     </div>
   </nav>`;
 }
