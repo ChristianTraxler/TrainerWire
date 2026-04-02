@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "2.01";
+const APP_VERSION = "2.02";
 
 // --- POKEMON IMAGE LOOKUP ---
 const IMG_BASE = "assets/pokemon-images";
@@ -3166,7 +3166,7 @@ function render() {
               <span style="font-size:${isMobile ? 12 : 13}px;font-weight:600;color:${th.text}">${item.qty}x ${item.name}</span>
               ${item.note ? `<span style="font-size:10px;color:${th.textMuted};font-weight:500">(${item.note})</span>` : ""}
             </div>
-            <span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${th.textSecondary};font-family:'JetBrains Mono',monospace">$${totalVal.toFixed(2)}${isEstimated ? `<span style="color:#F39C12;font-size:12px;font-weight:900;margin-left:3px;cursor:help" title="Estimated \u2014 not sold individually on the web store">*</span>` : ""}</span>
+            ${box.category !== "Event Bundle" ? `<span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${th.textSecondary};font-family:'JetBrains Mono',monospace">$${totalVal.toFixed(2)}${isEstimated ? `<span style="color:#F39C12;font-size:12px;font-weight:900;margin-left:3px;cursor:help" title="Estimated \u2014 not sold individually on the web store">*</span>` : ""}</span>` : ""}
           </div>`;
         }).join("");
         let timeLeftText = "";
