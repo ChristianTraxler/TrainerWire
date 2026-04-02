@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "2.0";
+const APP_VERSION = "2.01";
 
 // --- POKEMON IMAGE LOOKUP ---
 const IMG_BASE = "assets/pokemon-images";
@@ -1423,7 +1423,7 @@ function renderCountdown(dateStr, color, over, th, ev) {
       const units = endCd.days > 0
         ? [["D", endCd.days], ["H", endCd.hours], ["M", endCd.minutes], ["S", endCd.seconds]]
         : [["H", endCd.hours], ["M", endCd.minutes], ["S", endCd.seconds]];
-      return `<div style="display:flex;gap:4px;align-items:center">${units.map(([l, v], i) =>
+      return `<div style="display:flex;gap:4px;align-items:center"><span style="font-size:16px;color:#2ECC71;font-weight:700;margin-right:4px">Ends in</span>${units.map(([l, v], i) =>
         `<div style="display:flex;align-items:center;gap:1px"><div style="background:${th.countdownBg("#2ECC71")};border:1.5px solid ${th.countdownBorder("#2ECC71")};border-radius:7px;padding:3px 6px;min-width:32px;text-align:center;font-weight:700;font-size:14px;font-variant-numeric:tabular-nums;color:#2ECC71;font-family:'JetBrains Mono',monospace;${l === "S" ? "animation:countdownTick 1s ease infinite;" : ""}">${String(v).padStart(2, "0")}</div><span style="font-size:9px;color:${th.textMuted};font-weight:600">${l}</span>${i < units.length - 1 ? `<span style="color:${th.border};font-weight:300;margin-left:1px;font-size:12px">:</span>` : ""}</div>`
       ).join("")}</div>`;
     }
@@ -1434,7 +1434,7 @@ function renderCountdown(dateStr, color, over, th, ev) {
   if (!cd && over) return `<span style="font-size:12px;color:${th.textMuted};font-weight:600">Event Over</span>`;
   if (!cd) return `<span style="font-size:12px;color:#2ECC71;font-weight:700">LIVE NOW</span>`;
   const units = [["D", cd.days], ["H", cd.hours], ["M", cd.minutes], ["S", cd.seconds]];
-  return `<div style="display:flex;gap:4px;align-items:center">${units.map(([l, v], i) =>
+  return `<div style="display:flex;gap:4px;align-items:center"><span style="font-size:16px;color:${color};font-weight:700;margin-right:4px">Starts in</span>${units.map(([l, v], i) =>
     `<div style="display:flex;align-items:center;gap:1px"><div style="background:${th.countdownBg(color)};border:1.5px solid ${th.countdownBorder(color)};border-radius:7px;padding:3px 6px;min-width:32px;text-align:center;font-weight:700;font-size:14px;font-variant-numeric:tabular-nums;color:${color};font-family:'JetBrains Mono',monospace;${l === "S" ? "animation:countdownTick 1s ease infinite;" : ""}">${String(v).padStart(2, "0")}</div><span style="font-size:9px;color:${th.textMuted};font-weight:600">${l}</span>${i < 3 ? `<span style="color:${th.border};font-weight:300;margin-left:1px;font-size:12px">:</span>` : ""}</div>`
   ).join("")}</div>`;
 }
@@ -3142,10 +3142,12 @@ function render() {
     if (state.tab === "store") {
       const isCoinsFilter = state.storeFilter === "Pok\u00E9Coins";
       const filteredBoxes = isCoinsFilter ? [] : state.storeFilter === "All" ? WEB_STORE_BOXES : WEB_STORE_BOXES.filter(b => b.category === state.storeFilter);
-      const sortedBoxes = [...filteredBoxes].sort((a, b) => {
+      const eventBundles = filteredBoxes.filter(b => b.category === "Event Bundle");
+      const otherBoxes = filteredBoxes.filter(b => b.category !== "Event Bundle").sort((a, b) => {
         const va = calcBoxValue(a), vb = calcBoxValue(b);
         return vb.savingsPct - va.savingsPct;
       });
+      const sortedBoxes = [...eventBundles, ...otherBoxes];
       const catPillsHTML = STORE_CATEGORIES.map(cat => {
         const isActive = state.storeFilter === cat;
         return `<button onclick="setStoreFilter('${cat}')" style="padding:${isMobile ? "6px 14px" : "7px 16px"};border-radius:20px;border:1.5px solid ${isActive ? "#E74C3C" : th.border};background:${isActive ? th.accentBg("#E74C3C") : th.surface};color:${isActive ? "#E74C3C" : th.textSecondary};font-size:${isMobile ? 11 : 12}px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s ease;white-space:nowrap">${cat}</button>`;
