@@ -3023,8 +3023,9 @@ function render() {
                   <span style="font-size:10px;font-weight:700;color:${th.textMuted};background:${th.accentBgSubtle("#888")};padding:3px 8px;border-radius:20px">${box.category}</span>
                 </div>
               </div>
-              <div style="text-align:right;flex-shrink:0">
+              <div style="display:flex;align-items:center;gap:${isMobile ? 8 : 10}px;flex-shrink:0">
                 <div style="font-size:${isMobile ? 22 : 26}px;font-weight:900;color:${th.text};font-family:'JetBrains Mono',monospace">$${box.price.toFixed(2)}</div>
+                ${box.category === "Event Bundle" ? `<img src="assets/pokemon-images/icons/image.gif" style="width:${isMobile ? 36 : 42}px;height:${isMobile ? 36 : 42}px;object-fit:contain" alt="Bundle" />` : ""}
               </div>
             </div>
             <div style="display:flex;align-items:center;gap:${isMobile ? 8 : 12}px;padding:${isMobile ? "10px 12px" : "12px 16px"};border-radius:14px;background:${th.accentBg(v.ratingColor)};border:1px solid ${v.ratingColor}33">
@@ -3081,6 +3082,7 @@ function render() {
                   <p style="margin:0"><strong style="color:${th.text}">Save/Overpay %</strong> \u2014 how much you save (or lose) compared to individual prices</p>
                   <p style="margin:0"><strong style="color:${th.text}">Total Item Value (+/\u2212)</strong> \u2014 the green or red number at the bottom of each card. Green (+) means you\u2019re saving that much compared to buying items separately. Red (\u2212) means you\u2019re overpaying by that amount.</p>
                   <p style="margin:0"><strong style="color:${th.text}">Item list</strong> \u2014 each item with quantity and its individual value on the right</p>
+                  <p style="margin:0;display:flex;align-items:center;gap:6px"><img src="assets/pokemon-images/icons/image.gif" style="width:20px;height:20px;object-fit:contain" alt="Bundle icon" /> <strong style="color:${th.text}">Bundle icon</strong> \u2014 cards with this gold badge are event bundles</p>
                 </div>
               </div>
               <div style="font-size:${isMobile ? 11 : 12}px;color:${th.textSecondary};line-height:1.6;padding:${isMobile ? "10px 12px" : "12px 16px"};margin-top:4px;border-radius:10px;background:${th.accentBg("#F39C12")};border:1px solid #F39C1233">
