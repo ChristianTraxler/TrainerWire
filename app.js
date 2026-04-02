@@ -3286,7 +3286,7 @@ function render() {
             ${renderCoinTiers(th, isMobile)}
           </div>
           <div style="padding:${isMobile ? "10px 12px" : "12px 16px"};border-radius:10px;background:${th.accentBg("#2ECC71")};border:1px solid #2ECC7133">
-            <p style="margin:0;font-size:${isMobile ? 11 : 12}px;color:${th.textSecondary};line-height:1.6"><strong style="color:${th.text}">Tip:</strong> The $99.99 pack gives you the most coins per dollar at 16,500 total. But if that\u2019s too much at once, the $19.99 and $39.99 packs are still a solid value. The $0.99 pack has the worst rate \u2014 avoid buying coins in small amounts if you can.</p>
+            <p style="margin:0;font-size:${isMobile ? 11 : 12}px;color:${th.textSecondary};line-height:1.6"><strong style="color:${th.text}">Tip:</strong> The $99.99 pack gives you the most coins per dollar at 15,500 total. But if that\u2019s too much at once, the $19.99 and $39.99 packs are still a solid value. The $0.99 pack has the worst rate \u2014 avoid buying coins in small amounts if you can.</p>
           </div>
         </div>` : ""}
       </div>`;
@@ -3575,6 +3575,8 @@ function sidebarNav(tab) {
   state.selectedEvent = null;
   state.selectedNews = null;
   state.tab = tab;
+  sessionStorage.setItem("trainerwire_tab", tab);
+  if (tab === "nests") { loadNestsFromSupabase().then(() => render()); }
   render();
   window.scrollTo(0, 0);
 }
