@@ -125,6 +125,30 @@ const POGO_EVO = {
   907:"25 Candy",908:"100 Candy",910:"25 Candy",911:"100 Candy",913:"25 Candy",914:"100 Candy",916:"50 Candy",918:"50 Candy",920:"50 Candy",922:"25 Candy",923:"100 Candy + Walk 10km",925:"25 Candy",927:"50 Candy",929:"25 Candy",930:"100 Candy",933:"25 Candy",934:"100 Candy",936:"50 Candy + Defeat 30 Psychic (Buddy)",937:"50 Candy + Defeat 30 Ghost (Buddy)",939:"50 Candy",941:"50 Candy",943:"50 Candy",945:"50 Candy",947:"50 Candy",949:"50 Candy",952:"50 Candy",954:"50 Candy",956:"50 Candy",958:"25 Candy",959:"100 Candy",961:"50 Candy",964:"50 Candy",966:"50 Candy",970:"50 Candy",972:"50 Candy",975:"50 Candy",979:"100 Candy + Defeat 30 Raids (Buddy)",980:"50 Candy",981:"50 Candy",982:"50 Candy",983:"100 Candy",997:"25 Candy",998:"100 Candy",1000:"100 Candy",1011:"50 Candy",1013:"50 Candy",1019:"100 Candy"
 };
 
+// --- RAID BOSS CP RANGES (verified from LeekDuck Apr 2026) ---
+const RAID_CP = {
+  // 1-Star Raids
+  "Emolga":{normal:"876–933",boosted:"1095–1166",weather:"Rainy, Windy"},
+  "Dedenne":{normal:"991–1051",boosted:"1239–1315",weather:"Rainy, Cloudy"},
+  "Yamper":{normal:"410–450",boosted:"512–562",weather:"Rainy"},
+  "Pawmi":{normal:"326–363",boosted:"408–454",weather:"Rainy"},
+  // 3-Star Raids
+  "Raichu":{normal:"1180–1247",boosted:"1476–1558",weather:"Rainy"},
+  "Alolan Raichu":{normal:"1238–1306",boosted:"1548–1633",weather:"Rainy, Windy"},
+  "Azumarill":{normal:"849–907",boosted:"1061–1134",weather:"Rainy, Cloudy"},
+  // 5-Star Raids
+  "Regidrago":{normal:"1614–1699",boosted:"2017–2124",weather:"Windy"},
+  // Mega Raids
+  "Mega Manectric":{normal:"1267–1337",boosted:"1585–1672",weather:"Rainy"},
+  // Shadow Raids
+  "Shadow Latios":{normal:"2021–2178",boosted:"2526–2723",weather:"Windy"},
+  // Upcoming (from event data - verified from LeekDuck when they were active)
+  "Kyogre":{normal:"2260–2351",boosted:"2825–2939",weather:"Rainy"},
+  "Groudon":{normal:"2260–2351",boosted:"2825–2939",weather:"Sunny"},
+  "Tapu Koko":{normal:"1730–1810",boosted:"2162–2263",weather:"Rainy or Cloudy"},
+  "Tapu Lele":{normal:"1718–1799",boosted:"2148–2249",weather:"Windy or Cloudy"}
+};
+
 function formImgUrl(dex, filename) { return `${IMG_BASE}/National-Dex/regular/${getGenFolder(dex)}/${filename}.webp`; }
 
 // Regional evolution chains: maps a form prefix to its evolution line [{dex, form file, name}]
@@ -385,7 +409,8 @@ const SHINY_AVAILABLE = new Set([
   "Krabby","Hatenna","Darumaka","Eevee","Machop",
   "Hitmonchan","Hitmonlee","Drampa","Sableye","Falinks","Passimian","Beldum",
   "Cryogonal","Chansey","Grookey",
-  "Gyarados","Honedge","Dhelmise","Sinistea","Duraludon","Dreepy"
+  "Gyarados","Honedge","Dhelmise","Sinistea","Duraludon","Dreepy",
+  "Emolga","Raichu","Alolan Raichu","Azumarill","Regidrago"
 ]);
 function isShinyEligible(name) {
   if (name.includes("\u2728")) return true;
@@ -636,7 +661,7 @@ const EVENTS = [
   { id: 6, title: "Replay: Riolu Hatch Day", type: "Event", url: "https://pokemongo.com/en/news/replay-riolu-hatch-day-2026", date: "2026-04-18", endDate: null, time: "11:00 AM – 5:00 PM", color: "#3498DB", icon: "\uD83E\uDD5A", iconImg: "assets/pokemon-images/eggs/egg-2.png", featured: false, summary: "Riolu Hatch Day returns! Boosted Shiny Riolu odds from eggs.", details: { bosses: ["Riolu"], bonuses: ["Riolu eggs with boosted Shiny odds", "Timed Research", "Overlaps with Sustainability Week"], paidResearch: { price: "$1.99", rewards: ["1/4 Egg Hatch Distance during event", "1 Star Piece", "2 Super Incubators"], note: "Tasks must be completed and rewards claimed before 5:00 PM local time on April 18." }, tips: ["Clear egg slots before the event.", "Use Super Incubators during the 6-hour window.", "Shiny Riolu/Lucario is one of the most coveted shinies."] } },
   // { id: 7, title: "Max Battle Day: GO Bigger Replay", type: "Max Battle", date: "2026-04-25", endDate: null, time: "2:00 PM – 5:00 PM", color: "#8E44AD", icon: "\uD83D\uDCA5", featured: true, summary: "Gigantamax Kanto Starters return! Venusaur, Charizard, and Blastoise at Power Spots.", details: { bosses: ["Gigantamax Venusaur", "Gigantamax Charizard", "Gigantamax Blastoise", "Possible new Gigantamax forms"], bonuses: ["Boosted Power Spot spawns", "Shiny Gigantamax forms available", "Boosted Max Particles"], tips: ["Shiny Gigantamax Charizard is the coolest Charizard design.", "Coordinate 4-player groups.", "Farm Max Particles during the event."] } },
   { id: 8, title: "Steeled Resolve", type: "Event", url: "https://pokemongo.com/news/steeled-resolve-2026", urlDisabled: true, date: "2026-04-28", endDate: "2026-05-04", time: "10:00 AM – 8:00 PM", color: "#95A5A6", icon: "\uD83D\uDEE1\uFE0F", featured: false, summary: "Steel-type event closing out April. 'Steeled Resolve: Taken Over' sub-event begins April 30.", details: { bosses: ["Steel-type featured spawns (details TBA)"], bonuses: ["Steel-type wild spawns", "Event Field Research", "Steeled Resolve: Taken Over begins April 30"], tips: ["Stock Steel-type candy.", "'Steeled Resolve: Taken Over' likely involves Team GO Rocket.", "Shadow Latios continues in Shadow Raids."] } },
-  { id: 20, title: "5\u2605 Raid: Regidrago", type: "Raid", date: "2026-04-01", endDate: "2026-04-07", time: "Raid Hour: Wed Apr 1, 6–7 PM", color: "#E74C3C", icon: "\uD83D\uDC09", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-8_Galar/0895.webp", featured: false, summary: "Regidrago in 5-Star Raids. Mega Manectric in Mega Raids. Shadow Latios weekends.", details: { bosses: ["Regidrago (5\u2605)", "Mega Manectric (Mega)", "Shadow Latios (weekends through May 5)"], bonuses: ["Raid Hour: Wednesday 6–7 PM"], tips: ["Weak to Fairy, Ice, Dragon.", "Shadow Latios on weekends — bring Purified Gems."], counters: { label: "Regidrago (Dragon)", pokemon: [{ name: "Mega Rayquaza", fast: "Dragon Tail", charged: "Dragon Ascent", chargedNote: "Signature" }, { name: "Shadow Salamence", fast: "Dragon Tail", charged: "Outrage" }, { name: "Shadow Dragonite", fast: "Dragon Tail", charged: "Outrage" }, { name: "Mega Gardevoir", fast: "Charm", charged: "Dazzling Gleam" }, { name: "Shadow Garchomp", fast: "Dragon Tail", charged: "Outrage" }, { name: "Mega Latios", fast: "Dragon Breath", charged: "Dragon Claw" }] } } },
+  { id: 20, title: "5\u2605 Raid: Regidrago", type: "Raid", date: "2026-04-01", endDate: "2026-04-07", time: "Raid Hour: Wed Apr 1, 6–7 PM", color: "#E74C3C", icon: "\uD83D\uDC09", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-8_Galar/0895.webp", featured: false, summary: "Regidrago in 5-Star Raids. Mega Manectric in Mega Raids. Shadow Latios weekends.", details: { bosses: ["Regidrago (5\u2605)", "Mega Manectric (Mega)", "Shadow Latios (weekends through May 5)", "Raichu (3\u2605)", "Alolan Raichu (3\u2605)", "Azumarill (3\u2605)", "Emolga (1\u2605)", "Dedenne (1\u2605)", "Yamper (1\u2605)", "Pawmi (1\u2605)"], bonuses: ["Raid Hour: Wednesday 6–7 PM"], tips: ["Weak to Fairy, Ice, Dragon.", "Shadow Latios on weekends — bring Purified Gems."], counters: { label: "Regidrago (Dragon)", pokemon: [{ name: "Mega Rayquaza", fast: "Dragon Tail", charged: "Dragon Ascent", chargedNote: "Signature" }, { name: "Shadow Salamence", fast: "Dragon Tail", charged: "Outrage" }, { name: "Shadow Dragonite", fast: "Dragon Tail", charged: "Outrage" }, { name: "Mega Gardevoir", fast: "Charm", charged: "Dazzling Gleam" }, { name: "Shadow Garchomp", fast: "Dragon Tail", charged: "Outrage" }, { name: "Mega Latios", fast: "Dragon Breath", charged: "Dragon Claw" }] } } },
   { id: 21, title: "5\u2605 Raid: Kyogre", type: "Raid", date: "2026-04-08", endDate: "2026-04-14", time: "Raid Hour: Wed Apr 8, 6–7 PM", color: "#2980B9", icon: "\uD83C\uDF0A", featured: false, summary: "Kyogre returns. Top-tier Water attacker. Mega Aerodactyl in Mega Raids.", details: { bosses: ["Kyogre (5\u2605)", "Mega Aerodactyl (Mega)", "Shadow Latios (weekends)"], bonuses: ["Raid Hour: Wednesday 6–7 PM"], tips: ["Top-tier Water attacker — raid heavily.", "Weak to Grass and Electric.", "Shiny Kyogre is a gorgeous pink whale."], counters: { label: "Kyogre (Water)", pokemon: [{ name: "Mega Sceptile", fast: "Bullet Seed", charged: "Frenzy Plant", chargedNote: "CD Exclusive" }, { name: "Kartana", fast: "Razor Leaf", charged: "Leaf Blade" }, { name: "Shadow Raikou", fast: "Thunder Shock", charged: "Wild Charge" }, { name: "Zekrom", fast: "Charge Beam", charged: "Fusion Bolt" }, { name: "Shadow Electivire", fast: "Thunder Shock", charged: "Wild Charge" }, { name: "Shadow Tangrowth", fast: "Vine Whip", charged: "Power Whip" }] }, catchCP: [{ name: "Kyogre", normal: "2260–2351", boosted: "2825–2939", weather: "Rainy" }] } },
   { id: 22, title: "5\u2605 Raid: Groudon", type: "Raid", date: "2026-04-15", endDate: "2026-04-21", time: "Raid Hour: Wed Apr 15, 6–7 PM", color: "#C0392B", icon: "\uD83C\uDF0B", featured: false, summary: "Groudon returns. Best Ground-type attacker. Mega Alakazam in Mega Raids.", details: { bosses: ["Groudon (5\u2605)", "Mega Alakazam (Mega)", "Shadow Latios (weekends)"], bonuses: ["Raid Hour: Wednesday 6–7 PM"], tips: ["Best Ground attacker — prioritize high-IV catches.", "Weak to Water, Grass, Ice.", "Shiny Groudon (golden) is one of the best shinies."], counters: { label: "Groudon (Ground)", pokemon: [{ name: "Mega Swampert", fast: "Water Gun", charged: "Hydro Cannon", chargedNote: "CD Exclusive" }, { name: "Kartana", fast: "Razor Leaf", charged: "Leaf Blade" }, { name: "Shadow Swampert", fast: "Water Gun", charged: "Hydro Cannon", chargedNote: "CD Exclusive" }, { name: "Mega Sceptile", fast: "Bullet Seed", charged: "Frenzy Plant", chargedNote: "CD Exclusive" }, { name: "Shadow Mamoswine", fast: "Powder Snow", charged: "Avalanche" }, { name: "Kyogre", fast: "Waterfall", charged: "Surf" }] }, catchCP: [{ name: "Groudon", normal: "2260–2351", boosted: "2825–2939", weather: "Sunny" }] } },
   { id: 23, title: "5\u2605 Raid: Tapu Koko", type: "Raid", date: "2026-04-22", endDate: "2026-04-28", time: "Raid Hour: Wed Apr 22, 6–7 PM", color: "#F39C12", icon: "\u26A1", featured: false, summary: "Tapu Koko in 5-Star Raids. Electric/Fairy. Mega Sharpedo in Mega Raids.", details: { bosses: ["Tapu Koko (5\u2605)", "Mega Sharpedo (Mega)", "Shadow Latios (weekends)"], bonuses: ["Raid Hour: Wednesday 6–7 PM"], tips: ["Solid PvP pick — Electric/Fairy.", "Weak to Poison and Ground.", "Shiny has black/orange scheme."], counters: { label: "Tapu Koko (Electric/Fairy)", pokemon: [{ name: "Primal Groudon", fast: "Mud Shot", charged: "Precipice Blades", chargedNote: "Signature" }, { name: "Shadow Garchomp", fast: "Mud Shot", charged: "Earth Power", chargedNote: "CD Exclusive" }, { name: "Shadow Excadrill", fast: "Mud-Slap", charged: "Drill Run" }, { name: "Mega Gengar", fast: "Lick", charged: "Sludge Bomb" }, { name: "Shadow Rhyperior", fast: "Mud-Slap", charged: "Earthquake" }, { name: "Landorus (Therian)", fast: "Mud Shot", charged: "Earth Power" }] }, catchCP: [{ name: "Tapu Koko", normal: "1730–1810", boosted: "2162–2263", weather: "Rainy or Cloudy" }] } },
@@ -667,25 +692,25 @@ const ANNOUNCEMENTS = [
 
 const CURRENT_RAID_BOSSES = {
   "1-Star Raids": [
-    "Larvitar (1\u2605 Raid)","Lileep (1\u2605 Raid)","Galarian Stunfisk (1\u2605 Raid)","Rockruff (1\u2605 Raid)"
+    "Emolga (1\u2605 Raid)","Dedenne (1\u2605 Raid)","Yamper (1\u2605 Raid)","Pawmi (1\u2605 Raid)"
   ],
   "3-Star Raids": [
-    "Machamp (3\u2605 Raid)","Hippowdon (3\u2605 Raid)","Bombirdier (3\u2605 Raid)"
+    "Raichu (3\u2605 Raid)","Alolan Raichu (3\u2605 Raid)","Azumarill (3\u2605 Raid)"
   ],
   "5-Star Raids": [
-    "Regieleki (5\u2605 Raid)"
+    "Regidrago (5\u2605 Raid)"
   ],
   "Mega Raids": [
-    "Mega Houndoom (Mega)"
+    "Mega Manectric (Mega)"
   ],
   "Shadow 1-Star Raids": [
-    "Shadow Dratini (1\u2605 Shadow Raid)","Shadow Gligar (1\u2605 Shadow Raid)","Shadow Cacnea (1\u2605 Shadow Raid)","Shadow Joltik (1\u2605 Shadow Raid)"
+    "Shadow Dratini (1\u2605 Shadow Raid)","Shadow Cacnea (1\u2605 Shadow Raid)","Shadow Gligar (1\u2605 Shadow Raid)","Shadow Joltik (1\u2605 Shadow Raid)"
   ],
   "Shadow 3-Star Raids": [
     "Shadow Alolan Marowak (3\u2605 Shadow Raid)","Shadow Lapras (3\u2605 Shadow Raid)","Shadow Stantler (3\u2605 Shadow Raid)"
   ],
   "Shadow 5-Star Raids": [
-    "Shadow Latias (5\u2605 Shadow Raid)"
+    "Shadow Latios (5\u2605 Shadow Raid)"
   ]
 };
 
@@ -1545,14 +1570,14 @@ function renderRaidHeads(tier) {
 }
 const TIER_EGGS = { "1-Star Raids": "assets/pokemon-images/Raid-Eggs/1-star.png", "3-Star Raids": "assets/pokemon-images/Raid-Eggs/3-star.png", "5-Star Raids": "assets/pokemon-images/Raid-Eggs/5-star.png", "Mega Raids": "assets/pokemon-images/Raid-Eggs/mega.png", "Shadow Raids": "assets/pokemon-images/Raid-Eggs/5-star.png", "Shadow 1-Star Raids": "assets/pokemon-images/Raid-Eggs/1-star.png", "Shadow 3-Star Raids": "assets/pokemon-images/Raid-Eggs/3-star.png", "Shadow 5-Star Raids": "assets/pokemon-images/Raid-Eggs/5-star.png" };
 const RAID_BOSS_DATA = {
-  "Regidrago":{types:["Dragon"],cp:"1831–1916",cpBoost:"2289–2395",weather:"Windy"},
+  "Regidrago":{types:["Dragon"],cp:"1614–1699",cpBoost:"2017–2124",weather:"Windy"},
   "Kyogre":{types:["Water"],cp:"2260–2351",cpBoost:"2825–2939",weather:"Rainy"},
   "Groudon":{types:["Ground"],cp:"2260–2351",cpBoost:"2825–2939",weather:"Sunny"},
   "Tapu Koko":{types:["Electric","Fairy"],cp:"1730–1810",cpBoost:"2162–2263",weather:"Rainy or Cloudy"},
   "Tapu Lele":{types:["Psychic","Fairy"],cp:"1718–1799",cpBoost:"2148–2249",weather:"Windy or Cloudy"},
   "Mewtwo":{types:["Psychic"],cp:"2294–2387",cpBoost:"2868–2984",weather:"Windy"},
-  "Latios":{types:["Dragon","Psychic"],cp:"2006–2090",cpBoost:"2507–2613",weather:"Windy"},
-  "Lapras":{types:["Water","Ice"],cp:"1435–1509",cpBoost:"1794–1886",weather:"Rainy or Snow"},
+  "Latios":{types:["Dragon","Psychic"],cp:"2021–2178",cpBoost:"2526–2723",weather:"Windy"},
+  "Lapras":{types:["Water","Ice"],cp:"1377–1509",cpBoost:"1721–1886",weather:"Rainy or Snow"},
   "Snorlax":{types:["Normal"],cp:"1760–1843",cpBoost:"2201–2304",weather:"Partly Cloudy"},
   "Dragonite":{types:["Dragon","Flying"],cp:"2079–2167",cpBoost:"2599–2709",weather:"Windy"},
   "Pinsir":{types:["Bug"],cp:"1613–1690",cpBoost:"2016–2113",weather:"Rainy"},
@@ -1562,19 +1587,19 @@ const RAID_BOSS_DATA = {
   "Aerodactyl":{types:["Rock","Flying"],cp:"1490–1565",cpBoost:"1862–1956",weather:"Partly Cloudy or Windy"},
   "Alakazam":{types:["Psychic"],cp:"1666–1747",cpBoost:"2083–2184",weather:"Windy"},
   "Banette":{types:["Ghost"],cp:"1312–1385",cpBoost:"1641–1731",weather:"Foggy"},
-  "Manectric":{types:["Electric"],cp:"1201–1267",cpBoost:"1502–1584",weather:"Rainy"},
+  "Manectric":{types:["Electric"],cp:"1267–1337",cpBoost:"1585–1672",weather:"Rainy"},
   "Sharpedo":{types:["Water","Dark"],cp:"1174–1246",cpBoost:"1468–1558",weather:"Rainy or Foggy"},
   "Pikachu":{types:["Electric"]/*,cp:"530–574",cpBoost:"663–718",weather:"Rainy"*/},
-  "Butterfree":{types:["Bug","Flying"],cp:"1016–1083",cpBoost:"1270–1354",weather:"Rainy"},
-  "Diglett":{types:["Ground"],cp:"300–337",cpBoost:"375–421",weather:"Sunny"},
-  "Wooper":{types:["Water","Ground"],cp:"291–326",cpBoost:"364–408",weather:"Rainy or Sunny"},
-  "Absol":{types:["Dark"],cp:"1370–1443",cpBoost:"1712–1804",weather:"Foggy"},
-  "Kirlia":{types:["Psychic","Fairy"],cp:"396–437",cpBoost:"495–547",weather:"Windy or Cloudy"},
-  "Shinx":{types:["Electric"],cp:"303–340",cpBoost:"379–425",weather:"Rainy"},
-  "Croagunk":{types:["Poison","Fighting"],cp:"479–525",cpBoost:"599–656",weather:"Cloudy"},
-  "Blitzle":{types:["Electric"],cp:"484–531",cpBoost:"605–664",weather:"Rainy"},
-  "Minccino":{types:["Normal"],cp:"371–412",cpBoost:"464–515",weather:"Partly Cloudy"},
-  "Sneasel":{types:["Dark","Ice"],cp:"1067–1143",cpBoost:"1334–1429",weather:"Foggy or Snow"},
+  "Butterfree":{types:["Bug","Flying"],cp:"983–1044",cpBoost:"1229–1305",weather:"Rainy"},
+  "Diglett":{types:["Ground"],cp:"349–386",cpBoost:"437–483",weather:"Sunny"},
+  "Wooper":{types:["Water","Ground"],cp:"330–366",cpBoost:"412–458",weather:"Rainy or Sunny"},
+  "Absol":{types:["Dark"],cp:"1370–1443",cpBoost:"1712–1805",weather:"Fog"},
+  "Kirlia":{types:["Psychic","Fairy"],cp:"508–552",cpBoost:"635–690",weather:"Windy or Cloudy"},
+  "Shinx":{types:["Electric"],cp:"458–500",cpBoost:"572–625",weather:"Rainy"},
+  "Croagunk":{types:["Poison","Fighting"],cp:"500–544",cpBoost:"625–680",weather:"Cloudy"},
+  "Blitzle":{types:["Electric"],cp:"461–504",cpBoost:"577–630",weather:"Rainy"},
+  "Minccino":{types:["Normal"],cp:"456–498",cpBoost:"570–623",weather:"Partly Cloudy"},
+  "Sneasel":{types:["Dark","Ice"],cp:"1107–1172",cpBoost:"1384–1465",weather:"Fog or Snow"},
   "Garchomp":{types:["Dragon","Ground"]},
   "Salamence":{types:["Dragon","Flying"]},
   "Mamoswine":{types:["Ice","Ground"]},
@@ -1609,7 +1634,7 @@ const RAID_BOSS_DATA = {
   "Gligar":{types:["Ground","Flying"],cp:"952–1061",cpBoost:"1191–1326",weather:"Sunny or Windy"},
   "Cacnea":{types:["Grass"],cp:"618–709",cpBoost:"773–887",weather:"Sunny"},
   "Joltik":{types:["Bug","Electric"],cp:"504–584",cpBoost:"631–730",weather:"Rainy"},
-  "Marowak":{types:["Fire","Ghost"],cp:"941–1048",cpBoost:"1176–1311",weather:"Sunny or Foggy"},
+  "Marowak":{types:["Fire","Ghost"],cp:"941–1048",cpBoost:"1176–1311",weather:"Sunny or Fog"},
   "Stantler":{types:["Normal"],cp:"1118–1236",cpBoost:"1398–1546",weather:"Partly Cloudy"},
   "Latias":{types:["Dragon","Psychic"],cp:"1855–2006",cpBoost:"2320–2507",weather:"Windy"},
   "Growlithe":{types:["Fire"],cp:"660–710"},
@@ -1668,12 +1693,19 @@ const RAID_BOSS_DATA = {
   "Shuckle":{types:["Bug","Rock"],cp:"189–231"},
   "Wailmer":{types:["Water"],cp:"779–838"},
   "Chinchou":{types:["Water","Electric"]/*,cp:"443–479"*/},
-  "Dedenne":{types:["Electric","Fairy"]/*,cp:"743–789"*/},
-  "Pawmi":{types:["Electric"]/*,cp:"244–272"*/},
-  "Magnemite":{types:["Electric","Steel"]/*,cp:"544–583"*/},
-  "Mareep":{types:["Electric"]/*,cp:"391–424"*/},
-  "Joltik":{types:["Bug","Electric"]/*,cp:"404–438"*/},
-  "Raichu":{types:["Electric","Psychic"]/*,cp:"929–980"*/}
+  "Dedenne":{types:["Electric","Fairy"],cp:"991–1051",cpBoost:"1239–1315",weather:"Rainy, Cloudy"},
+  "Pawmi":{types:["Electric"],cp:"326–363",cpBoost:"408–454",weather:"Rainy"},
+  "Magnemite":{types:["Electric","Steel"]},
+  "Mareep":{types:["Electric"]},
+  "Joltik":{types:["Bug","Electric"]},
+  "Raichu":{types:["Electric"],cp:"1180–1247",cpBoost:"1476–1558",weather:"Rainy"},
+  "Alolan Raichu":{types:["Electric","Psychic"],cp:"1238–1306",cpBoost:"1548–1633",weather:"Rainy, Windy"},
+  "Emolga":{types:["Electric","Flying"],cp:"876–933",cpBoost:"1095–1166",weather:"Rainy, Windy"},
+  "Yamper":{types:["Electric"],cp:"410–450",cpBoost:"512–562",weather:"Rainy"},
+  "Azumarill":{types:["Water","Fairy"],cp:"849–907",cpBoost:"1061–1134",weather:"Rainy, Cloudy"},
+  "Shadow Latios":{types:["Dragon","Psychic"],cp:"2021–2178",cpBoost:"2526–2723",weather:"Windy"},
+  "Mega Manectric":{types:["Electric"],cp:"1267–1337",cpBoost:"1585–1672",weather:"Rainy"},
+  "Joltik":{types:["Bug","Electric"],cp:"504–584",cpBoost:"631–730",weather:"Rainy"}
 };
 const TYPE_COLORS = {
   "Normal":"#A8A878","Fire":"#F08030","Water":"#6890F0","Electric":"#F8D030","Grass":"#78C850",
