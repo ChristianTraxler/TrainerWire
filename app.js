@@ -849,7 +849,7 @@ const WEB_STORE_BOXES = [
     price: 8.99,
     category: "Event Bundle",
     limited: true,
-    timeLeft: "6 days",
+    expires: "2026-04-06",
     oneTime: true,
     items: [
       { name: "GO Pass Deluxe", qty: 1, note: "A Shockingly Good Time" },
@@ -867,7 +867,7 @@ const WEB_STORE_BOXES = [
     price: 14.99,
     category: "Event Bundle",
     limited: true,
-    timeLeft: "4 days",
+    limitedLabel: "LIMITED-TIME ONLY",
     oneTime: true,
     items: [
       { name: "GO Pass Deluxe", qty: 1, note: "April" },
@@ -885,7 +885,7 @@ const WEB_STORE_BOXES = [
     price: 4.99,
     category: "Event Bundle",
     limited: true,
-    timeLeft: "4 days",
+    expires: "2026-04-04",
     oneTime: true,
     items: [
       { name: "Fashion Raid Day Ticket", qty: 1 },
@@ -896,7 +896,9 @@ const WEB_STORE_BOXES = [
     name: "GO Pass Deluxe: April",
     price: 7.99,
     category: "Event Bundle",
-    limited: false,
+    limited: true,
+    limitedLabel: "LIMITED-TIME ONLY",
+    oneTime: true,
     items: [
       { name: "GO Pass Deluxe", qty: 1, note: "April" },
       { name: "Ultra Ball", qty: 10 },
@@ -910,7 +912,7 @@ const WEB_STORE_BOXES = [
     price: 6.99,
     category: "Event Bundle",
     limited: true,
-    timeLeft: "6 days",
+    expires: "2026-04-06",
     oneTime: true,
     items: [
       { name: "GO Pass Deluxe", qty: 1, note: "A Shockingly Good Time" },
@@ -926,7 +928,7 @@ const WEB_STORE_BOXES = [
     price: 4.99,
     category: "Event Bundle",
     limited: true,
-    timeLeft: "6 days",
+    expires: "2026-04-06",
     oneTime: true,
     items: [
       { name: "GO Pass Deluxe", qty: 1, note: "A Shockingly Good Time" },
@@ -940,7 +942,9 @@ const WEB_STORE_BOXES = [
     name: "GO Pass Deluxe: April + 10 Ranks",
     price: 9.99,
     category: "Event Bundle",
-    limited: false,
+    limited: true,
+    limitedLabel: "LIMITED-TIME ONLY",
+    oneTime: true,
     items: [
       { name: "GO Pass Deluxe", qty: 1, note: "April" },
 
@@ -3160,18 +3164,33 @@ function render() {
             <span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${th.textSecondary};font-family:'JetBrains Mono',monospace">$${totalVal.toFixed(2)}${isEstimated ? `<span style="color:#F39C12;font-size:12px;font-weight:900;margin-left:3px;cursor:help" title="Estimated \u2014 not sold individually on the web store">*</span>` : ""}</span>
           </div>`;
         }).join("");
-        const badgeHTML = box.limited ? `<span style="font-size:9px;font-weight:800;color:#fff;background:linear-gradient(135deg,#E74C3C,#C0392B);padding:3px 10px;border-radius:20px;letter-spacing:0.5px">LIMITED${box.timeLeft ? " \u00B7 " + box.timeLeft : ""}</span>` : "";
+        let timeLeftText = "";
+        if (box.expires) {
+          const now = new Date();
+          const expDate = new Date(box.expires + "T23:59:59");
+          const diffMs = expDate.getTime() - now.getTime();
+          if (diffMs <= 0) { timeLeftText = "EXPIRED"; }
+          else {
+            const daysLeft = Math.ceil(diffMs / 86400000);
+            timeLeftText = daysLeft === 1 ? "1 day left" : daysLeft + " days left";
+          }
+        }
+        const isExpired = timeLeftText === "EXPIRED";
+        const badgeHTML = box.limited ? `<span style="font-size:12px;font-weight:800;color:#fff;background:linear-gradient(135deg,${isExpired ? "#666,#555" : "#E74C3C,#C0392B"});padding:5px 14px;border-radius:20px;letter-spacing:0.5px;white-space:nowrap">${isExpired ? "EXPIRED" : box.limitedLabel ? box.limitedLabel : "LIMITED" + (timeLeftText ? " \u00B7 " + timeLeftText : "")}</span>` : "";
         const popularHTML = box.popular ? `<span style="font-size:9px;font-weight:800;color:#F39C12;background:${th.accentBg("#F39C12")};padding:3px 10px;border-radius:20px;letter-spacing:0.5px">POPULAR</span>` : "";
-        const oneTimeHTML = box.oneTime ? `<span style="font-size:9px;font-weight:700;color:${th.textMuted};background:${th.accentBgSubtle("#888")};padding:3px 8px;border-radius:20px">ONE-TIME</span>` : "";
+        const oneTimeHTML = box.oneTime ? `<span style="font-size:9px;font-weight:700;color:${th.textMuted};background:${th.accentBgSubtle("#888")};padding:3px 8px;border-radius:20px;white-space:nowrap">ONE-TIME</span>` : "";
         const ratingIcon = v.rating === "Great Deal" ? "\uD83D\uDD25" : v.rating === "Good Deal" ? "\u2705" : v.rating === "Fair" ? "\u2696\uFE0F" : "\u274C";
         return `<div style="background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;overflow:hidden;transition:all 0.25s ease;box-shadow:${th.shadow}" onmouseenter="this.style.borderColor='${v.ratingColor}';this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 25px ${v.ratingColor}22'" onmouseleave="this.style.borderColor='${th.border}';this.style.transform='translateY(0)';this.style.boxShadow='${th.shadow}'">
           <div style="padding:${isMobile ? "16px 16px 12px" : "20px 24px 16px"};display:flex;flex-direction:column;gap:10px">
             <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap">
               <div style="flex:1;min-width:0">
                 <h3 style="margin:0;font-size:${isMobile ? 15 : 17}px;font-weight:800;color:${th.text};line-height:1.3">${box.name}</h3>
-                <div style="display:flex;align-items:center;gap:6px;margin-top:6px;flex-wrap:wrap">
-                  ${badgeHTML}${popularHTML}${oneTimeHTML}
-                  <span style="font-size:10px;font-weight:700;color:${th.textMuted};background:${th.accentBgSubtle("#888")};padding:3px 8px;border-radius:20px">${box.category}</span>
+                <div style="display:flex;${isMobile ? "flex-direction:column;align-items:flex-start" : "align-items:center"};gap:6px;margin-top:6px">
+                  ${badgeHTML}
+                  <div style="display:flex;align-items:center;gap:6px">
+                    ${popularHTML}${oneTimeHTML}
+                    <span style="font-size:10px;font-weight:700;color:${th.textMuted};background:${th.accentBgSubtle("#888")};padding:3px 8px;border-radius:20px;white-space:nowrap">${box.category}</span>
+                  </div>
                 </div>
               </div>
               <div style="display:flex;align-items:center;gap:${isMobile ? 8 : 10}px;flex-shrink:0">
