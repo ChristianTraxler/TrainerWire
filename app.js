@@ -2644,12 +2644,12 @@ function handleGuideScroll(el) {
 
 function renderCoinTiers(th, isMobile) {
   const tiers = [
-    { coins: 110, bonus: 10, price: 0.99, img: "Item_COIN_HANDFUL_01.png", label: "Handful" },
-    { coins: 600, bonus: 50, price: 4.99, img: "Item_COIN_STACK_01.png", label: "Stack" },
-    { coins: 1300, bonus: 100, price: 9.99, img: "Item_COIN_POUCH_01.png", label: "Pouch" },
-    { coins: 2700, bonus: 200, price: 19.99, img: "Item_COIN_BOX_01.png", label: "Box" },
-    { coins: 5600, bonus: 400, price: 39.99, img: "Item_COIN_BUCKET_01.png", label: "Bucket" },
-    { coins: 15500, bonus: 1000, price: 99.99, img: "Item_COIN_HEAP_01.png", label: "Heap" }
+    { coins: 100, bonus: 10, price: 0.99, img: "Item_COIN_HANDFUL_01.png", label: "Handful" },
+    { coins: 550, bonus: 50, price: 4.99, img: "Item_COIN_STACK_01.png", label: "Stack" },
+    { coins: 1200, bonus: 100, price: 9.99, img: "Item_COIN_POUCH_01.png", label: "Pouch" },
+    { coins: 2500, bonus: 200, price: 19.99, img: "Item_COIN_BOX_01.png", label: "Box" },
+    { coins: 5200, bonus: 400, price: 39.99, img: "Item_COIN_BUCKET_01.png", label: "Bucket" },
+    { coins: 14500, bonus: 1000, price: 99.99, img: "Item_COIN_HEAP_01.png", label: "Heap" }
   ];
   const baseRate = tiers[0].price / (tiers[0].coins + tiers[0].bonus);
   const bestVal = tiers.reduce(function(best, t) { var v = (t.coins + t.bonus) / t.price; return v > best ? v : best; }, 0);
