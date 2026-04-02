@@ -48,7 +48,10 @@ const REGIONS = [
   { folder: "Gen-9_Paldea", label: "Gen 9 \u2014 Paldea", start: 906, end: 1025 }
 ];
 const POKEMON_FORMS = {
-  19:[{l:"Alola",f:"0019_alola"}],20:[{l:"Alola",f:"0020_alola"}],26:[{l:"Alola",f:"0026_alola"}],27:[{l:"Alola",f:"0027_alola"}],28:[{l:"Alola",f:"0028_alola"}],37:[{l:"Alola",f:"0037_alola"}],38:[{l:"Alola",f:"0038_alola"}],50:[{l:"Alola",f:"0050_alola"}],51:[{l:"Alola",f:"0051_alola"}],52:[{l:"Alola",f:"0052_alola"}],53:[{l:"Alola",f:"0053_alola"}],74:[{l:"Alola",f:"0074_alola"}],75:[{l:"Alola",f:"0075_alola"}],76:[{l:"Alola",f:"0076_alola"}],88:[{l:"Alola",f:"0088_alola"}],89:[{l:"Alola",f:"0089_alola"}],103:[{l:"Alola",f:"0103_alola"}],105:[{l:"Alola",f:"0105_alola"}],
+  19:[{l:"Alola",f:"0019_alola"}],20:[{l:"Alola",f:"0020_alola"}],26:[{l:"Alola",f:"0026_alola"}],27:[{l:"Alola",f:"0027_alola"}],28:[{l:"Alola",f:"0028_alola"}],37:[{l:"Alola",f:"0037_alola"}],38:[{l:"Alola",f:"0038_alola"}],50:[{l:"Alola",f:"0050_alola"}],51:[{l:"Alola",f:"0051_alola"}],52:[{l:"Alola",f:"0052_alola"},{l:"Galar",f:"0052_galarian"}],53:[{l:"Alola",f:"0053_alola"}],58:[{l:"Hisui",f:"0058_hisuian"}],59:[{l:"Hisui",f:"0059_hisuian"}],74:[{l:"Alola",f:"0074_alola"}],75:[{l:"Alola",f:"0075_alola"}],76:[{l:"Alola",f:"0076_alola"}],77:[{l:"Galar",f:"0077_galarian"}],78:[{l:"Galar",f:"0078_galarian"}],79:[{l:"Galar",f:"0079_galarian"}],80:[{l:"Galar",f:"0080_galarian"}],83:[{l:"Galar",f:"0083_galarian"}],88:[{l:"Alola",f:"0088_alola"}],89:[{l:"Alola",f:"0089_alola"}],100:[{l:"Hisui",f:"0100_hisuian"}],101:[{l:"Hisui",f:"0101_hisuian"}],103:[{l:"Alola",f:"0103_alola"}],105:[{l:"Alola",f:"0105_alola"}],
+  128:[{l:"Paldea",f:"0128_paldean_combat"},{l:"Paldea Blaze",f:"0128_paldean_blaze"},{l:"Paldea Aqua",f:"0128_paldean_aqua"}],
+  144:[{l:"Galar",f:"0144_galarian"}],145:[{l:"Galar",f:"0145_galarian"}],146:[{l:"Galar",f:"0146_galarian"}],110:[{l:"Galar",f:"0110_galarian"}],122:[{l:"Galar",f:"0122_galarian"}],157:[{l:"Hisui",f:"0157_hisuian"}],
+  194:[{l:"Paldea",f:"0194_paldean"}],199:[{l:"Galar",f:"0199_galarian"}],211:[{l:"Hisui",f:"0211_hisuian"}],215:[{l:"Hisui",f:"0215_hisuian"}],222:[{l:"Galar",f:"0222_galarian"}],263:[{l:"Galar",f:"0263_galarian"}],264:[{l:"Galar",f:"0264_galarian"}],
   201:[{l:"A",f:"0201_a"},{l:"B",f:"0201_b"},{l:"C",f:"0201_c"},{l:"D",f:"0201_d"},{l:"E",f:"0201_e"},{l:"F",f:"0201_f"},{l:"G",f:"0201_g"},{l:"H",f:"0201_h"},{l:"I",f:"0201_i"},{l:"J",f:"0201_j"},{l:"K",f:"0201_k"},{l:"L",f:"0201_l"},{l:"M",f:"0201_m"},{l:"N",f:"0201_n"},{l:"O",f:"0201_o"},{l:"P",f:"0201_p"},{l:"Q",f:"0201_q"},{l:"R",f:"0201_r"},{l:"S",f:"0201_s"},{l:"T",f:"0201_t"},{l:"U",f:"0201_u"},{l:"V",f:"0201_v"},{l:"W",f:"0201_w"},{l:"X",f:"0201_x"},{l:"Y",f:"0201_y"},{l:"Z",f:"0201_z"},{l:"!",f:"0201_zem"},{l:"?",f:"0201_zim"}],
   327:[{l:"Pattern 1",f:"0327_01"},{l:"Pattern 2",f:"0327_02"},{l:"Pattern 3",f:"0327_03"},{l:"Pattern 4",f:"0327_04"},{l:"Pattern 5",f:"0327_05"},{l:"Pattern 6",f:"0327_06"},{l:"Pattern 7",f:"0327_07"},{l:"Pattern 8",f:"0327_08"},{l:"Pattern 9",f:"0327_09"}],
   351:[{l:"Rainy",f:"0351_rain"},{l:"Snowy",f:"0351_snow"},{l:"Sunny",f:"0351_sun"}],
@@ -62,9 +65,18 @@ const POKEMON_FORMS = {
   483:[{l:"Origin",f:"0483_origin"}],484:[{l:"Origin",f:"0484_origin"}],
   487:[{l:"Altered",f:"0487_alt"},{l:"Origin",f:"0487_ori"}],
   492:[{l:"Land",f:"0492_land"},{l:"Sky",f:"0492_sky"}],
-  550:[{l:"Blue-Striped",f:"0550_blue"},{l:"Red-Striped",f:"0550_red"}],
+  503:[{l:"Hisui",f:"0503_hisuian"}],
+  549:[{l:"Hisui",f:"0549_hisuian"}],
+  550:[{l:"Blue-Striped",f:"0550_blue"},{l:"Red-Striped",f:"0550_red"},{l:"Hisui",f:"0550_hisuian"}],
+  554:[{l:"Galar",f:"0554_galarian"}],
+  555:[{l:"Galar",f:"0555_galarian"}],
+  562:[{l:"Galar",f:"0562_galarian"}],
+  570:[{l:"Hisui",f:"0570_hisuian"}],
+  571:[{l:"Hisui",f:"0571_hisuian"}],
   585:[{l:"Autumn",f:"0585_autumn"},{l:"Spring",f:"0585_spring"},{l:"Summer",f:"0585_summer"},{l:"Winter",f:"0585_winter"}],
   586:[{l:"Autumn",f:"0586_autumn"},{l:"Spring",f:"0586_spring"},{l:"Summer",f:"0586_summer"},{l:"Winter",f:"0586_winter"}],
+  618:[{l:"Galar",f:"0618_galarian"}],
+  628:[{l:"Hisui",f:"0628_hisuian"}],
   641:[{l:"Incarnate",f:"0641_incarnate-male"},{l:"Therian",f:"0641_therian-male"}],
   642:[{l:"Incarnate",f:"0642_incarnate-male"},{l:"Therian",f:"0642_therian-male"}],
   645:[{l:"Incarnate",f:"0645_incarnate-male"},{l:"Therian",f:"0645_therian-male"}],
@@ -77,10 +89,14 @@ const POKEMON_FORMS = {
   671:[{l:"Blue",f:"0671_blue-female"},{l:"Orange",f:"0671_orange-female"},{l:"Red",f:"0671_red-female"},{l:"White",f:"0671_white-female"},{l:"Yellow",f:"0671_yellow-female"}],
   676:[{l:"Dandy",f:"0676_dandy"},{l:"Debutante",f:"0676_debutante"},{l:"Diamond",f:"0676_diamond"},{l:"Heart",f:"0676_heart"},{l:"Kabuki",f:"0676_kabuki"},{l:"La Reine",f:"0676_lareine"},{l:"Matron",f:"0676_matron"},{l:"Pharaoh",f:"0676_pharaoh"},{l:"Star",f:"0676_star"}],
   681:[{l:"Blade",f:"0681_blade"}],
+  705:[{l:"Hisui",f:"0705_hisuian"}],
+  706:[{l:"Hisui",f:"0706_hisuian"}],
   710:[{l:"Small",f:"0710a_small"},{l:"Average",f:"0710b_average"},{l:"Large",f:"0710c_large"},{l:"Super",f:"0710d_super"}],
   711:[{l:"Small",f:"0711a_small"},{l:"Average",f:"0711b_average"},{l:"Large",f:"0711c_large"},{l:"Super",f:"0711d_super"}],
+  713:[{l:"Hisui",f:"0713_hisuian"}],
   718:[{l:"10%",f:"0718_010"},{l:"50%",f:"0718_050"},{l:"100%",f:"0718_100"}],
   720:[{l:"Confined",f:"0720_confined"},{l:"Unbound",f:"0720_unbound"}],
+  724:[{l:"Hisui",f:"0724_hisuian"}],
   741:[{l:"Baile",f:"0741_baile"},{l:"Pa'u",f:"0741_pau"},{l:"Pom-Pom",f:"0741_pom"},{l:"Sensu",f:"0741_sensu"}],
   745:[{l:"Dusk",f:"0745_dusk"},{l:"Midday",f:"0745_midday"},{l:"Midnight",f:"0745_midnight"}],
   746:[{l:"School",f:"0746_school"}],
@@ -96,7 +112,43 @@ const POKEMON_FORMS = {
   1012:[{l:"Artisan",f:"1012_artisan"},{l:"Counterfeit",f:"1012_counterfeit"}],
   1013:[{l:"Masterpiece",f:"1013_masterpiece"},{l:"Unremarkable",f:"1013_unremarkable"}]
 };
+const POGO_EVO = {
+  2:"25 Candy",3:"100 Candy",5:"25 Candy",6:"100 Candy",8:"25 Candy",9:"100 Candy",11:"12 Candy",12:"50 Candy",14:"12 Candy",15:"50 Candy",17:"12 Candy",18:"50 Candy",20:"25 Candy",22:"50 Candy",24:"50 Candy",26:"50 Candy",28:"50 Candy",30:"25 Candy",31:"100 Candy",33:"25 Candy",34:"100 Candy",36:"50 Candy",38:"50 Candy",40:"50 Candy",42:"25 Candy",44:"25 Candy",45:"100 Candy",47:"50 Candy",49:"50 Candy",51:"50 Candy",53:"50 Candy",55:"50 Candy",57:"50 Candy",59:"50 Candy",61:"25 Candy",62:"100 Candy",64:"25 Candy",65:"100 Candy or Trade",67:"25 Candy",68:"100 Candy or Trade",70:"25 Candy",71:"100 Candy",73:"50 Candy",75:"25 Candy",76:"100 Candy or Trade",78:"50 Candy",80:"50 Candy",82:"25 Candy",85:"50 Candy",87:"50 Candy",89:"50 Candy",91:"50 Candy",93:"25 Candy",94:"100 Candy or Trade",97:"50 Candy",99:"50 Candy",101:"50 Candy",103:"50 Candy",105:"50 Candy",110:"50 Candy",112:"50 Candy",117:"50 Candy",119:"50 Candy",121:"50 Candy",124:"25 Candy",125:"25 Candy",126:"25 Candy",130:"400 Candy",134:"25 Candy",135:"25 Candy",136:"25 Candy",139:"50 Candy",141:"50 Candy",143:"50 Candy",148:"25 Candy",149:"100 Candy",
+  153:"25 Candy",154:"100 Candy",156:"25 Candy",157:"100 Candy",159:"25 Candy",160:"100 Candy",162:"50 Candy",164:"50 Candy",166:"25 Candy",168:"50 Candy",169:"100 Candy",171:"50 Candy",176:"25 Candy",178:"50 Candy",180:"25 Candy",181:"100 Candy",182:"100 Candy + Sun Stone",184:"25 Candy",186:"100 Candy + King's Rock",188:"25 Candy",189:"100 Candy",192:"50 Candy + Sun Stone",195:"50 Candy",196:"25 Candy + Walk 10km (Day)",197:"25 Candy + Walk 10km (Night)",199:"50 Candy + King's Rock",202:"25 Candy",205:"50 Candy",208:"50 Candy + Metal Coat",210:"50 Candy",212:"50 Candy + Metal Coat",217:"50 Candy",219:"50 Candy",221:"25 Candy",224:"50 Candy",229:"50 Candy",230:"100 Candy + Dragon Scale",232:"50 Candy",233:"50 Candy + Up-Grade",237:"25 Candy",242:"50 Candy",247:"25 Candy",248:"100 Candy",
+  253:"25 Candy",254:"100 Candy",256:"25 Candy",257:"100 Candy",259:"25 Candy",260:"100 Candy",262:"50 Candy",264:"50 Candy",266:"12 Candy",267:"50 Candy",268:"12 Candy",269:"50 Candy",271:"25 Candy",272:"100 Candy",274:"25 Candy",275:"100 Candy",277:"50 Candy",279:"50 Candy",281:"25 Candy",282:"100 Candy",284:"50 Candy",286:"50 Candy",288:"25 Candy",289:"100 Candy",291:"50 Candy",292:"50 Candy",294:"12 Candy",295:"50 Candy",297:"50 Candy",301:"50 Candy",305:"25 Candy",306:"100 Candy",308:"50 Candy",310:"50 Candy",317:"50 Candy",319:"50 Candy",321:"400 Candy",323:"50 Candy",326:"50 Candy",329:"25 Candy",330:"100 Candy",332:"50 Candy",334:"400 Candy",340:"50 Candy",342:"50 Candy",344:"50 Candy",346:"50 Candy",348:"50 Candy",350:"100 Candy + Walk 20km",354:"50 Candy",356:"25 Candy",362:"50 Candy",364:"25 Candy",365:"100 Candy",367:"50 Candy (Random)",368:"50 Candy (Random)",372:"25 Candy",373:"100 Candy",375:"25 Candy",376:"100 Candy",
+  388:"25 Candy",389:"100 Candy",391:"25 Candy",392:"100 Candy",394:"25 Candy",395:"100 Candy",397:"25 Candy",398:"100 Candy",400:"50 Candy",402:"50 Candy",404:"25 Candy",405:"100 Candy",407:"100 Candy + Sinnoh Stone",409:"50 Candy",411:"50 Candy",413:"50 Candy",414:"50 Candy",416:"50 Candy (\u2640 Only)",419:"50 Candy",421:"50 Candy",423:"50 Candy",424:"100 Candy + Sinnoh Stone",426:"50 Candy",428:"50 Candy",429:"100 Candy + Sinnoh Stone",430:"100 Candy + Sinnoh Stone",432:"50 Candy",435:"50 Candy",437:"50 Candy",444:"25 Candy",445:"100 Candy",448:"50 Candy",450:"50 Candy",452:"50 Candy",454:"50 Candy",457:"50 Candy",460:"50 Candy",461:"100 Candy + Sinnoh Stone",462:"100 Candy + Magnetic Lure",463:"100 Candy + Sinnoh Stone",464:"100 Candy + Sinnoh Stone",465:"100 Candy + Sinnoh Stone",466:"100 Candy + Sinnoh Stone",467:"100 Candy + Sinnoh Stone",468:"100 Candy + Sinnoh Stone",469:"100 Candy + Sinnoh Stone",470:"25 Candy + Mossy Lure",471:"25 Candy + Glacial Lure",472:"100 Candy + Sinnoh Stone",473:"100 Candy + Sinnoh Stone",474:"100 Candy + Sinnoh Stone",475:"100 Candy + Sinnoh Stone (\u2642 Only)",476:"100 Candy + Magnetic Lure",477:"100 Candy + Sinnoh Stone",478:"100 Candy + Sinnoh Stone (\u2640 Only)",
+  496:"25 Candy",497:"100 Candy",499:"25 Candy",500:"100 Candy",502:"25 Candy",503:"100 Candy",505:"50 Candy",507:"25 Candy",508:"100 Candy",510:"50 Candy",512:"100 Candy + Unova Stone",514:"100 Candy + Unova Stone",516:"100 Candy + Unova Stone",518:"50 Candy",520:"12 Candy",521:"50 Candy",523:"50 Candy",525:"25 Candy",526:"200 Candy or Trade",528:"50 Candy + Walk 1km (Buddy)",530:"50 Candy",533:"25 Candy",534:"200 Candy or Trade",536:"25 Candy",537:"100 Candy",541:"25 Candy",542:"100 Candy",544:"25 Candy",545:"100 Candy",547:"50 Candy + Sun Stone",549:"50 Candy + Sun Stone",552:"25 Candy",553:"100 Candy",555:"50 Candy",558:"50 Candy",560:"50 Candy",563:"50 Candy",565:"50 Candy",567:"50 Candy",569:"50 Candy",571:"50 Candy",573:"50 Candy",575:"25 Candy",576:"100 Candy",578:"25 Candy",579:"100 Candy",581:"50 Candy",583:"25 Candy",584:"100 Candy",586:"50 Candy",589:"200 Candy or Trade",591:"50 Candy",593:"50 Candy",596:"50 Candy",598:"50 Candy",600:"25 Candy",601:"100 Candy",603:"25 Candy",604:"100 Candy + Unova Stone",606:"50 Candy",608:"25 Candy",609:"100 Candy + Unova Stone",611:"25 Candy",612:"100 Candy",614:"50 Candy",617:"200 Candy or Trade",620:"50 Candy",623:"50 Candy",625:"50 Candy",628:"50 Candy",630:"50 Candy",634:"25 Candy",635:"100 Candy",637:"400 Candy",
+  651:"25 Candy",652:"100 Candy",654:"25 Candy",655:"100 Candy",657:"25 Candy",658:"100 Candy",660:"50 Candy",662:"25 Candy",663:"100 Candy",665:"25 Candy",666:"100 Candy",668:"50 Candy",673:"50 Candy",675:"50 Candy",680:"25 Candy",681:"100 Candy",683:"50 Candy + Use Incense (Buddy)",685:"50 Candy + Feed 25 Treats (Buddy)",687:"50 Candy (Phone Upside Down)",689:"50 Candy",691:"50 Candy",693:"50 Candy",695:"50 Candy",697:"50 Candy",699:"50 Candy",700:"25 Candy + Earn 70 Hearts (Buddy)",705:"25 Candy",706:"100 Candy (Rainy Weather or Rainy Lure)",709:"200 Candy or Trade",711:"50 Candy",713:"50 Candy",715:"400 Candy",
+  723:"25 Candy",724:"100 Candy",726:"25 Candy",727:"100 Candy",729:"25 Candy",730:"100 Candy",732:"25 Candy",733:"100 Candy",735:"50 Candy",737:"25 Candy",738:"100 Candy + Magnetic Lure",740:"50 Candy",743:"50 Candy",745:"50 Candy (Day=Midday, Night=Midnight, Dusk=Event Rockruff)",748:"50 Candy",750:"50 Candy",752:"50 Candy",754:"50 Candy",756:"50 Candy",758:"50 Candy (\u2640 Only)",760:"400 Candy",762:"25 Candy",763:"100 Candy (\u2640 Only)",768:"50 Candy",770:"50 Candy",783:"25 Candy",784:"100 Candy",809:"400 Candy",
+  811:"25 Candy",812:"100 Candy",814:"25 Candy",815:"100 Candy",817:"25 Candy",818:"100 Candy",820:"50 Candy",822:"25 Candy",823:"100 Candy",825:"25 Candy",826:"100 Candy",828:"50 Candy",830:"50 Candy",832:"50 Candy",834:"50 Candy",836:"50 Candy",838:"25 Candy",839:"100 Candy",841:"50 Candy",842:"50 Candy",844:"50 Candy",847:"50 Candy",849:"50 Candy",851:"50 Candy",853:"50 Candy",855:"50 Candy",857:"25 Candy",858:"100 Candy",860:"25 Candy",861:"100 Candy",862:"100 Candy (Night)",863:"50 Candy",864:"50 Candy",865:"50 Candy",866:"100 Candy",867:"50 Candy",869:"50 Candy",873:"50 Candy",879:"50 Candy",886:"25 Candy",887:"100 Candy",
+  899:"50 Candy",900:"Max Battles Only",901:"100 Candy (During Full Moon)",902:"50 Candy",903:"100 Candy + Sinnoh Stone",904:"50 Candy",
+  907:"25 Candy",908:"100 Candy",910:"25 Candy",911:"100 Candy",913:"25 Candy",914:"100 Candy",916:"50 Candy",918:"50 Candy",920:"50 Candy",922:"25 Candy",923:"100 Candy + Walk 10km",925:"25 Candy",927:"50 Candy",929:"25 Candy",930:"100 Candy",933:"25 Candy",934:"100 Candy",936:"50 Candy + Defeat 30 Psychic (Buddy)",937:"50 Candy + Defeat 30 Ghost (Buddy)",939:"50 Candy",941:"50 Candy",943:"50 Candy",945:"50 Candy",947:"50 Candy",949:"50 Candy",952:"50 Candy",954:"50 Candy",956:"50 Candy",958:"25 Candy",959:"100 Candy",961:"50 Candy",964:"50 Candy",966:"50 Candy",970:"50 Candy",972:"50 Candy",975:"50 Candy",979:"100 Candy + Defeat 30 Raids (Buddy)",980:"50 Candy",981:"50 Candy",982:"50 Candy",983:"100 Candy",997:"25 Candy",998:"100 Candy",1000:"100 Candy",1011:"50 Candy",1013:"50 Candy",1019:"100 Candy"
+};
+
 function formImgUrl(dex, filename) { return `${IMG_BASE}/National-Dex/regular/${getGenFolder(dex)}/${filename}.webp`; }
+
+// Regional evolution chains: maps a form prefix to its evolution line [{dex, form file, name}]
+const REGIONAL_EVOS = {
+  alola: [
+    [19,20],[27,28],[37,38],[50,51],[52,53],[74,75,76],[88,89]
+  ],
+  galarian: [
+    [52,863],[77,78],[79,80],[79,199],[83,865],[109,110],[122,866],[222,864],[263,264,862],[554,555],[562,867]
+  ],
+  hisuian: [
+    [58,59],[100,101],[155,156,157],[211,904],[215,903],[501,502,503],[548,549],[550,902],[570,571],[627,628],[704,705,706],[712,713],[722,723,724]
+  ],
+  paldea: [
+    [194,980]
+  ]
+};
+function getRegionalEvoChain(dex, formLabel) {
+  const region = formLabel.toLowerCase().replace("galar","galarian").replace("hisui","hisuian").replace("paldea","paldea");
+  const chains = REGIONAL_EVOS[region];
+  if (!chains) return null;
+  const chain = chains.find(c => c.includes(dex));
+  return chain || null;
+}
 
 // --- POKEMON DETAIL VIEW ---
 const STAT_COLORS = {hp:"#FF5959",attack:"#F5AC78",defense:"#FAE078","special-attack":"#9DB7F5","special-defense":"#A7DB8D",speed:"#FA92B2"};
@@ -115,17 +167,6 @@ async function fetchPokemonData(dexNum) {
   return result;
 }
 function _fmtName(n) { return n.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" "); }
-function _parseTrigger(details) {
-  if (!details || !details.length) return "";
-  const d = details[0]; const p = [];
-  switch (d.trigger?.name) {
-    case "level-up": p.push(d.min_level ? `Level ${d.min_level}` : "Level up"); if (d.min_happiness) p.push(`(Happiness ${d.min_happiness})`); if (d.time_of_day) p.push(`(${d.time_of_day})`); if (d.known_move) p.push(`(knows ${_fmtName(d.known_move.name)})`); if (d.known_move_type) p.push(`(knows ${d.known_move_type.name} move)`); if (d.location) p.push(`(at ${_fmtName(d.location.name)})`); if (d.needs_overworld_rain) p.push("(rain)"); if (d.turn_upside_down) p.push("(upside down)"); break;
-    case "use-item": p.push(`Use ${_fmtName(d.item?.name || "item")}`); break;
-    case "trade": p.push("Trade"); if (d.held_item) p.push(`(holding ${_fmtName(d.held_item.name)})`); break;
-    default: if (d.trigger?.name) p.push(_fmtName(d.trigger.name));
-  }
-  return p.join(" ");
-}
 async function fetchEvolutionChain(dexNum) {
   const ck = `evo_${dexNum}`;
   if (_pokeCache[ck]) return _pokeCache[ck];
@@ -137,12 +178,109 @@ async function fetchEvolutionChain(dexNum) {
   const stages = [];
   function walk(node, depth) {
     const num = parseInt(node.species.url.split("/").filter(Boolean).pop(), 10);
-    stages.push({ name: _fmtName(node.species.name), dexNum: num, trigger: _parseTrigger(node.evolution_details), depth });
+    stages.push({ name: _fmtName(node.species.name), dexNum: num, trigger: POGO_EVO[num] || "", depth });
     for (const child of node.evolves_to) walk(child, depth + 1);
   }
   walk(chain.chain, 0);
-  _pokeCache[ck] = stages;
-  return stages;
+  // Expand Pokemon with multiple evolution forms
+  const EVO_FORM_EXPAND = {
+    413: [
+      { name: "Wormadam (Plant)", dexNum: 413, trigger: "50 Candy (Plant Cloak)", imgFile: "0413_plant-female" },
+      { name: "Wormadam (Sandy)", dexNum: 413, trigger: "50 Candy (Sandy Cloak)", imgFile: "0413_sandy-female" },
+      { name: "Wormadam (Trash)", dexNum: 413, trigger: "50 Candy (Trash Cloak)", imgFile: "0413_trash-female" }
+    ],
+    745: [
+      { name: "Lycanroc (Midday)", dexNum: 745, trigger: "50 Candy (Day)", imgFile: "0745_midday" },
+      { name: "Lycanroc (Dusk)", dexNum: 745, trigger: "50 Candy (Event Rockruff)", imgFile: "0745_dusk" },
+      { name: "Lycanroc (Midnight)", dexNum: 745, trigger: "50 Candy (Night)", imgFile: "0745_midnight" }
+    ],
+    849: [
+      { name: "Toxtricity (Amped)", dexNum: 849, trigger: "50 Candy (Random)", imgFile: "0849_amped" },
+      { name: "Toxtricity (Low Key)", dexNum: 849, trigger: "50 Candy (Random)", imgFile: "0849_lowkey" }
+    ],
+    892: [
+      { name: "Urshifu (Single Strike)", dexNum: 892, trigger: "50 Candy", imgFile: "0892_single" },
+      { name: "Urshifu (Rapid Strike)", dexNum: 892, trigger: "50 Candy", imgFile: "0892_rapid" }
+    ],
+    925: [
+      { name: "Maushold (Three)", dexNum: 925, trigger: "25 Candy (Random)", imgFile: "0925_three" },
+      { name: "Maushold (Four)", dexNum: 925, trigger: "25 Candy (Random)", imgFile: "0925_four" }
+    ]
+  };
+  const expanded = [];
+  for (const s of stages) {
+    if (EVO_FORM_EXPAND[s.dexNum]) {
+      for (const form of EVO_FORM_EXPAND[s.dexNum]) expanded.push({ ...form, depth: s.depth });
+    } else {
+      expanded.push(s);
+    }
+  }
+  // Append Mega Evolutions (Pokemon GO uses Mega Energy)
+  const MEGA_EVOS = {
+    3:[{n:"Mega Venusaur",f:"0003_mega"}],
+    6:[{n:"Mega Charizard X",f:"0006_megax"},{n:"Mega Charizard Y",f:"0006_megay"}],
+    9:[{n:"Mega Blastoise",f:"0009_mega"}],
+    15:[{n:"Mega Beedrill",f:"0015_mega"}],
+    18:[{n:"Mega Pidgeot",f:"0018_mega"}],
+    65:[{n:"Mega Alakazam",f:"0065_mega"}],
+    80:[{n:"Mega Slowbro",f:"0080_mega"}],
+    94:[{n:"Mega Gengar",f:"0094_mega"}],
+    115:[{n:"Mega Kangaskhan",f:"0115_mega-female"}],
+    127:[{n:"Mega Pinsir",f:"0127_mega"}],
+    130:[{n:"Mega Gyarados",f:"0130_mega"}],
+    142:[{n:"Mega Aerodactyl",f:"0142_mega"}],
+    150:[{n:"Mega Mewtwo X",f:"0150_megax"},{n:"Mega Mewtwo Y",f:"0150_megay"}],
+    181:[{n:"Mega Ampharos",f:"0181_mega"}],
+    208:[{n:"Mega Steelix",f:"0208_mega"}],
+    212:[{n:"Mega Scizor",f:"0212_mega"}],
+    214:[{n:"Mega Heracross",f:"0214_mega"}],
+    229:[{n:"Mega Houndoom",f:"0229_mega"}],
+    248:[{n:"Mega Tyranitar",f:"0248_mega"}],
+    254:[{n:"Mega Sceptile",f:"0254_mega"}],
+    257:[{n:"Mega Blaziken",f:"0257_mega"}],
+    260:[{n:"Mega Swampert",f:"0260_mega"}],
+    282:[{n:"Mega Gardevoir",f:"0282_mega"}],
+    302:[{n:"Mega Sableye",f:"0302_mega"}],
+    303:[{n:"Mega Mawile",f:"0303_mega"}],
+    306:[{n:"Mega Aggron",f:"0306_mega"}],
+    310:[{n:"Mega Manectric",f:"0310_mega"}],
+    319:[{n:"Mega Sharpedo",f:"0319_mega"}],
+    323:[{n:"Mega Camerupt",f:"0323_mega"}],
+    334:[{n:"Mega Altaria",f:"0334_mega"}],
+    354:[{n:"Mega Banette",f:"0354_mega"}],
+    359:[{n:"Mega Absol",f:"0359_mega"}],
+    362:[{n:"Mega Glalie",f:"0362_mega"}],
+    373:[{n:"Mega Salamence",f:"0373_mega"}],
+    376:[{n:"Mega Metagross",f:"0376_mega"}],
+    380:[{n:"Mega Latias",f:"0380_mega-female"}],
+    381:[{n:"Mega Latios",f:"0381_mega-male"}],
+    382:[{n:"Primal Kyogre",f:"0382_primal"}],
+    383:[{n:"Primal Groudon",f:"0383_primal"}],
+    384:[{n:"Mega Rayquaza",f:"0384_mega"}],
+    428:[{n:"Mega Lopunny",f:"0428_mega"}],
+    445:[{n:"Mega Garchomp",f:"0445_mega"}],
+    448:[{n:"Mega Lucario",f:"0448_mega"}],
+    460:[{n:"Mega Abomasnow",f:"0460_mega"}],
+    475:[{n:"Mega Gallade",f:"0475_mega-male"}],
+    531:[{n:"Mega Audino",f:"0531_mega"}],
+    719:[{n:"Mega Diancie",f:"0719_mega"}]
+  };
+  const maxDepth = Math.max(...expanded.map(e => e.depth));
+  // Check all Pokemon in the chain for Megas (e.g., Slowbro has Mega but isn't final)
+  const allDexInChain = [...new Set(expanded.map(e => e.dexNum))];
+  const megasAdded = new Set();
+  for (const dex of allDexInChain) {
+    if (MEGA_EVOS[dex] && !megasAdded.has(dex)) {
+      megasAdded.add(dex);
+      const parentDepth = expanded.find(e => e.dexNum === dex)?.depth || maxDepth;
+      for (const m of MEGA_EVOS[dex]) {
+        const triggerText = dex === 382 || dex === 383 ? "400 Primal Energy" : dex === 384 ? "300 Mega Energy + Dragon Ascent (Meteorite)" : "200 Mega Energy (first), free after";
+        expanded.push({ name: m.n, dexNum: dex, trigger: triggerText, depth: parentDepth + 1, imgFile: m.f, isMega: true });
+      }
+    }
+  }
+  _pokeCache[ck] = expanded;
+  return expanded;
 }
 function pokemonImgUrl(dex) { return natDexImg(dex, GENDER_SUFFIX[dex] || ""); }
 
@@ -298,7 +436,7 @@ function toggleDarkMode() {
 let breakpoint = getBreakpoint();
 function getBreakpoint() {
   const w = window.innerWidth;
-  if (w >= 1024) return "desktop";
+  if (w >= 1280) return "desktop";
   if (w >= 640) return "tablet";
   return "mobile";
 }
@@ -628,6 +766,326 @@ const CURRENT_MAX_BATTLES = {
 };
 const MAX_TIER_COLORS = { "1-Star Max Battles": "#78C850", "2-Star Max Battles": "#F39C12", "3-Star Max Battles": "#F1C40F", "5-Star Max Battles": "#8E44AD", "6-Star Max Battles": "#E74C3C" };
 
+// --- WEB STORE BOX DATA ---
+const STORE_ITEM_VALUES = {
+  "Remote Raid Pass": 1.50,
+  "Premium Battle Pass": 1.00,
+  "Egg Incubator": 1.00,
+  "Super Incubator": 1.50,
+  "Lucky Egg": 0.62,
+  "Star Piece": 0.75,
+  "Max Revive": 0.13,
+  "Max Potion": 0.20,
+  "Ultra Ball": 0.05,
+  "Silver Pinap Berry": 0.20,
+  "Golden Razz Berry": 0.13,
+  "Max Particle Pack": 1.33,
+  "Max Mushroom": 3.33,
+  "Link Charge": 0.005,
+  "GO Pass Deluxe": 4.99,
+  "Fashion Raid Day Ticket": 2.99,
+  "Pokémon Storage Upgrade": 1.99,
+  "Item Bag Upgrade": 1.99,
+  "PokéCoin": 0.007
+};
+
+const ESTIMATED_VALUE_ITEMS = new Set(["Ultra Ball", "GO Pass Deluxe", "Fashion Raid Day Ticket", "PokéCoin"]);
+
+const WEB_STORE_BOXES = [
+  {
+    name: "GO Pass Deluxe: A Shockingly Good Time Ultra Box",
+    price: 8.99,
+    category: "Event Bundle",
+    limited: true,
+    timeLeft: "6 days",
+    oneTime: true,
+    items: [
+      { name: "GO Pass Deluxe", qty: 1, note: "A Shockingly Good Time" },
+
+      { name: "Ultra Ball", qty: 20 },
+      { name: "Max Revive", qty: 10 },
+      { name: "Premium Battle Pass", qty: 2 },
+      { name: "Egg Incubator", qty: 1 },
+      { name: "Super Incubator", qty: 1 },
+      { name: "Max Potion", qty: 10 }
+    ]
+  },
+  {
+    name: "GO Pass Deluxe: April Ultra Box",
+    price: 14.99,
+    category: "Event Bundle",
+    limited: true,
+    timeLeft: "4 days",
+    oneTime: true,
+    items: [
+      { name: "GO Pass Deluxe", qty: 1, note: "April" },
+
+      { name: "Ultra Ball", qty: 20 },
+      { name: "Max Revive", qty: 10 },
+      { name: "Premium Battle Pass", qty: 2 },
+      { name: "Egg Incubator", qty: 1 },
+      { name: "Super Incubator", qty: 1 },
+      { name: "Max Potion", qty: 10 }
+    ]
+  },
+  {
+    name: "Fashion Raid Day Ultra Ticket Box",
+    price: 4.99,
+    category: "Event Bundle",
+    limited: true,
+    timeLeft: "4 days",
+    oneTime: true,
+    items: [
+      { name: "Fashion Raid Day Ticket", qty: 1 },
+      { name: "Premium Battle Pass", qty: 1 }
+    ]
+  },
+  {
+    name: "GO Pass Deluxe: April",
+    price: 7.99,
+    category: "Event Bundle",
+    limited: false,
+    items: [
+      { name: "GO Pass Deluxe", qty: 1, note: "April" },
+      { name: "Ultra Ball", qty: 10 },
+      { name: "Max Revive", qty: 5 },
+      { name: "Premium Battle Pass", qty: 1 },
+      { name: "Max Potion", qty: 5 }
+    ]
+  },
+  {
+    name: "GO Pass Deluxe: Shockingly Good Time + 6 Ranks",
+    price: 6.99,
+    category: "Event Bundle",
+    limited: true,
+    timeLeft: "6 days",
+    oneTime: true,
+    items: [
+      { name: "GO Pass Deluxe", qty: 1, note: "A Shockingly Good Time" },
+
+      { name: "Ultra Ball", qty: 10 },
+      { name: "Max Revive", qty: 5 },
+      { name: "Premium Battle Pass", qty: 1 },
+      { name: "Max Potion", qty: 5 }
+    ]
+  },
+  {
+    name: "GO Pass Deluxe: A Shockingly Good Time",
+    price: 4.99,
+    category: "Event Bundle",
+    limited: true,
+    timeLeft: "6 days",
+    oneTime: true,
+    items: [
+      { name: "GO Pass Deluxe", qty: 1, note: "A Shockingly Good Time" },
+      { name: "Ultra Ball", qty: 10 },
+      { name: "Max Revive", qty: 5 },
+      { name: "Premium Battle Pass", qty: 1 },
+      { name: "Max Potion", qty: 5 }
+    ]
+  },
+  {
+    name: "GO Pass Deluxe: April + 10 Ranks",
+    price: 9.99,
+    category: "Event Bundle",
+    limited: false,
+    items: [
+      { name: "GO Pass Deluxe", qty: 1, note: "April" },
+
+      { name: "Ultra Ball", qty: 10 },
+      { name: "Max Revive", qty: 5 },
+      { name: "Premium Battle Pass", qty: 1 },
+      { name: "Max Potion", qty: 5 }
+    ]
+  },
+  {
+    name: "Lucky Egg Bundle",
+    price: 4.99,
+    category: "Item",
+    limited: false,
+    items: [
+      { name: "Lucky Egg", qty: 8 }
+    ]
+  },
+  {
+    name: "Star Piece Bundle",
+    price: 5.99,
+    category: "Item",
+    limited: false,
+    items: [
+      { name: "Star Piece", qty: 8 }
+    ]
+  },
+  {
+    name: "Remote Raid Pass",
+    price: 2.99,
+    category: "Raid",
+    popular: true,
+    limited: false,
+    items: [
+      { name: "Remote Raid Pass", qty: 2 }
+    ]
+  },
+  {
+    name: "Egg Incubator Bundle",
+    price: 2.99,
+    category: "Item",
+    limited: false,
+    items: [
+      { name: "Egg Incubator", qty: 3 }
+    ]
+  },
+  {
+    name: "Super Incubator Bundle",
+    price: 2.99,
+    category: "Item",
+    limited: false,
+    items: [
+      { name: "Super Incubator", qty: 2 }
+    ]
+  },
+  {
+    name: "Premium Battle Pass Bundle",
+    price: 2.99,
+    category: "Raid",
+    limited: false,
+    items: [
+      { name: "Premium Battle Pass", qty: 3 }
+    ]
+  },
+  {
+    name: "600 Link Charge + 3 Remote Raid Pass",
+    price: 7.99,
+    category: "Raid",
+    limited: false,
+    items: [
+      { name: "Link Charge", qty: 600 },
+      { name: "Remote Raid Pass", qty: 3 }
+    ]
+  },
+  {
+    name: "Max Particle Pack Bundle",
+    price: 7.99,
+    category: "Max",
+    limited: false,
+    items: [
+      { name: "Max Particle Pack", qty: 6 }
+    ]
+  },
+  {
+    name: "Max Mushroom Bundle",
+    price: 9.99,
+    category: "Max",
+    limited: false,
+    items: [
+      { name: "Max Mushroom", qty: 3 }
+    ]
+  },
+  {
+    name: "3 Max Particle Pack + 3 Remote Raid Pass",
+    price: 7.99,
+    category: "Max",
+    limited: false,
+    items: [
+      { name: "Max Particle Pack", qty: 3 },
+      { name: "Remote Raid Pass", qty: 3 }
+    ]
+  },
+  {
+    name: "Max Particle Pack + Remote Raid Pass",
+    price: 2.99,
+    category: "Max",
+    limited: false,
+    items: [
+      { name: "Max Particle Pack", qty: 1 },
+      { name: "Remote Raid Pass", qty: 1 }
+    ]
+  },
+  {
+    name: "Pokémon Storage Upgrade",
+    price: 1.99,
+    category: "Upgrade",
+    popular: true,
+    limited: false,
+    items: [
+      { name: "Pokémon Storage Upgrade", qty: 1 }
+    ]
+  },
+  {
+    name: "Item Bag Upgrade",
+    price: 1.99,
+    category: "Upgrade",
+    popular: true,
+    limited: false,
+    items: [
+      { name: "Item Bag Upgrade", qty: 1 }
+    ]
+  },
+  {
+    name: "Max Revive Bundle",
+    price: 1.99,
+    category: "Item",
+    limited: false,
+    items: [
+      { name: "Max Revive", qty: 15 }
+    ]
+  },
+  {
+    name: "Silver Pinap Berry Bundle",
+    price: 1.99,
+    category: "Item",
+    limited: false,
+    items: [
+      { name: "Silver Pinap Berry", qty: 10 }
+    ]
+  },
+  {
+    name: "Golden Razz Berry Bundle",
+    price: 1.99,
+    category: "Item",
+    limited: false,
+    items: [
+      { name: "Golden Razz Berry", qty: 15 }
+    ]
+  },
+  {
+    name: "Max Potion Bundle",
+    price: 1.99,
+    category: "Item",
+    limited: false,
+    items: [
+      { name: "Max Potion", qty: 10 }
+    ]
+  },
+  {
+    name: "600 Link Charge",
+    price: 2.99,
+    category: "Item",
+    limited: false,
+    items: [
+      { name: "Link Charge", qty: 600 }
+    ]
+  }
+];
+
+function calcBoxValue(box) {
+  let totalValue = 0;
+  box.items.forEach(item => {
+    const unitVal = STORE_ITEM_VALUES[item.name] || 0;
+    totalValue += unitVal * item.qty;
+  });
+  const savings = totalValue - box.price;
+  const savingsPct = totalValue > 0 ? ((savings / totalValue) * 100) : 0;
+  let rating, ratingColor;
+  if (savingsPct >= 30) { rating = "Great Deal"; ratingColor = "#2ECC71"; }
+  else if (savingsPct >= 15) { rating = "Good Deal"; ratingColor = "#3498DB"; }
+  else if (savingsPct >= 0) { rating = "Fair"; ratingColor = "#F39C12"; }
+  else { rating = "Bad Deal"; ratingColor = "#E74C3C"; }
+  return { totalValue, savings, savingsPct, rating, ratingColor };
+}
+
+const STORE_CATEGORIES = ["All", "Event Bundle", "Raid", "Max", "Item", "Upgrade"];
+
 const EVENT_TYPES = ["All", "Event", "Raid", "Max Battle", "Community Day", "GO Fest"];
 
 // --- STATE ---
@@ -645,7 +1103,9 @@ let state = {
   calSelectedDay: null,
   pokedexDetail: null,
   pokedexDetailData: null,
-  pokedexDetailEvolutions: null
+  pokedexDetailEvolutions: null,
+  storeFilter: "All",
+  storeGuideOpen: false
 };
 
 // --- NEST MIGRATION ---
@@ -1672,6 +2132,17 @@ function goBack() {
   render();
 }
 
+function getPokemonOfTheDay() {
+  const now = new Date();
+  const seed = now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate();
+  let hash = seed;
+  hash = ((hash >> 16) ^ hash) * 0x45d9f3b;
+  hash = ((hash >> 16) ^ hash) * 0x45d9f3b;
+  hash = (hash >> 16) ^ hash;
+  const dex = (Math.abs(hash) % 1025) + 1;
+  return dex;
+}
+
 function searchPokedex(val) {
   const query = val.trim().toLowerCase();
   const resultsEl = document.getElementById("dex-search-results");
@@ -1807,26 +2278,94 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
   const totalStats = data.stats.reduce((sum, s) => sum + s.value, 0);
   let evoHtml = "";
   if (evolutions && evolutions.length > 1) {
-    const evoItems = evolutions.map((evo, i) => {
-      const isActive = evo.dexNum === data.dexNum;
-      const arrow = i > 0 && evo.trigger ? `<div style="display:flex;flex-direction:column;align-items:center;margin:0 4px;flex-shrink:0">
-        <div style="font-size:18px;color:${th.textMuted}">\u2192</div>
-        <div style="font-size:10px;color:${th.textSecondary};text-align:center;max-width:80px;line-height:1.2">${esc(evo.trigger)}</div>
-      </div>` : "";
-      return `${arrow}<div onclick="openPokemonDetail(${evo.dexNum})" style="display:flex;flex-direction:column;align-items:center;cursor:pointer;padding:8px;border-radius:12px;background:${isActive ? th.accentBgSubtle(primaryColor) : "transparent"};border:2px solid ${isActive ? primaryColor : "transparent"};transition:all 0.2s;flex-shrink:0" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${isActive ? th.accentBgSubtle(primaryColor) : "transparent"}'">
-        <img src="${pokemonImgUrl(evo.dexNum)}" style="width:56px;height:56px;object-fit:contain" onerror="this.style.opacity='0.3'" />
-        <div style="font-size:11px;font-weight:${isActive ? 700 : 500};color:${isActive ? th.text : th.textSecondary};margin-top:4px">${esc(evo.name)}</div>
-        <div style="font-size:10px;color:${th.textMuted}">#${String(evo.dexNum).padStart(4, "0")}</div>
+    function evoCard(evo) {
+      const isActive = evo.dexNum === data.dexNum && (!evo.imgFile || evo.name === data.name);
+      return `<div onclick="openPokemonDetail(${evo.dexNum})" style="display:flex;flex-direction:column;align-items:center;cursor:pointer;padding:8px;border-radius:12px;background:${isActive ? th.accentBgSubtle(primaryColor) : "transparent"};border:2px solid ${isActive ? primaryColor : "transparent"};transition:all 0.2s;flex-shrink:0" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${isActive ? th.accentBgSubtle(primaryColor) : "transparent"}'">
+        <img src="${evo.isMega ? `${IMG_BASE}/Mega/regular/${getGenFolder(evo.dexNum)}/${evo.imgFile}.webp` : evo.imgFile ? formImgUrl(evo.dexNum, evo.imgFile) : pokemonImgUrl(evo.dexNum)}" style="width:56px;height:56px;object-fit:contain" onerror="this.style.opacity='0.3'" />
+        <div style="font-size:11px;font-weight:${isActive ? 700 : 500};color:${isActive ? th.text : th.textSecondary};margin-top:4px;text-align:center;max-width:90px">${esc(evo.name)}</div>
+        <div style="font-size:10px;color:${th.textMuted}">#${String(evo.dexNum).padStart(4,"0")}</div>
       </div>`;
-    }).join("");
+    }
+    // Separate Megas from regular evolutions
+    const regularEvos = evolutions.filter(e => !e.isMega);
+    const megaEvos = evolutions.filter(e => e.isMega);
+    // Group by depth to detect branching
+    const byDepth = {};
+    regularEvos.forEach(e => { if (!byDepth[e.depth]) byDepth[e.depth] = []; byDepth[e.depth].push(e); });
+    const depths = Object.keys(byDepth).map(Number).sort((a,b) => a - b);
+    const hasBranch = depths.some(d => byDepth[d].length > 1);
+
+    let evoContent = "";
+    if (hasBranch) {
+      // Build stages: each depth is either a single Pokemon or a branch group
+      const stagesHTML = depths.map((d, di) => {
+        const group = byDepth[d];
+        if (group.length === 1) {
+          // Single Pokemon at this depth
+          const evo = group[0];
+          const arrow = di > 0 ? `<div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+            <div style="font-size:18px;color:${th.textMuted}">\u2192</div>
+            <div style="font-size:10px;color:${th.textSecondary};text-align:center;max-width:80px;line-height:1.2">${esc(evo.trigger)}</div>
+          </div>` : "";
+          return `${arrow}${evoCard(evo)}`;
+        } else {
+          // Multiple Pokemon = branch
+          const branchRows = group.map(evo => `<div style="display:flex;align-items:center;gap:4px">
+            <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:${isMobile ? 60 : 70}px">
+              <div style="font-size:16px;color:${th.textMuted}">\u2192</div>
+              <div style="font-size:${isMobile ? 8 : 9}px;color:${th.textSecondary};text-align:center;line-height:1.2">${esc(evo.trigger)}</div>
+            </div>
+            <div style="min-width:${isMobile ? 80 : 100}px">${evoCard(evo)}</div>
+          </div>`).join("");
+          return `<div style="display:flex;flex-direction:column;gap:6px">${branchRows}</div>`;
+        }
+      }).join("");
+
+      evoContent = `<div style="display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;background:${th.surface};border-radius:12px;border:1px solid ${th.border};overflow-x:auto">
+        ${stagesHTML}
+      </div>`;
+    } else {
+      // Linear layout
+      const evoItems = regularEvos.map((evo, i) => {
+        const arrow = i > 0 && evo.trigger ? `<div style="display:flex;flex-direction:column;align-items:center;margin:0 4px;flex-shrink:0">
+          <div style="font-size:18px;color:${th.textMuted}">\u2192</div>
+          <div style="font-size:10px;color:${th.textSecondary};text-align:center;max-width:80px;line-height:1.2">${esc(evo.trigger)}</div>
+        </div>` : "";
+        return `${arrow}${evoCard(evo)}`;
+      }).join("");
+      evoContent = `<div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px;padding:12px;background:${th.surface};border-radius:12px;border:1px solid ${th.border}">${evoItems}</div>`;
+    }
+
+    let megaHtml = "";
+    if (megaEvos.length > 0) {
+      const megaCards = megaEvos.map(evo => `<div style="display:flex;align-items:center;gap:${isMobile ? 8 : 12}px;padding:${isMobile ? 10 : 12}px;background:${th.accentBgSubtle("#8E44AD")};border:1px solid ${th.countdownBorder("#8E44AD")};border-radius:12px">
+        <img src="${IMG_BASE}/Mega/regular/${getGenFolder(evo.dexNum)}/${evo.imgFile}.webp" style="width:${isMobile ? 52 : 60}px;height:${isMobile ? 52 : 60}px;object-fit:contain;flex-shrink:0" onerror="this.style.opacity='0.3'" />
+        <div style="flex:1;min-width:0">
+          <div style="font-size:${isMobile ? 13 : 14}px;font-weight:700;color:${th.text}">${esc(evo.name)}</div>
+          <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textSecondary};margin-top:2px">${esc(evo.trigger)}</div>
+        </div>
+      </div>`).join("");
+      megaHtml = `<div style="margin-top:12px">
+        <div style="font-size:13px;font-weight:700;color:#8E44AD;margin-bottom:8px">\u26A1 Mega Evolution</div>
+        <div style="display:flex;flex-direction:column;gap:8px">${megaCards}</div>
+      </div>`;
+    }
+
     evoHtml = `<div style="margin-top:20px">
       <div style="font-size:14px;font-weight:700;color:${th.text};margin-bottom:10px">Evolution Chain</div>
-      <div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px;padding:12px;background:${th.surface};border-radius:12px;border:1px solid ${th.border}">${evoItems}</div>
+      ${evoContent}
+      ${megaHtml}
     </div>`;
   }
   const pad = isMobile ? "16px" : "24px";
   return `<div style="padding:${pad};max-width:480px;margin:0 auto">
-    <button onclick="closePokemonDetail()" style="display:flex;align-items:center;gap:6px;background:none;border:none;color:${th.textSecondary};font-size:14px;font-weight:600;cursor:pointer;padding:8px 0;margin-bottom:12px;font-family:inherit" onmouseenter="this.style.color='${th.text}'" onmouseleave="this.style.color='${th.textSecondary}'">\u2190 Back to Pok\u00E9Dex</button>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <button onclick="closePokemonDetail()" style="display:flex;align-items:center;gap:6px;background:none;border:none;color:${th.textSecondary};font-size:14px;font-weight:600;cursor:pointer;padding:8px 0;font-family:inherit" onmouseenter="this.style.color='${th.text}'" onmouseleave="this.style.color='${th.textSecondary}'">\u2190 Back</button>
+      <div style="display:flex;gap:8px">
+        ${data.dexNum > 1 ? `<button onclick="openPokemonDetail(${data.dexNum - 1})" style="width:36px;height:36px;border-radius:10px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;transition:all 0.15s ease" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${th.surface}'">\u25C0</button>` : ""}
+        ${data.dexNum < 1025 ? `<button onclick="openPokemonDetail(${data.dexNum + 1})" style="width:36px;height:36px;border-radius:10px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;transition:all 0.15s ease" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${th.surface}'">\u25B6</button>` : ""}
+      </div>
+    </div>
     <div style="text-align:center;padding:20px 0;background:linear-gradient(135deg,${primaryColor}22,${primaryColor}08);border-radius:16px;margin-bottom:16px;position:relative;overflow:hidden">
       <div style="position:absolute;top:8px;right:12px;font-size:28px;font-weight:800;color:${primaryColor};opacity:0.7">${dexStr}</div>
       <img src="${pokemonImgUrl(data.dexNum)}" style="width:${isMobile ? 140 : 180}px;height:${isMobile ? 140 : 180}px;object-fit:contain;filter:drop-shadow(0 4px 12px ${primaryColor}40)" onerror="this.style.opacity='0.3'" />
@@ -1834,9 +2373,33 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
     <div style="text-align:center;margin-bottom:16px">
       <div style="font-size:12px;font-weight:700;color:${th.textMuted};letter-spacing:1px">${dexStr}</div>
       <div style="font-size:24px;font-weight:800;color:${th.text};margin:2px 0;text-transform:capitalize">${esc(data.name)}</div>
-      <div style="font-size:13px;color:${th.textSecondary};font-style:italic;margin-bottom:10px">${esc(data.genus)}</div>
+      <div style="font-size:13px;color:${th.textSecondary};font-style:italic;margin-bottom:4px">${esc(data.genus)}</div>
+      <div style="font-size:11px;color:${primaryColor};font-weight:600;margin-bottom:10px">${getGenFolder(data.dexNum).replace("Gen-","Gen ").replace("_"," \u2014 ")} Region</div>
       <div>${typeBadges}</div>
     </div>
+    ${(() => {
+      const capTypes = data.types.map(t => t.charAt(0).toUpperCase() + t.slice(1));
+      const weaknesses = getWeaknesses(capTypes);
+      const resistances = getResistances(capTypes);
+      let wrHtml = "";
+      if (weaknesses.length > 0) {
+        wrHtml += `<div style="padding:14px;background:${th.surface};border-radius:12px;border:1px solid ${th.border};margin-bottom:12px">
+          <div style="font-size:11px;font-weight:700;color:#E74C3C;letter-spacing:0.5px;margin-bottom:8px;text-transform:uppercase">Weak To</div>
+          <div style="display:flex;gap:4px;flex-wrap:wrap">${weaknesses.map(w =>
+            `<span style="font-size:12px;font-weight:700;color:#fff;background:${TYPE_COLORS[w.type] || "#888"};padding:3px 10px;border-radius:10px;text-shadow:0 1px 2px rgba(0,0,0,0.3)">${w.type}${w.multiplier > 2 ? " 2\u00D7" : ""}</span>`
+          ).join("")}</div>
+        </div>`;
+      }
+      if (resistances.length > 0) {
+        wrHtml += `<div style="padding:14px;background:${th.surface};border-radius:12px;border:1px solid ${th.border};margin-bottom:12px">
+          <div style="font-size:11px;font-weight:700;color:#27AE60;letter-spacing:0.5px;margin-bottom:8px;text-transform:uppercase">Resists</div>
+          <div style="display:flex;gap:4px;flex-wrap:wrap">${resistances.map(r =>
+            `<span style="font-size:12px;font-weight:700;color:#fff;background:${TYPE_COLORS[r.type] || "#888"};padding:3px 10px;border-radius:10px;opacity:${r.double ? "1" : "0.7"};text-shadow:0 1px 2px rgba(0,0,0,0.3)">${r.type}${r.double ? " 2\u00D7" : ""}</span>`
+          ).join("")}</div>
+        </div>`;
+      }
+      return wrHtml;
+    })()}
     <div style="display:flex;justify-content:center;gap:24px;padding:12px;background:${th.surface};border-radius:12px;border:1px solid ${th.border};margin-bottom:16px">
       <div style="text-align:center"><div style="font-size:11px;font-weight:600;color:${th.textMuted};text-transform:uppercase;letter-spacing:0.5px">Height</div><div style="font-size:16px;font-weight:700;color:${th.text}">${heightM} m</div></div>
       <div style="width:1px;background:${th.border}"></div>
@@ -1854,16 +2417,75 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
     ${(() => {
       const forms = POKEMON_FORMS[data.dexNum];
       if (!forms || forms.length === 0) return "";
-      const formCards = forms.map(fm => {
-        const fSrc = formImgUrl(data.dexNum, fm.f);
-        return `<div onclick="showFormModal('${fSrc}','${esc(fm.l)}')" style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px;border-radius:12px;background:${th.accentBgSubtle(primaryColor)};border:1px solid ${th.border};cursor:pointer;transition:transform 0.15s ease,box-shadow 0.15s ease" onmouseenter="this.style.transform='scale(1.05)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none'">
-          <img src="${fSrc}" style="width:${isMobile ? 56 : 64}px;height:${isMobile ? 56 : 64}px;object-fit:contain" onerror="this.style.opacity='0.3'" />
-          <span style="font-size:${isMobile ? 10 : 11}px;font-weight:600;color:${th.textSecondary};text-align:center">${esc(fm.l)}</span>
+      const fullName = data.name;
+      // Group forms by region type
+      const regionTypes = {};
+      const otherForms = [];
+      forms.forEach(fm => {
+        const lLower = fm.l.toLowerCase();
+        if (["alola","galar","hisui","paldea"].includes(lLower)) {
+          if (!regionTypes[lLower]) regionTypes[lLower] = [];
+          regionTypes[lLower].push(fm);
+        } else {
+          otherForms.push(fm);
+        }
+      });
+
+      let formsHTML = "";
+
+      // Render regional form sections with evolution chains
+      for (const [region, rForms] of Object.entries(regionTypes)) {
+        const regionLabel = region === "alola" ? "Alolan" : region === "galar" ? "Galarian" : region === "hisui" ? "Hisuian" : "Paldean";
+        const evoChain = getRegionalEvoChain(data.dexNum, region);
+        let evoHTML = "";
+        if (evoChain && evoChain.length > 1) {
+          const evoItems = evoChain.map((d, i) => {
+            const eName = DEX_BY_NUM[d] || "???";
+            const regionKey = region === "alola" ? "alola" : region === "galar" ? "galarian" : "hisuian";
+            const formFile = String(d).padStart(4,"0") + "_" + regionKey;
+            const eSrc = formImgUrl(d, formFile);
+            const arrow = i > 0 ? `<div style="font-size:16px;color:${th.textMuted};flex-shrink:0">\u2192</div>` : "";
+            return `${arrow}<div onclick="openPokemonDetail(${d})" style="display:flex;flex-direction:column;align-items:center;cursor:pointer;padding:6px;border-radius:10px;flex-shrink:0" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='transparent'">
+              <img src="${eSrc}" style="width:${isMobile ? 48 : 56}px;height:${isMobile ? 48 : 56}px;object-fit:contain" onerror="this.src='${pokemonImgUrl(d)}'" />
+              <div style="font-size:10px;font-weight:600;color:${th.textSecondary};margin-top:2px">${regionLabel} ${esc(eName)}</div>
+              <div style="font-size:9px;color:${th.textMuted}">#${String(d).padStart(4,"0")}</div>
+            </div>`;
+          }).join("");
+          evoHTML = `<div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px;padding:10px;background:${th.surface};border-radius:10px;border:1px solid ${th.border};margin-top:8px">${evoItems}</div>`;
+        }
+
+        const fSrc = formImgUrl(data.dexNum, rForms[0].f);
+        const formFullName = `${regionLabel} ${fullName}`;
+        formsHTML += `<div style="padding:${isMobile ? "12px" : "14px"};background:${th.accentBgSubtle(primaryColor)};border:1px solid ${th.border};border-radius:12px">
+          <div onclick="showFormModal('${fSrc}','${esc(formFullName)}')" style="display:flex;align-items:center;gap:12px;cursor:pointer">
+            <img src="${fSrc}" style="width:${isMobile ? 64 : 76}px;height:${isMobile ? 64 : 76}px;object-fit:contain;flex-shrink:0" onerror="this.style.opacity='0.3'" />
+            <div>
+              <div style="font-size:${isMobile ? 14 : 15}px;font-weight:700;color:${th.text}">${esc(formFullName)}</div>
+              <div style="font-size:${isMobile ? 11 : 12}px;color:${th.textMuted}">#${String(data.dexNum).padStart(4,"0")}</div>
+              <div style="font-size:${isMobile ? 10 : 11}px;color:${primaryColor};font-weight:600;margin-top:2px">${region === "alola" ? "Alola Region" : region === "galar" ? "Galar Region" : region === "hisui" ? "Hisui Region" : "Paldea Region"}</div>
+            </div>
+          </div>
+          ${evoHTML}
         </div>`;
-      }).join("");
+      }
+
+      // Render other (non-regional) forms as grid
+      if (otherForms.length > 0) {
+        const otherCards = otherForms.map(fm => {
+          const fSrc = formImgUrl(data.dexNum, fm.f);
+          const formFullName = `${fm.l} ${fullName}`;
+          return `<div onclick="showFormModal('${fSrc}','${esc(formFullName)}')" style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:${isMobile ? "10px 6px" : "12px 8px"};border-radius:12px;background:${th.accentBgSubtle(primaryColor)};border:1px solid ${th.border};cursor:pointer;transition:transform 0.15s ease,box-shadow 0.15s ease" onmouseenter="this.style.transform='scale(1.05)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none'">
+            <img src="${fSrc}" style="width:${isMobile ? 64 : 76}px;height:${isMobile ? 64 : 76}px;object-fit:contain" onerror="this.style.opacity='0.3'" />
+            <span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${th.text};text-align:center">${esc(formFullName)}</span>
+            <span style="font-size:${isMobile ? 9 : 10}px;color:${th.textMuted}">#${String(data.dexNum).padStart(4,"0")}</span>
+          </div>`;
+        }).join("");
+        formsHTML += `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(${isMobile ? 100 : 120}px,1fr));gap:8px">${otherCards}</div>`;
+      }
+
       return `<div style="margin-top:20px">
         <div style="font-size:14px;font-weight:700;color:${th.text};margin-bottom:10px">Forms</div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(${isMobile ? 70 : 80}px,1fr));gap:8px">${formCards}</div>
+        <div style="display:flex;flex-direction:column;gap:10px">${formsHTML}</div>
       </div>`;
     })()}
   </div>`;
@@ -1908,6 +2530,44 @@ function setFilter(f) {
   state.filter = f;
   state.openYears = {};
   render();
+}
+
+function setStoreFilter(f) {
+  state.storeFilter = f;
+  render();
+}
+
+function toggleStoreGuide() {
+  state.storeGuideOpen = !state.storeGuideOpen;
+  const wrapper = document.getElementById("store-guide-wrapper");
+  const arrow = document.getElementById("store-guide-arrow");
+  const fade = document.getElementById("store-guide-fade");
+  const mobile = getBreakpoint() === "mobile";
+  if (wrapper) {
+    if (state.storeGuideOpen) {
+      wrapper.style.maxHeight = mobile ? "350px" : "600px";
+      wrapper.style.opacity = "1";
+      wrapper.style.overflowY = mobile ? "auto" : "hidden";
+      wrapper.scrollTop = 0;
+    } else {
+      wrapper.style.maxHeight = "0";
+      wrapper.style.opacity = "0";
+      wrapper.style.overflowY = "hidden";
+    }
+  }
+  if (fade) {
+    fade.style.opacity = state.storeGuideOpen ? "1" : "0";
+  }
+  if (arrow) {
+    arrow.style.transform = state.storeGuideOpen ? "rotate(180deg)" : "rotate(0deg)";
+  }
+}
+
+function handleGuideScroll(el) {
+  const fade = document.getElementById("store-guide-fade");
+  if (!fade) return;
+  const distFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight;
+  fade.style.opacity = distFromBottom < 10 ? "0" : "1";
 }
 
 function setNewsFilter(f) {
@@ -2323,6 +2983,124 @@ function render() {
       </div>`;
     }
 
+    // Store tab
+    let storeTabHTML = "";
+    if (state.tab === "store") {
+      const filteredBoxes = state.storeFilter === "All" ? WEB_STORE_BOXES : WEB_STORE_BOXES.filter(b => b.category === state.storeFilter);
+      const sortedBoxes = [...filteredBoxes].sort((a, b) => {
+        const va = calcBoxValue(a), vb = calcBoxValue(b);
+        return vb.savingsPct - va.savingsPct;
+      });
+      const catPillsHTML = STORE_CATEGORIES.map(cat => {
+        const isActive = state.storeFilter === cat;
+        return `<button onclick="setStoreFilter('${cat}')" style="padding:${isMobile ? "6px 14px" : "7px 16px"};border-radius:20px;border:1.5px solid ${isActive ? "#E74C3C" : th.border};background:${isActive ? th.accentBg("#E74C3C") : th.surface};color:${isActive ? "#E74C3C" : th.textSecondary};font-size:${isMobile ? 11 : 12}px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s ease;white-space:nowrap">${cat}</button>`;
+      }).join("");
+      const boxCardsHTML = sortedBoxes.map(box => {
+        const v = calcBoxValue(box);
+        const itemsHTML = box.items.map(item => {
+          const unitVal = STORE_ITEM_VALUES[item.name] || 0;
+          const totalVal = unitVal * item.qty;
+          const isEstimated = ESTIMATED_VALUE_ITEMS.has(item.name);
+          return `<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid ${th.border}">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-size:${isMobile ? 12 : 13}px;font-weight:600;color:${th.text}">${item.qty}x ${item.name}</span>
+              ${item.note ? `<span style="font-size:10px;color:${th.textMuted};font-weight:500">(${item.note})</span>` : ""}
+            </div>
+            <span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${th.textSecondary};font-family:'JetBrains Mono',monospace">$${totalVal.toFixed(2)}${isEstimated ? `<span style="color:#F39C12;font-size:12px;font-weight:900;margin-left:3px;cursor:help" title="Estimated \u2014 not sold individually on the web store">*</span>` : ""}</span>
+          </div>`;
+        }).join("");
+        const badgeHTML = box.limited ? `<span style="font-size:9px;font-weight:800;color:#fff;background:linear-gradient(135deg,#E74C3C,#C0392B);padding:3px 10px;border-radius:20px;letter-spacing:0.5px">LIMITED${box.timeLeft ? " \u00B7 " + box.timeLeft : ""}</span>` : "";
+        const popularHTML = box.popular ? `<span style="font-size:9px;font-weight:800;color:#F39C12;background:${th.accentBg("#F39C12")};padding:3px 10px;border-radius:20px;letter-spacing:0.5px">POPULAR</span>` : "";
+        const oneTimeHTML = box.oneTime ? `<span style="font-size:9px;font-weight:700;color:${th.textMuted};background:${th.accentBgSubtle("#888")};padding:3px 8px;border-radius:20px">ONE-TIME</span>` : "";
+        const ratingIcon = v.rating === "Great Deal" ? "\uD83D\uDD25" : v.rating === "Good Deal" ? "\u2705" : v.rating === "Fair" ? "\u2696\uFE0F" : "\u274C";
+        return `<div style="background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;overflow:hidden;transition:all 0.25s ease;box-shadow:${th.shadow}" onmouseenter="this.style.borderColor='${v.ratingColor}';this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 25px ${v.ratingColor}22'" onmouseleave="this.style.borderColor='${th.border}';this.style.transform='translateY(0)';this.style.boxShadow='${th.shadow}'">
+          <div style="padding:${isMobile ? "16px 16px 12px" : "20px 24px 16px"};display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap">
+              <div style="flex:1;min-width:0">
+                <h3 style="margin:0;font-size:${isMobile ? 15 : 17}px;font-weight:800;color:${th.text};line-height:1.3">${box.name}</h3>
+                <div style="display:flex;align-items:center;gap:6px;margin-top:6px;flex-wrap:wrap">
+                  ${badgeHTML}${popularHTML}${oneTimeHTML}
+                  <span style="font-size:10px;font-weight:700;color:${th.textMuted};background:${th.accentBgSubtle("#888")};padding:3px 8px;border-radius:20px">${box.category}</span>
+                </div>
+              </div>
+              <div style="text-align:right;flex-shrink:0">
+                <div style="font-size:${isMobile ? 22 : 26}px;font-weight:900;color:${th.text};font-family:'JetBrains Mono',monospace">$${box.price.toFixed(2)}</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:${isMobile ? 8 : 12}px;padding:${isMobile ? "10px 12px" : "12px 16px"};border-radius:14px;background:${th.accentBg(v.ratingColor)};border:1px solid ${v.ratingColor}33">
+              <span style="font-size:${isMobile ? 20 : 24}px">${ratingIcon}</span>
+              <div>
+                <div style="font-size:${isMobile ? 14 : 16}px;font-weight:800;color:${v.ratingColor}">${v.rating}</div>
+                <div style="font-size:${isMobile ? 11 : 12}px;color:${th.textSecondary};font-weight:600">${v.savingsPct >= 0 ? "Save" : "Overpay"} ${Math.abs(v.savingsPct).toFixed(0)}% \u00B7 Value: $${v.totalValue.toFixed(2)}</div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column">${itemsHTML}</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding-top:4px">
+              <span style="font-size:${isMobile ? 11 : 12}px;color:${th.textMuted};font-weight:600">Total Item Value</span>
+              <span style="font-size:${isMobile ? 14 : 15}px;font-weight:800;color:${v.savingsPct >= 0 ? "#2ECC71" : "#E74C3C"};font-family:'JetBrains Mono',monospace">${v.savingsPct >= 0 ? "+" : "-"}$${Math.abs(v.savings).toFixed(2)}</span>
+            </div>
+          </div>
+        </div>`;
+      }).join("");
+      storeTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
+        <div style="text-align:center;padding:10px">
+          <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text}">\uD83D\uDED2 Web Store Box Analysis</h2>
+          <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Are the current Pok\u00E9mon GO web store boxes worth it?</p>
+          <p style="margin:4px 0 0 0;font-size:${isMobile ? 10 : 11}px;color:${th.textFaint};font-weight:500">Values based on individual item prices from <a href="https://store.pokemongo.com" target="_blank" rel="noopener noreferrer" style="color:${th.textMuted};text-decoration:underline">store.pokemongo.com</a></p>
+        </div>
+        <div style="background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 14 : 16}px;overflow:hidden;box-shadow:${th.shadow}">
+          <div onclick="toggleStoreGuide()" style="padding:${isMobile ? "12px 16px" : "14px 20px"};cursor:pointer;font-size:${isMobile ? 13 : 14}px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px;user-select:none">
+            <span style="font-size:16px">\u2753</span> How to Read This Page
+            <span style="margin-left:auto;display:flex;align-items:center;gap:6px"><span style="font-size:11px;color:${th.textMuted};font-weight:500">${state.storeGuideOpen ? "tap to collapse" : "tap to expand"}</span><span id="store-guide-arrow" style="font-size:12px;color:${th.textMuted};transition:transform 0.3s ease;transform:rotate(${state.storeGuideOpen ? "180deg" : "0deg"})">&#9660;</span></span>
+          </div>
+          <div id="store-guide-wrapper" style="position:relative;max-height:${state.storeGuideOpen ? (isMobile ? "350px" : "600px") : "0"};transition:max-height 0.4s cubic-bezier(0.25,0.46,0.45,0.94),opacity 0.3s ease;opacity:${state.storeGuideOpen ? "1" : "0"};overflow-y:${state.storeGuideOpen && isMobile ? "auto" : "hidden"};overflow-x:hidden;${isMobile ? "-webkit-overflow-scrolling:touch" : ""}"${isMobile ? ` onscroll="handleGuideScroll(this)"` : ""}>
+            <div style="padding:${isMobile ? "0 16px 16px" : "0 20px 20px"};display:flex;flex-direction:column;gap:14px;border-top:1px solid ${th.border}">
+              <div style="padding-top:14px">
+                <div style="font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:6px">What is this?</div>
+                <p style="margin:0;font-size:${isMobile ? 12 : 13}px;color:${th.textSecondary};line-height:1.6">We compare the price of each bundle to what you\u2019d pay buying every item inside it individually. If the bundle costs less than the items are worth separately, you\u2019re saving money.</p>
+              </div>
+              <div>
+                <div style="font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:8px">Rating Breakdown</div>
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  ${[
+                    {icon:"\uD83D\uDD25",label:"Great Deal",color:"#2ECC71",desc:"30%+ savings \u2014 strong value, worth buying if you need the items"},
+                    {icon:"\u2705",label:"Good Deal",color:"#3498DB",desc:"15\u201330% savings \u2014 solid bundle that saves you a meaningful amount"},
+                    {icon:"\u2696\uFE0F",label:"Fair",color:"#F39C12",desc:"0\u201315% savings \u2014 small discount, only worth it if you want everything inside"},
+                    {icon:"\u274C",label:"Bad Deal",color:"#E74C3C",desc:"Costs more than buying items separately \u2014 skip it"}
+                  ].map(r => `<div style="display:flex;align-items:flex-start;gap:${isMobile ? 8 : 10}px">
+                    <span style="font-size:16px;flex-shrink:0;margin-top:1px">${r.icon}</span>
+                    <div><span style="font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${r.color}">${r.label}</span><span style="font-size:${isMobile ? 11 : 12}px;color:${th.textSecondary}"> \u2014 ${r.desc}</span></div>
+                  </div>`).join("")}
+                </div>
+              </div>
+              <div>
+                <div style="font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:6px">Reading a Box Card</div>
+                <div style="display:flex;flex-direction:column;gap:4px;font-size:${isMobile ? 11 : 12}px;color:${th.textSecondary};line-height:1.6">
+                  <p style="margin:0"><strong style="color:${th.text}">Price</strong> \u2014 what the bundle costs in USD</p>
+                  <p style="margin:0"><strong style="color:${th.text}">Value</strong> \u2014 what all items inside are worth if bought separately</p>
+                  <p style="margin:0"><strong style="color:${th.text}">Save/Overpay %</strong> \u2014 how much you save (or lose) compared to individual prices</p>
+                  <p style="margin:0"><strong style="color:${th.text}">Total Item Value (+/\u2212)</strong> \u2014 the green or red number at the bottom of each card. Green (+) means you\u2019re saving that much compared to buying items separately. Red (\u2212) means you\u2019re overpaying by that amount.</p>
+                  <p style="margin:0"><strong style="color:${th.text}">Item list</strong> \u2014 each item with quantity and its individual value on the right</p>
+                </div>
+              </div>
+              <div style="font-size:${isMobile ? 11 : 12}px;color:${th.textSecondary};line-height:1.6;padding:${isMobile ? "10px 12px" : "12px 16px"};margin-top:4px;border-radius:10px;background:${th.accentBg("#F39C12")};border:1px solid #F39C1233">
+                <span style="font-size:14px;margin-right:4px">\u26A0\uFE0F</span>
+                <strong style="color:${th.text}">Disclaimer:</strong> Item values are estimated from the cheapest way to buy each item individually on the web store. Event tickets (GO Pass Deluxe) are valued at their standalone price. Items marked with an asterisk (*) are not sold individually and use approximate values based on in-game Pok\u00E9Coin costs. Boxes are sorted best-to-worst by savings percentage.
+              </div>
+            </div>
+            ${isMobile ? `<div id="store-guide-fade" style="position:sticky;bottom:0;left:0;right:0;height:50px;margin-top:-50px;background:linear-gradient(to bottom,transparent,${th.surface});pointer-events:none;z-index:1;transition:opacity 0.3s ease;opacity:${state.storeGuideOpen ? "1" : "0"}"></div>` : ""}
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">${catPillsHTML}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:8px">
+          ${[{label:"Great Deal",color:"#2ECC71",icon:"\uD83D\uDD25"},{label:"Good Deal",color:"#3498DB",icon:"\u2705"},{label:"Fair",color:"#F39C12",icon:"\u2696\uFE0F"},{label:"Bad Deal",color:"#E74C3C",icon:"\u274C"}].map(r =>
+            `<span style="font-size:${isMobile ? 10 : 11}px;font-weight:700;color:${r.color};display:flex;align-items:center;gap:4px">${r.icon} ${r.label}</span>`
+          ).join(`<span style="color:${th.textFaint}">\u00B7</span>`)}
+        </div>
+        <div style="display:grid;grid-template-columns:${isMobile ? "1fr" : "repeat(auto-fill,minmax(380px,1fr))"};gap:${isMobile ? 14 : 18}px">${boxCardsHTML}</div>
+      </div>`;
+    }
+
     let pokedexTabHTML = "";
     if (state.tab === "pokedex") {
       const gridCols = isMobile ? "repeat(auto-fill,minmax(80px,1fr))" : "repeat(auto-fill,minmax(110px,1fr))";
@@ -2367,6 +3145,23 @@ function render() {
             <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;pointer-events:none">\uD83D\uDD0D</span>
             <div id="dex-search-results" style="display:none;position:absolute;top:100%;left:0;right:0;max-height:300px;overflow-y:auto;background:${th.surface};border:1.5px solid ${th.border};border-radius:12px;margin-top:4px;z-index:100;box-shadow:0 8px 24px rgba(0,0,0,0.2)"></div>
           </div>
+          ${(() => {
+            const potdDex = getPokemonOfTheDay();
+            const potdName = DEX_BY_NUM[potdDex] || "???";
+            const potdImg = pokemonImgUrl(potdDex);
+            const potdRegion = getGenFolder(potdDex).replace("Gen-","Gen ").replace("_"," \u2014 ");
+            return `<div onclick="openPokemonDetail(${potdDex})" style="padding:${isMobile ? "18px" : "24px"};background:linear-gradient(135deg,${th.heroBg("#F39C12")},${th.heroBg("#E74C3C")});border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;cursor:pointer;transition:all 0.2s ease;box-shadow:${th.shadow}" onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.15)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='${th.shadow}'">
+              <div style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:#F39C12;text-transform:uppercase;letter-spacing:1px;margin-bottom:${isMobile ? 10 : 12}px">\u2B50 Pok\u00E9mon of the Day</div>
+              <div style="display:flex;align-items:center;gap:${isMobile ? 14 : 18}px">
+                <img src="${potdImg}" style="width:${isMobile ? 80 : 100}px;height:${isMobile ? 80 : 100}px;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.3));flex-shrink:0" onerror="this.style.opacity='0.3'" />
+                <div>
+                  <div style="font-size:${isMobile ? 20 : 24}px;font-weight:800;color:${th.text}">${esc(potdName)}</div>
+                  <div style="font-size:${isMobile ? 12 : 13}px;color:${th.textMuted};margin-top:2px">#${String(potdDex).padStart(4,"0")} \u00B7 ${potdRegion}</div>
+                  <div style="margin-top:8px;font-size:${isMobile ? 11 : 12}px;font-weight:600;color:#F39C12">Tap to learn more \u2192</div>
+                </div>
+              </div>
+            </div>`;
+          })()}
           ${regionsHTML}
         </div>`;
       }
@@ -2477,7 +3272,7 @@ function render() {
       </div>` : "";
 
     content = `<main style="padding:${mainPad};display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
-      ${welcomeHTML}${!["home","tools","nests","pokedex"].includes(state.tab) ? `${liveHTML}${heroHTML}${tabsHTML}` : ""}${state.tab === "home" ? `${liveHTML}${heroHTML}${tabsHTML}` : ""}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${newsTabHTML}${pokedexTabHTML}${toolsTabHTML}${nestsTabHTML}
+      ${welcomeHTML}${!["home","tools","nests","pokedex","store"].includes(state.tab) ? `${liveHTML}${heroHTML}${tabsHTML}` : ""}${state.tab === "home" ? `${liveHTML}${heroHTML}${tabsHTML}` : ""}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${newsTabHTML}${storeTabHTML}${pokedexTabHTML}${toolsTabHTML}${nestsTabHTML}
     </main>`;
     if (hero || activeEvents.length > 0) state.heroRendered = true;
   }
@@ -2492,8 +3287,8 @@ function render() {
       <div style="font-size:${isMobile ? 10 : 12}px;color:${th.textMuted};font-weight:500;letter-spacing:0.2px">${COMMUNITY_TAGLINE}</div></div>
     </div></div>
     ${isDesktop ? `<nav style="display:flex;align-items:center;gap:4px">
-      ${[["goHome()","Home"],["setTab('events')","Events"],["setTab('calendar')","Calendar"],["setTab('raids')","Raids"],["setTab('max')","Max Battles"],["setTab('news')","News"],["setTab('pokedex')","Pok\u00E9Dex"],["setTab('nests')","Nests"],["setTab('tools')","PoGO Tools"]].map(([fn, label]) => {
-        const tabMap = {"Home":"home","Events":"events","Calendar":"calendar","Raids":"raids","Max Battles":"max","News":"news","Pok\u00E9Dex":"pokedex","Nests":"nests","PoGO Tools":"tools"};
+      ${[["goHome()","Home"],["setTab('events')","Events"],["setTab('calendar')","Calendar"],["setTab('raids')","Raids"],["setTab('max')","Max Battles"],["setTab('news')","News"],["setTab('pokedex')","Pok\u00E9Dex"],["setTab('store')","Deal Check"],["setTab('nests')","Nests"],["setTab('tools')","PoGO Tools"]].map(([fn, label]) => {
+        const tabMap = {"Home":"home","Events":"events","Calendar":"calendar","Raids":"raids","Max Battles":"max","News":"news","Deal Check":"store","Pok\u00E9Dex":"pokedex","Nests":"nests","PoGO Tools":"tools"};
         const isActive = state.tab === tabMap[label];
         return `<button onclick="${fn || ''}" style="padding:7px 14px;border-radius:10px;border:${isActive ? "1.5px solid #E74C3C" : "1.5px solid transparent"};background:${isActive ? th.accentBg("#E74C3C") : "transparent"};color:${isActive ? "#E74C3C" : th.text};font-size:13px;font-weight:${isActive ? "700" : "600"};cursor:pointer;font-family:inherit;transition:all 0.15s ease;white-space:nowrap" onmouseenter="this.style.background='${isActive ? th.accentBg("#E74C3C") : th.surfaceHover}'" onmouseleave="this.style.background='${isActive ? th.accentBg("#E74C3C") : "transparent"}'">${label}</button>`;
       }
@@ -2603,6 +3398,7 @@ function renderSidebar(th) {
     { id: "max", icon: "\uD83D\uDCA5", label: "Max Battles" },
     { id: "news", icon: "\uD83D\uDCE2", label: "News" },
     { id: "pokedex", icon: "\uD83D\uDCD6", iconImg: "assets/pokemon-images/Items/Main1.webp", label: "Pok\u00E9Dex" },
+    { id: "store", icon: "\uD83D\uDED2", label: "Deal Check" },
     { id: "nests", icon: "\uD83C\uDF33", iconImg: "assets/pokemon-images/icons/ic_grass.png", label: "Nests" },
     { id: "tools", icon: "\uD83D\uDEE0\uFE0F", label: "PoGO Tools" }
   ];
