@@ -3471,16 +3471,19 @@ document.addEventListener("touchend", (e) => {
     if (!ptrEl) {
       ptrEl = document.createElement("div");
       ptrEl.id = "pull-to-refresh-indicator";
-      ptrEl.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>`;
-      Object.assign(ptrEl.style, {
-        position: "fixed", top: "0", left: "0", width: "100%", height: "0",
-        display: "flex", alignItems: "center", justifyContent: "center",
-        overflow: "hidden", zIndex: "99999", transition: "none",
-        color: getComputedStyle(document.documentElement).getPropertyValue("color") || "#888",
-        pointerEvents: "none"
-      });
       document.body.appendChild(ptrEl);
     }
+    const iconColor = darkMode ? "#a0a0b8" : "#666";
+    const bgColor = darkMode ? "#1a1a24" : "#fff";
+    const borderColor = darkMode ? "#2a2a3a" : "#e8e8e8";
+    ptrEl.innerHTML = `<div style="width:40px;height:40px;border-radius:50%;background:${bgColor};border:1.5px solid ${borderColor};display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,${darkMode ? "0.5" : "0.12"})">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="${iconColor}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+    </div>`;
+    Object.assign(ptrEl.style, {
+      position: "fixed", top: "-50px", left: "50%", transform: "translateX(-50%)",
+      width: "40px", height: "40px", zIndex: "99999", transition: "none",
+      pointerEvents: "none"
+    });
     return ptrEl;
   }
 
@@ -3497,14 +3500,14 @@ document.addEventListener("touchend", (e) => {
     ptrDist = e.touches[0].clientY - ptrStartY;
     if (ptrDist < 0) { ptrDist = 0; return; }
     const el = getPtrEl();
-    const clamped = Math.min(ptrDist * 0.4, 80);
-    el.style.height = clamped + "px";
+    const travel = Math.min(ptrDist * 0.45, 100);
+    el.style.top = (travel - 50) + "px";
     el.style.transition = "none";
-    const svg = el.querySelector("svg");
-    if (svg) {
+    const circle = el.querySelector("div");
+    if (circle) {
       const rot = Math.min((ptrDist / 150) * 360, 360);
-      svg.style.transform = `rotate(${rot}deg)`;
-      svg.style.opacity = Math.min(ptrDist / 100, 1);
+      circle.style.transform = `rotate(${rot}deg)`;
+      circle.style.opacity = Math.min(ptrDist / 80, 1);
     }
   }, { passive: true });
 
@@ -3513,15 +3516,14 @@ document.addEventListener("touchend", (e) => {
     ptrActive = false;
     const el = getPtrEl();
     if (ptrDist > 150) {
-      // Trigger refresh
-      el.style.transition = "height 0.2s ease";
-      el.style.height = "50px";
-      const svg = el.querySelector("svg");
-      if (svg) svg.style.animation = "spin 0.6s linear infinite";
+      el.style.transition = "top 0.2s ease";
+      el.style.top = "16px";
+      const circle = el.querySelector("div");
+      if (circle) circle.style.animation = "spin 0.6s linear infinite";
       setTimeout(() => location.reload(), 400);
     } else {
-      el.style.transition = "height 0.2s ease";
-      el.style.height = "0";
+      el.style.transition = "top 0.2s ease";
+      el.style.top = "-50px";
     }
     ptrDist = 0;
   }, { passive: true });
