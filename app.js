@@ -2714,7 +2714,7 @@ function renderCoinTiers(th, isMobile) {
         // Bottom stats
         + '<div style="display:flex;align-items:center;justify-content:space-between;padding-top:4px">'
           + '<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">'
-            + '<span style="font-size:' + (isMobile ? 10 : 11) + 'px;font-weight:700;color:' + th.textSecondary + ";font-family:'JetBrains Mono',monospace;background:" + th.accentBgSubtle("#888") + ';padding:3px 8px;border-radius:8px">' + coinsPerDollar + ' coins/$</span>'
+            + '<span style="font-size:' + (isMobile ? 10 : 11) + 'px;font-weight:700;color:' + th.textSecondary + ";font-family:'JetBrains Mono',monospace;background:" + th.accentBgSubtle("#888") + ';padding:3px 8px;border-radius:8px">' + coinsPerDollar + ' coins/$1</span>'
             + cheaperHTML
           + '</div>'
           + '<span style="font-size:' + (isMobile ? 11 : 12) + 'px;font-weight:600;color:' + th.textMuted + '">' + total.toLocaleString() + ' total</span>'
