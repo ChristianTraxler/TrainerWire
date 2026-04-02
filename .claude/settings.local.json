@@ -20,7 +20,8 @@
       "WebFetch(domain:pokegenie.net)",
       "Bash(find /Users/christiantraxler/Desktop/Current-Projects/Pokémon-GO-Event-Hub/assets/pokemon-images -name *0895*)",
       "WebFetch(domain:www.raids.nl)",
-      "WebFetch(domain:pokestealordeal.com)"
+      "WebFetch(domain:pokestealordeal.com)",
+      "Bash(ls /Users/christiantraxler/Desktop/Current-Projects/Pokémon-GO-Event-Hub/assets/trainerwire-*)"
     ]
   }
 }
