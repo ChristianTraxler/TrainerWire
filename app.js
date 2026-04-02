@@ -1150,7 +1150,7 @@ let state = {
   selectedNews: null,
   filter: "All",
   newsFilter: "All",
-  tab: "home",
+  tab: sessionStorage.getItem("trainerwire_tab") || "home",
   openYears: {},
   openNewsYears: {},
   heroRendered: false,
@@ -2251,6 +2251,7 @@ function goHome() {
   state.selectedEvent = null;
   state.selectedNews = null;
   state.tab = "home";
+  sessionStorage.setItem("trainerwire_tab", "home");
   render();
 }
 
@@ -2259,6 +2260,7 @@ function setTab(tab) {
   state.selectedEvent = null;
   state.selectedNews = null;
   state.pokedexDetail = null;
+  sessionStorage.setItem("trainerwire_tab", tab);
   if (tab === "nests") { loadNestsFromSupabase().then(() => render()); }
   render();
 }
@@ -2656,7 +2658,7 @@ function renderCoinTiers(th, isMobile) {
   var imgSize = isMobile ? 48 : 56;
   return tiers.map(function(tier, i) {
     var total = tier.coins + tier.bonus;
-    var centsPerCoin = (tier.price / total * 100).toFixed(2);
+    var costPerCoin = (tier.price / total).toFixed(4);
     var coinsPerDollar = (total / tier.price).toFixed(1);
     var isBest = (total / tier.price) === bestVal;
     var savingsPct = ((1 - (tier.price / total) / baseRate) * 100).toFixed(0);
@@ -2694,7 +2696,7 @@ function renderCoinTiers(th, isMobile) {
           + '<span style="font-size:' + (isMobile ? 20 : 24) + 'px">' + ratingIcon + '</span>'
           + '<div>'
             + '<div style="font-size:' + (isMobile ? 14 : 16) + 'px;font-weight:800;color:' + ratingColor + '">' + rating + '</div>'
-            + '<div style="font-size:' + (isMobile ? 11 : 12) + 'px;color:' + th.textSecondary + ';font-weight:600">' + total.toLocaleString() + ' total coins \u00B7 ' + centsPerCoin + '\u00A2/coin</div>'
+            + '<div style="font-size:' + (isMobile ? 11 : 12) + 'px;color:' + th.textSecondary + ';font-weight:600">' + total.toLocaleString() + ' total coins \u00B7 $' + costPerCoin + '/coin</div>'
           + '</div>'
         + '</div>'
         // Details
