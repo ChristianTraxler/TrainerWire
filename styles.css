@@ -1,6 +1,6 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { overflow-y: scroll; }
-html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; -webkit-font-smoothing: antialiased; overscroll-behavior-y: contain; }
 #app *, #app *::before, #app *::after { transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; }
 .dex-toggle { transition: transform 0.3s ease !important; }
 ::-webkit-scrollbar { display: none; }
@@ -27,6 +27,7 @@ html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; -webkit-fon
 
 @keyframes sparkle { 0%,100% { opacity:0.4;transform:scale(0.8); } 50% { opacity:1;transform:scale(1); } }
 @keyframes boostedShiny { 0% { opacity:0.6;transform:scale(0.7) rotate(0deg); } 25% { opacity:1;transform:scale(1.2) rotate(10deg); } 50% { opacity:0.8;transform:scale(0.9) rotate(-5deg); } 75% { opacity:1;transform:scale(1.15) rotate(8deg); } 100% { opacity:0.6;transform:scale(0.7) rotate(0deg); } }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
 button:active { transform: scale(0.97) !important; }
 button { transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
