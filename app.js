@@ -19,6 +19,7 @@ function getGenFolder(dex) {
 }
 function dexPad(d) { return String(d).padStart(4, "0"); }
 function natDexImg(dex, suffix) { return `${IMG_BASE}/National-Dex/regular/${getGenFolder(dex)}/${dexPad(dex)}${suffix || ""}.webp`; }
+function shinyDexImg(dex, suffix) { return `${IMG_BASE}/National-Dex/shiny/${getGenFolder(dex)}/${dexPad(dex)}${suffix || ""}.webp`; }
 function eventDexImg(dex, costume) { return `${IMG_BASE}/Event-Dex/regular/${getGenFolder(dex)}/${dexPad(dex)}_${costume}.webp`; }
 function megaImg(dex, suffix) { return `${IMG_BASE}/Mega/regular/${getGenFolder(dex)}/${dexPad(dex)}_${suffix || "mega"}${GENDER_SUFFIX[dex] || ""}.webp`; }
 function gmaxImg(dex) { return `${IMG_BASE}/Gigantamax/regular/Gen-8_Galar/${dexPad(dex)}_gigamax.webp`; }
@@ -536,35 +537,35 @@ const EVENTS = [
   // Historical Community Days
   ...[
     ["Sprigatito","2025-01-05","Frenzy Plant → Meowscarada","\uD83C\uDF31","#27AE60","3× Stardust, 2× Candy"],
-    ["CD Classic: Ralts","2025-01-25","Synchronoise → Gardevoir/Gallade","\uD83D\uDC83","#9B59B6","¼ Hatch Distance"],
+    ["CD Classic: Ralts","2025-01-25","Synchronoise → Gardevoir/Gallade","\uD83D\uDC83","#9B59B6","1/4 Hatch Distance"],
     ["Karrablast & Shelmet","2025-02-09","Razor Shell → Escavalier","\uD83D\uDC1B","#E67E22","3× XP, 2× Candy"],
     ["Fuecoco","2025-03-08","Blast Burn → Skeledirge","\uD83D\uDD25","#E74C3C","3× Stardust, 2× Candy"],
-    ["CD Classic: Totodile","2025-03-22","Hydro Cannon → Feraligatr","\uD83D\uDC0A","#3498DB","¼ Hatch Distance"],
+    ["CD Classic: Totodile","2025-03-22","Hydro Cannon → Feraligatr","\uD83D\uDC0A","#3498DB","1/4 Hatch Distance"],
     ["Vanillite","2025-04-27","Avalanche → Vanilluxe","\uD83C\uDF66","#85C1E9","3× XP, 2× Candy"],
-    ["Pawmi","2025-05-11","Brick Break → Pawmot","\u26A1","#F39C12","¼ Hatch Distance, 2× Candy"],
+    ["Pawmi","2025-05-11","Brick Break → Pawmot","\u26A1","#F39C12","1/4 Hatch Distance, 2× Candy"],
     ["CD Classic: Machop","2025-05-24","Payback → Machamp","\uD83D\uDCAA","#95A5A6","3× Stardust"],
     ["Jangmo-o","2025-06-21","Clanging Scales → Kommo-o","\uD83D\uDC09","#E74C3C","3× XP, 2× Candy"],
-    ["CD Classic: Eevee","2025-07-05","Last Resort → Eevee + Eeveelution moves","\uD83E\uDD8A","#A0522D","¼ Hatch Distance"],
+    ["CD Classic: Eevee","2025-07-05","Last Resort → Eevee + Eeveelution moves","\uD83E\uDD8A","#A0522D","1/4 Hatch Distance"],
     ["Quaxly","2025-07-20","Hydro Cannon → Quaquaval","\uD83E\uDD86","#2980B9","3× Stardust, 2× Candy"],
-    ["Rookidee","2025-08-30","Air Cutter → Corviknight","\uD83D\uDC26","#5D6D7E","¼ Hatch Distance, 2× Candy"],
-    ["Flabébé","2025-09-14","Chilling Water → Florges","\uD83C\uDF38","#FF69B4","¼ Hatch Distance, 2× Candy"],
+    ["Rookidee","2025-08-30","Air Cutter → Corviknight","\uD83D\uDC26","#5D6D7E","1/4 Hatch Distance, 2× Candy"],
+    ["Flabébé","2025-09-14","Chilling Water → Florges","\uD83C\uDF38","#FF69B4","1/4 Hatch Distance, 2× Candy"],
     ["Solosis","2025-10-12","Charm → Reuniclus","\uD83E\uDDEC","#27AE60","3× Stardust, 2× Candy"],
     ["Pikipek","2025-11-30","Beak Blast → Toucannon","\uD83D\uDC26","#E67E22","3× XP, 2× Candy"],
     ["December Recap 2025","2025-12-06","All 2025 CD moves available","\uD83C\uDF84","#C0392B","2× XP, 2× Stardust, 2× Candy"],
     ["Rowlet","2024-01-06","Frenzy Plant → Decidueye","\uD83C\uDF43","#27AE60","3× Stardust, 2× Candy"],
-    ["CD Classic: Porygon","2024-01-20","Tri Attack → Porygon-Z","\uD83D\uDCA0","#E91E63","¼ Hatch Distance"],
+    ["CD Classic: Porygon","2024-01-20","Tri Attack → Porygon-Z","\uD83D\uDCA0","#E91E63","1/4 Hatch Distance"],
     ["Chansey","2024-02-10","Wild Charge → Blissey","\uD83E\uDD5A","#FF69B4","3× XP, 2× Candy"],
     ["Bellsprout","2024-03-16","Magical Leaf → Victreebel","\uD83C\uDF3F","#27AE60","3× Stardust, 2× Candy"],
-    ["CD Classic: Bagon","2024-04-07","Outrage → Salamence","\uD83D\uDC09","#3498DB","¼ Hatch Distance"],
+    ["CD Classic: Bagon","2024-04-07","Outrage → Salamence","\uD83D\uDC09","#3498DB","1/4 Hatch Distance"],
     ["Litten","2024-04-20","Blast Burn → Incineroar","\uD83D\uDC31","#E74C3C","3× XP, 2× Candy"],
     ["Bounsweet","2024-05-19","High Jump Kick → Tsareena","\uD83C\uDF4A","#27AE60","3× Stardust, 2× Candy"],
     ["Goomy","2024-06-09","Thunder Punch → Goodra","\uD83D\uDC0C","#8E44AD","3× Stardust, 2× Candy"],
     ["CD Classic: Cyndaquil","2024-06-22","Blast Burn → Typhlosion","\uD83D\uDD25","#E74C3C","2× Stardust, 2× XP"],
-    ["Tynamo","2024-07-21","Volt Switch → Eelektross","\u26A1","#3498DB","¼ Hatch Distance, 2× Candy"],
+    ["Tynamo","2024-07-21","Volt Switch → Eelektross","\u26A1","#3498DB","1/4 Hatch Distance, 2× Candy"],
     ["Popplio","2024-08-31","Hydro Cannon → Primarina","\uD83C\uDFA4","#2980B9","3× XP, 2× Candy"],
-    ["CD Classic: Beldum","2024-08-18","Meteor Mash → Metagross","\u2699\uFE0F","#95A5A6","¼ Hatch Distance"],
+    ["CD Classic: Beldum","2024-08-18","Meteor Mash → Metagross","\u2699\uFE0F","#95A5A6","1/4 Hatch Distance"],
     ["Ponyta & G-Ponyta","2024-09-14","Wild Charge → Rapidash","\uD83D\uDC34","#E67E22","3× Stardust, 2× Candy"],
-    ["Sewaddle","2024-10-05","Shadow Claw → Leavanny","\uD83C\uDF42","#27AE60","¼ Hatch Distance, 2× Candy"],
+    ["Sewaddle","2024-10-05","Shadow Claw → Leavanny","\uD83C\uDF42","#27AE60","1/4 Hatch Distance, 2× Candy"],
     ["Mankey","2024-11-10","Rage Fist → Annihilape","\uD83D\uDC12","#C0392B","3× XP, 2× Candy"],
     ["December Recap 2024","2024-12-21","All 2024 CD moves available","\uD83C\uDF84","#C0392B","2× Candy, 2× Stardust, 2× XP"],
     ["Larvitar","2023-01-21","Smack Down → Tyranitar","\uD83E\uDEA8","#27AE60","CD Classic"],
@@ -645,16 +646,20 @@ const EVENTS = [
     ["Beldum","2018-10-21","Meteor Mash → Metagross","\u2699\uFE0F","#95A5A6","3× Stardust"],
     ["Cyndaquil","2018-11-10","Blast Burn → Typhlosion","\uD83D\uDD25","#E74C3C","2× Stardust"],
     ["December Recap 2018","2018-12-01","All 2018 CD moves available","\uD83C\uDF84","#C0392B","2× Candy, 2× Stardust, 2× XP"],
-  ].map(([title,date,move,icon,color,bonus],i) => ({
-    id: 1000+i, title, type: "Community Day", date, endDate: null,
-    time: "2:00 PM – 5:00 PM", color, icon, featured: false,
-    summary: `${move}. ${bonus}.`,
-    details: { bosses: [move], bonuses: [bonus], tips: [] }
-  })),
-  { id: 50, title: "CD Classic: Piplup", type: "Community Day", date: "2026-01-04", endDate: null, time: "2:00 PM – 5:00 PM", color: "#3498DB", icon: "\uD83D\uDC27", featured: false, summary: "Piplup Community Day Classic! Evolve to Empoleon for the exclusive Charged Attack Hydro Cannon.", details: { bosses: ["Empoleon with Hydro Cannon (exclusive Charged Move)"], bonuses: ["¼ Hatch Distance", "3-hour Incense", "1-hour Lure Modules", "Boosted Shiny Piplup rate", "Special Research available for $1.99"], tips: ["Hydro Cannon Empoleon is a solid Water attacker and PvP pick.", "Piplup attracted to Lure Modules have boosted Shiny rates.", "Community Day Classic events revisit fan-favorite Pokémon."] } },
-  { id: 51, title: "Community Day: Grookey", type: "Community Day", date: "2026-01-18", endDate: null, time: "2:00 PM – 5:00 PM", color: "#27AE60", icon: "\uD83C\uDF31", featured: false, summary: "Grookey takes the spotlight! Evolve to Rillaboom for the exclusive Charged Attack Frenzy Plant.", details: { bosses: ["Rillaboom with Frenzy Plant (exclusive Charged Move)"], bonuses: ["Boosted Shiny Grookey rate", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "Extra Special Trade (2–9 PM)", "Special Background encounters available"], tips: ["Frenzy Plant is the premier Grass Charged Move — Rillaboom benefits hugely.", "First Community Day of 2026 with the new yearly Special Background feature.", "Check in at Community Ambassador events for bonus Timed Research."] } },
-  { id: 52, title: "Community Day: Vulpix & Alolan Vulpix", type: "Community Day", date: "2026-02-15", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E67E22", icon: "\uD83E\uDD8A", featured: false, summary: "Vulpix and Alolan Vulpix share the spotlight! Exclusive moves Energy Ball and Chilling Water.", details: { bosses: ["Ninetales with Energy Ball (exclusive)", "Alolan Ninetales with Chilling Water (exclusive)"], bonuses: ["Both forms spawning in the wild", "Boosted Shiny rates for both Vulpix forms", "3-hour Incense", "Standard Community Day bonuses"], tips: ["Alolan Ninetales with Chilling Water is excellent in PvP Great League.", "Dual-feature Community Days let you hunt two shinies at once.", "Prioritize Alolan Vulpix if you care about PvP meta relevance."] } },
-  { id: 53, title: "Community Day: Scorbunny", type: "Community Day", url: "https://pokemongo.com/news/communityday-march-2026-scorbunny", date: "2026-03-14", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E74C3C", icon: "\uD83D\uDC30", featured: false, summary: "Scorbunny stars in March! Evolve Raboot to Cinderace for the exclusive Charged Attack Blast Burn.", details: { bosses: ["Cinderace with Blast Burn (exclusive Charged Move)"], bonuses: ["¼ Egg Hatch Distance", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "Extra Special Trade (2–9 PM)", "50% less Trade Stardust cost (2–9 PM)"], tips: ["Blast Burn is the best Fire Charged Move — makes Cinderace a solid Fire attacker.", "Evolve within 5 hours after the event ends to get the exclusive move.", "Overlaps with Pokémon Pokopia Celebration Event — double-dip on bonuses."] } },
+  ].map(([title,date,move,icon,color,bonus],i) => {
+    const cdName = title.replace("CD Classic: ","").replace("Community Day: ","").replace("December Recap 2025","").replace("December Recap 2024","").replace("December Recap 2023","").replace("December Recap 2022","").replace("December Recap 2021","").replace("December Recap 2020","").split(" & ")[0].split(" + ")[0].trim();
+    const cdImg = cdName ? getPokemonImg(cdName) : null;
+    return {
+      id: 1000+i, title, type: "Community Day", date, endDate: null,
+      time: "2:00 PM – 5:00 PM", color, icon, iconImg: cdImg ? cdImg.url : undefined, featured: false,
+      summary: `${move}. ${bonus}.`,
+      details: { bosses: [move], bonuses: [bonus], tips: [] }
+    };
+  }),
+  { id: 50, title: "CD Classic: Piplup", type: "Community Day", date: "2026-01-04", endDate: null, time: "2:00 PM – 5:00 PM", color: "#3498DB", icon: "\uD83D\uDC27", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-4_Sinnoh/0393.webp", featured: false, summary: "Piplup Community Day Classic! Evolve to Empoleon for the exclusive Charged Attack Hydro Cannon.", details: { bosses: ["Empoleon with Hydro Cannon (exclusive Charged Move)"], bonuses: ["1/4 Hatch Distance", "3-hour Incense", "1-hour Lure Modules", "Boosted Shiny Piplup rate", "Special Research available for $1.99"], tips: ["Hydro Cannon Empoleon is a solid Water attacker and PvP pick.", "Piplup attracted to Lure Modules have boosted Shiny rates.", "Community Day Classic events revisit fan-favorite Pokémon."] } },
+  { id: 51, title: "Community Day: Grookey", type: "Community Day", date: "2026-01-18", endDate: null, time: "2:00 PM – 5:00 PM", color: "#27AE60", icon: "\uD83C\uDF31", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-8_Galar/0810.webp", featured: false, summary: "Grookey takes the spotlight! Evolve to Rillaboom for the exclusive Charged Attack Frenzy Plant.", details: { bosses: ["Rillaboom with Frenzy Plant (exclusive Charged Move)"], bonuses: ["Boosted Shiny Grookey rate", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "Extra Special Trade (2–9 PM)", "Special Background encounters available"], tips: ["Frenzy Plant is the premier Grass Charged Move — Rillaboom benefits hugely.", "First Community Day of 2026 with the new yearly Special Background feature.", "Check in at Community Ambassador events for bonus Timed Research."] } },
+  { id: 52, title: "Community Day: Vulpix & Alolan Vulpix", type: "Community Day", date: "2026-02-15", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E67E22", icon: "\uD83E\uDD8A", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-1_Kanto/0037.webp", featured: false, summary: "Vulpix and Alolan Vulpix share the spotlight! Exclusive moves Energy Ball and Chilling Water.", details: { bosses: ["Ninetales with Energy Ball (exclusive)", "Alolan Ninetales with Chilling Water (exclusive)"], bonuses: ["Both forms spawning in the wild", "Boosted Shiny rates for both Vulpix forms", "3-hour Incense", "Standard Community Day bonuses"], tips: ["Alolan Ninetales with Chilling Water is excellent in PvP Great League.", "Dual-feature Community Days let you hunt two shinies at once.", "Prioritize Alolan Vulpix if you care about PvP meta relevance."] } },
+  { id: 53, title: "Community Day: Scorbunny", type: "Community Day", url: "https://pokemongo.com/news/communityday-march-2026-scorbunny", date: "2026-03-14", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E74C3C", icon: "\uD83D\uDC30", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-8_Galar/0813.webp", featured: false, summary: "Scorbunny stars in March! Evolve Raboot to Cinderace for the exclusive Charged Attack Blast Burn.", details: { bosses: ["Cinderace with Blast Burn (exclusive Charged Move)"], bonuses: ["1/4 Egg Hatch Distance", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "Extra Special Trade (2–9 PM)", "50% less Trade Stardust cost (2–9 PM)"], tips: ["Blast Burn is the best Fire Charged Move — makes Cinderace a solid Fire attacker.", "Evolve within 5 hours after the event ends to get the exclusive move.", "Overlaps with Pokémon Pokopia Celebration Event — double-dip on bonuses."] } },
   { id: 4, title: "Community Day: Tinkatink", type: "Community Day", url: "https://pokemongo.com/news/communityday-april-2026-tinkatink", date: "2026-04-11", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E84393", icon: "\uD83D\uDD28", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-9_Paldea/0957-female.webp", featured: true, summary: "Tinkatink takes the spotlight! Evolve to Tinkaton for the exclusive Charged Attack Gigaton Hammer.", details: { bosses: ["Tinkaton"], bonuses: ["3× Catch Stardust", "2× Catch Candy", "2× chance for Candy XL", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "1 extra Special Trade (2–9 PM)", "50% less Trade Stardust cost (2–9 PM)"], tips: ["Evolve Tinkatuff during the event or up to 4 hours after (by 9 PM) for Gigaton Hammer.", "Stack Star Pieces with the 3× Stardust bonus — one of the best dust events.", "Tinkatink with Special Backgrounds from Field Research and Lure Modules.", "Take snapshots for Tinkatink photobomb encounters."] } },
   { id: 54, title: "Community Day: May 2026", type: "Community Day", date: "2026-05-09", endDate: null, time: "2:00 PM – 5:00 PM", color: "#636E72", icon: "\u2753", featured: false, summary: "May Community Day — date confirmed, featured Pokémon to be announced.", details: { bosses: ["Featured Pokémon: TBA"], bonuses: ["Standard Community Day bonuses expected", "Exclusive move for final evolution", "Boosted Shiny rate"], tips: ["Date is locked in — mark your calendar.", "Featured Pokémon usually announced 2–4 weeks before.", "Start stockpiling Poké Balls and Star Pieces."] } },
   { id: 55, title: "CD Classic: May 2026", type: "Community Day", date: "2026-05-16", endDate: null, time: "2:00 PM – 5:00 PM", color: "#636E72", icon: "\uD83D\uDD04", featured: false, summary: "May Community Day Classic — date confirmed, featured Pokémon to be announced.", details: { bosses: ["Featured Pokémon: TBA (past Community Day rerun)"], bonuses: ["Standard CD Classic bonuses expected", "Exclusive move available again"], tips: ["CD Classics bring back Pokémon and moves from past Community Days.", "Great chance to get an exclusive move you missed."] } },
@@ -1779,16 +1784,25 @@ function getRaidBossData(name) {
   for (const [pkmn, data] of Object.entries(RAID_BOSS_DATA)) {
     if (name.includes(pkmn)) return data;
   }
+  // Fallback: try to get types from cached PokéAPI data
+  const cleaned = cleanRaidLabel(name).replace(/^Shadow\s+/,"").replace(/^Mega\s+/,"").replace(/^Alolan\s+/,"").replace(/^Galarian\s+/,"").replace(/\s+with\s+.*/,"").trim();
+  const dex = DEX[cleaned];
+  if (dex) {
+    const cached = _pokeCache[`pokemon_${dex}`];
+    if (cached && cached.types) {
+      return { types: cached.types.map(t => t.charAt(0).toUpperCase() + t.slice(1)) };
+    }
+  }
   return null;
 }
 function cleanRaidLabel(name) {
   return name.replace(/^★/, "").replace(/\s*\(\d★\s*(?:Raid|Shadow Raid)?\)|\s*\(Mega\)|\s*\(\d★\s*Max Battle.*?\)|\s*\(Research Breakthrough\)/g, "").trim();
 }
-function renderBossItem(item, color, th, cardLayout) {
+function renderBossItem(item, color, th, cardLayout, noSparkles) {
   const pkmn = getPokemonImg(item);
   const imgSize = cardLayout ? 120 : 150;
   let imgEl = pokemonImgHTML(pkmn, imgSize);
-  if (imgEl) imgEl = wrapShinySparkles(imgEl, item, imgSize);
+  if (imgEl && !noSparkles) imgEl = wrapShinySparkles(imgEl, item, imgSize);
   const raidData = getRaidBossData(item);
   const typesHTML = raidData ? `<div style="display:flex;gap:4px;margin-top:4px;flex-wrap:wrap;${cardLayout ? "justify-content:center" : ""}">${raidData.types.map(t =>
     `<span style="font-size:${cardLayout ? 11 : 13}px;font-weight:700;color:#fff;background:${TYPE_COLORS[t] || "#888"};padding:2px 8px;border-radius:10px">${t}</span>`
@@ -1801,7 +1815,7 @@ function renderBossItem(item, color, th, cardLayout) {
   const resistances = raidData ? getResistances(raidData.types) : [];
   const hasBack = weaknesses.length > 0 || resistances.length > 0;
   const backContent = hasBack ? `
-    <div style="font-size:11px;font-weight:700;color:${th.textMuted};margin-bottom:16px;text-transform:uppercase;letter-spacing:0.5px">${esc(cleanRaidLabel(item))}</div>
+    <div style="font-size:11px;font-weight:700;color:${th.textMuted};margin-bottom:16px;text-transform:uppercase;letter-spacing:0.5px">${esc(cleanRaidLabel(item).replace(/\s+with\s+.*/i,"").trim())}</div>
     ${weaknesses.length > 0 ? `<div style="margin-bottom:20px">
       <div style="font-size:10px;font-weight:700;color:#E74C3C;letter-spacing:0.5px;margin-bottom:4px">WEAK TO</div>
       <div style="display:flex;gap:3px;flex-wrap:wrap;${cardLayout ? "justify-content:center" : ""}">${weaknesses.map(w =>
@@ -1842,7 +1856,7 @@ function renderBossItem(item, color, th, cardLayout) {
   </div>`;
 }
 
-function renderDetailSection(title, emoji, items, color, th, showImages) {
+function renderDetailSection(title, emoji, items, color, th, showImages, noSparkles) {
   if (!showImages) {
     return `<div><h4 style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>${emoji}</span> ${esc(title)}</h4>
       <div style="display:flex;flex-direction:column;gap:5px">${items.map(item =>
@@ -1875,14 +1889,14 @@ function renderDetailSection(title, emoji, items, color, th, showImages) {
   if (tierKeys.length === 0) {
     return `<div style="display:flex;flex-direction:column"><h4 style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>${emoji}</span> ${esc(title)}</h4>
       ${legendHTML}
-      <div style="display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${items.map(item => renderBossItem(item, color, th, breakpoint !== "mobile")).join("")}</div></div>`;
+      <div style="display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${items.map(item => renderBossItem(item, color, th, breakpoint !== "mobile", noSparkles)).join("")}</div></div>`;
   }
   // Render with tier groupings
   let html = `<div style="display:flex;flex-direction:column"><h4 style="margin:0 0 12px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>${emoji}</span> ${esc(title)}</h4>${legendHTML}`;
   // Untiered items first (wild spawns etc)
   if (untiered.length > 0) {
     html += `<div style="margin-bottom:12px">${tierKeys.length > 0 ? "" : ""}
-      <div style="display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${untiered.map(item => renderBossItem(item, color, th, breakpoint !== "mobile")).join("")}</div></div>`;
+      <div style="display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${untiered.map(item => renderBossItem(item, color, th, breakpoint !== "mobile", noSparkles)).join("")}</div></div>`;
   }
   // Tiered groups
   tierKeys.forEach(tier => {
@@ -1903,7 +1917,7 @@ function renderDetailSection(title, emoji, items, color, th, showImages) {
         <span style="font-size:12px;font-weight:700;color:${th.text};letter-spacing:0.5px;text-transform:uppercase">${tier}</span>
         ${renderRaidHeads(tier)}
       </div>
-      <div style="padding:8px;display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${tiered[tier].map(item => renderBossItem(item, tierColor, th, breakpoint !== "mobile")).join("")}</div>
+      <div style="padding:8px;display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${tiered[tier].map(item => renderBossItem(item, tierColor, th, breakpoint !== "mobile", noSparkles)).join("")}</div>
     </div>`;
   });
   html += `</div>`;
@@ -2017,12 +2031,12 @@ function renderEventDetail(event, th) {
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
           ${(() => {
             if (event.iconImg) {
-              return `<div style="width:50px;height:50px;border-radius:14px;background:${th.accentBg(event.color)};border:2px solid ${th.countdownBorder(event.color)};display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="${event.iconImg}" style="width:46px;height:46px;object-fit:contain" onerror="this.parentElement.innerHTML='${event.icon}'" /></div>`;
+              return `<div style="width:70px;height:70px;border-radius:16px;background:${th.accentBg(event.color)};border:2px solid ${th.countdownBorder(event.color)};display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="${event.iconImg}" style="width:62px;height:62px;object-fit:contain" onerror="this.parentElement.innerHTML='${event.icon}'" /></div>`;
             }
             const detailPkmn = (event.type === "Raid" || event.type === "Max Battle") && event.details && event.details.bosses && event.details.bosses[0] ? getPokemonImg(event.details.bosses[0]) : null;
             return detailPkmn
-              ? `<div style="width:50px;height:50px;border-radius:14px;background:${th.accentBg(event.color)};border:2px solid ${th.countdownBorder(event.color)};display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="${detailPkmn.url}" style="width:46px;height:46px;object-fit:contain" onerror="this.parentElement.innerHTML='${event.icon}'" /></div>`
-              : `<div style="width:50px;height:50px;border-radius:14px;background:${th.accentBg(event.color)};border:2px solid ${th.countdownBorder(event.color)};display:flex;align-items:center;justify-content:center;font-size:26px">${event.icon}</div>`;
+              ? `<div style="width:70px;height:70px;border-radius:16px;background:${th.accentBg(event.color)};border:2px solid ${th.countdownBorder(event.color)};display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="${detailPkmn.url}" style="width:62px;height:62px;object-fit:contain" onerror="this.parentElement.innerHTML='${event.icon}'" /></div>`
+              : `<div style="width:70px;height:70px;border-radius:16px;background:${th.accentBg(event.color)};border:2px solid ${th.countdownBorder(event.color)};display:flex;align-items:center;justify-content:center;font-size:32px">${event.icon}</div>`;
           })()}
           <div>
             <div style="font-size:10px;font-weight:700;color:${event.color};letter-spacing:1.2px;text-transform:uppercase;margin-bottom:3px;display:flex;gap:6px;align-items:center">${esc(event.type)}${active ? `<span style="background:#2ECC71;color:#fff;padding:1px 7px;border-radius:20px;font-size:9px">LIVE NOW</span>` : ""}</div>
@@ -2041,7 +2055,61 @@ function renderEventDetail(event, th) {
           ? `<div style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:${th.textMuted};padding:8px 14px;border:1.5px solid ${th.border};border-radius:10px;background:${th.surface};opacity:0.6;cursor:default">\uD83D\uDD17 More information coming soon</div>`
           : `<a href="${event.url}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:${event.color};text-decoration:none;padding:8px 14px;border:1.5px solid ${event.color}40;border-radius:10px;background:${th.accentBgSubtle(event.color)};transition:all 0.2s ease" onmouseenter="this.style.background='${event.color}20';this.style.borderColor='${event.color}'" onmouseleave="this.style.background='${th.accentBgSubtle(event.color)}';this.style.borderColor='${event.color}40'">\uD83D\uDD17 For more information about this event, click here</a>`) : ""}
         <div class="move-deadline" data-event-id="${event.id}">${renderMoveDeadlineBanner(event, th)}</div>
-        ${event.details.bosses ? renderDetailSection("Featured Encounters", "\uD83C\uDFAF", event.details.bosses, event.color, th, true) : ""}
+        ${event.details.bosses ? renderDetailSection(event.type === "Community Day" ? "Featured Move(s)" : "Featured Encounters", "\uD83C\uDFAF", event.details.bosses, event.color, th, true, event.type === "Community Day") : ""}
+        ${event.type === "Community Day" && event.iconImg ? (() => {
+          const cdName = event.title.replace("CD Classic: ","").replace("Community Day: ","").split(" & ")[0].split(" + ")[0].trim();
+          const cdDex = DEX[cdName];
+          if (!cdDex) return "";
+          // Build evolution family from cached data or walk DEX
+          const evoKey = `evo_${cdDex}`;
+          let family = _pokeCache[evoKey];
+          if (!family || family.length === 0) {
+            // Fallback: just show the CD Pokemon itself
+            family = [{ name: cdName, dexNum: cdDex }];
+          }
+          // Filter to unique dex numbers (no form expansions)
+          const seen = new Set();
+          const uniqueFamily = family.filter(f => { if (f.isMega || seen.has(f.dexNum)) return false; seen.add(f.dexNum); return true; });
+          const isMob = breakpoint === "mobile";
+          const imgSize = isMob ? 80 : 100;
+          const cardStyle = `display:flex;flex-direction:column;align-items:center;padding:${isMob ? "10px 8px" : "12px 10px"};border-radius:12px;background:${th.accentBgSubtle(event.color)};border:1.5px solid ${th.border};text-align:center;min-width:${isMob ? 90 : 110}px;max-width:${isMob ? 130 : 160}px;flex:1`;
+
+          const arrowHTML = (dex) => {
+            const evo = POGO_EVO[dex] || "";
+            return `<div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;margin:0 2px">
+              <div style="font-size:18px;color:${th.textMuted}">\u2192</div>
+              <div style="font-size:${isMob ? 8 : 9}px;color:${th.textSecondary};text-align:center;max-width:70px;line-height:1.2">${esc(evo)}</div>
+            </div>`;
+          };
+
+          const buildRow = (getFn, nameColor) => uniqueFamily.map((f, i) => {
+            const suffix = GENDER_SUFFIX[f.dexNum] || "";
+            const src = getFn(f.dexNum, suffix);
+            const name = DEX_BY_NUM[f.dexNum] || f.name;
+            const isShiny = nameColor === "#F39C12";
+            const arrow = i > 0 ? arrowHTML(f.dexNum) : "";
+            const cached = _pokeCache[`pokemon_${f.dexNum}`];
+            const typesEl = cached && cached.types ? `<div style="display:flex;gap:3px;margin-top:3px;justify-content:center;flex-wrap:wrap">${cached.types.map(t => `<span style="font-size:9px;font-weight:700;color:#fff;background:${TYPE_COLORS[t.charAt(0).toUpperCase()+t.slice(1)] || "#888"};padding:1px 6px;border-radius:8px">${t.charAt(0).toUpperCase()+t.slice(1)}</span>`).join("")}</div>` : "";
+            return `${arrow}<div onclick="showFormModal('${src}','${esc(name)}')" style="${cardStyle}${isShiny ? ";position:relative" : ""};cursor:pointer;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.03)'" onmouseleave="this.style.transform='scale(1)'">
+              ${isShiny ? `<div style="position:absolute;top:6%;right:10%;z-index:2;font-size:20px">\u2728</div>` : ""}
+              <img src="${src}" style="width:${imgSize}px;height:${imgSize}px;object-fit:contain" onerror="this.style.opacity='0.3'" />
+              <div style="margin-top:4px;font-weight:700;color:${nameColor};font-size:${isMob ? 11 : 12}px">${esc(name)}</div>
+              ${typesEl}
+            </div>`;
+          }).join("");
+
+          return `<div>
+            <h4 style="margin:0 0 10px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>\uD83D\uDD17</span> Evolution Chain</h4>
+            <div style="margin-bottom:12px">
+              <div style="font-size:11px;font-weight:600;color:${th.textMuted};margin-bottom:6px">Normal</div>
+              <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px">${buildRow(natDexImg, th.text)}</div>
+            </div>
+            <div>
+              <div style="font-size:11px;font-weight:600;color:#F39C12;margin-bottom:6px">\u2728 Shiny</div>
+              <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px">${buildRow(shinyDexImg, "#F39C12")}</div>
+            </div>
+          </div>`;
+        })() : ""}
         ${event.details.catchCP ? renderCatchCP(event.details.catchCP, th) : ""}
         ${event.details.spotlightHours ? `<div><h4 style="margin:0 0 10px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>\uD83D\uDD26</span> Daily Spotlight Hours <span style="font-size:11px;font-weight:500;color:${th.textMuted}">(6:00 \u2013 7:00 PM)</span></h4>
           <div style="display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:6px"}">${event.details.spotlightHours.map(sh => {
@@ -2184,6 +2252,38 @@ function selectEvent(id) {
   state.selectedEvent = EVENTS.find(e => e.id === id);
   render();
   window.scrollTo(0, 0);
+  // Pre-fetch evolution chain and Pokemon data for Community Day
+  const ev = state.selectedEvent;
+  if (ev && ev.type === "Community Day") {
+    const cdName = ev.title.replace("CD Classic: ","").replace("Community Day: ","").split(" & ")[0].split(" + ")[0].trim();
+    const cdDex = DEX[cdName];
+    const fetches = [];
+    if (cdDex) {
+      if (!_pokeCache[`evo_${cdDex}`]) fetches.push(fetchEvolutionChain(cdDex));
+      // After evo chain is loaded, fetch type data for all stages
+      const fetchAllStages = async () => {
+        if (!_pokeCache[`evo_${cdDex}`]) await fetchEvolutionChain(cdDex);
+        const evoChain = _pokeCache[`evo_${cdDex}`] || [];
+        const seen = new Set();
+        for (const stage of evoChain) {
+          if (!stage.isMega && !seen.has(stage.dexNum)) {
+            seen.add(stage.dexNum);
+            if (!_pokeCache[`pokemon_${stage.dexNum}`]) await fetchPokemonData(stage.dexNum);
+          }
+        }
+      };
+      fetches.push(fetchAllStages());
+    }
+    // Fetch type data for all bosses in the event
+    if (ev.details && ev.details.bosses) {
+      ev.details.bosses.forEach(boss => {
+        const cleaned = boss.replace(/\s+with\s+.*/,"").replace(/\s*\(.*?\)/g,"").trim();
+        const dex = DEX[cleaned];
+        if (dex && !_pokeCache[`pokemon_${dex}`]) fetches.push(fetchPokemonData(dex));
+      });
+    }
+    if (fetches.length > 0) Promise.all(fetches).then(() => render());
+  }
 }
 
 function selectNews(id) {
@@ -2444,7 +2544,7 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
     </div>
     <div style="text-align:center;padding:20px 0;background:linear-gradient(135deg,${primaryColor}22,${primaryColor}08);border-radius:16px;margin-bottom:16px;position:relative;overflow:hidden">
       <div style="position:absolute;top:8px;right:12px;font-size:28px;font-weight:800;color:${primaryColor};opacity:0.7">${dexStr}</div>
-      <img src="${pokemonImgUrl(data.dexNum)}" style="width:${isMobile ? 140 : 180}px;height:${isMobile ? 140 : 180}px;object-fit:contain;filter:drop-shadow(0 4px 12px ${primaryColor}40)" onerror="this.style.opacity='0.3'" />
+      <img onclick="showFormModal('${pokemonImgUrl(data.dexNum)}','${esc(data.name)}')" src="${pokemonImgUrl(data.dexNum)}" style="width:${isMobile ? 140 : 180}px;height:${isMobile ? 140 : 180}px;object-fit:contain;filter:drop-shadow(0 4px 12px ${primaryColor}40);cursor:pointer" onerror="this.style.opacity='0.3'" />
     </div>
     <div style="text-align:center;margin-bottom:16px">
       <div style="font-size:12px;font-weight:700;color:${th.textMuted};letter-spacing:1px">${dexStr}</div>
@@ -2896,12 +2996,12 @@ function render() {
                       onmouseleave="this.style.background='${th.surface}'">
                       ${(() => {
                         if (ev.iconImg) {
-                          return `<div style="width:34px;height:34px;border-radius:9px;background:${th.accentBg(ev.color)};display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="${ev.iconImg}" style="width:30px;height:30px;object-fit:contain" onerror="this.parentElement.innerHTML='${ev.icon}'" /></div>`;
+                          return `<div style="width:55px;height:55px;border-radius:14px;background:${th.accentBg(ev.color)};display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="${ev.iconImg}" style="width:48px;height:48px;object-fit:contain" onerror="this.parentElement.innerHTML='${ev.icon}'" /></div>`;
                         }
                         const raidPkmn = (ev.type === "Raid" || ev.type === "Max Battle") && ev.details && ev.details.bosses && ev.details.bosses[0] ? getPokemonImg(ev.details.bosses[0]) : null;
                         return raidPkmn
-                          ? `<div style="width:34px;height:34px;border-radius:9px;background:${th.accentBg(ev.color)};display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="${raidPkmn.url}" style="width:30px;height:30px;object-fit:contain" onerror="this.parentElement.innerHTML='${ev.icon}'" /></div>`
-                          : `<div style="width:34px;height:34px;border-radius:9px;background:${th.accentBg(ev.color)};display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0">${ev.icon}</div>`;
+                          ? `<div style="width:55px;height:55px;border-radius:14px;background:${th.accentBg(ev.color)};display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="${raidPkmn.url}" style="width:48px;height:48px;object-fit:contain" onerror="this.parentElement.innerHTML='${ev.icon}'" /></div>`
+                          : `<div style="width:55px;height:55px;border-radius:14px;background:${th.accentBg(ev.color)};display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">${ev.icon}</div>`;
                       })()}
                       <div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:${th.text};line-height:1.3">${esc(ev.title)}</div>
                       <div style="font-size:12px;color:${th.textMuted};margin-top:2px">${formatDate(ev.date)}</div></div>
