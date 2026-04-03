@@ -891,7 +891,8 @@ const WEB_STORE_BOXES = [
     items: [
       { name: "Fashion Raid Day Ticket", qty: 1 },
       { name: "Premium Battle Pass", qty: 1 }
-    ]
+    ],
+    ticketBonuses: ["Up to 14 Raid Passes from spinning Gym Photo Discs", "Increased chance to get Rare Candy XL from Raid Battles", "50% more XP from Raid Battles", "2\u00D7 Stardust from Raid Battles"]
   },
   {
     name: "GO Pass Deluxe: April",
@@ -3216,6 +3217,12 @@ function render() {
               <span style="font-size:${isMobile ? 14 : 15}px;font-weight:800;color:${v.savingsPct >= 0 ? "#2ECC71" : "#E74C3C"};font-family:'JetBrains Mono',monospace">${v.savingsPct >= 0 ? "+" : "-"}$${Math.abs(v.savings).toFixed(2)}</span>
             </div>` : ""}
           </div>
+          ${box.ticketBonuses ? `<div style="margin:${isMobile ? "10px 14px 14px" : "14px 20px 20px"};padding:${isMobile ? "14px" : "16px"};border-radius:14px;background:${th.accentBgSubtle("#E67E22")};border:1px solid ${th.countdownBorder("#E67E22")}">
+            <div style="font-size:12px;font-weight:700;color:#E67E22;margin-bottom:4px">\uD83C\uDFAB Ticket Bonuses</div>
+            <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;margin-bottom:8px">These bonuses will be effective on Saturday, April 4, 2026, from 2:00 p.m. to 5:00 p.m.</div>
+            <ul style="margin:0;padding-left:18px;font-size:${isMobile ? 12 : 13}px;color:${th.textSecondary};line-height:1.8">${box.ticketBonuses.map(b => `<li>${esc(b)}</li>`).join("")}</ul>
+            <div style="margin-top:12px;padding-top:10px;border-top:1px solid ${th.countdownBorder("#E67E22")};font-size:${isMobile ? 11 : 12}px;color:#2ECC71;font-weight:700">\uD83D\uDCA1 Pro Tip: <span style="font-weight:500;color:${th.textSecondary}">Purchasing the ticket through the Web Store gives you an extra Raid Pass!</span></div>
+          </div>` : ""}
         </div>`;
       }).join("");
       storeTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
