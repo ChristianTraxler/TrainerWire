@@ -1,7 +1,8 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "2.03";
+const APP_VERSION = "2.50";
+const REPORT_EMAIL = "ssj4gogeta2004@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
 const IMG_BASE = "assets/pokemon-images";
@@ -2616,6 +2617,58 @@ function goHome() {
   render();
 }
 
+let reportPhotoFile = null;
+
+function updateReportSection() {
+  const type = document.getElementById("report-type").value;
+  const select = document.getElementById("report-section");
+  const label = document.getElementById("report-section-label");
+  if (type === "suggestion") {
+    label.textContent = "What area is this about?";
+    select.innerHTML = `<option value="accessibility">Accessibility</option><option value="content-data">Content & Data</option><option value="general">General</option><option value="new-feature">New Feature</option><option value="notifications">Notifications & Alerts</option><option value="performance">Performance</option><option value="ui-design">UI / Design</option>`;
+  } else {
+    label.textContent = "Which page or section?";
+    select.innerHTML = `<option value="calendar">Calendar</option><option value="store">Deal Check</option><option value="events">Events</option><option value="general">General / Sitewide</option><option value="max-battles">Max Battles</option><option value="nests">Nests</option><option value="news">News</option><option value="pokedex">Pok\u00E9Dex</option><option value="tools">PoGO Tools</option><option value="raids">Raids</option>`;
+  }
+}
+
+function previewReportPhoto(input) {
+  const file = input.files[0];
+  const preview = document.getElementById("report-photo-preview");
+  const prompt = document.getElementById("report-photo-prompt");
+  if (!file) { preview.style.display = "none"; prompt.style.display = "flex"; reportPhotoFile = null; return; }
+  if (file.size > 10 * 1024 * 1024) { alert("Image must be under 10 MB."); input.value = ""; return; }
+  reportPhotoFile = file;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    preview.innerHTML = `<div style="position:relative;display:inline-block"><img src="${e.target.result}" style="max-width:100%;max-height:200px;border-radius:10px;object-fit:contain" /><button onclick="event.stopPropagation();removeReportPhoto()" style="position:absolute;top:-8px;right:-8px;width:24px;height:24px;border-radius:50%;background:#E74C3C;border:none;color:#fff;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1">\u00D7</button></div><div style="margin-top:6px;font-size:12px;color:${t(darkMode).textMuted}">${file.name}</div>`;
+    preview.style.display = "block";
+    prompt.style.display = "none";
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeReportPhoto() {
+  reportPhotoFile = null;
+  document.getElementById("report-photo").value = "";
+  document.getElementById("report-photo-preview").style.display = "none";
+  document.getElementById("report-photo-preview").innerHTML = "";
+  document.getElementById("report-photo-prompt").style.display = "flex";
+}
+
+function submitReport() {
+  const type = document.getElementById("report-type").value;
+  const section = document.getElementById("report-section").value;
+  const description = document.getElementById("report-description").value.trim();
+  const name = document.getElementById("report-name").value.trim();
+  if (!description) { alert("Please describe the issue before submitting."); return; }
+  const typeLabels = {"wrong-info":"Wrong Information","bug":"Bug / Something Broken","missing":"Missing Event or Data","suggestion":"Suggestion / Feature Request","other":"Other"};
+  const hasPhoto = reportPhotoFile !== null;
+  const subject = encodeURIComponent(`[TrainerWire Report] ${typeLabels[type] || type}`);
+  const body = encodeURIComponent(`Report Type: ${typeLabels[type] || type}\nSection: ${section}\n${name ? "From: " + name + "\n" : ""}\nDescription:\n${description}\n${hasPhoto ? "\n\u26A0\uFE0F SCREENSHOT: Please attach the screenshot you selected (" + reportPhotoFile.name + ") to this email before sending.\n" : ""}\n---\nSent from TrainerWire v${APP_VERSION}`);
+  window.open(`mailto:${REPORT_EMAIL}?subject=${subject}&body=${body}`, "_self");
+}
+
 function setTab(tab) {
   state.tab = tab;
   state.selectedEvent = null;
@@ -3841,6 +3894,68 @@ function render() {
       </div>`;
     }
 
+    // Report tab
+    let reportTabHTML = "";
+    if (state.tab === "report") {
+      reportTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px;max-width:640px;margin:0 auto;width:100%">
+        <div style="text-align:center;padding:10px">
+          <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text}">\uD83D\uDCDD Report an Issue</h2>
+          <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Found a bug or incorrect info? Let us know and we'll fix it!</p>
+        </div>
+        <div style="padding:${isMobile ? "20px 18px" : "28px 28px"};background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;display:flex;flex-direction:column;gap:${isMobile ? 14 : 18}px;box-shadow:${th.shadow}">
+          <div>
+            <label style="display:block;font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:6px">Report Type</label>
+            <select id="report-type" onchange="updateReportSection()" style="width:100%;padding:${isMobile ? "11px 14px" : "12px 16px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.bg};color:${th.text};font-size:${isMobile ? 14 : 15}px;font-family:inherit;outline:none;cursor:pointer;appearance:auto">
+              <option value="bug">Bug / Something Broken</option>
+              <option value="missing">Missing Event or Data</option>
+              <option value="suggestion">Suggestion / Feature Request</option>
+              <option value="wrong-info">Wrong Information</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div id="report-section-wrapper">
+            <label id="report-section-label" style="display:block;font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:6px">Which page or section?</label>
+            <select id="report-section" style="width:100%;padding:${isMobile ? "11px 14px" : "12px 16px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.bg};color:${th.text};font-size:${isMobile ? 14 : 15}px;font-family:inherit;outline:none;cursor:pointer;appearance:auto">
+              <option value="calendar">Calendar</option>
+              <option value="store">Deal Check</option>
+              <option value="events">Events</option>
+              <option value="general">General / Sitewide</option>
+              <option value="max-battles">Max Battles</option>
+              <option value="nests">Nests</option>
+              <option value="news">News</option>
+              <option value="pokedex">Pok\u00E9Dex</option>
+              <option value="tools">PoGO Tools</option>
+              <option value="raids">Raids</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block;font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:6px">Description <span style="color:${th.textMuted};font-weight:500">(be as specific as possible)</span></label>
+            <textarea id="report-description" rows="5" placeholder="Describe the issue or what's wrong..." style="width:100%;padding:${isMobile ? "11px 14px" : "12px 16px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.bg};color:${th.text};font-size:${isMobile ? 14 : 15}px;font-family:inherit;outline:none;resize:vertical;box-sizing:border-box;line-height:1.5"></textarea>
+          </div>
+          <div>
+            <label style="display:block;font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:6px">Screenshot <span style="color:${th.textMuted};font-weight:500">(optional)</span></label>
+            <div id="report-photo-drop" onclick="document.getElementById('report-photo').click()" style="width:100%;padding:${isMobile ? "20px 14px" : "24px 16px"};border-radius:12px;border:2px dashed ${th.border};background:${th.bg};cursor:pointer;text-align:center;box-sizing:border-box;transition:border-color 0.2s ease" onmouseenter="this.style.borderColor='#E74C3C'" onmouseleave="this.style.borderColor='${th.border}'">
+              <div id="report-photo-preview" style="display:none;margin-bottom:10px"></div>
+              <div id="report-photo-prompt" style="display:flex;flex-direction:column;align-items:center;gap:6px">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="${th.textMuted}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span style="font-size:${isMobile ? 13 : 14}px;color:${th.textMuted};font-weight:500">Tap to add a screenshot</span>
+                <span style="font-size:${isMobile ? 10 : 11}px;color:${th.textFaint}">PNG, JPG, or GIF \u00B7 Max 10 MB</span>
+              </div>
+            </div>
+            <input id="report-photo" type="file" accept="image/*" style="display:none" onchange="previewReportPhoto(this)" />
+          </div>
+          <div>
+            <label style="display:block;font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:6px">Your Name <span style="color:${th.textMuted};font-weight:500">(optional)</span></label>
+            <input id="report-name" type="text" placeholder="Trainer name or nickname" style="width:100%;padding:${isMobile ? "11px 14px" : "12px 16px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.bg};color:${th.text};font-size:${isMobile ? 14 : 15}px;font-family:inherit;outline:none;box-sizing:border-box" />
+          </div>
+          <button onclick="submitReport()" style="width:100%;padding:${isMobile ? "13px" : "14px"};border-radius:12px;border:none;background:linear-gradient(135deg,#E74C3C,#F39C12);color:#fff;font-size:${isMobile ? 15 : 16}px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.2s ease;letter-spacing:0.3px" onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(231,76,60,0.3)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">Submit Report</button>
+        </div>
+        <div style="text-align:center;font-size:${isMobile ? 11 : 12}px;color:${th.textFaint};line-height:1.6;padding:0 8px">
+          Reports are sent via email. Your email app will open with the details pre-filled.<br>Thank you for helping us keep TrainerWire accurate!
+        </div>
+      </div>`;
+    }
+
     const welcomeHTML = state.tab === "home" ? `<div style="border-radius:${isMobile ? 18 : 24}px;padding:${isMobile ? "24px 18px" : "32px 28px"};background:linear-gradient(135deg,${th.heroBg("#E74C3C")},${th.heroBg("#F39C12")});border:1.5px solid ${th.border};overflow:hidden;position:relative;animation:fadeSlideUp 0.5s cubic-bezier(0.25,0.46,0.45,0.94)">
         <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:${isMobile ? 14 : 18}px">
           <img src="assets/trainerwire-logo.PNG" style="width:${isMobile ? 278 : 327}px;height:${isMobile ? 278 : 327}px;object-fit:contain;margin-top:${isMobile ? -40 : -50}px" alt="TrainerWire" />
@@ -3873,7 +3988,7 @@ function render() {
       </div>` : "";
 
     content = `<main style="padding:${mainPad};display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
-      ${welcomeHTML}${!["home","tools","nests","pokedex","store"].includes(state.tab) ? `${liveHTML}${heroHTML}${tabsHTML}` : ""}${state.tab === "home" ? `${liveHTML}${heroHTML}${tabsHTML}` : ""}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${newsTabHTML}${storeTabHTML}${pokedexTabHTML}${toolsTabHTML}${nestsTabHTML}
+      ${welcomeHTML}${!["home","tools","nests","pokedex","store","report"].includes(state.tab) ? `${liveHTML}${heroHTML}${tabsHTML}` : ""}${state.tab === "home" ? `${liveHTML}${heroHTML}${tabsHTML}` : ""}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${newsTabHTML}${storeTabHTML}${pokedexTabHTML}${toolsTabHTML}${nestsTabHTML}${reportTabHTML}
     </main>`;
     if (hero || activeEvents.length > 0) state.heroRendered = true;
   }
@@ -3907,7 +4022,8 @@ function render() {
   </div>`;
 
   const footerHTML = `<footer style="text-align:center;padding:${isMobile ? "20px 16px" : "28px 24px"};font-size:${isMobile ? 11 : 12}px;color:${th.textFaint};font-weight:500;border-top:1px solid ${th.footerBorder}">
-    ${COMMUNITY_NAME} \u00B7 Not affiliated with Niantic, The Pok\u00E9mon Company, or Nintendo
+    ${COMMUNITY_NAME} \u00B7 v${APP_VERSION} \u00B7 Not affiliated with Niantic, The Pok\u00E9mon Company, or Nintendo
+    <div style="margin-top:8px"><a onclick="setTab('report')" style="color:${th.textMuted};cursor:pointer;text-decoration:underline;font-size:${isMobile ? 11 : 12}px">Report a Bug or Issue</a></div>
   </footer>`;
 
   const scrollTopBtn = `<button id="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:${isMobile ? 20 : 28}px;right:${isMobile ? 16 : 28}px;width:${isMobile ? 44 : 48}px;height:${isMobile ? 44 : 48}px;border-radius:50%;background:linear-gradient(135deg,#E74C3C,#F39C12);border:none;box-shadow:0 4px 18px rgba(231,76,60,0.35);cursor:pointer;display:none;align-items:center;justify-content:center;z-index:200;transition:opacity 0.4s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);font-family:inherit;opacity:0;transform:translateY(20px) scale(0.8)" onmouseenter="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 24px rgba(231,76,60,0.5)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='0 4px 18px rgba(231,76,60,0.35)'"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg></button>`;
@@ -4003,7 +4119,8 @@ function renderSidebar(th) {
     { id: "pokedex", icon: "\uD83D\uDCD6", iconImg: "assets/pokemon-images/Items/Main1.webp", label: "Pok\u00E9Dex" },
     { id: "store", icon: "\uD83D\uDED2", label: "Deal Check" },
     { id: "nests", icon: "\uD83C\uDF33", iconImg: "assets/pokemon-images/icons/ic_grass.png", label: "Nests" },
-    { id: "tools", icon: "\uD83D\uDEE0\uFE0F", label: "PoGO Tools" }
+    { id: "tools", icon: "\uD83D\uDEE0\uFE0F", label: "PoGO Tools" },
+    { id: "report", icon: "\uD83D\uDCDD", label: "Report Issue" }
   ];
   return `<div id="sidebar-overlay" onclick="closeSidebar()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:998;opacity:0;pointer-events:none;transition:opacity 0.3s ease"></div>
   <nav id="sidebar" style="position:fixed;top:0;left:0;width:260px;height:100%;background:${th.surface};border-right:1.5px solid ${th.border};z-index:999;transform:translateX(-100%);transition:transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;overflow-y:auto">
