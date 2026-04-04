@@ -30,7 +30,7 @@ const DEX = {
   "Treecko":252,"Grovyle":253,"Sceptile":254,"Torchic":255,"Combusken":256,"Blaziken":257,"Mudkip":258,"Marshtomp":259,"Swampert":260,"Poochyena":261,"Mightyena":262,"Zigzagoon":263,"Linoone":264,"Wurmple":265,"Silcoon":266,"Beautifly":267,"Cascoon":268,"Dustox":269,"Lotad":270,"Lombre":271,"Ludicolo":272,"Seedot":273,"Nuzleaf":274,"Shiftry":275,"Taillow":276,"Swellow":277,"Wingull":278,"Pelipper":279,"Ralts":280,"Kirlia":281,"Gardevoir":282,"Surskit":283,"Masquerain":284,"Shroomish":285,"Breloom":286,"Slakoth":287,"Vigoroth":288,"Slaking":289,"Nincada":290,"Ninjask":291,"Shedinja":292,"Whismur":293,"Loudred":294,"Exploud":295,"Makuhita":296,"Hariyama":297,"Azurill":298,"Nosepass":299,"Skitty":300,"Delcatty":301,"Sableye":302,"Mawile":303,"Aron":304,"Lairon":305,"Aggron":306,"Meditite":307,"Medicham":308,"Electrike":309,"Manectric":310,"Plusle":311,"Minun":312,"Volbeat":313,"Illumise":314,"Roselia":315,"Gulpin":316,"Swalot":317,"Carvanha":318,"Sharpedo":319,"Wailmer":320,"Wailord":321,"Numel":322,"Camerupt":323,"Torkoal":324,"Spoink":325,"Grumpig":326,"Spinda":327,"Trapinch":328,"Vibrava":329,"Flygon":330,"Cacnea":331,"Cacturne":332,"Swablu":333,"Altaria":334,"Zangoose":335,"Seviper":336,"Lunatone":337,"Solrock":338,"Barboach":339,"Whiscash":340,"Corphish":341,"Crawdaunt":342,"Baltoy":343,"Claydol":344,"Lileep":345,"Cradily":346,"Anorith":347,"Armaldo":348,"Feebas":349,"Milotic":350,"Castform":351,"Kecleon":352,"Shuppet":353,"Banette":354,"Duskull":355,"Dusclops":356,"Tropius":357,"Chimecho":358,"Absol":359,"Wynaut":360,"Snorunt":361,"Glalie":362,"Spheal":363,"Sealeo":364,"Walrein":365,"Clamperl":366,"Huntail":367,"Gorebyss":368,"Relicanth":369,"Luvdisc":370,"Bagon":371,"Shelgon":372,"Salamence":373,"Beldum":374,"Metang":375,"Metagross":376,"Regirock":377,"Regice":378,"Registeel":379,"Latias":380,"Latios":381,"Kyogre":382,"Groudon":383,"Rayquaza":384,"Jirachi":385,"Deoxys":386,
   "Turtwig":387,"Grotle":388,"Torterra":389,"Chimchar":390,"Monferno":391,"Infernape":392,"Piplup":393,"Prinplup":394,"Empoleon":395,"Starly":396,"Staravia":397,"Staraptor":398,"Bidoof":399,"Bibarel":400,"Kricketot":401,"Kricketune":402,"Shinx":403,"Luxio":404,"Luxray":405,"Budew":406,"Roserade":407,"Cranidos":408,"Rampardos":409,"Shieldon":410,"Bastiodon":411,"Burmy":412,"Wormadam":413,"Mothim":414,"Combee":415,"Vespiquen":416,"Pachirisu":417,"Buizel":418,"Floatzel":419,"Cherubi":420,"Cherrim":421,"Shellos":422,"Gastrodon":423,"Ambipom":424,"Drifloon":425,"Drifblim":426,"Buneary":427,"Lopunny":428,"Mismagius":429,"Honchkrow":430,"Glameow":431,"Purugly":432,"Chingling":433,"Stunky":434,"Skuntank":435,"Bronzor":436,"Bronzong":437,"Bonsly":438,"Mime Jr.":439,"Happiny":440,"Chatot":441,"Spiritomb":442,"Gible":443,"Gabite":444,"Garchomp":445,"Munchlax":446,"Riolu":447,"Lucario":448,"Hippopotas":449,"Hippowdon":450,"Skorupi":451,"Drapion":452,"Croagunk":453,"Toxicroak":454,"Carnivine":455,"Finneon":456,"Lumineon":457,"Mantyke":458,"Snover":459,"Abomasnow":460,"Weavile":461,"Magnezone":462,"Lickilicky":463,"Rhyperior":464,"Tangrowth":465,"Electivire":466,"Magmortar":467,"Togekiss":468,"Yanmega":469,"Leafeon":470,"Glaceon":471,"Gliscor":472,"Mamoswine":473,"Porygon-Z":474,"Gallade":475,"Probopass":476,"Dusknoir":477,"Froslass":478,"Rotom":479,"Uxie":480,"Mesprit":481,"Azelf":482,"Dialga":483,"Palkia":484,"Heatran":485,"Regigigas":486,"Giratina":487,"Cresselia":488,"Phione":489,"Manaphy":490,"Darkrai":491,"Shaymin":492,"Arceus":493,
   "Victini":494,"Snivy":495,"Servine":496,"Serperior":497,"Tepig":498,"Pignite":499,"Emboar":500,"Oshawott":501,"Dewott":502,"Samurott":503,"Patrat":504,"Watchog":505,"Lillipup":506,"Herdier":507,"Stoutland":508,"Purrloin":509,"Liepard":510,"Pansage":511,"Simisage":512,"Pansear":513,"Simisear":514,"Panpour":515,"Simipour":516,"Munna":517,"Musharna":518,"Pidove":519,"Tranquill":520,"Unfezant":521,"Blitzle":522,"Zebstrika":523,"Roggenrola":524,"Boldore":525,"Gigalith":526,"Woobat":527,"Swoobat":528,"Drilbur":529,"Excadrill":530,"Audino":531,"Timburr":532,"Gurdurr":533,"Conkeldurr":534,"Tympole":535,"Palpitoad":536,"Seismitoad":537,"Throh":538,"Sawk":539,"Sewaddle":540,"Swadloon":541,"Leavanny":542,"Venipede":543,"Whirlipede":544,"Scolipede":545,"Cottonee":546,"Whimsicott":547,"Petilil":548,"Lilligant":549,"Basculin":550,"Sandile":551,"Krokorok":552,"Krookodile":553,"Darumaka":554,"Darmanitan":555,"Maractus":556,"Dwebble":557,"Crustle":558,"Scraggy":559,"Scrafty":560,"Sigilyph":561,"Yamask":562,"Cofagrigus":563,"Tirtouga":564,"Carracosta":565,"Archen":566,"Archeops":567,"Trubbish":568,"Garbodor":569,"Zorua":570,"Zoroark":571,"Minccino":572,"Cinccino":573,"Gothita":574,"Gothorita":575,"Gothitelle":576,"Solosis":577,"Duosion":578,"Reuniclus":579,"Ducklett":580,"Swanna":581,"Vanillite":582,"Vanillish":583,"Vanilluxe":584,"Deerling":585,"Sawsbuck":586,"Emolga":587,"Karrablast":588,"Escavalier":589,"Foongus":590,"Amoonguss":591,"Frillish":592,"Jellicent":593,"Alomomola":594,"Joltik":595,"Galvantula":596,"Ferroseed":597,"Ferrothorn":598,"Klink":599,"Klang":600,"Klinklang":601,"Tynamo":602,"Eelektrik":603,"Eelektross":604,"Elgyem":605,"Beheeyem":606,"Litwick":607,"Lampent":608,"Chandelure":609,"Axew":610,"Fraxure":611,"Haxorus":612,"Cubchoo":613,"Beartic":614,"Cryogonal":615,"Shelmet":616,"Accelgor":617,"Stunfisk":618,"Mienfoo":619,"Mienshao":620,"Druddigon":621,"Golett":622,"Golurk":623,"Pawniard":624,"Bisharp":625,"Bouffalant":626,"Rufflet":627,"Braviary":628,"Vullaby":629,"Mandibuzz":630,"Heatmor":631,"Durant":632,"Deino":633,"Zweilous":634,"Hydreigon":635,"Larvesta":636,"Volcarona":637,"Cobalion":638,"Terrakion":639,"Virizion":640,"Tornadus":641,"Thundurus":642,"Reshiram":643,"Zekrom":644,"Landorus":645,"Kyurem":646,"Keldeo":647,"Meloetta":648,"Genesect":649,
-  "Chespin":650,"Quilladin":651,"Chesnaught":652,"Fennekin":653,"Braixen":654,"Delphox":655,"Froakie":656,"Frogadier":657,"Greninja":658,"Bunnelby":659,"Diggersby":660,"Fletchling":661,"Fletchinder":662,"Talonflame":663,"Scatterbug":664,"Spewpa":665,"Vivillon":666,"Litleo":667,"Pyroar":668,"Skiddo":672,"Gogoat":673,"Pancham":674,"Pangoro":675,"Furfrou":676,"Espurr":677,"Meowstic":678,"Honedge":679,"Doublade":680,"Aegislash":681,"Spritzee":682,"Aromatisse":683,"Swirlix":684,"Slurpuff":685,"Inkay":686,"Malamar":687,"Binacle":688,"Barbaracle":689,"Skrelp":690,"Dragalge":691,"Clauncher":692,"Clawitzer":693,"Helioptile":694,"Heliolisk":695,"Tyrunt":696,"Tyrantrum":697,"Amaura":698,"Aurorus":699,"Sylveon":700,"Hawlucha":701,"Dedenne":702,"Carbink":703,"Goomy":704,"Sliggoo":705,"Goodra":706,"Klefki":707,"Phantump":708,"Trevenant":709,"Pumpkaboo":710,"Gourgeist":711,"Bergmite":712,"Avalugg":713,"Noibat":714,"Noivern":715,"Xerneas":716,"Yveltal":717,"Zygarde":718,"Diancie":719,"Hoopa":720,"Volcanion":721,
+  "Chespin":650,"Quilladin":651,"Chesnaught":652,"Fennekin":653,"Braixen":654,"Delphox":655,"Froakie":656,"Frogadier":657,"Greninja":658,"Bunnelby":659,"Diggersby":660,"Fletchling":661,"Fletchinder":662,"Talonflame":663,"Scatterbug":664,"Spewpa":665,"Vivillon":666,"Litleo":667,"Pyroar":668,"Flabebe":669,"Floette":670,"Florges":671,"Skiddo":672,"Gogoat":673,"Pancham":674,"Pangoro":675,"Furfrou":676,"Espurr":677,"Meowstic":678,"Honedge":679,"Doublade":680,"Aegislash":681,"Spritzee":682,"Aromatisse":683,"Swirlix":684,"Slurpuff":685,"Inkay":686,"Malamar":687,"Binacle":688,"Barbaracle":689,"Skrelp":690,"Dragalge":691,"Clauncher":692,"Clawitzer":693,"Helioptile":694,"Heliolisk":695,"Tyrunt":696,"Tyrantrum":697,"Amaura":698,"Aurorus":699,"Sylveon":700,"Hawlucha":701,"Dedenne":702,"Carbink":703,"Goomy":704,"Sliggoo":705,"Goodra":706,"Klefki":707,"Phantump":708,"Trevenant":709,"Pumpkaboo":710,"Gourgeist":711,"Bergmite":712,"Avalugg":713,"Noibat":714,"Noivern":715,"Xerneas":716,"Yveltal":717,"Zygarde":718,"Diancie":719,"Hoopa":720,"Volcanion":721,
   "Rowlet":722,"Dartrix":723,"Decidueye":724,"Litten":725,"Torracat":726,"Incineroar":727,"Popplio":728,"Brionne":729,"Primarina":730,"Pikipek":731,"Trumbeak":732,"Toucannon":733,"Yungoos":734,"Gumshoos":735,"Grubbin":736,"Charjabug":737,"Vikavolt":738,"Crabrawler":739,"Crabominable":740,"Oricorio":741,"Cutiefly":742,"Ribombee":743,"Rockruff":744,"Lycanroc":745,"Wishiwashi":746,"Mareanie":747,"Toxapex":748,"Mudbray":749,"Mudsdale":750,"Dewpider":751,"Araquanid":752,"Fomantis":753,"Lurantis":754,"Morelull":755,"Shiinotic":756,"Salandit":757,"Salazzle":758,"Stufful":759,"Bewear":760,"Bounsweet":761,"Steenee":762,"Tsareena":763,"Comfey":764,"Oranguru":765,"Passimian":766,"Wimpod":767,"Golisopod":768,"Sandygast":769,"Palossand":770,"Pyukumuku":771,"Type: Null":772,"Silvally":773,"Minior":774,"Komala":775,"Turtonator":776,"Togedemaru":777,"Mimikyu":778,"Bruxish":779,"Drampa":780,"Dhelmise":781,"Jangmo-o":782,"Hakamo-o":783,"Kommo-o":784,"Tapu Koko":785,"Tapu Lele":786,"Tapu Bulu":787,"Tapu Fini":788,"Cosmog":789,"Cosmoem":790,"Solgaleo":791,"Lunala":792,"Nihilego":793,"Buzzwole":794,"Pheromosa":795,"Xurkitree":796,"Celesteela":797,"Kartana":798,"Guzzlord":799,"Necrozma":800,"Magearna":801,"Marshadow":802,"Poipole":803,"Naganadel":804,"Stakataka":805,"Blacephalon":806,"Zeraora":807,"Meltan":808,"Melmetal":809,
   "Grookey":810,"Thwackey":811,"Rillaboom":812,"Scorbunny":813,"Raboot":814,"Cinderace":815,"Sobble":816,"Drizzile":817,"Inteleon":818,"Skwovet":819,"Greedent":820,"Rookidee":821,"Corvisquire":822,"Corviknight":823,"Blipbug":824,"Dottler":825,"Orbeetle":826,"Nickit":827,"Thievul":828,"Gossifleur":829,"Eldegoss":830,"Wooloo":831,"Dubwool":832,"Chewtle":833,"Drednaw":834,"Yamper":835,"Boltund":836,"Rolycoly":837,"Carkol":838,"Coalossal":839,"Applin":840,"Flapple":841,"Appletun":842,"Silicobra":843,"Sandaconda":844,"Cramorant":845,"Arrokuda":846,"Barraskewda":847,"Toxel":848,"Toxtricity":849,"Sizzlipede":850,"Centiskorch":851,"Clobbopus":852,"Grapploct":853,"Sinistea":854,"Polteageist":855,"Hatenna":856,"Hattrem":857,"Hatterene":858,"Impidimp":859,"Morgrem":860,"Grimmsnarl":861,"Obstagoon":862,"Perrserker":863,"Cursola":864,"Sirfetchd":865,"Mr. Rime":866,"Runerigus":867,"Milcery":868,"Alcremie":869,"Falinks":870,"Pincurchin":871,"Snom":872,"Frosmoth":873,"Stonjourner":874,"Eiscue":875,"Indeedee":876,"Morpeko":877,"Cufant":878,"Copperajah":879,"Dracozolt":880,"Arctozolt":881,"Dracovish":882,"Arctovish":883,"Duraludon":884,"Dreepy":885,"Drakloak":886,"Dragapult":887,"Zacian":888,"Zamazenta":889,"Eternatus":890,"Kubfu":891,"Urshifu":892,"Zarude":893,"Regieleki":894,"Regidrago":895,"Glastrier":896,"Spectrier":897,"Calyrex":898,"Wyrdeer":899,"Kleavor":900,"Ursaluna":901,"Basculegion":902,"Sneasler":903,"Overqwil":904,"Enamorus":905,
   "Sprigatito":906,"Floragato":907,"Meowscarada":908,"Fuecoco":909,"Crocalor":910,"Skeledirge":911,"Quaxly":912,"Quaxwell":913,"Quaquaval":914,"Lechonk":915,"Oinkologne":916,"Tarountula":917,"Spidops":918,"Nymble":919,"Lokix":920,"Pawmi":921,"Pawmo":922,"Pawmot":923,"Tandemaus":924,"Maushold":925,"Fidough":926,"Dachsbun":927,"Smoliv":928,"Dolliv":929,"Arboliva":930,"Squawkabilly":931,"Nacli":932,"Naclstack":933,"Garganacl":934,"Charcadet":935,"Armarouge":936,"Ceruledge":937,"Tadbulb":938,"Bellibolt":939,"Wattrel":940,"Kilowattrel":941,"Maschiff":942,"Mabosstiff":943,"Shroodle":944,"Grafaiai":945,"Bramblin":946,"Brambleghast":947,"Toedscool":948,"Toedscruel":949,"Klawf":950,"Capsakid":951,"Scovillain":952,"Rellor":953,"Rabsca":954,"Flittle":955,"Espathra":956,"Tinkatink":957,"Tinkatuff":958,"Tinkaton":959,"Wiglett":960,"Wugtrio":961,"Bombirdier":962,"Finizen":963,"Palafin":964,"Varoom":965,"Revavroom":966,"Cyclizar":967,"Orthworm":968,"Glimmet":969,"Glimmora":970,"Greavard":971,"Houndstone":972,"Flamigo":973,"Cetoddle":974,"Cetitan":975,"Veluza":976,"Dondozo":977,"Tatsugiri":978,"Annihilape":979,"Clodsire":980,"Farigiraf":981,"Dudunsparce":982,"Kingambit":983,"Great Tusk":984,"Scream Tail":985,"Brute Bonnet":986,"Flutter Mane":987,"Slither Wing":988,"Sandy Shocks":989,"Iron Treads":990,"Iron Bundle":991,"Iron Hands":992,"Iron Jugulis":993,"Iron Moth":994,"Iron Thorns":995,"Frigibax":996,"Arctibax":997,"Baxcalibur":998,"Gimmighoul":999,"Gholdengo":1000,"Wo-Chien":1001,"Chien-Pao":1002,"Ting-Lu":1003,"Chi-Yu":1004,"Roaring Moon":1005,"Iron Valiant":1006,"Koraidon":1007,"Miraidon":1008,"Walking Wake":1009,"Iron Leaves":1010,"Dipplin":1011,"Poltchageist":1012,"Sinistcha":1013,"Okidogi":1014,"Munkidori":1015,"Fezandipiti":1016,"Ogerpon":1017,"Archaludon":1018,"Hydrapple":1019,"Gouging Fire":1020,"Raging Bolt":1021,"Iron Boulder":1022,"Iron Crown":1023,"Terapagos":1024,"Pecharunt":1025
@@ -538,7 +538,7 @@ const EVENTS = [
   ...[
     ["Sprigatito","2025-01-05","Frenzy Plant → Meowscarada","\uD83C\uDF31","#27AE60","3× Stardust, 2× Candy"],
     ["CD Classic: Ralts","2025-01-25","Synchronoise → Gardevoir/Gallade","\uD83D\uDC83","#9B59B6","1/4 Hatch Distance"],
-    ["Karrablast & Shelmet","2025-02-09","Razor Shell → Escavalier","\uD83D\uDC1B","#E67E22","3× XP, 2× Candy"],
+    ["Karrablast & Shelmet","2025-02-09","Escavalier with Razor Shell (exclusive Charged Move), Accelgor with Bug Buzz (exclusive Charged Move)","\uD83D\uDC1B","#E67E22","3× XP, 2× Candy"],
     ["Fuecoco","2025-03-08","Blast Burn → Skeledirge","\uD83D\uDD25","#E74C3C","3× Stardust, 2× Candy"],
     ["CD Classic: Totodile","2025-03-22","Hydro Cannon → Feraligatr","\uD83D\uDC0A","#3498DB","1/4 Hatch Distance"],
     ["Vanillite","2025-04-27","Avalanche → Vanilluxe","\uD83C\uDF66","#85C1E9","3× XP, 2× Candy"],
@@ -647,20 +647,31 @@ const EVENTS = [
     ["Cyndaquil","2018-11-10","Blast Burn → Typhlosion","\uD83D\uDD25","#E74C3C","2× Stardust"],
     ["December Recap 2018","2018-12-01","All 2018 CD moves available","\uD83C\uDF84","#C0392B","2× Candy, 2× Stardust, 2× XP"],
   ].map(([title,date,move,icon,color,bonus],i) => {
-    const cdName = title.replace("CD Classic: ","").replace("Community Day: ","").replace("December Recap 2025","").replace("December Recap 2024","").replace("December Recap 2023","").replace("December Recap 2022","").replace("December Recap 2021","").replace("December Recap 2020","").split(" & ")[0].split(" + ")[0].trim();
+    const cdName = title.replace("CD Classic: ","").replace("Community Day: ","").replace(/December Recap \d+/,"").replace(/\s*\(.*?\)/,"").replace("A-","Alolan ").replace("G-","Galarian ").split(" & ")[0].split(" + ")[0].replace("Flabébé","Flabebe").trim();
     const cdImg = cdName ? getPokemonImg(cdName) : null;
+    const transformedMove = (move.includes(" with ") || move.startsWith("All ") || move.includes("Eeveelution")) ? move : move.split(", ").map(m => {
+      const match = m.match(/^(.+?)\s*→\s*(.+)$/);
+      return match ? `Evolve to ${match[2]} for the exclusive Charged Attack ${match[1]}` : m;
+    }).join(". ");
+    const cdPokemon = title.replace("CD Classic: ","").replace("Community Day: ","").replace(/\s*\(.*?\)/,"").trim();
+    const summaryText = move.startsWith("All ") ? move : `${cdPokemon} takes the spotlight! ${transformedMove}`;
     return {
       id: 1000+i, title, type: "Community Day", date, endDate: null,
       time: "2:00 PM – 5:00 PM", color, icon, iconImg: cdImg ? cdImg.url : undefined, featured: false,
-      summary: `${move}. ${bonus}.`,
-      details: { bosses: [move], bonuses: [bonus], tips: [] }
+      summary: `${summaryText}.`,
+      details: { bosses: (move.includes(", ") ? move.split(", ") : [move]).map(m => {
+        if (m.includes(" with ") || m.startsWith("All ") || m.includes("Eeveelution")) return m;
+        const match = m.match(/^(.+?)\s*→\s*(.+)$/);
+        if (match) return `${match[2]} with ${match[1]} (exclusive Charged Move)`;
+        return m;
+      }), bonuses: [bonus], tips: [] }
     };
   }),
   { id: 50, title: "CD Classic: Piplup", type: "Community Day", date: "2026-01-04", endDate: null, time: "2:00 PM – 5:00 PM", color: "#3498DB", icon: "\uD83D\uDC27", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-4_Sinnoh/0393.webp", featured: false, summary: "Piplup Community Day Classic! Evolve to Empoleon for the exclusive Charged Attack Hydro Cannon.", details: { bosses: ["Empoleon with Hydro Cannon (exclusive Charged Move)"], bonuses: ["1/4 Hatch Distance", "3-hour Incense", "1-hour Lure Modules", "Boosted Shiny Piplup rate", "Special Research available for $1.99"], tips: ["Hydro Cannon Empoleon is a solid Water attacker and PvP pick.", "Piplup attracted to Lure Modules have boosted Shiny rates.", "Community Day Classic events revisit fan-favorite Pokémon."] } },
   { id: 51, title: "Community Day: Grookey", type: "Community Day", date: "2026-01-18", endDate: null, time: "2:00 PM – 5:00 PM", color: "#27AE60", icon: "\uD83C\uDF31", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-8_Galar/0810.webp", featured: false, summary: "Grookey takes the spotlight! Evolve to Rillaboom for the exclusive Charged Attack Frenzy Plant.", details: { bosses: ["Rillaboom with Frenzy Plant (exclusive Charged Move)"], bonuses: ["Boosted Shiny Grookey rate", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "Extra Special Trade (2–9 PM)", "Special Background encounters available"], tips: ["Frenzy Plant is the premier Grass Charged Move — Rillaboom benefits hugely.", "First Community Day of 2026 with the new yearly Special Background feature.", "Check in at Community Ambassador events for bonus Timed Research."] } },
   { id: 52, title: "Community Day: Vulpix & Alolan Vulpix", type: "Community Day", date: "2026-02-15", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E67E22", icon: "\uD83E\uDD8A", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-1_Kanto/0037.webp", featured: false, summary: "Vulpix and Alolan Vulpix share the spotlight! Exclusive moves Energy Ball and Chilling Water.", details: { bosses: ["Ninetales with Energy Ball (exclusive)", "Alolan Ninetales with Chilling Water (exclusive)"], bonuses: ["Both forms spawning in the wild", "Boosted Shiny rates for both Vulpix forms", "3-hour Incense", "Standard Community Day bonuses"], tips: ["Alolan Ninetales with Chilling Water is excellent in PvP Great League.", "Dual-feature Community Days let you hunt two shinies at once.", "Prioritize Alolan Vulpix if you care about PvP meta relevance."] } },
   { id: 53, title: "Community Day: Scorbunny", type: "Community Day", url: "https://pokemongo.com/news/communityday-march-2026-scorbunny", date: "2026-03-14", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E74C3C", icon: "\uD83D\uDC30", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-8_Galar/0813.webp", featured: false, summary: "Scorbunny stars in March! Evolve Raboot to Cinderace for the exclusive Charged Attack Blast Burn.", details: { bosses: ["Cinderace with Blast Burn (exclusive Charged Move)"], bonuses: ["1/4 Egg Hatch Distance", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "Extra Special Trade (2–9 PM)", "50% less Trade Stardust cost (2–9 PM)"], tips: ["Blast Burn is the best Fire Charged Move — makes Cinderace a solid Fire attacker.", "Evolve within 5 hours after the event ends to get the exclusive move.", "Overlaps with Pokémon Pokopia Celebration Event — double-dip on bonuses."] } },
-  { id: 4, title: "Community Day: Tinkatink", type: "Community Day", url: "https://pokemongo.com/news/communityday-april-2026-tinkatink", date: "2026-04-11", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E84393", icon: "\uD83D\uDD28", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-9_Paldea/0957-female.webp", featured: true, summary: "Tinkatink takes the spotlight! Evolve to Tinkaton for the exclusive Charged Attack Gigaton Hammer.", details: { bosses: ["Tinkaton"], bonuses: ["3× Catch Stardust", "2× Catch Candy", "2× chance for Candy XL", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "1 extra Special Trade (2–9 PM)", "50% less Trade Stardust cost (2–9 PM)"], tips: ["Evolve Tinkatuff during the event or up to 4 hours after (by 9 PM) for Gigaton Hammer.", "Stack Star Pieces with the 3× Stardust bonus — one of the best dust events.", "Tinkatink with Special Backgrounds from Field Research and Lure Modules.", "Take snapshots for Tinkatink photobomb encounters."] } },
+  { id: 4, title: "Community Day: Tinkatink", type: "Community Day", url: "https://pokemongo.com/news/communityday-april-2026-tinkatink", date: "2026-04-11", endDate: null, time: "2:00 PM – 5:00 PM", color: "#E84393", icon: "\uD83D\uDD28", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-9_Paldea/0957-female.webp", featured: true, summary: "Tinkatink takes the spotlight! Evolve to Tinkaton for the exclusive Charged Attack Gigaton Hammer.", details: { bosses: ["Tinkaton with Gigaton Hammer (exclusive Charged Move)"], bonuses: ["3× Catch Stardust", "2× Catch Candy", "2× chance for Candy XL", "3-hour Incense", "1-hour Lure Modules (2–9 PM)", "1 extra Special Trade (2–9 PM)", "50% less Trade Stardust cost (2–9 PM)"], tips: ["Evolve Tinkatuff during the event or up to 4 hours after (by 9 PM) for Gigaton Hammer.", "Stack Star Pieces with the 3× Stardust bonus — one of the best dust events.", "Tinkatink with Special Backgrounds from Field Research and Lure Modules.", "Take snapshots for Tinkatink photobomb encounters."] } },
   { id: 54, title: "Community Day: May 2026", type: "Community Day", date: "2026-05-09", endDate: null, time: "2:00 PM – 5:00 PM", color: "#636E72", icon: "\u2753", featured: false, summary: "May Community Day — date confirmed, featured Pokémon to be announced.", details: { bosses: ["Featured Pokémon: TBA"], bonuses: ["Standard Community Day bonuses expected", "Exclusive move for final evolution", "Boosted Shiny rate"], tips: ["Date is locked in — mark your calendar.", "Featured Pokémon usually announced 2–4 weeks before.", "Start stockpiling Poké Balls and Star Pieces."] } },
   { id: 55, title: "CD Classic: May 2026", type: "Community Day", date: "2026-05-16", endDate: null, time: "2:00 PM – 5:00 PM", color: "#636E72", icon: "\uD83D\uDD04", featured: false, summary: "May Community Day Classic — date confirmed, featured Pokémon to be announced.", details: { bosses: ["Featured Pokémon: TBA (past Community Day rerun)"], bonuses: ["Standard CD Classic bonuses expected", "Exclusive move available again"], tips: ["CD Classics bring back Pokémon and moves from past Community Days.", "Great chance to get an exclusive move you missed."] } },
   { id: 5, title: "Sustainability Week 2026", type: "Event", url: "https://pokemongo.com/news/sustainability-week-2026", date: "2026-04-14", endDate: "2026-04-20", time: "10:00 AM – 8:00 PM", color: "#27AE60", icon: "\uD83C\uDF3F", featured: true, summary: "Silicobra debuts! G. Corsola w/ pink sunglasses and Shiny Toedscool make first appearances.", details: { bosses: ["Silicobra (debut)", "G. Corsola w/ pink sunglasses", "Shiny Toedscool", "Seedot", "Castform", "Wiglett"], bonuses: ["Rotating Route spawns every 2 days", "Boosted Shiny Lapras, Togetic, Castform, Trubbish", "Toedscool in forested/grassy biomes", "Silicobra in desert-like biomes", "GO Pass milestone bonuses"], tips: ["Shiny Toedscool is brand new — check every one.", "Galarian Corsola in sunglasses is a top collector target.", "Route spawns rotate every 2 days — plan your priorities.", "Silicobra evolves into Sandaconda for 50 Candy."] } },
@@ -1711,6 +1722,9 @@ const RAID_BOSS_DATA = {
   "Joltik":{types:["Bug","Electric"]},
   "Raichu":{types:["Electric"],cp:"1180–1247",cpBoost:"1476–1558",weather:"Rainy"},
   "Alolan Raichu":{types:["Electric","Psychic"],cp:"1238–1306",cpBoost:"1548–1633",weather:"Rainy, Windy"},
+  "Alolan Ninetales":{types:["Ice","Fairy"]},
+  "Alolan Marowak":{types:["Fire","Ghost"]},
+  "Alolan Vulpix":{types:["Ice"]},
   "Emolga":{types:["Electric","Flying"],cp:"876–933",cpBoost:"1095–1166",weather:"Rainy, Windy"},
   "Yamper":{types:["Electric"],cp:"410–450",cpBoost:"512–562",weather:"Rainy"},
   "Azumarill":{types:["Water","Fairy"],cp:"849–907",cpBoost:"1061–1134",weather:"Rainy, Cloudy"},
@@ -1781,7 +1795,9 @@ function flipCard(el) {
 }
 
 function getRaidBossData(name) {
-  for (const [pkmn, data] of Object.entries(RAID_BOSS_DATA)) {
+  // Check longer keys first so "Alolan Ninetales" matches before "Ninetales"
+  const sortedEntries = Object.entries(RAID_BOSS_DATA).sort((a, b) => b[0].length - a[0].length);
+  for (const [pkmn, data] of sortedEntries) {
     if (name.includes(pkmn)) return data;
   }
   // Fallback: try to get types from cached PokéAPI data
@@ -2004,7 +2020,12 @@ function renderCalendar(th) {
           ${selEvents.map(ev => {
             const active = isActive(ev);
             return `<button onclick="selectEvent(${ev.id})" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:${th.accentBgSubtle(ev.color)};border:1.5px solid ${th.border};border-radius:10px;cursor:pointer;text-align:left;width:100%;font-family:inherit;border-left:4px solid ${ev.color}">
-              ${ev.iconImg ? `<img src="${ev.iconImg}" style="width:28px;height:28px;object-fit:contain" />` : `<div style="font-size:18px">${ev.icon}</div>`}
+              ${(() => {
+                if (ev.iconImg) return `<img src="${ev.iconImg}" style="width:32px;height:32px;object-fit:contain;border-radius:8px" />`;
+                const calPkmn = (ev.type === "Raid" || ev.type === "Max Battle") && ev.details && ev.details.bosses && ev.details.bosses[0] ? getPokemonImg(ev.details.bosses[0]) : null;
+                if (calPkmn) return `<img src="${calPkmn.url}" style="width:32px;height:32px;object-fit:contain;border-radius:8px" />`;
+                return `<div style="font-size:18px">${ev.icon}</div>`;
+              })()}
               <div style="flex:1;min-width:0">
                 <div style="font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:6px">${esc(ev.title)}${active ? `<span style="font-size:9px;font-weight:700;color:#fff;background:#2ECC71;padding:1px 6px;border-radius:10px">LIVE</span>` : ""}</div>
                 <div style="font-size:11px;color:${th.textMuted};margin-top:2px">${esc(ev.type)} \u00B7 ${esc(ev.time)}</div>
@@ -2057,57 +2078,138 @@ function renderEventDetail(event, th) {
         <div class="move-deadline" data-event-id="${event.id}">${renderMoveDeadlineBanner(event, th)}</div>
         ${event.details.bosses ? renderDetailSection(event.type === "Community Day" ? "Featured Move(s)" : "Featured Encounters", "\uD83C\uDFAF", event.details.bosses, event.color, th, true, event.type === "Community Day") : ""}
         ${event.type === "Community Day" && event.iconImg ? (() => {
-          const cdName = event.title.replace("CD Classic: ","").replace("Community Day: ","").split(" & ")[0].split(" + ")[0].trim();
-          const cdDex = DEX[cdName];
-          if (!cdDex) return "";
-          // Build evolution family from cached data or walk DEX
-          const evoKey = `evo_${cdDex}`;
-          let family = _pokeCache[evoKey];
-          if (!family || family.length === 0) {
-            // Fallback: just show the CD Pokemon itself
-            family = [{ name: cdName, dexNum: cdDex }];
-          }
-          // Filter to unique dex numbers (no form expansions)
-          const seen = new Set();
-          const uniqueFamily = family.filter(f => { if (f.isMega || seen.has(f.dexNum)) return false; seen.add(f.dexNum); return true; });
+          const cdTitle = event.title.replace("CD Classic: ","").replace("Community Day: ","").replace(/\s*\(.*?\)/,"");
+          const cdNames = cdTitle.split(" & ").map(n => n.split(" + ")[0].trim());
+          const separateChains = [];
+          cdNames.forEach(cdName => {
+            const isAlolan = cdName.startsWith("Alolan ") || cdName.startsWith("A-");
+            const isGalarian = cdName.startsWith("Galarian ") || cdName.startsWith("G-");
+            const isPaldean = cdName.startsWith("Paldean ");
+            const baseName = cdName.replace("Alolan ","").replace("A-","").replace("Galarian ","").replace("G-","").replace("Paldean ","").replace("Flabébé","Flabebe");
+            const cdDex = DEX[baseName];
+            if (!cdDex) return;
+            // Override regional evolution chains that don't follow the base chain
+            const REGIONAL_CHAIN_OVERRIDE = {
+              "194_paldean": [{ dexNum: 194, name: "Paldean Wooper", depth: 0, isPaldean: true, isRegional: true }, { dexNum: 980, name: "Clodsire", depth: 1, isPaldean: true, isRegional: true }],
+              "263_galarian": [{ dexNum: 263, name: "Galarian Zigzagoon", depth: 0, isGalarian: true, isRegional: true }, { dexNum: 264, name: "Galarian Linoone", depth: 1, isGalarian: true, isRegional: true }, { dexNum: 862, name: "Obstagoon", depth: 2, isGalarian: true, isRegional: true }]
+            };
+            const overrideKey = `${cdDex}_${isPaldean ? "paldean" : isGalarian ? "galarian" : isAlolan ? "alolan" : ""}`;
+            if (REGIONAL_CHAIN_OVERRIDE[overrideKey]) {
+              separateChains.push(REGIONAL_CHAIN_OVERRIDE[overrideKey]);
+              return;
+            }
+            const evoKey = `evo_${cdDex}`;
+            let family = _pokeCache[evoKey];
+            if (!family || family.length === 0) {
+              family = [{ name: baseName, dexNum: cdDex }];
+            }
+            // Build direct evolution line for this Pokemon
+            const baseEntry = family.find(f => f.dexNum === cdDex && !f.isMega);
+            const directLine = [];
+
+            // Walk backwards to find all ancestors
+            if (baseEntry) {
+              const ancestors = [];
+              for (let d = 0; d < baseEntry.depth; d++) {
+                const atDepth = family.filter(f => f.depth === d && !f.isMega);
+                if (atDepth.length === 1) ancestors.push(atDepth[0]);
+                else if (atDepth.length > 1) {
+                  const closest = atDepth.find(f => f.dexNum < cdDex) || atDepth[0];
+                  ancestors.push(closest);
+                }
+              }
+              directLine.push(...ancestors, baseEntry);
+
+              // Walk forward to find all descendants
+              let currentDepth = baseEntry.depth;
+              let lastDex = cdDex;
+              while (true) {
+                const nextLevel = family.filter(f => f.depth === currentDepth + 1 && !f.isMega);
+                if (nextLevel.length === 0) break;
+                if (nextLevel.length === 1) {
+                  directLine.push(nextLevel[0]);
+                  lastDex = nextLevel[0].dexNum;
+                } else {
+                  // Multiple evolutions at same depth - pick closest dex number to last
+                  const directEvo = nextLevel.find(f => Math.abs(f.dexNum - lastDex) <= 2) || nextLevel[0];
+                  directLine.push(directEvo);
+                  lastDex = directEvo.dexNum;
+                }
+                currentDepth++;
+              }
+            } else {
+              directLine.push({ name: baseName, dexNum: cdDex, depth: 0 });
+            }
+            const chain = [];
+            const seenChain = new Set();
+            const regionPrefix = isAlolan ? "Alolan" : isGalarian ? "Galarian" : isPaldean ? "Paldean" : "";
+            const isRegional = isAlolan || isGalarian || isPaldean;
+            directLine.filter(f => !seenChain.has(f.dexNum) && (seenChain.add(f.dexNum), true)).forEach(f => {
+              if (isRegional) {
+                chain.push({ ...f, name: regionPrefix + " " + (DEX_BY_NUM[f.dexNum] || f.name), isAlolan, isGalarian, isPaldean, isRegional: true });
+              } else {
+                chain.push(f);
+              }
+            });
+            if (chain.length > 0) separateChains.push(chain);
+          });
+          if (separateChains.length === 0) return "";
+          const allFamilies = separateChains.length === 1 ? separateChains[0] : [];
           const isMob = breakpoint === "mobile";
-          const imgSize = isMob ? 80 : 100;
-          const cardStyle = `display:flex;flex-direction:column;align-items:center;padding:${isMob ? "10px 8px" : "12px 10px"};border-radius:12px;background:${th.accentBgSubtle(event.color)};border:1.5px solid ${th.border};text-align:center;min-width:${isMob ? 90 : 110}px;max-width:${isMob ? 130 : 160}px;flex:1`;
+          const imgSize = isMob ? 60 : 100;
+          const cardStyle = `display:flex;flex-direction:column;align-items:center;padding:${isMob ? "8px 4px" : "12px 10px"};border-radius:12px;background:${th.accentBgSubtle(event.color)};border:1.5px solid ${th.border};text-align:center;min-width:${isMob ? 70 : 110}px;max-width:${isMob ? 110 : 160}px;flex:1`;
 
           const arrowHTML = (dex) => {
             const evo = POGO_EVO[dex] || "";
-            return `<div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;margin:0 2px">
-              <div style="font-size:18px;color:${th.textMuted}">\u2192</div>
-              <div style="font-size:${isMob ? 8 : 9}px;color:${th.textSecondary};text-align:center;max-width:70px;line-height:1.2">${esc(evo)}</div>
+            return `<div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;margin:0 ${isMob ? 1 : 2}px">
+              <div style="font-size:${isMob ? 14 : 18}px;color:${th.textMuted}">\u2192</div>
+              <div style="font-size:${isMob ? 7 : 9}px;color:${th.textSecondary};text-align:center;max-width:${isMob ? 50 : 70}px;line-height:1.2">${esc(evo)}</div>
             </div>`;
           };
 
-          const buildRow = (getFn, nameColor) => uniqueFamily.map((f, i) => {
-            const suffix = GENDER_SUFFIX[f.dexNum] || "";
+          const buildChainRow = (chain, getFn, nameColor) => chain.map((f, i) => {
+            // Only use regional suffix for Pokemon that have regional form images (not new evolutions like Obstagoon, Clodsire)
+            const hasRegionalImg = f.isAlolan && POKEMON_FORMS[f.dexNum]?.some(fm => fm.l === "Alola") || f.isGalarian && POKEMON_FORMS[f.dexNum]?.some(fm => fm.l === "Galar") || f.isPaldean && POKEMON_FORMS[f.dexNum]?.some(fm => fm.l === "Paldea");
+            const suffix = hasRegionalImg ? (f.isAlolan ? "_alola" : f.isGalarian ? "_galarian" : "_paldean") : (GENDER_SUFFIX[f.dexNum] || "");
             const src = getFn(f.dexNum, suffix);
-            const name = DEX_BY_NUM[f.dexNum] || f.name;
+            const name = f.name || DEX_BY_NUM[f.dexNum];
             const isShiny = nameColor === "#F39C12";
             const arrow = i > 0 ? arrowHTML(f.dexNum) : "";
+            const ALOLAN_TYPES = {19:["Dark","Normal"],20:["Dark","Normal"],26:["Electric","Psychic"],27:["Ice","Steel"],28:["Ice","Steel"],37:["Ice"],38:["Ice","Fairy"],50:["Ground","Steel"],51:["Ground","Steel"],52:["Dark"],53:["Dark"],74:["Rock","Electric"],75:["Rock","Electric"],76:["Rock","Electric"],88:["Poison","Dark"],89:["Poison","Dark"],103:["Grass","Dragon"],105:["Fire","Ghost"]};
+            const GALARIAN_TYPES = {77:["Psychic"],78:["Psychic","Fairy"],263:["Dark","Normal"],264:["Dark","Normal"],862:["Dark","Normal"]};
+            const PALDEAN_TYPES = {194:["Poison","Ground"],980:["Poison","Ground"]};
             const cached = _pokeCache[`pokemon_${f.dexNum}`];
-            const typesEl = cached && cached.types ? `<div style="display:flex;gap:3px;margin-top:3px;justify-content:center;flex-wrap:wrap">${cached.types.map(t => `<span style="font-size:9px;font-weight:700;color:#fff;background:${TYPE_COLORS[t.charAt(0).toUpperCase()+t.slice(1)] || "#888"};padding:1px 6px;border-radius:8px">${t.charAt(0).toUpperCase()+t.slice(1)}</span>`).join("")}</div>` : "";
+            const types = f.isAlolan ? (ALOLAN_TYPES[f.dexNum] || null) : f.isGalarian ? (GALARIAN_TYPES[f.dexNum] || null) : f.isPaldean ? (PALDEAN_TYPES[f.dexNum] || null) : (cached && cached.types);
+            const typesEl = types ? `<div style="display:flex;gap:3px;margin-top:3px;justify-content:center;flex-wrap:wrap">${types.map(t => { const cap = t.charAt(0).toUpperCase()+t.slice(1); return `<span style="font-size:9px;font-weight:700;color:#fff;background:${TYPE_COLORS[cap] || "#888"};padding:1px 6px;border-radius:8px">${cap}</span>`; }).join("")}</div>` : "";
             return `${arrow}<div onclick="showFormModal('${src}','${esc(name)}')" style="${cardStyle}${isShiny ? ";position:relative" : ""};cursor:pointer;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.03)'" onmouseleave="this.style.transform='scale(1)'">
               ${isShiny ? `<div style="position:absolute;top:6%;right:10%;z-index:2;font-size:20px">\u2728</div>` : ""}
               <img src="${src}" style="width:${imgSize}px;height:${imgSize}px;object-fit:contain" onerror="this.style.opacity='0.3'" />
-              <div style="margin-top:4px;font-weight:700;color:${nameColor};font-size:${isMob ? 11 : 12}px">${esc(name)}</div>
+              <div style="margin-top:4px;font-weight:700;color:${nameColor};font-size:${isMob ? 9 : 12}px">${esc(name)}</div>
               ${typesEl}
             </div>`;
           }).join("");
 
+          // Split into separate chains
+          let chains;
+          if (separateChains.length > 1) {
+            chains = separateChains;
+          } else {
+            const regularChain = allFamilies.filter(f => !f.isRegional);
+            const regionalChain = allFamilies.filter(f => f.isRegional);
+            chains = regularChain.length > 0 ? [regularChain] : [];
+            if (regionalChain.length > 0) chains.push(regionalChain);
+          }
+
+          const chainsHTML = chains.map(chain => `<div style="margin-bottom:12px">
+            <div style="font-size:11px;font-weight:600;color:${th.textMuted};margin-bottom:6px">Normal${chain[0]?.isRegional ? ` (${chain[0]?.isAlolan ? "Alolan" : chain[0]?.isGalarian ? "Galarian" : "Paldean"})` : chains.length > 1 ? ` (${DEX_BY_NUM[chain[0]?.dexNum] || ""})` : ""}</div>
+            <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px">${buildChainRow(chain, natDexImg, th.text)}</div>
+            <div style="font-size:11px;font-weight:600;color:#F39C12;margin-top:8px;margin-bottom:6px">\u2728 Shiny${chain[0]?.isRegional ? ` (${chain[0]?.isAlolan ? "Alolan" : chain[0]?.isGalarian ? "Galarian" : "Paldean"})` : chains.length > 1 ? ` (${DEX_BY_NUM[chain[0]?.dexNum] || ""})` : ""}</div>
+            <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px">${buildChainRow(chain, shinyDexImg, "#F39C12")}</div>
+          </div>`).join("");
+
           return `<div>
             <h4 style="margin:0 0 10px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>\uD83D\uDD17</span> Evolution Chain</h4>
-            <div style="margin-bottom:12px">
-              <div style="font-size:11px;font-weight:600;color:${th.textMuted};margin-bottom:6px">Normal</div>
-              <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px">${buildRow(natDexImg, th.text)}</div>
-            </div>
-            <div>
-              <div style="font-size:11px;font-weight:600;color:#F39C12;margin-bottom:6px">\u2728 Shiny</div>
-              <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px">${buildRow(shinyDexImg, "#F39C12")}</div>
-            </div>
+            ${chainsHTML}
           </div>`;
         })() : ""}
         ${event.details.catchCP ? renderCatchCP(event.details.catchCP, th) : ""}
@@ -2255,25 +2357,26 @@ function selectEvent(id) {
   // Pre-fetch evolution chain and Pokemon data for Community Day
   const ev = state.selectedEvent;
   if (ev && ev.type === "Community Day") {
-    const cdName = ev.title.replace("CD Classic: ","").replace("Community Day: ","").split(" & ")[0].split(" + ")[0].trim();
-    const cdDex = DEX[cdName];
+    const cdTitle = ev.title.replace("CD Classic: ","").replace("Community Day: ","").replace(/\s*\(.*?\)/,"");
+    const cdNames = cdTitle.split(" & ").map(n => n.replace("Alolan ","").replace("A-","").replace("Galarian ","").replace("G-","").replace("Paldean ","").replace("Flabébé","Flabebe").split(" + ")[0].trim());
     const fetches = [];
-    if (cdDex) {
-      if (!_pokeCache[`evo_${cdDex}`]) fetches.push(fetchEvolutionChain(cdDex));
-      // After evo chain is loaded, fetch type data for all stages
-      const fetchAllStages = async () => {
-        if (!_pokeCache[`evo_${cdDex}`]) await fetchEvolutionChain(cdDex);
-        const evoChain = _pokeCache[`evo_${cdDex}`] || [];
-        const seen = new Set();
-        for (const stage of evoChain) {
-          if (!stage.isMega && !seen.has(stage.dexNum)) {
-            seen.add(stage.dexNum);
-            if (!_pokeCache[`pokemon_${stage.dexNum}`]) await fetchPokemonData(stage.dexNum);
+    cdNames.forEach(cdName => {
+      const cdDex = DEX[cdName];
+      if (cdDex) {
+        const fetchAllStages = async () => {
+          if (!_pokeCache[`evo_${cdDex}`]) await fetchEvolutionChain(cdDex);
+          const evoChain = _pokeCache[`evo_${cdDex}`] || [];
+          const seen = new Set();
+          for (const stage of evoChain) {
+            if (!stage.isMega && !seen.has(stage.dexNum)) {
+              seen.add(stage.dexNum);
+              if (!_pokeCache[`pokemon_${stage.dexNum}`]) await fetchPokemonData(stage.dexNum);
+            }
           }
-        }
-      };
-      fetches.push(fetchAllStages());
-    }
+        };
+        fetches.push(fetchAllStages());
+      }
+    });
     // Fetch type data for all bosses in the event
     if (ev.details && ev.details.bosses) {
       ev.details.bosses.forEach(boss => {
@@ -2293,8 +2396,15 @@ function selectNews(id) {
 }
 
 function goBack() {
+  const wasCD = state.selectedEvent && state.selectedEvent.type === "Community Day" && isOver(state.selectedEvent);
   state.selectedEvent = null;
   render();
+  if (wasCD) {
+    requestAnimationFrame(() => {
+      const archiveEl = document.getElementById("cd-archive-search");
+      if (archiveEl) archiveEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
 }
 
 function getPokemonOfTheDay() {
@@ -2853,6 +2963,23 @@ function toggleCatchCP(id) {
   }
 }
 
+function searchArchivedCDs(val) {
+  const query = val.trim().toLowerCase();
+  const resultsEl = document.getElementById("cd-archive-results");
+  if (!resultsEl || query.length < 1) { if (resultsEl) resultsEl.style.display = "none"; return; }
+  const th = t(darkMode);
+  const matches = EVENTS.filter(e => e.type === "Community Day" && isOver(e) && e.title.toLowerCase().includes(query)).slice(0, 10);
+  if (matches.length === 0) { resultsEl.innerHTML = `<div style="padding:12px;text-align:center;color:${th.textMuted};font-size:13px">No Community Days found</div>`; resultsEl.style.display = "block"; return; }
+  resultsEl.innerHTML = matches.map(ev => {
+    const dateStr = formatDate(ev.date);
+    return `<div onclick="selectEvent(${ev.id});document.getElementById('cd-archive-search').value='';document.getElementById('cd-archive-results').style.display='none'" style="display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;transition:background 0.1s ease" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='transparent'">
+      ${ev.iconImg ? `<img src="${ev.iconImg}" style="width:36px;height:36px;object-fit:contain;border-radius:8px" onerror="this.style.display='none'" />` : `<span style="font-size:20px">${ev.icon}</span>`}
+      <div><div style="font-size:13px;font-weight:600;color:${th.text}">${esc(ev.title)}</div><div style="font-size:11px;color:${th.textMuted}">${dateStr}</div></div>
+    </div>`;
+  }).join("");
+  resultsEl.style.display = "block";
+}
+
 function toggleYear(y) {
   state.openYears[y] = !state.openYears[y];
   render();
@@ -2973,8 +3100,13 @@ function render() {
           archiveHTML = `<div style="width:100%;display:flex;flex-direction:column;gap:10px">
             <div style="margin-top:${upcomingEvents.length > 0 ? 12 : 0}px;display:flex;align-items:center;gap:10px">
               <div style="flex:1;height:1px;background:${th.border}"></div>
-              <span style="font-size:11px;font-weight:700;color:${th.textMuted};letter-spacing:1px;text-transform:uppercase;white-space:nowrap">Archived Events</span>
+              <span style="font-size:11px;font-weight:700;color:${th.textMuted};letter-spacing:1px;text-transform:uppercase;white-space:nowrap">Archived Community Days</span>
               <div style="flex:1;height:1px;background:${th.border}"></div>
+            </div>
+            <div style="position:relative;max-width:400px;margin:0 auto;width:100%">
+              <input id="cd-archive-search" placeholder="Search past Community Days..." oninput="searchArchivedCDs(this.value)" autocomplete="off" style="width:100%;padding:${isMobile ? "10px 14px 10px 38px" : "12px 16px 12px 42px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:${isMobile ? 13 : 14}px;font-family:inherit;outline:none;box-sizing:border-box" />
+              <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none">\uD83D\uDD0D</span>
+              <div id="cd-archive-results" style="display:none;position:absolute;top:100%;left:0;right:0;max-height:300px;overflow-y:auto;background:${th.surface};border:1.5px solid ${th.border};border-radius:12px;margin-top:4px;z-index:100;box-shadow:0 8px 24px rgba(0,0,0,0.2)"></div>
             </div>
             ${archiveYears.map(year => {
               const items = pastByYear[year];
