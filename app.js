@@ -153,6 +153,7 @@ const RAID_CP = {
 };
 
 function formImgUrl(dex, filename) { return `${IMG_BASE}/National-Dex/regular/${getGenFolder(dex)}/${filename}.webp`; }
+function shinyFormImgUrl(dex, filename) { return `${IMG_BASE}/National-Dex/shiny/${getGenFolder(dex)}/${filename}.webp`; }
 
 // Regional evolution chains: maps a form prefix to its evolution line [{dex, form file, name}]
 const REGIONAL_EVOS = {
@@ -2962,14 +2963,25 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
         }
 
         const fSrc = formImgUrl(data.dexNum, rForms[0].f);
+        const shinyfSrc = shinyFormImgUrl(data.dexNum, rForms[0].f);
         const formFullName = `${regionLabel} ${fullName}`;
+        const shinyFormFullName = `Shiny ${regionLabel} ${fullName}`;
         formsHTML += `<div style="padding:${isMobile ? "12px" : "14px"};background:${th.accentBgSubtle(primaryColor)};border:1px solid ${th.border};border-radius:12px">
-          <div onclick="showFormModal('${fSrc}','${esc(formFullName)}')" style="display:flex;align-items:center;gap:12px;cursor:pointer">
-            <img src="${fSrc}" style="width:${isMobile ? 64 : 76}px;height:${isMobile ? 64 : 76}px;object-fit:contain;flex-shrink:0" onerror="this.style.opacity='0.3'" />
-            <div>
-              <div style="font-size:${isMobile ? 14 : 15}px;font-weight:700;color:${th.text}">${esc(formFullName)}</div>
-              <div style="font-size:${isMobile ? 11 : 12}px;color:${th.textMuted}">#${String(data.dexNum).padStart(4,"0")}</div>
-              <div style="font-size:${isMobile ? 10 : 11}px;color:${primaryColor};font-weight:600;margin-top:2px">${region === "alola" ? "Alola Region" : region === "galar" ? "Galar Region" : region === "hisui" ? "Hisui Region" : "Paldea Region"}</div>
+          <div style="margin-bottom:10px">
+            <div style="font-size:${isMobile ? 14 : 15}px;font-weight:700;color:${th.text}">${esc(formFullName)}</div>
+            <div style="display:flex;align-items:center;gap:6px;margin-top:2px">
+              <span style="font-size:${isMobile ? 11 : 12}px;color:${th.textMuted}">#${String(data.dexNum).padStart(4,"0")}</span>
+              <span style="font-size:${isMobile ? 10 : 11}px;color:${primaryColor};font-weight:600">${region === "alola" ? "Alola Region" : region === "galar" ? "Galar Region" : region === "hisui" ? "Hisui Region" : "Paldea Region"}</span>
+            </div>
+          </div>
+          <div style="display:flex;align-items:flex-end;justify-content:center;gap:${isMobile ? 20 : 28}px">
+            <div onclick="showFormModal('${fSrc}','${esc(formFullName)}')" style="display:flex;flex-direction:column;align-items:center;cursor:pointer">
+              <img src="${fSrc}" style="width:${isMobile ? 72 : 84}px;height:${isMobile ? 72 : 84}px;object-fit:contain" onerror="this.style.opacity='0.3'" />
+              <div style="font-size:${isMobile ? 9 : 10}px;font-weight:600;color:${th.textSecondary};margin-top:4px">Regular</div>
+            </div>
+            <div onclick="showFormModal('${shinyfSrc}','${esc(shinyFormFullName)}')" style="display:flex;flex-direction:column;align-items:center;cursor:pointer;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'">
+              <img src="${shinyfSrc}" style="width:${isMobile ? 72 : 84}px;height:${isMobile ? 72 : 84}px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(255,215,0,0.3))" onerror="this.parentElement.style.display='none'" />
+              <div style="font-size:${isMobile ? 9 : 10}px;font-weight:600;color:${th.textMuted};margin-top:4px">\u2728 Shiny</div>
             </div>
           </div>
           ${evoHTML}
@@ -2980,11 +2992,19 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
       if (otherForms.length > 0) {
         const otherCards = otherForms.map(fm => {
           const fSrc = formImgUrl(data.dexNum, fm.f);
+          const shinyfSrc = shinyFormImgUrl(data.dexNum, fm.f);
           const formFullName = `${fm.l} ${fullName}`;
-          return `<div onclick="showFormModal('${fSrc}','${esc(formFullName)}')" style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:${isMobile ? "10px 6px" : "12px 8px"};border-radius:12px;background:${th.accentBgSubtle(primaryColor)};border:1px solid ${th.border};cursor:pointer;transition:transform 0.15s ease,box-shadow 0.15s ease" onmouseenter="this.style.transform='scale(1.05)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none'">
-            <img src="${fSrc}" style="width:${isMobile ? 64 : 76}px;height:${isMobile ? 64 : 76}px;object-fit:contain" onerror="this.style.opacity='0.3'" />
-            <span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${th.text};text-align:center">${esc(formFullName)}</span>
-            <span style="font-size:${isMobile ? 9 : 10}px;color:${th.textMuted}">#${String(data.dexNum).padStart(4,"0")}</span>
+          const shinyFormFullName = `Shiny ${fm.l} ${fullName}`;
+          return `<div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:${isMobile ? "10px 6px" : "12px 8px"};border-radius:12px;background:${th.accentBgSubtle(primaryColor)};border:1px solid ${th.border}">
+            <div onclick="showFormModal('${fSrc}','${esc(formFullName)}')" style="cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'">
+              <img src="${fSrc}" style="width:${isMobile ? 64 : 76}px;height:${isMobile ? 64 : 76}px;object-fit:contain" onerror="this.style.opacity='0.3'" />
+              <span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${th.text};text-align:center">${esc(formFullName)}</span>
+              <span style="font-size:${isMobile ? 9 : 10}px;color:${th.textMuted}">#${String(data.dexNum).padStart(4,"0")}</span>
+            </div>
+            <div onclick="showFormModal('${shinyfSrc}','${esc(shinyFormFullName)}')" style="cursor:pointer;margin-top:4px;padding:4px 8px;border-radius:8px;background:${th.surface};border:1px solid ${th.border};display:flex;align-items:center;gap:6px;transition:transform 0.15s ease,box-shadow 0.15s ease" onmouseenter="this.style.transform='scale(1.05)';this.style.boxShadow='0 2px 8px rgba(255,215,0,0.15)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none'">
+              <img src="${shinyfSrc}" style="width:${isMobile ? 28 : 32}px;height:${isMobile ? 28 : 32}px;object-fit:contain;filter:drop-shadow(0 1px 4px rgba(255,215,0,0.3))" onerror="this.parentElement.style.display='none'" />
+              <span style="font-size:${isMobile ? 9 : 10}px;font-weight:600;color:${th.textSecondary}">\u2728 Shiny</span>
+            </div>
           </div>`;
         }).join("");
         formsHTML += `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(${isMobile ? 100 : 120}px,1fr));gap:8px">${otherCards}</div>`;
