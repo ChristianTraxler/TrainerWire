@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "2.02";
+const APP_VERSION = "2.03";
 
 // --- POKEMON IMAGE LOOKUP ---
 const IMG_BASE = "assets/pokemon-images";
