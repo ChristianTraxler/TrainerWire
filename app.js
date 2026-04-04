@@ -336,11 +336,11 @@ function getPokemonImg(name) {
   }
   if (lower.includes("galarian")) {
     const m = name.match(/Galarian\s+(\w+)/);
-    if (m) { const dex = DEX[m[1]]; if (dex) return { url: natDexImg(dex, "_galarian"), shadow: lower.includes("shadow") }; }
+    if (m) { const dex = DEX[m[1]]; if (dex) return { url: natDexImg(dex, "_galarian"), shadow: lower.startsWith("shadow ") }; }
   }
   if (lower.includes("alolan")) {
     const m = name.match(/Alolan\s+(\w+)/);
-    if (m) { const dex = DEX[m[1]]; if (dex) return { url: natDexImg(dex, "_alola"), shadow: lower.includes("shadow") }; }
+    if (m) { const dex = DEX[m[1]]; if (dex) return { url: natDexImg(dex, "_alola"), shadow: lower.startsWith("shadow ") }; }
   }
   if (lower.includes("shadow")) {
     const m = name.match(/Shadow\s+(\w+)/);
@@ -537,15 +537,15 @@ const EVENTS = [
   // Historical Community Days
   ...[
     ["Sprigatito","2025-01-05","Frenzy Plant → Meowscarada","\uD83C\uDF31","#27AE60","3× Stardust, 2× Candy"],
-    ["CD Classic: Ralts","2025-01-25","Synchronoise → Gardevoir/Gallade","\uD83D\uDC83","#9B59B6","1/4 Hatch Distance"],
-    ["Karrablast & Shelmet","2025-02-09","Escavalier with Razor Shell (exclusive Charged Move), Accelgor with Bug Buzz (exclusive Charged Move)","\uD83D\uDC1B","#E67E22","3× XP, 2× Candy"],
+    ["CD Classic: Ralts","2025-01-25","Gardevoir with Synchronoise (exclusive Charged Move), Gallade with Synchronoise (exclusive Charged Move)","\uD83D\uDC83","#9B59B6","1/4 Hatch Distance"],
+    ["Karrablast & Shelmet","2025-02-09","Escavalier with Razor Shell (exclusive Charged Move), Accelgor with Energy Ball (exclusive Charged Move)","\uD83D\uDC1B","#E67E22","3× XP, 2× Candy"],
     ["Fuecoco","2025-03-08","Blast Burn → Skeledirge","\uD83D\uDD25","#E74C3C","3× Stardust, 2× Candy"],
     ["CD Classic: Totodile","2025-03-22","Hydro Cannon → Feraligatr","\uD83D\uDC0A","#3498DB","1/4 Hatch Distance"],
     ["Vanillite","2025-04-27","Avalanche → Vanilluxe","\uD83C\uDF66","#85C1E9","3× XP, 2× Candy"],
     ["Pawmi","2025-05-11","Brick Break → Pawmot","\u26A1","#F39C12","1/4 Hatch Distance, 2× Candy"],
     ["CD Classic: Machop","2025-05-24","Payback → Machamp","\uD83D\uDCAA","#95A5A6","3× Stardust"],
     ["Jangmo-o","2025-06-21","Clanging Scales → Kommo-o","\uD83D\uDC09","#E74C3C","3× XP, 2× Candy"],
-    ["CD Classic: Eevee","2025-07-05","Last Resort → Eevee + Eeveelution moves","\uD83E\uDD8A","#A0522D","1/4 Hatch Distance"],
+    ["CD Classic: Eevee","2025-07-05","Eevee with Last Resort (exclusive Charged Move)","\uD83E\uDD8A","#A0522D","1/4 Hatch Distance"],
     ["Quaxly","2025-07-20","Hydro Cannon → Quaquaval","\uD83E\uDD86","#2980B9","3× Stardust, 2× Candy"],
     ["Rookidee","2025-08-30","Air Cutter → Corviknight","\uD83D\uDC26","#5D6D7E","1/4 Hatch Distance, 2× Candy"],
     ["Flabébé","2025-09-14","Chilling Water → Florges","\uD83C\uDF38","#FF69B4","1/4 Hatch Distance, 2× Candy"],
@@ -564,7 +564,7 @@ const EVENTS = [
     ["Tynamo","2024-07-21","Volt Switch → Eelektross","\u26A1","#3498DB","1/4 Hatch Distance, 2× Candy"],
     ["Popplio","2024-08-31","Hydro Cannon → Primarina","\uD83C\uDFA4","#2980B9","3× XP, 2× Candy"],
     ["CD Classic: Beldum","2024-08-18","Meteor Mash → Metagross","\u2699\uFE0F","#95A5A6","1/4 Hatch Distance"],
-    ["Ponyta & G-Ponyta","2024-09-14","Wild Charge → Rapidash","\uD83D\uDC34","#E67E22","3× Stardust, 2× Candy"],
+    ["Ponyta & G-Ponyta","2024-09-14","Rapidash with Wild Charge (exclusive Charged Move), Galarian Rapidash with Wild Charge (exclusive Charged Move)","\uD83D\uDC34","#E67E22","3× Stardust, 2× Candy"],
     ["Sewaddle","2024-10-05","Shadow Claw → Leavanny","\uD83C\uDF42","#27AE60","1/4 Hatch Distance, 2× Candy"],
     ["Mankey","2024-11-10","Rage Fist → Annihilape","\uD83D\uDC12","#C0392B","3× XP, 2× Candy"],
     ["December Recap 2024","2024-12-21","All 2024 CD moves available","\uD83C\uDF84","#C0392B","2× Candy, 2× Stardust, 2× XP"],
@@ -576,17 +576,17 @@ const EVENTS = [
     ["Froakie","2023-05-21","Hydro Cannon → Greninja","\uD83D\uDC38","#2980B9","3× Stardust"],
     ["Axew","2023-06-10","Breaking Swipe → Haxorus","\uD83D\uDC09","#27AE60","3× XP"],
     ["Squirtle","2023-07-09","Hydro Cannon → Blastoise","\uD83D\uDC22","#3498DB","CD Classic"],
-    ["Poliwag","2023-08-13","Ice Beam → Poliwrath","\uD83C\uDF00","#3498DB","3× Stardust"],
-    ["Charmander","2023-09-02","Dragon Breath → Charizard","\uD83D\uDD25","#E74C3C","CD Classic"],
+    ["Poliwag","2023-08-13","Poliwrath with Counter (exclusive Charged Move), Politoed with Ice Beam (exclusive Charged Move)","\uD83C\uDF00","#3498DB","3× Stardust"],
+    ["Charmander","2023-09-02","Charizard with Dragon Breath (exclusive Fast Move), Charizard with Blast Burn (exclusive Charged Move)","\uD83D\uDD25","#E74C3C","CD Classic"],
     ["Grubbin","2023-09-23","Volt Switch → Vikavolt","\u26A1","#F39C12","3× XP"],
     ["Timburr","2023-10-15","Brutal Swing → Conkeldurr","\uD83D\uDCAA","#6D4C41","3× Stardust"],
     ["Mareep","2023-11-25","Dragon Pulse → Ampharos","\uD83D\uDC11","#F1C40F","CD Classic"],
-    ["Wooper & Paldean Wooper","2023-11-05","Aqua Tail → Quagsire","\uD83D\uDC1F","#3498DB","3× XP"],
+    ["Wooper & Paldean Wooper","2023-11-05","Quagsire with Aqua Tail (exclusive Charged Move), Clodsire with Megahorn (exclusive Charged Move)","\uD83D\uDC1F","#3498DB","3× XP"],
     ["December Recap 2023","2023-12-16","All 2023 CD moves available","\uD83C\uDF84","#C0392B","2× Candy, 2× Stardust, 2× XP"],
     ["Bulbasaur","2022-01-22","Frenzy Plant → Venusaur","\uD83C\uDF31","#27AE60","CD Classic"],
     ["Hoppip","2022-01-16","Acrobatics → Jumpluff","\uD83C\uDF88","#FF69B4","3× Stardust"],
     ["Hoppip (Makeup)","2022-02-05","Acrobatics → Jumpluff","\uD83C\uDF88","#FF69B4","Makeup Day"],
-    ["Sandshrew & A-Sandshrew","2022-03-13","Shadow Claw → Sandslash","\uD83E\uDD94","#F39C12","2× Stardust, 3× XP"],
+    ["Sandshrew & A-Sandshrew","2022-03-13","Sandslash with Night Slash (exclusive Charged Move), Alolan Sandslash with Shadow Claw (exclusive Charged Move)","\uD83E\uDD94","#F39C12","2× Stardust, 3× XP"],
     ["Mudkip","2022-04-10","Hydro Cannon → Swampert","\uD83D\uDCA7","#3498DB","CD Classic"],
     ["Stufful","2022-04-23","Drain Punch → Bewear","\uD83E\uDDF8","#FF69B4","3× XP"],
     ["Alolan Geodude","2022-05-21","Rollout → A-Golem","\uD83E\uDEA8","#6D4C41","3× Stardust"],
@@ -599,13 +599,13 @@ const EVENTS = [
     ["Teddiursa","2022-11-12","High Horsepower → Ursaluna","\uD83E\uDDF8","#6D4C41","3× Stardust"],
     ["December Recap 2022","2022-12-17","All 2022 CD moves available","\uD83C\uDF84","#C0392B","2× Candy, 2× Stardust"],
     ["Machop","2021-01-16","Payback → Machamp","\uD83D\uDCAA","#95A5A6","3× Stardust"],
-    ["Roselia","2021-02-07","Bullet Seed/Weather Ball → Roserade","\uD83C\uDF39","#27AE60","3× Stardust"],
+    ["Roselia","2021-02-07","Roserade with Bullet Seed (exclusive Fast Move), Roserade with Weather Ball (exclusive Charged Move)","\uD83C\uDF39","#27AE60","3× Stardust"],
     ["Fletchling","2021-03-06","Incinerate → Talonflame","\uD83D\uDC26","#E74C3C","3× XP"],
     ["Snivy","2021-04-11","Frenzy Plant → Serperior","\uD83D\uDC0D","#27AE60","3× XP"],
     ["Swablu","2021-05-15","Moonblast → Altaria","\u2601\uFE0F","#3498DB","3× XP"],
     ["Gible","2021-06-06","Earth Power → Garchomp","\uD83E\uDD88","#2C3E50","3× XP"],
     ["Tepig","2021-07-03","Blast Burn → Emboar","\uD83D\uDC37","#E74C3C","3× Stardust"],
-    ["Eevee","2021-08-14","Last Resort + Eeveelution moves","\uD83E\uDD8A","#A0522D","2-day event"],
+    ["Eevee","2021-08-14","Eevee with Last Resort (exclusive Charged Move)","\uD83E\uDD8A","#A0522D","2-day event"],
     ["Oshawott","2021-09-19","Hydro Cannon → Samurott","\uD83E\uDDA6","#2980B9","3× Stardust"],
     ["Duskull","2021-10-09","Shadow Ball → Dusknoir","\uD83D\uDC80","#8E44AD","3× XP"],
     ["Shinx","2021-11-21","Psychic Fangs → Luxray","\u26A1","#F1C40F","3× Stardust"],
@@ -618,7 +618,7 @@ const EVENTS = [
     ["Gastly","2020-07-19","Shadow Punch → Gengar","\uD83D\uDC7B","#8E44AD","3× Stardust"],
     ["Magikarp","2020-08-08","Aqua Tail → Gyarados","\uD83D\uDC1F","#E74C3C","3× Stardust"],
     ["Porygon","2020-09-20","Tri Attack → Porygon-Z","\uD83D\uDCA0","#E91E63","3× XP"],
-    ["Charmander","2020-10-17","Dragon Breath → Charizard","\uD83D\uDD25","#E74C3C","3× Stardust"],
+    ["Charmander","2020-10-17","Charizard with Dragon Breath (exclusive Fast Move)","\uD83D\uDD25","#E74C3C","3× Stardust"],
     ["Electabuzz","2020-11-15","Flamethrower → Electivire","\u26A1","#F1C40F","3× Stardust"],
     ["Magmar","2020-11-21","Thunderbolt → Magmortar","\uD83D\uDD25","#E74C3C","3× Stardust"],
     ["December Recap 2020","2020-12-12","All 2019–2020 CD moves","\uD83C\uDF84","#C0392B","2× Candy"],
@@ -629,7 +629,7 @@ const EVENTS = [
     ["Torchic","2019-05-19","Blast Burn → Blaziken","\uD83D\uDC14","#E74C3C","3× Stardust"],
     ["Slakoth","2019-06-08","Body Slam → Slaking","\uD83E\uDDA5","#6D4C41","3× XP"],
     ["Mudkip","2019-07-21","Hydro Cannon → Swampert","\uD83D\uDCA7","#3498DB","3× Stardust"],
-    ["Ralts","2019-08-03","Synchronoise → Gardevoir/Gallade","\uD83D\uDC83","#9B59B6","3× XP"],
+    ["Ralts","2019-08-03","Gardevoir with Synchronoise (exclusive Charged Move), Gallade with Synchronoise (exclusive Charged Move)","\uD83D\uDC83","#9B59B6","3× XP"],
     ["Turtwig","2019-09-15","Frenzy Plant → Torterra","\uD83D\uDC22","#27AE60","3× Stardust"],
     ["Trapinch","2019-10-12","Earth Power → Flygon","\uD83C\uDFDC\uFE0F","#E67E22","3× Stardust"],
     ["Chimchar","2019-11-16","Blast Burn → Infernape","\uD83D\uDC35","#E74C3C","3× Stardust"],
@@ -641,7 +641,7 @@ const EVENTS = [
     ["Charmander","2018-05-19","Blast Burn → Charizard","\uD83D\uDD25","#E74C3C","3× Stardust"],
     ["Larvitar","2018-06-16","Smack Down → Tyranitar","\uD83E\uDEA8","#27AE60","3× XP"],
     ["Squirtle","2018-07-08","Hydro Cannon → Blastoise","\uD83D\uDC22","#3498DB","3× Stardust"],
-    ["Eevee","2018-08-11","Last Resort → Eevee","\uD83E\uDD8A","#A0522D","2-day event"],
+    ["Eevee","2018-08-11","Eevee with Last Resort (exclusive Charged Move)","\uD83E\uDD8A","#A0522D","2-day event"],
     ["Chikorita","2018-09-22","Frenzy Plant → Meganium","\uD83C\uDF3F","#27AE60","3× XP"],
     ["Beldum","2018-10-21","Meteor Mash → Metagross","\u2699\uFE0F","#95A5A6","3× Stardust"],
     ["Cyndaquil","2018-11-10","Blast Burn → Typhlosion","\uD83D\uDD25","#E74C3C","2× Stardust"],
@@ -1682,7 +1682,7 @@ const RAID_BOSS_DATA = {
   "Krabby":{types:["Water"],cp:"835–892"},
   "Hatenna":{types:["Psychic"],cp:"451–492"},
   "Darumaka":{types:["Fire"],cp:"768–823"},
-  "Eevee":{types:["Normal"],cp:"565–612"},
+  "Eevee":{types:["Normal"]},
   "Machop":{types:["Fighting"],cp:"678–730"},
   "Hitmonchan":{types:["Fighting"],cp:"1263–1332"},
   "Hitmonlee":{types:["Fighting"],cp:"1399–1472"},
@@ -1725,12 +1725,104 @@ const RAID_BOSS_DATA = {
   "Alolan Ninetales":{types:["Ice","Fairy"]},
   "Alolan Marowak":{types:["Fire","Ghost"]},
   "Alolan Vulpix":{types:["Ice"]},
+  "Alolan Sandslash":{types:["Ice","Steel"]},
+  "Alolan Sandshrew":{types:["Ice","Steel"]},
+  "Alolan Golem":{types:["Rock","Electric"]},
+  "Alolan Geodude":{types:["Rock","Electric"]},
   "Emolga":{types:["Electric","Flying"],cp:"876–933",cpBoost:"1095–1166",weather:"Rainy, Windy"},
   "Yamper":{types:["Electric"],cp:"410–450",cpBoost:"512–562",weather:"Rainy"},
   "Azumarill":{types:["Water","Fairy"],cp:"849–907",cpBoost:"1061–1134",weather:"Rainy, Cloudy"},
   "Shadow Latios":{types:["Dragon","Psychic"],cp:"2021–2178",cpBoost:"2526–2723",weather:"Windy"},
   "Mega Manectric":{types:["Electric"],cp:"1267–1337",cpBoost:"1585–1672",weather:"Rainy"},
-  "Joltik":{types:["Bug","Electric"],cp:"504–584",cpBoost:"631–730",weather:"Rainy"}
+  "Joltik":{types:["Bug","Electric"],cp:"504–584",cpBoost:"631–730",weather:"Rainy"},
+  "Meowscarada":{types:["Grass","Dark"]},
+  "Skeledirge":{types:["Fire","Ghost"]},
+  "Quaquaval":{types:["Water","Fighting"]},
+  "Cinderace":{types:["Fire"]},
+  "Rillaboom":{types:["Grass"]},
+  "Corviknight":{types:["Flying","Steel"]},
+  "Toucannon":{types:["Normal","Flying"]},
+  "Reuniclus":{types:["Psychic"]},
+  "Florges":{types:["Fairy"]},
+  "Kommo-o":{types:["Dragon","Fighting"]},
+  "Pawmot":{types:["Electric","Fighting"]},
+  "Vanilluxe":{types:["Ice"]},
+  "Incineroar":{types:["Fire","Dark"]},
+  "Primarina":{types:["Water","Fairy"]},
+  "Tsareena":{types:["Grass"]},
+  "Goodra":{types:["Dragon"]},
+  "Eelektross":{types:["Electric"]},
+  "Annihilape":{types:["Fighting","Ghost"]},
+  "Leavanny":{types:["Bug","Grass"]},
+  "Decidueye":{types:["Grass","Ghost"]},
+  "Porygon-Z":{types:["Normal"]},
+  "Victreebel":{types:["Grass","Poison"]},
+  "Jumpluff":{types:["Grass","Flying"]},
+  "Bewear":{types:["Normal","Fighting"]},
+  "Hydreigon":{types:["Dark","Dragon"]},
+  "Staraptor":{types:["Normal","Flying"]},
+  "Obstagoon":{types:["Dark","Normal"]},
+  "Gigalith":{types:["Rock"]},
+  "Chandelure":{types:["Ghost","Fire"]},
+  "Ursaluna":{types:["Ground","Normal"]},
+  "Talonflame":{types:["Fire","Flying"]},
+  "Serperior":{types:["Grass"]},
+  "Altaria":{types:["Dragon","Flying"]},
+  "Garchomp":{types:["Dragon","Ground"]},
+  "Emboar":{types:["Fire","Fighting"]},
+  "Samurott":{types:["Water"]},
+  "Dusknoir":{types:["Ghost"]},
+  "Luxray":{types:["Electric"]},
+  "Empoleon":{types:["Water","Steel"]},
+  "Rhyperior":{types:["Ground","Rock"]},
+  "Gyarados":{types:["Water","Flying"]},
+  "Shiftry":{types:["Grass","Dark"]},
+  "Beedrill":{types:["Bug","Poison"]},
+  "Magmortar":{types:["Fire"]},
+  "Electivire":{types:["Electric"]},
+  "Infernape":{types:["Fire","Fighting"]},
+  "Torterra":{types:["Grass","Ground"]},
+  "Sceptile":{types:["Grass"]},
+  "Blaziken":{types:["Fire","Fighting"]},
+  "Slaking":{types:["Normal"]},
+  "Gardevoir":{types:["Psychic","Fairy"]},
+  "Gallade":{types:["Psychic","Fighting"]},
+  "Flygon":{types:["Ground","Dragon"]},
+  "Typhlosion":{types:["Fire"]},
+  "Meganium":{types:["Grass"]},
+  "Feraligatr":{types:["Water"]},
+  "Metagross":{types:["Steel","Psychic"]},
+  "Venusaur":{types:["Grass","Poison"]},
+  "Charizard":{types:["Fire","Flying"]},
+  "Blastoise":{types:["Water"]},
+  "Ampharos":{types:["Electric"]},
+  "Tyranitar":{types:["Rock","Dark"]},
+  "Salamence":{types:["Dragon","Flying"]},
+  "Swampert":{types:["Water","Ground"]},
+  "Mamoswine":{types:["Ice","Ground"]},
+  "Roserade":{types:["Grass","Poison"]},
+  "Machamp":{types:["Fighting"]},
+  "Walrein":{types:["Ice","Water"]},
+  "Conkeldurr":{types:["Fighting"]},
+  "Vikavolt":{types:["Bug","Electric"]},
+  "Greninja":{types:["Water","Dark"]},
+  "Haxorus":{types:["Dragon"]},
+  "Delphox":{types:["Fire","Psychic"]},
+  "Chesnaught":{types:["Grass","Fighting"]},
+  "Noivern":{types:["Flying","Dragon"]},
+  "Togekiss":{types:["Fairy","Flying"]},
+  "Escavalier":{types:["Bug","Steel"]},
+  "Accelgor":{types:["Bug"]},
+  "Politoed":{types:["Water"]},
+  "Poliwrath":{types:["Water","Fighting"]},
+  "Sandslash":{types:["Ground"]},
+  "Rapidash":{types:["Fire"]},
+  "Galarian Rapidash":{types:["Psychic","Fairy"]},
+  "Quagsire":{types:["Water","Ground"]},
+  "Clodsire":{types:["Poison","Ground"]},
+  "Blissey":{types:["Normal"]},
+  "Alakazam":{types:["Psychic"]},
+  "Gengar":{types:["Ghost","Poison"]}
 };
 const TYPE_COLORS = {
   "Normal":"#A8A878","Fire":"#F08030","Water":"#6890F0","Electric":"#F8D030","Grass":"#78C850",
@@ -2129,8 +2221,12 @@ function renderEventDetail(event, th) {
                 if (nextLevel.length === 1) {
                   directLine.push(nextLevel[0]);
                   lastDex = nextLevel[0].dexNum;
+                } else if (cdNames.length === 1 && !isAlolan && !isGalarian && !isPaldean) {
+                  // Single CD Pokemon with branching evolutions (e.g., Eevee, Ralts) - include ALL
+                  directLine.push(...nextLevel);
+                  lastDex = nextLevel[nextLevel.length - 1].dexNum;
                 } else {
-                  // Multiple evolutions at same depth - pick closest dex number to last
+                  // Dual CD - pick closest dex number to last
                   const directEvo = nextLevel.find(f => Math.abs(f.dexNum - lastDex) <= 2) || nextLevel[0];
                   directLine.push(directEvo);
                   lastDex = directEvo.dexNum;
@@ -2178,9 +2274,10 @@ function renderEventDetail(event, th) {
             const ALOLAN_TYPES = {19:["Dark","Normal"],20:["Dark","Normal"],26:["Electric","Psychic"],27:["Ice","Steel"],28:["Ice","Steel"],37:["Ice"],38:["Ice","Fairy"],50:["Ground","Steel"],51:["Ground","Steel"],52:["Dark"],53:["Dark"],74:["Rock","Electric"],75:["Rock","Electric"],76:["Rock","Electric"],88:["Poison","Dark"],89:["Poison","Dark"],103:["Grass","Dragon"],105:["Fire","Ghost"]};
             const GALARIAN_TYPES = {77:["Psychic"],78:["Psychic","Fairy"],263:["Dark","Normal"],264:["Dark","Normal"],862:["Dark","Normal"]};
             const PALDEAN_TYPES = {194:["Poison","Ground"],980:["Poison","Ground"]};
-            const cached = _pokeCache[`pokemon_${f.dexNum}`];
-            const types = f.isAlolan ? (ALOLAN_TYPES[f.dexNum] || null) : f.isGalarian ? (GALARIAN_TYPES[f.dexNum] || null) : f.isPaldean ? (PALDEAN_TYPES[f.dexNum] || null) : (cached && cached.types);
-            const typesEl = types ? `<div style="display:flex;gap:3px;margin-top:3px;justify-content:center;flex-wrap:wrap">${types.map(t => { const cap = t.charAt(0).toUpperCase()+t.slice(1); return `<span style="font-size:9px;font-weight:700;color:#fff;background:${TYPE_COLORS[cap] || "#888"};padding:1px 6px;border-radius:8px">${cap}</span>`; }).join("")}</div>` : "";
+            const chainName = name;
+            const rbd = getRaidBossData(chainName);
+            const types = f.isAlolan ? (ALOLAN_TYPES[f.dexNum] || null) : f.isGalarian ? (GALARIAN_TYPES[f.dexNum] || null) : f.isPaldean ? (PALDEAN_TYPES[f.dexNum] || null) : (rbd ? rbd.types : null);
+            const typesEl = types ? `<div style="display:flex;gap:3px;margin-top:3px;justify-content:center;flex-wrap:wrap">${types.map(t => { const cap = t.charAt(0).toUpperCase()+t.slice(1); return `<span style="font-size:${isMob ? 8 : 9}px;font-weight:700;color:#fff;background:${TYPE_COLORS[cap] || "#888"};padding:1px 6px;border-radius:8px">${cap}</span>`; }).join("")}</div>` : "";
             return `${arrow}<div onclick="showFormModal('${src}','${esc(name)}')" style="${cardStyle}${isShiny ? ";position:relative" : ""};cursor:pointer;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.03)'" onmouseleave="this.style.transform='scale(1)'">
               ${isShiny ? `<div style="position:absolute;top:6%;right:10%;z-index:2;font-size:20px">\u2728</div>` : ""}
               <img src="${src}" style="width:${imgSize}px;height:${imgSize}px;object-fit:contain" onerror="this.style.opacity='0.3'" />
@@ -2200,12 +2297,64 @@ function renderEventDetail(event, th) {
             if (regionalChain.length > 0) chains.push(regionalChain);
           }
 
-          const chainsHTML = chains.map(chain => `<div style="margin-bottom:12px">
-            <div style="font-size:11px;font-weight:600;color:${th.textMuted};margin-bottom:6px">Normal${chain[0]?.isRegional ? ` (${chain[0]?.isAlolan ? "Alolan" : chain[0]?.isGalarian ? "Galarian" : "Paldean"})` : chains.length > 1 ? ` (${DEX_BY_NUM[chain[0]?.dexNum] || ""})` : ""}</div>
-            <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px">${buildChainRow(chain, natDexImg, th.text)}</div>
-            <div style="font-size:11px;font-weight:600;color:#F39C12;margin-top:8px;margin-bottom:6px">\u2728 Shiny${chain[0]?.isRegional ? ` (${chain[0]?.isAlolan ? "Alolan" : chain[0]?.isGalarian ? "Galarian" : "Paldean"})` : chains.length > 1 ? ` (${DEX_BY_NUM[chain[0]?.dexNum] || ""})` : ""}</div>
-            <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px">${buildChainRow(chain, shinyDexImg, "#F39C12")}</div>
-          </div>`).join("");
+          const buildGridRow = (chain, getFn, nameColor) => {
+            const base = chain[0];
+            const evos = chain.slice(1);
+            const baseSuffix = base.isAlolan ? "_alola" : base.isGalarian ? "_galarian" : base.isPaldean ? "_paldean" : (GENDER_SUFFIX[base.dexNum] || "");
+            const baseSrc = getFn(base.dexNum, baseSuffix);
+            const baseName = base.name || DEX_BY_NUM[base.dexNum];
+            const isShiny = nameColor === "#F39C12";
+            const baseRbd = getRaidBossData(baseName);
+            const baseTypes = baseRbd ? baseRbd.types : null;
+            const baseTypesEl = baseTypes ? `<div style="display:flex;gap:3px;margin-top:3px;justify-content:center;flex-wrap:wrap">${baseTypes.map(t => `<span style="font-size:9px;font-weight:700;color:#fff;background:${TYPE_COLORS[t] || "#888"};padding:1px 6px;border-radius:8px">${t}</span>`).join("")}</div>` : "";
+            const baseCard = `<div style="display:flex;flex-direction:column;align-items:center;margin-bottom:8px">
+              <div onclick="showFormModal('${baseSrc}','${esc(baseName)}')" style="${cardStyle}${isShiny ? ";position:relative" : ""};cursor:pointer;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.03)'" onmouseleave="this.style.transform='scale(1)'">
+                ${isShiny ? `<div style="position:absolute;top:6%;right:10%;z-index:2;font-size:20px">\u2728</div>` : ""}
+                <img src="${baseSrc}" style="width:${imgSize}px;height:${imgSize}px;object-fit:contain" />
+                <div style="margin-top:4px;font-weight:700;color:${nameColor};font-size:${isMob ? 9 : 12}px">${esc(baseName)}</div>
+                ${baseTypesEl}
+              </div>
+              <div style="font-size:14px;color:${th.textMuted};margin-top:6px">\u25BC</div>
+            </div>`;
+            const evoCards = evos.map(f => {
+              const hasRegionalImg = f.isAlolan && POKEMON_FORMS[f.dexNum]?.some(fm => fm.l === "Alola") || f.isGalarian && POKEMON_FORMS[f.dexNum]?.some(fm => fm.l === "Galar") || f.isPaldean && POKEMON_FORMS[f.dexNum]?.some(fm => fm.l === "Paldea");
+              const suffix = hasRegionalImg ? (f.isAlolan ? "_alola" : f.isGalarian ? "_galarian" : "_paldean") : (GENDER_SUFFIX[f.dexNum] || "");
+              const src = getFn(f.dexNum, suffix);
+              const name = f.name || DEX_BY_NUM[f.dexNum];
+              const evo = POGO_EVO[f.dexNum] || "";
+              const rbd = getRaidBossData(name);
+              const types = rbd ? rbd.types : null;
+              const typesEl = types ? `<div style="display:flex;gap:3px;margin-top:3px;justify-content:center;flex-wrap:wrap">${types.map(t => `<span style="font-size:${isMob ? 8 : 9}px;font-weight:700;color:#fff;background:${TYPE_COLORS[t] || "#888"};padding:1px 5px;border-radius:6px">${t}</span>`).join("")}</div>` : "";
+              return `<div onclick="showFormModal('${src}','${esc(name)}')" style="display:flex;flex-direction:column;align-items:center;padding:${isMob ? "8px 4px" : "8px 6px"};border-radius:10px;background:${th.accentBgSubtle(event.color)};border:1px solid ${th.border};text-align:center;cursor:pointer;transition:transform 0.15s ease${isShiny ? ";position:relative" : ""}" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'">
+                ${isShiny ? `<div style="position:absolute;top:4px;right:6px;font-size:14px">\u2728</div>` : ""}
+                <img src="${src}" style="width:${isMob ? 48 : 60}px;height:${isMob ? 48 : 60}px;object-fit:contain" />
+                <div style="font-size:${isMob ? 10 : 11}px;font-weight:700;color:${nameColor};margin-top:3px">${esc(name)}</div>
+                ${typesEl}
+                <div style="font-size:${isMob ? 8 : 11}px;color:${th.textMuted};margin-top:3px;line-height:1.2">${esc(evo)}</div>
+              </div>`;
+            }).join("");
+            const gridCols = evos.length <= 4 ? evos.length : (isMob ? 3 : Math.min(evos.length, 4));
+            return `${baseCard}<div style="display:grid;grid-template-columns:repeat(${gridCols},1fr);gap:${isMob ? 4 : 8}px;max-width:${isMob ? "100%" : "600px"};margin:0 auto">${evoCards}</div>`;
+          };
+
+          const chainsHTML = chains.map(chain => {
+            const isLargeChain = chain.length > 4;
+            const regionLabel = chain[0]?.isRegional ? ` (${chain[0]?.isAlolan ? "Alolan" : chain[0]?.isGalarian ? "Galarian" : "Paldean"})` : chains.length > 1 ? ` (${DEX_BY_NUM[chain[0]?.dexNum] || ""})` : "";
+            if (isLargeChain) {
+              return `<div style="margin-bottom:12px">
+                <div style="font-size:11px;font-weight:600;color:${th.textMuted};margin-bottom:6px">Normal${regionLabel}</div>
+                ${buildGridRow(chain, natDexImg, th.text)}
+                <div style="font-size:11px;font-weight:600;color:#F39C12;margin-top:12px;margin-bottom:6px">\u2728 Shiny${regionLabel}</div>
+                ${buildGridRow(chain, shinyDexImg, "#F39C12")}
+              </div>`;
+            }
+            return `<div style="margin-bottom:12px">
+              <div style="font-size:11px;font-weight:600;color:${th.textMuted};margin-bottom:6px">Normal${regionLabel}</div>
+              <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px">${buildChainRow(chain, natDexImg, th.text)}</div>
+              <div style="font-size:11px;font-weight:600;color:#F39C12;margin-top:8px;margin-bottom:6px">\u2728 Shiny${regionLabel}</div>
+              <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px">${buildChainRow(chain, shinyDexImg, "#F39C12")}</div>
+            </div>`;
+          }).join("");
 
           return `<div>
             <h4 style="margin:0 0 10px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>\uD83D\uDD17</span> Evolution Chain</h4>
@@ -2624,13 +2773,16 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
 
     let megaHtml = "";
     if (megaEvos.length > 0) {
-      const megaCards = megaEvos.map(evo => `<div style="display:flex;align-items:center;gap:${isMobile ? 8 : 12}px;padding:${isMobile ? 10 : 12}px;background:${th.accentBgSubtle("#8E44AD")};border:1px solid ${th.countdownBorder("#8E44AD")};border-radius:12px">
-        <img src="${IMG_BASE}/Mega/regular/${getGenFolder(evo.dexNum)}/${evo.imgFile}.webp" style="width:${isMobile ? 52 : 60}px;height:${isMobile ? 52 : 60}px;object-fit:contain;flex-shrink:0" onerror="this.style.opacity='0.3'" />
+      const megaCards = megaEvos.map(evo => {
+        const megaSrc = `${IMG_BASE}/Mega/regular/${getGenFolder(evo.dexNum)}/${evo.imgFile}.webp`;
+        return `<div onclick="showFormModal('${megaSrc}','${esc(evo.name)}')" style="display:flex;align-items:center;gap:${isMobile ? 8 : 12}px;padding:${isMobile ? 10 : 12}px;background:${th.accentBgSubtle("#8E44AD")};border:1px solid ${th.countdownBorder("#8E44AD")};border-radius:12px;cursor:pointer;transition:transform 0.15s ease,box-shadow 0.15s ease" onmouseenter="this.style.transform='scale(1.02)';this.style.boxShadow='0 4px 12px rgba(142,68,173,0.2)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none'">
+        <img src="${megaSrc}" style="width:${isMobile ? 52 : 60}px;height:${isMobile ? 52 : 60}px;object-fit:contain;flex-shrink:0" onerror="this.style.opacity='0.3'" />
         <div style="flex:1;min-width:0">
           <div style="font-size:${isMobile ? 13 : 14}px;font-weight:700;color:${th.text}">${esc(evo.name)}</div>
           <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textSecondary};margin-top:2px">${esc(evo.trigger)}</div>
         </div>
-      </div>`).join("");
+      </div>`;
+      }).join("");
       megaHtml = `<div style="margin-top:12px">
         <div style="font-size:13px;font-weight:700;color:#8E44AD;margin-bottom:8px">\u26A1 Mega Evolution</div>
         <div style="display:flex;flex-direction:column;gap:8px">${megaCards}</div>
@@ -2700,6 +2852,22 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
       <div style="padding:14px;background:${th.surface};border-radius:12px;border:1px solid ${th.border}">${statBars}</div>
     </div>
     ${evoHtml}
+    ${(() => {
+      const shinySrc = shinyDexImg(data.dexNum, GENDER_SUFFIX[data.dexNum] || "");
+      const shinyLabel = "Shiny " + data.name;
+      return `<div style="margin-top:20px">
+        <div style="font-size:14px;font-weight:700;color:${th.text};margin-bottom:10px">\u2728 Shiny Variant</div>
+        <div onclick="showFormModal('${shinySrc}','${esc(shinyLabel)}')" style="display:flex;align-items:center;gap:${isMobile ? 12 : 16}px;padding:${isMobile ? 14 : 16}px;background:${th.surface};border-radius:12px;border:1px solid ${th.border};cursor:pointer;transition:transform 0.15s ease,box-shadow 0.15s ease" onmouseenter="this.style.transform='scale(1.02)';this.style.boxShadow='0 4px 16px rgba(255,215,0,0.2)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none'">
+          <div style="position:relative;flex-shrink:0">
+            <img src="${shinySrc}" style="width:${isMobile ? 80 : 100}px;height:${isMobile ? 80 : 100}px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(255,215,0,0.3))" onerror="this.style.opacity='0.3'" />
+          </div>
+          <div>
+            <div style="font-size:${isMobile ? 15 : 16}px;font-weight:700;color:${th.text}">${esc(shinyLabel)}</div>
+            <div style="font-size:${isMobile ? 11 : 12}px;color:${th.textSecondary};margin-top:4px">Tap to view full size</div>
+          </div>
+        </div>
+      </div>`;
+    })()}
     ${(() => {
       const forms = POKEMON_FORMS[data.dexNum];
       if (!forms || forms.length === 0) return "";
