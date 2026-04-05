@@ -125,7 +125,7 @@ const POGO_EVO = {
   651:"25 Candy",652:"100 Candy",654:"25 Candy",655:"100 Candy",657:"25 Candy",658:"100 Candy",660:"50 Candy",662:"25 Candy",663:"100 Candy",665:"25 Candy",666:"100 Candy",668:"50 Candy",673:"50 Candy",675:"50 Candy",680:"25 Candy",681:"100 Candy",683:"50 Candy + Use Incense (Buddy)",685:"50 Candy + Feed 25 Treats (Buddy)",687:"50 Candy (Phone Upside Down)",689:"50 Candy",691:"50 Candy",693:"50 Candy",695:"50 Candy",697:"50 Candy",699:"50 Candy",700:"25 Candy + Earn 70 Hearts (Buddy)",705:"25 Candy",706:"100 Candy (Rainy Weather or Rainy Lure)",709:"200 Candy or Trade",711:"50 Candy",713:"50 Candy",715:"400 Candy",
   723:"25 Candy",724:"100 Candy",726:"25 Candy",727:"100 Candy",729:"25 Candy",730:"100 Candy",732:"25 Candy",733:"100 Candy",735:"50 Candy",737:"25 Candy",738:"100 Candy + Magnetic Lure",740:"50 Candy",743:"50 Candy",745:"50 Candy (Day=Midday, Night=Midnight, Dusk=Event Rockruff)",748:"50 Candy",750:"50 Candy",752:"50 Candy",754:"50 Candy",756:"50 Candy",758:"50 Candy (\u2640 Only)",760:"400 Candy",762:"25 Candy",763:"100 Candy (\u2640 Only)",768:"50 Candy",770:"50 Candy",783:"25 Candy",784:"100 Candy",809:"400 Candy",
   811:"25 Candy",812:"100 Candy",814:"25 Candy",815:"100 Candy",817:"25 Candy",818:"100 Candy",820:"50 Candy",822:"25 Candy",823:"100 Candy",825:"25 Candy",826:"100 Candy",828:"50 Candy",830:"50 Candy",832:"50 Candy",834:"50 Candy",836:"50 Candy",838:"25 Candy",839:"100 Candy",841:"50 Candy",842:"50 Candy",844:"50 Candy",847:"50 Candy",849:"50 Candy",851:"50 Candy",853:"50 Candy",855:"50 Candy",857:"25 Candy",858:"100 Candy",860:"25 Candy",861:"100 Candy",862:"100 Candy (Night)",863:"50 Candy",864:"50 Candy",865:"50 Candy",866:"100 Candy",867:"50 Candy",869:"50 Candy",873:"50 Candy",879:"50 Candy",886:"25 Candy",887:"100 Candy",
-  899:"50 Candy",900:"Max Battles Only",901:"100 Candy (During Full Moon)",902:"50 Candy",903:"100 Candy + Sinnoh Stone",904:"50 Candy",
+  899:"50 Candy",900:"Max Battles Only",901:"100 Candy (During Full Moon)",902:"50 Candy",903:"100 Candy + Walk 7km (Buddy, Sunny)",904:"50 Candy + Win 10 Raids (Buddy)",
   907:"25 Candy",908:"100 Candy",910:"25 Candy",911:"100 Candy",913:"25 Candy",914:"100 Candy",916:"50 Candy",918:"50 Candy",920:"50 Candy",922:"25 Candy",923:"100 Candy + Walk 10km",925:"25 Candy",927:"50 Candy",929:"25 Candy",930:"100 Candy",933:"25 Candy",934:"100 Candy",936:"50 Candy + Defeat 30 Psychic (Buddy)",937:"50 Candy + Defeat 30 Ghost (Buddy)",939:"50 Candy",941:"50 Candy",943:"50 Candy",945:"50 Candy",947:"50 Candy",949:"50 Candy",952:"50 Candy",954:"50 Candy",956:"50 Candy",958:"25 Candy",959:"100 Candy",961:"50 Candy",964:"50 Candy",966:"50 Candy",970:"50 Candy",972:"50 Candy",975:"50 Candy",979:"100 Candy + Defeat 30 Raids (Buddy)",980:"50 Candy",981:"50 Candy",982:"50 Candy",983:"100 Candy",997:"25 Candy",998:"100 Candy",1000:"100 Candy",1011:"50 Candy",1013:"50 Candy",1019:"100 Candy"
 };
 
@@ -157,6 +157,10 @@ function formImgUrl(dex, filename) { return `${IMG_BASE}/National-Dex/regular/${
 function shinyFormImgUrl(dex, filename) { return `${IMG_BASE}/National-Dex/shiny/${getGenFolder(dex)}/${filename}.webp`; }
 
 // Regional evolution chains: maps a form prefix to its evolution line [{dex, form file, name}]
+const EVO_REGIONAL_BRANCH = {
+  903: { parentImgFile: "0215_hisuian", parentName: "Hisuian Sneasel", parentDex: 215 },
+  904: { parentImgFile: "0211_hisuian", parentName: "Hisuian Qwilfish", parentDex: 211 }
+};
 const REGIONAL_EVOS = {
   alola: [
     [19,20],[27,28],[37,38],[50,51],[52,53],[74,75,76],[88,89]
@@ -2786,7 +2790,25 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
     const hasBranch = depths.some(d => byDepth[d].length > 1);
 
     let evoContent = "";
-    if (hasBranch) {
+    // Check if any branch evo has a regional parent override
+    const hasRegionalBranch = regularEvos.some(e => EVO_REGIONAL_BRANCH[e.dexNum]);
+    if (hasBranch && hasRegionalBranch) {
+      // Render as stacked rows: each branch gets its own full linear chain
+      const base = regularEvos.find(e => e.depth === 0);
+      const rows = regularEvos.filter(e => e.depth > 0).map(evo => {
+        const rb = EVO_REGIONAL_BRANCH[evo.dexNum];
+        const parent = rb ? { name: rb.parentName, dexNum: rb.parentDex, imgFile: rb.parentImgFile, trigger: "", depth: 0 } : base;
+        return `<div style="display:flex;align-items:center;justify-content:center;gap:4px">
+          ${evoCard(parent)}
+          <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;margin:0 4px">
+            <div style="font-size:18px;color:${th.textMuted}">\u2192</div>
+            <div style="font-size:10px;color:${th.textSecondary};text-align:center;max-width:80px;line-height:1.2">${esc(evo.trigger)}</div>
+          </div>
+          ${evoCard(evo)}
+        </div>`;
+      }).join("");
+      evoContent = `<div style="display:flex;flex-direction:column;gap:8px;padding:12px;background:${th.surface};border-radius:12px;border:1px solid ${th.border}">${rows}</div>`;
+    } else if (hasBranch) {
       // Build stages: each depth is either a single Pokemon or a branch group
       const stagesHTML = depths.map((d, di) => {
         const group = byDepth[d];
@@ -2814,6 +2836,29 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
       evoContent = `<div style="display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;background:${th.surface};border-radius:12px;border:1px solid ${th.border};overflow-x:auto">
         ${stagesHTML}
       </div>`;
+    } else if (hasRegionalBranch) {
+      // Linear chain where child evolves from a regional form
+      // Show base form on its own line, then regional parent → child on second line
+      const base = regularEvos.find(e => e.depth === 0);
+      const rows = [];
+      // First row: base form alone (doesn't evolve)
+      if (base) rows.push(`<div style="display:flex;align-items:center;justify-content:center;gap:4px">${evoCard(base)}</div>`);
+      // Second row: regional parent → evolved form
+      regularEvos.filter(e => e.depth > 0).forEach(evo => {
+        const rb = EVO_REGIONAL_BRANCH[evo.dexNum];
+        if (rb) {
+          const parent = { name: rb.parentName, dexNum: rb.parentDex, imgFile: rb.parentImgFile, trigger: "", depth: 0 };
+          rows.push(`<div style="display:flex;align-items:center;justify-content:center;gap:4px">
+            ${evoCard(parent)}
+            <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;margin:0 4px">
+              <div style="font-size:18px;color:${th.textMuted}">\u2192</div>
+              <div style="font-size:10px;color:${th.textSecondary};text-align:center;max-width:80px;line-height:1.2">${esc(evo.trigger)}</div>
+            </div>
+            ${evoCard(evo)}
+          </div>`);
+        }
+      });
+      evoContent = `<div style="display:flex;flex-direction:column;gap:8px;padding:12px;background:${th.surface};border-radius:12px;border:1px solid ${th.border}">${rows.join("")}</div>`;
     } else {
       // Linear layout
       const evoItems = regularEvos.map((evo, i) => {
