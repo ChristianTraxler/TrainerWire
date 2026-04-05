@@ -873,6 +873,7 @@ const WEB_STORE_BOXES = [
     price: 8.99,
     category: "Event Bundle",
     limited: true,
+    availableFrom: "2026-03-31",
     expires: "2026-04-06",
     oneTime: true,
     items: [
@@ -909,6 +910,7 @@ const WEB_STORE_BOXES = [
     price: 4.99,
     category: "Event Bundle",
     limited: true,
+    availableFrom: "2026-03-28",
     expires: "2026-04-04",
     oneTime: true,
     items: [
@@ -937,6 +939,7 @@ const WEB_STORE_BOXES = [
     price: 6.99,
     category: "Event Bundle",
     limited: true,
+    availableFrom: "2026-03-31",
     expires: "2026-04-06",
     oneTime: true,
     items: [
@@ -953,6 +956,7 @@ const WEB_STORE_BOXES = [
     price: 4.99,
     category: "Event Bundle",
     limited: true,
+    availableFrom: "2026-03-31",
     expires: "2026-04-06",
     oneTime: true,
     items: [
@@ -1186,7 +1190,9 @@ let state = {
   pokedexDetailData: null,
   pokedexDetailEvolutions: null,
   storeFilter: "All",
-  storeGuideOpen: false
+  storeGuideOpen: false,
+  openStoreArchiveYears: {},
+  openStoreArchiveMonths: {}
 };
 
 // --- NEST MIGRATION ---
@@ -3112,6 +3118,24 @@ function setStoreFilter(f) {
   render();
 }
 
+function toggleStoreArchiveYear(year) {
+  state.openStoreArchiveYears[year] = !state.openStoreArchiveYears[year];
+  if (!state.openStoreArchiveYears[year]) {
+    Object.keys(state.openStoreArchiveMonths).forEach(function(k) {
+      if (k.startsWith(year + "-")) state.openStoreArchiveMonths[k] = false;
+    });
+  }
+  render();
+}
+function toggleStoreArchiveMonth(key) {
+  state.openStoreArchiveMonths[key] = !state.openStoreArchiveMonths[key];
+  var isOpen = state.openStoreArchiveMonths[key];
+  var content = document.getElementById("store-archive-month-content-" + key);
+  var arrow = document.getElementById("store-archive-month-arrow-" + key);
+  if (content) content.style.display = isOpen ? "grid" : "none";
+  if (arrow) arrow.style.transform = isOpen ? "rotate(180deg)" : "rotate(0deg)";
+}
+
 function toggleStoreGuide() {
   state.storeGuideOpen = !state.storeGuideOpen;
   const wrapper = document.getElementById("store-guide-wrapper");
@@ -3410,9 +3434,9 @@ function render() {
                   </div>
                   <div style="font-size:18px;color:${th.textMuted};transition:transform 0.2s ease;transform:${isOpen ? "rotate(180deg)" : "rotate(0deg)"}">\u25BE</div>
                 </button>
-                ${isOpen ? `<div style="border:1.5px solid ${th.border};border-top:none;border-radius:0 0 16px 16px;overflow:hidden;animation:fadeSlideIn 0.25s ease">
+                ${isOpen ? `<div style="background:${th.surface};border:1.5px solid ${th.border};border-top:none;border-radius:0 0 16px 16px;overflow:hidden;animation:fadeSlideIn 0.25s ease">
                   ${items.map((ev, i) =>
-                    `<button onclick="selectEvent(${ev.id})" style="display:flex;align-items:center;gap:12px;padding:14px 18px;background:${th.surface};border:none;border-top:${i > 0 ? `1px solid ${th.border}` : "none"};cursor:pointer;text-align:left;width:100%;font-family:inherit;transition:background 0.15s ease"
+                    `<button onclick="selectEvent(${ev.id})" style="display:flex;align-items:center;gap:12px;padding:14px 18px;background:${th.surface};border:none;border-top:${i > 0 ? `1px solid ${th.border}` : "none"};cursor:pointer;text-align:left;width:100%;font-family:inherit;transition:background 0.15s ease;-webkit-tap-highlight-color:transparent;outline:none"
                       onmouseenter="this.style.background='${th.surfaceHover}'"
                       onmouseleave="this.style.background='${th.surface}'">
                       ${(() => {
@@ -3471,9 +3495,9 @@ function render() {
                 </div>
                 <div style="font-size:18px;color:${th.textMuted};transition:transform 0.2s ease;transform:${isOpen ? "rotate(180deg)" : "rotate(0deg)"}">\u25BE</div>
               </button>
-              ${isOpen ? `<div style="border:1.5px solid ${th.border};border-top:none;border-radius:0 0 16px 16px;overflow:hidden;animation:fadeSlideIn 0.25s ease">
+              ${isOpen ? `<div style="background:${th.surface};border:1.5px solid ${th.border};border-top:none;border-radius:0 0 16px 16px;overflow:hidden;animation:fadeSlideIn 0.25s ease">
                 ${items.map((a, i) =>
-                  `<button onclick="selectNews(${a.id})" style="display:flex;align-items:center;gap:12px;padding:14px 18px;background:${th.surface};border:none;border-top:${i > 0 ? `1px solid ${th.border}` : "none"};cursor:pointer;text-align:left;width:100%;font-family:inherit;transition:background 0.15s ease"
+                  `<button onclick="selectNews(${a.id})" style="display:flex;align-items:center;gap:12px;padding:14px 18px;background:${th.surface};border:none;border-top:${i > 0 ? `1px solid ${th.border}` : "none"};cursor:pointer;text-align:left;width:100%;font-family:inherit;transition:background 0.15s ease;-webkit-tap-highlight-color:transparent;outline:none"
                     onmouseenter="this.style.background='${th.surfaceHover}'"
                     onmouseleave="this.style.background='${th.surface}'">
                     <span style="font-size:10px;font-weight:700;background:${th.tagBg(a.tag)};color:${th.tagText(a.tag)};padding:3px 8px;border-radius:20px;flex-shrink:0">${esc(a.tag)}</span>
@@ -3664,12 +3688,15 @@ function render() {
     if (state.tab === "store") {
       const isCoinsFilter = state.storeFilter === "Pok\u00E9Coins";
       const filteredBoxes = isCoinsFilter ? [] : state.storeFilter === "All" ? WEB_STORE_BOXES : WEB_STORE_BOXES.filter(b => b.category === state.storeFilter);
-      const eventBundles = filteredBoxes.filter(b => b.category === "Event Bundle");
+      const now = new Date();
+      const isEventExpired = (b) => b.category === "Event Bundle" && b.expires && new Date(b.expires + "T23:59:59").getTime() < now.getTime();
+      const activeEventBundles = filteredBoxes.filter(b => b.category === "Event Bundle" && !isEventExpired(b));
+      const expiredEventBundles = filteredBoxes.filter(b => isEventExpired(b));
       const otherBoxes = filteredBoxes.filter(b => b.category !== "Event Bundle").sort((a, b) => {
         const va = calcBoxValue(a), vb = calcBoxValue(b);
         return vb.savingsPct - va.savingsPct;
       });
-      const sortedBoxes = [...eventBundles, ...otherBoxes];
+      const sortedBoxes = [...activeEventBundles, ...otherBoxes];
       const catPillsHTML = STORE_CATEGORIES.map(cat => {
         const isActive = state.storeFilter === cat;
         return `<button onclick="setStoreFilter('${cat}')" style="padding:${isMobile ? "6px 14px" : "7px 16px"};border-radius:20px;border:1.5px solid ${isActive ? "#E74C3C" : th.border};background:${isActive ? th.accentBg("#E74C3C") : th.surface};color:${isActive ? "#E74C3C" : th.textSecondary};font-size:${isMobile ? 11 : 12}px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s ease;white-space:nowrap">${cat}</button>`;
@@ -3746,6 +3773,114 @@ function render() {
           </div>` : ""}
         </div>`;
       }).join("");
+      // Build archived event bundles section grouped by year/month
+      const MONTH_NAMES = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      const fmtArchiveDate = function(d) { return MONTH_NAMES[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear(); };
+      function renderArchiveCard(box, th, isMobile) {
+        var archItemsHTML = box.items.map(function(item) {
+          var itemImg = (ITEM_IMAGES_MULTI[item.name] && ITEM_IMAGES_MULTI[item.name][item.qty]) || ITEM_IMAGES[item.name];
+          var imgTag = itemImg ? '<img src="assets/pokemon-images/Items/' + itemImg + '" style="width:30px;height:30px;object-fit:contain;flex-shrink:0" alt="' + item.name + '" />' : "";
+          var noteTag = item.note ? '<span style="font-size:10px;color:' + th.textMuted + ';font-weight:500">(' + item.note + ')</span>' : "";
+          return '<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid ' + th.border + '">' +
+            '<div style="display:flex;align-items:center;gap:8px">' + imgTag +
+            '<span style="font-size:' + (isMobile ? 12 : 13) + 'px;font-weight:600;color:' + th.text + '">' + item.qty + 'x ' + item.name + '</span>' + noteTag +
+            '</div></div>';
+        }).join("");
+        var fromDate = box.availableFrom ? new Date(box.availableFrom) : null;
+        var toDate = new Date(box.expires);
+        var dateRangeText = fromDate ? fmtArchiveDate(fromDate) + " \u2013 " + fmtArchiveDate(toDate) : "Through " + fmtArchiveDate(toDate);
+        var oneTimeTag = box.oneTime ? '<span style="font-size:9px;font-weight:700;color:' + th.textMuted + ';background:' + th.accentBgSubtle("#888") + ';padding:3px 8px;border-radius:20px;white-space:nowrap">ONE-TIME</span>' : "";
+        var ticketHTML = "";
+        if (box.ticketBonuses) {
+          ticketHTML = '<div style="margin:' + (isMobile ? "10px 14px 14px" : "14px 20px 20px") + ';padding:' + (isMobile ? "14px" : "16px") + ';border-radius:14px;background:' + th.accentBgSubtle("#E67E22") + ';border:1px solid ' + th.countdownBorder("#E67E22") + '">' +
+            '<div style="font-size:12px;font-weight:700;color:#E67E22;margin-bottom:4px">&#127915; Ticket Bonuses</div>' +
+            '<ul style="margin:0;padding-left:18px;font-size:' + (isMobile ? 12 : 13) + 'px;color:' + th.textSecondary + ';line-height:1.8">' + box.ticketBonuses.map(function(b) { return '<li>' + esc(b) + '</li>'; }).join("") + '</ul></div>';
+        }
+        return '<div style="background:' + th.surface + ';border:1.5px solid ' + th.border + ';border-radius:' + (isMobile ? 18 : 20) + 'px;overflow:hidden;opacity:0.75;box-shadow:' + th.shadow + '">' +
+          '<div style="padding:' + (isMobile ? "16px 16px 12px" : "20px 24px 16px") + ';display:flex;flex-direction:column;gap:10px">' +
+            '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap">' +
+              '<div style="flex:1;min-width:0">' +
+                '<h3 style="margin:0;font-size:' + (isMobile ? 15 : 17) + 'px;font-weight:800;color:' + th.text + ';line-height:1.3">' + box.name + '</h3>' +
+                '<div style="display:flex;' + (isMobile ? "flex-direction:column;align-items:flex-start" : "align-items:center") + ';gap:6px;margin-top:6px">' +
+                  '<span style="font-size:12px;font-weight:800;color:#fff;background:linear-gradient(135deg,#666,#555);padding:5px 14px;border-radius:20px;letter-spacing:0.5px;white-space:nowrap">EXPIRED</span>' +
+                  '<div style="display:flex;align-items:center;gap:6px">' + oneTimeTag +
+                    '<span style="font-size:10px;font-weight:700;color:' + th.textMuted + ';background:' + th.accentBgSubtle("#888") + ';padding:3px 8px;border-radius:20px;white-space:nowrap">' + box.category + '</span>' +
+                  '</div>' +
+                '</div>' +
+                '<div style="margin-top:8px;font-size:' + (isMobile ? 11 : 12) + 'px;font-weight:600;color:' + th.textMuted + ';display:flex;align-items:center;gap:6px"><span style="font-size:14px">&#128197;</span> ' + dateRangeText + '</div>' +
+              '</div>' +
+              '<div style="display:flex;align-items:center;gap:' + (isMobile ? 8 : 10) + 'px;flex-shrink:0">' +
+                '<div style="font-size:' + (isMobile ? 22 : 26) + 'px;font-weight:900;color:' + th.text + ';font-family:\'JetBrains Mono\',monospace">$' + box.price.toFixed(2) + '</div>' +
+                '<img src="assets/pokemon-images/icons/image.gif" style="width:' + (isMobile ? 36 : 42) + 'px;height:' + (isMobile ? 36 : 42) + 'px;object-fit:contain" alt="Bundle" />' +
+              '</div>' +
+            '</div>' +
+            '<div style="display:flex;flex-direction:column">' + archItemsHTML + '</div>' +
+          '</div>' + ticketHTML +
+        '</div>';
+      }
+      // Group expired bundles by year then month
+      var archiveByYear = {};
+      expiredEventBundles.forEach(function(box) {
+        var expD = new Date(box.expires);
+        var y = String(expD.getFullYear());
+        var m = expD.getMonth();
+        if (!archiveByYear[y]) archiveByYear[y] = {};
+        if (!archiveByYear[y][m]) archiveByYear[y][m] = [];
+        archiveByYear[y][m].push(box);
+      });
+      var archiveYearKeys = Object.keys(archiveByYear).sort().reverse();
+      var archiveHTML = "";
+      if ((state.storeFilter === "All" || state.storeFilter === "Event Bundle") && archiveYearKeys.length > 0) {
+        // Header divider
+        archiveHTML = '<div style="width:100%;display:flex;flex-direction:column;gap:10px">' +
+          '<div style="display:flex;align-items:center;gap:10px">' +
+            '<div style="flex:1;height:1px;background:' + th.border + '"></div>' +
+            '<span style="font-size:11px;font-weight:700;color:' + th.textMuted + ';letter-spacing:1px;text-transform:uppercase;white-space:nowrap">Archived Event Bundles</span>' +
+            '<div style="flex:1;height:1px;background:' + th.border + '"></div>' +
+          '</div>';
+        // Year accordions
+        archiveYearKeys.forEach(function(year) {
+          var monthsInYear = archiveByYear[year];
+          var monthKeys = Object.keys(monthsInYear).sort().reverse();
+          var totalBundles = 0;
+          monthKeys.forEach(function(m) { totalBundles += monthsInYear[m].length; });
+          var yearOpen = !!state.openStoreArchiveYears[year];
+          var yearLabel = totalBundles + ' bundle' + (totalBundles === 1 ? '' : 's');
+          archiveHTML += '<div style="margin-top:6px">' +
+            '<button onclick="toggleStoreArchiveYear(\'' + year + '\')" style="display:flex;align-items:center;justify-content:space-between;width:100%;padding:14px 18px;background:' + th.surface + ';border:1.5px solid ' + th.border + ';border-radius:' + (yearOpen ? '16px 16px 0 0' : '16px') + ';cursor:pointer;font-family:inherit;transition:all 0.2s ease;box-shadow:' + th.shadow + '">' +
+              '<div style="display:flex;align-items:center;gap:10px">' +
+                '<div style="width:36px;height:36px;border-radius:10px;background:' + th.accentBg("#636E72") + ';display:flex;align-items:center;justify-content:center;font-size:16px">&#128230;</div>' +
+                '<div style="text-align:left"><div style="font-size:15px;font-weight:700;color:' + th.text + '">' + year + '</div>' +
+                '<div style="font-size:12px;color:' + th.textMuted + ';font-weight:500">' + yearLabel + '</div></div>' +
+              '</div>' +
+              '<div style="font-size:18px;color:' + th.textMuted + ';transition:transform 0.2s ease;transform:' + (yearOpen ? 'rotate(180deg)' : 'rotate(0deg)') + '">\u25BE</div>' +
+            '</button>';
+          if (yearOpen) {
+            archiveHTML += '<div style="background:' + th.surface + ';border:1.5px solid ' + th.border + ';border-top:none;border-radius:0 0 16px 16px;overflow:hidden">';
+            monthKeys.forEach(function(m, mIdx) {
+              var boxes = monthsInYear[m];
+              var monthKey = year + '-' + m;
+              var monthOpen = !!state.openStoreArchiveMonths[monthKey];
+              var monthLabel = boxes.length + ' bundle' + (boxes.length === 1 ? '' : 's');
+              archiveHTML += '<div style="border-top:' + (mIdx > 0 ? '1px solid ' + th.border : 'none') + '">' +
+                '<button onclick="toggleStoreArchiveMonth(\'' + monthKey + '\')" style="display:flex;align-items:center;justify-content:space-between;width:100%;padding:12px 18px;background:' + th.surface + ';border:none;cursor:pointer;font-family:inherit;box-sizing:border-box;transition:background 0.15s ease;-webkit-tap-highlight-color:transparent;outline:none" onmouseenter="this.style.background=\'' + th.surfaceHover + '\'" onmouseleave="this.style.background=\'' + th.surface + '\'">' +
+                  '<div style="display:flex;align-items:center;gap:10px">' +
+                    '<div style="width:30px;height:30px;border-radius:8px;background:' + th.accentBg("#636E72") + ';display:flex;align-items:center;justify-content:center;font-size:13px">&#128197;</div>' +
+                    '<div style="text-align:left"><div style="font-size:14px;font-weight:600;color:' + th.text + '">' + MONTH_NAMES[m] + '</div>' +
+                    '<div style="font-size:11px;color:' + th.textMuted + ';font-weight:500">' + monthLabel + '</div></div>' +
+                  '</div>' +
+                  '<div id="store-archive-month-arrow-' + monthKey + '" style="font-size:16px;color:' + th.textMuted + ';transition:transform 0.2s ease;transform:' + (monthOpen ? 'rotate(180deg)' : 'rotate(0deg)') + '">\u25BE</div>' +
+                '</button>';
+              var cardsHTML = boxes.map(function(box) { return renderArchiveCard(box, th, isMobile); }).join("");
+              archiveHTML += '<div id="store-archive-month-content-' + monthKey + '" style="border-top:1px solid ' + th.border + ';padding:' + (isMobile ? '12px 14px 14px' : '16px 18px 18px') + ';display:' + (monthOpen ? 'grid' : 'none') + ';grid-template-columns:' + (isMobile ? '1fr' : 'repeat(auto-fill,minmax(380px,1fr))') + ';gap:' + (isMobile ? 14 : 18) + 'px;background:' + th.surface + '">' + cardsHTML + '</div>';
+              archiveHTML += '</div>';
+            });
+            archiveHTML += '</div>';
+          }
+          archiveHTML += '</div>';
+        });
+        archiveHTML += '</div>';
+      }
       storeTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
         <div style="text-align:center;padding:10px">
           <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text}">\uD83D\uDED2 Web Store Box Analysis</h2>
@@ -3820,6 +3955,7 @@ function render() {
             <p style="margin:0;font-size:${isMobile ? 11 : 12}px;color:${th.textSecondary};line-height:1.6"><strong style="color:${th.text}">Tip:</strong> The $99.99 pack gives you the most coins per dollar at 15,500 total. But if that\u2019s too much at once, the $19.99 and $39.99 packs are still a solid value. The $0.99 pack has the worst rate \u2014 avoid buying coins in small amounts if you can.</p>
           </div>
         </div>` : ""}
+        ${archiveHTML}
       </div>`;
     }
 
