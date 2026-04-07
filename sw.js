@@ -7,6 +7,7 @@ const APP_SHELL = [
   "/app.js",
   "/styles.css",
   "/manifest.json",
+  "/data/pokemon-data.json",
   "/assets/trainerwire-icon-192.png",
   "/assets/trainerwire-icon-512.png",
   "/assets/trainerwire-apple-icon.png",

@@ -684,7 +684,7 @@ const EVENTS = [
   { id: 5, title: "Sustainability Week 2026", type: "Event", url: "https://pokemongo.com/news/sustainability-week-2026", date: "2026-04-14", endDate: "2026-04-20", time: "10:00 AM – 8:00 PM", color: "#27AE60", icon: "\uD83C\uDF3F", featured: true, summary: "Silicobra debuts! G. Corsola w/ pink sunglasses and Shiny Toedscool make first appearances.", details: { bosses: ["Silicobra (debut)", "G. Corsola w/ pink sunglasses", "Shiny Toedscool", "Seedot", "Castform", "Wiglett"], bonuses: ["Rotating Route spawns every 2 days", "Boosted Shiny Lapras, Togetic, Castform, Trubbish", "Toedscool in forested/grassy biomes", "Silicobra in desert-like biomes", "GO Pass milestone bonuses"], tips: ["Shiny Toedscool is brand new — check every one.", "Galarian Corsola in sunglasses is a top collector target.", "Route spawns rotate every 2 days — plan your priorities.", "Silicobra evolves into Sandaconda for 50 Candy."] } },
   { id: 6, title: "Replay: Riolu Hatch Day", type: "Event", url: "https://pokemongo.com/en/news/replay-riolu-hatch-day-2026", date: "2026-04-18", endDate: null, time: "11:00 AM – 5:00 PM", color: "#3498DB", icon: "\uD83E\uDD5A", iconImg: "assets/pokemon-images/eggs/egg-2.png", featured: false, summary: "Riolu Hatch Day returns! Boosted Shiny Riolu odds from eggs.", details: { bosses: ["Riolu"], bonuses: ["Riolu eggs with boosted Shiny odds", "Timed Research", "Overlaps with Sustainability Week"], paidResearch: { price: "$1.99", rewards: ["1/4 Egg Hatch Distance during event", "1 Star Piece", "2 Super Incubators"], note: "Tasks must be completed and rewards claimed before 5:00 PM local time on April 18." }, tips: ["Clear egg slots before the event.", "Use Super Incubators during the 6-hour window.", "Shiny Riolu/Lucario is one of the most coveted shinies."] } },
   { id: 7, title: "Replay: GO Bigger", type: "Max Battle", url: "https://pokemongo.com/news/replay-go-bigger-2026", date: "2026-04-25", endDate: null, time: "2:00 PM – 5:00 PM", color: "#8E44AD", icon: "\uD83D\uDCA5", featured: true, summary: "Gigantamax Venusaur, Charizard, Blastoise & Gengar at all Power Spots! Shiny forms available. Max Particle cap raised to 1,600.", details: { bosses: ["Gigantamax Venusaur \u2728", "Gigantamax Charizard \u2728", "Gigantamax Blastoise \u2728", "Gigantamax Gengar \u2728"], bonuses: ["Max Particle storage cap raised to 1,600", "8\u00D7 Max Particles from Power Spots", "2\u00D7 Max Particles from exploring (12 AM \u2013 5 PM local time)", "1/4 Adventuring distance (12 AM \u2013 5 PM local time)", "All Power Spots host Gigantamax Battles with increased refresh rates", "3 Special Trades for the day", "Remote Raid limit increased to 20 (Apr 24 5 PM \u2013 Apr 25 8 PM PDT)"], paidResearch: { price: "$4.99", rewards: ["1 Max Mushroom", "25,000 XP", "6,400 Max Particles", "2\u00D7 XP from Max Battles"] }, tips: ["Gigantamax Gengar is new to this replay \u2014 prioritize if you need it.", "All four Gigantamax forms can be Shiny \u2014 check every encounter.", "Max Mushrooms temporarily double Dynamax/Gigantamax damage in Max Battles.", "Coordinate 4-player groups for the toughest Gigantamax raids.", "Use Campfire to locate nearby Max Battles."] } },
-  { id: 8, title: "Steeled Resolve", type: "Event", url: "https://pokemongo.com/news/steeled-resolve-2026", urlDisabled: true, date: "2026-04-28", endDate: "2026-05-04", time: "10:00 AM – 8:00 PM", color: "#95A5A6", icon: "\uD83D\uDEE1\uFE0F", featured: false, summary: "Steel-type event closing out April. 'Steeled Resolve: Taken Over' sub-event begins April 30.", details: { bosses: ["Steel-type featured spawns (details TBA)"], bonuses: ["Steel-type wild spawns", "Event Field Research", "Steeled Resolve: Taken Over begins April 30"], tips: ["Stock Steel-type candy.", "'Steeled Resolve: Taken Over' likely involves Team GO Rocket.", "Shadow Latios continues in Shadow Raids."] } },
+  { id: 8, title: "Steeled Resolve", type: "Event", url: "https://pokemongo.com/news/steeled-resolve-2026", urlDisabled: false, date: "2026-04-28", endDate: "2026-05-04", time: "10:00 AM – 8:00 PM", color: "#95A5A6", icon: "\uD83D\uDEE1\uFE0F", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-9_Paldea/0968.webp", featured: true, summary: "Orthworm debuts! Steel-type event with Shiny Meltan from Mystery Boxes and GO Pass milestones. 'Steeled Resolve: Taken Over' sub-event begins April 30.", details: { bosses: ["Orthworm (debut) \u2728", "Magnemite \u2728", "Aron \u2728", "Ferroseed \u2728", "Pawniard \u2728", "Magnemite (Field Research) \u2728", "Pineco (Field Research) \u2728", "Nosepass (Field Research) \u2728", "Bronzor (Field Research) \u2728", "Drilbur (Field Research) \u2728", "Ferroseed (Field Research) \u2728", "Beldum (Field Research - rare) \u2728", "Shieldon (Field Research - rare) \u2728", "Honedge (1\u2605 Raid) \u2728", "Shieldon (1\u2605 Raid) \u2728", "Beldum (1\u2605 Raid) \u2728", "Orthworm (3\u2605 Raid) \u2728", "Meltan (Mystery Box) \u2728"], bonuses: ["2\u00D7 Catch Candy (GO Pass Tier 1 milestone)", "Increased Stardust from Team GO Rocket defeats (GO Pass Tier 2 milestone)", "Reduced Mystery Box cooldown timer", "Shiny Meltan available from Mystery Box during event", "No daily GO Point cap May 2\u20134"], goPass: { free: ["Encounters with Beldum, Pawniard, Honedge, Meltan, and more Steel-types", "1 Super Rocket Radar", "Mysterious Components and Shadow Shards", "2\u00D7 Catch Candy (Tier 1 milestone)", "Increased Stardust from Team GO Rocket defeats (Tier 2 milestone)"], deluxe: { price: "$4.99", rewards: ["Everything in the free track", "Extra Steel-type Pok\u00E9mon encounters", "2 Super Rocket Radars (1 extra)", "Upgraded milestone rewards", "Faster progression through ranks"] }, deluxePlus: { price: "$6.99", rewards: ["Everything in GO Pass Deluxe", "Instantly skip to Rank 7", "Web Store bundle: 10 Ultra Balls, 5 Max Revives, 1 Premium Battle Pass, 5 Max Potions"] } }, tips: ["Orthworm is brand new \u2014 catch and raid for candy.", "Use Mystery Box during the event for a shot at Shiny Meltan.", "Beldum and Shieldon are rare Field Research encounters \u2014 complete every task.", "Steeled Resolve: Taken Over sub-event begins April 30 \u2014 likely Team GO Rocket themed.", "GO Pass Deluxe rewards include Super Rocket Radars and Shadow Shards.", "No GO Point cap May 2\u20134 \u2014 grind milestones that weekend."] } },
   { id: 20, title: "5\u2605 Raid: Regidrago", type: "Raid", date: "2026-04-01", endDate: "2026-04-07", time: "Raid Hour: Wed Apr 1, 6–7 PM", color: "#E74C3C", icon: "\uD83D\uDC09", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-8_Galar/0895.webp", featured: false, summary: "Regidrago in 5-Star Raids. Mega Manectric in Mega Raids. Shadow Latios weekends.", details: { bosses: ["Regidrago (5\u2605)", "Mega Manectric (Mega)", "Shadow Latios (weekends through May 5)", "Raichu (3\u2605)", "Alolan Raichu (3\u2605)", "Azumarill (3\u2605)", "Emolga (1\u2605)", "Dedenne (1\u2605)", "Yamper (1\u2605)", "Pawmi (1\u2605)"], bonuses: ["Raid Hour: Wednesday 6–7 PM"], tips: ["Weak to Fairy, Ice, Dragon.", "Shadow Latios on weekends — bring Purified Gems."], counters: { label: "Regidrago (Dragon)", pokemon: [{ name: "Mega Rayquaza", fast: "Dragon Tail", charged: "Dragon Ascent", chargedNote: "Signature" }, { name: "Shadow Salamence", fast: "Dragon Tail", charged: "Outrage" }, { name: "Shadow Dragonite", fast: "Dragon Tail", charged: "Outrage" }, { name: "Mega Gardevoir", fast: "Charm", charged: "Dazzling Gleam" }, { name: "Shadow Garchomp", fast: "Dragon Tail", charged: "Outrage" }, { name: "Mega Latios", fast: "Dragon Breath", charged: "Dragon Claw" }] } } },
   { id: 21, title: "5\u2605 Raid: Kyogre", type: "Raid", date: "2026-04-08", endDate: "2026-04-14", time: "Raid Hour: Wed Apr 8, 6–7 PM", color: "#2980B9", icon: "\uD83C\uDF0A", featured: false, summary: "Kyogre returns. Top-tier Water attacker. Mega Aerodactyl in Mega Raids.", details: { bosses: ["Kyogre (5\u2605)", "Mega Aerodactyl (Mega)", "Shadow Latios (weekends)"], bonuses: ["Raid Hour: Wednesday 6–7 PM"], tips: ["Top-tier Water attacker — raid heavily.", "Weak to Grass and Electric.", "Shiny Kyogre is a gorgeous pink whale."], counters: { label: "Kyogre (Water)", pokemon: [{ name: "Mega Sceptile", fast: "Bullet Seed", charged: "Frenzy Plant", chargedNote: "CD Exclusive" }, { name: "Kartana", fast: "Razor Leaf", charged: "Leaf Blade" }, { name: "Shadow Raikou", fast: "Thunder Shock", charged: "Wild Charge" }, { name: "Zekrom", fast: "Charge Beam", charged: "Fusion Bolt" }, { name: "Shadow Electivire", fast: "Thunder Shock", charged: "Wild Charge" }, { name: "Shadow Tangrowth", fast: "Vine Whip", charged: "Power Whip" }] }, catchCP: [{ name: "Kyogre", normal: "2260–2351", boosted: "2825–2939", weather: "Rainy" }] } },
   { id: 22, title: "5\u2605 Raid: Groudon", type: "Raid", date: "2026-04-15", endDate: "2026-04-21", time: "Raid Hour: Wed Apr 15, 6–7 PM", color: "#C0392B", icon: "\uD83C\uDF0B", featured: false, summary: "Groudon returns. Best Ground-type attacker. Mega Alakazam in Mega Raids.", details: { bosses: ["Groudon (5\u2605)", "Mega Alakazam (Mega)", "Shadow Latios (weekends)"], bonuses: ["Raid Hour: Wednesday 6–7 PM"], tips: ["Best Ground attacker — prioritize high-IV catches.", "Weak to Water, Grass, Ice.", "Shiny Groudon (golden) is one of the best shinies."], counters: { label: "Groudon (Ground)", pokemon: [{ name: "Mega Swampert", fast: "Water Gun", charged: "Hydro Cannon", chargedNote: "CD Exclusive" }, { name: "Kartana", fast: "Razor Leaf", charged: "Leaf Blade" }, { name: "Shadow Swampert", fast: "Water Gun", charged: "Hydro Cannon", chargedNote: "CD Exclusive" }, { name: "Mega Sceptile", fast: "Bullet Seed", charged: "Frenzy Plant", chargedNote: "CD Exclusive" }, { name: "Shadow Mamoswine", fast: "Powder Snow", charged: "Avalanche" }, { name: "Kyogre", fast: "Waterfall", charged: "Surf" }] }, catchCP: [{ name: "Groudon", normal: "2260–2351", boosted: "2825–2939", weather: "Sunny" }] } },
@@ -1590,9 +1590,12 @@ function getRaidTier(name) {
   if (/Shadow/.test(name) && /weekend|final week/i.test(name)) return "Shadow Raids";
   if (/Lures/.test(name)) return "Lure Encounters";
   if (/Research Breakthrough/.test(name)) return "Research Breakthrough";
+  if (/Field Research - rare/i.test(name)) return "Field Research (Rare)";
+  if (/Field Research/i.test(name)) return "Field Research";
+  if (/Mystery Box/i.test(name)) return "Mystery Box";
   return null;
 }
-const TIER_COLORS = { "1-Star Raids": "#FFB6C1", "3-Star Raids": "#F1C40F", "5-Star Raids": "#8E44AD", "6-Star Max Battles": "#E74C3C", "Mega Raids": "#E67E22", "Shadow Raids": "#7B2FBE", "Lure Encounters": "#3498DB", "Shadow 1-Star Raids": "#7B2FBE", "Shadow 3-Star Raids": "#7B2FBE", "Shadow 5-Star Raids": "#7B2FBE", "Research Breakthrough": "#E67E22" };
+const TIER_COLORS = { "1-Star Raids": "#FFB6C1", "3-Star Raids": "#F1C40F", "5-Star Raids": "#8E44AD", "6-Star Max Battles": "#E74C3C", "Mega Raids": "#E67E22", "Shadow Raids": "#7B2FBE", "Lure Encounters": "#3498DB", "Shadow 1-Star Raids": "#7B2FBE", "Shadow 3-Star Raids": "#7B2FBE", "Shadow 5-Star Raids": "#7B2FBE", "Research Breakthrough": "#E67E22", "Field Research": "#3498DB", "Field Research (Rare)": "#9B59B6", "Mystery Box": "#95A5A6" };
 const TIER_HEADS = { "1-Star Raids": 1, "3-Star Raids": 3, "5-Star Raids": 5, "6-Star Max Battles": 6, "Mega Raids": 4, "Shadow Raids": 5, "Shadow 1-Star Raids": 1, "Shadow 3-Star Raids": 3, "Shadow 5-Star Raids": 5 };
 function raidHeadIcon(size, color) {
   return `<svg width="${size}" height="${size}" viewBox="0 0 250 250" fill="${color}" xmlns="http://www.w3.org/2000/svg"><path d="M196.15 92.13c6.34-4.09 8.67-10 10.87-15.95 3-8 5.36-7.4 11.38-2.15 3.6 3.17 5.6 6.62 1.15 12.87 5.86-.57 9.64-.88 13.42-1.33s5.28 1 5.68 4.91c.78 7.6-2.75 11.91-11.25 14.29 7.39 2.65 8.43 6.89 7.43 12.91-.91 5.5-4.15 6.86-8.86 7 3.88 9 1.57 12.78-7.48 13.2-9.37.43-12.26 3.26-10.07 12.32 2.63 10.84-.63 19.28-7.24 27.59-10.85 13.64-22.52 26.37-36.41 36.94-26.77 20.27-53.18 20.37-79.86.21-14.74-11.14-27-24.66-38.31-39.24-5.73-7.41-8-15.1-5.8-24.21.59-2.52 1.27-5.43.58-7.78-1.6-5.42-6.08-6-11.21-6q-12.18.09-6.83-13c-5-.26-8.33-2.11-9-7.82s0-9.83 8-12c-9.59-2.54-12.78-7.54-11.77-15.3.37-2.79 1.59-4.34 4.46-4.13 3.94.3 7.87.74 12.4 1.18 0-3.21-.82-6.33.22-8.61 1.16-2.54 3.81-4.58 6.17-6.35 3.89-2.81 5.18-2.24 7.56 2.32 2.57 5 5.12 10 7.93 14.9.77 1.33 2.41 2.16 3.69 3.25 6.68-5.28 9.32-11.5 6.58-19.47-2.8-8.16-5.66-16.29-8.48-24.44-1-2.81-2.48-5.59-2.73-8.47-.72-8 5.83-13.28 13.27-10.63C76 34.25 88.92 41.61 97.36 55a34 34 0 0 0 3.42 5 7.16 7.16 0 0 0 12-2.25c2.76-6.78 5.16-13.71 8.07-20.42a6.87 6.87 0 0 1 4.23-3.33c.82-.19 2.68 1.83 3.25 3.2 2.57 6.13 4.94 12.36 7.19 18.62 1.17 3.24 2.15 6 6.48 6.3 4 .31 6.23-1.13 8.09-4.32C157.64 44.83 169 36.42 182.7 31c4.68-1.85 9.62-5.8 14.67-.54s4 10.52 1.46 16.59c-3.36 7.92-5.77 16.24-8.71 24.34s-1.12 14.96 6.03 20.74ZM71 142c-2.06 5.58-4.44 11-6 16.65a11 11 0 0 0 1.15 7.51c8.57 15.27 19.26 28.78 34.28 38.25 16.63 10.49 33.37 10.1 49.7-.69 14.18-9.37 24.65-22.21 32.8-37 1.2-2.17 2.17-5.23 1.61-7.45-1.5-5.88-3.9-11.54-5.94-17.28l-2.54.14c-.68 2.58-1.82 5.14-1.92 7.75-.17 4.3.64 8.65.41 12.95-.12 2.4-1.33 6.61-2.39 6.72-2.51.26-5.55-1-7.8-2.46-2.94-2-5.32-4.75-7.74-7-25.39 13.75-35.73 13.77-64 .35-3.09 2.76-6.11 5.86-9.54 8.43-4.32 3.24-8 1.75-8.21-3.54a83.55 83.55 0 0 1 .84-14.9c.53-3.83-.49-6.43-4.71-8.43Zm27.17.67C103 126 94.86 103.92 82.32 96.5c-2.57-1.53-4.39-.59-6.17 1.09-6.26 5.87-9.69 13.24-11.27 21.58-.68 3.58 1.23 5.52 4.06 7.09 9.49 5.29 18.94 10.64 29.19 16.4Zm52.13.14c9.2-5 17.07-9.15 24.83-13.52 10.61-6 11.12-7.56 6.54-18.72a43.61 43.61 0 0 0-2.14-4.47c-7.2-12.92-11.35-13.32-20.43-1.64-8.5 10.86-12.63 22.89-8.84 38.34Zm-25 4.8c6.22-.41 13-2.14 16.64-9 3.53-6.62 1.66-12.76-2.78-18.42-3.26-4.17-6.16-8.62-9.46-12.75-4.48-5.62-5.74-5.58-10.4.31-3.28 4.15-6.08 8.68-9.44 12.76-4.71 5.74-5.86 12-2.35 18.41s9.72 8.49 17.76 8.68Z"/><path d="M109.32 128.36c9 10.28 21.31 10.41 30.1 1.19-.12 9.77-4.21 13.84-14.25 14.18-10.43.35-14.79-3.57-15.85-15.37Z"/><path d="M114.67 120.53c6.64 4.72 13.16 6 19.53-.25 3.52 4.38 1.57 7.35-1.09 9.87-3.45 3.26-11.82 3.59-15.8.65-3.37-2.49-5.31-5.62-2.64-10.27Z"/><path d="M124.38 107.52c6.53 7 7.53 9.48 5 11.88-2.23 2.15-6.69 2.24-9.2.18-2.84-2.37-2.18-4.51 4.2-12.06Z"/></svg>`;
@@ -1604,239 +1607,8 @@ function renderRaidHeads(tier) {
   return `<div style="display:flex;gap:2px;align-items:center;margin-left:auto">${Array(count).fill(raidHeadIcon(20, color)).join("")}</div>`;
 }
 const TIER_EGGS = { "1-Star Raids": "assets/pokemon-images/Raid-Eggs/1-star.png", "3-Star Raids": "assets/pokemon-images/Raid-Eggs/3-star.png", "5-Star Raids": "assets/pokemon-images/Raid-Eggs/5-star.png", "Mega Raids": "assets/pokemon-images/Raid-Eggs/mega.png", "Shadow Raids": "assets/pokemon-images/Raid-Eggs/5-star.png", "Shadow 1-Star Raids": "assets/pokemon-images/Raid-Eggs/1-star.png", "Shadow 3-Star Raids": "assets/pokemon-images/Raid-Eggs/3-star.png", "Shadow 5-Star Raids": "assets/pokemon-images/Raid-Eggs/5-star.png" };
-const RAID_BOSS_DATA = {
-  "Regidrago":{types:["Dragon"],cp:"1614–1699",cpBoost:"2017–2124",weather:"Windy"},
-  "Kyogre":{types:["Water"],cp:"2260–2351",cpBoost:"2825–2939",weather:"Rainy"},
-  "Groudon":{types:["Ground"],cp:"2260–2351",cpBoost:"2825–2939",weather:"Sunny"},
-  "Tapu Koko":{types:["Electric","Fairy"],cp:"1730–1810",cpBoost:"2162–2263",weather:"Rainy or Cloudy"},
-  "Tapu Lele":{types:["Psychic","Fairy"],cp:"1718–1799",cpBoost:"2148–2249",weather:"Windy or Cloudy"},
-  "Mewtwo":{types:["Psychic"],cp:"2294–2387",cpBoost:"2868–2984",weather:"Windy"},
-  "Latios":{types:["Dragon","Psychic"],cp:"2021–2178",cpBoost:"2526–2723",weather:"Windy"},
-  "Lapras":{types:["Water","Ice"],cp:"1377–1509",cpBoost:"1721–1886",weather:"Rainy or Snow"},
-  "Snorlax":{types:["Normal"],cp:"1760–1843",cpBoost:"2201–2304",weather:"Partly Cloudy"},
-  "Dragonite":{types:["Dragon","Flying"],cp:"2079–2167",cpBoost:"2599–2709",weather:"Windy"},
-  "Pinsir":{types:["Bug"],cp:"1613–1690",cpBoost:"2016–2113",weather:"Rainy"},
-  "Scizor":{types:["Bug","Steel"],cp:"1636–1714",cpBoost:"2046–2143",weather:"Rainy or Snow"},
-  "Kleavor":{types:["Bug","Rock"],cp:"1627–1705",cpBoost:"2034–2131",weather:"Rainy or Partly Cloudy"},
-  "Blipbug":{types:["Bug"],cp:"161–190",cpBoost:"201–238",weather:"Rainy"},
-  "Aerodactyl":{types:["Rock","Flying"],cp:"1490–1565",cpBoost:"1862–1956",weather:"Partly Cloudy or Windy"},
-  "Alakazam":{types:["Psychic"],cp:"1666–1747",cpBoost:"2083–2184",weather:"Windy"},
-  "Banette":{types:["Ghost"],cp:"1312–1385",cpBoost:"1641–1731",weather:"Foggy"},
-  "Manectric":{types:["Electric"],cp:"1267–1337",cpBoost:"1585–1672",weather:"Rainy"},
-  "Sharpedo":{types:["Water","Dark"],cp:"1174–1246",cpBoost:"1468–1558",weather:"Rainy or Foggy"},
-  "Pikachu":{types:["Electric"]/*,cp:"530–574",cpBoost:"663–718",weather:"Rainy"*/},
-  "Butterfree":{types:["Bug","Flying"],cp:"983–1044",cpBoost:"1229–1305",weather:"Rainy"},
-  "Diglett":{types:["Ground"],cp:"349–386",cpBoost:"437–483",weather:"Sunny"},
-  "Wooper":{types:["Water","Ground"],cp:"330–366",cpBoost:"412–458",weather:"Rainy or Sunny"},
-  "Absol":{types:["Dark"],cp:"1370–1443",cpBoost:"1712–1805",weather:"Fog"},
-  "Kirlia":{types:["Psychic","Fairy"],cp:"508–552",cpBoost:"635–690",weather:"Windy or Cloudy"},
-  "Shinx":{types:["Electric"],cp:"458–500",cpBoost:"572–625",weather:"Rainy"},
-  "Croagunk":{types:["Poison","Fighting"],cp:"500–544",cpBoost:"625–680",weather:"Cloudy"},
-  "Blitzle":{types:["Electric"],cp:"461–504",cpBoost:"577–630",weather:"Rainy"},
-  "Minccino":{types:["Normal"],cp:"456–498",cpBoost:"570–623",weather:"Partly Cloudy"},
-  "Sneasel":{types:["Dark","Ice"],cp:"1107–1172",cpBoost:"1384–1465",weather:"Fog or Snow"},
-  "Garchomp":{types:["Dragon","Ground"]},
-  "Salamence":{types:["Dragon","Flying"]},
-  "Mamoswine":{types:["Ice","Ground"]},
-  "Weavile":{types:["Dark","Ice"]},
-  "Raikou":{types:["Electric"]},
-  "Electivire":{types:["Electric"]},
-  "Excadrill":{types:["Ground","Steel"]},
-  "Metagross":{types:["Steel","Psychic"]},
-  "Rhyperior":{types:["Ground","Rock"]},
-  "Tangrowth":{types:["Grass"]},
-  "Chandelure":{types:["Ghost","Fire"]},
-  "Swampert":{types:["Water","Ground"]},
-  "Gardevoir":{types:["Psychic","Fairy"]},
-  "Gengar":{types:["Ghost","Poison"]},
-  "Sceptile":{types:["Grass"]},
-  "Rayquaza":{types:["Dragon","Flying"]},
-  "Giratina":{types:["Ghost","Dragon"]},
-  "Darmanitan":{types:["Ice"]},
-  "Kartana":{types:["Grass","Steel"]},
-  "Landorus":{types:["Ground","Flying"]},
-  "Zekrom":{types:["Dragon","Electric"]},
-  "Larvitar":{types:["Rock","Ground"],cp:"548–594",cpBoost:"686–743",weather:"Partly Cloudy or Sunny"},
-  "Lileep":{types:["Rock","Grass"],cp:"686–738",cpBoost:"858–922",weather:"Partly Cloudy or Sunny"},
-  "Stunfisk":{types:["Ground","Steel"],cp:"1169–1235",cpBoost:"1461–1544",weather:"Sunny or Snow"},
-  "Rockruff":{types:["Rock"],cp:"499–543",cpBoost:"624–679",weather:"Partly Cloudy"},
-  "Machamp":{types:["Fighting"],cp:"1667–1746",cpBoost:"2084–2183",weather:"Cloudy"},
-  "Hippowdon":{types:["Ground"],cp:"1684–1763",cpBoost:"2105–2204",weather:"Sunny"},
-  "Bombirdier":{types:["Flying","Dark"],cp:"1351–1421",cpBoost:"1688–1777",weather:"Windy or Foggy"},
-  "Regieleki":{types:["Electric"],cp:"1524–1602",cpBoost:"1905–2002",weather:"Rainy"},
-  "Houndoom":{types:["Dark","Fire"],cp:"1432–1505",cpBoost:"1790–1882",weather:"Foggy or Sunny"},
-  "Dratini":{types:["Dragon"],cp:"495–574",cpBoost:"618–717",weather:"Windy"},
-  "Gligar":{types:["Ground","Flying"],cp:"952–1061",cpBoost:"1191–1326",weather:"Sunny or Windy"},
-  "Cacnea":{types:["Grass"],cp:"618–709",cpBoost:"773–887",weather:"Sunny"},
-  "Joltik":{types:["Bug","Electric"],cp:"504–584",cpBoost:"631–730",weather:"Rainy"},
-  "Marowak":{types:["Fire","Ghost"],cp:"941–1048",cpBoost:"1176–1311",weather:"Sunny or Fog"},
-  "Stantler":{types:["Normal"],cp:"1118–1236",cpBoost:"1398–1546",weather:"Partly Cloudy"},
-  "Latias":{types:["Dragon","Psychic"],cp:"1855–2006",cpBoost:"2320–2507",weather:"Windy"},
-  "Growlithe":{types:["Fire"],cp:"660–710"},
-  "Gastly":{types:["Ghost","Poison"],cp:"649–702"},
-  "Pidove":{types:["Normal","Flying"],cp:"443–484"},
-  "Woobat":{types:["Psychic","Flying"],cp:"535–580",cpBoost:"669–725",weather:"Windy"},
-  "Drilbur":{types:["Ground"],cp:"732–786"},
-  "Inkay":{types:["Dark","Psychic"],cp:"486–529"},
-  "Grookey":{types:["Grass"],cp:"574–620"},
-  "Sobble":{types:["Water"],cp:"579–627"},
-  "Skwovet":{types:["Normal"],cp:"495–539"},
-  "Wooloo":{types:["Normal"],cp:"366–403"},
-  "Scorbunny":{types:["Fire"],cp:"579–627"},
-  "Trubbish":{types:["Poison"],cp:"526–571"},
-  "Rookidee":{types:["Flying"],cp:"344–380"},
-  "Spheal":{types:["Ice","Water"],cp:"505–550"},
-  "Roggenrola":{types:["Rock"],cp:"639–688"},
-  "Bounsweet":{types:["Grass"],cp:"237–268"},
-  "Kabuto":{types:["Rock","Water"],cp:"730–783"},
-  "Omanyte":{types:["Rock","Water"],cp:"826–882"},
-  "Abra":{types:["Psychic"],cp:"712–767"},
-  "Ralts":{types:["Psychic","Fairy"],cp:"275–308"},
-  "Krabby":{types:["Water"],cp:"835–892"},
-  "Hatenna":{types:["Psychic"],cp:"451–492"},
-  "Darumaka":{types:["Fire"],cp:"768–823"},
-  "Eevee":{types:["Normal"]},
-  "Machop":{types:["Fighting"],cp:"678–730"},
-  "Hitmonchan":{types:["Fighting"],cp:"1263–1332"},
-  "Hitmonlee":{types:["Fighting"],cp:"1399–1472"},
-  "Drampa":{types:["Normal","Dragon"],cp:"1588–1665"},
-  "Sableye":{types:["Dark","Ghost"],cp:"789–843"},
-  "Falinks":{types:["Fighting"],cp:"1278–1347"},
-  "Passimian":{types:["Fighting"],cp:"1654–1733"},
-  "Beldum":{types:["Steel","Psychic"],cp:"513–558"},
-  "Cryogonal":{types:["Ice"],cp:"1524–1598"},
-  "Chansey":{types:["Normal"],cp:"654–717"},
-  "Regice":{types:["Ice"],cp:"1703–1784"},
-  "Riolu":{types:["Fighting"]},
-  "Tinkaton":{types:["Fairy","Steel"]},
-  "Silicobra":{types:["Ground"]},
-  "Corsola":{types:["Ghost"]},
-  "Toedscool":{types:["Ground","Grass"]},
-  "Seedot":{types:["Grass"]},
-  "Castform":{types:["Normal"]},
-  "Wiglett":{types:["Water"]},
-  "Gyarados":{types:["Water","Flying"]},
-  "Honedge":{types:["Steel","Ghost"]},
-  "Dhelmise":{types:["Ghost","Grass"]},
-  "Sinistea":{types:["Ghost"]},
-  "Duraludon":{types:["Steel","Dragon"]},
-  "Dreepy":{types:["Dragon","Ghost"]},
-  "Caterpie":{types:["Bug"],cp:"219–249"},
-  "Charmander":{types:["Fire"],cp:"516–560"},
-  "Bulbasaur":{types:["Grass","Poison"],cp:"590–637"},
-  "Squirtle":{types:["Water"],cp:"497–540"},
-  "Shuckle":{types:["Bug","Rock"],cp:"189–231"},
-  "Wailmer":{types:["Water"],cp:"779–838"},
-  "Chinchou":{types:["Water","Electric"]/*,cp:"443–479"*/},
-  "Dedenne":{types:["Electric","Fairy"],cp:"991–1051",cpBoost:"1239–1315",weather:"Rainy, Cloudy"},
-  "Pawmi":{types:["Electric"],cp:"326–363",cpBoost:"408–454",weather:"Rainy"},
-  "Magnemite":{types:["Electric","Steel"]},
-  "Mareep":{types:["Electric"]},
-  "Joltik":{types:["Bug","Electric"]},
-  "Raichu":{types:["Electric"],cp:"1180–1247",cpBoost:"1476–1558",weather:"Rainy"},
-  "Alolan Raichu":{types:["Electric","Psychic"],cp:"1238–1306",cpBoost:"1548–1633",weather:"Rainy, Windy"},
-  "Alolan Ninetales":{types:["Ice","Fairy"]},
-  "Alolan Marowak":{types:["Fire","Ghost"]},
-  "Alolan Vulpix":{types:["Ice"]},
-  "Alolan Sandslash":{types:["Ice","Steel"]},
-  "Alolan Sandshrew":{types:["Ice","Steel"]},
-  "Alolan Golem":{types:["Rock","Electric"]},
-  "Alolan Geodude":{types:["Rock","Electric"]},
-  "Emolga":{types:["Electric","Flying"],cp:"876–933",cpBoost:"1095–1166",weather:"Rainy, Windy"},
-  "Yamper":{types:["Electric"],cp:"410–450",cpBoost:"512–562",weather:"Rainy"},
-  "Azumarill":{types:["Water","Fairy"],cp:"849–907",cpBoost:"1061–1134",weather:"Rainy, Cloudy"},
-  "Shadow Latios":{types:["Dragon","Psychic"],cp:"2021–2178",cpBoost:"2526–2723",weather:"Windy"},
-  "Mega Manectric":{types:["Electric"],cp:"1267–1337",cpBoost:"1585–1672",weather:"Rainy"},
-  "Joltik":{types:["Bug","Electric"],cp:"504–584",cpBoost:"631–730",weather:"Rainy"},
-  "Meowscarada":{types:["Grass","Dark"]},
-  "Skeledirge":{types:["Fire","Ghost"]},
-  "Quaquaval":{types:["Water","Fighting"]},
-  "Cinderace":{types:["Fire"]},
-  "Rillaboom":{types:["Grass"]},
-  "Corviknight":{types:["Flying","Steel"]},
-  "Toucannon":{types:["Normal","Flying"]},
-  "Reuniclus":{types:["Psychic"]},
-  "Florges":{types:["Fairy"]},
-  "Kommo-o":{types:["Dragon","Fighting"]},
-  "Pawmot":{types:["Electric","Fighting"]},
-  "Vanilluxe":{types:["Ice"]},
-  "Incineroar":{types:["Fire","Dark"]},
-  "Primarina":{types:["Water","Fairy"]},
-  "Tsareena":{types:["Grass"]},
-  "Goodra":{types:["Dragon"]},
-  "Eelektross":{types:["Electric"]},
-  "Annihilape":{types:["Fighting","Ghost"]},
-  "Leavanny":{types:["Bug","Grass"]},
-  "Decidueye":{types:["Grass","Ghost"]},
-  "Porygon-Z":{types:["Normal"]},
-  "Victreebel":{types:["Grass","Poison"]},
-  "Jumpluff":{types:["Grass","Flying"]},
-  "Bewear":{types:["Normal","Fighting"]},
-  "Hydreigon":{types:["Dark","Dragon"]},
-  "Staraptor":{types:["Normal","Flying"]},
-  "Obstagoon":{types:["Dark","Normal"]},
-  "Gigalith":{types:["Rock"]},
-  "Chandelure":{types:["Ghost","Fire"]},
-  "Ursaluna":{types:["Ground","Normal"]},
-  "Talonflame":{types:["Fire","Flying"]},
-  "Serperior":{types:["Grass"]},
-  "Altaria":{types:["Dragon","Flying"]},
-  "Garchomp":{types:["Dragon","Ground"]},
-  "Emboar":{types:["Fire","Fighting"]},
-  "Samurott":{types:["Water"]},
-  "Dusknoir":{types:["Ghost"]},
-  "Luxray":{types:["Electric"]},
-  "Empoleon":{types:["Water","Steel"]},
-  "Rhyperior":{types:["Ground","Rock"]},
-  "Gyarados":{types:["Water","Flying"]},
-  "Shiftry":{types:["Grass","Dark"]},
-  "Beedrill":{types:["Bug","Poison"]},
-  "Magmortar":{types:["Fire"]},
-  "Electivire":{types:["Electric"]},
-  "Infernape":{types:["Fire","Fighting"]},
-  "Torterra":{types:["Grass","Ground"]},
-  "Sceptile":{types:["Grass"]},
-  "Blaziken":{types:["Fire","Fighting"]},
-  "Slaking":{types:["Normal"]},
-  "Gardevoir":{types:["Psychic","Fairy"]},
-  "Gallade":{types:["Psychic","Fighting"]},
-  "Flygon":{types:["Ground","Dragon"]},
-  "Typhlosion":{types:["Fire"]},
-  "Meganium":{types:["Grass"]},
-  "Feraligatr":{types:["Water"]},
-  "Metagross":{types:["Steel","Psychic"]},
-  "Venusaur":{types:["Grass","Poison"]},
-  "Charizard":{types:["Fire","Flying"]},
-  "Blastoise":{types:["Water"]},
-  "Ampharos":{types:["Electric"]},
-  "Tyranitar":{types:["Rock","Dark"]},
-  "Salamence":{types:["Dragon","Flying"]},
-  "Swampert":{types:["Water","Ground"]},
-  "Mamoswine":{types:["Ice","Ground"]},
-  "Roserade":{types:["Grass","Poison"]},
-  "Machamp":{types:["Fighting"]},
-  "Walrein":{types:["Ice","Water"]},
-  "Conkeldurr":{types:["Fighting"]},
-  "Vikavolt":{types:["Bug","Electric"]},
-  "Greninja":{types:["Water","Dark"]},
-  "Haxorus":{types:["Dragon"]},
-  "Delphox":{types:["Fire","Psychic"]},
-  "Chesnaught":{types:["Grass","Fighting"]},
-  "Noivern":{types:["Flying","Dragon"]},
-  "Togekiss":{types:["Fairy","Flying"]},
-  "Escavalier":{types:["Bug","Steel"]},
-  "Accelgor":{types:["Bug"]},
-  "Politoed":{types:["Water"]},
-  "Poliwrath":{types:["Water","Fighting"]},
-  "Sandslash":{types:["Ground"]},
-  "Rapidash":{types:["Fire"]},
-  "Galarian Rapidash":{types:["Psychic","Fairy"]},
-  "Quagsire":{types:["Water","Ground"]},
-  "Clodsire":{types:["Poison","Ground"]},
-  "Blissey":{types:["Normal"]},
-  "Alakazam":{types:["Psychic"]},
-  "Gengar":{types:["Ghost","Poison"]}
-};
+let RAID_BOSS_DATA = {};
+fetch("data/pokemon-data.json").then(r => r.json()).then(data => { Object.assign(RAID_BOSS_DATA, data); render(); }).catch(() => {});
 const TYPE_COLORS = {
   "Normal":"#A8A878","Fire":"#F08030","Water":"#6890F0","Electric":"#F8D030","Grass":"#78C850",
   "Ice":"#98D8D8","Fighting":"#C03028","Poison":"#A040A0","Ground":"#E0C068","Flying":"#A890F0",
@@ -1917,7 +1689,7 @@ function getRaidBossData(name) {
   return null;
 }
 function cleanRaidLabel(name) {
-  return name.replace(/^★/, "").replace(/\s*\(\d★\s*(?:Raid|Shadow Raid)?\)|\s*\(Mega\)|\s*\(\d★\s*Max Battle.*?\)|\s*\(Research Breakthrough\)/g, "").trim();
+  return name.replace(/^★/, "").replace(/\s*\(\d★\s*(?:Raid|Shadow Raid)?\)|\s*\(Mega\)|\s*\(\d★\s*Max Battle.*?\)|\s*\(Research Breakthrough\)|\s*\(Field Research(?:\s*-\s*rare)?\)|\s*\(Mystery Box\)/gi, "").replace(/\s*✨/g, "").trim();
 }
 function renderBossItem(item, color, th, cardLayout, noSparkles) {
   const pkmn = getPokemonImg(item);
@@ -1928,9 +1700,10 @@ function renderBossItem(item, color, th, cardLayout, noSparkles) {
   const typesHTML = raidData ? `<div style="display:flex;gap:4px;margin-top:4px;flex-wrap:wrap;${cardLayout ? "justify-content:center" : ""}">${raidData.types.map(t =>
     `<span style="font-size:${cardLayout ? 11 : 13}px;font-weight:700;color:#fff;background:${TYPE_COLORS[t] || "#888"};padding:2px 8px;border-radius:10px">${t}</span>`
   ).join("")}</div>` : "";
-  const cpHTML = raidData && raidData.cp ? `<div style="margin-top:5px;font-size:${cardLayout ? 13 : 14}px;color:${th.text};line-height:1.6;${cardLayout ? "text-align:center" : ""}">
+  const isRaidTier = /\(\d★\s*(?:Raid|Shadow Raid)?\)|\(Mega\)|\(\d★\s*Max Battle/.test(item);
+  const cpHTML = raidData && raidData.cp && isRaidTier ? `<div style="margin-top:5px;font-size:${cardLayout ? 13 : 14}px;color:${th.text};line-height:1.6;${cardLayout ? "text-align:center" : ""}">
     <div>CP <span style="font-weight:800;font-size:${cardLayout ? 15 : 16}px">${raidData.cp}</span></div>
-    <div style="font-size:${cardLayout ? 11 : 13}px;color:${th.textSecondary}">\u2601\uFE0F ${raidData.weather}: <span style="font-weight:700">${raidData.cpBoost}</span></div>
+    ${raidData.weather ? `<div style="font-size:${cardLayout ? 11 : 13}px;color:${th.textSecondary}">\u2601\uFE0F ${raidData.weather}: <span style="font-weight:700">${raidData.cpBoost}</span></div>` : ""}
   </div>` : "";
   const weaknesses = raidData ? getWeaknesses(raidData.types) : [];
   const resistances = raidData ? getResistances(raidData.types) : [];
@@ -2408,6 +2181,21 @@ function renderEventDetail(event, th) {
             ${event.details.paidResearch.rewards.map(r => `<div style="padding:10px 14px;border-radius:10px;background:${th.accentBgSubtle("#E67E22")};border:1px solid ${th.countdownBorder("#E67E22")};font-size:13.5px;color:${th.textSecondary};line-height:1.5;display:flex;align-items:center;gap:8px"><span style="color:#E67E22;font-weight:700">•</span> ${esc(r)}</div>`).join("")}
             ${event.details.paidResearch.note ? `<div style="padding:10px 14px;border-radius:10px;background:${th.accentBgSubtle("#E74C3C")};border:1px solid ${th.countdownBorder("#E74C3C")};font-size:12px;color:#E74C3C;font-weight:700;line-height:1.5;display:flex;align-items:center;gap:8px"><span style="font-size:14px">\u26A0\uFE0F</span> ${esc(event.details.paidResearch.note)}</div>` : ""}
           </div></div>` : ""}
+        ${event.details.goPass ? (() => {
+          const gp = event.details.goPass;
+          const renderTier = (title, emoji, color, items) => `<div style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden;flex:1;min-width:200px">
+            <div style="padding:10px 14px;background:${th.accentBgSubtle(color)};border-bottom:1.5px solid ${th.border};display:flex;align-items:center;gap:8px">
+              <span>${emoji}</span><span style="font-size:12px;font-weight:700;color:${th.text};letter-spacing:0.5px;text-transform:uppercase">${title}</span>
+            </div>
+            <div style="padding:10px;display:flex;flex-direction:column;gap:5px">${items.map(r => `<div style="padding:8px 12px;border-radius:9px;background:${th.accentBgSubtle(color)};font-size:13px;color:${th.textSecondary};line-height:1.45;display:flex;align-items:center;gap:8px"><span style="color:${color};font-weight:700">\u2022</span> ${esc(r)}</div>`).join("")}</div>
+          </div>`;
+          return `<div><h4 style="margin:0 0 10px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>\uD83C\uDFAB</span> GO Pass</h4>
+            <div style="display:flex;flex-wrap:wrap;gap:10px">
+              ${gp.free ? renderTier("Free Track", "\uD83C\uDD93", "#27AE60", gp.free) : ""}
+              ${gp.deluxe ? renderTier("Deluxe \u2014 " + gp.deluxe.price, "\uD83D\uDCB0", "#E67E22", gp.deluxe.rewards) : ""}
+              ${gp.deluxePlus ? renderTier("Deluxe + 6 Ranks \u2014 " + gp.deluxePlus.price, "\uD83D\uDE80", "#8E44AD", gp.deluxePlus.rewards) : ""}
+            </div></div>`;
+        })() : ""}
         ${event.details.counters ? renderCounters(event.details.counters, th) : ""}
         ${event.details.tips && event.details.tips.length > 0 ? `<div><h4 style="margin:0 0 10px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>\uD83D\uDCA1</span> Trainer Tips</h4>
           <div style="display:flex;flex-direction:column;gap:6px">${event.details.tips.map(tip =>
