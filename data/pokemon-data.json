@@ -356,6 +356,12 @@
       "Psychic"
     ]
   },
+  "Dewpider": {
+    "types": [
+      "Water",
+      "Bug"
+    ]
+  },
   "Dhelmise": {
     "types": [
       "Ghost",
@@ -683,6 +689,12 @@
   "Haxorus": {
     "types": [
       "Dragon"
+    ]
+  },
+  "Helioptile": {
+    "types": [
+      "Electric",
+      "Normal"
     ]
   },
   "Hippowdon": {
@@ -1273,6 +1285,12 @@
     "cpBoost": "570–623",
     "weather": "Partly Cloudy"
   },
+  "Morelull": {
+    "types": [
+      "Grass",
+      "Fairy"
+    ]
+  },
   "Ninetales": {
     "types": [
       "Fire"
@@ -1820,6 +1838,12 @@
       "Flying"
     ]
   },
+  "Stufful": {
+    "types": [
+      "Normal",
+      "Fighting"
+    ]
+  },
   "Stunfisk": {
     "types": [
       "Ground",
@@ -1957,6 +1981,12 @@
   "Vanilluxe": {
     "types": [
       "Ice"
+    ]
+  },
+  "Varoom": {
+    "types": [
+      "Steel",
+      "Poison"
     ]
   },
   "Venusaur": {
