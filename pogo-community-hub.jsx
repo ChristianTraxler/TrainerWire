@@ -730,7 +730,8 @@ export default function App() {
 const globalCSS = `
   @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{margin:0;padding:0;width:100%;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  html,body{margin:0;padding:0;width:100%;-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden;-ms-overflow-style:none;scrollbar-width:none}
   ::-webkit-scrollbar{display:none}
 
   @keyframes fadeSlideIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
