@@ -3811,7 +3811,7 @@ function render() {
           <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text};display:flex;align-items:center;justify-content:center;gap:8px"><img src="assets/pokemon-images/eggs/egg-2.png" style="width:${isMobile ? 34 : 38}px;height:${isMobile ? 34 : 38}px;object-fit:contain;position:relative;top:-4px" /> Egg Hatches</h2>
           <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Current egg pool by distance tier</p>
         </div>
-        <div style="display:flex;gap:${isMobile ? 6 : 8}px;overflow-x:auto;padding:0 4px 6px;-webkit-overflow-scrolling:touch;scrollbar-width:none">${eggNavHTML}</div>
+        <div style="display:flex;gap:${isMobile ? 6 : 8}px;overflow-x:auto;padding:0 4px 6px;-webkit-overflow-scrolling:touch;scrollbar-width:none;justify-content:center;flex-wrap:wrap">${eggNavHTML}</div>
         <div style="text-align:center;font-size:11px;color:${th.textMuted};font-weight:500;margin-top:-10px">Data sourced from LeekDuck.com</div>
         ${eggSectionsHTML}
       </div>`;
@@ -4576,7 +4576,7 @@ function renderSidebar(th) {
               ${t.subTabs.map(st => `<button onclick="sidebarNav('${st.id}')" style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;border:none;background:${state.tab === st.id ? th.accentBgSubtle("#E74C3C") : "transparent"};cursor:pointer;font-family:inherit;transition:background 0.15s ease;width:100%;text-align:left"
                 onmouseenter="this.style.background='${th.surfaceHover}'"
                 onmouseleave="this.style.background='${state.tab === st.id ? th.accentBgSubtle("#E74C3C") : "transparent"}'">
-                ${st.iconImg ? `<img src="${st.iconImg}" style="width:${st.iconSize||22}px;height:${st.iconSize||22}px;object-fit:contain" alt="${st.label}" />` : `<span style="font-size:18px">${st.icon}</span>`}
+                ${st.iconImg ? `<img src="${st.iconImg}" style="width:${st.iconSize||22}px;height:${st.iconSize||22}px;object-fit:contain;${st.id === "eggs" ? "position:relative;top:-4px" : ""}" alt="${st.label}" />` : `<span style="font-size:18px">${st.icon}</span>`}
                 <span style="font-size:15px;font-weight:${state.tab === st.id ? "700" : "600"};color:${state.tab === st.id ? th.text : th.textSecondary}">${st.label}</span>
               </button>`).join("")}
             </div>
