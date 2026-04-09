@@ -3399,12 +3399,15 @@ function render() {
     // Tabs
     const tabsHTML = `<div style="display:flex;border-bottom:2px solid ${th.tabBorder};margin-top:4px">
       ${["events", "calendar", "raids", "max", "rocket", "eggs", "news"].map(tb => {
-        const rocketIcon = `<img src="assets/pokemon-images/icons/teamrocket_r_full.png" style="width:20px;height:20px;object-fit:contain;vertical-align:middle" />`;
-        const eggIcon = `<img src="assets/pokemon-images/eggs/egg-2.png" style="width:24px;height:24px;object-fit:contain;vertical-align:middle" />`;
-        const mobileLabel = tb === "events" ? `\uD83D\uDCC5 Events` : tb === "calendar" ? `\uD83D\uDDD3\uFE0F Cal` : tb === "raids" ? `\u2694\uFE0F Raids` : tb === "max" ? `\uD83D\uDCA5 Max` : tb === "rocket" ? `${rocketIcon} Rocket` : tb === "eggs" ? `${eggIcon} Eggs` : `\uD83D\uDCE2 News`;
+        const rocketIcon = `<img src="assets/pokemon-images/icons/teamrocket_r_full.png" style="width:${isMobile ? 22 : 20}px;height:${isMobile ? 22 : 20}px;object-fit:contain;vertical-align:middle" />`;
+        const eggIcon = `<img src="assets/pokemon-images/eggs/egg-2.png" style="width:${isMobile ? 28 : 24}px;height:${isMobile ? 28 : 24}px;object-fit:contain;vertical-align:middle;position:relative;top:-4px" />`;
+        const iconWrap = (inner) => `<span style="display:flex;align-items:center;justify-content:center;width:24px;height:24px">${inner}</span>`;
+        const mobileIcon = tb === "events" ? iconWrap(`<span style="font-size:20px">\uD83D\uDCC5</span>`) : tb === "calendar" ? iconWrap(`<span style="font-size:20px">\uD83D\uDDD3\uFE0F</span>`) : tb === "raids" ? iconWrap(`<span style="font-size:20px">\u2694\uFE0F</span>`) : tb === "max" ? iconWrap(`<span style="font-size:20px">\uD83D\uDCA5</span>`) : tb === "rocket" ? iconWrap(rocketIcon) : tb === "eggs" ? iconWrap(eggIcon) : iconWrap(`<span style="font-size:20px">\uD83D\uDCE2</span>`);
+        const mobileText = tb === "events" ? "Events" : tb === "calendar" ? "Cal" : tb === "raids" ? "Raids" : tb === "max" ? "Max" : tb === "rocket" ? "Rocket" : tb === "eggs" ? "Eggs" : "News";
+        const mobileLabel = `<span style="display:flex;flex-direction:column;align-items:center;gap:3px">${mobileIcon}<span>${mobileText}</span></span>`;
         const desktopLabel = tb === "events" ? `\uD83D\uDCC5 Events (${upcomingEvents.length})` : tb === "calendar" ? `\uD83D\uDDD3\uFE0F Calendar` : tb === "raids" ? `\u2694\uFE0F Raids` : tb === "max" ? `\uD83D\uDCA5 Max Battles` : tb === "rocket" ? `${rocketIcon} Rocket` : tb === "eggs" ? `${eggIcon} Eggs` : `\uD83D\uDCE2 News (${filteredAnnouncements.length})`;
         const label = isMobile ? mobileLabel : desktopLabel;
-        return `<button onclick="setTab('${tb}')" style="flex:1;padding:${isMobile ? "9px 0" : "11px 0"};background:none;border:none;border-bottom:${state.tab === tb ? `2.5px solid ${th.tabActive}` : "2.5px solid transparent"};color:${state.tab === tb ? th.tabActive : th.tabInactive};font-size:${isMobile ? 10 : 13}px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:${isMobile ? "0.3px" : "1px"};transition:all 0.15s ease;font-family:inherit">${label}</button>`;
+        return `<button onclick="setTab('${tb}')" style="${isMobile ? "flex:1;padding:8px 4px" : "flex:1;padding:11px 0"};background:none;border:none;border-bottom:${state.tab === tb ? `2.5px solid ${th.tabActive}` : "2.5px solid transparent"};color:${state.tab === tb ? th.tabActive : th.tabInactive};font-size:${isMobile ? 9 : 13}px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:${isMobile ? "0.3px" : "1px"};transition:all 0.15s ease;font-family:inherit;white-space:nowrap">${label}</button>`;
       }).join("")}
     </div>`;
 
