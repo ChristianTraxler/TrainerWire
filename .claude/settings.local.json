@@ -23,7 +23,10 @@
       "WebFetch(domain:pokestealordeal.com)",
       "Bash(ls /Users/christiantraxler/Desktop/Current-Projects/Pokémon-GO-Event-Hub/assets/trainerwire-*)",
       "WebFetch(domain:www.pokemongohub.net)",
-      "WebFetch(domain:snacknap.com)"
+      "WebFetch(domain:snacknap.com)",
+      "WebFetch(domain:www.dittobase.com)",
+      "WebFetch(domain:dittobase.com)",
+      "Bash(node -e ':*)"
     ]
   }
 }

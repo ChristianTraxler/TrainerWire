@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "2.53";
+const APP_VERSION = "2.6";
 const REPORT_EMAIL = "ssj4gogeta2004@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -359,6 +359,10 @@ function getPokemonImg(name) {
     const m = name.match(/Alolan\s+(\w+)/);
     if (m) { const dex = DEX[m[1]]; if (dex) return { url: natDexImg(dex, "_alola"), shadow: lower.startsWith("shadow ") }; }
   }
+  if (lower.includes("hisuian")) {
+    const m = name.match(/Hisuian\s+(\w+)/);
+    if (m) { const dex = DEX[m[1]]; if (dex) return { url: natDexImg(dex, "_hisuian"), shadow: lower.startsWith("shadow ") }; }
+  }
   if (lower.includes("shadow")) {
     const m = name.match(/Shadow\s+(\w+)/);
     if (m) { const dex = DEX[m[1]]; if (dex) return { url: natDexImg(dex, GENDER_SUFFIX[dex] || ""), shadow: true }; }
@@ -371,6 +375,10 @@ function getPokemonImg(name) {
       if (dex && costume) return { url: eventDexImg(dex, costume), shadow: false };
       if (dex) return { url: natDexImg(dex, GENDER_SUFFIX[dex] || ""), shadow: false };
     }
+  }
+  if (lower.includes("(female)")) {
+    const m = name.match(/(\w+)\s*\(Female\)/);
+    if (m) { const dex = DEX[m[1]]; if (dex) return { url: natDexImg(dex, "-female"), shadow: false }; }
   }
   if (lower.includes("paldean tauros")) {
     if (lower.includes("blaze")) return { url: natDexImg(128, "_blaze"), shadow: false };
@@ -430,7 +438,16 @@ const SHINY_AVAILABLE = new Set([
   "Cryogonal","Chansey","Grookey",
   "Gyarados","Honedge","Dhelmise","Sinistea","Duraludon","Dreepy",
   "Emolga","Raichu","Alolan Raichu","Azumarill","Regidrago","Cacnea",
-  "Vulpix","Goomy","Ampharos","Shiftry"
+  "Vulpix","Goomy","Ampharos","Shiftry",
+  "Chikorita","Cyndaquil","Totodile","Treecko","Torchic","Mudkip",
+  "Turtwig","Chimchar","Piplup","Snivy","Tepig","Oshawott",
+  "Chespin","Fennekin","Froakie","Rowlet","Litten","Popplio","Sprigatito",
+  "Dunsparce","Wimpod","Tadbulb","Cleffa","Igglybuff","Smoochum","Larvesta",
+  "Snom","Fidough","Munchlax","Indeedee",
+  "Chingling","Happiny","Audino","Skarmory",
+  "Meowth","Zigzagoon","Geodude","Slowpoke","Basculin",
+  "Deino","Impidimp","Charcadet","Turtonator","Toxel","Gible",
+  "Sandile","Vullaby","Pancham","Salandit"
 ]);
 function isShinyEligible(name) {
   if (name.includes("\u2728")) return true;
@@ -730,6 +747,58 @@ const ANNOUNCEMENTS = [
   { id: 6, date: "2026-03-15", published: "2025-12-09", title: "GO Fest 2026 Tickets On Sale", tag: "Alert", url: "https://pokemongo.com/news/save-the-date-go-fest-2026", body: "Tickets for Tokyo, Chicago, Copenhagen live. $33/day. Global finale July 11–12.", fullBody: "GO Fest 2026 celebrates 10 years of Pokémon GO:", sections: [{ heading: "Tokyo — May 29–Jun 1", items: ["Odaiba Seaside Park", "Citywide from May 25", "City Exploration Tickets"] }, { heading: "Chicago — Jun 5–7", items: ["Grant Park", "Hosted by Spark", "Tickets $33"] }, { heading: "Copenhagen — Jun 12–14", items: ["Fælledparken", "Hosted by Candela", "Shiny Paldean Tauros exclusive"] }, { heading: "Global — Jul 11–12", items: ["All trainers worldwide", "Zeraora via Special Research", "One per trainer across all events"] }] }
 ];
 
+const CURRENT_EGGS = {
+  "1 km Eggs": [
+    "Bulbasaur","Charmander","Squirtle","Chikorita","Cyndaquil","Totodile","Treecko","Torchic","Mudkip","Turtwig","Chimchar","Piplup","Snivy","Tepig","Oshawott","Chespin","Fennekin","Froakie","Rowlet","Litten","Popplio","Grookey","Scorbunny","Sobble","Sprigatito","Fuecoco","Quaxly"
+  ],
+  "2 km Eggs": [
+    "Dunsparce","Wimpod","Tadbulb","Cleffa","Igglybuff","Smoochum","Larvesta"
+  ],
+  "5 km Eggs": [
+    "Sizzlipede","Snom","Fidough","Munchlax","Indeedee (Male)","Indeedee (Female)","Larvesta"
+  ],
+  "7 km Eggs": [
+    "Galarian Meowth","Galarian Corsola","Galarian Zigzagoon","Galarian Darumaka","Galarian Stunfisk","Alolan Geodude","Alolan Diglett"
+  ],
+  "7 km Route Eggs": [
+    "Galarian Corsola","Galarian Slowpoke","Hisuian Sneasel","Hisuian Growlithe","Hisuian Basculin"
+  ],
+  "10 km Eggs": [
+    "Deino","Honedge","Impidimp","Dreepy","Charcadet","Tinkatink","Larvesta"
+  ],
+  "12 km Eggs": [
+    "Sandile","Vullaby","Shroodle","Pancham","Salandit","Varoom"
+  ],
+  "5 km Adventure Sync": [
+    "Chingling","Happiny","Audino","Riolu","Skarmory"
+  ],
+  "10 km Adventure Sync": [
+    "Goomy","Turtonator","Toxel","Gible","Dreepy"
+  ]
+};
+const EGG_TIER_COLORS = {
+  "1 km Eggs": "#F5C842",
+  "2 km Eggs": "#78C850",
+  "5 km Eggs": "#E67E22",
+  "7 km Eggs": "#F1C40F",
+  "7 km Route Eggs": "#27AE60",
+  "10 km Eggs": "#8E44AD",
+  "12 km Eggs": "#E74C3C",
+  "5 km Adventure Sync": "#3498DB",
+  "10 km Adventure Sync": "#2980B9"
+};
+const EGG_TIER_IMAGES = {
+  "1 km Eggs": "assets/pokemon-images/eggs/egg-1.png",
+  "2 km Eggs": "assets/pokemon-images/eggs/egg-2.png",
+  "5 km Eggs": "assets/pokemon-images/eggs/egg-5.png",
+  "7 km Eggs": "assets/pokemon-images/eggs/egg-7.png",
+  "7 km Route Eggs": "assets/pokemon-images/eggs/egg-7.png",
+  "10 km Eggs": "assets/pokemon-images/eggs/egg-10.png",
+  "12 km Eggs": "assets/pokemon-images/eggs/egg-12.png",
+  "5 km Adventure Sync": "assets/pokemon-images/eggs/egg-5.png",
+  "10 km Adventure Sync": "assets/pokemon-images/eggs/egg-10.png"
+};
+
 const CURRENT_RAID_BOSSES = {
   "1-Star Raids": [
     "Alolan Vulpix (1\u2605 Raid)","Goomy (1\u2605 Raid)","Rookidee (1\u2605 Raid)","Sinistea (1\u2605 Raid)"
@@ -831,6 +900,67 @@ const CURRENT_MAX_BATTLES = {
   // ]
 };
 const MAX_TIER_COLORS = { "1-Star Max Battles": "#78C850", "2-Star Max Battles": "#F39C12", "3-Star Max Battles": "#F1C40F", "5-Star Max Battles": "#8E44AD", "6-Star Max Battles": "#E74C3C" };
+
+const ROCKET_LINEUPS = {
+  leaders: [
+    {
+      name: "Giovanni",
+      role: "Boss",
+      icon: "assets/pokemon-images/icons/boss-giovanni.png.webp",
+      quote: "I will not tolerate your interference.",
+      color: "#8B0000",
+      slots: [["Persian"], ["Rhyperior", "Machamp", "Kangaskhan"], ["Incarnate Forme Thundurus"]]
+    },
+    {
+      name: "Cliff",
+      role: "Leader",
+      icon: "assets/pokemon-images/icons/leader-cliff.png.webp",
+      quote: "My strength comes from my loyalty to Team GO Rocket.",
+      color: "#C0392B",
+      slots: [["Magikarp"], ["Skarmory", "Cradily", "Annihilape"], ["Tyranitar", "Gallade", "Camerupt"]]
+    },
+    {
+      name: "Arlo",
+      role: "Leader",
+      icon: "assets/pokemon-images/icons/leader-arlo.png.webp",
+      quote: "It's time to learn your place in the world.",
+      color: "#E67E22",
+      slots: [["Mawile"], ["Slowbro", "Steelix", "Golurk"], ["Scizor", "Alakazam", "Charizard"]]
+    },
+    {
+      name: "Sierra",
+      role: "Leader",
+      icon: "assets/pokemon-images/icons/leader-sierra.png.webp",
+      quote: "I envy you \u2014 you get to battle me!",
+      color: "#8E44AD",
+      slots: [["Hoppip"], ["Ferrothorn", "Flygon", "Blastoise"], ["Houndoom", "Steelix", "Milotic"]]
+    }
+  ],
+  grunts: [
+    { type: "Normal", gender: "male", quote: "Normal doesn\u2019t mean weak.", slots: [["Teddiursa", "Meowth", "Swablu"], ["Loudred", "Starly", "Rattata"], ["Kangaskhan", "Swellow", "Ursaring"]] },
+    { type: "Fire", gender: "female", quote: "Do you know how hot Pok\u00E9mon fire breath can get?", slots: [["Vulpix", "Litwick", "Fennekin"], ["Magmar", "Camerupt", "Braixen"], ["Magmortar", "Darmanitan", "Delphox"]] },
+    { type: "Water", gender: "female", quote: "These waters are treacherous!", slots: [["Tentacool", "Krabby", "Froakie"], ["Tentacruel", "Sharpedo", "Frogadier"], ["Kabutops", "Walrein", "Greninja"]] },
+    { type: "Water", gender: "male", quote: "These waters are treacherous!", slots: [["Magikarp", "Feebas"], ["Magikarp"], ["Magikarp", "Gyarados"]] },
+    { type: "Electric", gender: "female", quote: "Get ready to be shocked!", slots: [["Magnemite", "Voltorb", "Shinx"], ["Alolan Geodude", "Voltorb", "Electabuzz"], ["Ampharos", "Luxray", "Galvantula"]] },
+    { type: "Grass", gender: "male", quote: "Don\u2019t tangle with us!", slots: [["Cacnea", "Chespin", "Phantump"], ["Lileep", "Ferrothorn", "Quilladin"], ["Cradily", "Chesnaught", "Trevenant"]] },
+    { type: "Ice", gender: "female", quote: "You\u2019re gonna be frozen in your tracks.", slots: [["Sneasel", "Swinub", "Spheal"], ["Alolan Ninetales", "Sealeo", "Froslass"], ["Glalie", "Froslass", "Aurorus"]] },
+    { type: "Fighting", gender: "female", quote: "This buff physique isn\u2019t just for show!", slots: [["Mankey", "Machop", "Timburr"], ["Hitmonlee", "Hitmonchan", "Hitmontop"], ["Infernape", "Conkeldurr", "Annihilape"]] },
+    { type: "Poison", gender: "female", quote: "Coiled and ready to strike!", slots: [["Zubat", "Oddish", "Qwilfish"], ["Nidorina", "Nidorino", "Galarian Weezing"], ["Weezing", "Toxicroak", "Amoonguss"]] },
+    { type: "Ground", gender: "male", quote: "You\u2019ll be defeated into the ground!", slots: [["Sandshrew", "Gligar", "Trapinch"], ["Gligar", "Vibrava", "Claydol"], ["Flygon", "Hippowdon", "Golurk"]] },
+    { type: "Flying", gender: "female", quote: "Battle against my Flying-type Pok\u00E9mon!", slots: [["Pidgey", "Taillow", "Swablu"], ["Zubat", "Scyther", "Gligar"], ["Dragonite", "Swanna", "Toucannon"]] },
+    { type: "Psychic", gender: "male", quote: "Are you scared of psychics that use unseen power?", slots: [["Drowzee", "Wobbuffet", "Ralts"], ["Drowzee", "Wobbuffet", "Duosion"], ["Gallade", "Reuniclus", "Malamar"]] },
+    { type: "Bug", gender: "male", quote: "Go, my super bug Pok\u00E9mon!", slots: [["Venonat", "Karrablast", "Shelmet"], ["Pinsir", "Shuckle", "Anorith"], ["Scizor", "Scolipede", "Vikavolt"]] },
+    { type: "Rock", gender: "male", quote: "Let\u2019s rock and roll!", slots: [["Omanyte", "Shuckle", "Cranidos"], ["Graveler", "Cranidos", "Shieldon"], ["Golem", "Tyrantrum", "Aurorus"]] },
+    { type: "Ghost", gender: "male", quote: "Ke\u2026 ke\u2026 ke\u2026 ke\u2026 ke\u2026 ke\u2026", slots: [["Gastly", "Duskull", "Yamask"], ["Sableye", "Dusclops", "Cofagrigus"], ["Gengar", "Froslass", "Alolan Marowak"]] },
+    { type: "Dragon", gender: "female", quote: "ROAR! \u2026How\u2019d that sound?", slots: [["Dratini", "Bagon", "Deino"], ["Alolan Exeggutor", "Dragonair", "Gabite"], ["Dragonite", "Salamence", "Garchomp"]] },
+    { type: "Dark", gender: "female", quote: "Wherever there is light, there is also shadow.", slots: [["Alolan Rattata", "Poochyena", "Carvanha"], ["Alolan Raticate", "Mightyena"], ["Liepard", "Hydreigon"]] },
+    { type: "Steel", gender: "male", quote: "You\u2019re no match for my iron will!", slots: [["Alolan Sandshrew", "Aron", "Beldum"], ["Skarmory", "Lairon", "Metang"], ["Alolan Sandslash", "Aggron", "Probopass"]] },
+    { type: "Fairy", gender: "female", quote: "Check out my cute Pok\u00E9mon!", slots: [["Alolan Vulpix", "Snubbull", "Ralts"], ["Galarian Weezing", "Snubbull", "Kirlia"], ["Alolan Ninetales", "Galarian Weezing", "Granbull"]] },
+    { type: "Normal", gender: "male", quote: "Winning is for winners.", slots: [["Bulbasaur", "Charmander", "Squirtle"], ["Ivysaur", "Charmeleon", "Wartortle"], ["Venusaur", "Charizard", "Blastoise"]] },
+    { type: "Normal", gender: "female", quote: "Winning is for winners.", slots: [["Snorlax"], ["Gardevoir", "Poliwrath", "Snorlax"], ["Gyarados", "Snorlax", "Dragonite"]] },
+    { type: "Decoy", gender: "female", quote: "Fooled ya, twerp.", slots: [["Bellsprout"], ["Raticate", "Weepinbell"], ["Raticate", "Snorlax"]] }
+  ]
+};
 
 // --- WEB STORE BOX DATA ---
 const STORE_ITEM_VALUES = {
@@ -2576,6 +2706,50 @@ function showFormModal(imgSrc, label) {
   document.body.appendChild(overlay);
 }
 
+function showRocketPopup(name) {
+  const th = t(darkMode);
+  const rd = getRaidBossData(name);
+  const pkmn = getPokemonImg("Shadow " + name);
+  const imgSrc = pkmn ? pkmn.url : "";
+  const weaknesses = rd ? getWeaknesses(rd.types) : [];
+  const resistances = rd ? getResistances(rd.types) : [];
+  const typesHTML = rd ? rd.types.map(t =>
+    `<span style="font-size:14px;font-weight:700;color:#fff;background:${TYPE_COLORS[t] || "#888"};padding:4px 14px;border-radius:12px">${t}</span>`
+  ).join(" ") : "";
+  const weakHTML = weaknesses.length > 0 ? `<div style="margin-top:16px">
+    <div style="font-size:11px;font-weight:700;color:#E74C3C;letter-spacing:0.5px;margin-bottom:6px">WEAK TO</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center">${weaknesses.map(w =>
+      `<span style="font-size:12px;font-weight:700;color:#fff;background:${TYPE_COLORS[w.type] || "#888"};padding:3px 10px;border-radius:10px">${w.type}${w.multiplier > 2 ? " 2\u00D7" : ""}</span>`
+    ).join("")}</div>
+  </div>` : "";
+  const resistHTML = resistances.length > 0 ? `<div style="margin-top:12px">
+    <div style="font-size:11px;font-weight:700;color:#27AE60;letter-spacing:0.5px;margin-bottom:6px">RESISTS</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center">${resistances.map(r =>
+      `<span style="font-size:12px;font-weight:700;color:#fff;background:${TYPE_COLORS[r.type] || "#888"};padding:3px 10px;border-radius:10px;opacity:${r.double ? "1" : "0.7"}">${r.type}${r.double ? " 2\u00D7" : ""}</span>`
+    ).join("")}</div>
+  </div>` : "";
+  const overlay = document.createElement("div");
+  overlay.id = "rocket-popup";
+  overlay.style.cssText = "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:9999;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:fadeIn 0.2s ease";
+  overlay.onclick = () => overlay.remove();
+  overlay.innerHTML = `<div onclick="event.stopPropagation()" style="background:${th.bg};border:1.5px solid ${th.border};border-radius:20px;padding:24px;max-width:340px;width:90vw;text-align:center;cursor:default;animation:scaleIn 0.25s ease;position:relative">
+    <div onclick="this.parentElement.parentElement.remove()" style="position:absolute;top:12px;right:16px;font-size:20px;color:${th.textMuted};cursor:pointer;font-weight:700">\u00D7</div>
+    ${imgSrc ? `<div style="position:relative;width:140px;height:140px;margin:0 auto">
+      <div style="position:absolute;top:18%;left:15%;width:35%;height:30%;background:rgba(120,40,180,0.55);border-radius:60% 40% 55% 45%;filter:blur(8px);transform:rotate(-15deg);animation:flameWisp1 2.2s ease-in-out infinite"></div>
+      <div style="position:absolute;top:10%;left:45%;width:30%;height:25%;background:rgba(100,20,160,0.45);border-radius:45% 55% 50% 40%;filter:blur(9px);transform:rotate(10deg);animation:flameWisp2 2.5s ease-in-out infinite"></div>
+      <div style="position:absolute;top:35%;left:55%;width:35%;height:32%;background:rgba(130,50,190,0.5);border-radius:50% 60% 40% 55%;filter:blur(8px);transform:rotate(20deg);animation:flameWisp3 2s ease-in-out infinite"></div>
+      <div style="position:absolute;top:50%;left:10%;width:32%;height:28%;background:rgba(110,30,170,0.5);border-radius:55% 45% 60% 40%;filter:blur(9px);transform:rotate(-10deg);animation:flameWisp4 2.3s ease-in-out infinite"></div>
+      <div style="position:absolute;top:55%;left:45%;width:30%;height:25%;background:rgba(140,50,200,0.45);border-radius:40% 60% 45% 55%;filter:blur(8px);transform:rotate(5deg);animation:flameWisp5 2.1s ease-in-out infinite"></div>
+      <img src="${imgSrc}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
+    </div>` : ""}
+    <div style="font-size:18px;font-weight:800;color:${th.text};margin-top:8px">Shadow ${esc(name)}</div>
+    <div style="margin-top:10px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap">${typesHTML}</div>
+    ${weakHTML}
+    ${resistHTML}
+  </div>`;
+  document.body.appendChild(overlay);
+}
+
 function renderPokemonDetail(data, evolutions, th, isMobile) {
   if (!data) {
     return `<div style="padding:24px;text-align:center;color:${th.textMuted}">
@@ -3217,9 +3391,11 @@ function render() {
 
     // Tabs
     const tabsHTML = `<div style="display:flex;border-bottom:2px solid ${th.tabBorder};margin-top:4px">
-      ${["events", "calendar", "raids", "max", "news"].map(tb => {
-        const mobileLabel = tb === "events" ? `\uD83D\uDCC5 Events` : tb === "calendar" ? `\uD83D\uDDD3\uFE0F Cal` : tb === "raids" ? `\u2694\uFE0F Raids` : tb === "max" ? `\uD83D\uDCA5 Max` : `\uD83D\uDCE2 News`;
-        const desktopLabel = tb === "events" ? `\uD83D\uDCC5 Events (${upcomingEvents.length})` : tb === "calendar" ? `\uD83D\uDDD3\uFE0F Calendar` : tb === "raids" ? `\u2694\uFE0F Raids` : tb === "max" ? `\uD83D\uDCA5 Max Battles` : `\uD83D\uDCE2 News (${filteredAnnouncements.length})`;
+      ${["events", "calendar", "raids", "max", "rocket", "eggs", "news"].map(tb => {
+        const rocketIcon = `<img src="assets/pokemon-images/icons/teamrocket_r_full.png" style="width:20px;height:20px;object-fit:contain;vertical-align:middle" />`;
+        const eggIcon = `<img src="assets/pokemon-images/eggs/egg-2.png" style="width:24px;height:24px;object-fit:contain;vertical-align:middle" />`;
+        const mobileLabel = tb === "events" ? `\uD83D\uDCC5 Events` : tb === "calendar" ? `\uD83D\uDDD3\uFE0F Cal` : tb === "raids" ? `\u2694\uFE0F Raids` : tb === "max" ? `\uD83D\uDCA5 Max` : tb === "rocket" ? `${rocketIcon} Rocket` : tb === "eggs" ? `${eggIcon} Eggs` : `\uD83D\uDCE2 News`;
+        const desktopLabel = tb === "events" ? `\uD83D\uDCC5 Events (${upcomingEvents.length})` : tb === "calendar" ? `\uD83D\uDDD3\uFE0F Calendar` : tb === "raids" ? `\u2694\uFE0F Raids` : tb === "max" ? `\uD83D\uDCA5 Max Battles` : tb === "rocket" ? `${rocketIcon} Rocket` : tb === "eggs" ? `${eggIcon} Eggs` : `\uD83D\uDCE2 News (${filteredAnnouncements.length})`;
         const label = isMobile ? mobileLabel : desktopLabel;
         return `<button onclick="setTab('${tb}')" style="flex:1;padding:${isMobile ? "9px 0" : "11px 0"};background:none;border:none;border-bottom:${state.tab === tb ? `2.5px solid ${th.tabActive}` : "2.5px solid transparent"};color:${state.tab === tb ? th.tabActive : th.tabInactive};font-size:${isMobile ? 10 : 13}px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:${isMobile ? "0.3px" : "1px"};transition:all 0.15s ease;font-family:inherit">${label}</button>`;
       }).join("")}
@@ -3446,6 +3622,173 @@ function render() {
         <div style="text-align:center;font-size:11px;color:${th.textMuted};font-weight:500;margin-top:-10px">Data sourced from Pok\u00E9monGO.com, LeekDuck.com & Pok\u00E9monGOHUB.net</div>
         <div style="text-align:center;font-size:12px;color:${th.textMuted};font-weight:600;margin-top:2px">Tap a Pok\u00E9mon to see its weaknesses & resistances</div>
         ${maxSectionsHTML}
+      </div>`;
+    }
+
+    // Rocket tab
+    let rocketTabHTML = "";
+    if (state.tab === "rocket") {
+      const cardLayout = breakpoint !== "mobile";
+      // Shared slot row renderer for leaders and grunts
+      const rocketSlotImgSize = cardLayout ? 80 : 56;
+      const renderRocketSlotRow = (slotPokemon, slotIdx, shinySlot = 0) => {
+        const pkmnCards = slotPokemon.map(p => {
+          const pkmn = getPokemonImg("Shadow " + p);
+          let imgEl = pkmn ? pokemonImgHTML(pkmn, rocketSlotImgSize) : "";
+          if (imgEl && slotIdx === shinySlot) {
+            const sparkle = `<div style="position:absolute;top:2%;right:-2%;z-index:2;font-size:20px">\u2728</div>`;
+            if (imgEl.includes("position:relative;width:")) {
+              imgEl = imgEl.replace(/<\/div>$/, `${sparkle}</div>`);
+            } else {
+              const srcMatch = imgEl.match(/src="([^"]+)"/);
+              imgEl = `<div style="position:relative;width:${rocketSlotImgSize}px;height:${rocketSlotImgSize}px;flex-shrink:0">
+                <img src="${srcMatch[1]}" style="width:100%;height:100%;object-fit:contain" onerror="this.style.display='none'" />
+                ${sparkle}
+              </div>`;
+            }
+          }
+          const displayName = p.replace(/\s*\(Male\)/," \u2642").replace(/\s*\(Female\)/," \u2640");
+          const safeAttr = p.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/'/g,"&#39;").replace(/</g,"&lt;");
+          return `<div onclick="showRocketPopup(this.dataset.pkmn)" data-pkmn="${safeAttr}" style="display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.08)'" onmouseleave="this.style.transform='scale(1)'">
+            ${imgEl}
+            <div style="font-size:${isMobile ? 10 : 11}px;font-weight:600;color:${th.text};text-align:center">${esc(displayName)}</div>
+          </div>`;
+        }).join("");
+        const premierBall = slotIdx === shinySlot ? `<img src="assets/pokemon-images/Items/premierball_sprite.png" style="width:${isMobile ? 20 : 24}px;height:${isMobile ? 20 : 24}px;object-fit:contain" />` : "";
+        return `<div style="background:${th.surface};border-radius:10px;padding:${isMobile ? "8px" : "10px 14px"};display:flex;align-items:center;gap:${isMobile ? 8 : 14}px">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:2px;min-width:${isMobile ? 20 : 24}px;align-self:stretch;justify-content:space-between">${premierBall}<div style="font-size:${isMobile ? 16 : 20}px;font-weight:800;color:${th.textMuted};margin-top:auto">${slotIdx + 1}</div></div>
+          <div style="display:flex;flex-wrap:wrap;flex:1;justify-content:space-evenly">
+            ${pkmnCards}
+          </div>
+        </div>`;
+      };
+      // Render a leader/boss card
+      const renderRocketCard = (entry, roleLabel, icon, maxW, shinySlot = 0, shinyRate = "") => {
+        const slotsHTML = entry.slots.map((s, i) => renderRocketSlotRow(s, i, shinySlot)).join("");
+        const shinyBadge = shinyRate ? `<div style="display:flex;align-items:center;gap:3px;font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${th.textMuted};white-space:nowrap">\u2728 ${shinyRate}</div>` : "";
+        return `<div style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden;${maxW}">
+          <div style="padding:${isMobile ? "10px 12px" : "12px 16px"};display:flex;align-items:center;gap:${isMobile ? 8 : 12}px">
+            ${icon}
+            <div style="flex:1;min-width:0">
+              <div style="font-size:${isMobile ? 15 : 17}px;font-weight:800;color:${th.text}">${esc(entry.name)}</div>
+              <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:600">${roleLabel}</div>
+              <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-style:italic;margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">"${esc(entry.quote)}"</div>
+            </div>
+            ${shinyBadge}
+          </div>
+          <div style="padding:${isMobile ? "6px 8px 10px" : "6px 12px 14px"};display:flex;flex-direction:column;gap:${isMobile ? 5 : 6}px">
+            ${slotsHTML}
+          </div>
+        </div>`;
+      };
+      // Giovanni section (standalone)
+      const giovanni = ROCKET_LINEUPS.leaders[0];
+      const giovanniIcon = `<img src="${giovanni.icon}" style="width:${isMobile ? 36 : 44}px;height:${isMobile ? 36 : 44}px;object-fit:contain;border-radius:50%" onerror="this.style.display='none'" />`;
+      const giovanniHTML = renderRocketCard(giovanni, "Rocket Boss", giovanniIcon, `max-width:${isMobile ? "100%" : "420px"}`, 2, "1/64");
+      // Leaders section (Cliff, Arlo, Sierra)
+      const leadersOnly = ROCKET_LINEUPS.leaders.slice(1);
+      let leadersHTML = leadersOnly.map(leader => {
+        const icon = `<img src="${leader.icon}" style="width:${isMobile ? 36 : 44}px;height:${isMobile ? 36 : 44}px;object-fit:contain;border-radius:50%" onerror="this.style.display='none'" />`;
+        return renderRocketCard(leader, "Rocket Leader", icon, "", 0, "1/64");
+      }).join("");
+      // Grunts section (~3 per row on desktop)
+      const typeIconPath = (t) => {
+        const mapped = {"Normal":"NORMAL","Fire":"FIRE","Water":"WATER","Electric":"ELECTRIC","Grass":"GRASS","Ice":"ICE","Fighting":"FIGHTING","Poison":"POISON","Ground":"GROUND","Flying":"FLYING","Psychic":"PSYCHIC","Bug":"BUG","Rock":"ROCK","Ghost":"GHOST","Dragon":"DRAGON","Dark":"DARK","Steel":"STEEL","Fairy":"FAIRY"};
+        return mapped[t] ? `assets/pokemon-images/pokemon-types/POKEMON_TYPE_${mapped[t]}.png` : null;
+      };
+      let gruntsHTML = ROCKET_LINEUPS.grunts.map(grunt => {
+        const genderLabel = grunt.gender === "male" ? "Male Grunt" : "Female Grunt";
+        const genderIcon = `<img src="assets/pokemon-images/icons/${grunt.gender}.png" style="width:${isMobile ? 32 : 40}px;height:${isMobile ? 32 : 40}px;object-fit:contain;border-radius:50%;opacity:0.85" onerror="this.style.display='none'" />`;
+        const tIcon = typeIconPath(grunt.type);
+        const typeImg = tIcon ? `<img src="${tIcon}" style="width:${isMobile ? 18 : 22}px;height:${isMobile ? 18 : 22}px;object-fit:contain" onerror="this.style.display='none'" />` : "";
+        const gColor = TYPE_COLORS[grunt.type] || null;
+        const cardBorder = gColor ? `${gColor}60` : th.border;
+        const cardBg = gColor ? `${gColor}${darkMode ? "18" : "10"}` : "transparent";
+        const headerBg = gColor ? `${gColor}${darkMode ? "30" : "20"}` : th.surface;
+        const slotsHTML = grunt.slots.map((s, i) => renderRocketSlotRow(s, i)).join("");
+        return `<div style="border:1.5px solid ${cardBorder};border-radius:14px;overflow:hidden;background:${cardBg}">
+          <div style="padding:${isMobile ? "10px 12px" : "12px 16px"};background:${headerBg};display:flex;align-items:center;gap:${isMobile ? 8 : 12}px">
+            ${genderIcon}
+            <div style="flex:1;min-width:0">
+              <div style="display:flex;align-items:center;gap:6px;font-size:${isMobile ? 15 : 17}px;font-weight:800;color:${th.text}">${typeImg}${esc(grunt.type)}</div>
+              <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:600">${genderLabel}</div>
+              <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-style:italic;margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">"${esc(grunt.quote)}"</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:3px;font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${th.textMuted};white-space:nowrap">\u2728 1/256</div>
+          </div>
+          <div style="padding:${isMobile ? "6px 8px 10px" : "6px 12px 14px"};display:flex;flex-direction:column;gap:${isMobile ? 5 : 6}px">
+            ${slotsHTML}
+          </div>
+        </div>`;
+      }).join("");
+      rocketTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
+        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic">Last updated on Apr 09, 2026 at 4:30 pm</div>
+        <div style="text-align:center;padding:10px">
+          <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text};display:flex;align-items:center;justify-content:center;gap:8px"><img src="assets/pokemon-images/icons/teamrocket_r_full.png" style="width:${isMobile ? 24 : 30}px;height:${isMobile ? 24 : 30}px;object-fit:contain" /> Team GO Rocket</h2>
+          <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Current Team GO Rocket lineups</p>
+        </div>
+        <div style="text-align:center;font-size:11px;color:${th.textMuted};font-weight:500;margin-top:-10px">Data sourced from LeekDuck.com, Pok\u00E9monGOHUB.net & DittoBase.com</div>
+        <div style="text-align:center;font-size:12px;color:${th.textMuted};font-weight:600;margin-top:2px">Tap a Pok\u00E9mon to see its type, weaknesses & resistances</div>
+        <div style="font-size:${isMobile ? 15 : 18}px;font-weight:800;color:${th.text};padding:0 4px;display:flex;align-items:center;gap:8px"><img src="assets/pokemon-images/icons/boss-giovanni.png.webp" style="width:22px;height:22px;object-fit:contain;border-radius:50%" /> Boss</div>
+        ${giovanniHTML}
+        <div style="margin-top:${isMobile ? 20 : 28}px;font-size:${isMobile ? 15 : 18}px;font-weight:800;color:${th.text};padding:0 4px;display:flex;align-items:center;gap:8px"><img src="assets/pokemon-images/icons/teamrocket_r.png" style="width:20px;height:20px;object-fit:contain" /> Leaders</div>
+        <div style="display:grid;grid-template-columns:${isMobile ? "1fr" : "repeat(3, 1fr)"};gap:${isMobile ? 10 : 14}px">
+          ${leadersHTML}
+        </div>
+        <div style="margin-top:${isMobile ? 20 : 28}px;font-size:${isMobile ? 15 : 18}px;font-weight:800;color:${th.text};padding:0 4px;display:flex;align-items:center;gap:8px"><img src="assets/pokemon-images/icons/teamrocket_r.png" style="width:20px;height:20px;object-fit:contain" /> Grunt Lineups</div>
+        <div style="display:grid;grid-template-columns:${isMobile ? "1fr" : "repeat(3, 1fr)"};gap:${isMobile ? 10 : 14}px">
+          ${gruntsHTML}
+        </div>
+      </div>`;
+    }
+
+    // Eggs tab
+    let eggsTabHTML = "";
+    if (state.tab === "eggs") {
+      let eggSectionsHTML = "";
+      Object.entries(CURRENT_EGGS).forEach(([tier, pokemon]) => {
+        const tierColor = EGG_TIER_COLORS[tier] || "#78C850";
+        const eggUrl = EGG_TIER_IMAGES[tier];
+        const isAdventureSync = tier.includes("Adventure Sync");
+        const isRoute = tier.includes("Route");
+        const tierLabel = tier;
+        const eggImg = eggUrl ? `<img src="${eggUrl}" style="width:28px;height:28px;object-fit:contain" onerror="this.style.display='none'" />` : "";
+        const badgeHTML = isAdventureSync ? `<span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${tierColor};background:${th.accentBg(tierColor)};padding:3px 10px;border-radius:10px;margin-left:auto;white-space:nowrap">Adventure Sync</span>` : isRoute ? `<span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${tierColor};background:${th.accentBg(tierColor)};padding:3px 10px;border-radius:10px;margin-left:auto;white-space:nowrap">Route Gift from Mateo</span>` : "";
+        eggSectionsHTML += `<div style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden">
+          <div style="padding:10px 14px;background:${th.accentBgSubtle(tierColor)};border-bottom:1.5px solid ${th.border};display:flex;align-items:center;gap:8px">
+            ${eggImg}
+            <span style="font-size:12px;font-weight:700;color:${th.text};letter-spacing:0.5px;text-transform:uppercase">${tierLabel}</span>
+            ${badgeHTML}
+          </div>
+          <div style="padding:8px;display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${pokemon.map(name => {
+            const pkmn = getPokemonImg(name);
+            const imgSize = breakpoint !== "mobile" ? 120 : 60;
+            let imgEl = pokemonImgHTML(pkmn, imgSize);
+            if (imgEl) imgEl = wrapShinySparkles(imgEl, name, imgSize);
+            const displayName = name.replace(/\s*\(Male\)/," \u2642").replace(/\s*\(Female\)/," \u2640");
+            const eggData = getRaidBossData(name);
+            const eggTypesHTML = eggData ? `<div style="display:flex;gap:3px;margin-top:3px;flex-wrap:wrap;${breakpoint !== "mobile" ? "justify-content:center" : ""}">${eggData.types.map(t =>
+              `<span style="font-size:${breakpoint !== "mobile" ? 10 : 11}px;font-weight:700;color:#fff;background:${TYPE_COLORS[t] || "#888"};padding:1px 6px;border-radius:8px">${t}</span>`
+            ).join("")}</div>` : "";
+            if (breakpoint !== "mobile" && pkmn) {
+              return `<div style="border-radius:12px;background:${th.accentBgSubtle(tierColor)};border:1.5px solid ${th.border};flex:1;min-width:140px;max-width:200px;display:flex;flex-direction:column;align-items:center;padding:12px 8px;text-align:center">
+                ${imgEl}
+                <div style="margin-top:6px;font-weight:700;color:${th.text};font-size:13px">${esc(displayName)}</div>
+                ${eggTypesHTML}
+              </div>`;
+            }
+            return `<div style="border-radius:9px;background:${th.accentBgSubtle(tierColor)};width:100%;display:flex;align-items:center;gap:10px;padding:${pkmn ? "4px" : "7px"} 12px;font-size:13.5px;color:${th.textSecondary};line-height:1.45">${imgEl
+              || `<div style="width:5px;height:5px;border-radius:50%;background:${tierColor};flex-shrink:0"></div>`}<div><div style="font-weight:700;color:${th.text};font-size:13px">${esc(displayName)}</div>${eggTypesHTML}</div></div>`;
+          }).join("")}</div>
+        </div>`;
+      });
+      eggsTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
+        <div style="text-align:center;padding:10px">
+          <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text};display:flex;align-items:center;justify-content:center;gap:8px"><img src="assets/pokemon-images/eggs/egg-2.png" style="width:${isMobile ? 24 : 30}px;height:${isMobile ? 24 : 30}px;object-fit:contain" /> Egg Hatches</h2>
+          <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Current egg pool by distance tier</p>
+        </div>
+        <div style="text-align:center;font-size:11px;color:${th.textMuted};font-weight:500;margin-top:-10px">Data sourced from LeekDuck.com</div>
+        ${eggSectionsHTML}
       </div>`;
     }
 
@@ -4018,7 +4361,7 @@ function render() {
       </div>` : "";
 
     content = `<main style="padding:${mainPad};display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
-      ${welcomeHTML}${!["home","tools","nests","pokedex","store","report"].includes(state.tab) ? `${liveHTML}${heroHTML}${tabsHTML}` : ""}${state.tab === "home" ? `${liveHTML}${heroHTML}${tabsHTML}` : ""}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${newsTabHTML}${storeTabHTML}${pokedexTabHTML}${toolsTabHTML}${nestsTabHTML}${reportTabHTML}
+      ${welcomeHTML}${!["home","tools","nests","pokedex","store","report"].includes(state.tab) ? `${liveHTML}${heroHTML}${tabsHTML}` : ""}${state.tab === "home" ? `${liveHTML}${heroHTML}${tabsHTML}` : ""}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${rocketTabHTML}${eggsTabHTML}${newsTabHTML}${storeTabHTML}${pokedexTabHTML}${toolsTabHTML}${nestsTabHTML}${reportTabHTML}
     </main>`;
     if (hero || activeEvents.length > 0) state.heroRendered = true;
   }
@@ -4032,14 +4375,41 @@ function render() {
       <div><div style="font-size:${isMobile ? 16 : 20}px;font-weight:800;color:${th.text};letter-spacing:-0.3px;line-height:1.2">${COMMUNITY_NAME}</div>
       <div style="font-size:${isMobile ? 10 : 12}px;color:${th.textMuted};font-weight:500;letter-spacing:0.2px">${COMMUNITY_TAGLINE}</div></div>
     </div></div>
-    ${isDesktop ? `<nav style="display:flex;align-items:center;gap:4px">
-      ${[["goHome()","Home"],["setTab('events')","Events"],["setTab('calendar')","Calendar"],["setTab('raids')","Raids"],["setTab('max')","Max Battles"],["setTab('news')","News"],["setTab('pokedex')","Pok\u00E9Dex"],["setTab('store')","Deal Check"],["setTab('nests')","Nests"],["setTab('tools')","PoGO Tools"]].map(([fn, label]) => {
-        const tabMap = {"Home":"home","Events":"events","Calendar":"calendar","Raids":"raids","Max Battles":"max","News":"news","Deal Check":"store","Pok\u00E9Dex":"pokedex","Nests":"nests","PoGO Tools":"tools"};
-        const isActive = state.tab === tabMap[label];
-        return `<button onclick="${fn || ''}" style="padding:7px 14px;border-radius:10px;border:${isActive ? "1.5px solid #E74C3C" : "1.5px solid transparent"};background:${isActive ? th.accentBg("#E74C3C") : "transparent"};color:${isActive ? "#E74C3C" : th.text};font-size:13px;font-weight:${isActive ? "700" : "600"};cursor:pointer;font-family:inherit;transition:all 0.15s ease;white-space:nowrap" onmouseenter="this.style.background='${isActive ? th.accentBg("#E74C3C") : th.surfaceHover}'" onmouseleave="this.style.background='${isActive ? th.accentBg("#E74C3C") : "transparent"}'">${label}</button>`;
-      }
-      ).join("")}
-    </nav>` : ""}
+    ${isDesktop ? (() => {
+      const currentTabs = ["raids","max","rocket","eggs"];
+      const isCurrentActive = currentTabs.includes(state.tab);
+      const navBtn = (fn, label, tabId) => {
+        const isActive = state.tab === tabId;
+        return `<button onclick="${fn}" style="padding:7px 14px;border-radius:10px;border:${isActive ? "1.5px solid #E74C3C" : "1.5px solid transparent"};background:${isActive ? th.accentBg("#E74C3C") : "transparent"};color:${isActive ? "#E74C3C" : th.text};font-size:13px;font-weight:${isActive ? "700" : "600"};cursor:pointer;font-family:inherit;transition:all 0.15s ease;white-space:nowrap" onmouseenter="this.style.background='${isActive ? th.accentBg("#E74C3C") : th.surfaceHover}'" onmouseleave="this.style.background='${isActive ? th.accentBg("#E74C3C") : "transparent"}'">${label}</button>`;
+      };
+      const dropdownItems = [
+        {fn:"setTab('raids')",label:"Raids",icon:"\u2694\uFE0F",id:"raids"},
+        {fn:"setTab('max')",label:"Max Battles",icon:"\uD83D\uDCA5",id:"max"},
+        {fn:"setTab('rocket')",label:"Rocket",iconImg:"assets/pokemon-images/icons/teamrocket_r_full.png",id:"rocket"},
+        {fn:"setTab('eggs')",label:"Eggs",iconImg:"assets/pokemon-images/eggs/egg-2.png",iconSize:24,id:"eggs"}
+      ];
+      return `<nav style="display:flex;align-items:center;gap:4px">
+        ${navBtn("goHome()","Home","home")}
+        ${navBtn("setTab('events')","Events","events")}
+        ${navBtn("setTab('calendar')","Calendar","calendar")}
+        <div class="nav-dropdown" onmouseenter="this.classList.add('open')" onmouseleave="this.classList.remove('open')" onclick="this.classList.toggle('open')">
+          <button class="nav-dropdown-btn" style="border:${isCurrentActive ? "1.5px solid #E74C3C" : "1.5px solid transparent"};background:${isCurrentActive ? th.accentBg("#E74C3C") : "transparent"};color:${isCurrentActive ? "#E74C3C" : th.text};font-weight:${isCurrentActive ? "700" : "600"}" onmouseenter="if(!${isCurrentActive})this.style.background='${th.surfaceHover}'" onmouseleave="if(!${isCurrentActive})this.style.background='transparent'">Current <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 4l3 3 3-3"/></svg></button>
+          <div class="nav-dropdown-menu">
+            <div class="nav-dropdown-menu-inner" style="background:${th.surface};border:1.5px solid ${th.border};box-shadow:0 8px 30px rgba(0,0,0,0.12)">
+            ${dropdownItems.map(d => {
+              const active = state.tab === d.id;
+              return `<button class="nav-dropdown-item" onclick="event.stopPropagation();setTab('${d.id}')" style="color:${active ? "#E74C3C" : th.text};font-weight:${active ? "700" : "600"};background:${active ? th.accentBg("#E74C3C") : "transparent"}" onmouseenter="if(!${active})this.style.background='${th.surfaceHover}'" onmouseleave="if(!${active})this.style.background='${active ? th.accentBg("#E74C3C") : "transparent"}'">${d.iconImg ? `<span style="width:20px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0"><img src="${d.iconImg}" style="width:${d.iconSize||16}px;height:${d.iconSize||16}px;object-fit:contain" /></span>` : d.icon} ${d.label}</button>`;
+            }).join("")}
+            </div>
+          </div>
+        </div>
+        ${navBtn("setTab('news')","News","news")}
+        ${navBtn("setTab('pokedex')","Pok\u00E9Dex","pokedex")}
+        ${navBtn("setTab('store')","Deal Check","store")}
+        ${navBtn("setTab('nests')","Nests","nests")}
+        ${navBtn("setTab('tools')","PoGO Tools","tools")}
+      </nav>`;
+    })() : ""}
     <button id="theme-toggle" onclick="toggleDarkMode()" style="background:${darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.06)"};border:1.5px solid ${th.border};border-radius:50%;width:${isMobile ? 36 : 40}px;height:${isMobile ? 36 : 40}px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:${isMobile ? 18 : 20}px;transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);flex-shrink:0"
       onmouseenter="this.style.transform='scale(1.12)';this.style.boxShadow='0 4px 15px ${darkMode ? "rgba(255,200,50,0.2)" : "rgba(0,0,0,0.15)"}';"
       onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none';">${darkMode ? "\u2600\uFE0F" : "\uD83C\uDF19"}</button>
@@ -4139,12 +4509,17 @@ function sidebarNav(tab) {
 
 function renderSidebar(th) {
   if (breakpoint === "desktop") return "";
+  const currentSubTabs = [
+    { id: "raids", icon: "\u2694\uFE0F", label: "Raids" },
+    { id: "max", icon: "\uD83D\uDCA5", label: "Max Battles" },
+    { id: "rocket", icon: "", iconImg: "assets/pokemon-images/icons/teamrocket_r_full.png", label: "Rocket" },
+    { id: "eggs", icon: "", iconImg: "assets/pokemon-images/eggs/egg-2.png", iconSize: 30, label: "Eggs" }
+  ];
   const tabs = [
     { id: "home", icon: "\uD83C\uDFE0", label: "Home" },
     { id: "events", icon: "\uD83D\uDCC5", label: "Events" },
     { id: "calendar", icon: "\uD83D\uDDD3\uFE0F", label: "Calendar" },
-    { id: "raids", icon: "\u2694\uFE0F", label: "Raids" },
-    { id: "max", icon: "\uD83D\uDCA5", label: "Max Battles" },
+    { id: "current", icon: "\uD83D\uDD25", label: "Current", subTabs: currentSubTabs },
     { id: "news", icon: "\uD83D\uDCE2", label: "News" },
     { id: "pokedex", icon: "\uD83D\uDCD6", iconImg: "assets/pokemon-images/Items/Main1.webp", label: "Pok\u00E9Dex" },
     { id: "store", icon: "\uD83D\uDED2", label: "Deal Check" },
@@ -4162,12 +4537,33 @@ function renderSidebar(th) {
       </div>
     </div>
     <div style="padding:12px 8px;display:flex;flex-direction:column;gap:2px">
-      ${tabs.map(t => `<button onclick="sidebarNav('${t.id}')" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;border:none;background:${state.tab === t.id ? th.accentBgSubtle("#E74C3C") : "transparent"};cursor:pointer;font-family:inherit;transition:background 0.15s ease;width:100%;text-align:left"
+      ${tabs.map(t => {
+        if (t.subTabs) {
+          const isCurrentOpen = false;
+          const isGroupActive = isCurrentOpen;
+          return `<div>
+            <button onclick="const sub=this.nextElementSibling;const open=sub.style.maxHeight!=='0px'&&sub.style.maxHeight!=='';const h=sub.scrollHeight;if(open){sub.style.maxHeight=sub.scrollHeight+'px';sub.offsetHeight;sub.style.maxHeight='0px';sub.style.opacity='0'}else{sub.style.maxHeight=h+'px';sub.style.opacity='1';setTimeout(()=>{sub.style.maxHeight='none'},300)};this.querySelector('.sb-arrow').style.transform=open?'rotate(-90deg)':'rotate(0deg)'" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;border:none;background:${isGroupActive ? th.accentBgSubtle("#E74C3C") : "transparent"};cursor:pointer;font-family:inherit;transition:background 0.15s ease;width:100%;text-align:left">
+              <span style="font-size:20px">${t.icon}</span>
+              <span style="font-size:16px;font-weight:${isGroupActive ? "700" : "600"};color:${isGroupActive ? th.text : th.textSecondary};flex:1">${t.label}</span>
+              <svg class="sb-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="${th.textMuted}" stroke-width="2" stroke-linecap="round" style="transition:transform 0.2s ease;transform:${isCurrentOpen ? "rotate(0deg)" : "rotate(-90deg)"}"><path d="M3 4.5l3 3 3-3"/></svg>
+            </button>
+            <div style="display:flex;flex-direction:column;gap:2px;padding-left:20px;overflow:hidden;transition:max-height 0.3s cubic-bezier(0.25,0.46,0.45,0.94),opacity 0.25s ease;max-height:${isCurrentOpen ? "none" : "0px"};opacity:${isCurrentOpen ? "1" : "0"}">
+              ${t.subTabs.map(st => `<button onclick="sidebarNav('${st.id}')" style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;border:none;background:${state.tab === st.id ? th.accentBgSubtle("#E74C3C") : "transparent"};cursor:pointer;font-family:inherit;transition:background 0.15s ease;width:100%;text-align:left"
+                onmouseenter="this.style.background='${th.surfaceHover}'"
+                onmouseleave="this.style.background='${state.tab === st.id ? th.accentBgSubtle("#E74C3C") : "transparent"}'">
+                ${st.iconImg ? `<img src="${st.iconImg}" style="width:${st.iconSize||22}px;height:${st.iconSize||22}px;object-fit:contain" alt="${st.label}" />` : `<span style="font-size:18px">${st.icon}</span>`}
+                <span style="font-size:15px;font-weight:${state.tab === st.id ? "700" : "600"};color:${state.tab === st.id ? th.text : th.textSecondary}">${st.label}</span>
+              </button>`).join("")}
+            </div>
+          </div>`;
+        }
+        return `<button onclick="sidebarNav('${t.id}')" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;border:none;background:${state.tab === t.id ? th.accentBgSubtle("#E74C3C") : "transparent"};cursor:pointer;font-family:inherit;transition:background 0.15s ease;width:100%;text-align:left"
         onmouseenter="this.style.background='${th.surfaceHover}'"
         onmouseleave="this.style.background='${state.tab === t.id ? th.accentBgSubtle("#E74C3C") : "transparent"}'">
         ${t.iconImg ? `<img src="${t.iconImg}" style="width:28px;height:28px;object-fit:contain" alt="${t.label}" />` : `<span style="font-size:20px">${t.icon}</span>`}
         <span style="font-size:16px;font-weight:${state.tab === t.id ? "700" : "600"};color:${state.tab === t.id ? th.text : th.textSecondary}">${t.label}</span>
-      </button>`).join("")}
+      </button>`;
+      }).join("")}
     </div>
     <div style="margin-top:auto;padding:16px 20px;border-top:1.5px solid ${th.border}">
       <div style="font-size:11px;color:${th.textFaint};text-align:center">${COMMUNITY_NAME} \u00B7 v${APP_VERSION}</div>
