@@ -83,7 +83,10 @@
   "Alolan Vulpix": {
     "types": [
       "Ice"
-    ]
+    ],
+    "cp": "463–504",
+    "cpBoost": "579–631",
+    "weather": "Snow"
   },
   "Altaria": {
     "types": [
@@ -94,7 +97,10 @@
   "Ampharos": {
     "types": [
       "Electric"
-    ]
+    ],
+    "cp": "1554–1630",
+    "cpBoost": "1943–2037",
+    "weather": "Rainy"
   },
   "Annihilape": {
     "types": [
@@ -366,7 +372,10 @@
     "types": [
       "Ghost",
       "Grass"
-    ]
+    ],
+    "cp": "1608–1685",
+    "cpBoost": "2010–2107",
+    "weather": "Fog, Sunny"
   },
   "Diglett": {
     "types": [
@@ -442,7 +451,10 @@
   "Eevee": {
     "types": [
       "Normal"
-    ]
+    ],
+    "cp": "565–612",
+    "cpBoost": "707–765",
+    "weather": "Partly Cloudy"
   },
   "Electivire": {
     "types": [
@@ -642,6 +654,14 @@
     "cp": "952–1061",
     "cpBoost": "1191–1326",
     "weather": "Sunny or Windy"
+  },
+  "Goomy": {
+    "types": [
+      "Dragon"
+    ],
+    "cp": "514–557",
+    "cpBoost": "642–697",
+    "weather": "Windy"
   },
   "Goodra": {
     "types": [
@@ -988,7 +1008,10 @@
     "types": [
       "Rock",
       "Flying"
-    ]
+    ],
+    "cp": "1515–1590",
+    "cpBoost": "1894–1988",
+    "weather": "Partly Cloudy, Windy"
   },
   "Mega Aggron": {
     "types": [
@@ -1532,7 +1555,9 @@
     "types": [
       "Flying"
     ],
-    "cp": "344–380"
+    "cp": "344–380",
+    "cpBoost": "430–476",
+    "weather": "Windy"
   },
   "Roserade": {
     "types": [
@@ -1599,10 +1624,22 @@
       "Grass"
     ]
   },
+  "Shadow Alolan Marowak": {
+    "types": [
+      "Fire",
+      "Ghost"
+    ],
+    "cp": "941–1048",
+    "cpBoost": "1176–1311",
+    "weather": "Sunny, Fog"
+  },
   "Shadow Cacnea": {
     "types": [
       "Grass"
-    ]
+    ],
+    "cp": "618–709",
+    "cpBoost": "773–887",
+    "weather": "Sunny"
   },
   "Shadow Chandelure": {
     "types": [
@@ -1619,7 +1656,10 @@
   "Shadow Dratini": {
     "types": [
       "Dragon"
-    ]
+    ],
+    "cp": "495–574",
+    "cpBoost": "618–717",
+    "weather": "Windy"
   },
   "Shadow Electivire": {
     "types": [
@@ -1642,19 +1682,28 @@
     "types": [
       "Ground",
       "Flying"
-    ]
+    ],
+    "cp": "952–1061",
+    "cpBoost": "1191–1326",
+    "weather": "Sunny, Windy"
   },
   "Shadow Joltik": {
     "types": [
       "Bug",
       "Electric"
-    ]
+    ],
+    "cp": "504–584",
+    "cpBoost": "631–730",
+    "weather": "Rainy"
   },
   "Shadow Lapras": {
     "types": [
       "Water",
       "Ice"
-    ]
+    ],
+    "cp": "1377–1509",
+    "cpBoost": "1721–1886",
+    "weather": "Rainy, Snow"
   },
   "Shadow Latios": {
     "types": [
@@ -1697,7 +1746,10 @@
   "Shadow Stantler": {
     "types": [
       "Normal"
-    ]
+    ],
+    "cp": "1118–1236",
+    "cpBoost": "1398–1546",
+    "weather": "Partly Cloudy"
   },
   "Shadow Swampert": {
     "types": [
@@ -1738,7 +1790,10 @@
     "types": [
       "Grass",
       "Dark"
-    ]
+    ],
+    "cp": "1263–1333",
+    "cpBoost": "1579–1666",
+    "weather": "Sunny, Fog"
   },
   "Shinx": {
     "types": [
@@ -1763,7 +1818,10 @@
   "Sinistea": {
     "types": [
       "Ghost"
-    ]
+    ],
+    "cp": "603–650",
+    "cpBoost": "754–813",
+    "weather": "Fog"
   },
   "Sizzlipede": {
     "types": [
@@ -1937,7 +1995,10 @@
   "Trapinch": {
     "types": [
       "Ground"
-    ]
+    ],
+    "cp": "676–728",
+    "cpBoost": "845–910",
+    "weather": "Sunny"
   },
   "Trubbish": {
     "types": [

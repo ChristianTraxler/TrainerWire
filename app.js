@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "2.52";
+const APP_VERSION = "2.53";
 const REPORT_EMAIL = "ssj4gogeta2004@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -129,25 +129,31 @@ const POGO_EVO = {
   907:"25 Candy",908:"100 Candy",910:"25 Candy",911:"100 Candy",913:"25 Candy",914:"100 Candy",916:"50 Candy",918:"50 Candy",920:"50 Candy",922:"25 Candy",923:"100 Candy + Walk 10km",925:"25 Candy",927:"50 Candy",929:"25 Candy",930:"100 Candy",933:"25 Candy",934:"100 Candy",936:"50 Candy + Defeat 30 Psychic (Buddy)",937:"50 Candy + Defeat 30 Ghost (Buddy)",939:"50 Candy",941:"50 Candy",943:"50 Candy",945:"50 Candy",947:"50 Candy",949:"50 Candy",952:"50 Candy",954:"50 Candy",956:"50 Candy",958:"25 Candy",959:"100 Candy",961:"50 Candy",964:"50 Candy",966:"50 Candy",970:"50 Candy",972:"50 Candy",975:"50 Candy",979:"100 Candy + Defeat 30 Raids (Buddy)",980:"50 Candy",981:"50 Candy",982:"50 Candy",983:"100 Candy",997:"25 Candy",998:"100 Candy",1000:"100 Candy",1011:"50 Candy",1013:"50 Candy",1019:"100 Candy"
 };
 
-// --- RAID BOSS CP RANGES (verified from LeekDuck Apr 2026) ---
+// --- RAID BOSS CP RANGES (verified from LeekDuck/snacknap Apr 2026) ---
 const RAID_CP = {
   // 1-Star Raids
-  "Emolga":{normal:"876–933",boosted:"1095–1166",weather:"Rainy, Windy"},
-  "Dedenne":{normal:"991–1051",boosted:"1239–1315",weather:"Rainy, Cloudy"},
-  "Yamper":{normal:"410–450",boosted:"512–562",weather:"Rainy"},
-  "Pawmi":{normal:"326–363",boosted:"408–454",weather:"Rainy"},
+  "Alolan Vulpix":{normal:"463–504",boosted:"579–631",weather:"Snow"},
+  "Goomy":{normal:"514–557",boosted:"642–697",weather:"Rainy, Windy"},
+  "Rookidee":{normal:"344–380",boosted:"430–476",weather:"Windy"},
+  "Sinistea":{normal:"603–650",boosted:"754–813",weather:"Fog"},
   // 3-Star Raids
-  "Raichu":{normal:"1180–1247",boosted:"1476–1558",weather:"Rainy"},
-  "Alolan Raichu":{normal:"1238–1306",boosted:"1548–1633",weather:"Rainy, Windy"},
-  "Azumarill":{normal:"849–907",boosted:"1061–1134",weather:"Rainy, Cloudy"},
+  "Ampharos":{normal:"1554–1630",boosted:"1943–2037",weather:"Rainy"},
+  "Shiftry":{normal:"1263–1333",boosted:"1579–1666",weather:"Sunny, Fog"},
+  "Dhelmise":{normal:"1608–1685",boosted:"2010–2107",weather:"Fog, Sunny"},
   // 5-Star Raids
-  "Regidrago":{normal:"1614–1699",boosted:"2017–2124",weather:"Windy"},
+  "Kyogre":{normal:"2260–2351",boosted:"2825–2939",weather:"Rainy"},
   // Mega Raids
-  "Mega Manectric":{normal:"1267–1337",boosted:"1585–1672",weather:"Rainy"},
+  "Mega Aerodactyl":{normal:"1515–1590",boosted:"1894–1988",weather:"Partly Cloudy, Windy"},
   // Shadow Raids
+  "Shadow Dratini":{normal:"495–574",boosted:"618–717",weather:"Windy"},
+  "Shadow Gligar":{normal:"952–1061",boosted:"1191–1326",weather:"Sunny, Windy"},
+  "Shadow Cacnea":{normal:"618–709",boosted:"773–887",weather:"Sunny"},
+  "Shadow Joltik":{normal:"504–584",boosted:"631–730",weather:"Rainy"},
+  "Shadow Alolan Marowak":{normal:"941–1048",boosted:"1176–1311",weather:"Sunny, Fog"},
+  "Shadow Lapras":{normal:"1377–1509",boosted:"1721–1886",weather:"Rainy, Snow"},
+  "Shadow Stantler":{normal:"1118–1236",boosted:"1398–1546",weather:"Partly Cloudy"},
   "Shadow Latios":{normal:"2021–2178",boosted:"2526–2723",weather:"Windy"},
   // Upcoming (from event data - verified from LeekDuck when they were active)
-  "Kyogre":{normal:"2260–2351",boosted:"2825–2939",weather:"Rainy"},
   "Groudon":{normal:"2260–2351",boosted:"2825–2939",weather:"Sunny"},
   "Tapu Koko":{normal:"1730–1810",boosted:"2162–2263",weather:"Rainy or Cloudy"},
   "Tapu Lele":{normal:"1718–1799",boosted:"2148–2249",weather:"Windy or Cloudy"}
@@ -423,7 +429,8 @@ const SHINY_AVAILABLE = new Set([
   "Hitmonchan","Hitmonlee","Drampa","Sableye","Falinks","Passimian","Beldum",
   "Cryogonal","Chansey","Grookey",
   "Gyarados","Honedge","Dhelmise","Sinistea","Duraludon","Dreepy",
-  "Emolga","Raichu","Alolan Raichu","Azumarill","Regidrago"
+  "Emolga","Raichu","Alolan Raichu","Azumarill","Regidrago","Cacnea",
+  "Vulpix","Goomy","Ampharos","Shiftry"
 ]);
 function isShinyEligible(name) {
   if (name.includes("\u2728")) return true;
@@ -691,7 +698,7 @@ const EVENTS = [
   { id: 8, title: "Steeled Resolve", type: "Event", url: "https://pokemongo.com/news/steeled-resolve-2026", urlDisabled: false, date: "2026-04-28", endDate: "2026-05-04", time: "10:00 AM – 8:00 PM", color: "#95A5A6", icon: "\uD83D\uDEE1\uFE0F", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-9_Paldea/0968.webp", featured: true, summary: "Orthworm debuts! Steel-type event with Shiny Meltan from Mystery Boxes and GO Pass milestones. 'Steeled Resolve: Taken Over' sub-event begins April 30.", details: { bosses: ["Orthworm (debut) \u2728", "Magnemite \u2728", "Aron \u2728", "Ferroseed \u2728", "Pawniard \u2728", "Magnemite (Field Research) \u2728", "Pineco (Field Research) \u2728", "Nosepass (Field Research) \u2728", "Bronzor (Field Research) \u2728", "Drilbur (Field Research) \u2728", "Ferroseed (Field Research) \u2728", "Beldum (Field Research - rare) \u2728", "Shieldon (Field Research - rare) \u2728", "Honedge (1\u2605 Raid) \u2728", "Shieldon (1\u2605 Raid) \u2728", "Beldum (1\u2605 Raid) \u2728", "Orthworm (3\u2605 Raid) \u2728", "Meltan (Mystery Box) \u2728"], bonuses: ["Reduced Mystery Box cooldown timer", "Shiny Meltan available from Mystery Box during event", "No daily GO Point cap May 2\u20134"], milestones: [{ tier: "Tier 1", bonus: "2\u00D7 Catch Candy" }, { tier: "Tier 2", bonus: "Increased Stardust from Team GO Rocket defeats" }], goPass: { free: ["Encounters with Beldum, Pawniard, Honedge, Meltan, and more Steel-types", "1 Super Rocket Radar", "Mysterious Components and Shadow Shards", "2\u00D7 Catch Candy (Tier 1 milestone)", "Increased Stardust from Team GO Rocket defeats (Tier 2 milestone)"], deluxe: { price: "$4.99", rewards: ["Everything in the free track", "Extra Steel-type Pok\u00E9mon encounters", "2 Super Rocket Radars (1 extra)", "Upgraded milestone rewards", "Faster progression through ranks"] }, deluxePlus: { price: "$6.99", rewards: ["Everything in GO Pass Deluxe", "Instantly skip to Rank 7", "Web Store bundle: 10 Ultra Balls, 5 Max Revives, 1 Premium Battle Pass, 5 Max Potions"] } }, tips: ["Orthworm is brand new \u2014 catch and raid for candy.", "Use Mystery Box during the event for a shot at Shiny Meltan.", "Beldum and Shieldon are rare Field Research encounters \u2014 complete every task.", "Steeled Resolve: Taken Over sub-event begins April 30 \u2014 see the separate Taken Over card for full details.", "GO Pass Deluxe rewards include Super Rocket Radars and Shadow Shards.", "No GO Point cap May 2\u20134 \u2014 grind milestones that weekend."] } },
   { id: 9, title: "Steeled Resolve: Taken Over", type: "Event", url: "https://pokemongo.com/news/steeled-resolve-taken-over-2026", date: "2026-04-30", endDate: "2026-05-04", time: "12:00 AM – 8:00 PM", color: "#7B68EE", icon: "\uD83D\uDE80", iconImg: "assets/pokemon-images/icons/RocketTakeover.png", featured: true, summary: "Team GO Rocket takes over! Shadow Incarnate Forme Landorus via Super Rocket Radar. Shiny Varoom debuts in 12 km Eggs. Use Charged TMs to remove Frustration.", details: { bosses: ["Shadow Incarnate Forme Landorus", "Shadow Helioptile \u2728", "Shadow Dewpider \u2728", "Shadow Morelull \u2728", "Shadow Stufful \u2728", "Shiny Varoom (12 km Eggs - debut) \u2728", "Beldum (GO Pass encounter) \u2728", "Pawniard (GO Pass encounter) \u2728", "Honedge (GO Pass encounter) \u2728", "Meltan (GO Pass encounter) \u2728"], bonuses: ["Team GO Rocket appears more frequently at Pok\u00E9Stops and in balloons", "Charged TM can remove Frustration from Shadow Pok\u00E9mon", "Shadow Pok\u00E9mon from 1\u2605 and 3\u2605 Shadow Raids have wider variance of Attack, Defense, and HP", "Shiny Varoom available from 12 km Eggs for the first time", "No daily GO Point cap May 2\u20134"], milestones: [{ tier: "Tier 1", bonus: "2\u00D7 Catch Candy" }, { tier: "Tier 2", bonus: "Increased Stardust from Team GO Rocket defeats" }], goPass: { free: ["Encounters with Beldum, Pawniard, Honedge, Meltan, and more Steel-types", "1 Super Rocket Radar", "Mysterious Components and Shadow Shards", "2\u00D7 Catch Candy (Tier 1 milestone)", "Increased Stardust from Team GO Rocket defeats (Tier 2 milestone)"], deluxe: { price: "$4.99", rewards: ["Everything in the free track", "Extra Steel-type Pok\u00E9mon encounters", "2 Super Rocket Radars (1 extra)", "Upgraded milestone rewards", "Faster progression through ranks"] }, deluxePlus: { price: "$6.99", rewards: ["Everything in GO Pass Deluxe", "Instantly skip to Rank 7", "Web Store bundle: 10 Ultra Balls, 5 Max Revives, 1 Premium Battle Pass, 5 Max Potions"] } }, tips: ["Use Charged TMs on your best Shadow Pok\u00E9mon to remove Frustration \u2014 this is rare!", "Shadow Incarnate Forme Landorus requires a Super Rocket Radar from GO Pass.", "Shiny Varoom is brand new \u2014 hatch as many 12 km Eggs as possible.", "Shadow Helioptile, Dewpider, Morelull, and Stufful can all be Shiny from Rocket Grunts.", "Shadow Raids have wider variance of Attack, Defense, and HP \u2014 you could get very high or very low IVs.", "Field Research rewards Fast TMs, Charged TMs, and Mysterious Components.", "No GO Point cap May 2\u20134 \u2014 grind milestones hard that weekend."] } },
   { id: 20, title: "5\u2605 Raid: Regidrago", type: "Raid", date: "2026-04-01", endDate: "2026-04-07", time: "Raid Hour: Wed Apr 1, 6–7 PM", color: "#E74C3C", icon: "\uD83D\uDC09", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-8_Galar/0895.webp", featured: false, summary: "Regidrago in 5-Star Raids. Mega Manectric in Mega Raids. Shadow Latios weekends.", details: { bosses: ["Regidrago (5\u2605)", "Mega Manectric (Mega)", "Shadow Latios (weekends through May 5)", "Raichu (3\u2605)", "Alolan Raichu (3\u2605)", "Azumarill (3\u2605)", "Emolga (1\u2605)", "Dedenne (1\u2605)", "Yamper (1\u2605)", "Pawmi (1\u2605)"], bonuses: ["Raid Hour: Wednesday 6–7 PM"], tips: ["Weak to Fairy, Ice, Dragon.", "Shadow Latios on weekends — bring Purified Gems."], counters: { label: "Regidrago (Dragon)", pokemon: [{ name: "Mega Rayquaza", fast: "Dragon Tail", charged: "Dragon Ascent", chargedNote: "Signature" }, { name: "Shadow Salamence", fast: "Dragon Tail", charged: "Outrage" }, { name: "Shadow Dragonite", fast: "Dragon Tail", charged: "Outrage" }, { name: "Mega Gardevoir", fast: "Charm", charged: "Dazzling Gleam" }, { name: "Shadow Garchomp", fast: "Dragon Tail", charged: "Outrage" }, { name: "Mega Latios", fast: "Dragon Breath", charged: "Dragon Claw" }] } } },
-  { id: 21, title: "5\u2605 Raid: Kyogre", type: "Raid", date: "2026-04-08", endDate: "2026-04-14", time: "Raid Hour: Wed Apr 8, 6–7 PM", color: "#2980B9", icon: "\uD83C\uDF0A", featured: false, summary: "Kyogre returns. Top-tier Water attacker. Mega Aerodactyl in Mega Raids.", details: { bosses: ["Kyogre (5\u2605)", "Mega Aerodactyl (Mega)", "Shadow Latios (weekends)"], bonuses: ["Raid Hour: Wednesday 6–7 PM"], tips: ["Top-tier Water attacker — raid heavily.", "Weak to Grass and Electric.", "Shiny Kyogre is a gorgeous pink whale."], counters: { label: "Kyogre (Water)", pokemon: [{ name: "Mega Sceptile", fast: "Bullet Seed", charged: "Frenzy Plant", chargedNote: "CD Exclusive" }, { name: "Kartana", fast: "Razor Leaf", charged: "Leaf Blade" }, { name: "Shadow Raikou", fast: "Thunder Shock", charged: "Wild Charge" }, { name: "Zekrom", fast: "Charge Beam", charged: "Fusion Bolt" }, { name: "Shadow Electivire", fast: "Thunder Shock", charged: "Wild Charge" }, { name: "Shadow Tangrowth", fast: "Vine Whip", charged: "Power Whip" }] }, catchCP: [{ name: "Kyogre", normal: "2260–2351", boosted: "2825–2939", weather: "Rainy" }] } },
+  { id: 21, title: "5\u2605 Raid: Kyogre", type: "Raid", date: "2026-04-08", endDate: "2026-04-14", time: "Raid Hour: Wed Apr 8, 6–7 PM", color: "#2980B9", icon: "\uD83C\uDF0A", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-3_Hoenn/0382.webp", featured: false, summary: "Kyogre returns. Top-tier Water attacker. Mega Aerodactyl in Mega Raids.", details: { bosses: ["Kyogre (5\u2605)", "Mega Aerodactyl (Mega)", "Shadow Latios (weekends)"], bonuses: ["Raid Hour: Wednesday 6–7 PM"], tips: ["Top-tier Water attacker — raid heavily.", "Weak to Grass and Electric.", "Shiny Kyogre is a gorgeous pink whale."], counters: { label: "Kyogre (Water)", pokemon: [{ name: "Mega Sceptile", fast: "Bullet Seed", charged: "Frenzy Plant", chargedNote: "CD Exclusive" }, { name: "Kartana", fast: "Razor Leaf", charged: "Leaf Blade" }, { name: "Shadow Raikou", fast: "Thunder Shock", charged: "Wild Charge" }, { name: "Zekrom", fast: "Charge Beam", charged: "Fusion Bolt" }, { name: "Shadow Electivire", fast: "Thunder Shock", charged: "Wild Charge" }, { name: "Shadow Tangrowth", fast: "Vine Whip", charged: "Power Whip" }] }, catchCP: [{ name: "Kyogre", normal: "2260–2351", boosted: "2825–2939", weather: "Rainy" }] } },
   { id: 22, title: "5\u2605 Raid: Groudon", type: "Raid", date: "2026-04-15", endDate: "2026-04-21", time: "Raid Hour: Wed Apr 15, 6–7 PM", color: "#C0392B", icon: "\uD83C\uDF0B", featured: false, summary: "Groudon returns. Best Ground-type attacker. Mega Alakazam in Mega Raids.", details: { bosses: ["Groudon (5\u2605)", "Mega Alakazam (Mega)", "Shadow Latios (weekends)"], bonuses: ["Raid Hour: Wednesday 6–7 PM"], tips: ["Best Ground attacker — prioritize high-IV catches.", "Weak to Water, Grass, Ice.", "Shiny Groudon (golden) is one of the best shinies."], counters: { label: "Groudon (Ground)", pokemon: [{ name: "Mega Swampert", fast: "Water Gun", charged: "Hydro Cannon", chargedNote: "CD Exclusive" }, { name: "Kartana", fast: "Razor Leaf", charged: "Leaf Blade" }, { name: "Shadow Swampert", fast: "Water Gun", charged: "Hydro Cannon", chargedNote: "CD Exclusive" }, { name: "Mega Sceptile", fast: "Bullet Seed", charged: "Frenzy Plant", chargedNote: "CD Exclusive" }, { name: "Shadow Mamoswine", fast: "Powder Snow", charged: "Avalanche" }, { name: "Kyogre", fast: "Waterfall", charged: "Surf" }] }, catchCP: [{ name: "Groudon", normal: "2260–2351", boosted: "2825–2939", weather: "Sunny" }] } },
   { id: 23, title: "5\u2605 Raid: Tapu Koko", type: "Raid", date: "2026-04-22", endDate: "2026-04-28", time: "Raid Hour: Wed Apr 22, 6–7 PM", color: "#F39C12", icon: "\u26A1", featured: false, summary: "Tapu Koko in 5-Star Raids. Electric/Fairy. Mega Sharpedo in Mega Raids.", details: { bosses: ["Tapu Koko (5\u2605)", "Mega Sharpedo (Mega)", "Shadow Latios (weekends)"], bonuses: ["Raid Hour: Wednesday 6–7 PM"], tips: ["Solid PvP pick — Electric/Fairy.", "Weak to Poison and Ground.", "Shiny has black/orange scheme."], counters: { label: "Tapu Koko (Electric/Fairy)", pokemon: [{ name: "Primal Groudon", fast: "Mud Shot", charged: "Precipice Blades", chargedNote: "Signature" }, { name: "Shadow Garchomp", fast: "Mud Shot", charged: "Earth Power", chargedNote: "CD Exclusive" }, { name: "Shadow Excadrill", fast: "Mud-Slap", charged: "Drill Run" }, { name: "Mega Gengar", fast: "Lick", charged: "Sludge Bomb" }, { name: "Shadow Rhyperior", fast: "Mud-Slap", charged: "Earthquake" }, { name: "Landorus (Therian)", fast: "Mud Shot", charged: "Earth Power" }] }, catchCP: [{ name: "Tapu Koko", normal: "1730–1810", boosted: "2162–2263", weather: "Rainy or Cloudy" }] } },
   { id: 24, title: "5\u2605 Raid: Tapu Lele", type: "Raid", date: "2026-04-29", endDate: "2026-05-05", time: "Raid Hour: Wed Apr 29, 6–7 PM", color: "#FF6B81", icon: "\uD83E\uDD8B", featured: false, summary: "Tapu Lele closes April. Mega Banette. Final week for Shadow Latios.", details: { bosses: ["Tapu Lele (5\u2605)", "Mega Banette (Mega)", "Shadow Latios (final week)"], bonuses: ["Raid Hour: Wednesday 6–7 PM", "Last week for Shadow Latios"], tips: ["Final week for Shadow Latios — get raids in before May 5.", "Tapu Lele weak to Ghost, Poison, Steel."], counters: { label: "Tapu Lele (Psychic/Fairy)", pokemon: [{ name: "Mega Gengar", fast: "Lick", charged: "Shadow Ball" }, { name: "Shadow Metagross", fast: "Bullet Punch", charged: "Meteor Mash", chargedNote: "CD Exclusive" }, { name: "Origin Giratina", fast: "Shadow Claw", charged: "Shadow Force", chargedNote: "Signature" }, { name: "Shadow Chandelure", fast: "Hex", charged: "Shadow Ball" }, { name: "Mega Banette", fast: "Shadow Claw", charged: "Shadow Ball" }, { name: "Shadow Excadrill", fast: "Metal Claw", charged: "Iron Head" }] }, catchCP: [{ name: "Tapu Lele", normal: "1718–1799", boosted: "2148–2249", weather: "Windy or Cloudy" }] } },
@@ -700,7 +707,7 @@ const EVENTS = [
   { id: 61, title: "Bug Out 2026", type: "Event", url: "https://pokemongo.com/news/bug-out-2026", date: "2026-03-17", endDate: "2026-03-23", time: "10:00 AM \u2013 8:00 PM", color: "#2ECC71", icon: "\uD83D\uDC1B", featured: false, summary: "Blipbug, Dottler, and Orbeetle debut! Shiny Sizzlipede released. Rotating Lure spawns with Pinsir, Scizor, and Kleavor in 3-Star Raids.", details: { bosses: ["Blipbug (debut)", "Sizzlipede (Shiny debut)", "Caterpie", "Dwebble", "Nymble", "Scyther", "Blipbug (1\u2605 Raid)", "Pinsir (3\u2605 Raid)", "Scizor (3\u2605 Raid)", "Kleavor (3\u2605 Raid)", "Paras (Lures Mar 17\u201319)", "Cutiefly (Lures Mar 19\u201321)", "Combee (Lures Mar 21\u201323)"], bonuses: ["2\u00D7 XP for Nice Throws or better (GO Pass Tier 1)", "2\u00D7 Catch Candy (GO Pass Tier 2)", "3\u00D7 Catch Candy (GO Pass Deluxe Tier 2)", "Rotating Lure Module spawns every 2 days", "GO Pass Deluxe $4.99 or Deluxe + 6 Ranks $6.99", "Boosted Shiny rates for Lure Pok\u00E9mon"], tips: ["Blipbug evolves to Dottler (25 Candy) then Orbeetle (100 Candy) \u2014 stock up.", "Shiny Sizzlipede is brand new \u2014 check every one you see.", "Pinsir, Scizor, and Kleavor in 3-Star Raids can all be Shiny.", "Paras, Combee, and Cutiefly from Lures have boosted Shiny rates.", "GO Pass rewards expire March 25 at 8 PM."] } },
   { id: 29, title: "Max Battle Day: Gigantamax Pikachu", type: "Max Battle", date: "2026-03-28", endDate: null, time: "2:00 PM – 5:00 PM", color: "#F1C40F", icon: "\u26A1", featured: false, summary: "Gigantamax Pikachu debuted in 6-Star Max Battles! Pikachu caught from Max Battles cannot evolve. Shiny Gigantamax Pikachu was available.", details: { bosses: ["Gigantamax Pikachu (6\u2605 Max Battle debut)"], bonuses: ["2× Max Particles from exploring (12 AM – 5 PM)", "Increased Max Particle storage limit", "3 Special Trades for the day", "Power Spots refreshed more frequently", "Gigantamax Pikachu on all Power Spots", "Remote Raid limit increased to 20 (Mar 27 5 PM – Mar 28 8 PM PDT)"], tips: ["Gigantamax Pikachu cannot evolve — it's a standalone collector Pokémon.", "As a pure Electric-type, Ground-type counters were the way to go.", "Paid Timed Research ($4.99) rewarded 1 Max Mushroom, 25,000 XP, 6,400 Max Particles, and 2× XP from Max Battles.", "Coordinating with a full group of 4 was essential for 6-Star difficulty."] } },
   { id: 63, title: "Max Monday: D-Max Woobat", type: "Max Battle", date: "2026-03-30", endDate: null, time: "6:00 AM – 9:00 PM", color: "#A890F0", icon: "\uD83D\uDCA5", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-5_Unova/0527.webp", featured: false, summary: "Dynamax Woobat featured at Power Spots this week.", details: { bosses: ["Dynamax Woobat"], bonuses: ["Max Monday: 6 AM – 9 PM Mar 30", "Power Spots all week", "Extra Power Spots on Monday"], tips: ["Woobat evolves into Swoobat with high friendship.", "Max Mondays have more Power Spots."] } },
-  { id: 30, title: "Dynamax Trapinch (Debut)", type: "Max Battle", date: "2026-04-06", endDate: "2026-04-12", time: "Max Monday: 6–7 PM", color: "#E67E22", icon: "\uD83C\uDFDC\uFE0F", featured: false, summary: "Dynamax Trapinch debuts at Power Spots.", details: { bosses: ["Dynamax Trapinch (debut)"], bonuses: ["Max Monday: 6–7 PM Apr 6", "Power Spots all week", "Extra Power Spots on Monday"], tips: ["Trapinch evolves into Flygon.", "Max Mondays have more Power Spots."] } },
+  { id: 30, title: "Dynamax Trapinch (Debut)", type: "Max Battle", date: "2026-04-06", endDate: "2026-04-12", time: "Max Monday: 6–7 PM", color: "#E67E22", icon: "\uD83C\uDFDC\uFE0F", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-3_Hoenn/0328.webp", featured: false, summary: "Dynamax Trapinch debuts at Power Spots.", details: { bosses: ["Dynamax Trapinch (debut)"], bonuses: ["Max Monday: 6–7 PM Apr 6", "Power Spots all week", "Extra Power Spots on Monday"], tips: ["Trapinch evolves into Flygon.", "Max Mondays have more Power Spots."] } },
   { id: 31, title: "Dynamax Drilbur", type: "Max Battle", date: "2026-04-13", endDate: "2026-04-19", time: "Max Monday: 6–7 PM", color: "#6D4C41", icon: "\u26CF\uFE0F", featured: false, summary: "Dynamax Drilbur at Power Spots. Excadrill is top-tier.", details: { bosses: ["Dynamax Drilbur"], bonuses: ["Max Monday: 6–7 PM Apr 13", "Power Spots all week"], tips: ["Excadrill is top Ground AND Steel attacker.", "Overlaps with Sustainability Week."] } },
   { id: 32, title: "Dynamax Regirock (Debut)", type: "Max Battle", date: "2026-04-20", endDate: "2026-04-26", time: "Max Monday: 6–7 PM", color: "#D4A574", icon: "\uD83E\uDEA8", featured: true, summary: "Dynamax Regirock debuts at Power Spots! Another Legendary Regi joins the Dynamax roster.", details: { bosses: ["Dynamax Regirock (debut)"], bonuses: ["Max Monday: 6–7 PM Apr 20", "Power Spots all week"], tips: ["Headline event — expect higher difficulty.", "Coordinate with your local group.", "Coordinate with your local group for max rewards."] } },
   { id: 33, title: "Dynamax Shuckle", type: "Max Battle", date: "2026-04-27", endDate: "2026-05-03", time: "Max Monday: 6–7 PM", color: "#FF7043", icon: "\uD83D\uDC1B", featured: false, summary: "Dynamax Shuckle rounds out April. Absurdly tanky.", details: { bosses: ["Dynamax Shuckle"], bonuses: ["Max Monday: 6–7 PM Apr 27"], tips: ["Highest Defense in the game.", "Collector piece more than meta pick."] } },
@@ -725,19 +732,19 @@ const ANNOUNCEMENTS = [
 
 const CURRENT_RAID_BOSSES = {
   "1-Star Raids": [
-    "Emolga (1\u2605 Raid)","Dedenne (1\u2605 Raid)","Yamper (1\u2605 Raid)","Pawmi (1\u2605 Raid)"
+    "Alolan Vulpix (1\u2605 Raid)","Goomy (1\u2605 Raid)","Rookidee (1\u2605 Raid)","Sinistea (1\u2605 Raid)"
   ],
   "3-Star Raids": [
-    "Raichu (3\u2605 Raid)","Alolan Raichu (3\u2605 Raid)","Azumarill (3\u2605 Raid)"
+    "Ampharos (3\u2605 Raid)","Shiftry (3\u2605 Raid)","Dhelmise (3\u2605 Raid)"
   ],
   "5-Star Raids": [
-    "Regidrago (5\u2605 Raid)"
+    "Kyogre (5\u2605 Raid)"
   ],
   "Mega Raids": [
-    "Mega Manectric (Mega)"
+    "Mega Aerodactyl (Mega)"
   ],
   "Shadow 1-Star Raids": [
-    "Shadow Dratini (1\u2605 Shadow Raid)","Shadow Cacnea (1\u2605 Shadow Raid)","Shadow Gligar (1\u2605 Shadow Raid)","Shadow Joltik (1\u2605 Shadow Raid)"
+    "Shadow Dratini (1\u2605 Shadow Raid)","Shadow Gligar (1\u2605 Shadow Raid)","Shadow Cacnea (1\u2605 Shadow Raid)","Shadow Joltik (1\u2605 Shadow Raid)"
   ],
   "Shadow 3-Star Raids": [
     "Shadow Alolan Marowak (3\u2605 Shadow Raid)","Shadow Lapras (3\u2605 Shadow Raid)","Shadow Stantler (3\u2605 Shadow Raid)"
@@ -772,6 +779,7 @@ const CURRENT_MAX_BATTLES = {
     { name: "D-Max Sobble", dex: 816 },
     { name: "D-Max Spheal", dex: 363 },
     { name: "D-Max Squirtle", dex: 7 },
+    { name: "D-Max Trapinch", dex: 328 },
     { name: "D-Max Trubbish", dex: 568 },
     { name: "D-Max Woobat", dex: 527 },
     { name: "D-Max Wooloo", dex: 831 }
@@ -794,9 +802,9 @@ const CURRENT_MAX_BATTLES = {
     { name: "D-Max Passimian", dex: 766 },
     { name: "D-Max Sableye", dex: 302 }
   ],
-  "5-Star Max Battles": [
-    { name: "D-Max Regice", dex: 378 }
-  ],
+  // "5-Star Max Battles": [
+  //   { name: "D-Max Regice", dex: 378 }
+  // ],
   // "6-Star Max Battles": [
   //   { name: "Gigantamax Venusaur", dex: 3, gmax: true },
   //   { name: "Gigantamax Charizard", dex: 6, gmax: true },
@@ -3191,7 +3199,7 @@ function render() {
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:${isMobile ? 10 : 16}px">
           <div><h2 style="margin:0 0 4px 0;font-size:${isMobile ? 18 : 24}px;font-weight:800;color:${th.text};display:flex;align-items:center;gap:8px">${(() => {
-            if (hero.iconImg) return `<img src="${hero.iconImg}" style="width:${isMobile ? 36 : 42}px;height:${isMobile ? 36 : 42}px;object-fit:contain;margin-left:-4px" onerror="this.outerHTML='${hero.icon}'" />`;
+            if (hero.iconImg) return `<img src="${hero.iconImg}" style="width:${isMobile ? 60 : 72}px;height:${isMobile ? 60 : 72}px;object-fit:contain;margin-left:-4px" onerror="this.outerHTML='${hero.icon}'" />`;
             const heroPkmn = (hero.type === "Raid" || hero.type === "Max Battle") && hero.details && hero.details.bosses && hero.details.bosses[0] ? getPokemonImg(hero.details.bosses[0]) : null;
             return heroPkmn ? `<img src="${heroPkmn.url}" style="width:${isMobile ? 36 : 42}px;height:${isMobile ? 36 : 42}px;object-fit:contain" onerror="this.outerHTML='${hero.icon}'" />` : hero.icon;
           })()} ${esc(hero.title)}</h2>
