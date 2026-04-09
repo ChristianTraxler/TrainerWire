@@ -1244,10 +1244,14 @@ function getReporterId() {
 let _nestsCache = [];
 async function loadNestsFromSupabase() {
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/nests?select=*&order=created_at.desc`, {
+    const migId = getCurrentMigrationId();
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/nests?select=*&order=created_at.desc&or=(migration_id.eq.${migId},migration_id.is.null)`, {
       headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` }
     });
-    if (res.ok) _nestsCache = await res.json();
+    if (res.ok) {
+      const nests = await res.json();
+      _nestsCache = nests.filter(n => !n.migration_id || n.migration_id === migId);
+    }
   } catch {}
   return _nestsCache;
 }
@@ -1303,12 +1307,14 @@ async function checkNestMigration() {
   const currentId = getCurrentMigrationId();
   if (currentId > _lastMigrationId) {
     _lastMigrationId = currentId;
-    await fetch(`${SUPABASE_URL}/rest/v1/nests?id=gt.0`, {
+    // Immediately clear stale nests from view by re-fetching (filtered by migration_id)
+    await loadNestsFromSupabase();
+    if (state.tab === "nests") render();
+    // Background cleanup: delete old nests from Supabase
+    fetch(`${SUPABASE_URL}/rest/v1/nests?migration_id=lt.${currentId}`, {
       method: "DELETE",
       headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` }
-    });
-    _nestsCache = [];
-    if (state.tab === "nests") render();
+    }).catch(() => {});
   }
 }
 async function geocodeLocation(query) {
@@ -1348,7 +1354,7 @@ async function insertNest(pokemon, location) {
   await fetch(`${SUPABASE_URL}/rest/v1/nests`, {
     method: "POST",
     headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, "Content-Type": "application/json", Prefer: "return=minimal", "x-reporter-id": reporterId },
-    body: JSON.stringify({ pokemon, location, reporter_id: reporterId, lat, lng })
+    body: JSON.stringify({ pokemon, location, reporter_id: reporterId, lat, lng, migration_id: getCurrentMigrationId() })
   });
   await loadNestsFromSupabase();
 }
