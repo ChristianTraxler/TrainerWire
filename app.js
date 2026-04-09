@@ -3808,7 +3808,7 @@ function render() {
       }).join("");
       eggsTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
         <div style="text-align:center;padding:10px">
-          <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text};display:flex;align-items:center;justify-content:center;gap:8px"><img src="assets/pokemon-images/eggs/egg-2.png" style="width:${isMobile ? 24 : 30}px;height:${isMobile ? 24 : 30}px;object-fit:contain" /> Egg Hatches</h2>
+          <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text};display:flex;align-items:center;justify-content:center;gap:8px"><img src="assets/pokemon-images/eggs/egg-2.png" style="width:${isMobile ? 34 : 38}px;height:${isMobile ? 34 : 38}px;object-fit:contain;position:relative;top:-4px" /> Egg Hatches</h2>
           <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Current egg pool by distance tier</p>
         </div>
         <div style="display:flex;gap:${isMobile ? 6 : 8}px;overflow-x:auto;padding:0 4px 6px;-webkit-overflow-scrolling:touch;scrollbar-width:none">${eggNavHTML}</div>
