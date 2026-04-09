@@ -1829,6 +1829,19 @@
     ],
     "cp": "275–308"
   },
+  "Rampardos": {
+    "types": [
+      "Rock"
+    ]
+  },
+  "Entei": {
+    "types": [
+      "Fire"
+    ],
+    "cp": "1834–1984",
+    "cpBoost": "2293–2480",
+    "weather": "Sunny"
+  },
   "Rapidash": {
     "types": [
       "Fire"
