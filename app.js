@@ -2763,7 +2763,9 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
   const typeBadges = data.types.map(t => `<span style="display:inline-block;padding:4px 14px;border-radius:20px;background:${typeColor(t)};color:#fff;font-size:13px;font-weight:600;text-transform:capitalize;margin-right:6px;text-shadow:0 1px 2px rgba(0,0,0,0.3)">${t}</span>`).join("");
   const heightM = (data.height / 10).toFixed(1);
   const weightKg = (data.weight / 10).toFixed(1);
-  const statBars = data.stats.map(s => {
+  const SHOWN_STATS = ["hp", "attack", "defense"];
+  // const SHOWN_STATS = ["hp", "attack", "defense", "special-attack", "special-defense", "speed"];
+  const statBars = data.stats.filter(s => SHOWN_STATS.includes(s.name)).map(s => {
     const pct = Math.min((s.value / 255) * 100, 100);
     const color = STAT_COLORS[s.name] || primaryColor;
     const label = STAT_LABELS[s.name] || s.name;
@@ -2775,7 +2777,7 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
       </div>
     </div>`;
   }).join("");
-  const totalStats = data.stats.reduce((sum, s) => sum + s.value, 0);
+  const totalStats = data.stats.filter(s => SHOWN_STATS.includes(s.name)).reduce((sum, s) => sum + s.value, 0);
   let evoHtml = "";
   if (evolutions && evolutions.length > 1) {
     function evoCard(evo) {
@@ -3105,6 +3107,11 @@ function getEventsForDate(dateStr) {
     const end = ev.endDate || ev.date;
     return dateStr >= ev.date && dateStr <= end;
   });
+}
+
+function scrollToEggTier(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function setFilter(f) {
@@ -3754,21 +3761,22 @@ function render() {
         const tierLabel = tier;
         const eggImg = eggUrl ? `<img src="${eggUrl}" style="width:28px;height:28px;object-fit:contain" onerror="this.style.display='none'" />` : "";
         const badgeHTML = isAdventureSync ? `<span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${tierColor};background:${th.accentBg(tierColor)};padding:3px 10px;border-radius:10px;margin-left:auto;white-space:nowrap">Adventure Sync</span>` : isRoute ? `<span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${tierColor};background:${th.accentBg(tierColor)};padding:3px 10px;border-radius:10px;margin-left:auto;white-space:nowrap">Route Gift from Mateo</span>` : "";
-        eggSectionsHTML += `<div style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden">
+        const tierId = "egg-" + tier.replace(/\s+/g, "-").toLowerCase();
+        eggSectionsHTML += `<div id="${tierId}" style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden;scroll-margin-top:${isMobile ? 80 : 100}px">
           <div style="padding:10px 14px;background:${th.accentBgSubtle(tierColor)};border-bottom:1.5px solid ${th.border};display:flex;align-items:center;gap:8px">
             ${eggImg}
             <span style="font-size:12px;font-weight:700;color:${th.text};letter-spacing:0.5px;text-transform:uppercase">${tierLabel}</span>
             ${badgeHTML}
           </div>
-          <div style="padding:8px;display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${pokemon.map(name => {
+          <div style="padding:${isMobile ? "10px" : "8px"};display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-wrap:wrap;gap:6px"}">${pokemon.map(name => {
             const pkmn = getPokemonImg(name);
-            const imgSize = breakpoint !== "mobile" ? 120 : 60;
+            const imgSize = breakpoint !== "mobile" ? 120 : 100;
             let imgEl = pokemonImgHTML(pkmn, imgSize);
             if (imgEl) imgEl = wrapShinySparkles(imgEl, name, imgSize);
             const displayName = name.replace(/\s*\(Male\)/," \u2642").replace(/\s*\(Female\)/," \u2640");
             const eggData = getRaidBossData(name);
-            const eggTypesHTML = eggData ? `<div style="display:flex;gap:3px;margin-top:3px;flex-wrap:wrap;${breakpoint !== "mobile" ? "justify-content:center" : ""}">${eggData.types.map(t =>
-              `<span style="font-size:${breakpoint !== "mobile" ? 10 : 11}px;font-weight:700;color:#fff;background:${TYPE_COLORS[t] || "#888"};padding:1px 6px;border-radius:8px">${t}</span>`
+            const eggTypesHTML = eggData ? `<div style="display:flex;gap:3px;margin-top:2px;flex-wrap:wrap;justify-content:center">${eggData.types.map(t =>
+              `<span style="font-size:${breakpoint !== "mobile" ? 10 : 9}px;font-weight:700;color:#fff;background:${TYPE_COLORS[t] || "#888"};padding:1px 5px;border-radius:6px">${t}</span>`
             ).join("")}</div>` : "";
             if (breakpoint !== "mobile" && pkmn) {
               return `<div style="border-radius:12px;background:${th.accentBgSubtle(tierColor)};border:1.5px solid ${th.border};flex:1;min-width:140px;max-width:200px;display:flex;flex-direction:column;align-items:center;padding:12px 8px;text-align:center">
@@ -3777,16 +3785,30 @@ function render() {
                 ${eggTypesHTML}
               </div>`;
             }
-            return `<div style="border-radius:9px;background:${th.accentBgSubtle(tierColor)};width:100%;display:flex;align-items:center;gap:10px;padding:${pkmn ? "4px" : "7px"} 12px;font-size:13.5px;color:${th.textSecondary};line-height:1.45">${imgEl
-              || `<div style="width:5px;height:5px;border-radius:50%;background:${tierColor};flex-shrink:0"></div>`}<div><div style="font-weight:700;color:${th.text};font-size:13px">${esc(displayName)}</div>${eggTypesHTML}</div></div>`;
+            return `<div style="border-radius:10px;background:${th.accentBgSubtle(tierColor)};border:1px solid ${th.border};width:calc(33.33% - 4px);display:flex;flex-direction:column;align-items:center;padding:8px 4px 6px;text-align:center;box-sizing:border-box">
+              ${imgEl || `<div style="width:100px;height:100px;display:flex;align-items:center;justify-content:center"><div style="width:8px;height:8px;border-radius:50%;background:${tierColor}"></div></div>`}
+              <div style="font-weight:700;color:${th.text};font-size:11px;margin-top:2px;line-height:1.2;word-break:break-word">${esc(displayName)}</div>
+              ${eggTypesHTML}
+            </div>`;
           }).join("")}</div>
         </div>`;
       });
+      const eggNavHTML = Object.keys(CURRENT_EGGS).map(tier => {
+        const tierId = "egg-" + tier.replace(/\s+/g, "-").toLowerCase();
+        const tierColor = EGG_TIER_COLORS[tier] || "#78C850";
+        const eggUrl = EGG_TIER_IMAGES[tier] || "";
+        const shortLabel = tier.replace(" Eggs", "").replace(" Adventure Sync", " AS").replace(" Route Eggs", " Route");
+        return `<div onclick="scrollToEggTier('${tierId}')" style="display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:${isMobile ? "6px 8px" : "8px 12px"};border-radius:12px;background:${th.accentBgSubtle(tierColor)};border:1.5px solid ${th.border};min-width:${isMobile ? "60px" : "70px"};transition:all 0.15s ease" onmouseenter="this.style.borderColor='${tierColor}';this.style.transform='translateY(-1px)'" onmouseleave="this.style.borderColor='${th.border}';this.style.transform='none'">
+          ${eggUrl ? `<img src="${eggUrl}" style="width:${isMobile ? 28 : 34}px;height:${isMobile ? 28 : 34}px;object-fit:contain" onerror="this.style.display='none'" />` : ""}
+          <span style="font-size:${isMobile ? 10 : 11}px;font-weight:700;color:${th.text};text-align:center;line-height:1.2">${shortLabel}</span>
+        </div>`;
+      }).join("");
       eggsTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
         <div style="text-align:center;padding:10px">
           <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text};display:flex;align-items:center;justify-content:center;gap:8px"><img src="assets/pokemon-images/eggs/egg-2.png" style="width:${isMobile ? 24 : 30}px;height:${isMobile ? 24 : 30}px;object-fit:contain" /> Egg Hatches</h2>
           <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Current egg pool by distance tier</p>
         </div>
+        <div style="display:flex;gap:${isMobile ? 6 : 8}px;overflow-x:auto;padding:0 4px 6px;-webkit-overflow-scrolling:touch;scrollbar-width:none">${eggNavHTML}</div>
         <div style="text-align:center;font-size:11px;color:${th.textMuted};font-weight:500;margin-top:-10px">Data sourced from LeekDuck.com</div>
         ${eggSectionsHTML}
       </div>`;
