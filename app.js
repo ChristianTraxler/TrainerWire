@@ -3847,7 +3847,7 @@ function render() {
         const eggImg = eggUrl ? `<img src="${eggUrl}" style="width:28px;height:28px;object-fit:contain" onerror="this.style.display='none'" />` : "";
         const badgeHTML = isAdventureSync ? `<span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${tierColor};background:${th.accentBg(tierColor)};padding:3px 10px;border-radius:10px;margin-left:auto;white-space:nowrap">Adventure Sync</span>` : isRoute ? `<span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${tierColor};background:${th.accentBg(tierColor)};padding:3px 10px;border-radius:10px;margin-left:auto;white-space:nowrap">Route Gift from Mateo</span>` : "";
         const tierId = "egg-" + tier.replace(/\s+/g, "-").toLowerCase();
-        eggSectionsHTML += `<div id="${tierId}" style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden;scroll-margin-top:${isMobile ? 80 : 100}px">
+        eggSectionsHTML += `<div id="${tierId}" style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden;scroll-margin-top:calc(${isMobile ? 80 : 100}px + env(safe-area-inset-top, 0px))">
           <div style="padding:10px 14px;background:${th.accentBgSubtle(tierColor)};border-bottom:1.5px solid ${th.border};display:flex;align-items:center;gap:8px">
             ${eggImg}
             <span style="font-size:12px;font-weight:700;color:${th.text};letter-spacing:0.5px;text-transform:uppercase">${tierLabel}</span>
@@ -4620,7 +4620,7 @@ function renderSidebar(th) {
     { id: "raids", icon: "\u2694\uFE0F", label: "Raids" },
     { id: "max", icon: "\uD83D\uDCA5", label: "Max Battles" },
     { id: "rocket", icon: "", iconImg: "assets/pokemon-images/icons/teamrocket_r_full.png", label: "Rocket" },
-    { id: "eggs", icon: "", iconImg: "assets/pokemon-images/eggs/egg-2.png", iconSize: 30, label: "Eggs" }
+    { id: "eggs", icon: "", iconImg: "assets/pokemon-images/eggs/egg-2.png", iconSize: 34, label: "Eggs" }
   ];
   const tabs = [
     { id: "home", icon: "\uD83C\uDFE0", label: "Home" },
@@ -4658,7 +4658,7 @@ function renderSidebar(th) {
               ${t.subTabs.map(st => `<button onclick="sidebarNav('${st.id}')" style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;border:none;background:${state.tab === st.id ? th.accentBgSubtle("#E74C3C") : "transparent"};cursor:pointer;font-family:inherit;transition:background 0.15s ease;width:100%;text-align:left"
                 onmouseenter="this.style.background='${th.surfaceHover}'"
                 onmouseleave="this.style.background='${state.tab === st.id ? th.accentBgSubtle("#E74C3C") : "transparent"}'">
-                ${st.iconImg ? `<img src="${st.iconImg}" style="width:${st.iconSize||22}px;height:${st.iconSize||22}px;object-fit:contain;${st.id === "eggs" ? "position:relative;top:-4px" : ""}" alt="${st.label}" />` : `<span style="font-size:18px">${st.icon}</span>`}
+                ${st.iconImg ? `<span style="display:flex;align-items:center;justify-content:center;width:22px"><img src="${st.iconImg}" style="width:${st.iconSize||22}px;height:${st.iconSize||22}px;object-fit:contain;position:relative;top:-4px" alt="${st.label}" /></span>` : `<span style="font-size:18px">${st.icon}</span>`}
                 <span style="font-size:15px;font-weight:${state.tab === st.id ? "700" : "600"};color:${state.tab === st.id ? th.text : th.textSecondary}">${st.label}</span>
               </button>`).join("")}
             </div>
