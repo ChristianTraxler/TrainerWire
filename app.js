@@ -447,7 +447,7 @@ const SHINY_AVAILABLE = new Set([
   "Vulpix","Goomy","Ampharos","Shiftry",
   "Chikorita","Cyndaquil","Totodile","Treecko","Torchic","Mudkip",
   "Turtwig","Chimchar","Piplup","Snivy","Tepig","Oshawott",
-  "Chespin","Fennekin","Froakie","Rowlet","Litten","Popplio","Sprigatito",
+  "Chespin","Fennekin","Froakie","Rowlet","Litten","Popplio","Sprigatito","Fuecoco","Quaxly",
   "Dunsparce","Wimpod","Tadbulb","Cleffa","Igglybuff","Smoochum","Larvesta",
   "Snom","Fidough","Munchlax","Indeedee",
   "Chingling","Happiny","Audino","Skarmory",
