@@ -2034,6 +2034,12 @@
       "Fire"
     ]
   },
+  "Shadow Dewpider": {
+    "types": [
+      "Water",
+      "Bug"
+    ]
+  },
   "Shadow Dragonite": {
     "types": [
       "Dragon",
@@ -2052,6 +2058,14 @@
     "types": [
       "Electric"
     ]
+  },
+  "Shadow Entei": {
+    "types": [
+      "Fire"
+    ],
+    "cp": "1834–1984",
+    "cpBoost": "2293–2480",
+    "weather": "Sunny"
   },
   "Shadow Excadrill": {
     "types": [
@@ -2073,6 +2087,18 @@
     "cp": "952–1061",
     "cpBoost": "1191–1326",
     "weather": "Sunny, Windy"
+  },
+  "Shadow Helioptile": {
+    "types": [
+      "Electric",
+      "Normal"
+    ]
+  },
+  "Shadow Incarnate Forme Landorus": {
+    "types": [
+      "Ground",
+      "Flying"
+    ]
   },
   "Shadow Joltik": {
     "types": [
@@ -2113,9 +2139,20 @@
       "Psychic"
     ]
   },
+  "Shadow Morelull": {
+    "types": [
+      "Grass",
+      "Fairy"
+    ]
+  },
   "Shadow Raikou": {
     "types": [
       "Electric"
+    ]
+  },
+  "Shadow Rampardos": {
+    "types": [
+      "Rock"
     ]
   },
   "Shadow Rhyperior": {
@@ -2137,6 +2174,12 @@
     "cp": "1118–1236",
     "cpBoost": "1398–1546",
     "weather": "Partly Cloudy"
+  },
+  "Shadow Stufful": {
+    "types": [
+      "Normal",
+      "Fighting"
+    ]
   },
   "Shadow Swampert": {
     "types": [

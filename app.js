@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "2.6";
+const APP_VERSION = "2.61";
 const REPORT_EMAIL = "ssj4gogeta2004@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -393,15 +393,21 @@ function getPokemonImg(name) {
 function pokemonImgHTML(pkmn, size) {
   if (!pkmn) return null;
   if (pkmn.shadow) {
-    return `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0">
-      <div style="position:absolute;top:18%;left:15%;width:35%;height:30%;background:rgba(120,40,180,0.55);border-radius:60% 40% 55% 45%;filter:blur(6px);transform:rotate(-15deg);animation:flameWisp1 2.2s ease-in-out infinite"></div>
-      <div style="position:absolute;top:10%;left:45%;width:30%;height:25%;background:rgba(100,20,160,0.45);border-radius:45% 55% 50% 40%;filter:blur(7px);transform:rotate(10deg);animation:flameWisp2 2.5s ease-in-out infinite"></div>
-      <div style="position:absolute;top:35%;left:55%;width:35%;height:32%;background:rgba(130,50,190,0.5);border-radius:50% 60% 40% 55%;filter:blur(6px);transform:rotate(20deg);animation:flameWisp3 2s ease-in-out infinite"></div>
-      <div style="position:absolute;top:50%;left:10%;width:32%;height:28%;background:rgba(110,30,170,0.5);border-radius:55% 45% 60% 40%;filter:blur(7px);transform:rotate(-10deg);animation:flameWisp4 2.3s ease-in-out infinite"></div>
-      <div style="position:absolute;top:55%;left:45%;width:30%;height:25%;background:rgba(140,50,200,0.45);border-radius:40% 60% 45% 55%;filter:blur(6px);transform:rotate(5deg);animation:flameWisp5 2.1s ease-in-out infinite"></div>
-      <div style="position:absolute;top:30%;left:25%;width:40%;height:35%;background:rgba(115,35,175,0.4);border-radius:50% 45% 55% 50%;filter:blur(8px);transform:rotate(-5deg);animation:flameWisp2 2.4s ease-in-out 0.3s infinite"></div>
-      <div style="position:absolute;top:15%;left:55%;width:25%;height:22%;background:rgba(105,25,165,0.4);border-radius:45% 55% 40% 50%;filter:blur(7px);transform:rotate(25deg);animation:flameWisp4 2.6s ease-in-out 0.2s infinite"></div>
-      <div style="position:absolute;top:45%;left:20%;width:28%;height:24%;background:rgba(135,45,195,0.45);border-radius:55% 40% 50% 45%;filter:blur(6px);transform:rotate(-20deg);animation:flameWisp1 2.3s ease-in-out 0.4s infinite"></div>
+    // --- PURPLE BLOB SHADOW (commented out - re-enable by swapping with shadow icon version below) ---
+    // return `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0">
+    //   <div style="position:absolute;top:18%;left:15%;width:35%;height:30%;background:rgba(120,40,180,0.55);border-radius:60% 40% 55% 45%;filter:blur(6px);transform:rotate(-15deg);animation:flameWisp1 2.2s ease-in-out infinite"></div>
+    //   <div style="position:absolute;top:10%;left:45%;width:30%;height:25%;background:rgba(100,20,160,0.45);border-radius:45% 55% 50% 40%;filter:blur(7px);transform:rotate(10deg);animation:flameWisp2 2.5s ease-in-out infinite"></div>
+    //   <div style="position:absolute;top:35%;left:55%;width:35%;height:32%;background:rgba(130,50,190,0.5);border-radius:50% 60% 40% 55%;filter:blur(6px);transform:rotate(20deg);animation:flameWisp3 2s ease-in-out infinite"></div>
+    //   <div style="position:absolute;top:50%;left:10%;width:32%;height:28%;background:rgba(110,30,170,0.5);border-radius:55% 45% 60% 40%;filter:blur(7px);transform:rotate(-10deg);animation:flameWisp4 2.3s ease-in-out infinite"></div>
+    //   <div style="position:absolute;top:55%;left:45%;width:30%;height:25%;background:rgba(140,50,200,0.45);border-radius:40% 60% 45% 55%;filter:blur(6px);transform:rotate(5deg);animation:flameWisp5 2.1s ease-in-out infinite"></div>
+    //   <div style="position:absolute;top:30%;left:25%;width:40%;height:35%;background:rgba(115,35,175,0.4);border-radius:50% 45% 55% 50%;filter:blur(8px);transform:rotate(-5deg);animation:flameWisp2 2.4s ease-in-out 0.3s infinite"></div>
+    //   <div style="position:absolute;top:15%;left:55%;width:25%;height:22%;background:rgba(105,25,165,0.4);border-radius:45% 55% 40% 50%;filter:blur(7px);transform:rotate(25deg);animation:flameWisp4 2.6s ease-in-out 0.2s infinite"></div>
+    //   <div style="position:absolute;top:45%;left:20%;width:28%;height:24%;background:rgba(135,45,195,0.45);border-radius:55% 40% 50% 45%;filter:blur(6px);transform:rotate(-20deg);animation:flameWisp1 2.3s ease-in-out 0.4s infinite"></div>
+    //   <img src="${pkmn.url}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
+    // </div>`;
+    // --- SHADOW ICON VERSION (active) ---
+    return `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0;overflow:visible">
+      <img src="assets/pokemon-images/icons/shadow_icon.png" style="position:absolute;top:-15%;left:-15%;width:130%;height:130%;object-fit:contain;opacity:${darkMode ? 0.85 : 0.6};z-index:0" />
       <img src="${pkmn.url}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
     </div>`;
   }
@@ -2111,10 +2117,8 @@ function renderEventDetail(event, th) {
               <div style="position:absolute;top:10px;left:12px;animation:boostedShiny 1.8s ease-in-out 0.4s infinite">${fourPointStar(16, "#FFD700")}</div>
               <div style="position:absolute;top:18px;left:4px;animation:boostedShiny 1.8s ease-in-out 0.8s infinite">${fourPointStar(8, "#FFD700")}</div>
             </div>` : "";
-            const isShadowEvent = event.details && event.details.bosses && event.details.bosses.some(b => b.toLowerCase().includes("shadow"));
             if (event.iconImg) {
-              const shadowBlobDetail = isShadowEvent ? `<div style="position:absolute;top:18%;left:15%;width:35%;height:30%;background:rgba(120,40,180,0.55);border-radius:60% 40% 55% 45%;filter:blur(6px);transform:rotate(-15deg);animation:flameWisp1 2.2s ease-in-out infinite"></div><div style="position:absolute;top:10%;left:45%;width:30%;height:25%;background:rgba(100,20,160,0.45);border-radius:45% 55% 50% 40%;filter:blur(7px);transform:rotate(10deg);animation:flameWisp2 2.5s ease-in-out infinite"></div><div style="position:absolute;top:35%;left:55%;width:35%;height:32%;background:rgba(130,50,190,0.5);border-radius:50% 60% 40% 55%;filter:blur(6px);transform:rotate(20deg);animation:flameWisp3 2s ease-in-out infinite"></div><div style="position:absolute;top:50%;left:10%;width:32%;height:28%;background:rgba(110,30,170,0.5);border-radius:55% 45% 60% 40%;filter:blur(7px);transform:rotate(-10deg);animation:flameWisp4 2.3s ease-in-out infinite"></div>` : "";
-              return `<div style="width:70px;height:70px;border-radius:16px;background:${th.accentBg(event.color)};border:2px solid ${th.countdownBorder(event.color)};display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;overflow:hidden">${shadowBlobDetail}<img src="${event.iconImg}" style="width:62px;height:62px;object-fit:contain;position:relative;z-index:1" onerror="this.parentElement.innerHTML='${event.icon}'" />${shinySparkleDetail}</div>`;
+              return `<div style="width:70px;height:70px;border-radius:16px;background:${th.accentBg(event.color)};border:2px solid ${th.countdownBorder(event.color)};display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;overflow:hidden"><img src="${event.iconImg}" style="width:62px;height:62px;object-fit:contain;position:relative;z-index:1" onerror="this.parentElement.innerHTML='${event.icon}'" />${shinySparkleDetail}</div>`;
             }
             const detailPkmn = (event.type === "Raid" || event.type === "Max Battle") && event.details && event.details.bosses && event.details.bosses[0] ? getPokemonImg(event.details.bosses[0]) : null;
             return detailPkmn
@@ -2458,10 +2462,8 @@ function renderEventCard(event, index, th) {
             <div style="position:absolute;top:10px;left:12px;animation:boostedShiny 1.8s ease-in-out 0.4s infinite">${fourPointStar(16, "#FFD700")}</div>
             <div style="position:absolute;top:18px;left:4px;animation:boostedShiny 1.8s ease-in-out 0.8s infinite">${fourPointStar(8, "#FFD700")}</div>
           </div>` : "";
-          const isShadowCard = event.details && event.details.bosses && event.details.bosses.some(b => b.toLowerCase().includes("shadow"));
-          const shadowBlobCard = isShadowCard ? `<div style="position:absolute;top:18%;left:15%;width:35%;height:30%;background:rgba(120,40,180,0.55);border-radius:60% 40% 55% 45%;filter:blur(5px);transform:rotate(-15deg);animation:flameWisp1 2.2s ease-in-out infinite"></div><div style="position:absolute;top:10%;left:45%;width:30%;height:25%;background:rgba(100,20,160,0.45);border-radius:45% 55% 50% 40%;filter:blur(5px);transform:rotate(10deg);animation:flameWisp2 2.5s ease-in-out infinite"></div><div style="position:absolute;top:35%;left:55%;width:35%;height:32%;background:rgba(130,50,190,0.5);border-radius:50% 60% 40% 55%;filter:blur(5px);transform:rotate(20deg);animation:flameWisp3 2s ease-in-out infinite"></div><div style="position:absolute;top:50%;left:10%;width:32%;height:28%;background:rgba(110,30,170,0.5);border-radius:55% 45% 60% 40%;filter:blur(5px);transform:rotate(-10deg);animation:flameWisp4 2.3s ease-in-out infinite"></div>` : "";
           if (event.iconImg) {
-            return `<div style="width:48px;height:48px;border-radius:12px;background:${th.accentBg(event.color)};display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;overflow:hidden">${shadowBlobCard}<img src="${event.iconImg}" style="width:44px;height:44px;object-fit:contain;position:relative;z-index:1" onerror="this.parentElement.innerHTML='${event.icon}'" />${shinySparkleCard}</div>`;
+            return `<div style="width:48px;height:48px;border-radius:12px;background:${th.accentBg(event.color)};display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;overflow:hidden"><img src="${event.iconImg}" style="width:44px;height:44px;object-fit:contain;position:relative;z-index:1" onerror="this.parentElement.innerHTML='${event.icon}'" />${shinySparkleCard}</div>`;
           }
           const raidPkmn = (event.type === "Raid" || event.type === "Max Battle") && event.details && event.details.bosses && event.details.bosses[0] ? getPokemonImg(event.details.bosses[0]) : null;
           return raidPkmn
@@ -2776,11 +2778,7 @@ function showRocketPopup(name) {
   overlay.innerHTML = `<div onclick="event.stopPropagation()" style="background:${th.bg};border:1.5px solid ${th.border};border-radius:20px;padding:24px;max-width:340px;width:90vw;text-align:center;cursor:default;animation:scaleIn 0.25s ease;position:relative">
     <div onclick="this.parentElement.parentElement.remove()" style="position:absolute;top:12px;right:16px;font-size:20px;color:${th.textMuted};cursor:pointer;font-weight:700">\u00D7</div>
     ${imgSrc ? `<div style="position:relative;width:140px;height:140px;margin:0 auto">
-      <div style="position:absolute;top:18%;left:15%;width:35%;height:30%;background:rgba(120,40,180,0.55);border-radius:60% 40% 55% 45%;filter:blur(8px);transform:rotate(-15deg);animation:flameWisp1 2.2s ease-in-out infinite"></div>
-      <div style="position:absolute;top:10%;left:45%;width:30%;height:25%;background:rgba(100,20,160,0.45);border-radius:45% 55% 50% 40%;filter:blur(9px);transform:rotate(10deg);animation:flameWisp2 2.5s ease-in-out infinite"></div>
-      <div style="position:absolute;top:35%;left:55%;width:35%;height:32%;background:rgba(130,50,190,0.5);border-radius:50% 60% 40% 55%;filter:blur(8px);transform:rotate(20deg);animation:flameWisp3 2s ease-in-out infinite"></div>
-      <div style="position:absolute;top:50%;left:10%;width:32%;height:28%;background:rgba(110,30,170,0.5);border-radius:55% 45% 60% 40%;filter:blur(9px);transform:rotate(-10deg);animation:flameWisp4 2.3s ease-in-out infinite"></div>
-      <div style="position:absolute;top:55%;left:45%;width:30%;height:25%;background:rgba(140,50,200,0.45);border-radius:40% 60% 45% 55%;filter:blur(8px);transform:rotate(5deg);animation:flameWisp5 2.1s ease-in-out infinite"></div>
+      <img src="assets/pokemon-images/icons/shadow_icon.png" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;opacity:${darkMode ? "0.85" : "0.6"};z-index:0" />
       <img src="${imgSrc}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
     </div>` : ""}
     <div style="font-size:18px;font-weight:800;color:${th.text};margin-top:8px">Shadow ${esc(name)}</div>
@@ -3329,8 +3327,8 @@ function searchArchivedCDs(val) {
   const resultsEl = document.getElementById("cd-archive-results");
   if (!resultsEl || query.length < 1) { if (resultsEl) resultsEl.style.display = "none"; return; }
   const th = t(darkMode);
-  const matches = EVENTS.filter(e => e.type === "Community Day" && isOver(e) && e.title.toLowerCase().includes(query)).slice(0, 10);
-  if (matches.length === 0) { resultsEl.innerHTML = `<div style="padding:12px;text-align:center;color:${th.textMuted};font-size:13px">No Community Days found</div>`; resultsEl.style.display = "block"; return; }
+  const matches = EVENTS.filter(e => (state.filter === "All" || e.type === state.filter) && isOver(e) && e.title.toLowerCase().includes(query)).slice(0, 10);
+  if (matches.length === 0) { resultsEl.innerHTML = `<div style="padding:12px;text-align:center;color:${th.textMuted};font-size:13px">No events found</div>`; resultsEl.style.display = "block"; return; }
   resultsEl.innerHTML = matches.map(ev => {
     const dateStr = formatDate(ev.date);
     return `<div onclick="selectEvent(${ev.id});document.getElementById('cd-archive-search').value='';document.getElementById('cd-archive-results').style.display='none'" style="display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;transition:background 0.1s ease" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='transparent'">
@@ -3341,9 +3339,45 @@ function searchArchivedCDs(val) {
   resultsEl.style.display = "block";
 }
 
-function toggleYear(y) {
+function toggleYear(y, e) {
   state.openYears[y] = !state.openYears[y];
-  render();
+  const btn = e.currentTarget;
+  const wrapper = btn.parentElement;
+  const isOpen = state.openYears[y];
+  const th = t(darkMode);
+  btn.style.borderRadius = isOpen ? "16px 16px 0 0" : "16px";
+  const arrow = btn.querySelector("div:last-child");
+  if (arrow) arrow.style.transform = isOpen ? "rotate(180deg)" : "rotate(0deg)";
+  const existing = wrapper.querySelector("[data-year-content]");
+  if (existing) existing.remove();
+  if (isOpen) {
+    const filtered = [...EVENTS].sort((a, b) => new Date(a.date) - new Date(b.date));
+    const items = (state.filter !== "All" ? filtered.filter(e => e.type === state.filter) : filtered)
+      .filter(e => isOver(e) && new Date(e.date + "T12:00:00").getFullYear() === Number(y))
+      .sort((a, b) => new Date(b.date) - new Date(a.date));
+    const content = document.createElement("div");
+    content.setAttribute("data-year-content", "true");
+    content.style.cssText = `background:${th.surface};border:1.5px solid ${th.border};border-top:none;border-radius:0 0 16px 16px;overflow:hidden;animation:fadeSlideIn 0.25s ease`;
+    content.innerHTML = items.map((ev, i) =>
+      `<button onclick="selectEvent(${ev.id})" style="display:flex;align-items:center;gap:12px;padding:14px 18px;background:${th.surface};border:none;border-top:${i > 0 ? `1px solid ${th.border}` : "none"};cursor:pointer;text-align:left;width:100%;font-family:inherit;transition:background 0.15s ease;-webkit-tap-highlight-color:transparent;outline:none"
+        onmouseenter="this.style.background='${th.surfaceHover}'"
+        onmouseleave="this.style.background='${th.surface}'">
+        ${(() => {
+          if (ev.iconImg) {
+            return `<div style="width:55px;height:55px;border-radius:14px;background:${th.accentBg(ev.color)};display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="${ev.iconImg}" style="width:48px;height:48px;object-fit:contain" onerror="this.parentElement.innerHTML='${ev.icon}'" /></div>`;
+          }
+          const raidPkmn = (ev.type === "Raid" || ev.type === "Max Battle") && ev.details && ev.details.bosses && ev.details.bosses[0] ? getPokemonImg(ev.details.bosses[0]) : null;
+          return raidPkmn
+            ? `<div style="width:55px;height:55px;border-radius:14px;background:${th.accentBg(ev.color)};display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="${raidPkmn.url}" style="width:48px;height:48px;object-fit:contain" onerror="this.parentElement.innerHTML='${ev.icon}'" /></div>`
+            : `<div style="width:55px;height:55px;border-radius:14px;background:${th.accentBg(ev.color)};display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">${ev.icon}</div>`;
+        })()}
+        <div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:${th.text};line-height:1.3">${esc(ev.title)}</div>
+        <div style="font-size:12px;color:${th.textMuted};margin-top:2px">${formatDate(ev.date)}</div></div>
+        <span style="font-size:10px;font-weight:700;color:${ev.color};background:${th.accentBg(ev.color)};padding:2px 8px;border-radius:20px;flex-shrink:0">${esc(ev.type)}</span>
+      </button>`
+    ).join("");
+    wrapper.appendChild(content);
+  }
 }
 
 function toggleNewsYear(y) {
@@ -3466,11 +3500,11 @@ function render() {
           archiveHTML = `<div style="width:100%;display:flex;flex-direction:column;gap:10px">
             <div style="margin-top:${upcomingEvents.length > 0 ? 12 : 0}px;display:flex;align-items:center;gap:10px">
               <div style="flex:1;height:1px;background:${th.border}"></div>
-              <span style="font-size:11px;font-weight:700;color:${th.textMuted};letter-spacing:1px;text-transform:uppercase;white-space:nowrap">Archived Community Days</span>
+              <span style="font-size:11px;font-weight:700;color:${th.textMuted};letter-spacing:1px;text-transform:uppercase;white-space:nowrap">Archived ${state.filter === "All" ? "Events" : state.filter + "s"}</span>
               <div style="flex:1;height:1px;background:${th.border}"></div>
             </div>
             <div style="position:relative;max-width:400px;margin:0 auto;width:100%">
-              <input id="cd-archive-search" placeholder="Search past Community Days..." oninput="searchArchivedCDs(this.value)" autocomplete="off" style="width:100%;padding:${isMobile ? "10px 14px 10px 38px" : "12px 16px 12px 42px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:${isMobile ? 13 : 14}px;font-family:inherit;outline:none;box-sizing:border-box" />
+              <input id="cd-archive-search" placeholder="Search past ${state.filter === "All" ? "events" : state.filter + "s"}..." oninput="searchArchivedCDs(this.value)" autocomplete="off" style="width:100%;padding:${isMobile ? "10px 14px 10px 38px" : "12px 16px 12px 42px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:${isMobile ? 13 : 14}px;font-family:inherit;outline:none;box-sizing:border-box" />
               <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none">\uD83D\uDD0D</span>
               <div id="cd-archive-results" style="display:none;position:absolute;top:100%;left:0;right:0;max-height:300px;overflow-y:auto;background:${th.surface};border:1.5px solid ${th.border};border-radius:12px;margin-top:4px;z-index:100;box-shadow:0 8px 24px rgba(0,0,0,0.2)"></div>
             </div>
@@ -3479,7 +3513,7 @@ function render() {
               const isOpen = !!state.openYears[year];
               const label = state.filter === "All" ? `${items.length} past event${items.length === 1 ? "" : "s"}` : `${items.length} past ${state.filter} event${items.length === 1 ? "" : "s"}`;
               return `<div style="margin-top:${upcomingEvents.length > 0 ? 6 : 0}px">
-                <button onclick="toggleYear('${year}')" style="display:flex;align-items:center;justify-content:space-between;width:100%;padding:14px 18px;background:${th.surface};border:1.5px solid ${th.border};border-radius:${isOpen ? "16px 16px 0 0" : "16px"};cursor:pointer;font-family:inherit;transition:all 0.2s ease;box-shadow:${th.shadow}">
+                <button onclick="toggleYear('${year}', event)" style="display:flex;align-items:center;justify-content:space-between;width:100%;padding:14px 18px;background:${th.surface};border:1.5px solid ${th.border};border-radius:${isOpen ? "16px 16px 0 0" : "16px"};cursor:pointer;font-family:inherit;transition:all 0.2s ease;box-shadow:${th.shadow}">
                   <div style="display:flex;align-items:center;gap:10px">
                     <div style="width:36px;height:36px;border-radius:10px;background:${th.accentBg("#636E72")};display:flex;align-items:center;justify-content:center;font-size:16px">\uD83D\uDCCB</div>
                     <div style="text-align:left"><div style="font-size:15px;font-weight:700;color:${th.text}">${year}</div>
@@ -3682,10 +3716,17 @@ function render() {
       const cardLayout = breakpoint !== "mobile";
       // Shared slot row renderer for leaders and grunts
       const rocketSlotImgSize = cardLayout ? 80 : 56;
+      const rocketShadowImg = (pkmn, size) => {
+        if (!pkmn) return "";
+        return `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0;overflow:visible">
+          <img src="assets/pokemon-images/icons/shadow_icon.png" style="position:absolute;top:-15%;left:-15%;width:130%;height:130%;object-fit:contain;opacity:${darkMode ? "0.85" : "0.6"};z-index:0" />
+          <img src="${pkmn.url}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
+        </div>`;
+      };
       const renderRocketSlotRow = (slotPokemon, slotIdx, shinySlot = 0) => {
         const pkmnCards = slotPokemon.map(p => {
           const pkmn = getPokemonImg("Shadow " + p);
-          let imgEl = pkmn ? pokemonImgHTML(pkmn, rocketSlotImgSize) : "";
+          let imgEl = pkmn ? rocketShadowImg(pkmn, rocketSlotImgSize) : "";
           if (imgEl && slotIdx === shinySlot) {
             const sparkle = `<div style="position:absolute;top:2%;right:-2%;z-index:2;font-size:20px">\u2728</div>`;
             if (imgEl.includes("position:relative;width:")) {
@@ -4433,7 +4474,7 @@ function render() {
   }
 
   // Header
-  const headerHTML = `<header style="padding:${isMobile ? "14px 18px" : "16px 32px"};border-bottom:1.5px solid ${th.border};background:${th.headerBg};backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;width:100%;display:flex;align-items:center;justify-content:space-between">
+  const headerHTML = `<header style="padding:${isMobile ? "14px 18px" : "16px 32px"};border-bottom:1.5px solid ${th.border};background:${th.headerBg};backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;width:100%;display:flex;align-items:center;justify-content:space-between;padding-top:calc(${isMobile ? "14px" : "16px"} + env(safe-area-inset-top, 0px))">
     <div style="display:flex;align-items:center;gap:${isMobile ? 6 : 14}px">
     ${breakpoint !== "desktop" ? `<button onclick="toggleSidebar()" style="background:none;border:none;cursor:pointer;padding:6px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="${th.text}" stroke-width="2.5" stroke-linecap="round"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg></button>` : ""}
     <div onclick="goHome()" style="cursor:pointer;display:flex;align-items:center;gap:${isMobile ? 10 : 14}px">
