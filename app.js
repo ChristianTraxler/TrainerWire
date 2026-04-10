@@ -4438,7 +4438,7 @@ function render() {
 
     const welcomeHTML = state.tab === "home" ? `<div style="border-radius:${isMobile ? 18 : 24}px;padding:${isMobile ? "24px 18px" : "32px 28px"};background:linear-gradient(135deg,${th.heroBg("#E74C3C")},${th.heroBg("#F39C12")});border:1.5px solid ${th.border};overflow:hidden;position:relative;animation:fadeSlideUp 0.5s cubic-bezier(0.25,0.46,0.45,0.94)">
         <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:${isMobile ? 14 : 18}px">
-          <img src="assets/trainerwire-logo.PNG" style="width:${isMobile ? 278 : 327}px;height:${isMobile ? 278 : 327}px;object-fit:contain;margin-top:${isMobile ? -40 : -50}px" alt="TrainerWire" />
+          <img src="assets/trainerwire-logo2.webp" style="width:${isMobile ? 278 : 327}px;height:${isMobile ? 278 : 327}px;object-fit:contain;margin-top:${isMobile ? -40 : -50}px" alt="TrainerWire" />
           <h2 style="margin:-52px 0 0 0;font-size:${isMobile ? 18 : 24}px;font-weight:800;color:${th.text};line-height:1.2">Welcome to TrainerWire</h2>
           <p style="margin:4px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Your one-stop hub for everything Pok\u00E9mon GO</p>
         </div>
@@ -4478,7 +4478,7 @@ function render() {
     <div style="display:flex;align-items:center;gap:${isMobile ? 6 : 14}px">
     ${breakpoint !== "desktop" ? `<button onclick="toggleSidebar()" style="background:none;border:none;cursor:pointer;padding:6px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="${th.text}" stroke-width="2.5" stroke-linecap="round"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg></button>` : ""}
     <div onclick="goHome()" style="cursor:pointer;display:flex;align-items:center;gap:${isMobile ? 10 : 14}px">
-      <img src="assets/trainerwire-logo.PNG" style="width:${isMobile ? 80 : 95}px;height:${isMobile ? 80 : 95}px;object-fit:contain;margin:-20px 0" alt="TrainerWire" />
+      <img src="assets/trainerwire-logo2.webp" style="width:${isMobile ? 80 : 95}px;height:${isMobile ? 80 : 95}px;object-fit:contain;margin:-20px 0" alt="TrainerWire" />
       <div><div style="font-size:${isMobile ? 16 : 20}px;font-weight:800;color:${th.text};letter-spacing:-0.3px;line-height:1.2">${COMMUNITY_NAME}</div>
       <div style="font-size:${isMobile ? 10 : 12}px;color:${th.textMuted};font-weight:500;letter-spacing:0.2px">${COMMUNITY_TAGLINE}</div></div>
     </div></div>
@@ -4637,7 +4637,7 @@ function renderSidebar(th) {
   return `<div id="sidebar-overlay" onclick="closeSidebar()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:998;opacity:0;pointer-events:none;transition:opacity 0.3s ease"></div>
   <nav id="sidebar" style="position:fixed;top:0;left:0;width:260px;height:100%;background:${th.surface};border-right:1.5px solid ${th.border};z-index:999;transform:translateX(-100%);transition:transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;overflow-y:auto">
     <div style="padding:24px 20px;border-bottom:1.5px solid ${th.border};display:flex;align-items:center;gap:12px">
-      <img src="assets/trainerwire-logo.PNG" style="width:80px;height:80px;object-fit:contain" alt="TrainerWire" />
+      <img src="assets/trainerwire-logo2.webp" style="width:80px;height:80px;object-fit:contain" alt="TrainerWire" />
       <div>
         <div style="font-size:16px;font-weight:800;color:${th.text}">TrainerWire</div>
         <div style="font-size:10px;color:${th.textMuted};font-weight:500">Pok\u00E9mon GO Hub</div>
