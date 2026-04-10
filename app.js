@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "2.61";
+const APP_VERSION = "2.62";
 const REPORT_EMAIL = "ssj4gogeta2004@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
