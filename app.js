@@ -3346,7 +3346,7 @@ function toggleYear(y, e) {
   const isOpen = state.openYears[y];
   const th = t(darkMode);
   btn.style.borderRadius = isOpen ? "16px 16px 0 0" : "16px";
-  const arrow = btn.querySelector("div:last-child");
+  const arrow = btn.querySelector("[data-year-arrow]");
   if (arrow) arrow.style.transform = isOpen ? "rotate(180deg)" : "rotate(0deg)";
   const existing = wrapper.querySelector("[data-year-content]");
   if (existing) existing.remove();
@@ -3519,7 +3519,7 @@ function render() {
                     <div style="text-align:left"><div style="font-size:15px;font-weight:700;color:${th.text}">${year}</div>
                     <div style="font-size:12px;color:${th.textMuted};font-weight:500">${label}</div></div>
                   </div>
-                  <div style="font-size:18px;color:${th.textMuted};transition:transform 0.2s ease;transform:${isOpen ? "rotate(180deg)" : "rotate(0deg)"}">\u25BE</div>
+                  <div data-year-arrow style="font-size:18px;color:${th.textMuted};transition:transform 0.2s ease;transform:${isOpen ? "rotate(180deg)" : "rotate(0deg)"}">\u25BE</div>
                 </button>
                 ${isOpen ? `<div style="background:${th.surface};border:1.5px solid ${th.border};border-top:none;border-radius:0 0 16px 16px;overflow:hidden;animation:fadeSlideIn 0.25s ease">
                   ${items.map((ev, i) =>
