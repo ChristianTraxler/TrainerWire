@@ -2745,6 +2745,7 @@ function setTab(tab) {
   sessionStorage.setItem("trainerwire_tab", tab);
   if (tab === "nests") { loadNestsFromSupabase().then(() => render()); }
   render();
+  window.scrollTo(0, 0);
 }
 
 function toggleCompactCard(headerEl) {
