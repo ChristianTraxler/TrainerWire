@@ -726,7 +726,7 @@ const EVENTS = [
   { id: 22, title: "5\u2605 Raid: Groudon", type: "Raid", date: "2026-04-15", endDate: "2026-04-21", time: "Raid Hour: Wed Apr 15, 6–7 PM", color: "#C0392B", icon: "\uD83C\uDF0B", featured: false, summary: "Groudon returns. Best Ground-type attacker. Mega Alakazam in Mega Raids.", details: { bosses: ["Groudon (5\u2605)", "Mega Alakazam (Mega)", "Shadow Latios (weekends)"], bonuses: ["Raid Hour: Wednesday 6–7 PM"], tips: ["Best Ground attacker — prioritize high-IV catches.", "Weak to Water, Grass, Ice.", "Shiny Groudon (golden) is one of the best shinies."], counters: { label: "Groudon (Ground)", pokemon: [{ name: "Mega Swampert", fast: "Water Gun", charged: "Hydro Cannon", chargedNote: "CD Exclusive" }, { name: "Kartana", fast: "Razor Leaf", charged: "Leaf Blade" }, { name: "Shadow Swampert", fast: "Water Gun", charged: "Hydro Cannon", chargedNote: "CD Exclusive" }, { name: "Mega Sceptile", fast: "Bullet Seed", charged: "Frenzy Plant", chargedNote: "CD Exclusive" }, { name: "Shadow Mamoswine", fast: "Powder Snow", charged: "Avalanche" }, { name: "Kyogre", fast: "Waterfall", charged: "Surf" }] }, catchCP: [{ name: "Groudon", normal: "2260–2351", boosted: "2825–2939", weather: "Sunny" }] } },
   { id: 23, title: "5\u2605 Raid: Tapu Koko", type: "Raid", date: "2026-04-22", endDate: "2026-04-28", time: "Raid Hour: Wed Apr 22, 6–7 PM", color: "#F39C12", icon: "\u26A1", featured: false, summary: "Tapu Koko in 5-Star Raids. Electric/Fairy. Mega Sharpedo in Mega Raids.", details: { bosses: ["Tapu Koko (5\u2605)", "Mega Sharpedo (Mega)", "Shadow Latios (weekends)"], bonuses: ["Raid Hour: Wednesday 6–7 PM"], tips: ["Solid PvP pick — Electric/Fairy.", "Weak to Poison and Ground.", "Shiny has black/orange scheme."], counters: { label: "Tapu Koko (Electric/Fairy)", pokemon: [{ name: "Primal Groudon", fast: "Mud Shot", charged: "Precipice Blades", chargedNote: "Signature" }, { name: "Shadow Garchomp", fast: "Mud Shot", charged: "Earth Power", chargedNote: "CD Exclusive" }, { name: "Shadow Excadrill", fast: "Mud-Slap", charged: "Drill Run" }, { name: "Mega Gengar", fast: "Lick", charged: "Sludge Bomb" }, { name: "Shadow Rhyperior", fast: "Mud-Slap", charged: "Earthquake" }, { name: "Landorus (Therian)", fast: "Mud Shot", charged: "Earth Power" }] }, catchCP: [{ name: "Tapu Koko", normal: "1730–1810", boosted: "2162–2263", weather: "Rainy or Cloudy" }] } },
   { id: 24, title: "5\u2605 Raid: Tapu Lele", type: "Raid", date: "2026-04-29", endDate: "2026-05-05", time: "Raid Hour: Wed Apr 29, 6–7 PM", color: "#FF6B81", icon: "\uD83E\uDD8B", featured: false, summary: "Tapu Lele closes April. Mega Banette. Final week for Shadow Latios.", details: { bosses: ["Tapu Lele (5\u2605)", "Mega Banette (Mega)", "Shadow Latios (final week)"], bonuses: ["Raid Hour: Wednesday 6–7 PM", "Last week for Shadow Latios"], tips: ["Final week for Shadow Latios — get raids in before May 5.", "Tapu Lele weak to Ghost, Poison, Steel."], counters: { label: "Tapu Lele (Psychic/Fairy)", pokemon: [{ name: "Mega Gengar", fast: "Lick", charged: "Shadow Ball" }, { name: "Shadow Metagross", fast: "Bullet Punch", charged: "Meteor Mash", chargedNote: "CD Exclusive" }, { name: "Origin Giratina", fast: "Shadow Claw", charged: "Shadow Force", chargedNote: "Signature" }, { name: "Shadow Chandelure", fast: "Hex", charged: "Shadow Ball" }, { name: "Mega Banette", fast: "Shadow Claw", charged: "Shadow Ball" }, { name: "Shadow Excadrill", fast: "Metal Claw", charged: "Iron Head" }] }, catchCP: [{ name: "Tapu Lele", normal: "1718–1799", boosted: "2148–2249", weather: "Windy or Cloudy" }] } },
-  { id: 62, title: "Season: Memories in Motion", type: "Event", url: "https://pokemongo.com/news/welcome-to-memories-in-motion", date: "2026-03-03", endDate: "2026-06-02", time: "10:00 AM", color: "#9B59B6", icon: "\uD83C\uDF1F", featured: false, summary: "The current season celebrating Pok\u00E9mon's 30th anniversary and GO's 10th year. Featuring daily discovery bonuses, Volcanion Special Research, and new event formats.", details: { bosses: ["Gyarados (Research Breakthrough)", "Honedge (Research Breakthrough)", "Dhelmise (Research Breakthrough)", "Sinistea (Research Breakthrough)", "Duraludon (Research Breakthrough)", "Dreepy (Research Breakthrough)"], bonuses: ["Free Volcanion Special Research available all season", "Guaranteed Candy XL on in-person trades for level 31+", "Weekend events have moved to Saturdays this season", "In-game event calendar coming later in the season"], seasonBonuses: ["Double-Time Sundays \u2014 Incense & Lures last 2\u00D7", "Fast-Track Mondays \u2014 2\u00D7 GO Points, extra Power Spots", "Max Mondays \u2014 rotating Dynamax Pok\u00E9mon (6 AM\u20139 PM)", "Showcase Tuesdays \u2014 Pok\u00E9Stop Showcases (10 AM\u20138 PM)", "Raid Hour Wednesdays \u2014 6\u20137 PM", "GO Battle Thursdays \u2014 up to 10 sets, 4\u00D7 Stardust from wins", "Friendship Fridays \u2014 2 Special Trades, Lucky boost, \u221210% Stardust"], tips: ["Free Volcanion Special Research available all season \u2014 no expiration.", "Guaranteed Candy XL on in-person trades for level 31+.", "Weekend events have moved to Saturdays this season.", "In-game event calendar coming later in the season."] } },
+  { id: 62, title: "Season: Memories in Motion", type: "Event", url: "https://pokemongo.com/news/welcome-to-memories-in-motion", date: "2026-03-03", endDate: "2026-06-02", time: "10:00 AM", color: "#9B59B6", icon: "\uD83C\uDF1F", featured: false, summary: "The current season celebrating Pok\u00E9mon's 30th anniversary and GO's 10th year. Featuring daily discovery bonuses, Volcanion Special Research, and new event formats.", details: { bosses: ["Gyarados (Research Breakthrough)", "Honedge (Research Breakthrough)", "Dhelmise (Research Breakthrough)", "Sinistea (Research Breakthrough)", "Duraludon (Research Breakthrough)", "Dreepy (Research Breakthrough)"], bonuses: ["Free Volcanion Special Research available all season", "Guaranteed Candy XL on in-person trades for level 31+", "Weekend events have moved to Saturdays this season", "In-game event calendar coming later in the season"], seasonBonuses: ["Double-Time Sundays \u2014 Incense & Lures last 2\u00D7", "Fast-Track Mondays \u2014 2\u00D7 GO Points, extra Power Spots", "Max Mondays \u2014 rotating Dynamax Pok\u00E9mon (6 AM\u20139 PM)", "Showcase Tuesdays \u2014 Pok\u00E9Stop Showcases (10 AM\u20138 PM)", "Raid Hour Wednesdays \u2014 6\u20137 PM", "GO Battle Thursdays \u2014 up to 10 sets, 4\u00D7 Stardust from wins", "Friendship Fridays \u2014 2 Special Trades, Lucky boost, \u221210% Stardust"], dailyDiscoveries: [{ day: "Sunday", name: "Double-Time Sunday", icon: "\uD83D\uDD25", color: "#E74C3C", desc: "Incense, Lure Modules, Glacial Lure Modules, Mossy Lure Modules, Magnetic Lure Modules, and Rainy Lure Modules activated on Sunday will last up to twice as long." }, { day: "Monday", name: "Fast-Track Monday & Max Monday", icon: "\u26A1", color: "#F39C12", desc: "2x GO Points from Pass Tasks for both monthly and event GO Passes. Power Spots refresh more frequently with additional locations. Max Battles rotate featured Dynamax Pokemon.", time: "Max Monday: 6:00 AM \u2013 9:00 PM" }, { day: "Tuesday", name: "Showcase Tuesday", icon: "\uD83C\uDFC6", color: "#3498DB", desc: "PokeStop Showcases will be active on Tuesdays, featuring up to 20 different categories.", time: "10:00 AM \u2013 8:00 PM" }, { day: "Wednesday", name: "Raid Hour", icon: "\u2694\uFE0F", color: "#9B59B6", desc: "Raid Bosses for five-star raids and Mega Raids will rotate at the start of the day each week. Raid Hours feature the five-star Raid Boss.", time: "6:00 PM \u2013 7:00 PM" }, { day: "Thursday", name: "GO Battle Thursday", icon: "\uD83E\uDD4A", color: "#E67E22", desc: "Trainers receive up to 4x Stardust from win rewards and can play 10 sets daily (50 battles total) instead of the usual 5 sets." }, { day: "Friday", name: "Friendship Friday", icon: "\uD83E\uDD1D", color: "#2ECC71", desc: "In-person trades feature 2 Special Trades allowed, increased Lucky Trade chances, -10% Stardust cost, and 2 guaranteed Candy XL from trades (level 31+)." }], tips: ["Free Volcanion Special Research available all season \u2014 no expiration.", "Guaranteed Candy XL on in-person trades for level 31+.", "Weekend events have moved to Saturdays this season.", "In-game event calendar coming later in the season."] } },
   { id: 60, title: "Pok\u00E9mon Pokopia Celebration", type: "Event", url: "https://pokemongo.com/news/pokemon-pokopia-celebration-event-2026", date: "2026-03-10", endDate: "2026-03-16", time: "10:00 AM \u2013 8:00 PM", color: "#E056A0", icon: "\uD83C\uDFAD", featured: false, summary: "Costumed Ditto debuts wearing a hat and cap! Boosted Shiny Sudowoodo and Zorua. Kanto starters, Lapras, Snorlax, and Dragonite in 3-Star Raids. Free Ditto Eye Mask avatar item.", details: { bosses: ["Ditto wearing a hat (debut)", "Ditto wearing a cap (debut)", "Sudowoodo (boosted Shiny)", "Zorua (boosted Shiny)", "Bulbasaur", "Charmander", "Squirtle", "Pikachu", "Lapras (3\u2605 Raid)", "Snorlax (3\u2605 Raid)", "Dragonite (3\u2605 Raid)"], bonuses: ["2\u00D7 XP for spinning Pok\u00E9Stops", "10\u00D7 XP for spinning a Pok\u00E9Stop for the first time", "Boosted Shiny rates for Sudowoodo and Zorua", "Collection Challenges with themed rewards", "Free Ditto Eye Mask avatar item in shop", "Event-themed stickers from Pok\u00E9Stops, Gyms, and Gifts"], tips: ["Catch everything \u2014 costumed Ditto transforms and hides among wild spawns.", "Shiny Zorua is extremely rare normally, take advantage of the boosted rates.", "Spin new Pok\u00E9Stops for 10\u00D7 XP \u2014 great time to explore new areas.", "Overlaps with Scorbunny Community Day on March 14."] } },
   { id: 61, title: "Bug Out 2026", type: "Event", url: "https://pokemongo.com/news/bug-out-2026", date: "2026-03-17", endDate: "2026-03-23", time: "10:00 AM \u2013 8:00 PM", color: "#2ECC71", icon: "\uD83D\uDC1B", featured: false, summary: "Blipbug, Dottler, and Orbeetle debut! Shiny Sizzlipede released. Rotating Lure spawns with Pinsir, Scizor, and Kleavor in 3-Star Raids.", details: { bosses: ["Blipbug (debut)", "Sizzlipede (Shiny debut)", "Caterpie", "Dwebble", "Nymble", "Scyther", "Blipbug (1\u2605 Raid)", "Pinsir (3\u2605 Raid)", "Scizor (3\u2605 Raid)", "Kleavor (3\u2605 Raid)", "Paras (Lures Mar 17\u201319)", "Cutiefly (Lures Mar 19\u201321)", "Combee (Lures Mar 21\u201323)"], bonuses: ["2\u00D7 XP for Nice Throws or better (GO Pass Tier 1)", "2\u00D7 Catch Candy (GO Pass Tier 2)", "3\u00D7 Catch Candy (GO Pass Deluxe Tier 2)", "Rotating Lure Module spawns every 2 days", "GO Pass Deluxe $4.99 or Deluxe + 6 Ranks $6.99", "Boosted Shiny rates for Lure Pok\u00E9mon"], tips: ["Blipbug evolves to Dottler (25 Candy) then Orbeetle (100 Candy) \u2014 stock up.", "Shiny Sizzlipede is brand new \u2014 check every one you see.", "Pinsir, Scizor, and Kleavor in 3-Star Raids can all be Shiny.", "Paras, Combee, and Cutiefly from Lures have boosted Shiny rates.", "GO Pass rewards expire March 25 at 8 PM."] } },
   { id: 29, title: "Max Battle Day: Gigantamax Pikachu", type: "Max Battle", date: "2026-03-28", endDate: null, time: "2:00 PM – 5:00 PM", color: "#F1C40F", icon: "\u26A1", featured: false, summary: "Gigantamax Pikachu debuted in 6-Star Max Battles! Pikachu caught from Max Battles cannot evolve. Shiny Gigantamax Pikachu was available.", details: { bosses: ["Gigantamax Pikachu (6\u2605 Max Battle debut)"], bonuses: ["2× Max Particles from exploring (12 AM – 5 PM)", "Increased Max Particle storage limit", "3 Special Trades for the day", "Power Spots refreshed more frequently", "Gigantamax Pikachu on all Power Spots", "Remote Raid limit increased to 20 (Mar 27 5 PM – Mar 28 8 PM PDT)"], tips: ["Gigantamax Pikachu cannot evolve — it's a standalone collector Pokémon.", "As a pure Electric-type, Ground-type counters were the way to go.", "Paid Timed Research ($4.99) rewarded 1 Max Mushroom, 25,000 XP, 6,400 Max Particles, and 2× XP from Max Battles.", "Coordinating with a full group of 4 was essential for 6-Star difficulty."] } },
@@ -1625,7 +1625,16 @@ function getEndCountdown(ev) {
   return { days: Math.floor(diff / 864e5), hours: Math.floor((diff % 864e5) / 36e5), minutes: Math.floor((diff % 36e5) / 6e4), seconds: Math.floor((diff % 6e4) / 1000) };
 }
 
-function renderCountdown(dateStr, color, over, th, ev) {
+function renderCountdown(dateStr, color, over, th, ev, compact) {
+  const fs = compact ? 12 : 14;
+  const mw = compact ? 26 : 32;
+  const pd = compact ? "3px 5px" : "4px 7px";
+  const br = compact ? 6 : 7;
+  const gp = compact ? 3 : 5;
+  const lfs = compact ? 8 : 9;
+  const cfs = compact ? 10 : 12;
+  const lbfs = compact ? 13 : 14;
+  const mr = compact ? "2px" : "3px";
   // If event is active, show countdown to end time
   if (ev && isActive(ev)) {
     const endCd = getEndCountdown(ev);
@@ -1633,8 +1642,8 @@ function renderCountdown(dateStr, color, over, th, ev) {
       const units = endCd.days > 0
         ? [["D", endCd.days], ["H", endCd.hours], ["M", endCd.minutes], ["S", endCd.seconds]]
         : [["H", endCd.hours], ["M", endCd.minutes], ["S", endCd.seconds]];
-      return `<div style="display:flex;gap:6px;align-items:center"><span style="font-size:17px;color:#2ECC71;font-weight:700;margin-right:4px">Ends in</span>${units.map(([l, v], i) =>
-        `<div style="display:flex;align-items:center;gap:1px"><div style="background:${th.countdownBg("#2ECC71")};border:1.5px solid ${th.countdownBorder("#2ECC71")};border-radius:8px;padding:5px 8px;min-width:38px;text-align:center;font-weight:700;font-size:17px;font-variant-numeric:tabular-nums;color:#2ECC71;font-family:'JetBrains Mono',monospace;${l === "S" ? "animation:countdownTick 1s ease infinite;" : ""}">${String(v).padStart(2, "0")}</div><span style="font-size:10px;color:${th.textMuted};font-weight:600">${l}</span>${i < units.length - 1 ? `<span style="color:${th.border};font-weight:300;margin-left:1px;font-size:14px">:</span>` : ""}</div>`
+      return `<div style="display:flex;gap:${gp}px;align-items:center"><span style="font-size:${lbfs}px;color:#2ECC71;font-weight:700;margin-right:${mr}">Ends in</span>${units.map(([l, v], i) =>
+        `<div style="display:flex;align-items:center;gap:1px"><div style="background:${th.countdownBg("#2ECC71")};border:1.5px solid ${th.countdownBorder("#2ECC71")};border-radius:${br}px;padding:${pd};min-width:${mw}px;text-align:center;font-weight:700;font-size:${fs}px;font-variant-numeric:tabular-nums;color:#2ECC71;font-family:'JetBrains Mono',monospace;${l === "S" ? "animation:countdownTick 1s ease infinite;" : ""}">${String(v).padStart(2, "0")}</div><span style="font-size:${lfs}px;color:${th.textMuted};font-weight:600">${l}</span>${i < units.length - 1 ? `<span style="color:${th.border};font-weight:300;margin-left:1px;font-size:${cfs}px">:</span>` : ""}</div>`
       ).join("")}</div>`;
     }
     return `<span style="font-size:12px;color:#2ECC71;font-weight:700">LIVE NOW</span>`;
@@ -1644,8 +1653,8 @@ function renderCountdown(dateStr, color, over, th, ev) {
   if (!cd && over) return `<span style="font-size:12px;color:${th.textMuted};font-weight:600">Event Over</span>`;
   if (!cd) return `<span style="font-size:12px;color:#2ECC71;font-weight:700">LIVE NOW</span>`;
   const units = [["D", cd.days], ["H", cd.hours], ["M", cd.minutes], ["S", cd.seconds]];
-  return `<div style="display:flex;gap:6px;align-items:center"><span style="font-size:17px;color:${color};font-weight:700;margin-right:4px">Starts in</span>${units.map(([l, v], i) =>
-    `<div style="display:flex;align-items:center;gap:1px"><div style="background:${th.countdownBg(color)};border:1.5px solid ${th.countdownBorder(color)};border-radius:8px;padding:5px 8px;min-width:38px;text-align:center;font-weight:700;font-size:17px;font-variant-numeric:tabular-nums;color:${color};font-family:'JetBrains Mono',monospace;${l === "S" ? "animation:countdownTick 1s ease infinite;" : ""}">${String(v).padStart(2, "0")}</div><span style="font-size:10px;color:${th.textMuted};font-weight:600">${l}</span>${i < 3 ? `<span style="color:${th.border};font-weight:300;margin-left:1px;font-size:14px">:</span>` : ""}</div>`
+  return `<div style="display:flex;gap:${gp}px;align-items:center"><span style="font-size:${lbfs}px;color:${color};font-weight:700;margin-right:${mr}">Starts in</span>${units.map(([l, v], i) =>
+    `<div style="display:flex;align-items:center;gap:1px"><div style="background:${th.countdownBg(color)};border:1.5px solid ${th.countdownBorder(color)};border-radius:${br}px;padding:${pd};min-width:${mw}px;text-align:center;font-weight:700;font-size:${fs}px;font-variant-numeric:tabular-nums;color:${color};font-family:'JetBrains Mono',monospace;${l === "S" ? "animation:countdownTick 1s ease infinite;" : ""}">${String(v).padStart(2, "0")}</div><span style="font-size:${lfs}px;color:${th.textMuted};font-weight:600">${l}</span>${i < 3 ? `<span style="color:${th.border};font-weight:300;margin-left:1px;font-size:${cfs}px">:</span>` : ""}</div>`
   ).join("")}</div>`;
 }
 
@@ -2060,10 +2069,23 @@ function renderCalendar(th) {
       <div style="font-size:${isMobile ? 12 : 13}px;font-weight:${isToday || hasEvents ? 700 : 500};color:${isToday ? "#2ECC71" : hasEvents ? th.text : th.textMuted}">${day}</div>
       ${hasEvents ? (isMobile
         ? `<div style="display:flex;flex-wrap:wrap;gap:2px;justify-content:center;padding:0 2px">${dayEvents.slice(0, 4).map(ev => `<div style="width:6px;height:6px;border-radius:50%;background:${ev.color}"></div>`).join("")}${dayEvents.length > 4 ? `<div style="font-size:7px;color:${th.textMuted}">+${dayEvents.length - 4}</div>` : ""}</div>`
-        : `<div style="display:flex;flex-direction:column;gap:1px;width:100%;padding:0 3px;overflow:hidden">${dayEvents.slice(0, 3).map(ev => {
-                const calIcon = ev.iconImg ? `<img src="${ev.iconImg}" style="width:14px;height:14px;object-fit:contain" />` : (() => { const p = (ev.type === "Raid" || ev.type === "Max Battle") && ev.details && ev.details.bosses && ev.details.bosses[0] ? getPokemonImg(ev.details.bosses[0]) : null; return p ? `<img src="${p.url}" style="width:14px;height:14px;object-fit:contain" />` : ev.icon; })();
-                return `<div style="display:flex;align-items:center;gap:3px;font-size:11px;font-weight:600;color:#fff;background:${ev.color};border-radius:4px;padding:1px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.5">${calIcon} ${esc(ev.title)}</div>`;
-              }).join("")}${dayEvents.length > 3 ? `<div style="font-size:9px;color:${th.textMuted};text-align:center">+${dayEvents.length - 3} more</div>` : ""}</div>`
+        : (() => {
+            const dayName = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][new Date(dateStr + "T12:00:00").getDay()];
+            const seasonEv = dayEvents.find(ev => ev.details && ev.details.dailyDiscoveries);
+            const dd = seasonEv ? seasonEv.details.dailyDiscoveries.find(d => d.day === dayName) : null;
+            const ddBar = dd ? `<div style="display:flex;align-items:center;gap:3px;font-size:11px;font-weight:600;color:#fff;background:${dd.color};border-radius:4px;padding:1px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.5">${dd.icon} ${esc(dd.name)}</div>` : "";
+            const maxItems = dd ? 2 : 3;
+            // Insert dd bar right after the Season event bar
+            let bars = "";
+            let ddInserted = false;
+            dayEvents.slice(0, maxItems).forEach(ev => {
+              const calIcon = ev.iconImg ? `<img src="${ev.iconImg}" style="width:14px;height:14px;object-fit:contain" />` : (() => { const p = (ev.type === "Raid" || ev.type === "Max Battle") && ev.details && ev.details.bosses && ev.details.bosses[0] ? getPokemonImg(ev.details.bosses[0]) : null; return p ? `<img src="${p.url}" style="width:14px;height:14px;object-fit:contain" />` : ev.icon; })();
+              bars += `<div style="display:flex;align-items:center;gap:3px;font-size:11px;font-weight:600;color:#fff;background:${ev.color};border-radius:4px;padding:1px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.5">${calIcon} ${esc(ev.title)}</div>`;
+              if (ev.details && ev.details.dailyDiscoveries && dd && !ddInserted) { bars += ddBar; ddInserted = true; }
+            });
+            const moreCount = dayEvents.length > maxItems ? dayEvents.length - maxItems : 0;
+            return `<div style="display:flex;flex-direction:column;gap:1px;width:100%;padding:0 3px;overflow:hidden">${bars}${moreCount > 0 ? `<div style="font-size:9px;color:${th.textMuted};text-align:center">+${moreCount} more</div>` : ""}</div>`;
+          })()
       ) : ""}
     </div>`;
   }
@@ -2080,7 +2102,7 @@ function renderCalendar(th) {
         <div style="padding:8px;display:flex;flex-direction:column;gap:6px">
           ${selEvents.map(ev => {
             const active = isActive(ev);
-            return `<button onclick="selectEvent(${ev.id})" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:${th.accentBgSubtle(ev.color)};border:1.5px solid ${th.border};border-radius:10px;cursor:pointer;text-align:left;width:100%;font-family:inherit;border-left:4px solid ${ev.color}">
+            const card = `<button onclick="selectEvent(${ev.id})" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:${th.accentBgSubtle(ev.color)};border:1.5px solid ${th.border};border-radius:10px;cursor:pointer;text-align:left;width:100%;font-family:inherit;border-left:4px solid ${ev.color}">
               ${(() => {
                 if (ev.iconImg) return `<img src="${ev.iconImg}" style="width:32px;height:32px;object-fit:contain;border-radius:8px" />`;
                 const calPkmn = (ev.type === "Raid" || ev.type === "Max Battle") && ev.details && ev.details.bosses && ev.details.bosses[0] ? getPokemonImg(ev.details.bosses[0]) : null;
@@ -2092,6 +2114,23 @@ function renderCalendar(th) {
                 <div style="font-size:11px;color:${th.textMuted};margin-top:2px">${esc(ev.type)} \u00B7 ${esc(ev.time)}</div>
               </div>
             </button>`;
+            // Insert daily discovery after the Season event
+            if (ev.details && ev.details.dailyDiscoveries) {
+              const selDayName = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][new Date(state.calSelectedDay + "T12:00:00").getDay()];
+              const dd = ev.details.dailyDiscoveries.find(d => d.day === selDayName);
+              if (dd) {
+                return card + `<div style="padding:10px 14px;background:${th.accentBg(dd.color)};border:1.5px solid ${dd.color}40;border-radius:10px;border-left:4px solid ${dd.color}">
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                    <span style="font-size:16px">${dd.icon}</span>
+                    <span style="font-size:13px;font-weight:700;color:${dd.color}">${esc(dd.name)}</span>
+                  </div>
+                  <div style="font-size:12px;color:${th.textSecondary};line-height:1.5">${esc(dd.desc)}</div>
+                  ${dd.time ? `<div style="margin-top:4px;font-size:11px;font-weight:600;color:${th.textMuted}">\uD83D\uDD52 ${esc(dd.time)}</div>` : ""}
+                </div>`;
+              }
+              return card;
+            }
+            return card;
           }).join("")}
         </div>
       </div>`;
@@ -2138,7 +2177,7 @@ function renderEventDetail(event, th) {
           <span class="countdown" data-date="${event.date}" data-color="${event.color}" data-over="${over}" data-event-id="${event.id}">${renderCountdown(event.date, event.color, over, th, event)}</span>
         </div>
       </div>
-      <div style="padding:20px 20px 24px;display:flex;flex-direction:column;gap:22px">
+      <div style="padding:20px 20px 24px;display:flex;flex-direction:column;gap:42px">
         <p style="margin:0;font-size:14.5px;color:${th.textSecondary};line-height:1.65">${esc(event.summary)}</p>
         ${event.shinyEligible ? `<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:8px;background:${th.accentBgSubtle("#FFD700")};border:1px solid ${th.countdownBorder("#FFD700")};align-self:flex-start">
           <div style="position:relative;width:28px;height:26px;flex-shrink:0;top:-4px">
@@ -2371,7 +2410,26 @@ function renderEventDetail(event, th) {
               </div>
             </div>`;
           }).join("")}</div></div>` : ""}
-        ${event.details.seasonBonuses ? renderDetailSection("Season Bonuses", "\uD83D\uDCC6", event.details.seasonBonuses, "#9B59B6", th) : ""}
+        ${/* event.details.seasonBonuses ? renderDetailSection("Season Bonuses", "\uD83D\uDCC6", event.details.seasonBonuses, "#9B59B6", th) : "" */ ""}
+
+        ${event.details.dailyDiscoveries ? `<div><h4 style="margin:0 0 10px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>\uD83D\uDDD3\uFE0F</span> Daily Discoveries</h4>
+          <div style="display:flex;flex-direction:column;gap:8px">${event.details.dailyDiscoveries.map(d => {
+            const today = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][new Date().getDay()];
+            const isToday = d.day === today;
+            return `<div style="padding:14px 16px;border-radius:12px;background:${isToday ? th.accentBg(d.color) : th.accentBgSubtle(d.color)};border:1.5px solid ${isToday ? d.color + "60" : th.countdownBorder(d.color)};transition:all 0.2s ease">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="font-size:18px">${d.icon}</span>
+                  <span style="font-size:14px;font-weight:700;color:${d.color}">${esc(d.name)}</span>
+                </div>
+                ${isToday ? `<span style="font-size:10px;font-weight:700;color:#fff;background:${d.color};padding:2px 8px;border-radius:20px">TODAY</span>` : `<span style="font-size:11px;font-weight:600;color:${th.textMuted}">${d.day}</span>`}
+              </div>
+              <div style="font-size:13px;color:${th.textSecondary};line-height:1.5">${esc(d.desc)}</div>
+              ${d.time ? `<div style="margin-top:6px;font-size:11px;font-weight:600;color:${th.textMuted};display:flex;align-items:center;gap:4px"><span>\uD83D\uDD52</span> ${esc(d.time)}</div>` : ""}
+            </div>`;
+          }).join("")}</div>
+          <div style="margin-top:8px;padding:10px 14px;border-radius:10px;background:${th.accentBgSubtle("#E74C3C")};border:1px solid ${th.countdownBorder("#E74C3C")};font-size:11px;color:#E74C3C;font-weight:600;line-height:1.5;display:flex;align-items:center;gap:8px"><span style="font-size:14px">\u26A0\uFE0F</span> Daily Discoveries run 12:00 AM \u2013 11:59 PM local time and may pause during major events like GO Fest.</div>
+        </div>` : ""}
         ${event.details.bonuses ? renderDetailSection("Active Bonuses", "\u2728", event.details.bonuses, "#27AE60", th) : ""}
         ${event.details.ticketBonuses ? renderDetailSection(`Ticket Bonuses${event.details.ticketPrice ? " — " + event.details.ticketPrice : ""}`, "\uD83C\uDFAB", event.details.ticketBonuses, "#E67E22", th) : ""}
         ${event.details.ticketNote ? `<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;background:${th.accentBgSubtle("#E74C3C")};border:1px solid ${th.countdownBorder("#E74C3C")}"><span style="font-size:14px">\u26A0\uFE0F</span><span style="font-size:12px;font-weight:600;color:#E74C3C">${esc(event.details.ticketNote)}</span></div>` : ""}
@@ -2688,6 +2746,23 @@ function setTab(tab) {
   sessionStorage.setItem("trainerwire_tab", tab);
   if (tab === "nests") { loadNestsFromSupabase().then(() => render()); }
   render();
+}
+
+function toggleCompactCard(headerEl) {
+  const card = headerEl.parentElement;
+  const body = card.querySelector(".compact-card-body");
+  const chevron = headerEl.querySelector(".compact-chevron");
+  if (!body) return;
+  const isOpen = body.style.maxHeight && body.style.maxHeight !== "0px";
+  if (isOpen) {
+    body.style.maxHeight = "0px";
+    body.style.padding = "0 14px";
+    if (chevron) chevron.style.transform = "rotate(0deg)";
+  } else {
+    body.style.maxHeight = body.scrollHeight + "px";
+    body.style.padding = "0 14px";
+    if (chevron) chevron.style.transform = "rotate(180deg)";
+  }
 }
 
 async function openPokemonDetail(dexNum) {
@@ -3145,7 +3220,7 @@ function getEventsForDate(dateStr) {
   return EVENTS.filter(ev => {
     const end = ev.endDate || ev.date;
     return dateStr >= ev.date && dateStr <= end;
-  });
+  }).sort((a, b) => b.title.startsWith("Season:") - a.title.startsWith("Season:"));
 }
 
 function scrollToEggTier(id) {
@@ -3420,7 +3495,7 @@ function render() {
   Object.keys(archivedNewsByYear).forEach(y => archivedNewsByYear[y].sort((a, b) => new Date(b.date) - new Date(a.date)));
   const newsArchiveYears = Object.keys(archivedNewsByYear).sort((a, b) => b - a);
 
-  const activeEvents = EVENTS.filter(isActive);
+  const activeEvents = EVENTS.filter(isActive).sort((a, b) => b.title.startsWith("Season:") - a.title.startsWith("Season:"));
   const upcomingHero = EVENTS.filter(e => !isOver(e) && !isActive(e)).sort((a, b) => new Date(a.date) - new Date(b.date))[0];
   const hero = upcomingHero || (activeEvents.length === 0 ? null : null);
 
@@ -3442,16 +3517,47 @@ function render() {
         <div style="font-size:${isMobile ? 10 : 11}px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:${isMobile ? 6 : 8}px;color:#2ECC71;display:flex;align-items:center;gap:6px">
           <span style="position:relative;width:7px;height:7px;display:inline-block"><span style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:50%;background:#2ECC71"></span><span style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:50%;background:#2ECC71;animation:sonarPulse 1.5s ease-out infinite"></span></span> LIVE
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:${isMobile ? 10 : 16}px">
-          <div><h2 style="margin:0 0 4px 0;font-size:${isMobile ? 18 : 24}px;font-weight:800;color:${th.text};display:flex;align-items:center;gap:8px">${ev.iconImg ? `<img src="${ev.iconImg}" style="width:${isMobile ? 60 : 72}px;height:${isMobile ? 60 : 72}px;object-fit:contain" onerror="this.outerHTML='${ev.icon}'" />` : ev.icon} ${esc(ev.title)}</h2>
-          <div style="font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">${formatDateRange(ev.date, ev.endDate)} \u00B7 ${esc(ev.time)}</div></div>
-          <span class="countdown" data-date="${ev.endDate || ev.date}" data-color="#2ECC71" data-over="false" data-event-id="${ev.id}">${renderCountdown(ev.endDate || ev.date, "#2ECC71", false, th, ev)}</span>
+        <div style="display:flex;${isMobile ? "flex-direction:column;gap:10px" : "justify-content:space-between;align-items:center;gap:16px"}">
+          <div style="min-width:0;${isMobile ? "" : "flex:1"}"><h2 style="margin:0 0 4px 0;font-size:${isMobile ? 18 : 22}px;font-weight:800;color:${th.text};display:flex;align-items:center;gap:8px${isMobile ? "" : ";white-space:nowrap;overflow:hidden;text-overflow:ellipsis"}">${ev.iconImg ? `<img src="${ev.iconImg}" style="width:${isMobile ? 48 : 72}px;height:${isMobile ? 48 : 72}px;object-fit:contain;flex-shrink:0" onerror="this.outerHTML='${ev.icon}'" />` : ev.icon} ${esc(ev.title)}</h2>
+          <div style="font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500${isMobile ? "" : ";white-space:nowrap;overflow:hidden;text-overflow:ellipsis"}">${formatDateRange(ev.date, ev.endDate)} \u00B7 ${esc(ev.time)}</div></div>
+          <span class="countdown" data-date="${ev.endDate || ev.date}" data-color="#2ECC71" data-over="false" data-event-id="${ev.id}" style="flex-shrink:0">${renderCountdown(ev.endDate || ev.date, "#2ECC71", false, th, ev)}</span>
+        </div>
+      </div>`;
+    });
+
+    // Compact live events (mobile, non-home tabs)
+    let liveCompactHTML = "";
+    activeEvents.forEach(ev => {
+      const compactIcon = ev.iconImg ? `<img src="${ev.iconImg}" style="width:28px;height:28px;object-fit:contain" onerror="this.outerHTML='${ev.icon}'" />` : ev.icon;
+      const fullIcon = ev.iconImg ? `<img src="${ev.iconImg}" style="width:60px;height:60px;object-fit:contain" onerror="this.outerHTML='${ev.icon}'" />` : ev.icon;
+      liveCompactHTML += `<div style="background:${th.heroBg("#2ECC71")};border:1.5px solid ${th.heroBorder("#2ECC71")};border-radius:12px;overflow:hidden">
+        <div onclick="toggleCompactCard(this)" style="padding:10px 14px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px">
+          <div style="display:flex;align-items:center;gap:8px;min-width:0;flex:1">
+            <span style="position:relative;width:7px;height:7px;display:inline-block;flex-shrink:0"><span style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:50%;background:#2ECC71"></span><span style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:50%;background:#2ECC71;animation:sonarPulse 1.5s ease-out infinite"></span></span>
+            ${compactIcon}
+            <span style="font-size:13px;font-weight:700;color:${th.text};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(ev.title)}</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+            <span class="countdown" data-date="${ev.endDate || ev.date}" data-color="#2ECC71" data-over="false" data-event-id="${ev.id}" data-compact="true">${renderCountdown(ev.endDate || ev.date, "#2ECC71", false, th, ev, true)}</span>
+            <span class="compact-chevron" style="font-size:14px;color:${th.textMuted};transition:transform 0.3s ease;display:inline-block">\u25BE</span>
+          </div>
+        </div>
+        <div class="compact-card-body" style="max-height:0;overflow:hidden;transition:max-height 0.35s cubic-bezier(0.25,0.46,0.45,0.94),padding 0.35s ease;padding:0 14px">
+          <div onclick="selectEvent(${ev.id})" style="cursor:pointer;padding:6px 0 14px;display:flex;align-items:center;gap:12px">
+            <div style="flex-shrink:0">${fullIcon}</div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:16px;font-weight:800;color:${th.text};margin-bottom:4px">${esc(ev.title)}</div>
+              <div style="font-size:12px;color:${th.textMuted};font-weight:500">${formatDateRange(ev.date, ev.endDate)} \u00B7 ${esc(ev.time)}</div>
+              <div style="margin-top:6px"><span style="font-size:10px;font-weight:700;color:#fff;background:#2ECC71;padding:2px 8px;border-radius:20px">LIVE</span></div>
+            </div>
+          </div>
         </div>
       </div>`;
     });
 
     // Hero (upcoming)
     let heroHTML = "";
+    let heroCompactHTML = "";
     if (hero) {
       heroHTML = `<div onclick="selectEvent(${hero.id})" style="background:${th.heroBg(hero.color)};border:1.5px solid ${th.heroBorder(hero.color)};border-radius:${isMobile ? 18 : 24}px;padding:${isMobile ? "20px 18px 16px" : "28px 28px 22px"};cursor:pointer;transition:all 0.3s cubic-bezier(0.25,0.46,0.45,0.94);overflow:hidden;${state.heroRendered ? "" : "animation:scaleIn 0.5s cubic-bezier(0.25,0.46,0.45,0.94)"}"
         onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 30px ${hero.color}20';"
@@ -3459,14 +3565,47 @@ function render() {
         <div style="font-size:${isMobile ? 10 : 11}px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:${isMobile ? 6 : 8}px;color:${hero.color};display:flex;align-items:center;gap:6px">
           \u23F1 Coming Up Next
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:${isMobile ? 10 : 16}px">
-          <div><h2 style="margin:0 0 4px 0;font-size:${isMobile ? 18 : 24}px;font-weight:800;color:${th.text};display:flex;align-items:center;gap:8px">${(() => {
-            if (hero.iconImg) return `<img src="${hero.iconImg}" style="width:${isMobile ? 60 : 72}px;height:${isMobile ? 60 : 72}px;object-fit:contain;margin-left:-4px" onerror="this.outerHTML='${hero.icon}'" />`;
+        <div style="display:flex;${isMobile ? "flex-direction:column;gap:10px" : "justify-content:space-between;align-items:center;gap:16px"}">
+          <div style="min-width:0;${isMobile ? "" : "flex:1"}"><h2 style="margin:0 0 4px 0;font-size:${isMobile ? 18 : 22}px;font-weight:800;color:${th.text};display:flex;align-items:center;gap:8px${isMobile ? "" : ";white-space:nowrap;overflow:hidden;text-overflow:ellipsis"}">${(() => {
+            if (hero.iconImg) return `<img src="${hero.iconImg}" style="width:${isMobile ? 48 : 72}px;height:${isMobile ? 48 : 72}px;object-fit:contain;margin-left:-4px;flex-shrink:0" onerror="this.outerHTML='${hero.icon}'" />`;
             const heroPkmn = (hero.type === "Raid" || hero.type === "Max Battle") && hero.details && hero.details.bosses && hero.details.bosses[0] ? getPokemonImg(hero.details.bosses[0]) : null;
-            return heroPkmn ? `<img src="${heroPkmn.url}" style="width:${isMobile ? 36 : 42}px;height:${isMobile ? 36 : 42}px;object-fit:contain" onerror="this.outerHTML='${hero.icon}'" />` : hero.icon;
+            return heroPkmn ? `<img src="${heroPkmn.url}" style="width:${isMobile ? 36 : 42}px;height:${isMobile ? 36 : 42}px;object-fit:contain;flex-shrink:0" onerror="this.outerHTML='${hero.icon}'" />` : hero.icon;
           })()} ${esc(hero.title)}</h2>
-          <div style="font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">${formatDateRange(hero.date, hero.endDate)} \u00B7 ${esc(hero.time)}</div></div>
-          <span class="countdown" data-date="${hero.date}" data-color="${hero.color}" data-over="false" data-event-id="${hero.id}">${renderCountdown(hero.date, hero.color, false, th, hero)}</span>
+          <div style="font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500${isMobile ? "" : ";white-space:nowrap;overflow:hidden;text-overflow:ellipsis"}">${formatDateRange(hero.date, hero.endDate)} \u00B7 ${esc(hero.time)}</div></div>
+          <span class="countdown" data-date="${hero.date}" data-color="${hero.color}" data-over="false" data-event-id="${hero.id}" style="flex-shrink:0">${renderCountdown(hero.date, hero.color, false, th, hero)}</span>
+        </div>
+      </div>`;
+      const compactHeroIcon = (() => {
+        if (hero.iconImg) return `<img src="${hero.iconImg}" style="width:28px;height:28px;object-fit:contain" onerror="this.outerHTML='${hero.icon}'" />`;
+        const heroPkmn = (hero.type === "Raid" || hero.type === "Max Battle") && hero.details && hero.details.bosses && hero.details.bosses[0] ? getPokemonImg(hero.details.bosses[0]) : null;
+        return heroPkmn ? `<img src="${heroPkmn.url}" style="width:28px;height:28px;object-fit:contain" onerror="this.outerHTML='${hero.icon}'" />` : hero.icon;
+      })();
+      const fullHeroIcon = (() => {
+        if (hero.iconImg) return `<img src="${hero.iconImg}" style="width:60px;height:60px;object-fit:contain" onerror="this.outerHTML='${hero.icon}'" />`;
+        const heroPkmn = (hero.type === "Raid" || hero.type === "Max Battle") && hero.details && hero.details.bosses && hero.details.bosses[0] ? getPokemonImg(hero.details.bosses[0]) : null;
+        return heroPkmn ? `<img src="${heroPkmn.url}" style="width:36px;height:36px;object-fit:contain" onerror="this.outerHTML='${hero.icon}'" />` : hero.icon;
+      })();
+      heroCompactHTML = `<div style="background:${th.heroBg(hero.color)};border:1.5px solid ${th.heroBorder(hero.color)};border-radius:12px;overflow:hidden">
+        <div onclick="toggleCompactCard(this)" style="padding:10px 14px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px">
+          <div style="display:flex;align-items:center;gap:8px;min-width:0;flex:1">
+            <span style="font-size:9px;font-weight:700;color:${hero.color};letter-spacing:0.5px">\u23F1</span>
+            ${compactHeroIcon}
+            <span style="font-size:13px;font-weight:700;color:${th.text};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(hero.title)}</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+            <span class="countdown" data-date="${hero.date}" data-color="${hero.color}" data-over="false" data-event-id="${hero.id}" data-compact="true">${renderCountdown(hero.date, hero.color, false, th, hero, true)}</span>
+            <span class="compact-chevron" style="font-size:14px;color:${th.textMuted};transition:transform 0.3s ease;display:inline-block">\u25BE</span>
+          </div>
+        </div>
+        <div class="compact-card-body" style="max-height:0;overflow:hidden;transition:max-height 0.35s cubic-bezier(0.25,0.46,0.45,0.94),padding 0.35s ease;padding:0 14px">
+          <div onclick="selectEvent(${hero.id})" style="cursor:pointer;padding:6px 0 14px;display:flex;align-items:center;gap:12px">
+            <div style="flex-shrink:0">${fullHeroIcon}</div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:16px;font-weight:800;color:${th.text};margin-bottom:4px">${esc(hero.title)}</div>
+              <div style="font-size:12px;color:${th.textMuted};font-weight:500">${formatDateRange(hero.date, hero.endDate)} \u00B7 ${esc(hero.time)}</div>
+              <div style="margin-top:6px"><span style="font-size:10px;font-weight:700;color:${hero.color};background:${th.accentBg(hero.color)};padding:2px 8px;border-radius:20px">COMING UP NEXT</span></div>
+            </div>
+          </div>
         </div>
       </div>`;
     }
@@ -4468,7 +4607,7 @@ function render() {
       </div>` : "";
 
     content = `<main style="padding:${mainPad};display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
-      ${welcomeHTML}${!["home","tools","nests","pokedex","store","report"].includes(state.tab) ? `${liveHTML}${heroHTML}${tabsHTML}` : ""}${state.tab === "home" ? `${liveHTML}${heroHTML}${tabsHTML}` : ""}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${rocketTabHTML}${eggsTabHTML}${newsTabHTML}${storeTabHTML}${pokedexTabHTML}${toolsTabHTML}${nestsTabHTML}${reportTabHTML}
+      ${welcomeHTML}${!["home","tools","nests","pokedex","store","report"].includes(state.tab) ? `${isMobile ? liveCompactHTML + heroCompactHTML : `<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:${isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>`}${tabsHTML}` : ""}${state.tab === "home" ? `<div style="display:grid;grid-template-columns:${isMobile ? "1fr" : "repeat(2,1fr)"};gap:${isMobile ? 12 : isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>${tabsHTML}` : ""}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${rocketTabHTML}${eggsTabHTML}${newsTabHTML}${storeTabHTML}${pokedexTabHTML}${toolsTabHTML}${nestsTabHTML}${reportTabHTML}
     </main>`;
     if (hero || activeEvents.length > 0) state.heroRendered = true;
   }
@@ -4552,7 +4691,8 @@ setInterval(() => {
     const over = el.dataset.over === "true";
     const eventId = el.dataset.eventId ? parseInt(el.dataset.eventId) : null;
     const ev = eventId ? EVENTS.find(e => e.id === eventId) : null;
-    el.innerHTML = renderCountdown(dateStr, color, over, th, ev);
+    const compact = el.dataset.compact === "true";
+    el.innerHTML = renderCountdown(dateStr, color, over, th, ev, compact);
   });
   // Update nest migration countdown & check for migration reset
   const nestEl = document.getElementById("nest-migration-countdown");
