@@ -2,7 +2,7 @@
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
 const APP_VERSION = "2.62";
-const REPORT_EMAIL = "ssj4gogeta2004@gmail.com";
+const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
 const IMG_BASE = "assets/pokemon-images";
@@ -1399,12 +1399,11 @@ let _nestsCache = [];
 async function loadNestsFromSupabase() {
   try {
     const migId = getCurrentMigrationId();
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/nests?select=*&order=created_at.desc&or=(migration_id.eq.${migId},migration_id.is.null)`, {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/nests?select=*&order=created_at.desc&migration_id=eq.${migId}`, {
       headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` }
     });
     if (res.ok) {
-      const nests = await res.json();
-      _nestsCache = nests.filter(n => !n.migration_id || n.migration_id === migId);
+      _nestsCache = await res.json();
     }
   } catch {}
   return _nestsCache;
