@@ -2246,6 +2246,11 @@
     ],
     "cp": "189–231"
   },
+  "Sandaconda": {
+    "types": [
+      "Ground"
+    ]
+  },
   "Silicobra": {
     "types": [
       "Ground"
@@ -2481,6 +2486,11 @@
     "types": [
       "Ground",
       "Grass"
+    ]
+  },
+  "Togepi": {
+    "types": [
+      "Fairy"
     ]
   },
   "Togekiss": {
