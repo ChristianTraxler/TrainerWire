@@ -4703,9 +4703,22 @@ function render() {
 
   const sidebarHTML = renderSidebar(th);
 
-  document.getElementById("app").innerHTML = `${sidebarHTML}<div style="min-height:100vh;display:flex;flex-direction:column;background:${th.bg};font-family:'Outfit','DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;color:${th.text};width:100%">
+  const appEl = document.getElementById("app");
+  // Save all existing logo images before DOM replacement to prevent flash
+  const existingLogos = Array.from(appEl.querySelectorAll("img[alt='TrainerWire']"));
+
+  appEl.innerHTML = `${sidebarHTML}<div style="min-height:100vh;display:flex;flex-direction:column;background:${th.bg};font-family:'Outfit','DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;color:${th.text};width:100%">
     ${headerHTML}${tickerHTML}<div style="flex:1">${content}</div>${footerHTML}
   </div>${scrollTopBtn}`;
+
+  // Swap new logo img elements with the preserved originals to avoid image flash
+  if (existingLogos.length) {
+    const newLogos = appEl.querySelectorAll("img[alt='TrainerWire']");
+    newLogos.forEach(newLogo => {
+      const match = existingLogos.find(old => old.src === newLogo.src && old.style.width === newLogo.style.width);
+      if (match) newLogo.replaceWith(match);
+    });
+  }
 }
 
 // --- COUNTDOWN TICK ---
