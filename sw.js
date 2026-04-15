@@ -1,4 +1,4 @@
-const CACHE_VERSION = "2.63";
+const CACHE_VERSION = "2.64";
 const CACHE_NAME = `trainerwire-v${CACHE_VERSION}`;
 
 // App shell — pre-cached on install
@@ -12,7 +12,8 @@ const APP_SHELL = [
   "/assets/trainerwire-icon-192.png",
   "/assets/trainerwire-icon-512.png",
   "/assets/trainerwire-apple-icon.png",
-  "/assets/trainerwire-logo.PNG"
+  "/assets/trainerwire-logo.PNG",
+  "/assets/trainerwire-logo2.webp"
 ];
 
 // Google Fonts to pre-cache

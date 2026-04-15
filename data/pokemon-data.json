@@ -547,6 +547,14 @@
     ],
     "cp": "732–786"
   },
+  "Dugtrio": {
+    "types": [
+      "Ground"
+    ],
+    "cp": "833–889",
+    "cpBoost": "1042–1112",
+    "weather": "Sunny"
+  },
   "Drowzee": {
     "types": [
       "Psychic"
@@ -860,6 +868,14 @@
     "types": [
       "Dragon"
     ]
+  },
+  "Gossifleur": {
+    "types": [
+      "Grass"
+    ],
+    "cp": "347–384",
+    "cpBoost": "434–480",
+    "weather": "Sunny"
   },
   "Goomy": {
     "types": [
@@ -1311,7 +1327,10 @@
   "Mega Alakazam": {
     "types": [
       "Psychic"
-    ]
+    ],
+    "cp": "1666–1747",
+    "cpBoost": "2083–2184",
+    "weather": "Windy"
   },
   "Mega Altaria": {
     "types": [
@@ -1975,6 +1994,15 @@
       "Ground"
     ]
   },
+  "Sandygast": {
+    "types": [
+      "Ghost",
+      "Ground"
+    ],
+    "cp": "655–705",
+    "cpBoost": "819–881",
+    "weather": "Fog, Sunny"
+  },
   "Sceptile": {
     "types": [
       "Grass"
@@ -2508,7 +2536,10 @@
     "types": [
       "Grass",
       "Ground"
-    ]
+    ],
+    "cp": "1600–1677",
+    "cpBoost": "2000–2096",
+    "weather": "Sunny"
   },
   "Totodile": {
     "types": [
@@ -3121,7 +3152,10 @@
     "types": [
       "Grass",
       "Poison"
-    ]
+    ],
+    "cp": "514–559",
+    "cpBoost": "643–699",
+    "weather": "Sunny, Cloudy"
   },
   "Piloswine": {
     "types": [
@@ -3261,7 +3295,10 @@
     "types": [
       "Grass",
       "Poison"
-    ]
+    ],
+    "cp": "1391–1462",
+    "cpBoost": "1739–1828",
+    "weather": "Sunny, Cloudy"
   },
   "Trevenant": {
     "types": [
@@ -3283,7 +3320,10 @@
     "types": [
       "Ghost",
       "Grass"
-    ]
+    ],
+    "cp": "595–642",
+    "cpBoost": "743–802",
+    "weather": "Fog, Sunny"
   },
   "Hitmontop": {
     "types": [
