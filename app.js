@@ -3544,7 +3544,11 @@ function render() {
           <span style="position:relative;width:7px;height:7px;display:inline-block"><span style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:50%;background:#2ECC71"></span><span style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:50%;background:#2ECC71;animation:sonarPulse 1.5s ease-out infinite"></span></span> LIVE
         </div>
         <div style="display:flex;${isMobile ? "flex-direction:column;gap:10px" : "justify-content:space-between;align-items:center;gap:16px"}">
-          <div style="min-width:0;${isMobile ? "" : "flex:1"}"><h2 style="margin:0 0 4px 0;font-size:${isMobile ? 18 : 22}px;font-weight:800;color:${th.text};display:flex;align-items:center;gap:8px${isMobile ? "" : ";white-space:nowrap;overflow:hidden;text-overflow:ellipsis"}">${ev.iconImg ? `<img src="${ev.iconImg}" style="width:${isMobile ? 48 : 72}px;height:${isMobile ? 48 : 72}px;object-fit:contain;flex-shrink:0" onerror="this.outerHTML='${ev.icon}'" />` : ev.icon} ${esc(ev.title)}</h2>
+          <div style="min-width:0;${isMobile ? "" : "flex:1"}"><h2 style="margin:0 0 4px 0;font-size:${isMobile ? 18 : 22}px;font-weight:800;color:${th.text};display:flex;align-items:center;gap:8px${isMobile ? "" : ";white-space:nowrap;overflow:hidden;text-overflow:ellipsis"}">${(() => {
+            if (ev.iconImg) return `<img src="${ev.iconImg}" style="width:${isMobile ? 36 : 42}px;height:${isMobile ? 36 : 42}px;object-fit:contain;flex-shrink:0" onerror="this.outerHTML='${ev.icon}'" />`;
+            const livePkmn = (ev.type === "Raid" || ev.type === "Max Battle") && ev.details && ev.details.bosses && ev.details.bosses[0] ? getPokemonImg(ev.details.bosses[0]) : null;
+            return livePkmn ? `<img src="${livePkmn.url}" style="width:${isMobile ? 36 : 42}px;height:${isMobile ? 36 : 42}px;object-fit:contain;flex-shrink:0" onerror="this.outerHTML='${ev.icon}'" />` : ev.icon;
+          })()} ${esc(ev.title)}</h2>
           <div style="font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500${isMobile ? "" : ";white-space:nowrap;overflow:hidden;text-overflow:ellipsis"}">${formatDateRange(ev.date, ev.endDate)} \u00B7 ${esc(ev.time)}</div></div>
           <span class="countdown" data-date="${ev.endDate || ev.date}" data-color="#2ECC71" data-over="false" data-event-id="${ev.id}" style="flex-shrink:0">${renderCountdown(ev.endDate || ev.date, "#2ECC71", false, th, ev)}</span>
         </div>
@@ -3554,8 +3558,16 @@ function render() {
     // Compact live events (mobile, non-home tabs)
     let liveCompactHTML = "";
     activeEvents.forEach(ev => {
-      const compactIcon = ev.iconImg ? `<img src="${ev.iconImg}" style="width:28px;height:28px;object-fit:contain" onerror="this.outerHTML='${ev.icon}'" />` : ev.icon;
-      const fullIcon = ev.iconImg ? `<img src="${ev.iconImg}" style="width:60px;height:60px;object-fit:contain" onerror="this.outerHTML='${ev.icon}'" />` : ev.icon;
+      const compactIcon = (() => {
+        if (ev.iconImg) return `<img src="${ev.iconImg}" style="width:28px;height:28px;object-fit:contain" onerror="this.outerHTML='${ev.icon}'" />`;
+        const pkmn = (ev.type === "Raid" || ev.type === "Max Battle") && ev.details && ev.details.bosses && ev.details.bosses[0] ? getPokemonImg(ev.details.bosses[0]) : null;
+        return pkmn ? `<img src="${pkmn.url}" style="width:28px;height:28px;object-fit:contain" onerror="this.outerHTML='${ev.icon}'" />` : ev.icon;
+      })();
+      const fullIcon = (() => {
+        if (ev.iconImg) return `<img src="${ev.iconImg}" style="width:36px;height:36px;object-fit:contain" onerror="this.outerHTML='${ev.icon}'" />`;
+        const pkmn = (ev.type === "Raid" || ev.type === "Max Battle") && ev.details && ev.details.bosses && ev.details.bosses[0] ? getPokemonImg(ev.details.bosses[0]) : null;
+        return pkmn ? `<img src="${pkmn.url}" style="width:36px;height:36px;object-fit:contain" onerror="this.outerHTML='${ev.icon}'" />` : ev.icon;
+      })();
       liveCompactHTML += `<div style="background:${th.heroBg("#2ECC71")};border:1.5px solid ${th.heroBorder("#2ECC71")};border-radius:12px;overflow:hidden">
         <div onclick="toggleCompactCard(this)" style="padding:10px 14px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px">
           <div style="display:flex;align-items:center;gap:8px;min-width:0;flex:1">
@@ -3593,7 +3605,7 @@ function render() {
         </div>
         <div style="display:flex;${isMobile ? "flex-direction:column;gap:10px" : "justify-content:space-between;align-items:center;gap:16px"}">
           <div style="min-width:0;${isMobile ? "" : "flex:1"}"><h2 style="margin:0 0 4px 0;font-size:${isMobile ? 18 : 22}px;font-weight:800;color:${th.text};display:flex;align-items:center;gap:8px${isMobile ? "" : ";white-space:nowrap;overflow:hidden;text-overflow:ellipsis"}">${(() => {
-            if (hero.iconImg) return `<img src="${hero.iconImg}" style="width:${isMobile ? 48 : 72}px;height:${isMobile ? 48 : 72}px;object-fit:contain;margin-left:-4px;flex-shrink:0" onerror="this.outerHTML='${hero.icon}'" />`;
+            if (hero.iconImg) return `<img src="${hero.iconImg}" style="width:${isMobile ? 36 : 42}px;height:${isMobile ? 36 : 42}px;object-fit:contain;margin-left:-4px;flex-shrink:0" onerror="this.outerHTML='${hero.icon}'" />`;
             const heroPkmn = (hero.type === "Raid" || hero.type === "Max Battle") && hero.details && hero.details.bosses && hero.details.bosses[0] ? getPokemonImg(hero.details.bosses[0]) : null;
             return heroPkmn ? `<img src="${heroPkmn.url}" style="width:${isMobile ? 36 : 42}px;height:${isMobile ? 36 : 42}px;object-fit:contain;flex-shrink:0" onerror="this.outerHTML='${hero.icon}'" />` : hero.icon;
           })()} ${esc(hero.title)}</h2>
