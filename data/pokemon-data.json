@@ -806,6 +806,11 @@
       "Poison"
     ]
   },
+  "Gigantamax Inteleon": {
+    "types": [
+      "Water"
+    ]
+  },
   "Gigantamax Kingler": {
     "types": [
       "Water"
@@ -830,6 +835,11 @@
   "Gigantamax Pikachu": {
     "types": [
       "Electric"
+    ]
+  },
+  "Gigantamax Rillaboom": {
+    "types": [
+      "Grass"
     ]
   },
   "Gigantamax Snorlax": {
@@ -2752,6 +2762,18 @@
     "cp": "410–450",
     "cpBoost": "512–562",
     "weather": "Rainy"
+  },
+  "Zacian (Crowned Sword)": {
+    "types": [
+      "Fairy",
+      "Steel"
+    ]
+  },
+  "Zamazenta (Crowned Shield)": {
+    "types": [
+      "Fighting",
+      "Steel"
+    ]
   },
   "Zekrom": {
     "types": [
