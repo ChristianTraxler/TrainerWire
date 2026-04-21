@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "2.64";
+const APP_VERSION = "2.65";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -350,6 +350,13 @@ function getPokemonImg(name) {
   }
   if (lower.includes("corsola") && lower.includes("sunglasses")) {
     return { url: eventDexImg(222, "spring_2026"), shadow: false };
+  }
+  if (lower.includes("flower crown")) {
+    const m = name.match(/^(\w+)/);
+    if (m) {
+      const dex = DEX[m[1]];
+      if (dex) return { url: eventDexImg(dex, "crown" + (GENDER_SUFFIX[dex] || "")), shadow: false };
+    }
   }
   if (lower.includes("galarian")) {
     const m = name.match(/Galarian\s+(\w+)/);
@@ -744,7 +751,8 @@ const EVENTS = [
   { id: 40, title: "GO Fest 2026: Tokyo", type: "GO Fest", date: "2026-05-29", endDate: "2026-06-01", time: "9 AM – 6 PM (Citywide from May 25)", color: "#FF6348", icon: "\uD83D\uDDFC", featured: true, summary: "GO Fest kicks off in Tokyo! Zeraora debut, Mewtwo raids, costumed Pikachu.", details: { bosses: ["Zeraora (debut)", "Mewtwo (5\u2605 citywide)", "Aqua Paldean Tauros", "Costumed Pikachu", "All Unown forms"], bonuses: ["Park sessions at Odaiba", "Citywide from May 25", "City Exploration Tickets", "4 City Districts", "GO Expert medal"], tips: ["Zeraora available once per trainer.", "Park tickets $33.", "Mewtwo raids citywide."] } },
   { id: 41, title: "GO Fest 2026: Chicago", type: "GO Fest", date: "2026-06-05", endDate: "2026-06-07", time: "Park Sessions + Citywide (from Jun 4)", color: "#0984E3", icon: "\uD83C\uDFD9\uFE0F", featured: false, summary: "GO Fest returns to Grant Park! Spark hosts. Zeraora, Mewtwo.", details: { bosses: ["Zeraora", "Mewtwo (5\u2605)", "Blaze Paldean Tauros", "Costumed Pikachu", "All Unown forms"], bonuses: ["Citywide from June 4", "Spark coaching", "4 City Districts"], tips: ["Grant Park confirmed 2026 AND 2027.", "Tickets $33 — first-come-first-served."] } },
   { id: 42, title: "GO Fest 2026: Copenhagen", type: "GO Fest", date: "2026-06-12", endDate: "2026-06-14", time: "9 AM – 6 PM CEST (Citywide from Jun 11)", color: "#00B894", icon: "\uD83C\uDFF0", featured: false, summary: "European GO Fest at Fælledparken! Candela hosts. Shiny Paldean Tauros exclusive.", details: { bosses: ["Zeraora", "Mewtwo (5\u2605)", "Shiny Combat Breed Paldean Tauros", ], bonuses: ["Fælledparken park", "Citywide from June 11", "Candela coaching"], tips: ["Shiny Paldean Tauros exclusive to ticket-holding raiders.", "Last in-person Zeraora before Global."] } },
-  { id: 43, title: "GO Fest 2026: Global", type: "GO Fest", date: "2026-07-11", endDate: "2026-07-12", time: "10:00 AM – 6:00 PM Local", color: "#6C5CE7", icon: "\uD83C\uDF0D", featured: true, summary: "Global finale! All trainers worldwide. Zeraora encounters, 10th anniversary.", details: { bosses: ["Zeraora (Special Research)", "Raid bosses TBA", "10th Anniversary Pokémon"], bonuses: ["Global participation", "Special Research", "10th anniversary celebrations"], tips: ["Your chance if you couldn't attend in person.", "Zeraora available globally for the first time."] } }
+  { id: 43, title: "GO Fest 2026: Global", type: "GO Fest", date: "2026-07-11", endDate: "2026-07-12", time: "10:00 AM – 6:00 PM Local", color: "#6C5CE7", icon: "\uD83C\uDF0D", featured: true, summary: "Global finale! All trainers worldwide. Zeraora encounters, 10th anniversary.", details: { bosses: ["Zeraora (Special Research)", "Raid bosses TBA", "10th Anniversary Pokémon"], bonuses: ["Global participation", "Special Research", "10th anniversary celebrations"], tips: ["Your chance if you couldn't attend in person.", "Zeraora available globally for the first time."] } },
+  { id: 64, title: "Spring Marathon 2026", type: "Event", url: "https://pokemongo.com/news/spring-marathon-2026", date: "2026-05-12", endDate: "2026-05-18", time: "10:00 AM – 8:00 PM", color: "#F093B0", icon: "🌸", featured: true, summary: "Flittle and Espathra debut from Paldea! Pikachu wearing a marathon visor appears with Shiny chance. 5 km Eggs feature flower crown Pichu, Togepi, and Happiny.", details: { bosses: ["Flittle (debut)", "Espathra (evolve Flittle with 50 Candy)", "Pikachu wearing a marathon visor (debut) ✨", "Eevee with flower crown (Field Research)", "Buneary with flower crown (Field Research) ✨"], eggLabel: "5 km Eggs", eggs: ["Pichu with flower crown ✨", "Togepi with flower crown ✨", "Happiny with flower crown ✨", "Flittle"], bonuses: ["Free Timed Research rewards 21,000 XP and an encounter with Pikachu wearing a marathon visor", "Timed Research expires May 18, 2026 at 8:00 PM local time", "Event-themed Field Research with costumed encounters", "GO Pass and GO Pass Deluxe rewards available"], milestones: [{ tier: "Tier 1", bonus: "2× XP for spinning a PokéStop", deluxe: "3× XP for spinning a PokéStop" }, { tier: "Tier 2", bonus: "1/2 Egg Hatch Distance when Eggs are placed in an Incubator during the event period" }], goPass: { free: ["Tier 1: 2× XP for spinning a PokéStop", "Tier 2: 1/2 Egg Hatch Distance for Eggs incubated during the event", "Marathon-themed milestone encounters"], deluxe: { price: "$4.99", rewards: ["Tier 1: 3× XP for spinning a PokéStop (upgraded)", "Upgraded milestone rewards", "Faster progression through ranks"] }, deluxePlus: { price: "$6.99", rewards: ["Everything in GO Pass Deluxe", "Instantly skip 6 ranks"] } }, tips: ["Flittle and Espathra make their Pokémon GO debut — check every spawn.", "Evolve Flittle with 50 Candy to get Espathra.", "Pikachu wearing a marathon visor can be Shiny — take every Timed Research encounter.", "Stack the 1/2 Egg Hatch Distance milestone with Super Incubators on 5 km Eggs.", "Flower crown Pichu, Togepi, and Happiny are all Shiny eligible from 5 km Eggs.", "Timed Research expires May 18 at 8 PM local — complete it before then."] } }
 ];
 
 const ANNOUNCEMENTS = [
@@ -1800,7 +1808,7 @@ function renderRaidHeads(tier) {
   const color = darkMode ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.85)";
   return `<div style="display:flex;gap:2px;align-items:center;margin-left:auto">${Array(count).fill(raidHeadIcon(20, color)).join("")}</div>`;
 }
-const TIER_EGGS = { "1-Star Raids": "assets/pokemon-images/Raid-Eggs/1-star.png", "3-Star Raids": "assets/pokemon-images/Raid-Eggs/3-star.png", "5-Star Raids": "assets/pokemon-images/Raid-Eggs/5-star.png", "Mega Raids": "assets/pokemon-images/Raid-Eggs/mega.png", "Shadow Raids": "assets/pokemon-images/Raid-Eggs/5-star.png", "Shadow 1-Star Raids": "assets/pokemon-images/Raid-Eggs/1-star.png", "Shadow 3-Star Raids": "assets/pokemon-images/Raid-Eggs/3-star.png", "Shadow 5-Star Raids": "assets/pokemon-images/Raid-Eggs/5-star.png" };
+const TIER_EGGS = { "1-Star Raids": "assets/pokemon-images/Raid-Eggs/1-star.png", "3-Star Raids": "assets/pokemon-images/Raid-Eggs/3-star.png", "5-Star Raids": "assets/pokemon-images/Raid-Eggs/5-star.png", "Mega Raids": "assets/pokemon-images/Raid-Eggs/mega.png", "Shadow Raids": "assets/pokemon-images/Raid-Eggs/5-star.png", "Shadow 1-Star Raids": "assets/pokemon-images/Raid-Eggs/1-star.png", "Shadow 3-Star Raids": "assets/pokemon-images/Raid-Eggs/3-star.png", "Shadow 5-Star Raids": "assets/pokemon-images/Raid-Eggs/5-star.png", "Field Research": "assets/pokemon-images/icons/green-research.png", "Field Research (Rare)": "assets/pokemon-images/icons/green-research.png" };
 let RAID_BOSS_DATA = {};
 fetch("data/pokemon-data.json").then(r => r.json()).then(data => { Object.assign(RAID_BOSS_DATA, data); render(); }).catch(() => {});
 const TYPE_COLORS = {
@@ -1903,7 +1911,7 @@ function renderBossItem(item, color, th, cardLayout, noSparkles) {
   const resistances = raidData ? getResistances(raidData.types) : [];
   const hasBack = weaknesses.length > 0 || resistances.length > 0;
   const backContent = hasBack ? `
-    <div style="font-size:11px;font-weight:700;color:${th.textMuted};margin-bottom:16px;text-transform:uppercase;letter-spacing:0.5px">${esc(cleanRaidLabel(item).replace(/\s+with\s+.*/i,"").trim())}</div>
+    <div style="font-size:11px;font-weight:700;color:${th.textMuted};margin-bottom:16px;text-transform:uppercase;letter-spacing:0.5px">${esc(cleanRaidLabel(item).replace(/\s*\(.*/,"").replace(/\s+with\s+.*/i,"").trim())}</div>
     ${weaknesses.length > 0 ? `<div style="margin-bottom:20px">
       <div style="font-size:10px;font-weight:700;color:#E74C3C;letter-spacing:0.5px;margin-bottom:4px">WEAK TO</div>
       <div style="display:flex;gap:3px;flex-wrap:wrap;${cardLayout ? "justify-content:center" : ""}">${weaknesses.map(w =>
@@ -2459,7 +2467,14 @@ function renderEventDetail(event, th) {
           <div style="margin-top:8px;padding:10px 14px;border-radius:10px;background:${th.accentBgSubtle("#E74C3C")};border:1px solid ${th.countdownBorder("#E74C3C")};font-size:11px;color:#E74C3C;font-weight:600;line-height:1.5;display:flex;align-items:center;gap:8px"><span style="font-size:14px">\u26A0\uFE0F</span> Daily Discoveries run 12:00 AM \u2013 11:59 PM local time and may pause during major events like GO Fest.</div>
         </div>` : ""}
         ${event.details.bonuses ? renderDetailSection("Active Bonuses", "\u2728", event.details.bonuses, "#27AE60", th) : ""}
-        ${event.details.eggs ? renderDetailSection("7 km Eggs", "\uD83E\uDD5A", event.details.eggs, "#E67E22", th, true) + `<div style="display:flex;align-items:center;gap:10px;margin-top:8px;padding:8px 14px;border-radius:10px;background:${th.accentBgSubtle("#FFD700")};border:1px solid ${th.countdownBorder("#FFD700")}"><span style="display:inline-flex;align-items:center;gap:4px">${fourPointStar(12, "#FFD700")}${fourPointStar(8, "#FFD700")}</span><span style="font-size:12px;font-weight:600;color:${th.textSecondary}">Animated gold sparkles = <span style="color:#FFD700;font-weight:700">Boosted Shiny Rates</span></span></div>` : ""}
+        ${event.details.eggs ? (() => {
+          const eggLabel = event.details.eggLabel || "7 km Eggs";
+          const eggImgSrc = EGG_TIER_IMAGES[eggLabel];
+          const eggIcon = eggImgSrc ? `<img src="${eggImgSrc}" style="width:28px;height:28px;object-fit:contain;vertical-align:middle;position:relative;top:-4px" />` : "🥚";
+          const anyBoosted = event.details.eggs.some(e => e.startsWith("★"));
+          const legend = anyBoosted ? `<div style="display:flex;align-items:center;gap:10px;margin-top:8px;padding:8px 14px;border-radius:10px;background:${th.accentBgSubtle("#FFD700")};border:1px solid ${th.countdownBorder("#FFD700")}"><span style="display:inline-flex;align-items:center;gap:4px">${fourPointStar(12, "#FFD700")}${fourPointStar(8, "#FFD700")}</span><span style="font-size:12px;font-weight:600;color:${th.textSecondary}">Animated gold sparkles = <span style="color:#FFD700;font-weight:700">Boosted Shiny Rates</span></span></div>` : "";
+          return renderDetailSection(eggLabel, eggIcon, event.details.eggs, "#E67E22", th, true) + legend;
+        })() : ""}
         ${event.details.routes ? renderRoutes(event.details.routes, th) : ""}
         ${event.details.ticketBonuses ? renderDetailSection(`Ticket Bonuses${event.details.ticketPrice ? " — " + event.details.ticketPrice : ""}`, "\uD83C\uDFAB", event.details.ticketBonuses, "#E67E22", th) : ""}
         ${event.details.ticketNote ? `<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;background:${th.accentBgSubtle("#E74C3C")};border:1px solid ${th.countdownBorder("#E74C3C")}"><span style="font-size:14px">\u26A0\uFE0F</span><span style="font-size:12px;font-weight:600;color:#E74C3C">${esc(event.details.ticketNote)}</span></div>` : ""}
@@ -2473,7 +2488,7 @@ function renderEventDetail(event, th) {
             <div style="padding:8px 14px;background:${th.accentBgSubtle("#F39C12")};border-bottom:1.5px solid ${th.border};display:flex;align-items:center;gap:8px">
               <span style="font-size:12px;font-weight:700;color:${th.text};letter-spacing:0.5px;text-transform:uppercase">${esc(m.tier)}</span>
             </div>
-            <div style="padding:12px 14px;font-size:14px;font-weight:700;color:${th.text};line-height:1.45">${esc(m.bonus)}</div>
+            <div style="padding:12px 14px;font-size:14px;font-weight:500;color:${th.textSecondary};line-height:1.5;display:flex;flex-direction:column;gap:4px"><div>• ${esc(m.bonus)}</div>${m.deluxe ? `<div>• GO Pass Deluxe: ${esc(m.deluxe)}</div>` : ""}</div>
           </div>`).join("")}</div></div>` : ""}
         ${event.details.goPass ? (() => {
           const gp = event.details.goPass;

@@ -275,6 +275,11 @@
     ],
     "cp": "590–637"
   },
+  "Buneary": {
+    "types": [
+      "Normal"
+    ]
+  },
   "Butterfree": {
     "types": [
       "Bug",
@@ -664,6 +669,16 @@
   "Fidough": {
     "types": [
       "Fairy"
+    ]
+  },
+  "Flittle": {
+    "types": [
+      "Psychic"
+    ]
+  },
+  "Espathra": {
+    "types": [
+      "Psychic"
     ]
   },
   "Florges": {
@@ -1777,6 +1792,11 @@
     "cp": "1613–1690",
     "cpBoost": "2016–2113",
     "weather": "Rainy"
+  },
+  "Pichu": {
+    "types": [
+      "Electric"
+    ]
   },
   "Piplup": {
     "types": [
