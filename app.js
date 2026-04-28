@@ -2586,7 +2586,11 @@ function renderEventDetail(event, th) {
           }).join("")}</div>
           <div style="margin-top:8px;padding:10px 14px;border-radius:10px;background:${th.accentBgSubtle("#E74C3C")};border:1px solid ${th.countdownBorder("#E74C3C")};font-size:11px;color:#E74C3C;font-weight:600;line-height:1.5;display:flex;align-items:center;gap:8px"><span style="font-size:14px">\u26A0\uFE0F</span> Daily Discoveries run 12:00 AM \u2013 11:59 PM local time and may pause during major events like GO Fest.</div>
         </div>` : ""}
-        ${event.details.bonuses ? renderDetailSection("Active Bonuses", "\u2728", event.details.bonuses, "#27AE60", th) : ""}
+        ${event.details.bonusGroups
+          ? renderBonusGroups(event.details.bonusGroups, th)
+          : event.details.bonuses
+            ? renderDetailSection("Active Bonuses", "\u2728", event.details.bonuses, "#27AE60", th)
+            : ""}
         ${event.details.eggs ? (() => {
           const eggLabel = event.details.eggLabel || "7 km Eggs";
           const eggImgSrc = EGG_TIER_IMAGES[eggLabel];
