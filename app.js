@@ -2092,6 +2092,71 @@ function renderDetailSection(title, emoji, items, color, th, showImages, noSpark
   return html;
 }
 
+// Renders a structured Active Bonuses section with optional hero banner,
+// habitat-schedule timeline, and labeled bullet sub-cards. Used when an
+// event provides `details.bonusGroups` instead of a flat `details.bonuses` array.
+function renderBonusGroups(groups, th) {
+  const isMobile = breakpoint === "mobile";
+  const accent = "#27AE60";
+  let html = `<div style="display:flex;flex-direction:column;gap:12px">
+    <h4 style="margin:0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>✨</span> Active Bonuses</h4>`;
+
+  // Hero banner
+  if (groups.hero) {
+    html += `<div style="padding:14px 16px;border-radius:12px;background:${th.accentBgSubtle(accent)};border:1.5px solid ${th.countdownBorder(accent)};display:flex;align-items:center;gap:10px">
+      <span style="font-size:20px">🎉</span>
+      <span style="font-size:14.5px;font-weight:700;color:${accent};line-height:1.4">${esc(groups.hero)}</span>
+    </div>`;
+  }
+
+  // Habitat Schedule
+  if (groups.habitatSchedule && groups.habitatSchedule.length > 0) {
+    html += `<div style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden">
+      <div style="padding:10px 14px;background:${th.accentBgSubtle("#6C5CE7")};border-bottom:1.5px solid ${th.border};display:flex;align-items:center;gap:8px">
+        <span style="font-size:16px">🌍</span>
+        <span style="font-size:12px;font-weight:700;color:${th.text};letter-spacing:0.5px;text-transform:uppercase">Habitat Schedule</span>
+      </div>
+      <div style="padding:10px;display:${isMobile ? "flex" : "grid"};${isMobile ? "flex-direction:column;" : "grid-template-columns:repeat(3,1fr);"}gap:10px">
+        ${groups.habitatSchedule.map(slot => `
+          <div style="border:1px solid ${th.border};border-radius:10px;padding:10px;background:${th.surface};display:flex;flex-direction:column;gap:8px">
+            <div style="align-self:flex-start;font-size:11px;font-weight:700;color:#fff;background:#6C5CE7;padding:3px 10px;border-radius:12px;letter-spacing:0.3px">${esc(slot.time)}</div>
+            ${slot.biomes.map(b => `
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <div style="font-size:12.5px;font-weight:700;color:${th.text}">${esc(b.name)}</div>
+                <div style="display:flex;flex-wrap:wrap;gap:4px">
+                  ${b.types.map(t => `<span style="font-size:11px;font-weight:700;color:#fff;background:${TYPE_COLORS[t] || "#888"};padding:2px 8px;border-radius:10px">${esc(t)}</span>`).join("")}
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        `).join("")}
+      </div>
+    </div>`;
+  }
+
+  // Helper to render a labeled bullet sub-card (Event Hours, Full Day)
+  const renderBulletGroup = (icon, label, items) => `
+    <div style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden">
+      <div style="padding:10px 14px;background:${th.accentBgSubtle(accent)};border-bottom:1.5px solid ${th.border};display:flex;align-items:center;gap:8px">
+        <span style="font-size:14px">${icon}</span>
+        <span style="font-size:12px;font-weight:700;color:${th.text};letter-spacing:0.5px;text-transform:uppercase">${esc(label)}</span>
+      </div>
+      <div style="padding:10px;display:flex;flex-direction:column;gap:5px">
+        ${items.map(item => `<div style="display:flex;align-items:center;gap:10px;padding:7px 12px;border-radius:9px;background:${th.accentBgSubtle(accent)};font-size:13.5px;color:${th.textSecondary};line-height:1.45"><div style="width:5px;height:5px;border-radius:50%;background:${accent};flex-shrink:0"></div>${esc(item)}</div>`).join("")}
+      </div>
+    </div>`;
+
+  if (groups.eventHours && groups.eventHours.items && groups.eventHours.items.length > 0) {
+    html += renderBulletGroup("🕐", groups.eventHours.label || "Event Hours", groups.eventHours.items);
+  }
+  if (groups.fullDay && groups.fullDay.items && groups.fullDay.items.length > 0) {
+    html += renderBulletGroup("📅", groups.fullDay.label || "Full Day", groups.fullDay.items);
+  }
+
+  html += `</div>`;
+  return html;
+}
+
 // --- CALENDAR ---
 function renderCalendar(th) {
   const year = state.calYear;
