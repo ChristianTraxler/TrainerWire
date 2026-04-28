@@ -2120,11 +2120,11 @@ function renderBonusGroups(groups, th) {
         ${groups.habitatSchedule.map(slot => `
           <div style="border:1px solid ${th.border};border-radius:10px;padding:10px;background:${th.surface};display:flex;flex-direction:column;gap:8px">
             <div style="align-self:flex-start;font-size:11px;font-weight:700;color:#fff;background:#6C5CE7;padding:3px 10px;border-radius:12px;letter-spacing:0.3px">${esc(slot.time)}</div>
-            ${slot.biomes.map(b => `
+            ${(slot.biomes || []).map(b => `
               <div style="display:flex;flex-direction:column;gap:5px">
                 <div style="font-size:12.5px;font-weight:700;color:${th.text}">${esc(b.name)}</div>
                 <div style="display:flex;flex-wrap:wrap;gap:4px">
-                  ${b.types.map(t => `<span style="font-size:11px;font-weight:700;color:#fff;background:${TYPE_COLORS[t] || "#888"};padding:2px 8px;border-radius:10px">${esc(t)}</span>`).join("")}
+                  ${(b.types || []).map(t => `<span style="font-size:11px;font-weight:700;color:#fff;background:${TYPE_COLORS[t] || "#888"};padding:2px 8px;border-radius:10px">${esc(t)}</span>`).join("")}
                 </div>
               </div>
             `).join("")}
