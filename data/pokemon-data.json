@@ -1415,6 +1415,11 @@
       "Fairy"
     ]
   },
+  "Mega Falinks": {
+    "types": [
+      "Fighting"
+    ]
+  },
   "Mega Gallade": {
     "types": [
       "Psychic",
@@ -1646,6 +1651,12 @@
     "cp": "456–498",
     "cpBoost": "570–623",
     "weather": "Partly Cloudy"
+  },
+  "Moltres": {
+    "types": [
+      "Fire",
+      "Flying"
+    ]
   },
   "Morelull": {
     "types": [
