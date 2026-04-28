@@ -122,7 +122,7 @@ Add a new `renderBonusGroups(groups, th)` function. It returns one Active Bonuse
 
 ## Versioning
 
-Per project memory, this is a UI change to an existing feature → minor bump. Currently at v2.66 → v2.67. Ask the user to confirm before bumping. Sync `CACHE_VERSION` in `sw.js` to match.
+Per project memory, this is a UI change to an existing feature → minor bump. Currently at v2.68 → v2.69. Ask the user to confirm before bumping. Sync `CACHE_VERSION` in `sw.js` to match.
 
 ## Verification
 
