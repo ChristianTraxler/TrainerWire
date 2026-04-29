@@ -158,7 +158,7 @@ const RAID_CP = {
   "Shadow Latios":{normal:"2021–2178",boosted:"2526–2723",weather:"Windy"},
   // Upcoming (from event data - verified from LeekDuck when they were active)
   "Tapu Koko":{normal:"1730–1810",boosted:"2162–2263",weather:"Rainy or Cloudy"},
-  "Tapu Lele":{normal:"1718–1799",boosted:"2148–2249",weather:"Windy or Cloudy"}
+  "Tapu Lele":{normal:"1912–1996",boosted:"2390–2496",weather:"Windy or Cloudy"}
 };
 
 function formImgUrl(dex, filename) { return `${IMG_BASE}/National-Dex/regular/${getGenFolder(dex)}/${filename}.webp`; }
