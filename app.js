@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "2.70";
+const APP_VERSION = "2.71";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -356,6 +356,13 @@ function getPokemonImg(name) {
   }
   if (lower.includes("pikachu") && lower.includes("marathon visor")) {
     return { url: costumeDexImg(25, "f3341"), shadow: false };
+  }
+  if (lower.includes("pikachu visor")) {
+    const m = name.match(/^(\w+)/);
+    if (m) {
+      const dex = DEX[m[1]];
+      if (dex) return { url: eventDexImg(dex, "pikavisor"), shadow: false };
+    }
   }
   if (lower.includes("flower crown")) {
     const m = name.match(/^(\w+)/);
