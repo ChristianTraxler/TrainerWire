@@ -2145,6 +2145,14 @@
       "Fire"
     ]
   },
+  "Shadow Cresselia": {
+    "types": [
+      "Psychic"
+    ],
+    "cp": "1494–1633",
+    "cpBoost": "1867–2041",
+    "weather": "Windy"
+  },
   "Shadow Dewpider": {
     "types": [
       "Water",
