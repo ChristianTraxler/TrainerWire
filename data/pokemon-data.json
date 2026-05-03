@@ -289,6 +289,15 @@
     "cpBoost": "1229–1305",
     "weather": "Rainy"
   },
+  "Buzzwole": {
+    "types": [
+      "Bug",
+      "Fighting"
+    ],
+    "cp": "1894–1977",
+    "cpBoost": "2368–2472",
+    "weather": "Rain or Cloudy"
+  },
   "Cacnea": {
     "types": [
       "Grass"
@@ -624,6 +633,18 @@
     "types": [
       "Water",
       "Steel"
+    ]
+  },
+  "Enamorus": {
+    "types": [
+      "Fairy",
+      "Flying"
+    ]
+  },
+  "Eternatus": {
+    "types": [
+      "Poison",
+      "Dragon"
     ]
   },
   "Escavalier": {
@@ -1378,7 +1399,10 @@
   "Mega Banette": {
     "types": [
       "Ghost"
-    ]
+    ],
+    "cp": "1965–2053",
+    "cpBoost": "2456–2567",
+    "weather": "Fog"
   },
   "Mega Beedrill": {
     "types": [
@@ -1679,6 +1703,15 @@
       "Poison"
     ]
   },
+  "Nihilego": {
+    "types": [
+      "Rock",
+      "Poison"
+    ],
+    "cp": "2167–2256",
+    "cpBoost": "2709–2821",
+    "weather": "Partly Cloudy or Cloudy"
+  },
   "Ninetales": {
     "types": [
       "Fire"
@@ -1778,6 +1811,15 @@
     "types": [
       "Normal"
     ]
+  },
+  "Pheromosa": {
+    "types": [
+      "Bug",
+      "Fighting"
+    ],
+    "cp": "1538–1624",
+    "cpBoost": "1922–2030",
+    "weather": "Rain or Cloudy"
   },
   "Pidove": {
     "types": [
@@ -2505,6 +2547,24 @@
       "Grass"
     ]
   },
+  "Tapu Bulu": {
+    "types": [
+      "Grass",
+      "Fairy"
+    ],
+    "cp": "1870–1953",
+    "cpBoost": "2338–2442",
+    "weather": "Sunny or Cloudy"
+  },
+  "Tapu Fini": {
+    "types": [
+      "Water",
+      "Fairy"
+    ],
+    "cp": "1556–1632",
+    "cpBoost": "1946–2041",
+    "weather": "Rain or Cloudy"
+  },
   "Tapu Koko": {
     "types": [
       "Electric",
@@ -2785,6 +2845,14 @@
       "Bug",
       "Grass"
     ]
+  },
+  "Xurkitree": {
+    "types": [
+      "Electric"
+    ],
+    "cp": "2155–2249",
+    "cpBoost": "2695–2812",
+    "weather": "Rain"
   },
   "Yamper": {
     "types": [
