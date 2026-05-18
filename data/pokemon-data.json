@@ -41,10 +41,22 @@
     "cpBoost": "2083–2184",
     "weather": "Windy"
   },
+  "Alolan Cubone": {
+    "types": [
+      "Fire",
+      "Ghost"
+    ]
+  },
   "Alolan Diglett": {
     "types": [
       "Ground",
       "Steel"
+    ]
+  },
+  "Alolan Exeggutor": {
+    "types": [
+      "Grass",
+      "Dragon"
     ]
   },
   "Alolan Geodude": {
@@ -144,11 +156,34 @@
       "Bug"
     ]
   },
+  "Archeops": {
+    "types": [
+      "Rock",
+      "Flying"
+    ]
+  },
   "Aron": {
     "types": [
       "Steel",
       "Rock"
     ]
+  },
+  "Articuno": {
+    "types": [
+      "Ice",
+      "Flying"
+    ],
+    "cp": "1665–1743",
+    "cpBoost": "2082–2179",
+    "weather": "Snow or Windy"
+  },
+  "Attack Forme Deoxys": {
+    "types": [
+      "Psychic"
+    ],
+    "cp": "1372–1474",
+    "cpBoost": "1716–1842",
+    "weather": "Windy"
   },
   "Audino": {
     "types": [
@@ -161,6 +196,14 @@
       "Ice"
     ]
   },
+  "Azelf": {
+    "types": [
+      "Psychic"
+    ],
+    "cp": "1752–1834",
+    "cpBoost": "2190–2293",
+    "weather": "Windy"
+  },
   "Azumarill": {
     "types": [
       "Water",
@@ -169,6 +212,11 @@
     "cp": "849–907",
     "cpBoost": "1061–1134",
     "weather": "Rainy, Cloudy"
+  },
+  "Bagon": {
+    "types": [
+      "Dragon"
+    ]
   },
   "Banette": {
     "types": [
@@ -209,6 +257,15 @@
       "Normal",
       "Fighting"
     ]
+  },
+  "Blacephalon": {
+    "types": [
+      "Fire",
+      "Ghost"
+    ],
+    "cp": "1797–1884",
+    "cpBoost": "2246–2355",
+    "weather": "Sunny/Clear or Fog"
   },
   "Blastoise": {
     "types": [
@@ -251,6 +308,11 @@
     "cpBoost": "1688–1777",
     "weather": "Windy or Foggy"
   },
+  "Bouffalant": {
+    "types": [
+      "Normal"
+    ]
+  },
   "Bounsweet": {
     "types": [
       "Grass"
@@ -262,10 +324,26 @@
       "Fire"
     ]
   },
+  "Brionne": {
+    "types": [
+      "Water"
+    ]
+  },
+  "Bronzong": {
+    "types": [
+      "Steel",
+      "Psychic"
+    ]
+  },
   "Bronzor": {
     "types": [
       "Steel",
       "Psychic"
+    ]
+  },
+  "Buizel": {
+    "types": [
+      "Water"
     ]
   },
   "Bulbasaur": {
@@ -279,6 +357,15 @@
     "types": [
       "Normal"
     ]
+  },
+  "Burn Drive Genesect": {
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "cp": "1833–1916",
+    "cpBoost": "2292–2395",
+    "weather": "Rainy or Snow"
   },
   "Butterfree": {
     "types": [
@@ -312,6 +399,12 @@
       "Ground"
     ]
   },
+  "Carvanha": {
+    "types": [
+      "Water",
+      "Dark"
+    ]
+  },
   "Castform": {
     "types": [
       "Normal"
@@ -322,6 +415,15 @@
       "Bug"
     ],
     "cp": "219–249"
+  },
+  "Celesteela": {
+    "types": [
+      "Steel",
+      "Flying"
+    ],
+    "cp": "1694–1772",
+    "cpBoost": "2117–2216",
+    "weather": "Snow or Windy"
   },
   "Chandelure": {
     "types": [
@@ -352,6 +454,11 @@
     ],
     "cp": "516–560"
   },
+  "Charmeleon": {
+    "types": [
+      "Fire"
+    ]
+  },
   "Chesnaught": {
     "types": [
       "Grass",
@@ -367,6 +474,15 @@
     "types": [
       "Grass"
     ]
+  },
+  "Chill Drive Genesect": {
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "cp": "1833–1916",
+    "cpBoost": "2292–2395",
+    "weather": "Rainy or Snow"
   },
   "Chimchar": {
     "types": [
@@ -389,6 +505,27 @@
       "Fire"
     ]
   },
+  "Clamperl": {
+    "types": [
+      "Water"
+    ]
+  },
+  "Claydol": {
+    "types": [
+      "Ground",
+      "Psychic"
+    ]
+  },
+  "Clefable": {
+    "types": [
+      "Fairy"
+    ]
+  },
+  "Clefairy": {
+    "types": [
+      "Fairy"
+    ]
+  },
   "Cleffa": {
     "types": [
       "Fairy"
@@ -398,6 +535,20 @@
     "types": [
       "Poison",
       "Ground"
+    ]
+  },
+  "Cobalion": {
+    "types": [
+      "Steel",
+      "Fighting"
+    ],
+    "cp": "1649–1727",
+    "cpBoost": "2061–2159",
+    "weather": "Snow or Cloudy"
+  },
+  "Cofagrigus": {
+    "types": [
+      "Ghost"
     ]
   },
   "Combee": {
@@ -428,6 +579,19 @@
       "Grass"
     ]
   },
+  "Cranidos": {
+    "types": [
+      "Rock"
+    ]
+  },
+  "Cresselia": {
+    "types": [
+      "Psychic"
+    ],
+    "cp": "1555–1633",
+    "cpBoost": "1944–2041",
+    "weather": "Windy"
+  },
   "Croagunk": {
     "types": [
       "Poison",
@@ -437,11 +601,27 @@
     "cpBoost": "625–680",
     "weather": "Cloudy"
   },
+  "Crobat": {
+    "types": [
+      "Poison",
+      "Flying"
+    ]
+  },
   "Cryogonal": {
     "types": [
       "Ice"
     ],
     "cp": "1524–1598"
+  },
+  "Cubchoo": {
+    "types": [
+      "Ice"
+    ]
+  },
+  "Cubone": {
+    "types": [
+      "Ground"
+    ]
   },
   "Cutiefly": {
     "types": [
@@ -453,6 +633,14 @@
     "types": [
       "Fire"
     ]
+  },
+  "Darkrai": {
+    "types": [
+      "Dark"
+    ],
+    "cp": "2048–2136",
+    "cpBoost": "2560–2671",
+    "weather": "Fog"
   },
   "Darmanitan": {
     "types": [
@@ -480,6 +668,14 @@
     "cpBoost": "1239–1315",
     "weather": "Rainy, Cloudy"
   },
+  "Defense Forme Deoxys": {
+    "types": [
+      "Psychic"
+    ],
+    "cp": "1228–1299",
+    "cpBoost": "1535–1624",
+    "weather": "Windy"
+  },
   "Deino": {
     "types": [
       "Dark",
@@ -490,6 +686,11 @@
     "types": [
       "Fire",
       "Psychic"
+    ]
+  },
+  "Dewott": {
+    "types": [
+      "Water"
     ]
   },
   "Dewpider": {
@@ -507,6 +708,24 @@
     "cpBoost": "2010–2107",
     "weather": "Fog, Sunny"
   },
+  "Dialga": {
+    "types": [
+      "Steel",
+      "Dragon"
+    ],
+    "cp": "2217–2307",
+    "cpBoost": "2771–2884",
+    "weather": "Snow or Windy"
+  },
+  "Dialga (Origin Forme)": {
+    "types": [
+      "Steel",
+      "Dragon"
+    ],
+    "cp": "2246–2337",
+    "cpBoost": "2807–2921",
+    "weather": "Snow or Windy"
+  },
   "Diglett": {
     "types": [
       "Ground"
@@ -519,6 +738,30 @@
     "types": [
       "Normal"
     ]
+  },
+  "Dodrio": {
+    "types": [
+      "Normal",
+      "Flying"
+    ]
+  },
+  "Doduo": {
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "cp": "636–686",
+    "cpBoost": "795–857",
+    "weather": "Partly Cloudy or Windy"
+  },
+  "Douse Drive Genesect": {
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "cp": "1833–1916",
+    "cpBoost": "2292–2395",
+    "weather": "Rainy or Snow"
   },
   "Dragonair": {
     "types": [
@@ -561,6 +804,11 @@
     ],
     "cp": "732–786"
   },
+  "Drowzee": {
+    "types": [
+      "Psychic"
+    ]
+  },
   "Dugtrio": {
     "types": [
       "Ground"
@@ -569,14 +817,14 @@
     "cpBoost": "1042–1112",
     "weather": "Sunny"
   },
-  "Drowzee": {
-    "types": [
-      "Psychic"
-    ]
-  },
   "Dunsparce": {
     "types": [
       "Normal"
+    ]
+  },
+  "Duosion": {
+    "types": [
+      "Psychic"
     ]
   },
   "Duraludon": {
@@ -586,6 +834,11 @@
     ]
   },
   "Dusknoir": {
+    "types": [
+      "Ghost"
+    ]
+  },
+  "Duskull": {
     "types": [
       "Ghost"
     ]
@@ -609,7 +862,22 @@
     "cpBoost": "707–765",
     "weather": "Partly Cloudy"
   },
+  "Ekans": {
+    "types": [
+      "Poison"
+    ]
+  },
+  "Electabuzz": {
+    "types": [
+      "Electric"
+    ]
+  },
   "Electivire": {
+    "types": [
+      "Electric"
+    ]
+  },
+  "Elekid": {
     "types": [
       "Electric"
     ]
@@ -641,16 +909,52 @@
       "Flying"
     ]
   },
-  "Eternatus": {
+  "Enamorus (Incarnate Forme)": {
     "types": [
-      "Poison",
-      "Dragon"
-    ]
+      "Fairy",
+      "Flying"
+    ],
+    "cp": "1872–1957",
+    "cpBoost": "2340–2447",
+    "weather": "Cloudy or Windy"
+  },
+  "Enamorus (Therian Forme)": {
+    "types": [
+      "Fairy",
+      "Ground"
+    ],
+    "cp": "1853–1935",
+    "cpBoost": "2316–2420",
+    "weather": "Cloudy or Sunny/Clear"
+  },
+  "Entei": {
+    "types": [
+      "Fire"
+    ],
+    "cp": "1834–1984",
+    "cpBoost": "2293–2480",
+    "weather": "Sunny"
   },
   "Escavalier": {
     "types": [
       "Bug",
       "Steel"
+    ]
+  },
+  "Espathra": {
+    "types": [
+      "Psychic"
+    ]
+  },
+  "Espeon": {
+    "types": [
+      "Psychic"
+    ]
+  },
+  "Eternatus": {
+    "types": [
+      "Poison",
+      "Dragon"
     ]
   },
   "Excadrill": {
@@ -664,6 +968,11 @@
       "Fighting"
     ],
     "cp": "1278–1347"
+  },
+  "Feebas": {
+    "types": [
+      "Water"
+    ]
   },
   "Fennekin": {
     "types": [
@@ -692,12 +1001,18 @@
       "Fairy"
     ]
   },
-  "Flittle": {
+  "Flareon": {
     "types": [
-      "Psychic"
+      "Fire"
     ]
   },
-  "Espathra": {
+  "Fletchling": {
+    "types": [
+      "Normal",
+      "Flying"
+    ]
+  },
+  "Flittle": {
     "types": [
       "Psychic"
     ]
@@ -713,6 +1028,21 @@
       "Dragon"
     ]
   },
+  "Foongus": {
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "cp": "514–559",
+    "cpBoost": "643–699",
+    "weather": "Sunny, Cloudy"
+  },
+  "Forretress": {
+    "types": [
+      "Bug",
+      "Steel"
+    ]
+  },
   "Froakie": {
     "types": [
       "Water"
@@ -723,9 +1053,21 @@
       "Water"
     ]
   },
+  "Froslass": {
+    "types": [
+      "Ice",
+      "Ghost"
+    ]
+  },
   "Fuecoco": {
     "types": [
       "Fire"
+    ]
+  },
+  "Gabite": {
+    "types": [
+      "Dragon",
+      "Ground"
     ]
   },
   "Galarian Corsola": {
@@ -754,6 +1096,14 @@
       "Steel"
     ]
   },
+  "Galarian Ponyta": {
+    "types": [
+      "Psychic"
+    ],
+    "cp": "911–969",
+    "cpBoost": "1139–1212",
+    "weather": "Windy"
+  },
   "Galarian Rapidash": {
     "types": [
       "Psychic",
@@ -769,6 +1119,12 @@
     "types": [
       "Ground",
       "Steel"
+    ]
+  },
+  "Galarian Weezing": {
+    "types": [
+      "Poison",
+      "Fairy"
     ]
   },
   "Galarian Zigzagoon": {
@@ -787,6 +1143,11 @@
     "types": [
       "Bug",
       "Electric"
+    ]
+  },
+  "Garbodor": {
+    "types": [
+      "Poison"
     ]
   },
   "Garchomp": {
@@ -808,10 +1169,25 @@
     ],
     "cp": "649–702"
   },
+  "Genesect": {
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "cp": "1833–1916",
+    "cpBoost": "2292–2395",
+    "weather": "Rainy or Snow"
+  },
   "Gengar": {
     "types": [
       "Ghost",
       "Poison"
+    ]
+  },
+  "Geodude": {
+    "types": [
+      "Rock",
+      "Ground"
     ]
   },
   "Gible": {
@@ -889,10 +1265,30 @@
       "Poison"
     ]
   },
+  "Girafarig": {
+    "types": [
+      "Normal",
+      "Psychic"
+    ]
+  },
   "Giratina": {
     "types": [
       "Ghost",
       "Dragon"
+    ]
+  },
+  "Giratina (Altered Forme)": {
+    "types": [
+      "Ghost",
+      "Dragon"
+    ],
+    "cp": "1848–1931",
+    "cpBoost": "2310–2414",
+    "weather": "Fog or Windy"
+  },
+  "Glalie": {
+    "types": [
+      "Ice"
     ]
   },
   "Gligar": {
@@ -903,6 +1299,12 @@
     "cp": "952–1061",
     "cpBoost": "1191–1326",
     "weather": "Sunny or Windy"
+  },
+  "Golem": {
+    "types": [
+      "Rock",
+      "Ground"
+    ]
   },
   "Golurk": {
     "types": [
@@ -915,14 +1317,6 @@
       "Dragon"
     ]
   },
-  "Gossifleur": {
-    "types": [
-      "Grass"
-    ],
-    "cp": "347–384",
-    "cpBoost": "434–480",
-    "weather": "Sunny"
-  },
   "Goomy": {
     "types": [
       "Dragon"
@@ -931,15 +1325,34 @@
     "cpBoost": "642–697",
     "weather": "Windy"
   },
+  "Gossifleur": {
+    "types": [
+      "Grass"
+    ],
+    "cp": "347–384",
+    "cpBoost": "434–480",
+    "weather": "Sunny"
+  },
   "Granbull": {
     "types": [
       "Fairy"
+    ]
+  },
+  "Graveler": {
+    "types": [
+      "Rock",
+      "Ground"
     ]
   },
   "Greninja": {
     "types": [
       "Water",
       "Dark"
+    ]
+  },
+  "Grimer": {
+    "types": [
+      "Poison"
     ]
   },
   "Grookey": {
@@ -962,6 +1375,20 @@
     ],
     "cp": "660–710"
   },
+  "Gurdurr": {
+    "types": [
+      "Fighting"
+    ]
+  },
+  "Guzzlord": {
+    "types": [
+      "Dark",
+      "Dragon"
+    ],
+    "cp": "1565–1650",
+    "cpBoost": "1956–2062",
+    "weather": "Fog or Windy"
+  },
   "Gyarados": {
     "types": [
       "Water",
@@ -979,10 +1406,30 @@
     ],
     "cp": "451–492"
   },
+  "Haunter": {
+    "types": [
+      "Ghost",
+      "Poison"
+    ]
+  },
   "Haxorus": {
     "types": [
       "Dragon"
     ]
+  },
+  "Heatmor": {
+    "types": [
+      "Fire"
+    ]
+  },
+  "Heatran": {
+    "types": [
+      "Fire",
+      "Steel"
+    ],
+    "cp": "2058–2145",
+    "cpBoost": "2573–2681",
+    "weather": "Sunny/Clear or Snow"
   },
   "Helioptile": {
     "types": [
@@ -1028,6 +1475,20 @@
     ],
     "cp": "1399–1472"
   },
+  "Hitmontop": {
+    "types": [
+      "Fighting"
+    ]
+  },
+  "Ho-Oh": {
+    "types": [
+      "Fire",
+      "Flying"
+    ],
+    "cp": "2119–2207",
+    "cpBoost": "2649–2759",
+    "weather": "Sunny/Clear or Windy"
+  },
   "Honedge": {
     "types": [
       "Steel",
@@ -1043,6 +1504,11 @@
       "Flying"
     ]
   },
+  "Horsea": {
+    "types": [
+      "Water"
+    ]
+  },
   "Houndoom": {
     "types": [
       "Dark",
@@ -1052,10 +1518,21 @@
     "cpBoost": "1790–1882",
     "weather": "Foggy or Sunny"
   },
+  "Houndour": {
+    "types": [
+      "Dark",
+      "Fire"
+    ]
+  },
   "Hydreigon": {
     "types": [
       "Dark",
       "Dragon"
+    ]
+  },
+  "Hypno": {
+    "types": [
+      "Psychic"
     ]
   },
   "Igglybuff": {
@@ -1093,12 +1570,24 @@
       "Dark",
       "Psychic"
     ],
-    "cp": "486–529"
+    "cp": "486–529",
+    "cpBoost": "608–662",
+    "weather": "Fog or Windy"
   },
   "Ivysaur": {
     "types": [
       "Grass",
       "Poison"
+    ]
+  },
+  "Jangmo-o": {
+    "types": [
+      "Dragon"
+    ]
+  },
+  "Jolteon": {
+    "types": [
+      "Electric"
     ]
   },
   "Joltik": {
@@ -1123,16 +1612,30 @@
     ],
     "cp": "730–783"
   },
+  "Kabutops": {
+    "types": [
+      "Rock",
+      "Water"
+    ]
+  },
   "Kangaskhan": {
     "types": [
       "Normal"
+    ]
+  },
+  "Karrablast": {
+    "types": [
+      "Bug"
     ]
   },
   "Kartana": {
     "types": [
       "Grass",
       "Steel"
-    ]
+    ],
+    "cp": "2010–2101",
+    "cpBoost": "2512–2626",
+    "weather": "Sunny/Clear or Snow"
   },
   "Kingler": {
     "types": [
@@ -1157,6 +1660,16 @@
     "cpBoost": "2034–2131",
     "weather": "Rainy or Partly Cloudy"
   },
+  "Klink": {
+    "types": [
+      "Steel"
+    ]
+  },
+  "Koffing": {
+    "types": [
+      "Poison"
+    ]
+  },
   "Kommo-o": {
     "types": [
       "Dragon",
@@ -1177,10 +1690,25 @@
     "cpBoost": "2825–2939",
     "weather": "Rainy"
   },
+  "Kyurem": {
+    "types": [
+      "Dragon",
+      "Ice"
+    ],
+    "cp": "1957–2042",
+    "cpBoost": "2446–2553",
+    "weather": "Snow or Windy"
+  },
   "Lairon": {
     "types": [
       "Steel",
       "Rock"
+    ]
+  },
+  "Lampent": {
+    "types": [
+      "Ghost",
+      "Fire"
     ]
   },
   "Landorus": {
@@ -1188,6 +1716,24 @@
       "Ground",
       "Flying"
     ]
+  },
+  "Landorus (Incarnate Forme)": {
+    "types": [
+      "Ground",
+      "Flying"
+    ],
+    "cp": "1965–2050",
+    "cpBoost": "2456–2563",
+    "weather": "Sunny/Clear or Windy"
+  },
+  "Landorus (Therian Forme)": {
+    "types": [
+      "Ground",
+      "Flying"
+    ],
+    "cp": "2151–2241",
+    "cpBoost": "2688–2801",
+    "weather": "Sunny/Clear or Windy"
   },
   "Lapras": {
     "types": [
@@ -1231,6 +1777,11 @@
     "cpBoost": "2526–2723",
     "weather": "Windy"
   },
+  "Leafeon": {
+    "types": [
+      "Grass"
+    ]
+  },
   "Leavanny": {
     "types": [
       "Bug",
@@ -1261,6 +1812,35 @@
       "Fire"
     ]
   },
+  "Litwick": {
+    "types": [
+      "Ghost",
+      "Fire"
+    ]
+  },
+  "Loudred": {
+    "types": [
+      "Normal"
+    ]
+  },
+  "Lugia": {
+    "types": [
+      "Psychic",
+      "Flying"
+    ],
+    "cp": "2028–2115",
+    "cpBoost": "2535–2645",
+    "weather": "Windy"
+  },
+  "Lunala": {
+    "types": [
+      "Psychic",
+      "Ghost"
+    ],
+    "cp": "2219–2310",
+    "cpBoost": "2774–2887",
+    "weather": "Windy or Fog"
+  },
   "Luxray": {
     "types": [
       "Electric"
@@ -1283,11 +1863,29 @@
     "types": [
       "Fighting"
     ],
-    "cp": "678–730"
+    "cp": "678–730",
+    "cpBoost": "848–913",
+    "weather": "Cloudy"
+  },
+  "Magby": {
+    "types": [
+      "Fire"
+    ]
+  },
+  "Magcargo": {
+    "types": [
+      "Fire",
+      "Rock"
+    ]
   },
   "Magikarp": {
     "types": [
       "Water"
+    ]
+  },
+  "Magmar": {
+    "types": [
+      "Fire"
     ]
   },
   "Magmortar": {
@@ -1299,6 +1897,23 @@
     "types": [
       "Electric",
       "Steel"
+    ]
+  },
+  "Magneton": {
+    "types": [
+      "Electric",
+      "Steel"
+    ]
+  },
+  "Makuhita": {
+    "types": [
+      "Fighting"
+    ]
+  },
+  "Malamar": {
+    "types": [
+      "Dark",
+      "Psychic"
     ]
   },
   "Mamoswine": {
@@ -1318,6 +1933,17 @@
   "Mankey": {
     "types": [
       "Fighting"
+    ]
+  },
+  "Mantyke": {
+    "types": [
+      "Water",
+      "Flying"
+    ]
+  },
+  "Maractus": {
+    "types": [
+      "Grass"
     ]
   },
   "Mareep": {
@@ -1349,7 +1975,10 @@
     "types": [
       "Grass",
       "Ice"
-    ]
+    ],
+    "cp": "1316–1394",
+    "cpBoost": "1646–1742",
+    "weather": "Sunny/Clear or Snow"
   },
   "Mega Absol": {
     "types": [
@@ -1361,9 +1990,9 @@
       "Rock",
       "Flying"
     ],
-    "cp": "1515–1590",
-    "cpBoost": "1894–1988",
-    "weather": "Partly Cloudy, Windy"
+    "cp": "1466–1547",
+    "cpBoost": "1833–1934",
+    "weather": "Partly Cloudy or Windy"
   },
   "Mega Aggron": {
     "types": [
@@ -1374,8 +2003,8 @@
     "types": [
       "Psychic"
     ],
-    "cp": "1666–1747",
-    "cpBoost": "2083–2184",
+    "cp": "1334–1412",
+    "cpBoost": "1668–1765",
     "weather": "Windy"
   },
   "Mega Altaria": {
@@ -1388,13 +2017,19 @@
     "types": [
       "Electric",
       "Dragon"
-    ]
+    ],
+    "cp": "1186–1259",
+    "cpBoost": "1483–1574",
+    "weather": "Rainy"
   },
   "Mega Audino": {
     "types": [
       "Normal",
       "Fairy"
-    ]
+    ],
+    "cp": "1115–1187",
+    "cpBoost": "1394–1483",
+    "weather": "Partly Cloudy or Cloudy"
   },
   "Mega Banette": {
     "types": [
@@ -1408,7 +2043,10 @@
     "types": [
       "Bug",
       "Poison"
-    ]
+    ],
+    "cp": "954–1019",
+    "cpBoost": "1193–1273",
+    "weather": "Rainy or Cloudy"
   },
   "Mega Blastoise": {
     "types": [
@@ -1419,7 +2057,10 @@
     "types": [
       "Fire",
       "Fighting"
-    ]
+    ],
+    "cp": "1530–1606",
+    "cpBoost": "1913–2008",
+    "weather": "Sunny/Clear or Cloudy"
   },
   "Mega Camerupt": {
     "types": [
@@ -1454,24 +2095,36 @@
     "types": [
       "Dragon",
       "Ground"
-    ]
+    ],
+    "cp": "1843–1932",
+    "cpBoost": "2304–2415",
+    "weather": "Windy or Sunny/Clear"
   },
   "Mega Gardevoir": {
     "types": [
       "Psychic",
       "Fairy"
-    ]
+    ],
+    "cp": "1416–1494",
+    "cpBoost": "1770–1868",
+    "weather": "Windy or Cloudy"
   },
   "Mega Gengar": {
     "types": [
       "Ghost",
       "Poison"
-    ]
+    ],
+    "cp": "1431–1511",
+    "cpBoost": "1789–1889",
+    "weather": "Fog or Cloudy"
   },
   "Mega Glalie": {
     "types": [
       "Ice"
-    ]
+    ],
+    "cp": "1138–1203",
+    "cpBoost": "1423–1504",
+    "weather": "Snow"
   },
   "Mega Gyarados": {
     "types": [
@@ -1483,7 +2136,10 @@
     "types": [
       "Bug",
       "Fighting"
-    ]
+    ],
+    "cp": "1551–1632",
+    "cpBoost": "1939–2040",
+    "weather": "Rainy or Cloudy"
   },
   "Mega Houndoom": {
     "types": [
@@ -1518,7 +2174,10 @@
     "types": [
       "Fighting",
       "Steel"
-    ]
+    ],
+    "cp": "1356–1434",
+    "cpBoost": "1696–1793",
+    "weather": "Cloudy or Snow"
   },
   "Mega Manectric": {
     "types": [
@@ -1538,7 +2197,10 @@
     "types": [
       "Steel",
       "Psychic"
-    ]
+    ],
+    "cp": "1721–1807",
+    "cpBoost": "2152–2259",
+    "weather": "Snow or Windy"
   },
   "Mega Mewtwo": {
     "types": [
@@ -1549,13 +2211,19 @@
     "types": [
       "Normal",
       "Flying"
-    ]
+    ],
+    "cp": "1314–1391",
+    "cpBoost": "1642–1739",
+    "weather": "Partly Cloudy or Windy"
   },
   "Mega Pinsir": {
     "types": [
       "Bug",
       "Flying"
-    ]
+    ],
+    "cp": "1483–1564",
+    "cpBoost": "1854–1955",
+    "weather": "Rainy"
   },
   "Mega Rayquaza": {
     "types": [
@@ -1573,13 +2241,19 @@
     "types": [
       "Dragon",
       "Flying"
-    ]
+    ],
+    "cp": "1739–1825",
+    "cpBoost": "2174–2282",
+    "weather": "Windy"
   },
   "Mega Sceptile": {
     "types": [
       "Grass",
       "Dragon"
-    ]
+    ],
+    "cp": "1421–1500",
+    "cpBoost": "1776–1875",
+    "weather": "Sunny/Clear"
   },
   "Mega Scizor": {
     "types": [
@@ -1609,13 +2283,19 @@
     "types": [
       "Water",
       "Ground"
-    ]
+    ],
+    "cp": "1583–1662",
+    "cpBoost": "1979–2078",
+    "weather": "Rainy or Sunny/Clear"
   },
   "Mega Tyranitar": {
     "types": [
       "Rock",
       "Dark"
-    ]
+    ],
+    "cp": "1808–1895",
+    "cpBoost": "2260–2369",
+    "weather": "Partly Cloudy or Fog"
   },
   "Mega Venusaur": {
     "types": [
@@ -1644,7 +2324,21 @@
       "Normal"
     ]
   },
+  "Mesprit": {
+    "types": [
+      "Psychic"
+    ],
+    "cp": "1669–1747",
+    "cpBoost": "2086–2184",
+    "weather": "Windy"
+  },
   "Metagross": {
+    "types": [
+      "Steel",
+      "Psychic"
+    ]
+  },
+  "Metang": {
     "types": [
       "Steel",
       "Psychic"
@@ -1663,6 +2357,11 @@
     "cpBoost": "2868–2984",
     "weather": "Windy"
   },
+  "Mightyena": {
+    "types": [
+      "Dark"
+    ]
+  },
   "Milotic": {
     "types": [
       "Water"
@@ -1680,7 +2379,10 @@
     "types": [
       "Fire",
       "Flying"
-    ]
+    ],
+    "cp": "1896–1980",
+    "cpBoost": "2370–2475",
+    "weather": "Sunny/Clear or Windy"
   },
   "Morelull": {
     "types": [
@@ -1693,12 +2395,41 @@
       "Water"
     ]
   },
+  "Muk": {
+    "types": [
+      "Poison"
+    ]
+  },
   "Munchlax": {
     "types": [
       "Normal"
     ]
   },
+  "Munna": {
+    "types": [
+      "Psychic"
+    ]
+  },
+  "Necrozma": {
+    "types": [
+      "Psychic"
+    ],
+    "cp": "2018–2104",
+    "cpBoost": "2522–2630",
+    "weather": "Windy"
+  },
+  "Nidoqueen": {
+    "types": [
+      "Poison",
+      "Ground"
+    ]
+  },
   "Nidorina": {
+    "types": [
+      "Poison"
+    ]
+  },
+  "Nidorino": {
     "types": [
       "Poison"
     ]
@@ -1715,7 +2446,10 @@
   "Ninetales": {
     "types": [
       "Fire"
-    ]
+    ],
+    "cp": "1182–1302",
+    "cpBoost": "1478–1628",
+    "weather": "Sunny"
   },
   "Noivern": {
     "types": [
@@ -1723,9 +2457,23 @@
       "Dragon"
     ]
   },
+  "Normal Forme Deoxys": {
+    "types": [
+      "Psychic"
+    ],
+    "cp": "1717–1806",
+    "cpBoost": "2146–2257",
+    "weather": "Windy"
+  },
   "Nosepass": {
     "types": [
       "Rock"
+    ]
+  },
+  "Nuzleaf": {
+    "types": [
+      "Grass",
+      "Dark"
     ]
   },
   "Nymble": {
@@ -1739,12 +2487,42 @@
       "Normal"
     ]
   },
+  "Oddish": {
+    "types": [
+      "Grass",
+      "Poison"
+    ]
+  },
   "Omanyte": {
     "types": [
       "Rock",
       "Water"
     ],
     "cp": "826–882"
+  },
+  "Onix": {
+    "types": [
+      "Rock",
+      "Ground"
+    ],
+    "cp": "541–629",
+    "cpBoost": "677–787",
+    "weather": "Partly Cloudy or Sunny"
+  },
+  "Oricorio": {
+    "types": [
+      "Fire",
+      "Flying"
+    ]
+  },
+  "Origin Giratina": {
+    "types": [
+      "Ghost",
+      "Dragon"
+    ],
+    "cp": "2018–2105",
+    "cpBoost": "2523–2631",
+    "weather": "Fog or Windy"
   },
   "Orthworm": {
     "types": [
@@ -1769,6 +2547,24 @@
       "Poison",
       "Ground"
     ]
+  },
+  "Palkia": {
+    "types": [
+      "Water",
+      "Dragon"
+    ],
+    "cp": "2190–2280",
+    "cpBoost": "2737–2850",
+    "weather": "Rainy or Windy"
+  },
+  "Palkia (Origin Forme)": {
+    "types": [
+      "Water",
+      "Dragon"
+    ],
+    "cp": "2274–2367",
+    "cpBoost": "2843–2958",
+    "weather": "Rainy or Windy"
   },
   "Pancham": {
     "types": [
@@ -1807,10 +2603,25 @@
       "Steel"
     ]
   },
+  "Pelipper": {
+    "types": [
+      "Water",
+      "Flying"
+    ]
+  },
   "Persian": {
     "types": [
       "Normal"
     ]
+  },
+  "Phantump": {
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "cp": "595–642",
+    "cpBoost": "743–802",
+    "weather": "Fog, Sunny"
   },
   "Pheromosa": {
     "types": [
@@ -1821,6 +2632,23 @@
     "cpBoost": "1922–2030",
     "weather": "Rain or Cloudy"
   },
+  "Pichu": {
+    "types": [
+      "Electric"
+    ]
+  },
+  "Pidgeot": {
+    "types": [
+      "Normal",
+      "Flying"
+    ]
+  },
+  "Pidgey": {
+    "types": [
+      "Normal",
+      "Flying"
+    ]
+  },
   "Pidove": {
     "types": [
       "Normal",
@@ -1828,9 +2656,21 @@
     ],
     "cp": "443–484"
   },
+  "Pignite": {
+    "types": [
+      "Fire",
+      "Fighting"
+    ]
+  },
   "Pikachu": {
     "types": [
       "Electric"
+    ]
+  },
+  "Piloswine": {
+    "types": [
+      "Ice",
+      "Ground"
     ]
   },
   "Pineco": {
@@ -1846,11 +2686,6 @@
     "cpBoost": "2016–2113",
     "weather": "Rainy"
   },
-  "Pichu": {
-    "types": [
-      "Electric"
-    ]
-  },
   "Piplup": {
     "types": [
       "Water"
@@ -1861,10 +2696,25 @@
       "Water"
     ]
   },
+  "Poliwhirl": {
+    "types": [
+      "Water"
+    ]
+  },
   "Poliwrath": {
     "types": [
       "Water",
       "Fighting"
+    ]
+  },
+  "Ponyta": {
+    "types": [
+      "Fire"
+    ]
+  },
+  "Poochyena": {
+    "types": [
+      "Dark"
     ]
   },
   "Popplio": {
@@ -1881,6 +2731,20 @@
     "types": [
       "Water",
       "Fairy"
+    ]
+  },
+  "Primeape": {
+    "types": [
+      "Fighting"
+    ],
+    "cp": "1185–1307",
+    "cpBoost": "1482–1634",
+    "weather": "Cloudy"
+  },
+  "Probopass": {
+    "types": [
+      "Rock",
+      "Steel"
     ]
   },
   "Quagsire": {
@@ -1922,7 +2786,10 @@
   "Raikou": {
     "types": [
       "Electric"
-    ]
+    ],
+    "cp": "1889–1972",
+    "cpBoost": "2361–2466",
+    "weather": "Rainy"
   },
   "Ralts": {
     "types": [
@@ -1936,17 +2803,17 @@
       "Rock"
     ]
   },
-  "Entei": {
-    "types": [
-      "Fire"
-    ],
-    "cp": "1834–1984",
-    "cpBoost": "2293–2480",
-    "weather": "Sunny"
-  },
   "Rapidash": {
     "types": [
       "Fire"
+    ],
+    "cp": "1335–1406",
+    "cpBoost": "1669–1757",
+    "weather": "Sunny"
+  },
+  "Raticate": {
+    "types": [
+      "Normal"
     ]
   },
   "Rattata": {
@@ -1958,13 +2825,18 @@
     "types": [
       "Dragon",
       "Flying"
-    ]
+    ],
+    "cp": "2102–2191",
+    "cpBoost": "2627–2739",
+    "weather": "Windy"
   },
   "Regice": {
     "types": [
       "Ice"
     ],
-    "cp": "1703–1784"
+    "cp": "1703–1784",
+    "cpBoost": "2129–2230",
+    "weather": "Snow"
   },
   "Regidrago": {
     "types": [
@@ -1982,14 +2854,54 @@
     "cpBoost": "1905–2002",
     "weather": "Rainy"
   },
+  "Regigigas": {
+    "types": [
+      "Normal"
+    ],
+    "cp": "2389–2483",
+    "cpBoost": "2987–3104",
+    "weather": "Partly Cloudy"
+  },
   "Regirock": {
     "types": [
       "Rock"
-    ]
+    ],
+    "cp": "1703–1784",
+    "cpBoost": "2129–2230",
+    "weather": "Partly Cloudy"
+  },
+  "Registeel": {
+    "types": [
+      "Steel"
+    ],
+    "cp": "1326–1398",
+    "cpBoost": "1658–1748",
+    "weather": "Snow"
+  },
+  "Reshiram": {
+    "types": [
+      "Dragon",
+      "Fire"
+    ],
+    "cp": "2217–2307",
+    "cpBoost": "2771–2884",
+    "weather": "Sunny/Clear or Windy"
   },
   "Reuniclus": {
     "types": [
       "Psychic"
+    ]
+  },
+  "Rhydon": {
+    "types": [
+      "Ground",
+      "Rock"
+    ]
+  },
+  "Rhyhorn": {
+    "types": [
+      "Ground",
+      "Rock"
     ]
   },
   "Rhyperior": {
@@ -2047,7 +2959,9 @@
       "Dark",
       "Ghost"
     ],
-    "cp": "789–843"
+    "cp": "789–843",
+    "cpBoost": "986–1054",
+    "weather": "Fog"
   },
   "Salamence": {
     "types": [
@@ -2066,10 +2980,20 @@
       "Water"
     ]
   },
+  "Sandaconda": {
+    "types": [
+      "Ground"
+    ]
+  },
   "Sandile": {
     "types": [
       "Ground",
       "Dark"
+    ]
+  },
+  "Sandshrew": {
+    "types": [
+      "Ground"
     ]
   },
   "Sandslash": {
@@ -2100,11 +3024,26 @@
     "cpBoost": "2046–2143",
     "weather": "Rainy or Snow"
   },
+  "Scolipede": {
+    "types": [
+      "Bug",
+      "Poison"
+    ],
+    "cp": "1328–1398",
+    "cpBoost": "1660–1747",
+    "weather": "Rain or Cloudy"
+  },
   "Scorbunny": {
     "types": [
       "Fire"
     ],
     "cp": "579–627"
+  },
+  "Scraggy": {
+    "types": [
+      "Dark",
+      "Fighting"
+    ]
   },
   "Scyther": {
     "types": [
@@ -2112,13 +3051,35 @@
       "Flying"
     ]
   },
+  "Sealeo": {
+    "types": [
+      "Ice",
+      "Water"
+    ]
+  },
   "Seedot": {
     "types": [
       "Grass"
     ]
   },
+  "Seel": {
+    "types": [
+      "Water"
+    ]
+  },
   "Serperior": {
     "types": [
+      "Grass"
+    ]
+  },
+  "Servine": {
+    "types": [
+      "Grass"
+    ]
+  },
+  "Sewaddle": {
+    "types": [
+      "Bug",
       "Grass"
     ]
   },
@@ -2326,6 +3287,26 @@
     "cpBoost": "1468–1558",
     "weather": "Rainy or Foggy"
   },
+  "Shelgon": {
+    "types": [
+      "Dragon"
+    ]
+  },
+  "Shellder": {
+    "types": [
+      "Water"
+    ]
+  },
+  "Shellos": {
+    "types": [
+      "Water"
+    ]
+  },
+  "Shelmet": {
+    "types": [
+      "Bug"
+    ]
+  },
   "Shieldon": {
     "types": [
       "Rock",
@@ -2352,6 +3333,15 @@
     "cpBoost": "572–625",
     "weather": "Rainy"
   },
+  "Shock Drive Genesect": {
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "cp": "1833–1916",
+    "cpBoost": "2292–2395",
+    "weather": "Rainy or Snow"
+  },
   "Shroodle": {
     "types": [
       "Poison",
@@ -2364,11 +3354,6 @@
       "Rock"
     ],
     "cp": "189–231"
-  },
-  "Sandaconda": {
-    "types": [
-      "Ground"
-    ]
   },
   "Silicobra": {
     "types": [
@@ -2418,6 +3403,11 @@
       "Psychic"
     ]
   },
+  "Slugma": {
+    "types": [
+      "Fire"
+    ]
+  },
   "Smoochum": {
     "types": [
       "Ice",
@@ -2452,6 +3442,11 @@
     "cpBoost": "2201–2304",
     "weather": "Partly Cloudy"
   },
+  "Snorunt": {
+    "types": [
+      "Ice"
+    ]
+  },
   "Snubbull": {
     "types": [
       "Fairy"
@@ -2463,12 +3458,43 @@
     ],
     "cp": "579–627"
   },
+  "Solgaleo": {
+    "types": [
+      "Psychic",
+      "Steel"
+    ],
+    "cp": "2219–2310",
+    "cpBoost": "2774–2887",
+    "weather": "Windy or Snow"
+  },
+  "Spearow": {
+    "types": [
+      "Normal",
+      "Flying"
+    ]
+  },
+  "Speed Forme Deoxys": {
+    "types": [
+      "Psychic"
+    ],
+    "cp": "1568–1645",
+    "cpBoost": "1960–2056",
+    "weather": "Windy"
+  },
   "Spheal": {
     "types": [
       "Ice",
       "Water"
     ],
-    "cp": "505–550"
+    "cp": "505–550",
+    "cpBoost": "631–687",
+    "weather": "Snow or Rain"
+  },
+  "Spiritomb": {
+    "types": [
+      "Ghost",
+      "Dark"
+    ]
   },
   "Sprigatito": {
     "types": [
@@ -2480,6 +3506,15 @@
       "Water"
     ],
     "cp": "497–540"
+  },
+  "Stakataka": {
+    "types": [
+      "Rock",
+      "Steel"
+    ],
+    "cp": "1799–1882",
+    "cpBoost": "2249–2353",
+    "weather": "Partly Cloudy or Snow"
   },
   "Stantler": {
     "types": [
@@ -2493,6 +3528,11 @@
     "types": [
       "Normal",
       "Flying"
+    ]
+  },
+  "Staryu": {
+    "types": [
+      "Water"
     ]
   },
   "Steelix": {
@@ -2521,6 +3561,14 @@
       "Rock"
     ]
   },
+  "Suicune": {
+    "types": [
+      "Water"
+    ],
+    "cp": "1627–1704",
+    "cpBoost": "2033–2130",
+    "weather": "Rainy"
+  },
   "Swablu": {
     "types": [
       "Normal",
@@ -2533,9 +3581,27 @@
       "Ground"
     ]
   },
+  "Swanna": {
+    "types": [
+      "Water",
+      "Flying"
+    ]
+  },
   "Swellow": {
     "types": [
       "Normal",
+      "Flying"
+    ]
+  },
+  "Swinub": {
+    "types": [
+      "Ice",
+      "Ground"
+    ]
+  },
+  "Swoobat": {
+    "types": [
+      "Psychic",
       "Flying"
     ]
   },
@@ -2544,10 +3610,21 @@
       "Electric"
     ]
   },
+  "Taillow": {
+    "types": [
+      "Normal",
+      "Flying"
+    ]
+  },
   "Talonflame": {
     "types": [
       "Fire",
       "Flying"
+    ]
+  },
+  "Tandemaus": {
+    "types": [
+      "Normal"
     ]
   },
   "Tangrowth": {
@@ -2596,15 +3673,64 @@
       "Normal"
     ]
   },
+  "Teddiursa": {
+    "types": [
+      "Normal"
+    ]
+  },
+  "Tentacool": {
+    "types": [
+      "Water",
+      "Poison"
+    ]
+  },
+  "Tentacruel": {
+    "types": [
+      "Water",
+      "Poison"
+    ]
+  },
   "Tepig": {
     "types": [
       "Fire"
     ]
   },
+  "Terrakion": {
+    "types": [
+      "Rock",
+      "Fighting"
+    ],
+    "cp": "2026–2113",
+    "cpBoost": "2533–2641",
+    "weather": "Partly Cloudy or Cloudy"
+  },
   "Thundurus": {
     "types": [
       "Electric",
       "Flying"
+    ]
+  },
+  "Thundurus (Incarnate Forme)": {
+    "types": [
+      "Electric",
+      "Flying"
+    ],
+    "cp": "1828–1911",
+    "cpBoost": "2285–2389",
+    "weather": "Rainy or Windy"
+  },
+  "Thundurus (Therian Forme)": {
+    "types": [
+      "Electric",
+      "Flying"
+    ],
+    "cp": "2002–2091",
+    "cpBoost": "2503–2614",
+    "weather": "Rainy or Windy"
+  },
+  "Timburr": {
+    "types": [
+      "Fighting"
     ]
   },
   "Tinkatink": {
@@ -2625,21 +3751,37 @@
       "Grass"
     ]
   },
-  "Togepi": {
-    "types": [
-      "Fairy"
-    ]
-  },
   "Togekiss": {
     "types": [
       "Fairy",
       "Flying"
     ]
   },
+  "Togepi": {
+    "types": [
+      "Fairy"
+    ]
+  },
   "Torchic": {
     "types": [
       "Fire"
     ]
+  },
+  "Tornadus (Incarnate Forme)": {
+    "types": [
+      "Flying"
+    ],
+    "cp": "1828–1911",
+    "cpBoost": "2285–2389",
+    "weather": "Windy"
+  },
+  "Tornadus (Therian Forme)": {
+    "types": [
+      "Flying"
+    ],
+    "cp": "1756–1837",
+    "cpBoost": "2196–2296",
+    "weather": "Windy"
   },
   "Torterra": {
     "types": [
@@ -2667,6 +3809,12 @@
       "Poison"
     ]
   },
+  "Toxicroak": {
+    "types": [
+      "Poison",
+      "Fighting"
+    ]
+  },
   "Toxtricity": {
     "types": [
       "Electric",
@@ -2684,6 +3832,18 @@
   "Treecko": {
     "types": [
       "Grass"
+    ]
+  },
+  "Trevenant": {
+    "types": [
+      "Ghost",
+      "Grass"
+    ]
+  },
+  "Tropius": {
+    "types": [
+      "Grass",
+      "Flying"
     ]
   },
   "Trubbish": {
@@ -2742,9 +3902,22 @@
       "Dark"
     ]
   },
+  "Uxie": {
+    "types": [
+      "Psychic"
+    ],
+    "cp": "1370–1442",
+    "cpBoost": "1712–1803",
+    "weather": "Windy"
+  },
   "Vanilluxe": {
     "types": [
       "Ice"
+    ]
+  },
+  "Vaporeon": {
+    "types": [
+      "Water"
     ]
   },
   "Varoom": {
@@ -2783,10 +3956,38 @@
       "Electric"
     ]
   },
+  "Vileplume": {
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "cp": "1391–1462",
+    "cpBoost": "1739–1828",
+    "weather": "Sunny, Cloudy"
+  },
+  "Virizion": {
+    "types": [
+      "Grass",
+      "Fighting"
+    ],
+    "cp": "1649–1727",
+    "cpBoost": "2061–2159",
+    "weather": "Sunny/Clear or Cloudy"
+  },
+  "Voltorb": {
+    "types": [
+      "Electric"
+    ]
+  },
   "Vullaby": {
     "types": [
       "Dark",
       "Flying"
+    ]
+  },
+  "Vulpix": {
+    "types": [
+      "Fire"
     ]
   },
   "Wailmer": {
@@ -2798,6 +3999,11 @@
   "Walrein": {
     "types": [
       "Ice",
+      "Water"
+    ]
+  },
+  "Wartortle": {
+    "types": [
       "Water"
     ]
   },
@@ -2813,6 +4019,17 @@
       "Poison"
     ]
   },
+  "Weezing": {
+    "types": [
+      "Poison"
+    ]
+  },
+  "Whirlipede": {
+    "types": [
+      "Bug",
+      "Poison"
+    ]
+  },
   "Wiglett": {
     "types": [
       "Water"
@@ -2822,6 +4039,17 @@
     "types": [
       "Bug",
       "Water"
+    ]
+  },
+  "Wingull": {
+    "types": [
+      "Water",
+      "Flying"
+    ]
+  },
+  "Wobbuffet": {
+    "types": [
+      "Psychic"
     ]
   },
   "Woobat": {
@@ -2854,6 +4082,14 @@
       "Grass"
     ]
   },
+  "Xerneas": {
+    "types": [
+      "Fairy"
+    ],
+    "cp": "2073–2160",
+    "cpBoost": "2591–2701",
+    "weather": "Cloudy"
+  },
   "Xurkitree": {
     "types": [
       "Electric"
@@ -2861,6 +4097,11 @@
     "cp": "2155–2249",
     "cpBoost": "2695–2812",
     "weather": "Rain"
+  },
+  "Yamask": {
+    "types": [
+      "Ghost"
+    ]
   },
   "Yamper": {
     "types": [
@@ -2870,11 +4111,28 @@
     "cpBoost": "512–562",
     "weather": "Rainy"
   },
+  "Yveltal": {
+    "types": [
+      "Dark",
+      "Flying"
+    ],
+    "cp": "2073–2160",
+    "cpBoost": "2591–2701",
+    "weather": "Fog or Windy"
+  },
   "Zacian (Crowned Sword)": {
     "types": [
       "Fairy",
       "Steel"
     ]
+  },
+  "Zacian (Hero of Many Battles)": {
+    "types": [
+      "Fairy"
+    ],
+    "cp": "2100–2188",
+    "cpBoost": "2625–2735",
+    "weather": "Cloudy"
   },
   "Zamazenta (Crowned Shield)": {
     "types": [
@@ -2882,11 +4140,39 @@
       "Steel"
     ]
   },
+  "Zamazenta (Hero of Many Battles)": {
+    "types": [
+      "Fighting"
+    ],
+    "cp": "2100–2188",
+    "cpBoost": "2625–2735",
+    "weather": "Cloudy"
+  },
+  "Zapdos": {
+    "types": [
+      "Electric",
+      "Flying"
+    ],
+    "cp": "1930–2015",
+    "cpBoost": "2413–2519",
+    "weather": "Rainy or Windy"
+  },
+  "Zebstrika": {
+    "types": [
+      "Electric"
+    ],
+    "cp": "1317–1387",
+    "cpBoost": "1646–1734",
+    "weather": "Rainy"
+  },
   "Zekrom": {
     "types": [
       "Dragon",
       "Electric"
-    ]
+    ],
+    "cp": "2217–2307",
+    "cpBoost": "2771–2884",
+    "weather": "Windy or Rainy"
   },
   "Zeraora": {
     "types": [
@@ -2898,638 +4184,14 @@
       "Normal"
     ]
   },
-  "Zorua": {
-    "types": [
-      "Dark"
-    ]
-  },
-  "Vulpix": {
-    "types": [
-      "Fire"
-    ]
-  },
-  "Litwick": {
-    "types": [
-      "Ghost",
-      "Fire"
-    ]
-  },
-  "Lampent": {
-    "types": [
-      "Ghost",
-      "Fire"
-    ]
-  },
-  "Brionne": {
-    "types": [
-      "Water"
-    ]
-  },
-  "Heatmor": {
-    "types": [
-      "Fire"
-    ]
-  },
   "Zoroark": {
     "types": [
       "Dark"
     ]
   },
-  "Shellder": {
-    "types": [
-      "Water"
-    ]
-  },
-  "Shellos": {
-    "types": [
-      "Water"
-    ]
-  },
-  "Buizel": {
-    "types": [
-      "Water"
-    ]
-  },
-  "Voltorb": {
-    "types": [
-      "Electric"
-    ]
-  },
-  "Electabuzz": {
-    "types": [
-      "Electric"
-    ]
-  },
-  "Magneton": {
-    "types": [
-      "Electric",
-      "Steel"
-    ]
-  },
-  "Cubone": {
-    "types": [
-      "Ground"
-    ]
-  },
-  "Oddish": {
-    "types": [
-      "Grass",
-      "Poison"
-    ]
-  },
-  "Servine": {
-    "types": [
-      "Grass"
-    ]
-  },
-  "Shelgon": {
-    "types": [
-      "Dragon"
-    ]
-  },
-  "Snorunt": {
-    "types": [
-      "Ice"
-    ]
-  },
-  "Swinub": {
-    "types": [
-      "Ice",
-      "Ground"
-    ]
-  },
-  "Girafarig": {
-    "types": [
-      "Normal",
-      "Psychic"
-    ]
-  },
-  "Glalie": {
-    "types": [
-      "Ice"
-    ]
-  },
-  "Seel": {
-    "types": [
-      "Water"
-    ]
-  },
-  "Sealeo": {
-    "types": [
-      "Ice",
-      "Water"
-    ]
-  },
-  "Froslass": {
-    "types": [
-      "Ice",
-      "Ghost"
-    ]
-  },
-  "Makuhita": {
-    "types": [
-      "Fighting"
-    ]
-  },
-  "Primeape": {
-    "types": [
-      "Fighting"
-    ]
-  },
-  "Koffing": {
-    "types": [
-      "Poison"
-    ]
-  },
-  "Grimer": {
-    "types": [
-      "Poison"
-    ]
-  },
-  "Galarian Weezing": {
-    "types": [
-      "Poison",
-      "Fairy"
-    ]
-  },
-  "Garbodor": {
-    "types": [
-      "Poison"
-    ]
-  },
-  "Muk": {
-    "types": [
-      "Poison"
-    ]
-  },
-  "Rhydon": {
-    "types": [
-      "Ground",
-      "Rock"
-    ]
-  },
-  "Doduo": {
-    "types": [
-      "Normal",
-      "Flying"
-    ]
-  },
-  "Pidgeot": {
-    "types": [
-      "Normal",
-      "Flying"
-    ]
-  },
-  "Taillow": {
-    "types": [
-      "Normal",
-      "Flying"
-    ]
-  },
-  "Archeops": {
-    "types": [
-      "Rock",
-      "Flying"
-    ]
-  },
-  "Pelipper": {
-    "types": [
-      "Water",
-      "Flying"
-    ]
-  },
-  "Munna": {
-    "types": [
-      "Psychic"
-    ]
-  },
-  "Hypno": {
-    "types": [
-      "Psychic"
-    ]
-  },
-  "Espeon": {
-    "types": [
-      "Psychic"
-    ]
-  },
-  "Bronzong": {
-    "types": [
-      "Steel",
-      "Psychic"
-    ]
-  },
-  "Klink": {
-    "types": [
-      "Steel"
-    ]
-  },
-  "Shelmet": {
-    "types": [
-      "Bug"
-    ]
-  },
-  "Forretress": {
-    "types": [
-      "Bug",
-      "Steel"
-    ]
-  },
-  "Graveler": {
-    "types": [
-      "Rock",
-      "Ground"
-    ]
-  },
-  "Rhyhorn": {
-    "types": [
-      "Ground",
-      "Rock"
-    ]
-  },
-  "Nuzleaf": {
-    "types": [
-      "Grass",
-      "Dark"
-    ]
-  },
-  "Yamask": {
-    "types": [
-      "Ghost"
-    ]
-  },
-  "Duskull": {
-    "types": [
-      "Ghost"
-    ]
-  },
-  "Bagon": {
-    "types": [
-      "Dragon"
-    ]
-  },
-  "Jangmo-o": {
-    "types": [
-      "Dragon"
-    ]
-  },
-  "Alolan Exeggutor": {
-    "types": [
-      "Grass",
-      "Dragon"
-    ]
-  },
-  "Poochyena": {
+  "Zorua": {
     "types": [
       "Dark"
-    ]
-  },
-  "Mightyena": {
-    "types": [
-      "Dark"
-    ]
-  },
-  "Metang": {
-    "types": [
-      "Steel",
-      "Psychic"
-    ]
-  },
-  "Clefairy": {
-    "types": [
-      "Fairy"
-    ]
-  },
-  "Clefable": {
-    "types": [
-      "Fairy"
-    ]
-  },
-  "Charmeleon": {
-    "types": [
-      "Fire"
-    ]
-  },
-  "Wartortle": {
-    "types": [
-      "Water"
-    ]
-  },
-  "Mantyke": {
-    "types": [
-      "Water",
-      "Flying"
-    ]
-  },
-  "Raticate": {
-    "types": [
-      "Normal"
-    ]
-  },
-  "Poliwhirl": {
-    "types": [
-      "Water"
-    ]
-  },
-  "Magby": {
-    "types": [
-      "Fire"
-    ]
-  },
-  "Spearow": {
-    "types": [
-      "Normal",
-      "Flying"
-    ]
-  },
-  "Dodrio": {
-    "types": [
-      "Normal",
-      "Flying"
-    ]
-  },
-  "Tentacool": {
-    "types": [
-      "Water",
-      "Poison"
-    ]
-  },
-  "Dewott": {
-    "types": [
-      "Water"
-    ]
-  },
-  "Tentacruel": {
-    "types": [
-      "Water",
-      "Poison"
-    ]
-  },
-  "Carvanha": {
-    "types": [
-      "Water",
-      "Dark"
-    ]
-  },
-  "Alolan Cubone": {
-    "types": [
-      "Fire",
-      "Ghost"
-    ]
-  },
-  "Foongus": {
-    "types": [
-      "Grass",
-      "Poison"
-    ],
-    "cp": "514–559",
-    "cpBoost": "643–699",
-    "weather": "Sunny, Cloudy"
-  },
-  "Piloswine": {
-    "types": [
-      "Ice",
-      "Ground"
-    ]
-  },
-  "Timburr": {
-    "types": [
-      "Fighting"
-    ]
-  },
-  "Gurdurr": {
-    "types": [
-      "Fighting"
-    ]
-  },
-  "Ekans": {
-    "types": [
-      "Poison"
-    ]
-  },
-  "Whirlipede": {
-    "types": [
-      "Bug",
-      "Poison"
-    ]
-  },
-  "Weezing": {
-    "types": [
-      "Poison"
-    ]
-  },
-  "Sandshrew": {
-    "types": [
-      "Ground"
-    ]
-  },
-  "Swoobat": {
-    "types": [
-      "Psychic",
-      "Flying"
-    ]
-  },
-  "Oricorio": {
-    "types": [
-      "Fire",
-      "Flying"
-    ]
-  },
-  "Sewaddle": {
-    "types": [
-      "Bug",
-      "Grass"
-    ]
-  },
-  "Geodude": {
-    "types": [
-      "Rock",
-      "Ground"
-    ]
-  },
-  "Nidoqueen": {
-    "types": [
-      "Poison",
-      "Ground"
-    ]
-  },
-  "Crobat": {
-    "types": [
-      "Poison",
-      "Flying"
-    ]
-  },
-  "Spiritomb": {
-    "types": [
-      "Ghost",
-      "Dark"
-    ]
-  },
-  "Haunter": {
-    "types": [
-      "Ghost",
-      "Poison"
-    ]
-  },
-  "Wingull": {
-    "types": [
-      "Water",
-      "Flying"
-    ]
-  },
-  "Pignite": {
-    "types": [
-      "Fire",
-      "Fighting"
-    ]
-  },
-  "Cranidos": {
-    "types": [
-      "Rock"
-    ]
-  },
-  "Golem": {
-    "types": [
-      "Rock",
-      "Ground"
-    ]
-  },
-  "Teddiursa": {
-    "types": [
-      "Normal"
-    ]
-  },
-  "Loudred": {
-    "types": [
-      "Normal"
-    ]
-  },
-  "Magmar": {
-    "types": [
-      "Fire"
-    ]
-  },
-  "Kabutops": {
-    "types": [
-      "Rock",
-      "Water"
-    ]
-  },
-  "Feebas": {
-    "types": [
-      "Water"
-    ]
-  },
-  "Vileplume": {
-    "types": [
-      "Grass",
-      "Poison"
-    ],
-    "cp": "1391–1462",
-    "cpBoost": "1739–1828",
-    "weather": "Sunny, Cloudy"
-  },
-  "Trevenant": {
-    "types": [
-      "Ghost",
-      "Grass"
-    ]
-  },
-  "Maractus": {
-    "types": [
-      "Grass"
-    ]
-  },
-  "Leafeon": {
-    "types": [
-      "Grass"
-    ]
-  },
-  "Phantump": {
-    "types": [
-      "Ghost",
-      "Grass"
-    ],
-    "cp": "595–642",
-    "cpBoost": "743–802",
-    "weather": "Fog, Sunny"
-  },
-  "Hitmontop": {
-    "types": [
-      "Fighting"
-    ]
-  },
-  "Nidorino": {
-    "types": [
-      "Poison"
-    ]
-  },
-  "Toxicroak": {
-    "types": [
-      "Poison",
-      "Fighting"
-    ]
-  },
-  "Claydol": {
-    "types": [
-      "Ground",
-      "Psychic"
-    ]
-  },
-  "Pidgey": {
-    "types": [
-      "Normal",
-      "Flying"
-    ]
-  },
-  "Swanna": {
-    "types": [
-      "Water",
-      "Flying"
-    ]
-  },
-  "Wobbuffet": {
-    "types": [
-      "Psychic"
-    ]
-  },
-  "Duosion": {
-    "types": [
-      "Psychic"
-    ]
-  },
-  "Malamar": {
-    "types": [
-      "Dark",
-      "Psychic"
-    ]
-  },
-  "Karrablast": {
-    "types": [
-      "Bug"
-    ]
-  },
-  "Scolipede": {
-    "types": [
-      "Bug",
-      "Poison"
-    ]
-  },
-  "Cofagrigus": {
-    "types": [
-      "Ghost"
-    ]
-  },
-  "Gabite": {
-    "types": [
-      "Dragon",
-      "Ground"
-    ]
-  },
-  "Probopass": {
-    "types": [
-      "Rock",
-      "Steel"
     ]
   }
 }

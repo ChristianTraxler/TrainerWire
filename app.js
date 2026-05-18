@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "2.71";
+const APP_VERSION = "2.72";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -337,8 +337,31 @@ function getPokemonImg(name) {
   const dmaxMatch = name.match(/Dynamax\s+(\w+)/);
   if (dmaxMatch) { const dex = DEX[dmaxMatch[1]]; if (dex) return { url: natDexImg(dex, GENDER_SUFFIX[dex] || ""), shadow: false }; }
   if (lower.includes("origin")) {
-    const m = name.match(/Origin\s+(\w+)/);
-    if (m) { const dex = DEX[m[1]]; if (dex) return { url: natDexImg(dex, "_ori"), shadow: false }; }
+    const m = name.match(/(\w+)\s*\(Origin(?:\s+Forme)?\)/) || name.match(/Origin\s+(\w+)/);
+    if (m) {
+      const dex = DEX[m[1]];
+      const ORIGIN_SUFFIX = { 483: "_origin", 484: "_origin", 487: "_ori" };
+      if (dex) return { url: natDexImg(dex, ORIGIN_SUFFIX[dex] || "_ori"), shadow: false };
+    }
+  }
+  if (lower.includes("altered")) {
+    const m = name.match(/(\w+)\s*\(Altered(?:\s+Forme)?\)/) || name.match(/Altered\s+(?:Forme\s+)?(\w+)/);
+    if (m) {
+      const dex = DEX[m[1]];
+      if (dex === 487) return { url: natDexImg(487, "_alt"), shadow: false };
+    }
+  }
+  if (lower.includes("deoxys")) {
+    if (lower.includes("attack")) return { url: natDexImg(386, "_attack"), shadow: false };
+    if (lower.includes("defense")) return { url: natDexImg(386, "_defense"), shadow: false };
+    if (lower.includes("speed")) return { url: natDexImg(386, "_speed"), shadow: false };
+    if (lower.includes("normal")) return { url: natDexImg(386, ""), shadow: false };
+  }
+  if (lower.includes("genesect")) {
+    if (lower.includes("douse")) return { url: natDexImg(649, "_douse"), shadow: false };
+    if (lower.includes("shock")) return { url: natDexImg(649, "_shock"), shadow: false };
+    if (lower.includes("burn")) return { url: natDexImg(649, "_burn"), shadow: false };
+    if (lower.includes("chill")) return { url: natDexImg(649, "_chill"), shadow: false };
   }
   if (lower.includes("primal")) {
     const m = name.match(/Primal\s+(\w+)/);
@@ -459,7 +482,7 @@ const SHINY_AVAILABLE = new Set([
   "Pikachu","Chinchou","Dedenne","Pawmi","Castform","Seedot","Wiglett","Riolu","Togetic",
   "Bulbasaur","Charmander","Squirtle","Ditto","Sudowoodo","Zorua","Lapras","Snorlax","Dragonite",
   "Caterpie","Dwebble","Sizzlipede","Paras","Cutiefly","Combee","Pinsir","Scizor","Kleavor","Scyther",
-  "Regidrago","Kyogre","Groudon","Tapu Koko","Tapu Lele","Mewtwo",
+  "Regidrago","Kyogre","Groudon","Mewtwo",
   "Aerodactyl","Alakazam","Banette","Manectric","Sharpedo",
   "Venusaur","Charizard","Blastoise","Rayquaza","Sceptile","Swampert","Gardevoir","Gengar","Latios",
   "Absol","Butterfree","Diglett","Wooper","Sneasel","Kirlia","Shinx","Croagunk","Blitzle","Minccino",
@@ -486,7 +509,16 @@ const SHINY_AVAILABLE = new Set([
   "Chingling","Happiny","Audino","Skarmory",
   "Meowth","Zigzagoon","Geodude","Slowpoke","Basculin",
   "Deino","Impidimp","Charcadet","Turtonator","Toxel","Gible",
-  "Sandile","Vullaby","Pancham","Salandit"
+  "Sandile","Vullaby","Pancham","Salandit",
+  "Articuno","Zapdos","Moltres","Suicune","Lugia","Ho-Oh",
+  "Uxie","Mesprit","Azelf","Dialga","Palkia","Reshiram","Kyurem",
+  "Xerneas","Yveltal",
+  "Heatran","Registeel","Regigigas","Cresselia","Darkrai",
+  "Cobalion","Terrakion","Virizion","Genesect",
+  "Nihilego","Buzzwole","Pheromosa","Xurkitree","Celesteela","Guzzlord","Necrozma","Stakataka","Blacephalon",
+  "Tornadus","Thundurus","Deoxys",
+  "Zacian","Zamazenta",
+  "Heracross","Beedrill","Pidgeot","Blaziken","Abomasnow","Tyranitar","Lucario"
 ]);
 function isShinyEligible(name) {
   if (name.includes("\u2728")) return true;
@@ -787,14 +819,18 @@ const EVENTS = [
   { id: 74, title: "Dynamax Growlithe", type: "Max Battle", date: "2026-05-11", endDate: "2026-05-17", startsAt: "2026-05-11T06:00:00", endsAt: "2026-05-18T06:00:00", published: "2026-05-03", time: "Max Monday: 6–7 PM", color: "#F08030", icon: "🔥", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-1_Kanto/0058.webp", featured: false, summary: "Dynamax Growlithe featured at Power Spots this week.", details: { bosses: ["Dynamax Growlithe ✨"], bonuses: ["Max Monday: 6–7 PM May 11", "Power Spots all week", "Extra Power Spots on Monday", "Shiny Growlithe available"], tips: ["Shiny Growlithe can appear — check every encounter.", "Growlithe evolves into Arcanine with 50 Candy.", "Max Mondays have more Power Spots."] } },
   { id: 75, title: "Dynamax Registeel (Debut)", type: "Max Battle", date: "2026-05-18", endDate: "2026-05-24", startsAt: "2026-05-18T06:00:00", endsAt: "2026-05-25T06:00:00", published: "2026-05-03", time: "Max Monday: 6–7 PM", color: "#B7B7CE", icon: "⚙️", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-3_Hoenn/0379.webp", featured: true, summary: "Dynamax Registeel debuts at Power Spots! The third Legendary Regi to join the Dynamax roster.", details: { bosses: ["Dynamax Registeel (debut) ✨"], bonuses: ["Max Monday: 6–7 PM May 18", "Power Spots all week", "Shiny Registeel available"], tips: ["Headline event — expect higher difficulty.", "Shiny Registeel can appear — check every encounter.", "Coordinate with your local group for max rewards.", "Registeel is pure Steel — Fighting, Fire, and Ground attackers excel."], counters: { label: "Dynamax Registeel (Steel)", pokemon: [{ name: "Gigantamax Machamp", fast: "Karate Chop", charged: "Close Combat" }, { name: "Gigantamax Charizard", fast: "Fire Spin", charged: "Blast Burn", chargedNote: "CD Move" }, { name: "Mega Blaziken", fast: "Counter", charged: "Blast Burn", chargedNote: "CD Move" }, { name: "Mega Lucario", fast: "Counter", charged: "Aura Sphere" }, { name: "Gigantamax Rillaboom", fast: "Counter", charged: "Drum Beating", chargedNote: "Signature" }, { name: "Reshiram", fast: "Fire Fang", charged: "Fusion Flare" }] } } },
   { id: 76, title: "Dynamax Combee", type: "Max Battle", date: "2026-05-25", endDate: "2026-05-31", startsAt: "2026-05-25T06:00:00", endsAt: "2026-06-01T06:00:00", published: "2026-05-03", time: "Max Monday: 6–7 PM", color: "#F1C40F", icon: "🐝", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-4_Sinnoh/0415-male.webp", featured: false, summary: "Dynamax Combee featured at Power Spots this week.", details: { bosses: ["Dynamax Combee ✨"], bonuses: ["Max Monday: 6–7 PM May 25", "Power Spots all week", "Extra Power Spots on Monday", "Shiny Combee available"], tips: ["Shiny Combee can appear — check every encounter.", "Only female Combee evolve into Vespiquen — check the gender symbol before transferring.", "Max Mondays have more Power Spots."] } },
+  { id: 77, title: "Blanche's Quest for Knowledge", type: "Event", url: "https://pokemongo.com/news/global-events-gofest2026-overlays", date: "2026-05-26", endDate: "2026-06-01", published: "2026-05-18", time: "10:00 AM – 8:00 PM", color: "#3498DB", icon: "🔬", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-1_Kanto/0134.webp", featured: true, summary: "Week 1 of the Summer Quest series — Blanche leads a research-focused adventure featuring Field Research tasks and Incense encounters. Free GO Pass with Vaporeon, Larvitar, and Lapras milestone rewards.", details: { bosses: ["Squirtle ✨ (Wild)", "Alolan Vulpix ✨ (Wild)", "Krabby ✨ (Wild)", "Staryu ✨ (Wild)", "Galarian Zigzagoon ✨ (Wild)", "Lapras ✨ (Wild — rare)", "Vaporeon ✨ (Wild — rare)", "Larvitar ✨ (Wild — rare)", "Cubone ✨ (Incense)", "Horsea ✨ (Incense)", "Lapras ✨ (Incense)", "Vaporeon ✨ (Incense)", "Larvitar ✨ (Incense)", "Sableye ✨ (Incense)", "Clamperl ✨ (Incense)", "Cubchoo ✨ (Incense)", "Sinistea ✨ (Field Research)", "Tandemaus (Field Research)"], bonuses: ["GO Pass Rank 10+: 1 extra Candy when evolving", "GO Pass Rank 10+: Increased chance of Candy XL when evolving (Trainer Level 31+)", "GO Pass Rank 20+: 2× Incense duration", "Unlimited Point Weekend: May 30 – June 1 (no daily GO Point cap)", "Featured GO Pass rewards: Vaporeon, Larvitar, Lapras + Blanche-themed accessory", "All featured Pokémon can be Shiny", "Reward expiration: June 3 at 7:59 PM local time"], goPass: { free: ["Field Research and Incense encounters across the week", "Rank-up rewards: Vaporeon, Larvitar, and Lapras encounters", "Blanche-themed avatar accessory", "Rank 10+: +1 evolve Candy & boosted Candy XL chance", "Rank 20+: 2× Incense duration"], deluxe: { price: "$4.99", rewards: ["Everything in the free track", "Extra premium encounters", "Upgraded milestone rewards", "Faster progression through ranks"] }, deluxePlus: { price: "$6.99", rewards: ["Everything in GO Pass Deluxe", "Instantly skip 6 ranks"] } }, tips: ["Lapras, Vaporeon, and Larvitar are rare wild spawns — Incense boosts your odds significantly.", "Stack 2× Incense duration (Rank 20+) with the Unlimited Point Weekend for maximum farming.", "Field Research includes Sinistea and Tandemaus — both Shiny eligible.", "Larvitar evolves into Tyranitar — bank candy for a future Mega Tyranitar.", "Reward expires June 3 at 7:59 PM — claim before then.", "All featured Pokémon can be Shiny — check every encounter."], relatedNews: [{ id: 17, label: "Summer Quest Series — Full Breakdown", icon: "🌞" }] } },
+  { id: 78, title: "Spark's Caretaking Quest", type: "Event", url: "https://pokemongo.com/news/global-events-gofest2026-overlays", date: "2026-06-02", endDate: "2026-06-08", published: "2026-05-18", time: "10:00 AM – 8:00 PM", color: "#F1C40F", icon: "🥚", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-1_Kanto/0135.webp", featured: true, summary: "Week 2 of the Summer Quest series — Spark hosts an exploration-driven adventure centered on hatching Eggs and discovering Pokémon. Free GO Pass with Jolteon, Galarian Corsola, and Elekid milestone rewards.", details: { bosses: ["Bulbasaur ✨ (Wild)", "Alolan Raichu ✨ (Wild)", "Drowzee ✨ (Wild)", "Jolteon ✨ (Wild)", "Dratini ✨ (Wild)", "Houndour ✨ (Wild)", "Lileep ✨ (Wild)", "Combee ✨ (Wild)", "Machop ✨ (Field Research)", "Galarian Corsola ✨ (Field Research)"], eggLabel: "7 km Eggs", eggs: ["Pichu ✨", "Elekid ✨", "Shinx ✨", "Varoom ✨", "Galarian Corsola ✨", "Hisuian Qwilfish ✨"], bonuses: ["GO Pass Rank 10+: 1/2 Egg Hatch Distance", "GO Pass Rank 20+: 1.5× Hatch Candy", "GO Pass Deluxe Rank 20+: Adds 1.5× Hatch Stardust", "Unlimited Point Weekend: June 6 – 8 (no daily GO Point cap)", "Featured GO Pass rewards: Jolteon, Galarian Corsola, Elekid + Spark-themed accessory", "All featured Pokémon can be Shiny", "Reward expiration: June 10 at 7:59 PM local time"], goPass: { free: ["7 km Eggs with the event Pokémon pool", "Rank-up rewards: Jolteon, Galarian Corsola, and Elekid encounters", "Spark-themed avatar accessory", "Rank 10+: 1/2 Hatch Distance", "Rank 20+: 1.5× Hatch Candy"], deluxe: { price: "$4.99", rewards: ["Everything in the free track", "Rank 20+: 1.5× Hatch Stardust (Deluxe exclusive)", "Extra premium encounters", "Upgraded milestone rewards", "Faster progression through ranks"] }, deluxePlus: { price: "$6.99", rewards: ["Everything in GO Pass Deluxe", "Instantly skip 6 ranks"] } }, tips: ["Stockpile empty Egg slots and Incubators before the event — 7 km Eggs cycle to the new pool.", "Stack 1/2 Hatch Distance (Rank 10+) with Super Incubators for fastest hatches.", "Shiny Varoom and Hisuian Qwilfish are among the more elusive shinies — every 7 km Egg matters.", "1.5× Hatch Candy + 1.5× Hatch Stardust (Deluxe) compounds beautifully on 7 km Eggs.", "Galarian Corsola evolves into Galarian Cursola — a unique Ghost-type.", "Reward expires June 10 at 7:59 PM — claim before then."], relatedNews: [{ id: 17, label: "Summer Quest Series — Full Breakdown", icon: "🌞" }] } },
+  { id: 79, title: "Candela's Quest for Victory", type: "Event", url: "https://pokemongo.com/news/global-events-gofest2026-overlays", date: "2026-06-09", endDate: "2026-06-15", published: "2026-05-18", time: "10:00 AM – 8:00 PM", color: "#E74C3C", icon: "⚔️", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-1_Kanto/0136.webp", featured: true, summary: "Week 3 of the Summer Quest series — Candela hosts an event focused on raids and battling. Free GO Pass with Flareon, Rockruff, and Ponyta milestone rewards.", details: { bosses: ["Charmander ✨ (Wild)", "Mankey ✨ (Wild)", "Hisuian Growlithe ✨ (Wild)", "Machop ✨ (Wild)", "Ponyta ✨ (Wild)", "Scyther ✨ (Wild)", "Flareon ✨ (Wild)", "Slugma ✨ (Wild)", "Fletchling ✨ (Wild)", "Hisuian Growlithe ✨ (Raid)", "Machamp ✨ (Raid)", "Scizor ✨ (Raid)", "Magcargo ✨ (Raid)", "Scraggy ✨ (Raid)", "Honedge ✨ (Raid)", "Rockruff ✨ (Raid)"], bonuses: ["GO Pass Rank 10+: Increased Attack bonus from friends in raids", "GO Pass Rank 20+: 1.5× Raid Stardust", "GO Pass Deluxe Rank 20+: Up to 2 Raid Passes from Gym Photo Discs", "Unlimited Point Weekend: June 13 – 15 (no daily GO Point cap)", "Featured GO Pass rewards: Flareon, Rockruff, Ponyta + Candela-themed accessory", "All featured Pokémon can be Shiny", "Reward expiration: June 17 at 7:59 PM local time"], goPass: { free: ["Event-themed Raid Bosses across all tiers", "Rank-up rewards: Flareon, Rockruff, and Ponyta encounters", "Candela-themed avatar accessory", "Rank 10+: Increased Attack bonus from friends in raids", "Rank 20+: 1.5× Raid Stardust"], deluxe: { price: "$4.99", rewards: ["Everything in the free track", "Rank 20+: Up to 2 Raid Passes from Gym Photo Discs (Deluxe exclusive)", "Extra premium encounters", "Upgraded milestone rewards", "Faster progression through ranks"] }, deluxePlus: { price: "$6.99", rewards: ["Everything in GO Pass Deluxe", "Instantly skip 6 ranks"] } }, tips: ["Coordinate raid groups — the friends Attack bonus (Rank 10+) makes group raiding much stronger.", "Stack 1.5× Raid Stardust with Star Pieces during the Unlimited Point Weekend for a massive dust farm.", "Rockruff in raids — evolve based on time of day for Dusk, Midday, or Midnight Lycanroc.", "Honedge raid drops set up for Doublade and Aegislash — a meta Ghost/Steel attacker.", "Hisuian Growlithe is a regional rarity normally — stock up on candy.", "Reward expires June 17 at 7:59 PM — claim before then."], relatedNews: [{ id: 17, label: "Summer Quest Series — Full Breakdown", icon: "🌞" }] } },
   { id: 40, title: "GO Fest 2026: Tokyo", type: "GO Fest", date: "2026-05-29", endDate: "2026-06-01", time: "9 AM – 6 PM (Citywide from May 25)", color: "#FF6348", icon: "\uD83D\uDDFC", featured: true, summary: "GO Fest kicks off in Tokyo! Zeraora debut, Mewtwo raids, costumed Pikachu.", details: { bosses: ["Zeraora (debut)", "Mewtwo (5\u2605 citywide)", "Aqua Paldean Tauros", "Costumed Pikachu", "All Unown forms"], bonuses: ["Park sessions at Odaiba", "Citywide from May 25", "City Exploration Tickets", "4 City Districts", "GO Expert medal"], tips: ["Zeraora available once per trainer.", "Park tickets $33.", "Mewtwo raids citywide."] } },
   { id: 41, title: "GO Fest 2026: Chicago", type: "GO Fest", date: "2026-06-05", endDate: "2026-06-07", time: "Park Sessions + Citywide (from Jun 4)", color: "#0984E3", icon: "\uD83C\uDFD9\uFE0F", featured: false, summary: "GO Fest returns to Grant Park! Spark hosts. Zeraora, Mewtwo.", details: { bosses: ["Zeraora", "Mewtwo (5\u2605)", "Blaze Paldean Tauros", "Costumed Pikachu", "All Unown forms"], bonuses: ["Citywide from June 4", "Spark coaching", "4 City Districts"], tips: ["Grant Park confirmed 2026 AND 2027.", "Tickets $33 — first-come-first-served."] } },
   { id: 42, title: "GO Fest 2026: Copenhagen", type: "GO Fest", date: "2026-06-12", endDate: "2026-06-14", time: "9 AM – 6 PM CEST (Citywide from Jun 11)", color: "#00B894", icon: "\uD83C\uDFF0", featured: false, summary: "European GO Fest at Fælledparken! Candela hosts. Shiny Paldean Tauros exclusive.", details: { bosses: ["Zeraora", "Mewtwo (5\u2605)", "Shiny Combat Breed Paldean Tauros", ], bonuses: ["Fælledparken park", "Citywide from June 11", "Candela coaching"], tips: ["Shiny Paldean Tauros exclusive to ticket-holding raiders.", "Last in-person Zeraora before Global."] } },
-  { id: 43, title: "GO Fest 2026: Global", type: "GO Fest", url: "https://pokemongo.com/gofest/global", iconImg: "assets/pokemon-images/GO-Fest/gofest-2026-global.webp", wideIcon: true, published: "2026-04-28", date: "2026-07-11", endDate: "2026-07-12", time: "10:00 AM – 7:00 PM Local", color: "#6C5CE7", icon: "\uD83C\uDF0D", featured: true, summary: "FREE for all Trainers worldwide! Zeraora debuts via non-expiring Special Research. Mega Mewtwo X (Saturday) and Mega Mewtwo Y (Sunday) debut in Super Mega Raid Battles. Hourly habitat rotations cycle through all 18 types, plus team-hat Pikachu, Pikachu-visor starters, and Incense-exclusive Unown, Tropius, and Bouffalant.", details: { bosses: ["Zeraora (Mythical debut — Special Research)", "Mega Mewtwo X (Saturday Super Mega Raid debut)", "Mega Mewtwo Y (Sunday Super Mega Raid debut)", "Pikachu wearing Team Instinct hat", "Pikachu wearing Team Mystic hat", "Pikachu wearing Team Valor hat", "Bulbasaur wearing Pikachu visor (evolves)", "Charmander wearing Pikachu visor (evolves)", "Squirtle wearing Pikachu visor (evolves)", "Unown — all forms (Incense)", "Tropius ✨ (Incense)", "Bouffalant ✨ (Incense)"], bonuses: ["FREE for all Trainers logged in during the event weekend", "Event Hours (10 AM – 7 PM): Hourly habitat rotations across all 18 types", "10 AM – 1 PM: Stormfire Peaks (Ice / Electric / Fire) & Earthforged Domain (Ground / Steel / Normal)", "1 PM – 4 PM: Astral Tides (Psychic / Ghost / Water) & Verdant Anomaly (Poison / Bug / Grass)", "4 PM – 7 PM: Dragonflight Summit (Flying / Rock / Dragon) & Twilight Battlefield (Dark / Fairy / Fighting)", "Lure Modules last 1 hour during event hours", "Increased chance of encountering Shiny Pokémon during event hours", "Party Play active for the full 9 hours each day", "Hourly type-themed Field Research refreshes with the featured type", "Full Day (12 AM – 11:59 PM): Up to 9 free Raid Passes daily", "Up to 6 Special Trades daily", "1/2 Stardust cost for trades", "Open up to 50 Gifts daily"], bonusGroups: { hero: "FREE for all Trainers logged in during the event weekend", habitatSchedule: [{ time: "10 AM – 1 PM", biomes: [{ name: "Stormfire Peaks", types: ["Ice","Electric","Fire"] }, { name: "Earthforged Domain", types: ["Ground","Steel","Normal"] }] }, { time: "1 PM – 4 PM", biomes: [{ name: "Astral Tides", types: ["Psychic","Ghost","Water"] }, { name: "Verdant Anomaly", types: ["Poison","Bug","Grass"] }] }, { time: "4 PM – 7 PM", biomes: [{ name: "Dragonflight Summit", types: ["Flying","Rock","Dragon"] }, { name: "Twilight Battlefield", types: ["Dark","Fairy","Fighting"] }] }], eventHours: { label: "Event Hours (10 AM – 7 PM)", items: ["Lure Modules last 1 hour", "Increased chance of encountering Shiny Pokémon", "Party Play active for the full 9 hours each day", "Hourly type-themed Field Research refreshes with the featured type"] }, fullDay: { label: "Full Day (12 AM – 11:59 PM)", items: ["Up to 9 free Raid Passes daily", "Up to 6 Special Trades daily", "1/2 Stardust cost for trades", "Open up to 50 Gifts daily"] } }, tips: ["Zeraora is available globally for the first time — the Special Research is non-expiring, so no rush.", "Timed Research has a branching choice between Mega Mewtwo X or Mega Mewtwo Y — pick wisely, you can't get both from research.", "Mewtwo caught from Super Mega Raid Battles starts at Mega Level 1, with chances at Level 2 or 3.", "Saturday raids feature Mega Mewtwo X; Sunday features Mega Mewtwo Y — plan your raid days.", "Costumed Bulbasaur, Charmander, and Squirtle CAN evolve — keep your favorite IVs.", "Use Incense during off-peak hours to maximize Unown, Tropius, and Bouffalant encounters.", "All 18 types are featured across the day — there's a 9-hour spawn window for every type.", "Event runs 10:00 AM – 7:00 PM local time both Saturday July 11 and Sunday July 12, 2026."], relatedNews: [{ id: 13, label: "Mega Mewtwo X & Y — Full Breakdown", icon: "🦾" }] } },
+  { id: 43, title: "GO Fest 2026: Global", type: "GO Fest", url: "https://pokemongo.com/gofest/global", iconImg: "assets/pokemon-images/GO-Fest/gofest-2026-global.webp", wideIcon: true, published: "2026-04-28", updated: "2026-05-18", date: "2026-07-11", endDate: "2026-07-12", time: "10:00 AM – 7:00 PM Local", color: "#6C5CE7", icon: "\uD83C\uDF0D", featured: true, summary: "FREE for all Trainers worldwide! Zeraora debuts via non-expiring Special Research. Mega Mewtwo X (Saturday) and Mega Mewtwo Y (Sunday) debut in Super Mega Raid Battles. Hourly habitat rotations cycle through all 18 types, plus team-hat Pikachu, Pikachu-visor starters, and Incense-exclusive Unown, Tropius, and Bouffalant.", details: { bosses: ["Zeraora (Mythical debut — Special Research)", "Mega Mewtwo X (Saturday Super Mega Raid debut)", "Mega Mewtwo Y (Sunday Super Mega Raid debut)", "Pikachu wearing Team Instinct hat", "Pikachu wearing Team Mystic hat", "Pikachu wearing Team Valor hat", "Bulbasaur wearing Pikachu visor (evolves)", "Charmander wearing Pikachu visor (evolves)", "Squirtle wearing Pikachu visor (evolves)", "Unown — all forms (Incense)", "Tropius ✨ (Incense)", "Bouffalant ✨ (Incense)"], bonuses: ["FREE for all Trainers logged in during the event weekend", "Event Hours (10 AM – 7 PM): Hourly habitat rotations across all 18 types", "10 AM – 1 PM: Stormfire Peaks (Ice / Electric / Fire) & Earthforged Domain (Ground / Steel / Normal)", "1 PM – 4 PM: Astral Tides (Psychic / Ghost / Water) & Verdant Anomaly (Poison / Bug / Grass)", "4 PM – 7 PM: Dragonflight Summit (Flying / Rock / Dragon) & Twilight Battlefield (Dark / Fairy / Fighting)", "Lure Modules last 1 hour during event hours", "Increased chance of encountering Shiny Pokémon during event hours", "Party Play active for the full 9 hours each day", "Hourly type-themed Field Research refreshes with the featured type", "Full Day (12 AM – 11:59 PM): Up to 9 free Raid Passes daily", "Up to 6 Special Trades daily", "1/2 Stardust cost for trades", "Open up to 50 Gifts daily"], bonusGroups: { hero: "FREE for all Trainers logged in during the event weekend", habitatSchedule: [{ time: "10 AM – 1 PM", biomes: [{ name: "Stormfire Peaks", types: ["Ice","Electric","Fire"] }, { name: "Earthforged Domain", types: ["Ground","Steel","Normal"] }] }, { time: "1 PM – 4 PM", biomes: [{ name: "Astral Tides", types: ["Psychic","Ghost","Water"] }, { name: "Verdant Anomaly", types: ["Poison","Bug","Grass"] }] }, { time: "4 PM – 7 PM", biomes: [{ name: "Dragonflight Summit", types: ["Flying","Rock","Dragon"] }, { name: "Twilight Battlefield", types: ["Dark","Fairy","Fighting"] }] }], eventHours: { label: "Event Hours (10 AM – 7 PM)", items: ["Lure Modules last 1 hour", "Increased chance of encountering Shiny Pokémon", "Party Play active for the full 9 hours each day", "Hourly type-themed Field Research refreshes with the featured type"] }, fullDay: { label: "Full Day (12 AM – 11:59 PM)", items: ["Up to 9 free Raid Passes daily", "Up to 6 Special Trades daily", "1/2 Stardust cost for trades", "Open up to 50 Gifts daily"] } }, saturdayRaids: { label: "Saturday, July 11 — The following Pokémon will appear in raids!", megaRaids: ["Mega Ampharos (Mega)", "Mega Blaziken (Mega)", "Mega Abomasnow (Mega)", "Mega Alakazam (Mega)", "Mega Gengar (Mega)", "Mega Swampert (Mega)", "Mega Pidgeot (Mega)", "Mega Aerodactyl (Mega)", "Mega Salamence (Mega)"], fiveStarRaids: ["Articuno (5★ Raid)", "Zapdos (5★ Raid)", "Moltres (5★ Raid)", "Raikou (5★ Raid)", "Entei (5★ Raid)", "Suicune (5★ Raid)", "Lugia (5★ Raid)", "Kyogre (5★ Raid)", "Groudon (5★ Raid)", "Rayquaza (5★ Raid)", "Uxie (5★ Raid)", "Mesprit (5★ Raid)", "Azelf (5★ Raid)", "Dialga (5★ Raid)", "Palkia (5★ Raid)", "Reshiram (5★ Raid)", "Zekrom (5★ Raid)", "Kyurem (5★ Raid)", "Xerneas (5★ Raid)", "Yveltal (5★ Raid)", "Solgaleo (5★ Raid)", "Lunala (5★ Raid)", "Ho-Oh (5★ Raid)", "Giratina (Altered Forme) (5★ Raid)", "Origin Giratina (5★ Raid)"], note: "Uxie, Mesprit, and Azelf will appear more frequently in raids in their respective regions." }, sundayRaids: { label: "Sunday, July 12 — The following Pokémon will appear in raids!", megaRaids: ["Mega Metagross (Mega)", "Mega Garchomp (Mega)", "Mega Audino (Mega)", "Mega Heracross (Mega)", "Mega Beedrill (Mega)", "Mega Pinsir (Mega)", "Mega Sceptile (Mega)", "Mega Tyranitar (Mega)", "Mega Gardevoir (Mega)", "Mega Lucario (Mega)"], fiveStarRaids: ["Regirock (5★ Raid)", "Regice (5★ Raid)", "Registeel (5★ Raid)", "Latias (5★ Raid)", "Latios (5★ Raid)", "Heatran (5★ Raid)", "Regigigas (5★ Raid)", "Cresselia (5★ Raid)", "Darkrai (5★ Raid)", "Cobalion (5★ Raid)", "Terrakion (5★ Raid)", "Virizion (5★ Raid)", "Genesect (5★ Raid)", "Nihilego (5★ Raid)", "Buzzwole (5★ Raid)", "Pheromosa (5★ Raid)", "Xurkitree (5★ Raid)", "Celesteela (5★ Raid)", "Kartana (5★ Raid)", "Guzzlord (5★ Raid)", "Necrozma (5★ Raid)", "Stakataka (5★ Raid)", "Blacephalon (5★ Raid)", "Regieleki (5★ Raid)", "Regidrago (5★ Raid)", "Dialga (Origin Forme) (5★ Raid)", "Palkia (Origin Forme) (5★ Raid)", "Tornadus (Incarnate Forme) (5★ Raid)", "Tornadus (Therian Forme) (5★ Raid)", "Thundurus (Incarnate Forme) (5★ Raid)", "Thundurus (Therian Forme) (5★ Raid)", "Landorus (Incarnate Forme) (5★ Raid)", "Landorus (Therian Forme) (5★ Raid)", "Enamorus (Incarnate Forme) (5★ Raid)", "Enamorus (Therian Forme) (5★ Raid)", "Normal Forme Deoxys (5★ Raid)", "Attack Forme Deoxys (5★ Raid)", "Defense Forme Deoxys (5★ Raid)", "Speed Forme Deoxys (5★ Raid)", "Douse Drive Genesect (5★ Raid)", "Shock Drive Genesect (5★ Raid)", "Burn Drive Genesect (5★ Raid)", "Chill Drive Genesect (5★ Raid)", "Tapu Koko (5★ Raid)", "Tapu Lele (5★ Raid)", "Tapu Bulu (5★ Raid)", "Tapu Fini (5★ Raid)", "Zacian (Hero of Many Battles) (5★ Raid)", "Zamazenta (Hero of Many Battles) (5★ Raid)"] }, tips: ["Zeraora is available globally for the first time — the Special Research is non-expiring, so no rush.", "Timed Research has a branching choice between Mega Mewtwo X or Mega Mewtwo Y — pick wisely, you can't get both from research.", "Mewtwo caught from Super Mega Raid Battles starts at Mega Level 1, with chances at Level 2 or 3.", "Saturday raids feature Mega Mewtwo X; Sunday features Mega Mewtwo Y — plan your raid days.", "Costumed Bulbasaur, Charmander, and Squirtle CAN evolve — keep your favorite IVs.", "Use Incense during off-peak hours to maximize Unown, Tropius, and Bouffalant encounters.", "All 18 types are featured across the day — there's a 9-hour spawn window for every type.", "Event runs 10:00 AM – 7:00 PM local time both Saturday July 11 and Sunday July 12, 2026."], relatedNews: [{ id: 13, label: "Mega Mewtwo X & Y — Full Breakdown", icon: "🦾" }] } },
   { id: 64, title: "Spring Marathon 2026", type: "Event", url: "https://pokemongo.com/news/spring-marathon-2026", date: "2026-05-12", endDate: "2026-05-18", time: "10:00 AM – 8:00 PM", color: "#F093B0", icon: "🌸", iconImg: "assets/pokemon-images/National-Event-Costume-Dex/regular/Gen-1_Kanto/0025_f3341.webp", featured: true, summary: "Flittle and Espathra debut from Paldea! Pikachu wearing a marathon visor appears with Shiny chance. 5 km Eggs feature flower crown Pichu, Togepi, and Happiny.", details: { bosses: ["Flittle (debut)", "Espathra (evolve Flittle with 50 Candy)", "Pikachu wearing a marathon visor (debut) ✨", "Eevee with flower crown (Field Research)", "Buneary with flower crown (Field Research) ✨"], eggLabel: "5 km Eggs", eggs: ["Pichu with flower crown ✨", "Togepi with flower crown ✨", "Happiny with flower crown ✨", "Flittle"], bonuses: ["Free Timed Research rewards 21,000 XP and an encounter with Pikachu wearing a marathon visor", "Timed Research expires May 18, 2026 at 8:00 PM local time", "Event-themed Field Research with costumed encounters", "GO Pass and GO Pass Deluxe rewards available"], milestones: [{ tier: "Tier 1", bonus: "2× XP for spinning a PokéStop", deluxe: "3× XP for spinning a PokéStop" }, { tier: "Tier 2", bonus: "1/2 Egg Hatch Distance when Eggs are placed in an Incubator during the event period" }], goPass: { free: ["Tier 1: 2× XP for spinning a PokéStop", "Tier 2: 1/2 Egg Hatch Distance for Eggs incubated during the event", "Marathon-themed milestone encounters"], deluxe: { price: "$4.99", rewards: ["Tier 1: 3× XP for spinning a PokéStop (upgraded)", "Upgraded milestone rewards", "Faster progression through ranks"] }, deluxePlus: { price: "$6.99", rewards: ["Everything in GO Pass Deluxe", "Instantly skip 6 ranks"] } }, tips: ["Flittle and Espathra make their Pokémon GO debut — check every spawn.", "Evolve Flittle with 50 Candy to get Espathra.", "Pikachu wearing a marathon visor can be Shiny — take every Timed Research encounter.", "Stack the 1/2 Egg Hatch Distance milestone with Super Incubators on 5 km Eggs.", "Flower crown Pichu, Togepi, and Happiny are all Shiny eligible from 5 km Eggs.", "Timed Research expires May 18 at 8 PM local — complete it before then."] } }
 ];
 
 const ANNOUNCEMENTS = [
+  { id: 17, date: "2026-05-18", published: "2026-05-18", title: "Summer Quest Events 2026 — Blanche, Spark & Candela", tag: "News", url: "https://pokemongo.com/news/global-events-gofest2026-overlays", body: "Three consecutive GO Pass events from May 26 – June 15, 2026 lead into GO Fest 2026: Global. Each Team Leader hosts their own week — Blanche (research), Spark (eggs), Candela (raids) — with themed encounters, GO Pass rewards, and an Unlimited Point Weekend.", fullBody: "The Summer Quest Events 2026 series spans three back-to-back weeks (May 26 – June 15, 2026, 10 AM – 8 PM local time), with each Team Leader hosting their own themed event. The series culminates in Pokémon GO Fest 2026: Global on July 11–12.", sections: [{ heading: "Blanche's Quest for Knowledge — May 26 to June 1", items: ["Theme: Research-focused adventure (Field Research & Incense)", "Wild: Squirtle ✨, Alolan Vulpix ✨, Krabby ✨, Staryu ✨, Galarian Zigzagoon ✨; rare: Lapras ✨, Vaporeon ✨, Larvitar ✨", "Incense: Cubone ✨, Horsea ✨, Lapras ✨, Vaporeon ✨, Larvitar ✨, Sableye ✨, Clamperl ✨, Cubchoo ✨", "Field Research: Squirtle ✨, Alolan Vulpix ✨, Krabby ✨, Cubone ✨, Horsea ✨, Staryu ✨, Lapras ✨, Larvitar ✨, Sableye ✨, Cubchoo ✨, Sinistea ✨, Tandemaus", "Rank 10+: +1 evolve Candy & boosted Candy XL chance (L31+)", "Rank 20+: 2× Incense duration", "Unlimited Point Weekend: May 30 – June 1", "Featured rewards: Vaporeon, Larvitar, Lapras + Blanche-themed accessory", "Reward expiration: June 3 at 7:59 PM"] }, { heading: "Spark's Caretaking Quest — June 2 to June 8", items: ["Theme: Exploration-driven adventure (hatching Eggs)", "Wild: Bulbasaur ✨, Alolan Raichu ✨, Drowzee ✨, Jolteon ✨, Dratini ✨, Houndour ✨, Lileep ✨, Combee ✨", "7 km Eggs: Pichu ✨, Elekid ✨, Shinx ✨, Varoom ✨, Galarian Corsola ✨, Hisuian Qwilfish ✨", "Field Research: Bulbasaur ✨, Drowzee ✨, Jolteon ✨, Dratini ✨, Houndour ✨, Lileep ✨, Combee ✨, Galarian Corsola ✨, Alolan Raichu ✨, Machop ✨", "Rank 10+: 1/2 Hatch Distance", "Rank 20+: 1.5× Hatch Candy (Deluxe also adds 1.5× Hatch Stardust)", "Unlimited Point Weekend: June 6 – 8", "Featured rewards: Jolteon, Galarian Corsola, Elekid + Spark-themed accessory", "Reward expiration: June 10 at 7:59 PM"] }, { heading: "Candela's Quest for Victory — June 9 to June 15", items: ["Theme: Raids and battling — push your limits", "Wild: Charmander ✨, Mankey ✨, Hisuian Growlithe ✨, Machop ✨, Ponyta ✨, Scyther ✨, Flareon ✨, Slugma ✨, Fletchling ✨", "Raid Bosses: Hisuian Growlithe ✨, Machamp ✨, Scizor ✨, Magcargo ✨, Scraggy ✨, Honedge ✨, Rockruff ✨", "Field Research: Charmander ✨, Mankey ✨, Hisuian Growlithe ✨, Machop ✨, Scyther ✨, Flareon ✨, Slugma ✨, Scraggy ✨, Fletchling ✨, Honedge ✨, Rockruff ✨", "Rank 10+: Increased Attack bonus from friends in raids", "Rank 20+: 1.5× Raid Stardust (Deluxe also adds up to 2 Raid Passes from Photo Discs)", "Unlimited Point Weekend: June 13 – 15", "Featured rewards: Flareon, Rockruff, Ponyta + Candela-themed accessory", "Reward expiration: June 17 at 7:59 PM"] }, { heading: "GO Pass Pricing (All Three Weeks)", items: ["GO Pass Deluxe: $4.99", "GO Pass Deluxe + 6 Ranks: $6.99", "Web Store purchases include: 10 Ultra Balls, 5 Max Revives, 1 Premium Battle Pass, 5 Max Potions", "Ultra Box upgrade: 20 Ultra Balls, 10 Max Revives, 10 Max Potions, 2 Premium Battle Passes, 1 Incubator, 1 Super Incubator", "All featured Pokémon can be Shiny"] }, { heading: "GO Fest 2026: Global — July 11–12", items: ["Legendary Raid Features: Mega Mewtwo X, Mega Mewtwo Y, Zeraora", "FREE for all Trainers — Special Research and bonuses available without cost"] }, { heading: "Real-World Event Locations", items: ["Tokyo, Japan — Event Days: May 29 – June 1 (Citywide: May 25 – June 1)", "Chicago, Illinois — Event Days: June 5 – 7 (Citywide: June 4 – 7)", "Copenhagen, Denmark — Event Days: June 12 – 14 (Citywide: June 11 – 14)", "Community Ambassadors host meetups throughout each event"] }, { heading: "Tips", items: ["Three back-to-back GO Passes — plan your stamina; each week has its own grind.", "Unlimited Point Weekends are the prime time to push to Rank 20+ each week.", "Blanche week favors Incense farmers; Spark week favors hatchers; Candela week favors raiders.", "All featured Pokémon are Shiny eligible — check every encounter.", "Each week's rewards expire ~2 days after the event ends — claim promptly.", "These weekly events lead directly into the FREE GO Fest 2026: Global on July 11–12."] }] },
   { id: 13, date: "2026-04-28", published: "2026-04-28", title: "Mega Mewtwo X & Y Debut at GO Fest 2026", tag: "News", url: "https://pokemongo.com/news/mega-mewtwo-gofest-2026", body: "Mega Mewtwo X and Mega Mewtwo Y debut at GO Fest 2026 — Mega Mewtwo X in Saturday Super Mega Raids (Counter), Mega Mewtwo Y on Sunday (Psystrike). Caught Mewtwo arrive with Mega Level 1+ already unlocked.", fullBody: "Mega Mewtwo X and Mega Mewtwo Y, the Mega Evolutions of the Genetic Pokémon Mewtwo, make their Pokémon GO debuts during GO Fest 2026:", sections: [{ heading: "Super Mega Raid Debuts (GO Fest Global)", items: ["Saturday, July 11: Mega Mewtwo X — knows Counter (Fast Attack)", "Sunday, July 12: Mega Mewtwo Y — knows Psystrike (Charged Attack)", "Caught Mewtwo arrive with at least Mega Level 1 unlocked (chance at Level 2 or 3)"] }, { heading: "Mega Energy Mechanics", items: ["Mega Mewtwo X and Y require significantly more Mega Energy than other Pokémon", "Earn Mega Energy by defeating either form in Super Mega Raids", "Earn additional Mega Energy by completing GO Fest Timed Research", "Mega Level advancement tracks independently for each form (X and Y)", "Optional fast-track Mega Level progression by spending extra Mega Energy", "Existing Mewtwo Mega Energy converts to both X and Y variants — same split mechanic applied to Charizard"] }, { heading: "Branching GO Fest Timed Research", items: ["Choose between Mega Mewtwo X or Mega Mewtwo Y — you cannot get both from research", "Pick the form that fits your raid strategy and energy stockpile"] }, { heading: "In-Person GO Fest Events (Ticket Holders)", items: ["Tokyo: May 25 – June 1, 2026 (citywide window)", "Chicago: June 4 – June 7, 2026 (citywide window)", "Copenhagen: June 11 – June 14, 2026 (citywide window)", "City Experience Timed Research — four branching Trainer Challenges across city districts", "Complete at least two challenges to encounter Mega Mewtwo X or Y (Mega Level 1 pre-unlocked)", "Earn the exclusive \"Pokémon GO Expert\" commemorative medal"] }, { heading: "Park Session Finale (In-Person)", items: ["30-minute Super Mega Raid accommodating 1,000+ Trainers", "Both Mega Mewtwo X and Y available", "Caught Mewtwo receive an event-specific Location Background", "In-person captures know Counter (Fast) and Psystrike (Charged)"] }, { heading: "Tips", items: ["Stockpile Mewtwo Mega Energy now — it converts to both X and Y after the split.", "Decide your branching research choice (X or Y) based on which form you raid more.", "Mewtwo X is a Psychic / Fighting attacker; Mewtwo Y is pure Psychic with massive Attack — plan your team.", "Saturday = X, Sunday = Y in Super Mega Raids — plan your raid weekend accordingly.", "Use Party Play during GO Fest hours to chain Super Mega Raids for maximum Mega Energy."] }] },
   { id: 14, date: "2026-04-28", published: "2026-04-28", title: "GO Fest 2026: Global — FREE for All Trainers", tag: "News", url: "https://pokemongo.com/gofest/global", body: "GO Fest 2026: Global is FREE for all Trainers logged in July 11–12. Mega Mewtwo X & Y debut, Zeraora arrives via non-expiring Special Research, all 18 types featured across hourly habitats, plus 9 free Raid Passes daily.", fullBody: "Pokémon GO Fest 2026: Global runs Saturday, July 11 and Sunday, July 12, 2026, from 10:00 AM – 7:00 PM local time. For the first time, the global event is completely free — no ticket required for any trainer logged in during the event weekend.", sections: [{ heading: "Event Window", items: ["Saturday, July 11, 2026: 10:00 AM – 7:00 PM local time", "Sunday, July 12, 2026: 10:00 AM – 7:00 PM local time", "FREE for all Trainers logged in during the event weekend", "All ticket-holder exclusives available free to all logged-in players"] }, { heading: "Hourly Habitat Schedule (Both Days)", items: ["10 AM – 1 PM: Stormfire Peaks (Ice / Electric / Fire) & Earthforged Domain (Ground / Steel / Normal)", "1 PM – 4 PM: Astral Tides (Psychic / Ghost / Water) & Verdant Anomaly (Poison / Bug / Grass)", "4 PM – 7 PM: Dragonflight Summit (Flying / Rock / Dragon) & Twilight Battlefield (Dark / Fairy / Fighting)", "All 18 types featured across the day with increased spawn rates per time block"] }, { heading: "Costumed Pokémon", items: ["Pikachu wearing a Team Instinct hat ✨", "Pikachu wearing a Team Mystic hat ✨", "Pikachu wearing a Team Valor hat ✨", "Bulbasaur wearing a Pikachu visor ✨ (evolves)", "Charmander wearing a Pikachu visor ✨ (evolves)", "Squirtle wearing a Pikachu visor ✨ (evolves)"] }, { heading: "Incense Encounters", items: ["All Unown forms", "Tropius ✨", "Bouffalant ✨"] }, { heading: "Super Mega Raids", items: ["Saturday, July 11: Mega Mewtwo X (debut)", "Sunday, July 12: Mega Mewtwo Y (debut)", "Shiny Mewtwo possible from Super Mega Raids", "Caught Mewtwo arrive with at least Mega Level 1 unlocked (chance at Level 2 or 3)"] }, { heading: "Special Research — Zeraora Debut", items: ["Trainers worldwide can complete Special Research to encounter Zeraora, the Thunderclap Pokémon — a first for Pokémon GO", "Special Research does not expire — complete at your own pace", "In-person attendees received Zeraora candy instead during their event"] }, { heading: "Event Hours Bonuses (10 AM – 7 PM)", items: ["Increased Pokémon-type spawn rates per time block", "Lure Modules last 1 hour", "Incense attracts special event Pokémon", "Party Play active for the full 9 hours each day", "Elevated Shiny encounter rates", "Hourly type-themed Field Research refreshes with the featured type", "Branching Timed Research — choose between Mega Mewtwo X or Mega Mewtwo Y", "Global Challenges unlock additional bonuses and Ultra Unlock events"] }, { heading: "All-Day Bonuses (12 AM – 11:59 PM)", items: ["Up to 9 free Raid Passes daily from spinning Gym Photo Discs", "Up to 6 Special Trades permitted", "1/2 Stardust cost for trades", "Open up to 50 Gifts daily"] }, { heading: "In-Person Pre-Event Celebrations", items: ["Tokyo, Japan: May 29 – June 1, 2026", "Chicago, USA: June 5 – June 7, 2026", "Copenhagen, Denmark: June 12 – June 14, 2026", "Tickets available; in-person attendees encountered Zeraora early and received candy during the Global event"] }] },
   { id: 16, date: "2026-05-03", published: "2026-04-27", title: "Falinks Super Mega Raid Day \u2014 May 23", tag: "Update", url: "https://pokemongo.com/en/news/falinks-super-mega-raid-day-2026", body: "Mega Falinks debuts in Super Mega Raids on May 23, 2\u20135 PM local time! Up to 6 free Raid Passes, boosted Shiny odds, and a $4.99 ticket for 14 Raid Passes plus bonus XP and Stardust.", fullBody: "Falinks Super Mega Raid Day runs Saturday, May 23, 2026, from 2:00 PM \u2013 5:00 PM local time \u2014 fall in formation and ready your Link Charges as Mega Falinks makes its Super Mega Raid debut:", sections: [{ heading: "Featured Pok\u00e9mon", items: ["Mega Falinks \u2014 Super Mega Raid debut \u2728", "Increased chance of encountering Shiny Falinks"] }, { heading: "Free Bonuses", items: ["Up to 6 free Raid Passes from spinning Gym Photo Discs", "Remote Raid Pass limit increased to 20 (Fri, May 22, 5 PM \u2013 Sat, May 23, 8 PM PDT)"] }, { heading: "Paid Ticket ($4.99)", items: ["Up to 14 Raid Passes from spinning Gym Photo Discs", "Additional 5,000 XP per Super Mega Raid Battle", "Additional 5,000 Stardust per Super Mega Raid Battle", "Increased Rare Candy XL from Raid Battles", "Bonuses active during event hours only", "Available until Saturday, May 23 at 5:00 PM local time", "Non-refundable; cannot be purchased with Pok\u00e9Coins"] }, { heading: "Web Store Bundle", items: ["Falinks Super Mega Raid Day Ultra Ticket Box ($4.99): Event ticket + 1 Premium Battle Pass"] }, { heading: "Timed Research", items: ["Available during event hours \u2014 complete tasks and claim rewards before expiration", "Rewards include a Premium Battle Pass and a Mawile encounter"] }, { heading: "New Feature", items: ["Use the new web-based map at pokemongo.com/map to locate Super Mega Raids and community meetups"] }, { heading: "Tips", items: ["Falinks is a Fighting-type \u2014 weak to Flying, Psychic, and Fairy attacks", "Top counters: Mega Mewtwo Y, Mega Gardevoir, Mega Rayquaza, Mega Pidgeot, Lugia, Hoopa (Unbound)", "Coordinate with a full team \u2014 Super Mega Raids are designed for 1,000+ Trainers", "Stack a Premium Battle Pass before the event to maximize Raid Pass usage", "Shiny Falinks odds are boosted \u2014 check every encounter"] }] },
@@ -867,25 +903,25 @@ const EGG_TIER_IMAGES = {
 
 const CURRENT_RAID_BOSSES = {
   "1-Star Raids": [
-    "Beldum (1\u2605 Raid) \u2728","Shieldon (1\u2605 Raid) \u2728","Honedge (1\u2605 Raid) \u2728"
+    "Machop (1\u2605 Raid) \u2728","Galarian Ponyta (1\u2605 Raid) \u2728","Doduo (1\u2605 Raid) \u2728","Rockruff (1\u2605 Raid) \u2728"
   ],
   "3-Star Raids": [
-    "Orthworm (3\u2605 Raid) \u2728"
+    "Rapidash (3\u2605 Raid) \u2728","Scolipede (3\u2605 Raid) \u2728","Zebstrika (3\u2605 Raid) \u2728"
   ],
   "5-Star Raids": [
-    "Tapu Lele (5\u2605 Raid)"
+    "Buzzwole (5\u2605 Raid) \u2728","Pheromosa (5\u2605 Raid) \u2728","Xurkitree (5\u2605 Raid) \u2728"
   ],
   "Mega Raids": [
-    "Mega Banette (Mega)"
+    "Mega Glalie (Mega) \u2728"
   ],
   "Shadow 1-Star Raids": [
-    "Shadow Dratini (1\u2605 Shadow Raid)","Shadow Gligar (1\u2605 Shadow Raid)","Shadow Cacnea (1\u2605 Shadow Raid)","Shadow Joltik (1\u2605 Shadow Raid)"
+    "Shadow Larvitar (1\u2605 Shadow Raid) \u2728","Shadow Sableye (1\u2605 Shadow Raid) \u2728","Shadow Spheal (1\u2605 Shadow Raid) \u2728","Shadow Inkay (1\u2605 Shadow Raid) \u2728"
   ],
   "Shadow 3-Star Raids": [
-    "Shadow Alolan Marowak (3\u2605 Shadow Raid)","Shadow Lapras (3\u2605 Shadow Raid)","Shadow Stantler (3\u2605 Shadow Raid)"
+    "Shadow Ninetales (3\u2605 Shadow Raid) \u2728","Shadow Primeape (3\u2605 Shadow Raid) \u2728","Shadow Onix (3\u2605 Shadow Raid) \u2728"
   ],
   "Shadow 5-Star Raids": [
-    "Shadow Cresselia (5\u2605 Shadow Raid)"
+    "Shadow Cresselia (5\u2605 Shadow Raid) \u2728"
   ]
 };
 
@@ -975,7 +1011,7 @@ const ROCKET_LINEUPS = {
       icon: "assets/pokemon-images/icons/boss-giovanni.png.webp",
       quote: "I will not tolerate your interference.",
       color: "#8B0000",
-      slots: [["Persian"], ["Rhyperior", "Machamp", "Kangaskhan"], ["Incarnate Forme Thundurus"]]
+      slots: [["Persian"], ["Rhyperior", "Nidoking", "Kangaskhan"], ["Incarnate Forme Landorus"]]
     },
     {
       name: "Cliff",
@@ -983,7 +1019,7 @@ const ROCKET_LINEUPS = {
       icon: "assets/pokemon-images/icons/leader-cliff.png.webp",
       quote: "My strength comes from my loyalty to Team GO Rocket.",
       color: "#C0392B",
-      slots: [["Magikarp"], ["Skarmory", "Cradily", "Annihilape"], ["Tyranitar", "Gallade", "Camerupt"]]
+      slots: [["Snorlax"], ["Golurk", "Galarian Weezing", "Gardevoir"], ["Tyranitar", "Gallade", "Camerupt"]]
     },
     {
       name: "Arlo",
@@ -991,7 +1027,7 @@ const ROCKET_LINEUPS = {
       icon: "assets/pokemon-images/icons/leader-arlo.png.webp",
       quote: "It's time to learn your place in the world.",
       color: "#E67E22",
-      slots: [["Mawile"], ["Slowbro", "Steelix", "Golurk"], ["Scizor", "Alakazam", "Charizard"]]
+      slots: [["Pineco"], ["Slowbro", "Gigalith", "Steelix"], ["Scizor", "Alakazam", "Charizard"]]
     },
     {
       name: "Sierra",
@@ -999,7 +1035,7 @@ const ROCKET_LINEUPS = {
       icon: "assets/pokemon-images/icons/leader-sierra.png.webp",
       quote: "I envy you \u2014 you get to battle me!",
       color: "#8E44AD",
-      slots: [["Hoppip"], ["Ferrothorn", "Flygon", "Blastoise"], ["Houndoom", "Steelix", "Milotic"]]
+      slots: [["Duskull"], ["Flygon", "Ferrothorn", "Blastoise"], ["Steelix", "Houndoom", "Milotic"]]
     }
   ],
   grunts: [
@@ -2032,6 +2068,58 @@ function flipCard(el) {
   card.classList.toggle('flipped');
 }
 
+function toggleAccordion(el) {
+  const isOpen = el.dataset.open === "true";
+  const newState = isOpen ? "false" : "true";
+  el.dataset.open = newState;
+  el.setAttribute('aria-expanded', newState);
+  const content = el.nextElementSibling;
+  if (!content || !content.classList.contains('acc-content')) return;
+  content.dataset.open = newState;
+
+  // Find ancestor accordions that are open (their max-height needs to grow/shrink)
+  const openAncestors = [];
+  let p = content.parentElement;
+  while (p) {
+    if (p.classList && p.classList.contains('acc-content') && p.dataset.open === "true") {
+      openAncestors.push(p);
+    }
+    p = p.parentElement;
+  }
+
+  // Lock ancestors to explicit pixel max-height (transition needs px → px, not none → px)
+  openAncestors.forEach(a => {
+    a.style.maxHeight = a.scrollHeight + "px";
+  });
+
+  if (newState === "false") {
+    // Closing: lock this content to its current pixel height first
+    if (!content.style.maxHeight || content.style.maxHeight === "none") {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  }
+
+  // Force reflow so the explicit pixel values commit before we start the new transition
+  void content.offsetHeight;
+
+  // Now set the new target values — transition will fire
+  if (newState === "true") {
+    const tierTarget = content.scrollHeight;
+    content.style.maxHeight = tierTarget + "px";
+    openAncestors.forEach(a => {
+      a.style.maxHeight = (parseFloat(a.style.maxHeight) + tierTarget) + "px";
+    });
+  } else {
+    const tierCurrent = parseFloat(content.style.maxHeight) || 0;
+    requestAnimationFrame(() => {
+      content.style.maxHeight = "0px";
+      openAncestors.forEach(a => {
+        a.style.maxHeight = Math.max(0, parseFloat(a.style.maxHeight) - tierCurrent) + "px";
+      });
+    });
+  }
+}
+
 function getRaidBossData(name) {
   // Check longer keys first so "Alolan Ninetales" matches before "Ninetales"
   const sortedEntries = Object.entries(RAID_BOSS_DATA).sort((a, b) => b[0].length - a[0].length);
@@ -2702,6 +2790,55 @@ function renderEventDetail(event, th) {
           : event.details.bonuses
             ? renderDetailSection("Active Bonuses", "\u2728", event.details.bonuses, "#27AE60", th)
             : ""}
+        ${(event.details.saturdayRaids || event.details.sundayRaids) ? (() => {
+          const isMob = breakpoint === "mobile";
+          const chevronSVG = `<svg class="acc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
+          const renderTierAcc = (tierLabel, items, tierColor, tierKey) => {
+            const eggUrl = TIER_EGGS[tierKey];
+            const eggImg = eggUrl ? `<img src="${eggUrl}" style="width:26px;height:26px;object-fit:contain;flex-shrink:0" />` : "";
+            const stars = renderRaidHeads(tierKey);
+            const bossesHTML = items.map(item => renderBossItem(item, tierColor, th, !isMob)).join("");
+            return `<div style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden;background:${th.surface}">
+              <button class="acc-trigger" data-open="false" onclick="toggleAccordion(this)" aria-expanded="false" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:${th.accentBgSubtle(tierColor)};border:none;border-bottom:1.5px solid ${th.border};color:${th.text}">
+                ${eggImg}
+                <span style="font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase">${esc(tierLabel)}</span>
+                <span style="font-size:11px;font-weight:600;color:${th.textMuted};margin-left:4px">${items.length}</span>
+                <span style="margin-left:auto;display:flex;align-items:center;gap:8px">${stars}${chevronSVG}</span>
+              </button>
+              <div class="acc-content" data-open="false">
+                <div style="padding:10px;${isMob ? "display:flex;flex-direction:column;gap:6px" : "display:flex;flex-wrap:wrap;gap:8px"}">${bossesHTML}</div>
+              </div>
+            </div>`;
+          };
+          const renderDayAcc = (sr, dayLabel, accent) => {
+            if (!sr) return "";
+            const dayName = dayLabel.split(" \u00b7 ")[0];
+            const totalCount = (sr.megaRaids ? sr.megaRaids.length : 0) + (sr.fiveStarRaids ? sr.fiveStarRaids.length : 0);
+            return `<div style="border:1.5px solid ${th.countdownBorder(accent)};border-radius:14px;overflow:hidden;background:${th.accentBgSubtle(accent)}">
+              <button class="acc-trigger" data-open="false" onclick="toggleAccordion(this)" aria-expanded="false" style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:transparent;border:none;color:${th.text}">
+                <span style="font-size:22px;flex-shrink:0">\u2694\ufe0f</span>
+                <div style="display:flex;flex-direction:column;gap:2px;flex:1;min-width:0">
+                  <div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:${accent}">${esc(dayLabel)}</div>
+                  <div style="font-size:14.5px;font-weight:700;color:${th.text};line-height:1.4">${totalCount} raid bosses</div>
+                </div>
+                <span style="display:flex;align-items:center;color:${accent};flex-shrink:0">${chevronSVG}</span>
+              </button>
+              <div class="acc-content" data-open="false">
+                <div style="padding:0 12px 12px;display:flex;flex-direction:column;gap:10px">
+                  ${sr.megaRaids ? renderTierAcc(`${dayName} Mega Raids`, sr.megaRaids, "#E67E22", "Mega Raids") : ""}
+                  ${sr.fiveStarRaids ? renderTierAcc(`${dayName} Five-Star Raids`, sr.fiveStarRaids, "#8E44AD", "5-Star Raids") : ""}
+                  ${sr.note ? `<div style="padding:10px 14px;border-radius:10px;background:${th.tipBg};border:1px solid ${th.tipBorder};font-size:13px;color:${th.tipText};line-height:1.5;display:flex;align-items:center;gap:8px"><span style="font-size:14px">\ud83d\udca1</span>${esc(sr.note)}</div>` : ""}
+                  <div style="padding:8px 14px;border-radius:10px;background:${th.accentBgSubtle("#FFD700")};border:1px solid ${th.countdownBorder("#FFD700")};font-size:12px;font-weight:600;color:${th.textSecondary};line-height:1.5;display:flex;align-items:center;gap:8px"><span style="font-size:14px">\u2728</span>If you're lucky, you may encounter a Shiny one!</div>
+                </div>
+              </div>
+            </div>`;
+          };
+          return `<div style="display:flex;flex-direction:column;gap:14px">
+            <h4 style="margin:0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>\ud83c\udfaf</span> GO Fest Raid Bosses <span style="font-size:11px;font-weight:500;color:${th.textMuted}">(tap to expand)</span></h4>
+            ${renderDayAcc(event.details.saturdayRaids, "Saturday \u00b7 July 11", "#6C5CE7")}
+            ${renderDayAcc(event.details.sundayRaids, "Sunday \u00b7 July 12", "#E84393")}
+          </div>`;
+        })() : ""}
         ${event.details.eggs ? (() => {
           const eggLabel = event.details.eggLabel || "7 km Eggs";
           const eggImgSrc = EGG_TIER_IMAGES[eggLabel];
@@ -4149,7 +4286,7 @@ function render() {
         </div>`;
       });
       raidsTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
-        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on May 03, 2026 at 10:00 am</div>
+        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on May 18, 2026 at 10:00 am</div>
         <div style="text-align:center;padding:10px;font-size:14px;font-weight:600;color:${th.text}">Current Raid Bosses</div>
         <div style="text-align:center;font-size:11px;color:${th.textMuted};font-weight:500;margin-top:-10px">Data sourced from Pok\u00E9monGO.com, LeekDuck.com & Pok\u00E9monGOHUB.net</div>
         <div style="text-align:center;font-size:12px;color:${th.textMuted};font-weight:600;margin-top:2px">Tap a Pok\u00E9mon to see its weaknesses & resistances</div>
@@ -4332,7 +4469,7 @@ function render() {
         </div>`;
       }).join("");
       rocketTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
-        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on Apr 09, 2026 at 4:30 pm</div>
+        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on May 18, 2026 at 9:30 am</div>
         <div style="text-align:center;padding:10px">
           <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text};display:flex;align-items:center;justify-content:center;gap:8px"><img src="assets/pokemon-images/icons/teamrocket_r_full.png" style="width:${isMobile ? 24 : 30}px;height:${isMobile ? 24 : 30}px;object-fit:contain" /> Team GO Rocket</h2>
           <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Current Team GO Rocket lineups</p>
