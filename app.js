@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "2.72";
+const APP_VERSION = "2.75";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -819,9 +819,9 @@ const EVENTS = [
   { id: 74, title: "Dynamax Growlithe", type: "Max Battle", date: "2026-05-11", endDate: "2026-05-17", startsAt: "2026-05-11T06:00:00", endsAt: "2026-05-18T06:00:00", published: "2026-05-03", time: "Max Monday: 6–7 PM", color: "#F08030", icon: "🔥", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-1_Kanto/0058.webp", featured: false, summary: "Dynamax Growlithe featured at Power Spots this week.", details: { bosses: ["Dynamax Growlithe ✨"], bonuses: ["Max Monday: 6–7 PM May 11", "Power Spots all week", "Extra Power Spots on Monday", "Shiny Growlithe available"], tips: ["Shiny Growlithe can appear — check every encounter.", "Growlithe evolves into Arcanine with 50 Candy.", "Max Mondays have more Power Spots."] } },
   { id: 75, title: "Dynamax Registeel (Debut)", type: "Max Battle", date: "2026-05-18", endDate: "2026-05-24", startsAt: "2026-05-18T06:00:00", endsAt: "2026-05-25T06:00:00", published: "2026-05-03", time: "Max Monday: 6–7 PM", color: "#B7B7CE", icon: "⚙️", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-3_Hoenn/0379.webp", featured: true, summary: "Dynamax Registeel debuts at Power Spots! The third Legendary Regi to join the Dynamax roster.", details: { bosses: ["Dynamax Registeel (debut) ✨"], bonuses: ["Max Monday: 6–7 PM May 18", "Power Spots all week", "Shiny Registeel available"], tips: ["Headline event — expect higher difficulty.", "Shiny Registeel can appear — check every encounter.", "Coordinate with your local group for max rewards.", "Registeel is pure Steel — Fighting, Fire, and Ground attackers excel."], counters: { label: "Dynamax Registeel (Steel)", pokemon: [{ name: "Gigantamax Machamp", fast: "Karate Chop", charged: "Close Combat" }, { name: "Gigantamax Charizard", fast: "Fire Spin", charged: "Blast Burn", chargedNote: "CD Move" }, { name: "Mega Blaziken", fast: "Counter", charged: "Blast Burn", chargedNote: "CD Move" }, { name: "Mega Lucario", fast: "Counter", charged: "Aura Sphere" }, { name: "Gigantamax Rillaboom", fast: "Counter", charged: "Drum Beating", chargedNote: "Signature" }, { name: "Reshiram", fast: "Fire Fang", charged: "Fusion Flare" }] } } },
   { id: 76, title: "Dynamax Combee", type: "Max Battle", date: "2026-05-25", endDate: "2026-05-31", startsAt: "2026-05-25T06:00:00", endsAt: "2026-06-01T06:00:00", published: "2026-05-03", time: "Max Monday: 6–7 PM", color: "#F1C40F", icon: "🐝", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-4_Sinnoh/0415-male.webp", featured: false, summary: "Dynamax Combee featured at Power Spots this week.", details: { bosses: ["Dynamax Combee ✨"], bonuses: ["Max Monday: 6–7 PM May 25", "Power Spots all week", "Extra Power Spots on Monday", "Shiny Combee available"], tips: ["Shiny Combee can appear — check every encounter.", "Only female Combee evolve into Vespiquen — check the gender symbol before transferring.", "Max Mondays have more Power Spots."] } },
-  { id: 77, title: "Blanche's Quest for Knowledge", type: "Event", url: "https://pokemongo.com/news/global-events-gofest2026-overlays", date: "2026-05-26", endDate: "2026-06-01", published: "2026-05-18", time: "10:00 AM – 8:00 PM", color: "#3498DB", icon: "🔬", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-1_Kanto/0134.webp", featured: true, summary: "Week 1 of the Summer Quest series — Blanche leads a research-focused adventure featuring Field Research tasks and Incense encounters. Free GO Pass with Vaporeon, Larvitar, and Lapras milestone rewards.", details: { bosses: ["Squirtle ✨ (Wild)", "Alolan Vulpix ✨ (Wild)", "Krabby ✨ (Wild)", "Staryu ✨ (Wild)", "Galarian Zigzagoon ✨ (Wild)", "Lapras ✨ (Wild — rare)", "Vaporeon ✨ (Wild — rare)", "Larvitar ✨ (Wild — rare)", "Cubone ✨ (Incense)", "Horsea ✨ (Incense)", "Lapras ✨ (Incense)", "Vaporeon ✨ (Incense)", "Larvitar ✨ (Incense)", "Sableye ✨ (Incense)", "Clamperl ✨ (Incense)", "Cubchoo ✨ (Incense)", "Sinistea ✨ (Field Research)", "Tandemaus (Field Research)"], bonuses: ["GO Pass Rank 10+: 1 extra Candy when evolving", "GO Pass Rank 10+: Increased chance of Candy XL when evolving (Trainer Level 31+)", "GO Pass Rank 20+: 2× Incense duration", "Unlimited Point Weekend: May 30 – June 1 (no daily GO Point cap)", "Featured GO Pass rewards: Vaporeon, Larvitar, Lapras + Blanche-themed accessory", "All featured Pokémon can be Shiny", "Reward expiration: June 3 at 7:59 PM local time"], goPass: { free: ["Field Research and Incense encounters across the week", "Rank-up rewards: Vaporeon, Larvitar, and Lapras encounters", "Blanche-themed avatar accessory", "Rank 10+: +1 evolve Candy & boosted Candy XL chance", "Rank 20+: 2× Incense duration"], deluxe: { price: "$4.99", rewards: ["Everything in the free track", "Extra premium encounters", "Upgraded milestone rewards", "Faster progression through ranks"] }, deluxePlus: { price: "$6.99", rewards: ["Everything in GO Pass Deluxe", "Instantly skip 6 ranks"] } }, tips: ["Lapras, Vaporeon, and Larvitar are rare wild spawns — Incense boosts your odds significantly.", "Stack 2× Incense duration (Rank 20+) with the Unlimited Point Weekend for maximum farming.", "Field Research includes Sinistea and Tandemaus — both Shiny eligible.", "Larvitar evolves into Tyranitar — bank candy for a future Mega Tyranitar.", "Reward expires June 3 at 7:59 PM — claim before then.", "All featured Pokémon can be Shiny — check every encounter."], relatedNews: [{ id: 17, label: "Summer Quest Series — Full Breakdown", icon: "🌞" }] } },
-  { id: 78, title: "Spark's Caretaking Quest", type: "Event", url: "https://pokemongo.com/news/global-events-gofest2026-overlays", date: "2026-06-02", endDate: "2026-06-08", published: "2026-05-18", time: "10:00 AM – 8:00 PM", color: "#F1C40F", icon: "🥚", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-1_Kanto/0135.webp", featured: true, summary: "Week 2 of the Summer Quest series — Spark hosts an exploration-driven adventure centered on hatching Eggs and discovering Pokémon. Free GO Pass with Jolteon, Galarian Corsola, and Elekid milestone rewards.", details: { bosses: ["Bulbasaur ✨ (Wild)", "Alolan Raichu ✨ (Wild)", "Drowzee ✨ (Wild)", "Jolteon ✨ (Wild)", "Dratini ✨ (Wild)", "Houndour ✨ (Wild)", "Lileep ✨ (Wild)", "Combee ✨ (Wild)", "Machop ✨ (Field Research)", "Galarian Corsola ✨ (Field Research)"], eggLabel: "7 km Eggs", eggs: ["Pichu ✨", "Elekid ✨", "Shinx ✨", "Varoom ✨", "Galarian Corsola ✨", "Hisuian Qwilfish ✨"], bonuses: ["GO Pass Rank 10+: 1/2 Egg Hatch Distance", "GO Pass Rank 20+: 1.5× Hatch Candy", "GO Pass Deluxe Rank 20+: Adds 1.5× Hatch Stardust", "Unlimited Point Weekend: June 6 – 8 (no daily GO Point cap)", "Featured GO Pass rewards: Jolteon, Galarian Corsola, Elekid + Spark-themed accessory", "All featured Pokémon can be Shiny", "Reward expiration: June 10 at 7:59 PM local time"], goPass: { free: ["7 km Eggs with the event Pokémon pool", "Rank-up rewards: Jolteon, Galarian Corsola, and Elekid encounters", "Spark-themed avatar accessory", "Rank 10+: 1/2 Hatch Distance", "Rank 20+: 1.5× Hatch Candy"], deluxe: { price: "$4.99", rewards: ["Everything in the free track", "Rank 20+: 1.5× Hatch Stardust (Deluxe exclusive)", "Extra premium encounters", "Upgraded milestone rewards", "Faster progression through ranks"] }, deluxePlus: { price: "$6.99", rewards: ["Everything in GO Pass Deluxe", "Instantly skip 6 ranks"] } }, tips: ["Stockpile empty Egg slots and Incubators before the event — 7 km Eggs cycle to the new pool.", "Stack 1/2 Hatch Distance (Rank 10+) with Super Incubators for fastest hatches.", "Shiny Varoom and Hisuian Qwilfish are among the more elusive shinies — every 7 km Egg matters.", "1.5× Hatch Candy + 1.5× Hatch Stardust (Deluxe) compounds beautifully on 7 km Eggs.", "Galarian Corsola evolves into Galarian Cursola — a unique Ghost-type.", "Reward expires June 10 at 7:59 PM — claim before then."], relatedNews: [{ id: 17, label: "Summer Quest Series — Full Breakdown", icon: "🌞" }] } },
-  { id: 79, title: "Candela's Quest for Victory", type: "Event", url: "https://pokemongo.com/news/global-events-gofest2026-overlays", date: "2026-06-09", endDate: "2026-06-15", published: "2026-05-18", time: "10:00 AM – 8:00 PM", color: "#E74C3C", icon: "⚔️", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-1_Kanto/0136.webp", featured: true, summary: "Week 3 of the Summer Quest series — Candela hosts an event focused on raids and battling. Free GO Pass with Flareon, Rockruff, and Ponyta milestone rewards.", details: { bosses: ["Charmander ✨ (Wild)", "Mankey ✨ (Wild)", "Hisuian Growlithe ✨ (Wild)", "Machop ✨ (Wild)", "Ponyta ✨ (Wild)", "Scyther ✨ (Wild)", "Flareon ✨ (Wild)", "Slugma ✨ (Wild)", "Fletchling ✨ (Wild)", "Hisuian Growlithe ✨ (Raid)", "Machamp ✨ (Raid)", "Scizor ✨ (Raid)", "Magcargo ✨ (Raid)", "Scraggy ✨ (Raid)", "Honedge ✨ (Raid)", "Rockruff ✨ (Raid)"], bonuses: ["GO Pass Rank 10+: Increased Attack bonus from friends in raids", "GO Pass Rank 20+: 1.5× Raid Stardust", "GO Pass Deluxe Rank 20+: Up to 2 Raid Passes from Gym Photo Discs", "Unlimited Point Weekend: June 13 – 15 (no daily GO Point cap)", "Featured GO Pass rewards: Flareon, Rockruff, Ponyta + Candela-themed accessory", "All featured Pokémon can be Shiny", "Reward expiration: June 17 at 7:59 PM local time"], goPass: { free: ["Event-themed Raid Bosses across all tiers", "Rank-up rewards: Flareon, Rockruff, and Ponyta encounters", "Candela-themed avatar accessory", "Rank 10+: Increased Attack bonus from friends in raids", "Rank 20+: 1.5× Raid Stardust"], deluxe: { price: "$4.99", rewards: ["Everything in the free track", "Rank 20+: Up to 2 Raid Passes from Gym Photo Discs (Deluxe exclusive)", "Extra premium encounters", "Upgraded milestone rewards", "Faster progression through ranks"] }, deluxePlus: { price: "$6.99", rewards: ["Everything in GO Pass Deluxe", "Instantly skip 6 ranks"] } }, tips: ["Coordinate raid groups — the friends Attack bonus (Rank 10+) makes group raiding much stronger.", "Stack 1.5× Raid Stardust with Star Pieces during the Unlimited Point Weekend for a massive dust farm.", "Rockruff in raids — evolve based on time of day for Dusk, Midday, or Midnight Lycanroc.", "Honedge raid drops set up for Doublade and Aegislash — a meta Ghost/Steel attacker.", "Hisuian Growlithe is a regional rarity normally — stock up on candy.", "Reward expires June 17 at 7:59 PM — claim before then."], relatedNews: [{ id: 17, label: "Summer Quest Series — Full Breakdown", icon: "🌞" }] } },
+  { id: 77, title: "Blanche's Quest for Knowledge", type: "Event", url: "https://pokemongo.com/news/global-events-gofest2026-overlays", date: "2026-05-26", endDate: "2026-06-01", published: "2026-05-18", time: "10:00 AM – 8:00 PM", color: "#3498DB", icon: "🔬", iconImg: "assets/pokemon-images/Event-Dex/regular/Gen-1_Kanto/0131_blanche.webp", featured: true, summary: "Week 1 of the Summer Quest series — Blanche leads a research-focused adventure featuring Field Research tasks and Incense encounters. Free GO Pass with Vaporeon, Larvitar, and Lapras milestone rewards.", details: { bosses: ["Squirtle ✨ (Wild)", "Alolan Vulpix ✨ (Wild)", "Krabby ✨ (Wild)", "Staryu ✨ (Wild)", "Galarian Zigzagoon ✨ (Wild)", "Lapras ✨ (Wild — rare)", "Vaporeon ✨ (Wild — rare)", "Larvitar ✨ (Wild — rare)", "Cubone ✨ (Incense)", "Horsea ✨ (Incense)", "Lapras ✨ (Incense)", "Vaporeon ✨ (Incense)", "Larvitar ✨ (Incense)", "Sableye ✨ (Incense)", "Clamperl ✨ (Incense)", "Cubchoo ✨ (Incense)", "Sinistea ✨ (Field Research)", "Tandemaus (Field Research)"], bonuses: ["GO Pass Rank 10+: 1 extra Candy when evolving", "GO Pass Rank 10+: Increased chance of Candy XL when evolving (Trainer Level 31+)", "GO Pass Rank 20+: 2× Incense duration", "Unlimited Point Weekend: May 30 – June 1 (no daily GO Point cap)", "Featured GO Pass rewards: Vaporeon, Larvitar, Lapras + Blanche-themed accessory", "All featured Pokémon can be Shiny", "Reward expiration: June 3 at 7:59 PM local time"], goPass: { free: ["Field Research and Incense encounters across the week", "Rank-up rewards: Vaporeon, Larvitar, and Lapras encounters", "Blanche-themed avatar accessory", "Rank 10+: +1 evolve Candy & boosted Candy XL chance", "Rank 20+: 2× Incense duration"], deluxe: { price: "$4.99", rewards: ["Everything in the free track", "Extra premium encounters", "Upgraded milestone rewards", "Faster progression through ranks"] }, deluxePlus: { price: "$6.99", rewards: ["Everything in GO Pass Deluxe", "Instantly skip 6 ranks"] } }, tips: ["Lapras, Vaporeon, and Larvitar are rare wild spawns — Incense boosts your odds significantly.", "Stack 2× Incense duration (Rank 20+) with the Unlimited Point Weekend for maximum farming.", "Field Research includes Sinistea and Tandemaus — both Shiny eligible.", "Larvitar evolves into Tyranitar — bank candy for a future Mega Tyranitar.", "Reward expires June 3 at 7:59 PM — claim before then.", "All featured Pokémon can be Shiny — check every encounter."], relatedNews: [{ id: 17, label: "Summer Quest Series — Full Breakdown", icon: "🌞" }] } },
+  { id: 78, title: "Spark's Caretaking Quest", type: "Event", url: "https://pokemongo.com/news/global-events-gofest2026-overlays", date: "2026-06-02", endDate: "2026-06-08", published: "2026-05-18", time: "10:00 AM – 8:00 PM", color: "#F1C40F", icon: "🥚", iconImg: "assets/pokemon-images/Event-Dex/regular/Gen-2_Johto/0239_spark.webp", featured: true, summary: "Week 2 of the Summer Quest series — Spark hosts an exploration-driven adventure centered on hatching Eggs and discovering Pokémon. Free GO Pass with Jolteon, Galarian Corsola, and Elekid milestone rewards.", details: { bosses: ["Bulbasaur ✨ (Wild)", "Alolan Raichu ✨ (Wild)", "Drowzee ✨ (Wild)", "Jolteon ✨ (Wild)", "Dratini ✨ (Wild)", "Houndour ✨ (Wild)", "Lileep ✨ (Wild)", "Combee ✨ (Wild)", "Machop ✨ (Field Research)", "Galarian Corsola ✨ (Field Research)"], eggLabel: "7 km Eggs", eggs: ["Pichu ✨", "Elekid ✨", "Shinx ✨", "Varoom ✨", "Galarian Corsola ✨", "Hisuian Qwilfish ✨"], bonuses: ["GO Pass Rank 10+: 1/2 Egg Hatch Distance", "GO Pass Rank 20+: 1.5× Hatch Candy", "GO Pass Deluxe Rank 20+: Adds 1.5× Hatch Stardust", "Unlimited Point Weekend: June 6 – 8 (no daily GO Point cap)", "Featured GO Pass rewards: Jolteon, Galarian Corsola, Elekid + Spark-themed accessory", "All featured Pokémon can be Shiny", "Reward expiration: June 10 at 7:59 PM local time"], goPass: { free: ["7 km Eggs with the event Pokémon pool", "Rank-up rewards: Jolteon, Galarian Corsola, and Elekid encounters", "Spark-themed avatar accessory", "Rank 10+: 1/2 Hatch Distance", "Rank 20+: 1.5× Hatch Candy"], deluxe: { price: "$4.99", rewards: ["Everything in the free track", "Rank 20+: 1.5× Hatch Stardust (Deluxe exclusive)", "Extra premium encounters", "Upgraded milestone rewards", "Faster progression through ranks"] }, deluxePlus: { price: "$6.99", rewards: ["Everything in GO Pass Deluxe", "Instantly skip 6 ranks"] } }, tips: ["Stockpile empty Egg slots and Incubators before the event — 7 km Eggs cycle to the new pool.", "Stack 1/2 Hatch Distance (Rank 10+) with Super Incubators for fastest hatches.", "Shiny Varoom and Hisuian Qwilfish are among the more elusive shinies — every 7 km Egg matters.", "1.5× Hatch Candy + 1.5× Hatch Stardust (Deluxe) compounds beautifully on 7 km Eggs.", "Galarian Corsola evolves into Galarian Cursola — a unique Ghost-type.", "Reward expires June 10 at 7:59 PM — claim before then."], relatedNews: [{ id: 17, label: "Summer Quest Series — Full Breakdown", icon: "🌞" }] } },
+  { id: 79, title: "Candela's Quest for Victory", type: "Event", url: "https://pokemongo.com/news/global-events-gofest2026-overlays", date: "2026-06-09", endDate: "2026-06-15", published: "2026-05-18", time: "10:00 AM – 8:00 PM", color: "#E74C3C", icon: "⚔️", iconImg: "assets/pokemon-images/Event-Dex/regular/Gen-1_Kanto/0077_candela.webp", featured: true, summary: "Week 3 of the Summer Quest series — Candela hosts an event focused on raids and battling. Free GO Pass with Flareon, Rockruff, and Ponyta milestone rewards.", details: { bosses: ["Charmander ✨ (Wild)", "Mankey ✨ (Wild)", "Hisuian Growlithe ✨ (Wild)", "Machop ✨ (Wild)", "Ponyta ✨ (Wild)", "Scyther ✨ (Wild)", "Flareon ✨ (Wild)", "Slugma ✨ (Wild)", "Fletchling ✨ (Wild)", "Hisuian Growlithe ✨ (Raid)", "Machamp ✨ (Raid)", "Scizor ✨ (Raid)", "Magcargo ✨ (Raid)", "Scraggy ✨ (Raid)", "Honedge ✨ (Raid)", "Rockruff ✨ (Raid)"], bonuses: ["GO Pass Rank 10+: Increased Attack bonus from friends in raids", "GO Pass Rank 20+: 1.5× Raid Stardust", "GO Pass Deluxe Rank 20+: Up to 2 Raid Passes from Gym Photo Discs", "Unlimited Point Weekend: June 13 – 15 (no daily GO Point cap)", "Featured GO Pass rewards: Flareon, Rockruff, Ponyta + Candela-themed accessory", "All featured Pokémon can be Shiny", "Reward expiration: June 17 at 7:59 PM local time"], goPass: { free: ["Event-themed Raid Bosses across all tiers", "Rank-up rewards: Flareon, Rockruff, and Ponyta encounters", "Candela-themed avatar accessory", "Rank 10+: Increased Attack bonus from friends in raids", "Rank 20+: 1.5× Raid Stardust"], deluxe: { price: "$4.99", rewards: ["Everything in the free track", "Rank 20+: Up to 2 Raid Passes from Gym Photo Discs (Deluxe exclusive)", "Extra premium encounters", "Upgraded milestone rewards", "Faster progression through ranks"] }, deluxePlus: { price: "$6.99", rewards: ["Everything in GO Pass Deluxe", "Instantly skip 6 ranks"] } }, tips: ["Coordinate raid groups — the friends Attack bonus (Rank 10+) makes group raiding much stronger.", "Stack 1.5× Raid Stardust with Star Pieces during the Unlimited Point Weekend for a massive dust farm.", "Rockruff in raids — evolve based on time of day for Dusk, Midday, or Midnight Lycanroc.", "Honedge raid drops set up for Doublade and Aegislash — a meta Ghost/Steel attacker.", "Hisuian Growlithe is a regional rarity normally — stock up on candy.", "Reward expires June 17 at 7:59 PM — claim before then."], relatedNews: [{ id: 17, label: "Summer Quest Series — Full Breakdown", icon: "🌞" }] } },
   { id: 40, title: "GO Fest 2026: Tokyo", type: "GO Fest", date: "2026-05-29", endDate: "2026-06-01", time: "9 AM – 6 PM (Citywide from May 25)", color: "#FF6348", icon: "\uD83D\uDDFC", featured: true, summary: "GO Fest kicks off in Tokyo! Zeraora debut, Mewtwo raids, costumed Pikachu.", details: { bosses: ["Zeraora (debut)", "Mewtwo (5\u2605 citywide)", "Aqua Paldean Tauros", "Costumed Pikachu", "All Unown forms"], bonuses: ["Park sessions at Odaiba", "Citywide from May 25", "City Exploration Tickets", "4 City Districts", "GO Expert medal"], tips: ["Zeraora available once per trainer.", "Park tickets $33.", "Mewtwo raids citywide."] } },
   { id: 41, title: "GO Fest 2026: Chicago", type: "GO Fest", date: "2026-06-05", endDate: "2026-06-07", time: "Park Sessions + Citywide (from Jun 4)", color: "#0984E3", icon: "\uD83C\uDFD9\uFE0F", featured: false, summary: "GO Fest returns to Grant Park! Spark hosts. Zeraora, Mewtwo.", details: { bosses: ["Zeraora", "Mewtwo (5\u2605)", "Blaze Paldean Tauros", "Costumed Pikachu", "All Unown forms"], bonuses: ["Citywide from June 4", "Spark coaching", "4 City Districts"], tips: ["Grant Park confirmed 2026 AND 2027.", "Tickets $33 — first-come-first-served."] } },
   { id: 42, title: "GO Fest 2026: Copenhagen", type: "GO Fest", date: "2026-06-12", endDate: "2026-06-14", time: "9 AM – 6 PM CEST (Citywide from Jun 11)", color: "#00B894", icon: "\uD83C\uDFF0", featured: false, summary: "European GO Fest at Fælledparken! Candela hosts. Shiny Paldean Tauros exclusive.", details: { bosses: ["Zeraora", "Mewtwo (5\u2605)", "Shiny Combat Breed Paldean Tauros", ], bonuses: ["Fælledparken park", "Citywide from June 11", "Candela coaching"], tips: ["Shiny Paldean Tauros exclusive to ticket-holding raiders.", "Last in-person Zeraora before Global."] } },
@@ -1535,7 +1535,8 @@ let state = {
   storeFilter: "All",
   storeGuideOpen: false,
   openStoreArchiveYears: {},
-  openStoreArchiveMonths: {}
+  openStoreArchiveMonths: {},
+  weekDigestDay: null
 };
 
 // --- NEST MIGRATION ---
@@ -1793,6 +1794,28 @@ function isOver(ev) {
   return new Date() > getEventEndDate(ev);
 }
 
+function getWeekBounds(now = new Date()) {
+  const day = now.getDay();
+  const monOffset = (day + 6) % 7;
+  const start = new Date(now);
+  start.setHours(0, 0, 0, 0);
+  start.setDate(start.getDate() - monOffset);
+  const end = new Date(start);
+  end.setDate(end.getDate() + 6);
+  end.setHours(23, 59, 59, 999);
+  return { start, end };
+}
+
+function pillIconFor(ev) {
+  if (ev.type === "Community Day") return "⚡";
+  if (ev.type === "Max Battle") return "🛡️";
+  if (ev.type === "Raid") return "🔥";
+  if (ev.type === "GO Fest") return "🌍";
+  if (/spotlight hour/i.test(ev.time || "")) return "✨";
+  if (/raid hour/i.test(ev.time || "")) return "💥";
+  return "🎉";
+}
+
 function getMoveDeadline(ev) {
   if (ev.type !== "Community Day") return null;
   const dateStr = ev.endDate || ev.date;
@@ -1829,14 +1852,14 @@ function legibleColor(c, dark) {
 }
 
 function renderCountdown(dateStr, color, over, th, ev, compact) {
-  const fs = compact ? 12 : 14;
-  const mw = compact ? 26 : 32;
-  const pd = compact ? "3px 5px" : "4px 7px";
-  const br = compact ? 6 : 7;
-  const gp = compact ? 3 : 5;
-  const lfs = compact ? 8 : 9;
-  const cfs = compact ? 10 : 12;
-  const lbfs = compact ? 13 : 14;
+  const fs = compact ? 12 : 12;
+  const mw = compact ? 26 : 26;
+  const pd = compact ? "3px 5px" : "3px 6px";
+  const br = compact ? 6 : 6;
+  const gp = compact ? 3 : 4;
+  const lfs = compact ? 8 : 8;
+  const cfs = compact ? 10 : 11;
+  const lbfs = compact ? 13 : 12;
   const mr = compact ? "2px" : "3px";
   const digitColor = legibleColor(color, th.dark);
   const endColor = legibleColor("#2ECC71", th.dark);
@@ -3909,6 +3932,172 @@ function toggleNewsMonth(key) {
   render();
 }
 
+function toggleWeekDay(idx) {
+  state.weekDigestDay = (state.weekDigestDay === idx) ? null : idx;
+  render();
+}
+
+function renderWeekDigest(th, isMobile) {
+  const ACCENT = "#5B8DEF";
+  const { start: weekStart, end: weekEnd } = getWeekBounds();
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const todayIdx = Math.round((today - weekStart) / 86400000);
+
+  const weekEvents = EVENTS.filter(ev => {
+    const s = getEventStartDate(ev);
+    const e = getEventEndDate(ev);
+    return s <= weekEnd && e >= weekStart;
+  });
+
+  const byDay = [[], [], [], [], [], [], []];
+  weekEvents.forEach(ev => {
+    const evStartDay = new Date(ev.date + "T00:00:00");
+    evStartDay.setHours(0, 0, 0, 0);
+    const evEndDay = new Date((ev.endDate || ev.date) + "T00:00:00");
+    evEndDay.setHours(0, 0, 0, 0);
+    const days = new Set();
+    if (evStartDay >= weekStart && evStartDay <= weekEnd) {
+      days.add(Math.round((evStartDay - weekStart) / 86400000));
+    }
+    if (evEndDay >= weekStart && evEndDay <= weekEnd) {
+      days.add(Math.round((evEndDay - weekStart) / 86400000));
+    }
+    days.forEach(idx => byDay[idx].push(ev));
+  });
+  byDay.forEach(arr => arr.sort((a, b) => {
+    const aTimed = /hour/i.test(a.time || "") || a.type === "Community Day";
+    const bTimed = /hour/i.test(b.time || "") || b.type === "Community Day";
+    if (aTimed !== bTimed) return bTimed - aTimed;
+    return getEventStartDate(a) - getEventStartDate(b);
+  }));
+
+  const fmtMonDay = d => d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  const weekRangeText = `${fmtMonDay(weekStart)} – ${fmtMonDay(weekEnd)}`;
+  const dayNames = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
+  const fullDayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+  const seasonEvent = weekEvents.find(ev => ev.title && ev.title.startsWith("Season:") && ev.details && Array.isArray(ev.details.dailyDiscoveries));
+  const dailyByName = {};
+  if (seasonEvent) {
+    seasonEvent.details.dailyDiscoveries.forEach(d => { dailyByName[d.day] = d; });
+  }
+
+  const selectedDay = state.weekDigestDay !== null ? state.weekDigestDay : (todayIdx >= 0 && todayIdx <= 6 ? todayIdx : 0);
+
+  const pillsHTML = dayNames.map((name, idx) => {
+    const dayDate = new Date(weekStart);
+    dayDate.setDate(dayDate.getDate() + idx);
+    const events = byDay[idx];
+    const dailyForDay = dailyByName[fullDayNames[idx]];
+    const iconList = events.map(pillIconFor);
+    if (dailyForDay) iconList.push(dailyForDay.icon || "⭐");
+    const icons = [...new Set(iconList)].slice(0, 2).join(" ");
+    const count = events.length;
+    const isToday = idx === todayIdx;
+    const isPast = idx < todayIdx;
+    const isSelected = idx === selectedDay;
+    const bg = isToday ? ACCENT : (isSelected ? th.heroBg(ACCENT) : "transparent");
+    const border = isSelected && !isToday ? `1.5px solid ${ACCENT}` : `1.5px solid ${th.border}`;
+    const textColor = isToday ? "#fff" : th.text;
+    const labelColor = isToday ? "rgba(255,255,255,0.85)" : ACCENT;
+    const countColor = isToday ? "rgba(255,255,255,0.95)" : (count > 0 ? th.text : th.textFaint);
+    const opacity = isPast && !isSelected ? 0.55 : 1;
+    const countDisplay = count > 0 ? count : (dailyForDay ? "·" : "—");
+    return `<button onclick="toggleWeekDay(${idx})" style="flex:0 0 auto;${isMobile ? "scroll-snap-align:start;min-width:64px" : ""};display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px;padding:10px 6px;border-radius:14px;background:${bg};border:${border};cursor:pointer;font-family:inherit;transition:transform 0.15s ease,background 0.2s ease;opacity:${opacity};-webkit-tap-highlight-color:transparent;outline:none"
+      onmouseenter="this.style.transform='translateY(-2px)'"
+      onmouseleave="this.style.transform='translateY(0)'">
+      <div style="font-size:10px;font-weight:800;letter-spacing:1px;color:${labelColor}">${name}</div>
+      <div style="font-size:18px;font-weight:800;color:${textColor};line-height:1;font-variant-numeric:tabular-nums">${dayDate.getDate()}</div>
+      <div style="font-size:13px;line-height:1.1;min-height:16px">${icons || `<span style="color:${isToday ? "rgba(255,255,255,0.6)" : th.textFaint}">·</span>`}</div>
+      <div style="font-size:10px;font-weight:700;color:${countColor};line-height:1">${countDisplay}</div>
+    </button>`;
+  }).join("");
+
+  const dayEvents = byDay[selectedDay];
+  const selectedDayDate = new Date(weekStart);
+  selectedDayDate.setDate(selectedDayDate.getDate() + selectedDay);
+  const fullDayName = selectedDayDate.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
+
+  const dailyTask = dailyByName[fullDayNames[selectedDay]];
+  let dailyBannerHTML = "";
+  if (dailyTask && seasonEvent) {
+    const dColor = dailyTask.color || ACCENT;
+    dailyBannerHTML = `<button onclick="selectEvent(${seasonEvent.id})" style="display:flex;align-items:center;gap:12px;padding:${isMobile ? "10px 12px" : "12px 14px"};margin-bottom:10px;background:${th.heroBg(dColor)};border:1.5px solid ${th.heroBorder(dColor)};border-radius:12px;cursor:pointer;width:100%;text-align:left;font-family:inherit;transition:transform 0.15s ease,box-shadow 0.2s ease;-webkit-tap-highlight-color:transparent;outline:none"
+      onmouseenter="this.style.transform='translateY(-1px)';this.style.boxShadow='0 6px 16px ${dColor}25'"
+      onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+      <span style="font-size:${isMobile ? 22 : 26}px;flex-shrink:0;line-height:1">${dailyTask.icon || "⭐"}</span>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:9.5px;font-weight:800;letter-spacing:1px;color:${dColor};text-transform:uppercase;margin-bottom:2px">Daily Discovery</div>
+        <div style="font-size:${isMobile ? 13.5 : 14.5}px;font-weight:800;color:${th.text};line-height:1.25">${esc(dailyTask.name)}</div>
+        ${dailyTask.time ? `<div style="font-size:11.5px;color:${th.textMuted};font-weight:600;margin-top:2px">${esc(dailyTask.time)}</div>` : ""}
+      </div>
+      <div style="font-size:16px;color:${dColor};flex-shrink:0;font-weight:700">›</div>
+    </button>`;
+  }
+
+  let panelHTML;
+  if (dayEvents.length === 0) {
+    panelHTML = dailyTask ? "" : `<div style="padding:14px 4px;text-align:center;font-size:13px;color:${th.textMuted};font-style:italic">Nothing scheduled.</div>`;
+  } else {
+    panelHTML = dayEvents.map(ev => {
+      const evStartDay = new Date(ev.date + "T00:00:00");
+      evStartDay.setHours(0, 0, 0, 0);
+      const evEndDay = new Date((ev.endDate || ev.date) + "T00:00:00");
+      evEndDay.setHours(0, 0, 0, 0);
+      const isMultiDay = evStartDay.getTime() !== evEndDay.getTime();
+      const isStartDay = evStartDay.getTime() === selectedDayDate.getTime();
+      const isEndDay = evEndDay.getTime() === selectedDayDate.getTime();
+
+      let badge = "";
+      if (isMultiDay && isStartDay) badge = `<span style="font-size:9.5px;font-weight:700;color:#fff;background:${ev.color || ACCENT};padding:2px 7px;border-radius:10px;letter-spacing:0.5px">STARTS</span>`;
+      else if (isMultiDay && isEndDay) badge = `<span style="font-size:9.5px;font-weight:700;color:#fff;background:${ev.color || ACCENT};padding:2px 7px;border-radius:10px;letter-spacing:0.5px">ENDS</span>`;
+
+      const timeText = ev.time && /hour/i.test(ev.time) ? ev.time : "";
+
+      let iconHTML;
+      if (ev.iconImg) {
+        iconHTML = `<img src="${ev.iconImg}" style="width:32px;height:32px;object-fit:contain;flex-shrink:0" onerror="this.outerHTML='<span style=\\'font-size:22px\\'>${ev.icon || pillIconFor(ev)}</span>'" />`;
+      } else {
+        const pkmn = (ev.type === "Raid" || ev.type === "Max Battle") && ev.details && ev.details.bosses && ev.details.bosses[0] ? getPokemonImg(ev.details.bosses[0]) : null;
+        iconHTML = pkmn
+          ? `<img src="${pkmn.url}" style="width:32px;height:32px;object-fit:contain;flex-shrink:0" onerror="this.outerHTML='<span style=\\'font-size:22px\\'>${ev.icon || pillIconFor(ev)}</span>'" />`
+          : `<span style="font-size:22px;width:32px;text-align:center;flex-shrink:0">${ev.icon || pillIconFor(ev)}</span>`;
+      }
+
+      return `<button onclick="selectEvent(${ev.id})" style="display:flex;align-items:center;gap:12px;padding:10px 12px;background:transparent;border:none;border-radius:10px;cursor:pointer;text-align:left;width:100%;font-family:inherit;transition:background 0.15s ease;-webkit-tap-highlight-color:transparent;outline:none"
+        onmouseenter="this.style.background='${th.heroBg(ACCENT)}'"
+        onmouseleave="this.style.background='transparent'">
+        ${iconHTML}
+        <div style="flex:1;min-width:0">
+          <div style="font-size:13.5px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:6px;flex-wrap:wrap">${esc(ev.title)}${badge}</div>
+          ${timeText ? `<div style="font-size:11.5px;color:${th.textMuted};margin-top:2px">${esc(timeText)}</div>` : ""}
+        </div>
+        <div style="font-size:16px;color:${th.textFaint};flex-shrink:0">›</div>
+      </button>`;
+    }).join("");
+  }
+
+  const totalCount = weekEvents.length;
+  const emptyWeek = totalCount === 0;
+
+  return `<div style="background:${th.heroBg(ACCENT)};border:1.5px solid ${th.heroBorder(ACCENT)};border-radius:${isMobile ? 18 : 24}px;padding:${isMobile ? "18px 16px 14px" : "24px 24px 18px"};overflow:hidden">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:${isMobile ? 12 : 14}px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:8px;min-width:0">
+        <span style="font-size:${isMobile ? 18 : 20}px">📆</span>
+        <h2 style="margin:0;font-size:${isMobile ? 15 : 17}px;font-weight:800;color:${th.text};letter-spacing:0.5px">THIS WEEK IN POGO</h2>
+      </div>
+      <span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${ACCENT};background:${th.heroBg(ACCENT)};border:1px solid ${th.heroBorder(ACCENT)};padding:4px 10px;border-radius:12px;white-space:nowrap">${weekRangeText}</span>
+    </div>
+    <div style="display:${isMobile ? "flex" : "grid"};${isMobile ? "overflow-x:auto;scroll-snap-type:x mandatory;gap:8px;padding-bottom:6px;-webkit-overflow-scrolling:touch;scrollbar-width:none" : "grid-template-columns:repeat(7,1fr);gap:8px"};margin-bottom:${isMobile ? 12 : 14}px">${pillsHTML}</div>
+    ${emptyWeek ? `<div style="padding:18px 4px;text-align:center;font-size:13px;color:${th.textMuted};font-style:italic">Quiet week — check back Monday.</div>` : `<div style="border-top:1px solid ${th.border};padding-top:12px">
+      <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:${ACCENT};margin-bottom:8px;text-transform:uppercase">${esc(fullDayName)}</div>
+      ${dailyBannerHTML}
+      <div style="display:flex;flex-direction:column;gap:2px">${panelHTML}</div>
+    </div>`}
+  </div>`;
+}
+
 // --- MAIN RENDER ---
 function render() {
   const th = t(darkMode);
@@ -3969,26 +4158,26 @@ function render() {
     // Live events
     let liveHTML = "";
     activeEvents.forEach(ev => {
-      liveHTML += `<div onclick="selectEvent(${ev.id})" style="background:${th.heroBg("#2ECC71")};border:1.5px solid ${th.heroBorder("#2ECC71")};border-radius:${isMobile ? 18 : 24}px;padding:${isMobile ? "20px 18px 16px" : "28px 28px 22px"};cursor:pointer;transition:all 0.3s cubic-bezier(0.25,0.46,0.45,0.94);overflow:hidden;${state.heroRendered ? "" : "animation:scaleIn 0.5s cubic-bezier(0.25,0.46,0.45,0.94)"}"
+      liveHTML += `<div onclick="selectEvent(${ev.id})" style="background:${th.heroBg("#2ECC71")};border:1.5px solid ${th.heroBorder("#2ECC71")};border-radius:${isMobile ? 18 : 20}px;padding:${isMobile ? "20px 18px 16px" : "18px 22px 16px"};cursor:pointer;transition:all 0.3s cubic-bezier(0.25,0.46,0.45,0.94);overflow:hidden;${state.heroRendered ? "" : "animation:scaleIn 0.5s cubic-bezier(0.25,0.46,0.45,0.94)"}"
         onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 30px #2ECC7120';"
         onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none';">
-        <div style="font-size:${isMobile ? 10 : 11}px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:${isMobile ? 6 : 8}px;color:#2ECC71;display:flex;align-items:center;gap:6px">
+        <div style="font-size:${isMobile ? 10 : 10}px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:${isMobile ? 6 : 6}px;color:#2ECC71;display:flex;align-items:center;gap:6px">
           <span style="position:relative;width:7px;height:7px;display:inline-block"><span style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:50%;background:#2ECC71"></span><span style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:50%;background:#2ECC71;animation:sonarPulse 1.5s ease-out infinite"></span></span> LIVE
         </div>
-        <div style="display:flex;${isMobile ? "flex-direction:column;gap:10px" : "justify-content:space-between;align-items:center;gap:16px"}">
-          <div style="min-width:0;${isMobile ? "" : "flex:1"}"><h2 style="margin:0 0 4px 0;font-size:${isMobile ? 18 : 22}px;font-weight:800;color:${th.text};display:flex;align-items:center;gap:8px${isMobile ? "" : (ev.shadowBg ? ";overflow:visible" : ";white-space:nowrap;overflow:hidden;text-overflow:ellipsis")}">${(() => {
+        <div style="display:flex;${isMobile ? "flex-direction:column;gap:10px" : "justify-content:space-between;align-items:center;gap:14px"}">
+          <div style="min-width:0;${isMobile ? "" : "flex:1"}"><h2 style="margin:0 0 2px 0;font-size:${isMobile ? 18 : 18}px;font-weight:800;color:${th.text};display:flex;align-items:center;gap:8px${isMobile ? "" : (ev.shadowBg ? ";overflow:visible" : ";white-space:nowrap;overflow:hidden;text-overflow:ellipsis")}">${(() => {
             if (ev.shadowBg && ev.iconImg) {
-              const size = isMobile ? 56 : 68;
-              return `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0;overflow:visible;margin:${isMobile ? "-12px" : "-16px"} 0 ${isMobile ? "-8px" : "-10px"} 0">
+              const size = isMobile ? 56 : 56;
+              return `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0;overflow:visible;margin:${isMobile ? "-12px" : "-12px"} 0 ${isMobile ? "-8px" : "-8px"} 0">
                 <img src="assets/pokemon-images/icons/shadow_icon.png" style="position:absolute;top:-18%;left:-18%;width:136%;height:136%;object-fit:contain;opacity:${darkMode ? 0.9 : 0.7};z-index:0" />
                 <img src="${ev.iconImg}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
               </div>`;
             }
-            if (ev.iconImg) return `<img src="${ev.iconImg}" style="width:${isMobile ? 36 : 42}px;height:${isMobile ? 36 : 42}px;object-fit:contain;flex-shrink:0" onerror="this.outerHTML='${ev.icon}'" />`;
+            if (ev.iconImg) return `<img src="${ev.iconImg}" style="width:${isMobile ? 36 : 34}px;height:${isMobile ? 36 : 34}px;object-fit:contain;flex-shrink:0" onerror="this.outerHTML='${ev.icon}'" />`;
             const livePkmn = (ev.type === "Raid" || ev.type === "Max Battle") && ev.details && ev.details.bosses && ev.details.bosses[0] ? getPokemonImg(ev.details.bosses[0]) : null;
-            return livePkmn ? `<img src="${livePkmn.url}" style="width:${isMobile ? 36 : 42}px;height:${isMobile ? 36 : 42}px;object-fit:contain;flex-shrink:0" onerror="this.outerHTML='${ev.icon}'" />` : ev.icon;
+            return livePkmn ? `<img src="${livePkmn.url}" style="width:${isMobile ? 36 : 34}px;height:${isMobile ? 36 : 34}px;object-fit:contain;flex-shrink:0" onerror="this.outerHTML='${ev.icon}'" />` : ev.icon;
           })()} ${esc(ev.title)}</h2>
-          <div style="font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500${isMobile ? "" : ";white-space:nowrap;overflow:hidden;text-overflow:ellipsis"}">${formatDateRange(ev.date, ev.endDate)}${ev.time ? ` \u00B7 ${esc(ev.time)}` : ""}</div></div>
+          <div style="font-size:${isMobile ? 12 : 12}px;color:${th.textMuted};font-weight:500${isMobile ? "" : ";white-space:nowrap;overflow:hidden;text-overflow:ellipsis"}">${formatDateRange(ev.date, ev.endDate)}${ev.time ? ` \u00B7 ${esc(ev.time)}` : ""}</div></div>
           <span class="countdown" data-date="${ev.endDate || ev.date}" data-color="#2ECC71" data-over="false" data-event-id="${ev.id}" style="flex-shrink:0">${renderCountdown(ev.endDate || ev.date, "#2ECC71", false, th, ev)}</span>
         </div>
       </div>`;
@@ -4042,26 +4231,26 @@ function render() {
     let heroHTML = "";
     let heroCompactHTML = "";
     if (hero) {
-      heroHTML = `<div onclick="selectEvent(${hero.id})" style="background:${th.heroBg(hero.color)};border:1.5px solid ${th.heroBorder(hero.color)};border-radius:${isMobile ? 18 : 24}px;padding:${isMobile ? "20px 18px 16px" : "28px 28px 22px"};cursor:pointer;transition:all 0.3s cubic-bezier(0.25,0.46,0.45,0.94);overflow:hidden;${state.heroRendered ? "" : "animation:scaleIn 0.5s cubic-bezier(0.25,0.46,0.45,0.94)"}"
+      heroHTML = `<div onclick="selectEvent(${hero.id})" style="background:${th.heroBg(hero.color)};border:1.5px solid ${th.heroBorder(hero.color)};border-radius:${isMobile ? 18 : 20}px;padding:${isMobile ? "20px 18px 16px" : "18px 22px 16px"};cursor:pointer;transition:all 0.3s cubic-bezier(0.25,0.46,0.45,0.94);overflow:hidden;${state.heroRendered ? "" : "animation:scaleIn 0.5s cubic-bezier(0.25,0.46,0.45,0.94)"}"
         onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 30px ${hero.color}20';"
         onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none';">
-        <div style="font-size:${isMobile ? 10 : 11}px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:${isMobile ? 6 : 8}px;color:${hero.color};display:flex;align-items:center;gap:6px">
+        <div style="font-size:${isMobile ? 10 : 10}px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:${isMobile ? 6 : 6}px;color:${hero.color};display:flex;align-items:center;gap:6px">
           \u23F1 Coming Up Next
         </div>
-        <div style="display:flex;${isMobile ? "flex-direction:column;gap:10px" : "justify-content:space-between;align-items:center;gap:16px"}">
-          <div style="min-width:0;${isMobile ? "" : "flex:1"}"><h2 style="margin:0 0 4px 0;font-size:${isMobile ? 18 : 22}px;font-weight:800;color:${th.text};display:flex;align-items:center;gap:8px${isMobile ? "" : (hero.shadowBg ? ";overflow:visible" : ";white-space:nowrap;overflow:hidden;text-overflow:ellipsis")}">${(() => {
+        <div style="display:flex;${isMobile ? "flex-direction:column;gap:10px" : "justify-content:space-between;align-items:center;gap:14px"}">
+          <div style="min-width:0;${isMobile ? "" : "flex:1"}"><h2 style="margin:0 0 2px 0;font-size:${isMobile ? 18 : 18}px;font-weight:800;color:${th.text};display:flex;align-items:center;gap:8px${isMobile ? "" : (hero.shadowBg ? ";overflow:visible" : ";white-space:nowrap;overflow:hidden;text-overflow:ellipsis")}">${(() => {
             if (hero.shadowBg && hero.iconImg) {
-              const size = isMobile ? 44 : 54;
-              return `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0;overflow:visible;margin:${isMobile ? "-8px" : "-10px"} 0 4px 0">
+              const size = isMobile ? 44 : 46;
+              return `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0;overflow:visible;margin:${isMobile ? "-8px" : "-8px"} 0 2px 0">
                 <img src="assets/pokemon-images/icons/shadow_icon.png" style="position:absolute;top:-18%;left:-18%;width:136%;height:136%;object-fit:contain;opacity:${darkMode ? 0.9 : 0.7};z-index:0" />
                 <img src="${hero.iconImg}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
               </div>`;
             }
-            if (hero.iconImg) return `<img src="${hero.iconImg}" style="width:${isMobile ? 36 : 42}px;height:${isMobile ? 36 : 42}px;object-fit:contain;margin-left:-4px;flex-shrink:0" onerror="this.outerHTML='${hero.icon}'" />`;
+            if (hero.iconImg) return `<img src="${hero.iconImg}" style="width:${isMobile ? 36 : 34}px;height:${isMobile ? 36 : 34}px;object-fit:contain;margin-left:-4px;flex-shrink:0" onerror="this.outerHTML='${hero.icon}'" />`;
             const heroPkmn = (hero.type === "Raid" || hero.type === "Max Battle") && hero.details && hero.details.bosses && hero.details.bosses[0] ? getPokemonImg(hero.details.bosses[0]) : null;
-            return heroPkmn ? `<img src="${heroPkmn.url}" style="width:${isMobile ? 36 : 42}px;height:${isMobile ? 36 : 42}px;object-fit:contain;flex-shrink:0" onerror="this.outerHTML='${hero.icon}'" />` : hero.icon;
+            return heroPkmn ? `<img src="${heroPkmn.url}" style="width:${isMobile ? 36 : 34}px;height:${isMobile ? 36 : 34}px;object-fit:contain;flex-shrink:0" onerror="this.outerHTML='${hero.icon}'" />` : hero.icon;
           })()} ${esc(hero.title)}</h2>
-          <div style="font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500${isMobile ? "" : ";white-space:nowrap;overflow:hidden;text-overflow:ellipsis"}">${formatDateRange(hero.date, hero.endDate)} \u00B7 ${esc(hero.time)}</div></div>
+          <div style="font-size:${isMobile ? 12 : 12}px;color:${th.textMuted};font-weight:500${isMobile ? "" : ";white-space:nowrap;overflow:hidden;text-overflow:ellipsis"}">${formatDateRange(hero.date, hero.endDate)} \u00B7 ${esc(hero.time)}</div></div>
           <span class="countdown" data-date="${hero.date}" data-color="${hero.color}" data-over="false" data-event-id="${hero.id}" style="flex-shrink:0">${renderCountdown(hero.date, hero.color, false, th, hero)}</span>
         </div>
       </div>`;
@@ -5125,7 +5314,7 @@ function render() {
       </div>` : "";
 
     content = `<main style="padding:${mainPad};display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
-      ${welcomeHTML}${!["home","tools","nests","pokedex","store","report"].includes(state.tab) ? `${isMobile ? liveCompactHTML + heroCompactHTML : `<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:${isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>`}${tabsHTML}` : ""}${state.tab === "home" ? `<div style="display:grid;grid-template-columns:${isMobile ? "1fr" : "repeat(2,1fr)"};gap:${isMobile ? 12 : isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>${tabsHTML}` : ""}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${rocketTabHTML}${eggsTabHTML}${newsTabHTML}${storeTabHTML}${pokedexTabHTML}${toolsTabHTML}${nestsTabHTML}${reportTabHTML}
+      ${welcomeHTML}${!["home","tools","nests","pokedex","store","report"].includes(state.tab) ? `${isMobile ? liveCompactHTML + heroCompactHTML : `<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:${isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>`}${tabsHTML}` : ""}${state.tab === "home" ? `<div style="display:grid;grid-template-columns:${isMobile ? "1fr" : "repeat(2,1fr)"};gap:${isMobile ? 12 : isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>${renderWeekDigest(th, isMobile)}${tabsHTML}` : ""}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${rocketTabHTML}${eggsTabHTML}${newsTabHTML}${storeTabHTML}${pokedexTabHTML}${toolsTabHTML}${nestsTabHTML}${reportTabHTML}
     </main>`;
     if (hero || activeEvents.length > 0) state.heroRendered = true;
   }
