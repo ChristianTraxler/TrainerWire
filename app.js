@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "2.75";
+const APP_VERSION = "2.81";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -1536,7 +1536,8 @@ let state = {
   storeGuideOpen: false,
   openStoreArchiveYears: {},
   openStoreArchiveMonths: {},
-  weekDigestDay: null
+  weekDigestDay: null,
+  weekDigestOffset: 0
 };
 
 // --- NEST MIGRATION ---
@@ -1794,12 +1795,12 @@ function isOver(ev) {
   return new Date() > getEventEndDate(ev);
 }
 
-function getWeekBounds(now = new Date()) {
+function getWeekBounds(now = new Date(), weekOffset = 0) {
   const day = now.getDay();
   const monOffset = (day + 6) % 7;
   const start = new Date(now);
   start.setHours(0, 0, 0, 0);
-  start.setDate(start.getDate() - monOffset);
+  start.setDate(start.getDate() - monOffset + (weekOffset * 7));
   const end = new Date(start);
   end.setDate(end.getDate() + 6);
   end.setHours(23, 59, 59, 999);
@@ -3932,17 +3933,50 @@ function toggleNewsMonth(key) {
   render();
 }
 
+function rerenderWeekDigestOnly() {
+  const root = document.getElementById("week-digest-root");
+  if (!root) { render(); return; }
+  const th = t(darkMode);
+  const isMobile = breakpoint === "mobile";
+  root.outerHTML = renderWeekDigest(th, isMobile);
+}
+
 function toggleWeekDay(idx) {
+  const row = document.querySelector('[data-week-pills-row]');
+  const savedScroll = row ? row.scrollLeft : 0;
   state.weekDigestDay = (state.weekDigestDay === idx) ? null : idx;
-  render();
+  state._weekDigestAnimate = true;
+  rerenderWeekDigestOnly();
+  requestAnimationFrame(() => {
+    const newRow = document.querySelector('[data-week-pills-row]');
+    if (newRow) newRow.scrollLeft = savedScroll;
+  });
+}
+
+function shiftWeekDigest(delta) {
+  state.weekDigestOffset += delta;
+  state.weekDigestDay = null;
+  state._weekDigestAnimate = true;
+  rerenderWeekDigestOnly();
+}
+
+function resetWeekDigest() {
+  state.weekDigestOffset = 0;
+  state.weekDigestDay = null;
+  state._weekDigestAnimate = true;
+  rerenderWeekDigestOnly();
 }
 
 function renderWeekDigest(th, isMobile) {
   const ACCENT = "#5B8DEF";
-  const { start: weekStart, end: weekEnd } = getWeekBounds();
+  const weekOffset = state.weekDigestOffset || 0;
+  const { start: weekStart, end: weekEnd } = getWeekBounds(new Date(), weekOffset);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const todayIdx = Math.round((today - weekStart) / 86400000);
+  const isCurrentWeek = weekOffset === 0;
+  const animatePanel = state._weekDigestAnimate === true;
+  state._weekDigestAnimate = false;
 
   const weekEvents = EVENTS.filter(ev => {
     const s = getEventStartDate(ev);
@@ -4081,19 +4115,36 @@ function renderWeekDigest(th, isMobile) {
   const totalCount = weekEvents.length;
   const emptyWeek = totalCount === 0;
 
-  return `<div style="background:${th.heroBg(ACCENT)};border:1.5px solid ${th.heroBorder(ACCENT)};border-radius:${isMobile ? 18 : 24}px;padding:${isMobile ? "18px 16px 14px" : "24px 24px 18px"};overflow:hidden">
+  const headerTitle = weekOffset === 0 ? "THIS WEEK IN POGO" : weekOffset === 1 ? "NEXT WEEK IN POGO" : weekOffset === -1 ? "LAST WEEK IN POGO" : (weekOffset > 0 ? `IN ${weekOffset} WEEKS` : `${Math.abs(weekOffset)} WEEKS AGO`);
+  const chevron = (dir) => `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:block"><polyline points="${dir === "left" ? "15 18 9 12 15 6" : "9 18 15 12 9 6"}"></polyline></svg>`;
+  const arrowBtn = (dir, onClick, ariaLabel) => `<button onclick="${onClick}" aria-label="${ariaLabel}" style="display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:transparent;border:1.5px solid ${th.heroBorder(ACCENT)};color:${ACCENT};cursor:pointer;font-family:inherit;padding:0;transition:background 0.15s ease,transform 0.15s ease;-webkit-tap-highlight-color:transparent;outline:none"
+    onmouseenter="this.style.background='${th.heroBg(ACCENT)}';this.style.transform='scale(1.08)'"
+    onmouseleave="this.style.background='transparent';this.style.transform='scale(1)'">${chevron(dir)}</button>`;
+  const rangePill = `<span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${ACCENT};background:${th.heroBg(ACCENT)};border:1px solid ${th.heroBorder(ACCENT)};padding:4px 10px;border-radius:12px;white-space:nowrap">${weekRangeText}</span>`;
+  const todayBtn = !isCurrentWeek ? `<button onclick="resetWeekDigest()" aria-label="Jump to current week" style="font-size:${isMobile ? 10 : 11}px;font-weight:800;letter-spacing:0.8px;color:#fff;background:${ACCENT};border:1px solid ${ACCENT};padding:5px 10px;border-radius:12px;white-space:nowrap;cursor:pointer;font-family:inherit;transition:transform 0.15s ease,box-shadow 0.2s ease;-webkit-tap-highlight-color:transparent;outline:none"
+    onmouseenter="this.style.transform='scale(1.05)';this.style.boxShadow='0 4px 12px ${ACCENT}40'"
+    onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none'">TODAY</button>` : "";
+
+  return `<div id="week-digest-root" style="background:${th.heroBg(ACCENT)};border:1.5px solid ${th.heroBorder(ACCENT)};border-radius:${isMobile ? 18 : 24}px;padding:${isMobile ? "18px 16px 14px" : "24px 24px 18px"};overflow:hidden">
     <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:${isMobile ? 12 : 14}px;flex-wrap:wrap">
-      <div style="display:flex;align-items:center;gap:8px;min-width:0">
+      <div style="display:flex;align-items:center;gap:8px;min-width:0;flex-wrap:wrap">
         <span style="font-size:${isMobile ? 18 : 20}px">📆</span>
-        <h2 style="margin:0;font-size:${isMobile ? 15 : 17}px;font-weight:800;color:${th.text};letter-spacing:0.5px">THIS WEEK IN POGO</h2>
+        <h2 style="margin:0;font-size:${isMobile ? 15 : 17}px;font-weight:800;color:${th.text};letter-spacing:0.5px">${headerTitle}</h2>
+        ${todayBtn}
       </div>
-      <span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${ACCENT};background:${th.heroBg(ACCENT)};border:1px solid ${th.heroBorder(ACCENT)};padding:4px 10px;border-radius:12px;white-space:nowrap">${weekRangeText}</span>
+      <div style="display:flex;align-items:center;gap:8px">
+        ${arrowBtn("left", "shiftWeekDigest(-1)", "Previous week")}
+        ${rangePill}
+        ${arrowBtn("right", "shiftWeekDigest(1)", "Next week")}
+      </div>
     </div>
-    <div style="display:${isMobile ? "flex" : "grid"};${isMobile ? "overflow-x:auto;scroll-snap-type:x mandatory;gap:8px;padding-bottom:6px;-webkit-overflow-scrolling:touch;scrollbar-width:none" : "grid-template-columns:repeat(7,1fr);gap:8px"};margin-bottom:${isMobile ? 12 : 14}px">${pillsHTML}</div>
-    ${emptyWeek ? `<div style="padding:18px 4px;text-align:center;font-size:13px;color:${th.textMuted};font-style:italic">Quiet week — check back Monday.</div>` : `<div style="border-top:1px solid ${th.border};padding-top:12px">
-      <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:${ACCENT};margin-bottom:8px;text-transform:uppercase">${esc(fullDayName)}</div>
-      ${dailyBannerHTML}
-      <div style="display:flex;flex-direction:column;gap:2px">${panelHTML}</div>
+    <div data-week-pills-row style="display:${isMobile ? "flex" : "grid"};${isMobile ? "overflow-x:auto;scroll-snap-type:x mandatory;gap:8px;padding-bottom:6px;-webkit-overflow-scrolling:touch;scrollbar-width:none" : "grid-template-columns:repeat(7,1fr);gap:8px"};margin-bottom:${isMobile ? 12 : 14}px">${pillsHTML}</div>
+    ${emptyWeek ? `<div style="padding:18px 4px;text-align:center;font-size:13px;color:${th.textMuted};font-style:italic">${isCurrentWeek ? "Quiet week — check back Monday." : "Nothing scheduled this week yet."}</div>` : `<div style="border-top:1px solid ${th.border};padding-top:12px">
+      <div key="${selectedDay}-${weekOffset}" style="${animatePanel ? "animation:fadeSlideIn 0.28s cubic-bezier(0.25,0.46,0.45,0.94);" : ""}">
+        <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:${ACCENT};margin-bottom:8px;text-transform:uppercase">${esc(fullDayName)}</div>
+        ${dailyBannerHTML}
+        <div style="display:flex;flex-direction:column;gap:2px">${panelHTML}</div>
+      </div>
     </div>`}
   </div>`;
 }
