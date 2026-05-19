@@ -2011,7 +2011,10 @@
     "types": [
       "Dragon",
       "Fairy"
-    ]
+    ],
+    "cp": "1081–1145",
+    "cpBoost": "1352–1432",
+    "weather": "Windy or Cloudy"
   },
   "Mega Ampharos": {
     "types": [
