@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "2.83";
+const APP_VERSION = "2.84";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -1112,12 +1112,14 @@ const ITEM_IMAGES = {
   "Max Mushroom": "max_mushrooms.webp",
   "Link Charge": "link_charge.webp",
   "GO Pass Deluxe": "go_pass_deluxe.webp",
+  "+10 Ranks": "item_pass_point_01.png",
   "Fashion Raid Day Ticket": "item_1608_hd.png",
   "Shadow Entei Raid Day Ticket": "item_1608_hd.png",
   "Falinks Super Mega Raid Day Ticket": "item_1608_hd.png",
   "Pok\u00E9mon Storage Upgrade": "pokemonstorageupgrade.1.png",
   "Item Bag Upgrade": "itemstorageupgrade.1.png",
-  "Pok\u00E9Coin": "pokecoin.png"
+  "Pok\u00E9Coin": "pokecoin.png",
+  "Reward Points": "rewardsIcon.png"
 };
 const ITEM_IMAGES_MULTI = {
   "Egg Incubator": { 3: "limited_incubatorx3.png" },
@@ -1127,7 +1129,7 @@ const ITEM_IMAGES_MULTI = {
 
 const WEB_STORE_BOXES = [
   {
-    name: "GO Pass Deluxe Edition: May High-end Gift Box",
+    name: "GO Pass Deluxe: May Ultra Box",
     price: 14.99,
     category: "Event Bundle",
     limited: true,
@@ -1138,17 +1140,18 @@ const WEB_STORE_BOXES = [
     availabilityText: "Tuesday, May 5, at 10:00 a.m. to Tuesday, June 2, at 10:00 a.m. local time",
     items: [
       { name: "GO Pass Deluxe", qty: 1, note: "May" },
-      { name: "PokéCoin", qty: 1000 },
+      { name: "+10 Ranks", qty: 1000 },
       { name: "Ultra Ball", qty: 20 },
-      { name: "Star Piece", qty: 10 },
-      { name: "Lucky Egg", qty: 2 },
-      { name: "Super Incubator", qty: 1 },
+      { name: "Max Revive", qty: 10 },
+      { name: "Premium Battle Pass", qty: 2 },
       { name: "Egg Incubator", qty: 1 },
-      { name: "Premium Battle Pass", qty: 10 }
+      { name: "Super Incubator", qty: 1 },
+      { name: "Max Potion", qty: 10 },
+      { name: "Reward Points", qty: 180 }
     ]
   },
   {
-    name: "GO Pass Deluxe Edition: May + Level 10",
+    name: "GO Pass Deluxe: May + 10 Ranks",
     price: 9.99,
     category: "Event Bundle",
     limited: true,
@@ -1159,15 +1162,16 @@ const WEB_STORE_BOXES = [
     availabilityText: "Tuesday, May 5, at 10:00 a.m. to Tuesday, June 2, at 10:00 a.m. local time",
     items: [
       { name: "GO Pass Deluxe", qty: 1, note: "May" },
-      { name: "PokéCoin", qty: 1000 },
+      { name: "+10 Ranks", qty: 1000 },
       { name: "Ultra Ball", qty: 10 },
-      { name: "Star Piece", qty: 5 },
-      { name: "Lucky Egg", qty: 1 },
-      { name: "Premium Battle Pass", qty: 5 }
+      { name: "Max Revive", qty: 5 },
+      { name: "Premium Battle Pass", qty: 1 },
+      { name: "Max Potion", qty: 5 },
+      { name: "Reward Points", qty: 120 }
     ]
   },
   {
-    name: "GO Pass Deluxe Edition: May",
+    name: "GO Pass Deluxe: May",
     price: 7.99,
     category: "Event Bundle",
     limited: true,
@@ -1179,9 +1183,10 @@ const WEB_STORE_BOXES = [
     items: [
       { name: "GO Pass Deluxe", qty: 1, note: "May" },
       { name: "Ultra Ball", qty: 10 },
-      { name: "Star Piece", qty: 5 },
-      { name: "Lucky Egg", qty: 1 },
-      { name: "Premium Battle Pass", qty: 5 }
+      { name: "Max Revive", qty: 5 },
+      { name: "Premium Battle Pass", qty: 1 },
+      { name: "Max Potion", qty: 5 },
+      { name: "Reward Points", qty: 96 }
     ]
   },
   {
@@ -4979,7 +4984,7 @@ function render() {
           return `<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid ${th.border}">
             <div style="display:flex;align-items:center;gap:8px">
               ${itemImg ? `<img src="assets/pokemon-images/Items/${itemImg}" style="width:30px;height:30px;object-fit:contain;flex-shrink:0" alt="${item.name}" />` : ""}
-              <span style="font-size:${isMobile ? 12 : 13}px;font-weight:600;color:${th.text}">${item.qty}x ${item.name}</span>
+              <span style="font-size:${isMobile ? 12 : 13}px;font-weight:600;color:${th.text}">${item.qty}x ${item.name.startsWith("+") ? "&nbsp;" : ""}${item.name}</span>
               ${item.note ? `<span style="font-size:10px;color:${th.textMuted};font-weight:500">(${item.note})</span>` : ""}
             </div>
             ${box.category !== "Event Bundle" ? `<span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${th.textSecondary};font-family:'JetBrains Mono',monospace">$${totalVal.toFixed(2)}${isEstimated ? `<span style="color:#F39C12;font-size:12px;font-weight:900;margin-left:3px;cursor:help" title="Estimated \u2014 not sold individually on the web store">*</span>` : ""}</span>` : ""}
@@ -5051,7 +5056,7 @@ function render() {
           var noteTag = item.note ? '<span style="font-size:10px;color:' + th.textMuted + ';font-weight:500">(' + item.note + ')</span>' : "";
           return '<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid ' + th.border + '">' +
             '<div style="display:flex;align-items:center;gap:8px">' + imgTag +
-            '<span style="font-size:' + (isMobile ? 12 : 13) + 'px;font-weight:600;color:' + th.text + '">' + item.qty + 'x ' + item.name + '</span>' + noteTag +
+            '<span style="font-size:' + (isMobile ? 12 : 13) + 'px;font-weight:600;color:' + th.text + '">' + item.qty + 'x ' + (item.name.charAt(0) === '+' ? '&nbsp;' : '') + item.name + '</span>' + noteTag +
             '</div></div>';
         }).join("");
         var fromDate = box.availableFrom ? new Date(box.availableFrom) : null;
@@ -5150,7 +5155,7 @@ function render() {
         archiveHTML += '</div>';
       }
       storeTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
-        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on May 03, 2026 at 1:00 pm</div>
+        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on May 22, 2026 at 3:38 pm</div>
         <div style="text-align:center;padding:10px">
           <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text}">\uD83D\uDED2 Web Store Box Analysis</h2>
           <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Are the current Pok\u00E9mon GO web store boxes worth it?</p>
