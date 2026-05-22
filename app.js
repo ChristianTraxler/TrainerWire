@@ -1133,7 +1133,7 @@ const WEB_STORE_BOXES = [
     price: 14.99,
     category: "Event Bundle",
     limited: true,
-    limitedLabel: "LIMITED-TIME DISCOUNT",
+    limitedLabel: "LIMITED-TIME ONLY",
     oneTime: true,
     availableFrom: "2026-05-03",
     expires: "2026-06-02",
@@ -1155,7 +1155,7 @@ const WEB_STORE_BOXES = [
     price: 9.99,
     category: "Event Bundle",
     limited: true,
-    limitedLabel: "LIMITED-TIME DISCOUNT",
+    limitedLabel: "LIMITED-TIME ONLY",
     oneTime: true,
     availableFrom: "2026-05-03",
     expires: "2026-06-02",
@@ -1175,7 +1175,7 @@ const WEB_STORE_BOXES = [
     price: 7.99,
     category: "Event Bundle",
     limited: true,
-    limitedLabel: "LIMITED-TIME DISCOUNT",
+    limitedLabel: "LIMITED-TIME ONLY",
     oneTime: true,
     availableFrom: "2026-05-03",
     expires: "2026-06-02",
@@ -5155,7 +5155,7 @@ function render() {
         archiveHTML += '</div>';
       }
       storeTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
-        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on May 22, 2026 at 3:38 pm</div>
+        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on May 22, 2026 at 3:48 pm</div>
         <div style="text-align:center;padding:10px">
           <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text}">\uD83D\uDED2 Web Store Box Analysis</h2>
           <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Are the current Pok\u00E9mon GO web store boxes worth it?</p>
