@@ -1,4 +1,4 @@
-const CACHE_VERSION = "2.86";
+const CACHE_VERSION = "2.87";
 const CACHE_NAME = `trainerwire-v${CACHE_VERSION}`;
 
 // App shell — pre-cached on install
