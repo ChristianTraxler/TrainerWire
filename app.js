@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.01";
+const APP_VERSION = "3.02";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -1613,7 +1613,14 @@ function loadNests() { return _nestsCache; }
 
 // --- SUPABASE REALTIME ---
 let _nestsWS = null;
+let _nestsReconnectTimer = null;
 function subscribeToNests() {
+  // Cancel any pending reconnect from a previous close
+  if (_nestsReconnectTimer) { clearTimeout(_nestsReconnectTimer); _nestsReconnectTimer = null; }
+  // Detach + close any prior socket so it can't fire reconnect
+  if (_nestsWS) {
+    try { _nestsWS.onclose = null; _nestsWS.onmessage = null; _nestsWS.onopen = null; _nestsWS.close(); } catch {}
+  }
   _nestsWS = new WebSocket(`${SUPABASE_URL.replace("https://","wss://")}/realtime/v1/websocket?apikey=${SUPABASE_KEY}&vsn=1.0.0`);
   let heartbeat;
   _nestsWS.onopen = () => {
@@ -1629,14 +1636,19 @@ function subscribeToNests() {
   };
   _nestsWS.onclose = () => {
     clearInterval(heartbeat);
-    _nestsWS.onclose = null; // prevent double-fire stacking reconnect timers
-    setTimeout(subscribeToNests, 3000);
+    _nestsWS.onclose = null;
+    _nestsReconnectTimer = setTimeout(subscribeToNests, 3000);
   };
 }
 subscribeToNests();
 
 let _bugReportsWS = null;
+let _bugReportsReconnectTimer = null;
 function subscribeToBugReports() {
+  if (_bugReportsReconnectTimer) { clearTimeout(_bugReportsReconnectTimer); _bugReportsReconnectTimer = null; }
+  if (_bugReportsWS) {
+    try { _bugReportsWS.onclose = null; _bugReportsWS.onmessage = null; _bugReportsWS.onopen = null; _bugReportsWS.close(); } catch {}
+  }
   _bugReportsWS = new WebSocket(`${SUPABASE_URL.replace("https://","wss://")}/realtime/v1/websocket?apikey=${SUPABASE_KEY}&vsn=1.0.0`);
   let heartbeat;
   _bugReportsWS.onopen = () => {
@@ -1652,8 +1664,8 @@ function subscribeToBugReports() {
   };
   _bugReportsWS.onclose = () => {
     clearInterval(heartbeat);
-    _bugReportsWS.onclose = null; // prevent double-fire stacking reconnect timers
-    setTimeout(subscribeToBugReports, 3000);
+    _bugReportsWS.onclose = null;
+    _bugReportsReconnectTimer = setTimeout(subscribeToBugReports, 3000);
   };
 }
 subscribeToBugReports();
@@ -1661,26 +1673,27 @@ subscribeToBugReports();
 // (setTab/sidebarNav only trigger this on explicit navigation, not on reload).
 loadBugReportsFromSupabase().then(() => { if (state.tab === "report") render(); });
 
-// PWA / mobile: when the app comes back to foreground, the WebSocket may be in
-// a zombie state (iOS suspends background JS). Refetch caches and force-reconnect
-// the sockets so the user sees fresh data on resume.
-document.addEventListener("visibilitychange", () => {
+// --- PWA / mobile resume handling ---
+// iOS pauses JS and may invalidate WebSocket connections when a PWA is backgrounded.
+// On resume, the socket may report OPEN state but no traffic flows (zombie connection).
+// We can't trust readyState — always force-recreate sockets and refetch caches.
+let _lastResumeAt = 0;
+function onAppResume() {
   if (document.visibilityState !== "visible") return;
-  // Refetch caches
+  const now = Date.now();
+  // Throttle: avoid thrashing if multiple resume events fire close together
+  if (now - _lastResumeAt < 1500) return;
+  _lastResumeAt = now;
+  // Force-recreate both sockets (subscribeTo* functions are idempotent — they clean up old sockets first)
+  subscribeToBugReports();
+  subscribeToNests();
+  // Refresh both caches with whatever auth state we have
   loadBugReportsFromSupabase().then(() => { if (state.tab === "report") render(); });
   loadNestsFromSupabase().then(() => { if (state.tab === "nests") render(); });
-  // Force-close any stale sockets — the onclose handler will trigger reconnect after 3s
-  try {
-    if (_bugReportsWS && _bugReportsWS.readyState !== WebSocket.OPEN && _bugReportsWS.readyState !== WebSocket.CONNECTING) {
-      _bugReportsWS.close();
-    }
-  } catch {}
-  try {
-    if (_nestsWS && _nestsWS.readyState !== WebSocket.OPEN && _nestsWS.readyState !== WebSocket.CONNECTING) {
-      _nestsWS.close();
-    }
-  } catch {}
-});
+}
+document.addEventListener("visibilitychange", onAppResume);
+window.addEventListener("pageshow", onAppResume);
+window.addEventListener("focus", onAppResume);
 
 // --- SUPABASE AUTH (admin only) ---
 const ADMIN_SESSION_KEY = "trainerwire_admin_session";
@@ -1858,6 +1871,29 @@ const BUG_SCREENSHOT_MAX_BYTES = 15 * 1024 * 1024; // 15 MB cap (matches bucket 
 let _bugReportsCache = [];
 let _bugReportFilter = "all"; // "all" | "acknowledged" | "fixing" | "fixed" | "wont_fix" | "duplicate" | "not_a_bug"
 let _bugReportMoreOpen = false;
+let _statusMenuOpenForId = null; // id of the report whose status dropdown is open
+
+function toggleStatusMenu(id) {
+  _statusMenuOpenForId = (_statusMenuOpenForId === id) ? null : id;
+  render();
+  if (_statusMenuOpenForId !== null) {
+    setTimeout(() => {
+      const dismiss = (e) => {
+        if (!e.target.closest || !e.target.closest("[data-status-menu]")) {
+          _statusMenuOpenForId = null;
+          document.removeEventListener("click", dismiss, true);
+          render();
+        }
+      };
+      document.addEventListener("click", dismiss, true);
+    }, 0);
+  }
+}
+
+function pickStatus(id, newStatus) {
+  _statusMenuOpenForId = null;
+  updateBugReportStatus(id, newStatus);
+}
 
 function setBugReportFilter(filter) {
   _bugReportFilter = filter;
@@ -2120,10 +2156,22 @@ function renderBugReportCard(report) {
   // Public statuses only — pending lives in the admin queue, not here.
   const publicStatusKeys = ["acknowledged","fixing","fixed","wont_fix","duplicate","not_a_bug"];
   const currentMeta = BUG_STATUS_META[report.status] || BUG_STATUS_META.acknowledged;
+  const statusOpen = _statusMenuOpenForId == report.id;
+  const chevronSvg = encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'><path d='M6 9l6 6 6-6'/></svg>");
   const statusControl = admin
-    ? `<select onchange="this.disabled=true;updateBugReportStatus('${report.id}', this.value)" style="padding:2px 18px 2px 10px;min-height:0;height:auto;line-height:1;border-radius:999px;border:1.5px solid ${currentMeta.color};background-color:${currentMeta.color};color:#fff;font-size:10px;font-weight:700;letter-spacing:0.2px;text-transform:uppercase;cursor:pointer;font-family:inherit;appearance:none;-webkit-appearance:none;background-image:url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'><path d='M6 9l6 6 6-6'/></svg>\");background-repeat:no-repeat;background-position:right 4px center;background-size:8px;box-sizing:content-box;vertical-align:middle;display:inline-block">
-        ${publicStatusKeys.map(s => `<option value="${s}" ${s === report.status ? "selected" : ""} style="background:#fff;color:#000">${BUG_STATUS_META[s].label}</option>`).join("")}
-      </select>`
+    ? `<span data-status-menu style="position:relative;display:inline-block">
+        <button onclick="toggleStatusMenu('${report.id}')" aria-haspopup="menu" aria-expanded="${statusOpen}" style="display:inline-block;padding:2px 22px 2px 10px;border-radius:999px;border:1.5px solid ${currentMeta.color};background:${currentMeta.color};color:#fff;font-size:10px;font-weight:700;letter-spacing:0.2px;text-transform:uppercase;line-height:16px;vertical-align:middle;cursor:pointer;font-family:inherit;background-image:url('data:image/svg+xml;utf8,${chevronSvg}');background-repeat:no-repeat;background-position:right 6px center;background-size:8px">${currentMeta.label}</button>
+        ${statusOpen ? `<div style="position:absolute;top:100%;left:0;margin-top:6px;background:${th.surface};border:1.5px solid ${th.border};border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.25);padding:6px;display:flex;flex-direction:column;gap:2px;z-index:50;min-width:160px">
+            ${publicStatusKeys.map(s => {
+              const m = BUG_STATUS_META[s];
+              const active = report.status === s;
+              return `<button onclick="pickStatus('${report.id}', '${s}')" style="padding:8px 12px;border-radius:8px;border:none;background:${active ? th.accentBg(m.color) : "transparent"};color:${active ? m.color : th.text};font-size:13px;font-weight:${active ? 700 : 600};cursor:pointer;text-align:left;font-family:inherit;display:flex;align-items:center;gap:8px" onmouseenter="if(this.style.background==='transparent')this.style.background='${th.surfaceHover}'" onmouseleave="if(this.style.background==='${th.surfaceHover}')this.style.background='transparent'">
+                <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${m.color};flex-shrink:0"></span>
+                ${m.label}
+              </button>`;
+            }).join("")}
+          </div>` : ""}
+      </span>`
     : renderBugReportStatusPill(report.status);
 
   const adminNoteEditor = admin
