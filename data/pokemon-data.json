@@ -176,6 +176,12 @@
       "Flying"
     ]
   },
+  "Arctibax": {
+    "types": [
+      "Dragon",
+      "Ice"
+    ]
+  },
   "Aron": {
     "types": [
       "Steel",
@@ -243,6 +249,12 @@
   "Basculin": {
     "types": [
       "Water"
+    ]
+  },
+  "Baxcalibur": {
+    "types": [
+      "Dragon",
+      "Ice"
     ]
   },
   "Beedrill": {
@@ -1077,6 +1089,12 @@
     "types": [
       "Bug",
       "Steel"
+    ]
+  },
+  "Frigibax": {
+    "types": [
+      "Dragon",
+      "Ice"
     ]
   },
   "Froakie": {
