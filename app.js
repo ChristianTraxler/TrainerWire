@@ -1949,6 +1949,109 @@ function getRecentBugReportTimestampsFromCache() {
     .filter(t => Number.isFinite(t));
 }
 
+// --- BUG REPORT RENDERING ---
+const BUG_STATUS_META = {
+  pending:      { label: "Pending",      color: "#F1C40F" },
+  acknowledged: { label: "Acknowledged", color: "#7F8C8D" },
+  fixing:       { label: "Fixing",       color: "#F39C12" },
+  fixed:        { label: "Fixed",        color: "#2ECC71" },
+  wont_fix:     { label: "Won't Fix",    color: "#E74C3C" },
+  duplicate:    { label: "Duplicate",    color: "#9B59B6" },
+  not_a_bug:    { label: "Not a Bug",    color: "#3498DB" }
+};
+const BUG_TYPE_LABELS = {
+  "bug": "Bug", "wrong-info": "Wrong Info", "missing": "Missing", "suggestion": "Suggestion", "other": "Other"
+};
+const BUG_SECTION_LABELS = {
+  "calendar": "Calendar", "store": "Deal Check", "events": "Events", "general": "General",
+  "max-battles": "Max Battles", "nests": "Nests", "news": "News", "pokedex": "PokéDex",
+  "tools": "PoGO Tools", "raids": "Raids",
+  "accessibility": "Accessibility", "content-data": "Content & Data", "new-feature": "New Feature",
+  "notifications": "Notifications", "performance": "Performance", "ui-design": "UI / Design"
+};
+
+function relativeDate(iso) {
+  const then = new Date(iso).getTime();
+  if (!Number.isFinite(then)) return "";
+  const diff = Date.now() - then;
+  const m = Math.floor(diff / 60000);
+  if (m < 1) return "just now";
+  if (m < 60) return `${m} min ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h} hr${h === 1 ? "" : "s"} ago`;
+  const d = Math.floor(h / 24);
+  if (d < 30) return `${d} day${d === 1 ? "" : "s"} ago`;
+  return new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+}
+
+function openScreenshotLightbox(url) {
+  // If a lightbox is already open, remove it first so we don't stack overlays.
+  document.getElementById("screenshot-lightbox")?.remove();
+  const overlay = document.createElement("div");
+  overlay.id = "screenshot-lightbox";
+  overlay.style.cssText = "position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:400;display:flex;align-items:center;justify-content:center;padding:20px;cursor:zoom-out";
+  const img = document.createElement("img");
+  img.src = url;
+  img.style.cssText = "max-width:100%;max-height:100%;object-fit:contain;border-radius:8px";
+  const closeBtn = document.createElement("button");
+  closeBtn.textContent = "✕";
+  closeBtn.setAttribute("aria-label", "Close screenshot");
+  closeBtn.style.cssText = "position:absolute;top:20px;right:20px;width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,0.6);border:1.5px solid #fff;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center";
+  overlay.appendChild(img);
+  overlay.appendChild(closeBtn);
+  overlay.onclick = () => overlay.remove();
+  // Escape key handler — listens on document so it works even before focus lands.
+  const onKey = (e) => { if (e.key === "Escape") { overlay.remove(); document.removeEventListener("keydown", onKey); } };
+  document.addEventListener("keydown", onKey);
+  // Also clean up the keydown listener when the overlay is dismissed by click.
+  const observer = new MutationObserver(() => {
+    if (!document.body.contains(overlay)) {
+      document.removeEventListener("keydown", onKey);
+      observer.disconnect();
+    }
+  });
+  observer.observe(document.body, { childList: true });
+  document.body.appendChild(overlay);
+  closeBtn.focus();
+}
+
+function renderBugReportStatusPill(status) {
+  const meta = BUG_STATUS_META[status] || BUG_STATUS_META.acknowledged;
+  return `<span style="display:inline-block;padding:3px 10px;border-radius:999px;background:${meta.color};color:#fff;font-size:11px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase">${meta.label}</span>`;
+}
+
+function renderBugReportCard(report) {
+  const th = t(darkMode);
+  const typeLabel = BUG_TYPE_LABELS[report.report_type] || report.report_type;
+  const sectionLabel = BUG_SECTION_LABELS[report.section] || report.section;
+  const meta = `${typeLabel} · ${sectionLabel}`;
+  const reporter = report.reporter_name ? `— ${esc(report.reporter_name)} · ` : "";
+  const date = relativeDate(report.created_at);
+  const shot = report.screenshot_url
+    ? `<img src="${esc(report.screenshot_url)}" data-url="${esc(report.screenshot_url)}" onclick="openScreenshotLightbox(this.getAttribute('data-url'))" style="width:80px;height:80px;object-fit:cover;border-radius:8px;cursor:zoom-in;border:1.5px solid ${th.border};margin-top:10px;display:block" alt="Screenshot" onerror="this.style.display='none'" />`
+    : "";
+  const note = report.admin_note ? `<div style="margin-top:8px;padding:8px 10px;border-radius:8px;background:${th.bg};border:1px solid ${th.border};font-size:12px;color:${th.textSecondary};line-height:1.5"><span style="font-weight:700;color:${th.text}">✎ Admin note: </span>${esc(report.admin_note)}</div>` : "";
+  return `<div style="padding:14px 16px;background:${th.surface};border:1.5px solid ${th.border};border-radius:14px">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      ${renderBugReportStatusPill(report.status)}
+      <span style="font-size:12px;font-weight:600;color:${th.textMuted}">${esc(meta)}</span>
+    </div>
+    <div style="margin-top:10px;font-size:14px;color:${th.text};line-height:1.55;white-space:pre-wrap;word-break:break-word">${esc(report.description)}</div>
+    ${shot}
+    <div style="margin-top:10px;font-size:11px;color:${th.textFaint}">${reporter}${date}</div>
+    ${note}
+  </div>`;
+}
+
+function renderBugReportsList() {
+  const th = t(darkMode);
+  const reports = loadBugReports().filter(r => r.status !== "pending");
+  if (reports.length === 0) {
+    return `<div style="padding:24px;text-align:center;color:${th.textMuted};font-size:13px;border:1.5px dashed ${th.border};border-radius:14px">No reports yet — be the first to flag an issue!</div>`;
+  }
+  return `<div style="display:flex;flex-direction:column;gap:12px">${reports.map(renderBugReportCard).join("")}</div>`;
+}
+
 // --- POKEMON AUTOCOMPLETE ---
 const DEX_NAMES = Object.keys(DEX).sort();
 function onPokemonInput(e) {
@@ -5831,6 +5934,10 @@ function render() {
         </div>
         <div style="text-align:center;font-size:${isMobile ? 11 : 12}px;color:${th.textFaint};line-height:1.6;padding:0 8px">
           Thank you for helping us keep TrainerWire accurate!<br>Prefer email? Send it to <a href="mailto:${REPORT_EMAIL}" style="color:${th.textMuted}">${REPORT_EMAIL}</a>.
+        </div>
+        <div style="margin-top:24px">
+          <h3 style="margin:0 0 12px 0;font-size:${isMobile ? 16 : 18}px;font-weight:800;color:${th.text}">Recent Reports</h3>
+          ${renderBugReportsList()}
         </div>
       </div>`;
     }
