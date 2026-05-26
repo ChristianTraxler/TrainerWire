@@ -1628,6 +1628,100 @@ function subscribeToNests() {
 }
 subscribeToNests();
 
+// --- SUPABASE AUTH (admin only) ---
+const ADMIN_SESSION_KEY = "trainerwire_admin_session";
+
+function getAdminSession() {
+  try {
+    const raw = localStorage.getItem(ADMIN_SESSION_KEY);
+    if (!raw) return null;
+    const s = JSON.parse(raw);
+    if (!s || !s.access_token || !s.expires_at) return null;
+    return s;
+  } catch { return null; }
+}
+function setAdminSession(s) { localStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify(s)); }
+function clearAdminSession() { localStorage.removeItem(ADMIN_SESSION_KEY); }
+
+// Decode JWT payload without verification (verification happens server-side via RLS).
+function decodeJwt(token) {
+  try {
+    const b64 = token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
+    return JSON.parse(atob(b64));
+  } catch { return null; }
+}
+
+function isAdmin() {
+  const s = getAdminSession();
+  if (!s) return false;
+  // expires_at from Supabase is unix seconds
+  if (Date.now() / 1000 >= s.expires_at - 30) return false;
+  const payload = decodeJwt(s.access_token);
+  return !!(payload && payload.email);
+}
+
+function getAdminEmail() {
+  const s = getAdminSession();
+  if (!s) return null;
+  const p = decodeJwt(s.access_token);
+  return (p && p.email) ? p.email : null;
+}
+
+async function adminLoginRequest(email, password) {
+  const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+    method: "POST",
+    headers: { apikey: SUPABASE_KEY, "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password })
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    throw new Error(data.error_description || data.msg || data.message || data.error || "Sign-in failed.");
+  }
+  setAdminSession({
+    access_token: data.access_token,
+    refresh_token: data.refresh_token,
+    expires_at: Math.floor(Date.now() / 1000) + (data.expires_in || 3600)
+  });
+}
+
+function adminLogout() {
+  clearAdminSession();
+  render();
+}
+
+// Refresh the access token if it's near expiry. Returns the (possibly new) session.
+async function refreshAdminSessionIfNeeded() {
+  const s = getAdminSession();
+  if (!s) return null;
+  if (Date.now() / 1000 < s.expires_at - 60) return s;
+  if (!s.refresh_token) { clearAdminSession(); return null; }
+  try {
+    const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=refresh_token`, {
+      method: "POST",
+      headers: { apikey: SUPABASE_KEY, "Content-Type": "application/json" },
+      body: JSON.stringify({ refresh_token: s.refresh_token })
+    });
+    if (!res.ok) { clearAdminSession(); return null; }
+    const data = await res.json();
+    if (!data.access_token) { clearAdminSession(); return null; }
+    const next = {
+      access_token: data.access_token,
+      refresh_token: data.refresh_token || s.refresh_token,
+      expires_at: Math.floor(Date.now() / 1000) + (data.expires_in || 3600)
+    };
+    setAdminSession(next);
+    return next;
+  } catch { clearAdminSession(); return null; }
+}
+
+// Build a headers object for an authenticated REST call. Falls back to anon.
+async function supabaseAuthHeaders(extra) {
+  const base = { apikey: SUPABASE_KEY, ...(extra || {}) };
+  const s = await refreshAdminSessionIfNeeded();
+  base.Authorization = `Bearer ${s ? s.access_token : SUPABASE_KEY}`;
+  return base;
+}
+
 // --- POKEMON AUTOCOMPLETE ---
 const DEX_NAMES = Object.keys(DEX).sort();
 function onPokemonInput(e) {
