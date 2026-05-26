@@ -1830,6 +1830,30 @@ function renderAdminLoginModal() {
 // --- BUG REPORTS DATA LAYER ---
 const BUG_SCREENSHOT_MAX_BYTES = 15 * 1024 * 1024; // 15 MB cap (matches bucket setting)
 let _bugReportsCache = [];
+let _bugReportFilter = "all"; // "all" | "acknowledged" | "fixing" | "fixed" | "wont_fix" | "duplicate" | "not_a_bug"
+let _bugReportMoreOpen = false;
+
+function setBugReportFilter(filter) {
+  _bugReportFilter = filter;
+  _bugReportMoreOpen = false;
+  render();
+}
+function toggleBugReportMore() {
+  _bugReportMoreOpen = !_bugReportMoreOpen;
+  render();
+  if (_bugReportMoreOpen) {
+    // Auto-close on any click outside the dropdown wrapper.
+    const dismiss = (e) => {
+      if (!e.target.closest || !e.target.closest("[data-bug-more]")) {
+        _bugReportMoreOpen = false;
+        document.removeEventListener("click", dismiss, true);
+        render();
+      }
+    };
+    // Defer attachment until after the click that opened the dropdown finishes propagating.
+    setTimeout(() => document.addEventListener("click", dismiss, true), 0);
+  }
+}
 
 async function loadBugReportsFromSupabase() {
   try {
@@ -2020,6 +2044,41 @@ function renderBugReportStatusPill(status) {
   return `<span style="display:inline-block;padding:3px 10px;border-radius:999px;background:${meta.color};color:#fff;font-size:11px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase">${meta.label}</span>`;
 }
 
+function renderBugReportFilterChips() {
+  const th = t(darkMode);
+  const primary = [
+    { key: "all", label: "All" },
+    { key: "acknowledged", label: "Acknowledged" },
+    { key: "fixing", label: "Fixing" },
+    { key: "fixed", label: "Fixed" }
+  ];
+  const overflow = [
+    { key: "wont_fix", label: "Won't Fix" },
+    { key: "duplicate", label: "Duplicate" },
+    { key: "not_a_bug", label: "Not a Bug" }
+  ];
+  const chip = (key, label) => {
+    const active = _bugReportFilter === key;
+    return `<button onclick="setBugReportFilter('${key}')" style="padding:6px 14px;border-radius:999px;border:1.5px solid ${active ? "#E74C3C" : th.border};background:${active ? th.accentBg("#E74C3C") : th.surface};color:${active ? "#E74C3C" : th.text};font-size:12px;font-weight:${active ? 700 : 600};cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.15s ease">${label}</button>`;
+  };
+  const moreActive = overflow.some(o => o.key === _bugReportFilter);
+  const dropdown = _bugReportMoreOpen
+    ? `<div style="position:absolute;top:100%;right:0;margin-top:6px;background:${th.surface};border:1.5px solid ${th.border};border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.18);padding:6px;display:flex;flex-direction:column;gap:4px;z-index:20;min-width:140px">
+        ${overflow.map(o => {
+          const active = _bugReportFilter === o.key;
+          return `<button onclick="setBugReportFilter('${o.key}')" style="padding:8px 12px;border-radius:8px;border:none;background:${active ? th.accentBg("#E74C3C") : "transparent"};color:${active ? "#E74C3C" : th.text};font-size:13px;font-weight:600;cursor:pointer;text-align:left;font-family:inherit">${o.label}</button>`;
+        }).join("")}
+      </div>`
+    : "";
+  return `<div class="bug-report-chip-row" style="display:flex;align-items:center;gap:8px;overflow-x:auto;position:relative;padding-bottom:2px;scrollbar-width:none;-ms-overflow-style:none">
+    ${primary.map(p => chip(p.key, p.label)).join("")}
+    <div data-bug-more style="position:relative;flex-shrink:0">
+      <button onclick="toggleBugReportMore()" aria-expanded="${_bugReportMoreOpen}" aria-haspopup="menu" style="padding:6px 14px;border-radius:999px;border:1.5px solid ${moreActive ? "#E74C3C" : th.border};background:${moreActive ? th.accentBg("#E74C3C") : th.surface};color:${moreActive ? "#E74C3C" : th.text};font-size:12px;font-weight:${moreActive ? 700 : 600};cursor:pointer;font-family:inherit;transition:all 0.15s ease">More ▾</button>
+      ${dropdown}
+    </div>
+  </div>`;
+}
+
 function renderBugReportCard(report) {
   const th = t(darkMode);
   const typeLabel = BUG_TYPE_LABELS[report.report_type] || report.report_type;
@@ -2045,9 +2104,15 @@ function renderBugReportCard(report) {
 
 function renderBugReportsList() {
   const th = t(darkMode);
-  const reports = loadBugReports().filter(r => r.status !== "pending");
+  let reports = loadBugReports().filter(r => r.status !== "pending");
+  if (_bugReportFilter !== "all") {
+    reports = reports.filter(r => r.status === _bugReportFilter);
+  }
   if (reports.length === 0) {
-    return `<div style="padding:24px;text-align:center;color:${th.textMuted};font-size:13px;border:1.5px dashed ${th.border};border-radius:14px">No reports yet — be the first to flag an issue!</div>`;
+    const msg = _bugReportFilter === "all"
+      ? "No reports yet — be the first to flag an issue!"
+      : "No reports with this status.";
+    return `<div style="padding:24px;text-align:center;color:${th.textMuted};font-size:13px;border:1.5px dashed ${th.border};border-radius:14px">${msg}</div>`;
   }
   return `<div style="display:flex;flex-direction:column;gap:12px">${reports.map(renderBugReportCard).join("")}</div>`;
 }
@@ -3805,6 +3870,8 @@ function setTab(tab) {
   if (tab === "nests") { loadNestsFromSupabase().then(() => render()); }
   if (tab === "report") {
     _reportSubmitMessage = { type: "", text: "" }; // clear stale banner from prior visit
+    _bugReportFilter = "all";
+    _bugReportMoreOpen = false;
     loadBugReportsFromSupabase().then(() => render());
   }
   render();
@@ -5936,7 +6003,10 @@ function render() {
           Thank you for helping us keep TrainerWire accurate!<br>Prefer email? Send it to <a href="mailto:${REPORT_EMAIL}" style="color:${th.textMuted}">${REPORT_EMAIL}</a>.
         </div>
         <div style="margin-top:24px">
-          <h3 style="margin:0 0 12px 0;font-size:${isMobile ? 16 : 18}px;font-weight:800;color:${th.text}">Recent Reports</h3>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+            <h3 style="margin:0;font-size:${isMobile ? 16 : 18}px;font-weight:800;color:${th.text}">Recent Reports</h3>
+            ${renderBugReportFilterChips()}
+          </div>
           ${renderBugReportsList()}
         </div>
       </div>`;
@@ -6135,6 +6205,8 @@ function sidebarNav(tab) {
   if (tab === "nests") { loadNestsFromSupabase().then(() => render()); }
   if (tab === "report") {
     _reportSubmitMessage = { type: "", text: "" }; // clear stale banner from prior visit
+    _bugReportFilter = "all";
+    _bugReportMoreOpen = false;
     loadBugReportsFromSupabase().then(() => render());
   }
   render();
