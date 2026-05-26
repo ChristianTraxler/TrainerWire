@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.03";
+const APP_VERSION = "3.04";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -1644,6 +1644,18 @@ subscribeToNests();
 
 let _bugReportsWS = null;
 let _bugReportsReconnectTimer = null;
+let _bugReportsPollTimer = null;
+
+// Polling fallback: WebSocket realtime is unreliable on iOS PWA (connection gets
+// suspended in background, resume events don't always fire). Poll every 15s as backup.
+function startBugReportsPolling() {
+  if (_bugReportsPollTimer) return;
+  _bugReportsPollTimer = setInterval(() => {
+    loadBugReportsFromSupabase().then(() => {
+      if (state.tab === "report") render();
+    });
+  }, 15000);
+}
 function subscribeToBugReports() {
   if (_bugReportsReconnectTimer) { clearTimeout(_bugReportsReconnectTimer); _bugReportsReconnectTimer = null; }
   if (_bugReportsWS) {
@@ -1672,6 +1684,7 @@ subscribeToBugReports();
 // One-time initial cache populate so the report tab works on a fresh page load
 // (setTab/sidebarNav only trigger this on explicit navigation, not on reload).
 loadBugReportsFromSupabase().then(() => { if (state.tab === "report") render(); });
+startBugReportsPolling();
 
 // --- PWA / mobile resume handling ---
 // iOS pauses JS and may invalidate WebSocket connections when a PWA is backgrounded.
