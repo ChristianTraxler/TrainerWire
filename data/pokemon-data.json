@@ -77,6 +77,11 @@
       "Ghost"
     ]
   },
+  "Alolan Meowth": {
+    "types": [
+      "Dark"
+    ]
+  },
   "Alolan Ninetales": {
     "types": [
       "Ice",
@@ -155,6 +160,15 @@
       "Rock",
       "Bug"
     ]
+  },
+  "Aqua Paldean Tauros": {
+    "types": [
+      "Fighting",
+      "Water"
+    ],
+    "cp": "1546–1621",
+    "cpBoost": "1932–2026",
+    "weather": "Cloudy or Rainy"
   },
   "Archeops": {
     "types": [
@@ -271,6 +285,15 @@
     "types": [
       "Water"
     ]
+  },
+  "Blaze Paldean Tauros": {
+    "types": [
+      "Fighting",
+      "Fire"
+    ],
+    "cp": "1546–1621",
+    "cpBoost": "1932–2026",
+    "weather": "Cloudy or Sunny"
   },
   "Blaziken": {
     "types": [
@@ -551,10 +574,23 @@
       "Ghost"
     ]
   },
+  "Combat Breed Paldean Tauros": {
+    "types": [
+      "Fighting"
+    ],
+    "cp": "1546–1621",
+    "cpBoost": "1932–2026",
+    "weather": "Cloudy"
+  },
   "Combee": {
     "types": [
       "Bug",
       "Flying"
+    ]
+  },
+  "Comfey": {
+    "types": [
+      "Fairy"
     ]
   },
   "Conkeldurr": {
@@ -1094,6 +1130,12 @@
   "Galarian Meowth": {
     "types": [
       "Steel"
+    ]
+  },
+  "Galarian Mr. Mime": {
+    "types": [
+      "Ice",
+      "Psychic"
     ]
   },
   "Galarian Ponyta": {
@@ -2213,6 +2255,17 @@
       "Psychic"
     ]
   },
+  "Mega Mewtwo X": {
+    "types": [
+      "Psychic",
+      "Fighting"
+    ]
+  },
+  "Mega Mewtwo Y": {
+    "types": [
+      "Psychic"
+    ]
+  },
   "Mega Pidgeot": {
     "types": [
       "Normal",
@@ -2396,6 +2449,11 @@
       "Fairy"
     ]
   },
+  "Mudbray": {
+    "types": [
+      "Ground"
+    ]
+  },
   "Mudkip": {
     "types": [
       "Water"
@@ -2546,7 +2604,10 @@
   "Paldean Tauros": {
     "types": [
       "Fighting"
-    ]
+    ],
+    "cp": "1546–1621",
+    "cpBoost": "1932–2026",
+    "weather": "Cloudy"
   },
   "Paldean Wooper": {
     "types": [
@@ -2732,6 +2793,23 @@
     "types": [
       "Normal"
     ]
+  },
+  "Primal Groudon": {
+    "types": [
+      "Ground",
+      "Fire"
+    ],
+    "cp": "2260–2351",
+    "cpBoost": "2825–2939",
+    "weather": "Sunny"
+  },
+  "Primal Kyogre": {
+    "types": [
+      "Water"
+    ],
+    "cp": "2260–2351",
+    "cpBoost": "2825–2939",
+    "weather": "Rainy"
   },
   "Primarina": {
     "types": [
@@ -3234,7 +3312,10 @@
   "Shadow Raikou": {
     "types": [
       "Electric"
-    ]
+    ],
+    "cp": "1823–1972",
+    "cpBoost": "2280–2466",
+    "weather": "Rainy"
   },
   "Shadow Rampardos": {
     "types": [
@@ -4010,6 +4091,12 @@
   },
   "Wartortle": {
     "types": [
+      "Water"
+    ]
+  },
+  "Wash Rotom": {
+    "types": [
+      "Electric",
       "Water"
     ]
   },
