@@ -1799,6 +1799,111 @@ function renderAdminLoginModal() {
   </div>`;
 }
 
+// --- BUG REPORTS DATA LAYER ---
+const BUG_SCREENSHOT_MAX_BYTES = 15 * 1024 * 1024; // 15 MB cap (matches bucket setting)
+let _bugReportsCache = [];
+
+async function loadBugReportsFromSupabase() {
+  try {
+    const headers = await supabaseAuthHeaders();
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/bug_reports?select=*&order=created_at.desc`, { headers });
+    if (res.ok) _bugReportsCache = await res.json();
+  } catch {}
+  return _bugReportsCache;
+}
+function loadBugReports() { return _bugReportsCache; }
+
+async function uploadBugScreenshot(file) {
+  if (!file) return null;
+  if (file.size > BUG_SCREENSHOT_MAX_BYTES) {
+    throw new Error("Screenshot must be 15 MB or smaller.");
+  }
+  const nameParts = (file.name || "").split(".");
+  const rawExt = (nameParts.length > 1 ? nameParts.pop() : "").toLowerCase();
+  const ext = rawExt.replace(/[^a-z0-9]/g, "") || "png";
+  const reporterId = getReporterId();
+  const objName = `${reporterId}/${crypto.randomUUID()}.${ext}`;
+  const res = await fetch(`${SUPABASE_URL}/storage/v1/object/bug-screenshots/${objName}`, {
+    method: "POST",
+    headers: {
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`,
+      "Content-Type": file.type || "application/octet-stream",
+      "x-upsert": "false"
+    },
+    body: file
+  });
+  if (!res.ok) {
+    let detail = "";
+    try { const j = await res.json(); detail = j.message || j.error || ""; } catch {}
+    throw new Error(detail ? `Screenshot upload failed: ${detail}` : "Screenshot upload failed.");
+  }
+  return `${SUPABASE_URL}/storage/v1/object/public/bug-screenshots/${objName}`;
+}
+
+async function insertBugReport({ report_type, section, description, reporter_name, screenshot_url }) {
+  const reporterId = getReporterId();
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/bug_reports`, {
+    method: "POST",
+    headers: {
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`,
+      "Content-Type": "application/json",
+      Prefer: "return=minimal"
+    },
+    body: JSON.stringify({
+      report_type, section, description,
+      reporter_name: reporter_name || null,
+      reporter_id: reporterId,
+      screenshot_url: screenshot_url || null,
+      status: "pending"
+    })
+  });
+  if (!res.ok) {
+    let detail = "";
+    try { const j = await res.json(); detail = j.message || j.error || ""; } catch {}
+    throw new Error(detail || "Failed to submit report.");
+  }
+}
+
+async function updateBugReportStatus(id, newStatus) {
+  const headers = await supabaseAuthHeaders({ "Content-Type": "application/json", Prefer: "return=minimal" });
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/bug_reports?id=eq.${id}`, {
+    method: "PATCH",
+    headers,
+    body: JSON.stringify({ status: newStatus })
+  });
+  if (!res.ok) { alert("Failed to update status."); return; }
+  await loadBugReportsFromSupabase();
+  render();
+}
+
+async function updateBugReportAdminNote(id, note) {
+  const headers = await supabaseAuthHeaders({ "Content-Type": "application/json", Prefer: "return=minimal" });
+  const trimmed = (note || "").trim();
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/bug_reports?id=eq.${id}`, {
+    method: "PATCH",
+    headers,
+    body: JSON.stringify({ admin_note: trimmed || null })
+  });
+  if (!res.ok) { alert("Failed to save note."); return; }
+  await loadBugReportsFromSupabase();
+  render();
+}
+
+async function deleteBugReport(id) {
+  if (!confirm("Delete this report? This cannot be undone.")) return;
+  const headers = await supabaseAuthHeaders();
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/bug_reports?id=eq.${id}`, { method: "DELETE", headers });
+  if (!res.ok) { alert("Delete failed."); return; }
+  await loadBugReportsFromSupabase();
+  render();
+}
+
+async function approveBugReport(id) {
+  await updateBugReportStatus(id, "acknowledged");
+}
+
 // --- POKEMON AUTOCOMPLETE ---
 const DEX_NAMES = Object.keys(DEX).sort();
 function onPokemonInput(e) {
