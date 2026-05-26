@@ -47,6 +47,7 @@ create trigger bug_reports_status_updated
 -- 4. helper: is the current request from an admin?
 -- security definer: bypasses RLS on public.admins when checking membership.
 -- Avoids the circular policy dependency where admins_select_admin itself calls is_admin().
+-- Email comparison is case-insensitive (RFC 5321 treats addresses as case-insensitive in practice).
 create or replace function public.is_admin()
 returns boolean
 language sql
@@ -56,7 +57,7 @@ set search_path = public
 as $$
   select exists (
     select 1 from public.admins
-    where email = (auth.jwt() ->> 'email')
+    where lower(email) = lower(auth.jwt() ->> 'email')
   );
 $$;
 
