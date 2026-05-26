@@ -2102,6 +2102,45 @@ function renderBugReportCard(report) {
   </div>`;
 }
 
+function renderPendingQueueCard(report) {
+  const th = t(darkMode);
+  const typeLabel = BUG_TYPE_LABELS[report.report_type] || report.report_type;
+  const sectionLabel = BUG_SECTION_LABELS[report.section] || report.section;
+  const date = relativeDate(report.created_at);
+  const reporter = report.reporter_name ? `— ${esc(report.reporter_name)} · ` : "";
+  // Reporter/date live in the header row (right-aligned) rather than the bottom row
+  // used by renderBugReportCard, so the bottom is free for Approve/Delete buttons.
+  const shot = report.screenshot_url
+    ? `<img src="${esc(report.screenshot_url)}" data-url="${esc(report.screenshot_url)}" onclick="openScreenshotLightbox(this.getAttribute('data-url'))" style="width:80px;height:80px;object-fit:cover;border-radius:8px;cursor:zoom-in;border:1.5px solid ${th.border};margin-top:10px;display:block" alt="Screenshot" onerror="this.style.display='none'" />`
+    : "";
+  return `<div style="padding:14px 16px;background:${th.surface};border:1.5px solid #F1C40F;border-left-width:6px;border-radius:14px">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      ${renderBugReportStatusPill("pending")}
+      <span style="font-size:12px;font-weight:600;color:${th.textMuted}">${esc(typeLabel)} · ${esc(sectionLabel)}</span>
+      <span style="font-size:11px;color:${th.textFaint};margin-left:auto">${reporter}${date}</span>
+    </div>
+    <div style="margin-top:10px;font-size:14px;color:${th.text};line-height:1.55;white-space:pre-wrap;word-break:break-word">${esc(report.description)}</div>
+    ${shot}
+    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+      <button onclick="this.disabled=true;approveBugReport('${report.id}')" style="padding:8px 14px;border-radius:10px;border:none;background:#2ECC71;color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s ease">✓ Approve</button>
+      <button onclick="this.disabled=true;deleteBugReport('${report.id}')" style="padding:8px 14px;border-radius:10px;border:1.5px solid ${th.border};background:${th.surface};color:#E74C3C;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s ease">🗑 Delete</button>
+    </div>
+  </div>`;
+}
+
+function renderPendingQueue() {
+  if (!isAdmin()) return "";
+  const th = t(darkMode);
+  const pending = loadBugReports().filter(r => r.status === "pending");
+  if (pending.length === 0) {
+    return `<div style="padding:14px 16px;background:${th.surface};border:1.5px dashed ${th.border};border-radius:14px;font-size:13px;color:${th.textMuted};text-align:center;margin-bottom:18px">📭 Pending queue is empty.</div>`;
+  }
+  return `<div style="margin-bottom:18px">
+    <h3 style="margin:0 0 10px 0;font-size:15px;font-weight:800;color:${th.text}">📥 Pending review (${pending.length})</h3>
+    <div style="display:flex;flex-direction:column;gap:10px">${pending.map(renderPendingQueueCard).join("")}</div>
+  </div>`;
+}
+
 function renderBugReportsList() {
   const th = t(darkMode);
   let reports = loadBugReports().filter(r => r.status !== "pending");
@@ -6007,6 +6046,7 @@ function render() {
             </div>
           </div>
           <div>
+            ${renderPendingQueue()}
             <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px">
               <h3 style="margin:0;font-size:${isMobile ? 16 : 18}px;font-weight:800;color:${th.text}">Recent Reports</h3>
               ${renderBugReportFilterChips()}
