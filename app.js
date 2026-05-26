@@ -2044,7 +2044,7 @@ function openScreenshotLightbox(url) {
 
 function renderBugReportStatusPill(status) {
   const meta = BUG_STATUS_META[status] || BUG_STATUS_META.acknowledged;
-  return `<span style="display:inline-block;padding:3px 10px;border-radius:999px;background:${meta.color};color:#fff;font-size:11px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase">${meta.label}</span>`;
+  return `<span style="display:inline-block;padding:2px 10px;border-radius:999px;background:${meta.color};color:#fff;font-size:10px;font-weight:700;letter-spacing:0.2px;text-transform:uppercase;line-height:16px;vertical-align:middle">${meta.label}</span>`;
 }
 
 function renderBugReportFilterChips() {
@@ -2098,7 +2098,7 @@ function renderBugReportCard(report) {
   const publicStatusKeys = ["acknowledged","fixing","fixed","wont_fix","duplicate","not_a_bug"];
   const currentMeta = BUG_STATUS_META[report.status] || BUG_STATUS_META.acknowledged;
   const statusControl = admin
-    ? `<select onchange="this.disabled=true;updateBugReportStatus('${report.id}', this.value)" style="padding:4px 10px;border-radius:999px;border:1.5px solid ${currentMeta.color};background:${currentMeta.color};color:#fff;font-size:11px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase;cursor:pointer;font-family:inherit;appearance:none;-webkit-appearance:none;padding-right:22px;background-image:url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'><path d='M6 9l6 6 6-6'/></svg>\");background-repeat:no-repeat;background-position:right 6px center;background-size:10px">
+    ? `<select onchange="this.disabled=true;updateBugReportStatus('${report.id}', this.value)" style="padding:0 18px 0 8px;height:20px;line-height:18px;border-radius:999px;border:1.5px solid ${currentMeta.color};background:${currentMeta.color};color:#fff;font-size:10px;font-weight:700;letter-spacing:0.2px;text-transform:uppercase;cursor:pointer;font-family:inherit;appearance:none;-webkit-appearance:none;background-image:url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'><path d='M6 9l6 6 6-6'/></svg>\");background-repeat:no-repeat;background-position:right 4px center;background-size:8px;box-sizing:border-box;vertical-align:middle">
         ${publicStatusKeys.map(s => `<option value="${s}" ${s === report.status ? "selected" : ""} style="background:#fff;color:#000">${BUG_STATUS_META[s].label}</option>`).join("")}
       </select>`
     : renderBugReportStatusPill(report.status);
