@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.02";
+const APP_VERSION = "3.03";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -2157,10 +2157,9 @@ function renderBugReportCard(report) {
   const publicStatusKeys = ["acknowledged","fixing","fixed","wont_fix","duplicate","not_a_bug"];
   const currentMeta = BUG_STATUS_META[report.status] || BUG_STATUS_META.acknowledged;
   const statusOpen = _statusMenuOpenForId == report.id;
-  const chevronSvg = encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'><path d='M6 9l6 6 6-6'/></svg>");
   const statusControl = admin
     ? `<span data-status-menu style="position:relative;display:inline-block">
-        <button onclick="toggleStatusMenu('${report.id}')" aria-haspopup="menu" aria-expanded="${statusOpen}" style="display:inline-block;padding:2px 22px 2px 10px;border-radius:999px;border:1.5px solid ${currentMeta.color};background:${currentMeta.color};color:#fff;font-size:10px;font-weight:700;letter-spacing:0.2px;text-transform:uppercase;line-height:16px;vertical-align:middle;cursor:pointer;font-family:inherit;background-image:url('data:image/svg+xml;utf8,${chevronSvg}');background-repeat:no-repeat;background-position:right 6px center;background-size:8px">${currentMeta.label}</button>
+        <button onclick="toggleStatusMenu('${report.id}')" aria-haspopup="menu" aria-expanded="${statusOpen}" style="display:inline-block;padding:2px 10px;border-radius:999px;border:1.5px solid ${currentMeta.color};background:${currentMeta.color};color:#fff;font-size:10px;font-weight:700;letter-spacing:0.2px;text-transform:uppercase;line-height:16px;vertical-align:middle;cursor:pointer;font-family:inherit">${currentMeta.label}<span style="display:inline-block;margin-left:5px;font-size:8px;opacity:0.85;vertical-align:1px">▾</span></button>
         ${statusOpen ? `<div style="position:absolute;top:100%;left:0;margin-top:6px;background:${th.surface};border:1.5px solid ${th.border};border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.25);padding:6px;display:flex;flex-direction:column;gap:2px;z-index:50;min-width:160px">
             ${publicStatusKeys.map(s => {
               const m = BUG_STATUS_META[s];
