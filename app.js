@@ -1620,14 +1620,41 @@ function subscribeToNests() {
     heartbeat = setInterval(() => ws.send(JSON.stringify({ topic: "phoenix", event: "heartbeat", payload: {}, ref: "hb" })), 30000);
   };
   ws.onmessage = (e) => {
-    const msg = JSON.parse(e.data);
+    let msg;
+    try { msg = JSON.parse(e.data); } catch { return; }
     if (msg.event === "postgres_changes") {
       loadNestsFromSupabase().then(() => { if (state.tab === "nests") render(); });
     }
   };
-  ws.onclose = () => { clearInterval(heartbeat); setTimeout(subscribeToNests, 3000); };
+  ws.onclose = () => {
+    clearInterval(heartbeat);
+    ws.onclose = null; // prevent double-fire stacking reconnect timers
+    setTimeout(subscribeToNests, 3000);
+  };
 }
 subscribeToNests();
+
+function subscribeToBugReports() {
+  const ws = new WebSocket(`${SUPABASE_URL.replace("https://","wss://")}/realtime/v1/websocket?apikey=${SUPABASE_KEY}&vsn=1.0.0`);
+  let heartbeat;
+  ws.onopen = () => {
+    ws.send(JSON.stringify({ topic: "realtime:public:bug_reports", event: "phx_join", payload: { config: { broadcast: { self: true }, postgres_changes: [{ event: "*", schema: "public", table: "bug_reports" }] } }, ref: "1" }));
+    heartbeat = setInterval(() => ws.send(JSON.stringify({ topic: "phoenix", event: "heartbeat", payload: {}, ref: "hb-br" })), 30000);
+  };
+  ws.onmessage = (e) => {
+    let msg;
+    try { msg = JSON.parse(e.data); } catch { return; }
+    if (msg.event === "postgres_changes") {
+      loadBugReportsFromSupabase().then(() => { if (state.tab === "report") render(); });
+    }
+  };
+  ws.onclose = () => {
+    clearInterval(heartbeat);
+    ws.onclose = null; // prevent double-fire stacking reconnect timers
+    setTimeout(subscribeToBugReports, 3000);
+  };
+}
+subscribeToBugReports();
 
 // --- SUPABASE AUTH (admin only) ---
 const ADMIN_SESSION_KEY = "trainerwire_admin_session";
