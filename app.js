@@ -1655,6 +1655,9 @@ function subscribeToBugReports() {
   };
 }
 subscribeToBugReports();
+// One-time initial cache populate so the report tab works on a fresh page load
+// (setTab/sidebarNav only trigger this on explicit navigation, not on reload).
+loadBugReportsFromSupabase().then(() => { if (state.tab === "report") render(); });
 
 // --- SUPABASE AUTH (admin only) ---
 const ADMIN_SESSION_KEY = "trainerwire_admin_session";
