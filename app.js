@@ -2081,24 +2081,45 @@ function renderBugReportFilterChips() {
 
 function renderBugReportCard(report) {
   const th = t(darkMode);
+  const admin = isAdmin();
   const typeLabel = BUG_TYPE_LABELS[report.report_type] || report.report_type;
   const sectionLabel = BUG_SECTION_LABELS[report.section] || report.section;
   const meta = `${typeLabel} · ${sectionLabel}`;
   const reporter = report.reporter_name ? `— ${esc(report.reporter_name)} · ` : "";
   const date = relativeDate(report.created_at);
   const shot = report.screenshot_url
-    ? `<img src="${esc(report.screenshot_url)}" data-url="${esc(report.screenshot_url)}" onclick="openScreenshotLightbox(this.getAttribute('data-url'))" style="width:80px;height:80px;object-fit:cover;border-radius:8px;cursor:zoom-in;border:1.5px solid ${th.border};margin-top:10px;display:block" alt="Screenshot" onerror="this.style.display='none'" />`
+    ? `<img src="${escAttr(report.screenshot_url)}" data-url="${escAttr(report.screenshot_url)}" onclick="openScreenshotLightbox(this.getAttribute('data-url'))" style="width:80px;height:80px;object-fit:cover;border-radius:8px;cursor:zoom-in;border:1.5px solid ${th.border};margin-top:10px;display:block" alt="Screenshot" onerror="this.style.display='none'" />`
     : "";
-  const note = report.admin_note ? `<div style="margin-top:8px;padding:8px 10px;border-radius:8px;background:${th.bg};border:1px solid ${th.border};font-size:12px;color:${th.textSecondary};line-height:1.5"><span style="font-weight:700;color:${th.text}">✎ Admin note: </span>${esc(report.admin_note)}</div>` : "";
+
+  // Public statuses only — pending lives in the admin queue, not here.
+  const publicStatusKeys = ["acknowledged","fixing","fixed","wont_fix","duplicate","not_a_bug"];
+  const currentMeta = BUG_STATUS_META[report.status] || BUG_STATUS_META.acknowledged;
+  const statusControl = admin
+    ? `<select onchange="this.disabled=true;updateBugReportStatus('${report.id}', this.value)" style="padding:4px 10px;border-radius:999px;border:1.5px solid ${currentMeta.color};background:${currentMeta.color};color:#fff;font-size:11px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase;cursor:pointer;font-family:inherit;appearance:none;-webkit-appearance:none;padding-right:22px;background-image:url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'><path d='M6 9l6 6 6-6'/></svg>\");background-repeat:no-repeat;background-position:right 6px center;background-size:10px">
+        ${publicStatusKeys.map(s => `<option value="${s}" ${s === report.status ? "selected" : ""} style="background:#fff;color:#000">${BUG_STATUS_META[s].label}</option>`).join("")}
+      </select>`
+    : renderBugReportStatusPill(report.status);
+
+  const adminNoteEditor = admin
+    ? `<div style="margin-top:10px">
+        <input type="text" placeholder="Admin note (optional) — saved on blur" value="${escAttr(report.admin_note || "")}" onblur="this.onblur=null;updateBugReportAdminNote('${report.id}', this.value)" style="width:100%;padding:8px 10px;border-radius:8px;border:1.5px solid ${th.border};background:${th.bg};color:${th.text};font-size:12px;font-family:inherit;outline:none;box-sizing:border-box" />
+      </div>`
+    : (report.admin_note ? `<div style="margin-top:8px;padding:8px 10px;border-radius:8px;background:${th.bg};border:1px solid ${th.border};font-size:12px;color:${th.textSecondary};line-height:1.5"><span style="font-weight:700;color:${th.text}">✎ Admin note: </span>${esc(report.admin_note)}</div>` : "");
+
+  const adminDelete = admin
+    ? `<button onclick="this.disabled=true;deleteBugReport('${report.id}')" title="Delete report" aria-label="Delete report" style="background:none;border:none;color:${th.textMuted};font-size:14px;cursor:pointer;padding:8px;margin-left:auto;transition:color 0.15s ease" onmouseenter="this.style.color='#E74C3C'" onmouseleave="this.style.color='${th.textMuted}'">✕</button>`
+    : "";
+
   return `<div style="padding:14px 16px;background:${th.surface};border:1.5px solid ${th.border};border-radius:14px">
     <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-      ${renderBugReportStatusPill(report.status)}
+      ${statusControl}
       <span style="font-size:12px;font-weight:600;color:${th.textMuted}">${esc(meta)}</span>
+      ${adminDelete}
     </div>
     <div style="margin-top:10px;font-size:14px;color:${th.text};line-height:1.55;white-space:pre-wrap;word-break:break-word">${esc(report.description)}</div>
     ${shot}
     <div style="margin-top:10px;font-size:11px;color:${th.textFaint}">${reporter}${date}</div>
-    ${note}
+    ${adminNoteEditor}
   </div>`;
 }
 
@@ -2111,7 +2132,7 @@ function renderPendingQueueCard(report) {
   // Reporter/date live in the header row (right-aligned) rather than the bottom row
   // used by renderBugReportCard, so the bottom is free for Approve/Delete buttons.
   const shot = report.screenshot_url
-    ? `<img src="${esc(report.screenshot_url)}" data-url="${esc(report.screenshot_url)}" onclick="openScreenshotLightbox(this.getAttribute('data-url'))" style="width:80px;height:80px;object-fit:cover;border-radius:8px;cursor:zoom-in;border:1.5px solid ${th.border};margin-top:10px;display:block" alt="Screenshot" onerror="this.style.display='none'" />`
+    ? `<img src="${escAttr(report.screenshot_url)}" data-url="${escAttr(report.screenshot_url)}" onclick="openScreenshotLightbox(this.getAttribute('data-url'))" style="width:80px;height:80px;object-fit:cover;border-radius:8px;cursor:zoom-in;border:1.5px solid ${th.border};margin-top:10px;display:block" alt="Screenshot" onerror="this.style.display='none'" />`
     : "";
   return `<div style="padding:14px 16px;background:${th.surface};border:1.5px solid #F1C40F;border-left-width:6px;border-radius:14px">
     <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
@@ -2397,6 +2418,15 @@ function esc(str) {
   const div = document.createElement("div");
   div.textContent = str;
   return div.innerHTML;
+}
+
+// Safe for use inside double-quoted HTML attribute values (escapes `"` in addition to &<>).
+function escAttr(str) {
+  return String(str ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 }
 
 // --- COUNTDOWN TIMER ---
@@ -6150,7 +6180,7 @@ function render() {
   </div>`;
 
   const adminLinkHTML = isAdmin()
-    ? `<a onclick="adminLogout()" style="color:${th.textMuted};cursor:pointer;text-decoration:underline;font-size:${isMobile ? 11 : 12}px;margin-left:14px" title="Signed in as ${esc(getAdminEmail() || "")}">Sign out</a>`
+    ? `<a onclick="adminLogout()" style="color:${th.textMuted};cursor:pointer;text-decoration:underline;font-size:${isMobile ? 11 : 12}px;margin-left:14px" title="Signed in as ${escAttr(getAdminEmail() || "")}">Sign out</a>`
     : `<a onclick="openAdminLogin()" style="color:${th.textFaint};cursor:pointer;text-decoration:underline;font-size:${isMobile ? 11 : 12}px;margin-left:14px">Admin</a>`;
   const footerHTML = `<footer style="text-align:center;padding:${isMobile ? "20px 16px" : "28px 24px"};font-size:${isMobile ? 11 : 12}px;color:${th.textFaint};font-weight:500;border-top:1px solid ${th.footerBorder}">
     ${COMMUNITY_NAME} \u00B7 v${APP_VERSION} \u00B7 Not affiliated with Niantic, The Pok\u00E9mon Company, or Nintendo
