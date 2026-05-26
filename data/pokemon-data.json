@@ -216,6 +216,11 @@
       "Ice"
     ]
   },
+  "Axew": {
+    "types": [
+      "Dragon"
+    ]
+  },
   "Azelf": {
     "types": [
       "Psychic"
@@ -374,6 +379,12 @@
     "types": [
       "Steel",
       "Psychic"
+    ]
+  },
+  "Budew": {
+    "types": [
+      "Grass",
+      "Poison"
     ]
   },
   "Buizel": {
@@ -608,6 +619,11 @@
   "Conkeldurr": {
     "types": [
       "Fighting"
+    ]
+  },
+  "Corphish": {
+    "types": [
+      "Water"
     ]
   },
   "Corsola": {
@@ -857,6 +873,11 @@
       "Psychic"
     ]
   },
+  "Druddigon": {
+    "types": [
+      "Dragon"
+    ]
+  },
   "Dugtrio": {
     "types": [
       "Ground"
@@ -1009,6 +1030,18 @@
     "types": [
       "Ground",
       "Steel"
+    ]
+  },
+  "Exeggcute": {
+    "types": [
+      "Grass",
+      "Psychic"
+    ]
+  },
+  "Exeggutor": {
+    "types": [
+      "Grass",
+      "Psychic"
     ]
   },
   "Falinks": {
@@ -1720,6 +1753,11 @@
     "cpBoost": "2034–2131",
     "weather": "Rainy or Partly Cloudy"
   },
+  "Klawf": {
+    "types": [
+      "Rock"
+    ]
+  },
   "Klink": {
     "types": [
       "Steel"
@@ -1881,6 +1919,12 @@
   "Loudred": {
     "types": [
       "Normal"
+    ]
+  },
+  "Lucario": {
+    "types": [
+      "Fighting",
+      "Steel"
     ]
   },
   "Lugia": {
@@ -3990,6 +4034,11 @@
       "Dragon"
     ]
   },
+  "Tyrogue": {
+    "types": [
+      "Fighting"
+    ]
+  },
   "Unown": {
     "types": [
       "Psychic"
@@ -4191,6 +4240,11 @@
     "types": [
       "Bug",
       "Grass"
+    ]
+  },
+  "Wynaut": {
+    "types": [
+      "Psychic"
     ]
   },
   "Xerneas": {
