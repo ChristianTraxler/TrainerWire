@@ -1722,6 +1722,83 @@ async function supabaseAuthHeaders(extra) {
   return base;
 }
 
+// --- ADMIN LOGIN UI ---
+let _adminLoginVisible = false;
+let _adminLoginSubmitting = false;
+let _adminLoginError = ""; // "" or an error message
+let _adminLoginEmailDraft = ""; // preserved across re-renders so failed login keeps the email field populated
+
+function openAdminLogin() {
+  _adminLoginVisible = true;
+  _adminLoginError = "";
+  render();
+  // Focus after the next paint so the freshly-rendered input exists.
+  requestAnimationFrame(() => {
+    const el = document.getElementById("admin-login-email");
+    if (el) el.focus();
+  });
+}
+function closeAdminLogin() {
+  _adminLoginVisible = false;
+  _adminLoginSubmitting = false;
+  _adminLoginError = "";
+  _adminLoginEmailDraft = "";
+  render();
+}
+
+async function submitAdminLogin() {
+  if (_adminLoginSubmitting) return;
+  const emailEl = document.getElementById("admin-login-email");
+  const passEl = document.getElementById("admin-login-password");
+  if (!emailEl || !passEl) return;
+  const email = emailEl.value.trim();
+  const password = passEl.value;
+  _adminLoginEmailDraft = email; // preserve across re-renders
+  if (!email || !password) {
+    _adminLoginError = "Please enter both email and password.";
+    render();
+    return;
+  }
+  _adminLoginSubmitting = true;
+  _adminLoginError = "";
+  render();
+  try {
+    await adminLoginRequest(email, password);
+    closeAdminLogin();
+  } catch (e) {
+    _adminLoginError = e.message || "Sign-in failed.";
+    _adminLoginSubmitting = false;
+    render();
+  }
+}
+
+function onAdminLoginKey(e) {
+  if (e.key === "Escape") { e.preventDefault(); closeAdminLogin(); return; }
+  if (e.key === "Enter")  { e.preventDefault(); submitAdminLogin(); }
+}
+
+function renderAdminLoginModal() {
+  if (!_adminLoginVisible) return "";
+  const th = t(darkMode);
+  const submitting = _adminLoginSubmitting;
+  return `<div onclick="closeAdminLogin()" style="position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px">
+    <div onclick="event.stopPropagation()" style="background:${th.surface};border:1.5px solid ${th.border};border-radius:18px;padding:22px;width:100%;max-width:380px;box-shadow:0 12px 40px rgba(0,0,0,0.3)">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <div style="font-size:16px;font-weight:800;color:${th.text}">🔐 Admin sign-in</div>
+        <button onclick="closeAdminLogin()" style="background:none;border:none;color:${th.textMuted};font-size:18px;cursor:pointer;padding:4px;line-height:1">✕</button>
+      </div>
+      <div>
+        <label style="display:block;font-size:13px;font-weight:700;color:${th.text};margin-bottom:6px">Email</label>
+        <input id="admin-login-email" type="email" autocomplete="email" value="${esc(_adminLoginEmailDraft)}" onkeydown="onAdminLoginKey(event)" placeholder="you@example.com" style="width:100%;padding:11px 14px;border-radius:10px;border:1.5px solid ${th.border};background:${th.bg};color:${th.text};font-size:14px;font-family:inherit;outline:none;box-sizing:border-box" />
+        <label style="display:block;font-size:13px;font-weight:700;color:${th.text};margin:12px 0 6px">Password</label>
+        <input id="admin-login-password" type="password" autocomplete="current-password" onkeydown="onAdminLoginKey(event)" placeholder="••••••••" style="width:100%;padding:11px 14px;border-radius:10px;border:1.5px solid ${th.border};background:${th.bg};color:${th.text};font-size:14px;font-family:inherit;outline:none;box-sizing:border-box" />
+        ${_adminLoginError ? `<div style="margin-top:8px;font-size:12px;color:#E74C3C">${esc(_adminLoginError)}</div>` : ""}
+        <button onclick="submitAdminLogin()" ${submitting ? "disabled" : ""} style="margin-top:14px;width:100%;padding:12px;border-radius:10px;border:none;background:linear-gradient(135deg,#E74C3C,#F39C12);color:#fff;font-size:14px;font-weight:700;cursor:${submitting ? "wait" : "pointer"};font-family:inherit;opacity:${submitting ? 0.7 : 1}">${submitting ? "Signing in..." : "Sign in"}</button>
+      </div>
+    </div>
+  </div>`;
+}
+
 // --- POKEMON AUTOCOMPLETE ---
 const DEX_NAMES = Object.keys(DEX).sort();
 function onPokemonInput(e) {
@@ -5662,9 +5739,12 @@ function render() {
     <div style="display:inline-block;animation:tickerScroll 60s linear infinite;font-size:${isMobile ? 11 : 13}px;font-weight:600;color:#fff;letter-spacing:0.3px;line-height:1">${tickerContent}${tickerContent}</div>
   </div>`;
 
+  const adminLinkHTML = isAdmin()
+    ? `<a onclick="adminLogout()" style="color:${th.textMuted};cursor:pointer;text-decoration:underline;font-size:${isMobile ? 11 : 12}px;margin-left:14px" title="Signed in as ${esc(getAdminEmail() || "")}">Sign out</a>`
+    : `<a onclick="openAdminLogin()" style="color:${th.textFaint};cursor:pointer;text-decoration:underline;font-size:${isMobile ? 11 : 12}px;margin-left:14px">Admin</a>`;
   const footerHTML = `<footer style="text-align:center;padding:${isMobile ? "20px 16px" : "28px 24px"};font-size:${isMobile ? 11 : 12}px;color:${th.textFaint};font-weight:500;border-top:1px solid ${th.footerBorder}">
     ${COMMUNITY_NAME} \u00B7 v${APP_VERSION} \u00B7 Not affiliated with Niantic, The Pok\u00E9mon Company, or Nintendo
-    <div style="margin-top:8px"><a onclick="setTab('report')" style="color:${th.textMuted};cursor:pointer;text-decoration:underline;font-size:${isMobile ? 11 : 12}px">Report a Bug or Issue</a></div>
+    <div style="margin-top:8px"><a onclick="setTab('report')" style="color:${th.textMuted};cursor:pointer;text-decoration:underline;font-size:${isMobile ? 11 : 12}px">Report a Bug or Issue</a>${adminLinkHTML}</div>
   </footer>`;
 
   const scrollTopBtn = `<button id="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:${isMobile ? 20 : 28}px;right:${isMobile ? 16 : 28}px;width:${isMobile ? 44 : 48}px;height:${isMobile ? 44 : 48}px;border-radius:50%;background:linear-gradient(135deg,#E74C3C,#F39C12);border:none;box-shadow:0 4px 18px rgba(231,76,60,0.35);cursor:pointer;display:none;align-items:center;justify-content:center;z-index:200;transition:opacity 0.4s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);font-family:inherit;opacity:0;transform:translateY(20px) scale(0.8)" onmouseenter="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 24px rgba(231,76,60,0.5)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='0 4px 18px rgba(231,76,60,0.35)'"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg></button>`;
@@ -5677,7 +5757,7 @@ function render() {
 
   appEl.innerHTML = `${sidebarHTML}<div style="min-height:100vh;display:flex;flex-direction:column;background:${th.bg};font-family:'Outfit','DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;color:${th.text};width:100%">
     ${headerHTML}${tickerHTML}<div style="flex:1">${content}</div>${footerHTML}
-  </div>${scrollTopBtn}`;
+  </div>${scrollTopBtn}${renderAdminLoginModal()}`;
 
   // Swap new logo img elements with the preserved originals to avoid image flash
   if (existingLogos.length) {
