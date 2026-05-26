@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.0";
+const APP_VERSION = "3.01";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -1612,45 +1612,47 @@ async function loadNestsFromSupabase() {
 function loadNests() { return _nestsCache; }
 
 // --- SUPABASE REALTIME ---
+let _nestsWS = null;
 function subscribeToNests() {
-  const ws = new WebSocket(`${SUPABASE_URL.replace("https://","wss://")}/realtime/v1/websocket?apikey=${SUPABASE_KEY}&vsn=1.0.0`);
+  _nestsWS = new WebSocket(`${SUPABASE_URL.replace("https://","wss://")}/realtime/v1/websocket?apikey=${SUPABASE_KEY}&vsn=1.0.0`);
   let heartbeat;
-  ws.onopen = () => {
-    ws.send(JSON.stringify({ topic: "realtime:public:nests", event: "phx_join", payload: { config: { broadcast: { self: true }, postgres_changes: [{ event: "*", schema: "public", table: "nests" }] } }, ref: "1" }));
-    heartbeat = setInterval(() => ws.send(JSON.stringify({ topic: "phoenix", event: "heartbeat", payload: {}, ref: "hb" })), 30000);
+  _nestsWS.onopen = () => {
+    _nestsWS.send(JSON.stringify({ topic: "realtime:public:nests", event: "phx_join", payload: { config: { broadcast: { self: true }, postgres_changes: [{ event: "*", schema: "public", table: "nests" }] } }, ref: "1" }));
+    heartbeat = setInterval(() => _nestsWS.send(JSON.stringify({ topic: "phoenix", event: "heartbeat", payload: {}, ref: "hb" })), 30000);
   };
-  ws.onmessage = (e) => {
+  _nestsWS.onmessage = (e) => {
     let msg;
     try { msg = JSON.parse(e.data); } catch { return; }
     if (msg.event === "postgres_changes") {
       loadNestsFromSupabase().then(() => { if (state.tab === "nests") render(); });
     }
   };
-  ws.onclose = () => {
+  _nestsWS.onclose = () => {
     clearInterval(heartbeat);
-    ws.onclose = null; // prevent double-fire stacking reconnect timers
+    _nestsWS.onclose = null; // prevent double-fire stacking reconnect timers
     setTimeout(subscribeToNests, 3000);
   };
 }
 subscribeToNests();
 
+let _bugReportsWS = null;
 function subscribeToBugReports() {
-  const ws = new WebSocket(`${SUPABASE_URL.replace("https://","wss://")}/realtime/v1/websocket?apikey=${SUPABASE_KEY}&vsn=1.0.0`);
+  _bugReportsWS = new WebSocket(`${SUPABASE_URL.replace("https://","wss://")}/realtime/v1/websocket?apikey=${SUPABASE_KEY}&vsn=1.0.0`);
   let heartbeat;
-  ws.onopen = () => {
-    ws.send(JSON.stringify({ topic: "realtime:public:bug_reports", event: "phx_join", payload: { config: { broadcast: { self: true }, postgres_changes: [{ event: "*", schema: "public", table: "bug_reports" }] } }, ref: "1" }));
-    heartbeat = setInterval(() => ws.send(JSON.stringify({ topic: "phoenix", event: "heartbeat", payload: {}, ref: "hb-br" })), 30000);
+  _bugReportsWS.onopen = () => {
+    _bugReportsWS.send(JSON.stringify({ topic: "realtime:public:bug_reports", event: "phx_join", payload: { config: { broadcast: { self: true }, postgres_changes: [{ event: "*", schema: "public", table: "bug_reports" }] } }, ref: "1" }));
+    heartbeat = setInterval(() => _bugReportsWS.send(JSON.stringify({ topic: "phoenix", event: "heartbeat", payload: {}, ref: "hb-br" })), 30000);
   };
-  ws.onmessage = (e) => {
+  _bugReportsWS.onmessage = (e) => {
     let msg;
     try { msg = JSON.parse(e.data); } catch { return; }
     if (msg.event === "postgres_changes") {
       loadBugReportsFromSupabase().then(() => { if (state.tab === "report") render(); });
     }
   };
-  ws.onclose = () => {
+  _bugReportsWS.onclose = () => {
     clearInterval(heartbeat);
-    ws.onclose = null; // prevent double-fire stacking reconnect timers
+    _bugReportsWS.onclose = null; // prevent double-fire stacking reconnect timers
     setTimeout(subscribeToBugReports, 3000);
   };
 }
@@ -1658,6 +1660,27 @@ subscribeToBugReports();
 // One-time initial cache populate so the report tab works on a fresh page load
 // (setTab/sidebarNav only trigger this on explicit navigation, not on reload).
 loadBugReportsFromSupabase().then(() => { if (state.tab === "report") render(); });
+
+// PWA / mobile: when the app comes back to foreground, the WebSocket may be in
+// a zombie state (iOS suspends background JS). Refetch caches and force-reconnect
+// the sockets so the user sees fresh data on resume.
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState !== "visible") return;
+  // Refetch caches
+  loadBugReportsFromSupabase().then(() => { if (state.tab === "report") render(); });
+  loadNestsFromSupabase().then(() => { if (state.tab === "nests") render(); });
+  // Force-close any stale sockets — the onclose handler will trigger reconnect after 3s
+  try {
+    if (_bugReportsWS && _bugReportsWS.readyState !== WebSocket.OPEN && _bugReportsWS.readyState !== WebSocket.CONNECTING) {
+      _bugReportsWS.close();
+    }
+  } catch {}
+  try {
+    if (_nestsWS && _nestsWS.readyState !== WebSocket.OPEN && _nestsWS.readyState !== WebSocket.CONNECTING) {
+      _nestsWS.close();
+    }
+  } catch {}
+});
 
 // --- SUPABASE AUTH (admin only) ---
 const ADMIN_SESSION_KEY = "trainerwire_admin_session";
@@ -2098,7 +2121,7 @@ function renderBugReportCard(report) {
   const publicStatusKeys = ["acknowledged","fixing","fixed","wont_fix","duplicate","not_a_bug"];
   const currentMeta = BUG_STATUS_META[report.status] || BUG_STATUS_META.acknowledged;
   const statusControl = admin
-    ? `<select onchange="this.disabled=true;updateBugReportStatus('${report.id}', this.value)" style="padding:0 18px 0 8px;height:20px;line-height:18px;border-radius:999px;border:1.5px solid ${currentMeta.color};background:${currentMeta.color};color:#fff;font-size:10px;font-weight:700;letter-spacing:0.2px;text-transform:uppercase;cursor:pointer;font-family:inherit;appearance:none;-webkit-appearance:none;background-image:url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'><path d='M6 9l6 6 6-6'/></svg>\");background-repeat:no-repeat;background-position:right 4px center;background-size:8px;box-sizing:border-box;vertical-align:middle">
+    ? `<select onchange="this.disabled=true;updateBugReportStatus('${report.id}', this.value)" style="padding:2px 18px 2px 10px;min-height:0;height:auto;line-height:1;border-radius:999px;border:1.5px solid ${currentMeta.color};background-color:${currentMeta.color};color:#fff;font-size:10px;font-weight:700;letter-spacing:0.2px;text-transform:uppercase;cursor:pointer;font-family:inherit;appearance:none;-webkit-appearance:none;background-image:url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'><path d='M6 9l6 6 6-6'/></svg>\");background-repeat:no-repeat;background-position:right 4px center;background-size:8px;box-sizing:content-box;vertical-align:middle;display:inline-block">
         ${publicStatusKeys.map(s => `<option value="${s}" ${s === report.status ? "selected" : ""} style="background:#fff;color:#000">${BUG_STATUS_META[s].label}</option>`).join("")}
       </select>`
     : renderBugReportStatusPill(report.status);
