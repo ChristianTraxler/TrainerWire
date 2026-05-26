@@ -5945,69 +5945,74 @@ function render() {
     // Report tab
     let reportTabHTML = "";
     if (state.tab === "report") {
-      reportTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px;max-width:640px;margin:0 auto;width:100%">
+      const isWide = !isMobile && breakpoint === "desktop";
+      reportTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px;max-width:${isWide ? "1180px" : "640px"};margin:0 auto;width:100%">
         <div style="text-align:center;padding:10px">
           <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text}">\uD83D\uDCDD Report an Issue</h2>
           <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Found a bug or incorrect info? Let us know and we'll fix it!</p>
         </div>
-        <div style="padding:${isMobile ? "20px 18px" : "28px 28px"};background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;display:flex;flex-direction:column;gap:${isMobile ? 14 : 18}px;box-shadow:${th.shadow}">
-          <div>
-            <label style="display:block;font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:6px">Report Type</label>
-            <select id="report-type" onchange="updateReportSection()" style="width:100%;padding:${isMobile ? "11px 14px" : "12px 16px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.bg};color:${th.text};font-size:${isMobile ? 14 : 15}px;font-family:inherit;outline:none;cursor:pointer;appearance:auto">
-              <option value="bug">Bug / Something Broken</option>
-              <option value="missing">Missing Event or Data</option>
-              <option value="suggestion">Suggestion / Feature Request</option>
-              <option value="wrong-info">Wrong Information</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          <div id="report-section-wrapper">
-            <label id="report-section-label" style="display:block;font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:6px">Which page or section?</label>
-            <select id="report-section" style="width:100%;padding:${isMobile ? "11px 14px" : "12px 16px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.bg};color:${th.text};font-size:${isMobile ? 14 : 15}px;font-family:inherit;outline:none;cursor:pointer;appearance:auto">
-              <option value="calendar">Calendar</option>
-              <option value="store">Deal Check</option>
-              <option value="events">Events</option>
-              <option value="general">General / Sitewide</option>
-              <option value="max-battles">Max Battles</option>
-              <option value="nests">Nests</option>
-              <option value="news">News</option>
-              <option value="pokedex">Pok\u00E9Dex</option>
-              <option value="tools">PoGO Tools</option>
-              <option value="raids">Raids</option>
-            </select>
-          </div>
-          <div>
-            <label style="display:block;font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:6px">Description <span style="color:${th.textMuted};font-weight:500">(be as specific as possible)</span></label>
-            <textarea id="report-description" rows="5" placeholder="Describe the issue or what's wrong..." style="width:100%;padding:${isMobile ? "11px 14px" : "12px 16px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.bg};color:${th.text};font-size:${isMobile ? 14 : 15}px;font-family:inherit;outline:none;resize:vertical;box-sizing:border-box;line-height:1.5"></textarea>
-          </div>
-          <div>
-            <label style="display:block;font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:6px">Screenshot <span style="color:${th.textMuted};font-weight:500">(optional)</span></label>
-            <div id="report-photo-drop" onclick="document.getElementById('report-photo').click()" style="width:100%;padding:${isMobile ? "20px 14px" : "24px 16px"};border-radius:12px;border:2px dashed ${th.border};background:${th.bg};cursor:pointer;text-align:center;box-sizing:border-box;transition:border-color 0.2s ease" onmouseenter="this.style.borderColor='#E74C3C'" onmouseleave="this.style.borderColor='${th.border}'">
-              <div id="report-photo-preview" style="display:none;margin-bottom:10px"></div>
-              <div id="report-photo-prompt" style="display:flex;flex-direction:column;align-items:center;gap:6px">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="${th.textMuted}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-                <span style="font-size:${isMobile ? 13 : 14}px;color:${th.textMuted};font-weight:500">Tap to add a screenshot</span>
-                <span style="font-size:${isMobile ? 10 : 11}px;color:${th.textFaint}">PNG, JPG, or GIF \u00B7 Max 15 MB</span>
+        <div style="display:${isWide ? "grid" : "flex"};${isWide ? "grid-template-columns:460px 1fr;gap:24px;align-items:start" : "flex-direction:column;gap:20px"}">
+          <div${isWide ? ` style="position:sticky;top:96px"` : ""}>
+            <div style="padding:${isMobile ? "20px 18px" : "28px 28px"};background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;display:flex;flex-direction:column;gap:${isMobile ? 14 : 18}px;box-shadow:${th.shadow}">
+              <div>
+                <label style="display:block;font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:6px">Report Type</label>
+                <select id="report-type" onchange="updateReportSection()" style="width:100%;padding:${isMobile ? "11px 14px" : "12px 16px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.bg};color:${th.text};font-size:${isMobile ? 14 : 15}px;font-family:inherit;outline:none;cursor:pointer;appearance:auto">
+                  <option value="bug">Bug / Something Broken</option>
+                  <option value="missing">Missing Event or Data</option>
+                  <option value="suggestion">Suggestion / Feature Request</option>
+                  <option value="wrong-info">Wrong Information</option>
+                  <option value="other">Other</option>
+                </select>
               </div>
+              <div id="report-section-wrapper">
+                <label id="report-section-label" style="display:block;font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:6px">Which page or section?</label>
+                <select id="report-section" style="width:100%;padding:${isMobile ? "11px 14px" : "12px 16px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.bg};color:${th.text};font-size:${isMobile ? 14 : 15}px;font-family:inherit;outline:none;cursor:pointer;appearance:auto">
+                  <option value="calendar">Calendar</option>
+                  <option value="store">Deal Check</option>
+                  <option value="events">Events</option>
+                  <option value="general">General / Sitewide</option>
+                  <option value="max-battles">Max Battles</option>
+                  <option value="nests">Nests</option>
+                  <option value="news">News</option>
+                  <option value="pokedex">Pok\u00E9Dex</option>
+                  <option value="tools">PoGO Tools</option>
+                  <option value="raids">Raids</option>
+                </select>
+              </div>
+              <div>
+                <label style="display:block;font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:6px">Description <span style="color:${th.textMuted};font-weight:500">(be as specific as possible)</span></label>
+                <textarea id="report-description" rows="5" placeholder="Describe the issue or what's wrong..." style="width:100%;padding:${isMobile ? "11px 14px" : "12px 16px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.bg};color:${th.text};font-size:${isMobile ? 14 : 15}px;font-family:inherit;outline:none;resize:vertical;box-sizing:border-box;line-height:1.5"></textarea>
+              </div>
+              <div>
+                <label style="display:block;font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:6px">Screenshot <span style="color:${th.textMuted};font-weight:500">(optional)</span></label>
+                <div id="report-photo-drop" onclick="document.getElementById('report-photo').click()" style="width:100%;padding:${isMobile ? "20px 14px" : "24px 16px"};border-radius:12px;border:2px dashed ${th.border};background:${th.bg};cursor:pointer;text-align:center;box-sizing:border-box;transition:border-color 0.2s ease" onmouseenter="this.style.borderColor='#E74C3C'" onmouseleave="this.style.borderColor='${th.border}'">
+                  <div id="report-photo-preview" style="display:none;margin-bottom:10px"></div>
+                  <div id="report-photo-prompt" style="display:flex;flex-direction:column;align-items:center;gap:6px">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="${th.textMuted}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                    <span style="font-size:${isMobile ? 13 : 14}px;color:${th.textMuted};font-weight:500">Tap to add a screenshot</span>
+                    <span style="font-size:${isMobile ? 10 : 11}px;color:${th.textFaint}">PNG, JPG, or GIF \u00B7 Max 15 MB</span>
+                  </div>
+                </div>
+                <input id="report-photo" type="file" accept="image/*" style="display:none" onchange="previewReportPhoto(this)" />
+              </div>
+              <div>
+                <label style="display:block;font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:6px">Your Name <span style="color:${th.textMuted};font-weight:500">(optional)</span></label>
+                <input id="report-name" type="text" placeholder="Trainer name or nickname" style="width:100%;padding:${isMobile ? "11px 14px" : "12px 16px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.bg};color:${th.text};font-size:${isMobile ? 14 : 15}px;font-family:inherit;outline:none;box-sizing:border-box" />
+              </div>
+              <button onclick="submitReport()" ${_reportSubmitting ? "disabled" : ""} style="width:100%;padding:${isMobile ? "13px" : "14px"};border-radius:12px;border:none;background:linear-gradient(135deg,#E74C3C,#F39C12);color:#fff;font-size:${isMobile ? 15 : 16}px;font-weight:700;cursor:${_reportSubmitting ? "wait" : "pointer"};font-family:inherit;transition:all 0.2s ease;letter-spacing:0.3px;opacity:${_reportSubmitting ? 0.7 : 1}" ${_reportSubmitting ? "" : `onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(231,76,60,0.3)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'"`}>${_reportSubmitting ? "Submitting..." : "Submit Report"}</button>
+              ${_reportSubmitMessage.text ? `<div style="padding:10px 14px;border-radius:10px;font-size:13px;line-height:1.5;background:${_reportSubmitMessage.type === "success" ? "rgba(46,204,113,0.12)" : "rgba(231,76,60,0.12)"};color:${_reportSubmitMessage.type === "success" ? "#2ECC71" : "#E74C3C"};border:1px solid ${_reportSubmitMessage.type === "success" ? "rgba(46,204,113,0.3)" : "rgba(231,76,60,0.3)"}">${esc(_reportSubmitMessage.text)}</div>` : ""}
             </div>
-            <input id="report-photo" type="file" accept="image/*" style="display:none" onchange="previewReportPhoto(this)" />
+            <div style="text-align:center;font-size:${isMobile ? 11 : 12}px;color:${th.textFaint};line-height:1.6;padding:14px 8px 0">
+              Thank you for helping us keep TrainerWire accurate!<br>Prefer email? Send it to <a href="mailto:${REPORT_EMAIL}" style="color:${th.textMuted}">${REPORT_EMAIL}</a>.
+            </div>
           </div>
           <div>
-            <label style="display:block;font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:6px">Your Name <span style="color:${th.textMuted};font-weight:500">(optional)</span></label>
-            <input id="report-name" type="text" placeholder="Trainer name or nickname" style="width:100%;padding:${isMobile ? "11px 14px" : "12px 16px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.bg};color:${th.text};font-size:${isMobile ? 14 : 15}px;font-family:inherit;outline:none;box-sizing:border-box" />
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+              <h3 style="margin:0;font-size:${isMobile ? 16 : 18}px;font-weight:800;color:${th.text}">Recent Reports</h3>
+              ${renderBugReportFilterChips()}
+            </div>
+            ${renderBugReportsList()}
           </div>
-          <button onclick="submitReport()" ${_reportSubmitting ? "disabled" : ""} style="width:100%;padding:${isMobile ? "13px" : "14px"};border-radius:12px;border:none;background:linear-gradient(135deg,#E74C3C,#F39C12);color:#fff;font-size:${isMobile ? 15 : 16}px;font-weight:700;cursor:${_reportSubmitting ? "wait" : "pointer"};font-family:inherit;transition:all 0.2s ease;letter-spacing:0.3px;opacity:${_reportSubmitting ? 0.7 : 1}" ${_reportSubmitting ? "" : `onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(231,76,60,0.3)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'"`}>${_reportSubmitting ? "Submitting..." : "Submit Report"}</button>
-            ${_reportSubmitMessage.text ? `<div style="margin-top:10px;padding:10px 14px;border-radius:10px;font-size:13px;line-height:1.5;background:${_reportSubmitMessage.type === "success" ? "rgba(46,204,113,0.12)" : "rgba(231,76,60,0.12)"};color:${_reportSubmitMessage.type === "success" ? "#2ECC71" : "#E74C3C"};border:1px solid ${_reportSubmitMessage.type === "success" ? "rgba(46,204,113,0.3)" : "rgba(231,76,60,0.3)"}">${esc(_reportSubmitMessage.text)}</div>` : ""}
-        </div>
-        <div style="text-align:center;font-size:${isMobile ? 11 : 12}px;color:${th.textFaint};line-height:1.6;padding:0 8px">
-          Thank you for helping us keep TrainerWire accurate!<br>Prefer email? Send it to <a href="mailto:${REPORT_EMAIL}" style="color:${th.textMuted}">${REPORT_EMAIL}</a>.
-        </div>
-        <div style="margin-top:24px">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px">
-            <h3 style="margin:0;font-size:${isMobile ? 16 : 18}px;font-weight:800;color:${th.text}">Recent Reports</h3>
-            ${renderBugReportFilterChips()}
-          </div>
-          ${renderBugReportsList()}
         </div>
       </div>`;
     }
