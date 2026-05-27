@@ -289,6 +289,12 @@
       "Fighting"
     ]
   },
+  "Black Kyurem": {
+    "types": [
+      "Dragon",
+      "Ice"
+    ]
+  },
   "Blacephalon": {
     "types": [
       "Fire",
@@ -656,6 +662,18 @@
     "cpBoost": "1944–2041",
     "weather": "Windy"
   },
+  "Crowned Shield Zamazenta": {
+    "types": [
+      "Fighting",
+      "Steel"
+    ]
+  },
+  "Crowned Sword Zacian": {
+    "types": [
+      "Fairy",
+      "Steel"
+    ]
+  },
   "Croagunk": {
     "types": [
       "Poison",
@@ -716,6 +734,12 @@
       "Fire"
     ],
     "cp": "768–823"
+  },
+  "Dawn Wings Necrozma": {
+    "types": [
+      "Psychic",
+      "Ghost"
+    ]
   },
   "Decidueye": {
     "types": [
@@ -900,6 +924,12 @@
     "types": [
       "Steel",
       "Dragon"
+    ]
+  },
+  "Dusk Mane Necrozma": {
+    "types": [
+      "Psychic",
+      "Steel"
     ]
   },
   "Dusknoir": {
@@ -1736,6 +1766,12 @@
     "cpBoost": "2512–2626",
     "weather": "Sunny/Clear or Snow"
   },
+  "Keldeo (Resolute Forme)": {
+    "types": [
+      "Water",
+      "Fighting"
+    ]
+  },
   "Kingler": {
     "types": [
       "Water"
@@ -2190,6 +2226,18 @@
     ]
   },
   "Mega Charizard": {
+    "types": [
+      "Fire",
+      "Flying"
+    ]
+  },
+  "Mega Charizard X": {
+    "types": [
+      "Fire",
+      "Dragon"
+    ]
+  },
+  "Mega Charizard Y": {
     "types": [
       "Fire",
       "Flying"
@@ -3261,6 +3309,12 @@
     "cpBoost": "1176–1311",
     "weather": "Sunny, Fog"
   },
+  "Shadow Blaziken": {
+    "types": [
+      "Fire",
+      "Fighting"
+    ]
+  },
   "Shadow Cacnea": {
     "types": [
       "Grass"
@@ -3282,6 +3336,11 @@
     "cp": "1494–1633",
     "cpBoost": "1867–2041",
     "weather": "Windy"
+  },
+  "Shadow Darkrai": {
+    "types": [
+      "Dark"
+    ]
   },
   "Shadow Dewpider": {
     "types": [
@@ -3343,6 +3402,12 @@
     "cpBoost": "1191–1326",
     "weather": "Sunny, Windy"
   },
+  "Shadow Heatran": {
+    "types": [
+      "Fire",
+      "Steel"
+    ]
+  },
   "Shadow Helioptile": {
     "types": [
       "Electric",
@@ -3388,6 +3453,17 @@
       "Ground"
     ]
   },
+  "Shadow Mewtwo": {
+    "types": [
+      "Psychic"
+    ]
+  },
+  "Shadow Moltres": {
+    "types": [
+      "Fire",
+      "Flying"
+    ]
+  },
   "Shadow Metagross": {
     "types": [
       "Steel",
@@ -3398,6 +3474,12 @@
     "types": [
       "Grass",
       "Fairy"
+    ]
+  },
+  "Shadow Palkia": {
+    "types": [
+      "Water",
+      "Dragon"
     ]
   },
   "Shadow Raikou": {
@@ -3448,6 +3530,12 @@
   "Shadow Tangrowth": {
     "types": [
       "Grass"
+    ]
+  },
+  "Shadow Thundurus (Therian Forme)": {
+    "types": [
+      "Electric",
+      "Flying"
     ]
   },
   "Shadow Weavile": {
@@ -3693,6 +3781,11 @@
     "cp": "1799–1882",
     "cpBoost": "2249–2353",
     "weather": "Partly Cloudy or Snow"
+  },
+  "Standard Mode Shadow Darmanitan": {
+    "types": [
+      "Fire"
+    ]
   },
   "Stantler": {
     "types": [
@@ -4217,6 +4310,12 @@
     "types": [
       "Bug",
       "Poison"
+    ]
+  },
+  "White Kyurem": {
+    "types": [
+      "Dragon",
+      "Ice"
     ]
   },
   "Wiglett": {
