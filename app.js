@@ -3190,6 +3190,21 @@ function dexForBossName(bossName) {
   const stripped = bossName.replace(/^(Mega |Shadow |Alolan |Galarian |Hisuian |Paldean )/, "").trim();
   return DEX[stripped];
 }
+// Look up a groupSize entry by cleaned boss name across all EVENTS. Returns the
+// first match — used by the news detail page to attach raid sizing data to
+// boss cards without duplicating the data on the announcement itself.
+function findGroupSizeForBoss(bossName) {
+  if (!bossName || !Array.isArray(EVENTS)) return null;
+  for (const ev of EVENTS) {
+    const gsList = ev && ev.details && ev.details.groupSize;
+    if (!gsList) continue;
+    const list = Array.isArray(gsList) ? gsList : [gsList];
+    for (const gs of list) {
+      if (gs && gs.bossName === bossName) return gs;
+    }
+  }
+  return null;
+}
 function findRaidBossInfosForDex(dexNum) {
   const matches = [];
   if (!Array.isArray(EVENTS)) return matches;
@@ -3940,12 +3955,14 @@ function renderNewsDetail(announcement, th) {
               const subtitleHTML = subtitle ? `<div style="margin-top:4px;font-size:${cardLayout ? 11 : 12}px;font-weight:600;color:${th.textSecondary};${cardLayout ? "text-align:center" : ""};font-style:italic">${esc(subtitle)}</div>` : "";
               const dateHTML = dates ? `<div style="margin-top:8px;font-size:${cardLayout ? 11 : 12}px;font-weight:700;color:${tagColor};${cardLayout ? "text-align:center" : ""};padding:4px 8px;background:${th.tagBg(announcement.tag)};border-radius:8px;align-self:stretch">${esc(dates)}</div>` : "";
               const cleanedName = cleanRaidLabel(itemName);
+              const matchedGroupSize = findGroupSizeForBoss(cleanedName);
+              const groupSizeHTML = matchedGroupSize ? renderGroupSizeCompact(matchedGroupSize, th, cardLayout) : "";
               if (cardLayout) {
-                return `<div style="border-radius:12px;background:${th.accentBgSubtle(tagColor)};border:1.5px solid ${th.border};flex:1 1 140px;min-width:140px;max-width:200px;display:flex;flex-direction:column">
+                return `<div style="border-radius:12px;background:${th.accentBgSubtle(tagColor)};border:1.5px solid ${th.border};flex:1 1 160px;min-width:160px;max-width:220px;display:flex;flex-direction:column">
                   <div style="display:flex;flex-direction:column;align-items:center;padding:12px 8px;font-size:13px;color:${th.textSecondary};line-height:1.45;text-align:center;flex:1">
                     ${imgEl}
                     <div style="margin-top:6px;font-weight:700;color:${th.text};font-size:13px">${esc(cleanedName)}</div>
-                    ${subtitleHTML}${typesHTML}${cpHTML}
+                    ${subtitleHTML}${typesHTML}${cpHTML}${groupSizeHTML}
                   </div>
                   ${dateHTML ? `<div style="padding:0 8px 10px 8px">${dateHTML}</div>` : ""}
                 </div>`;
@@ -3955,7 +3972,7 @@ function renderNewsDetail(announcement, th) {
                   ${imgEl || ""}
                   <div style="flex:1;min-width:0">
                     <div style="font-weight:700;color:${th.text}">${esc(cleanedName)}</div>
-                    ${subtitleHTML}${typesHTML}${cpHTML}
+                    ${subtitleHTML}${typesHTML}${cpHTML}${groupSizeHTML}
                     ${dates ? `<div style="margin-top:6px;font-size:11px;font-weight:700;color:${tagColor};padding:3px 8px;background:${th.tagBg(announcement.tag)};border-radius:8px;display:inline-block">${esc(dates)}</div>` : ""}
                   </div>
                 </div>
