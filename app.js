@@ -865,6 +865,78 @@ const EVENTS = [
 ];
 
 const ANNOUNCEMENTS = [
+  { id: 22, date: "2026-05-27", published: "2026-05-27", title: "GO Pass: June — Lugia & Timed Incubator Returns", tag: "News", url: "https://pokemongo.com/news/go-pass-june-2026", body: "June's GO Pass features a Lugia encounter (Shiny possible). The Timed Incubator returns as a GO Pass Deluxe reward. Deluxe ($7.99) or Deluxe + 10 Ranks ($9.99). Runs June 2 – July 7.", fullBody: "GO Pass: June runs Tuesday, June 2 at 10:00 a.m. to Tuesday, July 7 at 10:00 a.m. local time. The Timed Incubator returns as part of GO Pass Deluxe. Trainers automatically receive the free GO Pass on June 2 — rank up to earn encounters, Max Particles, and more.", sections: [
+    { heading: "Event Window", items: [
+      "Starts: Tuesday, June 2 at 10:00 AM local time",
+      "Ends: Tuesday, July 7 at 10:00 AM local time",
+      "Rewards expire: Thursday, July 9 at 10:00 AM local time"
+    ] },
+    { heading: "GO Pass (Free) Rewards", items: [
+      { text: "Encounter with Lugia (Shiny possible) ✨", img: "assets/pokemon-images/National-Dex/regular/Gen-2_Johto/0249.webp" },
+      { text: "Stardust", img: "assets/pokemon-images/Items/stardust_painted.png" },
+      { text: "XP", img: "assets/pokemon-images/Items/luckyegg.png" },
+      { text: "Max Particles", img: "assets/pokemon-images/Items/max-particles.png" },
+      { text: "And even more goodies as you rank up", img: "assets/pokemon-images/Items/rewardsIcon.png" }
+    ] },
+    { heading: "GO Pass Deluxe ($7.99)", items: [
+      { text: "Everything in the free track", img: "assets/pokemon-images/Items/go_pass_deluxe.webp" },
+      { text: "1 Timed Incubator (returning item — expires Tuesday, July 14, 2026 at 10:00 AM local time)", img: "assets/pokemon-images/Items/EggIncubatorTimed_Activated.png" },
+      { text: "1 Super Incubator", img: "assets/pokemon-images/Items/super_incubator.webp" },
+      { text: "Additional Pokémon encounters", img: "assets/pokemon-images/icons/QuestPokemonReward.png" },
+      { text: "And even more goodies", img: "assets/pokemon-images/Items/rewardsIcon.png" }
+    ] },
+    { heading: "GO Pass Deluxe + 10 Ranks ($9.99)", items: [
+      { text: "Everything in GO Pass Deluxe", img: "assets/pokemon-images/Items/go_pass_deluxe.webp" },
+      { text: "Auto-rank up enough GO Points to reach Rank 11 instantly", img: "assets/pokemon-images/Items/item_pass_point_01.png" }
+    ] },
+    { heading: "Web Store Gift with Purchase (Deluxe or Deluxe + 10 Ranks)", items: [
+      { text: "10 Ultra Balls", img: "assets/pokemon-images/Items/ultraball_sprite.png" },
+      { text: "5 Max Revives", img: "assets/pokemon-images/Items/Max-revive.png" },
+      { text: "1 Premium Battle Pass", img: "assets/pokemon-images/Items/premium-raid-pass.png" },
+      { text: "5 Max Potions", img: "assets/pokemon-images/Items/Max-potion.png" }
+    ] },
+    { heading: "GO Pass Deluxe: June Ultra Box (Web Store Exclusive)", items: [
+      { text: "20 Ultra Balls", img: "assets/pokemon-images/Items/ultraball_sprite.png" },
+      { text: "10 Max Revives", img: "assets/pokemon-images/Items/Max-revive.png" },
+      { text: "10 Max Potions", img: "assets/pokemon-images/Items/Max-potion.png" },
+      { text: "2 Premium Battle Passes", img: "assets/pokemon-images/Items/premium-raid-pass.png" },
+      { text: "1 Incubator", img: "assets/pokemon-images/Items/EggIncubatorIAP_Activated.png" },
+      { text: "1 Super Incubator", img: "assets/pokemon-images/Items/super_incubator.webp" }
+    ] },
+    { heading: "Tier 1 — Rank 1 Milestone", items: [
+      "1 additional Candy when trading Pokémon",
+      "Trainer Level 31+: 1 guaranteed Candy XL when trading Pokémon"
+    ] },
+    { heading: "Tier 2 — Rank 25 Milestone (Free)", items: [
+      "Open up to 40 Gifts per day",
+      "Receive up to 125 Gifts per day from spinning PokéStop and Gym Photo Discs",
+      "Hold 10 more Gifts in your Item Bag"
+    ] },
+    { heading: "Tier 2 — Rank 25 Milestone (Deluxe Upgrade)", items: [
+      "Open up to 50 Gifts per day",
+      "Receive up to 150 Gifts per day from spinning PokéStop and Gym Photo Discs",
+      "Hold up to 20 more Gifts in your Item Bag"
+    ] },
+    { heading: "Tier 3 — Rank 50 Milestone", items: [
+      "2× Daily Adventure Incense duration"
+    ] },
+    { heading: "Tier 4 — Rank 75 Milestone", items: [
+      "Increased XP from hatching Eggs",
+      "Increased Stardust from hatching Eggs"
+    ] },
+    { heading: "The Timed Incubator (Deluxe Reward)", items: [
+      "Expires Tuesday, July 14, 2026 at 10:00 AM local time, regardless of when you claimed it",
+      "If an Egg placed in the Timed Incubator has not hatched by expiration, it transfers to a new single-use Incubator to finish incubating",
+      "The replacement single-use Incubator disappears after the Egg hatches"
+    ] },
+    { heading: "Tips", items: [
+      "Lugia is the Diving Pokémon (Psychic/Flying) — Shiny Lugia is available, so check the encounter.",
+      "The Timed Incubator returns for the first time in months — Deluxe trainers should stack 7 km and 10 km Eggs to maximize use before July 14.",
+      "Web Store purchases activate the Deluxe pass as soon as GO Pass begins (June 2) — you get the gift-with-purchase bundle on top.",
+      "Note: unlike May's Suicune GO Pass, the June pass does NOT include PokéCoins as a rank reward — the Timed Incubator replaces them.",
+      "Claim all earned rewards before Thursday, July 9 at 10:00 AM — anything unclaimed will be lost."
+    ] }
+  ] },
   { id: 21, date: "2026-05-27", published: "2026-05-27", title: "June Content Update — Forever Forward", tag: "News", url: "https://pokemongo.com/news/june-2026-content-update", body: "June 2026's full content rundown — Featured Necrozma, Celesteela (Southern Hemisphere) and Kartana (Northern Hemisphere). Max Battles rotate Inkay → Electabuzz → Roggenrola → Hoothoot → Pidove. 5★ Raids run Reshiram → Zekrom → Necrozma → Celesteela/Kartana. Mega Raids feature Mega Audino, Mega Lopunny, Mega Scizor, and Mega Pidgeot. Shadow Dialga returns to Shadow Raids all month, plus Community Day, Mega Raid Day, Flying Taxi, and the Team Leader Quests.", fullBody: "Pokémon GO's June 2026 Content Update launches alongside the Forever Forward Season and the game's 10th Anniversary celebrations. Necrozma is the headline 5★ raid debut for the month, with Celesteela appearing in the Southern Hemisphere and Kartana appearing in the Northern Hemisphere for the closing week. Max Battles, Mega Raids, Raid Hours, Community Day, Mega Raid Day, the Flying Taxi event, and Shadow Dialga round out a packed schedule. All times are local unless otherwise specified.", sections: [
     { heading: "Featured Pokémon", icon: "✨", showImages: true, intro: "Part of the Pokémon GO 10th Anniversary · Forever Forward Season. If you're lucky, you might encounter a Shiny one!", items: [
       { name: "Necrozma ✨ (5★ Raid)" },
@@ -3021,10 +3093,15 @@ function renderRoutes(routes, th) {
 
 function renderDetailSection(title, emoji, items, color, th, showImages, noSparkles, groupSize) {
   if (!showImages) {
+    const renderItem = item => {
+      if (item && typeof item === "object" && item.img) {
+        const imgEl = `<img src="${item.img}" style="width:28px;height:28px;object-fit:contain;flex-shrink:0" onerror="this.style.display='none'" />`;
+        return `<div style="display:flex;align-items:center;gap:10px;padding:5px 12px;border-radius:9px;background:${th.accentBgSubtle(color)};font-size:13.5px;color:${th.textSecondary};line-height:1.45">${imgEl}<span>${esc(item.text)}</span></div>`;
+      }
+      return `<div style="display:flex;align-items:center;gap:10px;padding:7px 12px;border-radius:9px;background:${th.accentBgSubtle(color)};font-size:13.5px;color:${th.textSecondary};line-height:1.45"><div style="width:5px;height:5px;border-radius:50%;background:${color};flex-shrink:0"></div>${esc(item)}</div>`;
+    };
     return `<div><h4 style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>${emoji}</span> ${esc(title)}</h4>
-      <div style="display:flex;flex-direction:column;gap:5px">${items.map(item =>
-        `<div style="display:flex;align-items:center;gap:10px;padding:7px 12px;border-radius:9px;background:${th.accentBgSubtle(color)};font-size:13.5px;color:${th.textSecondary};line-height:1.45"><div style="width:5px;height:5px;border-radius:50%;background:${color};flex-shrink:0"></div>${esc(item)}</div>`
-      ).join("")}</div></div>`;
+      <div style="display:flex;flex-direction:column;gap:5px">${items.map(renderItem).join("")}</div></div>`;
   }
   const hasBoosted = items.some(i => i.startsWith("\u2605"));
   const legendHTML = hasBoosted ? `<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:8px;background:${th.accentBgSubtle("#FFD700")};border:1px solid ${th.countdownBorder("#FFD700")};align-self:flex-start;margin-bottom:8px">
@@ -3891,9 +3968,13 @@ function renderNewsDetail(announcement, th) {
             </div>`;
           }
           return `<div>${headingHTML}
-          <div style="display:flex;flex-direction:column;gap:5px">${s.items.map(item =>
-            `<div style="display:flex;align-items:baseline;gap:10px;padding:8px 14px;border-radius:10px;background:${th.tagBg(announcement.tag)};font-size:13.5px;color:${th.textSecondary};line-height:1.5"><div style="width:5px;height:5px;border-radius:50%;background:${th.tagText(announcement.tag)};flex-shrink:0;margin-top:6px"></div>${esc(item)}</div>`
-          ).join("")}</div></div>`;
+          <div style="display:flex;flex-direction:column;gap:5px">${s.items.map(item => {
+            if (item && typeof item === "object" && item.img) {
+              const imgEl = `<img src="${item.img}" style="width:30px;height:30px;object-fit:contain;flex-shrink:0" onerror="this.style.display='none'" />`;
+              return `<div style="display:flex;align-items:center;gap:10px;padding:6px 14px;border-radius:10px;background:${th.tagBg(announcement.tag)};font-size:13.5px;color:${th.textSecondary};line-height:1.5">${imgEl}<span>${esc(item.text)}</span></div>`;
+            }
+            return `<div style="display:flex;align-items:baseline;gap:10px;padding:8px 14px;border-radius:10px;background:${th.tagBg(announcement.tag)};font-size:13.5px;color:${th.textSecondary};line-height:1.5"><div style="width:5px;height:5px;border-radius:50%;background:${th.tagText(announcement.tag)};flex-shrink:0;margin-top:6px"></div>${esc(item)}</div>`;
+          }).join("")}</div></div>`;
         }).join("") : ""}
       </div>
     </div>
