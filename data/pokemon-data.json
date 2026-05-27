@@ -1591,6 +1591,12 @@
     "cpBoost": "927–993",
     "weather": "Snow or Fog"
   },
+  "Hoothoot": {
+    "types": [
+      "Normal",
+      "Flying"
+    ]
+  },
   "Hoppip": {
     "types": [
       "Grass",
@@ -1915,6 +1921,14 @@
       "Ghost",
       "Fire"
     ]
+  },
+  "Lopunny": {
+    "types": [
+      "Normal"
+    ],
+    "cp": "1112–1177",
+    "cpBoost": "1391–1471",
+    "weather": "Partly Cloudy or Cloudy"
   },
   "Loudred": {
     "types": [
@@ -2278,7 +2292,10 @@
     "types": [
       "Normal",
       "Fighting"
-    ]
+    ],
+    "cp": "1112–1177",
+    "cpBoost": "1391–1471",
+    "weather": "Partly Cloudy or Cloudy"
   },
   "Mega Lucario": {
     "types": [
@@ -2380,7 +2397,10 @@
     "types": [
       "Bug",
       "Steel"
-    ]
+    ],
+    "cp": "1636–1714",
+    "cpBoost": "2046–2143",
+    "weather": "Rainy or Snow"
   },
   "Mega Sharpedo": {
     "types": [
@@ -2770,7 +2790,10 @@
     "types": [
       "Normal",
       "Flying"
-    ]
+    ],
+    "cp": "1151–1216",
+    "cpBoost": "1439–1521",
+    "weather": "Partly Cloudy or Windy"
   },
   "Pidgey": {
     "types": [
@@ -3264,6 +3287,12 @@
     "types": [
       "Water",
       "Bug"
+    ]
+  },
+  "Shadow Dialga": {
+    "types": [
+      "Steel",
+      "Dragon"
     ]
   },
   "Shadow Dragonite": {
