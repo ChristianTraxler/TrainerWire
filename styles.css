@@ -80,9 +80,9 @@ button { transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
   inset: 0;
   border-radius: inherit;
   pointer-events: none;
-  animation: twSonarPulse 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  animation: twSonarPulse 2.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
 }
-.tw-sonar-dot::after { animation-delay: 0.9s; }
+.tw-sonar-dot::after { animation-delay: 1.4s; }
 @media (prefers-reduced-motion: reduce) {
   .tw-sonar-dot::before, .tw-sonar-dot::after { animation: none; }
 }
