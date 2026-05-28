@@ -2762,6 +2762,7 @@ function renderActivitySubTab() {
       kind: "event",
       ts: new Date(e.date + "T00:00:00").getTime(),
       icon: e.icon || "📅",
+      iconImg: e.iconImg || null,
       color: e.color || "#9B59B6",
       title: e.title || "Untitled event",
       sub: `${e.type || "Event"} · ${e.endDate && e.endDate !== e.date ? `ends ${e.endDate}` : `today`}`,
@@ -2783,8 +2784,11 @@ function renderActivitySubTab() {
 
   const rows = items.map((it, i) => {
     const borderStyle = i === items.length - 1 ? "" : `border-bottom:1px solid ${th.border};`;
+    const iconHTML = it.iconImg
+      ? `<img src="${esc(it.iconImg)}" alt="" style="width:28px;height:28px;object-fit:contain;flex-shrink:0" onerror="this.outerHTML='<span style=\\'font-size:18px;flex-shrink:0\\'>${it.icon}</span>'" />`
+      : `<span style="font-size:18px;flex-shrink:0">${it.icon}</span>`;
     return `<button onclick="${it.onClick}" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border:none;border-left:3px solid ${it.color};${borderStyle}background:${th.surface};cursor:pointer;font-family:inherit;text-align:left;width:100%;transition:background 0.1s ease" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${th.surface}'">
-      <span style="font-size:18px;flex-shrink:0">${it.icon}</span>
+      ${iconHTML}
       <div style="flex:1;min-width:0">
         <div style="font-size:13px;font-weight:700;color:${th.text};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(it.title)}</div>
         <div style="font-size:11px;color:${th.textMuted};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(it.sub)}</div>
