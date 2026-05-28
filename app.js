@@ -3121,7 +3121,7 @@ function renderRoutes(routes, th) {
     <div style="display:flex;flex-wrap:wrap;gap:8px">${phaseCards}</div>${notesHTML}</div>`;
 }
 
-function renderDetailSection(title, emoji, items, color, th, showImages, noSparkles, groupSize, countersData) {
+function renderDetailSection(title, emoji, items, color, th, showImages, noSparkles, groupSize, countersData, collapsibleOnMobile) {
   // Build a lookup of counters by the boss label they target. Each counter
   // block has `label: "Boss Name (Type/Type)"` — we key on the boss name
   // so we can slot the block in next to the matching boss tile below.
@@ -3178,38 +3178,90 @@ function renderDetailSection(title, emoji, items, color, th, showImages, noSpark
   const tierKeys = (() => { const keys = Object.keys(tiered); const idx = k => keys.indexOf(k); return keys.slice().sort((a,b)=>{const ba=TIER_BOTTOM.indexOf(a),bb=TIER_BOTTOM.indexOf(b); if(ba<0 && bb<0) return idx(a)-idx(b); if(ba>=0 && bb>=0) return ba-bb; return ba<0?-1:1;}); })();
   // If no tiers found, render flat with card layout on tablet+
   if (tierKeys.length === 0) {
+    const flatItemsHTML = items.map(item => renderBossItem(item, color, th, breakpoint !== "mobile", noSparkles, groupSize)).join("");
+    if (collapsibleOnMobile && breakpoint === "mobile") {
+      const chevronSVG = `<svg class="acc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
+      return `<div style="display:flex;flex-direction:column"><h4 style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>${emoji}</span> ${esc(title)} <span style="font-size:11px;font-weight:500;color:${th.textMuted}">(tap to expand)</span></h4>
+        ${legendHTML}
+        <div style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden;background:${th.surface}">
+          <button class="acc-trigger" data-open="false" onclick="toggleAccordion(this)" aria-expanded="false" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:${th.accentBgSubtle(color)};border:none;color:${th.text}">
+            <span style="font-size:16px">${emoji}</span>
+            <span style="font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase">${esc(title)}</span>
+            <span style="font-size:11px;font-weight:600;color:${th.textMuted};margin-left:4px">${items.length}</span>
+            <span style="margin-left:auto;display:flex;align-items:center;color:${th.textMuted}">${chevronSVG}</span>
+          </button>
+          <div class="acc-content" data-open="false">
+            <div style="padding:10px;display:flex;flex-direction:column;gap:5px">${flatItemsHTML}</div>
+          </div>
+        </div></div>`;
+    }
     return `<div style="display:flex;flex-direction:column"><h4 style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>${emoji}</span> ${esc(title)}</h4>
       ${legendHTML}
-      <div style="display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${items.map(item => renderBossItem(item, color, th, breakpoint !== "mobile", noSparkles, groupSize)).join("")}</div></div>`;
+      <div style="display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${flatItemsHTML}</div></div>`;
   }
   // Render with tier groupings
-  let html = `<div style="display:flex;flex-direction:column"><h4 style="margin:0 0 12px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>${emoji}</span> ${esc(title)}</h4>${legendHTML}`;
+  const useAccordion = collapsibleOnMobile && breakpoint === "mobile";
+  const chevronSVG = `<svg class="acc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
+  let html = `<div style="display:flex;flex-direction:column"><h4 style="margin:0 0 12px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>${emoji}</span> ${esc(title)}${useAccordion ? ` <span style="font-size:11px;font-weight:500;color:${th.textMuted}">(tap to expand)</span>` : ""}</h4>${legendHTML}`;
   // Untiered items first (wild spawns etc)
   if (untiered.length > 0) {
-    html += `<div style="margin-bottom:12px">${tierKeys.length > 0 ? "" : ""}
-      <div style="display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${untiered.map(item => renderBossItem(item, color, th, breakpoint !== "mobile", noSparkles, groupSize)).join("")}</div></div>`;
+    const untieredItemsHTML = untiered.map(item => renderBossItem(item, color, th, breakpoint !== "mobile", noSparkles, groupSize)).join("");
+    if (useAccordion) {
+      html += `<div style="margin-bottom:12px;border:1.5px solid ${th.border};border-radius:14px;overflow:hidden;background:${th.surface}">
+        <button class="acc-trigger" data-open="false" onclick="toggleAccordion(this)" aria-expanded="false" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:${th.accentBgSubtle(color)};border:none;color:${th.text}">
+          <span style="font-size:16px">🌿</span>
+          <span style="font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase">Park & Wild Spawns</span>
+          <span style="font-size:11px;font-weight:600;color:${th.textMuted};margin-left:4px">${untiered.length}</span>
+          <span style="margin-left:auto;display:flex;align-items:center;color:${th.textMuted}">${chevronSVG}</span>
+        </button>
+        <div class="acc-content" data-open="false">
+          <div style="padding:10px;display:flex;flex-direction:column;gap:5px">${untieredItemsHTML}</div>
+        </div>
+      </div>`;
+    } else {
+      html += `<div style="margin-bottom:12px">${tierKeys.length > 0 ? "" : ""}
+        <div style="display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${untieredItemsHTML}</div></div>`;
+    }
   }
   // Tiered groups
   tierKeys.forEach(tier => {
     const tierColor = TIER_COLORS[tier] || color;
     const eggUrl = TIER_EGGS[tier];
-    const usesShadowEgg = eggUrl && eggUrl.endsWith("shadow.png");
-    const eggImg = eggUrl ? `<img src="${eggUrl}" style="width:${usesShadowEgg ? 44 : 28}px;height:${usesShadowEgg ? 44 : 28}px;object-fit:contain;flex-shrink:0" onerror="this.style.display='none'" />` : "";
+    const isShadowEgg = eggUrl && eggUrl.endsWith("shadow.png");
+    const eggImg = eggUrl ? (isShadowEgg
+      ? `<img src="${eggUrl}" style="width:48px;height:32px;object-fit:contain;flex-shrink:0;margin:-2px -10px" onerror="this.style.display='none'" />`
+      : `<img src="${eggUrl}" style="width:28px;height:28px;object-fit:contain;flex-shrink:0" onerror="this.style.display='none'" />`) : "";
     const tierCounters = tiered[tier]
       .map(item => findCountersForBoss(item))
       .filter((c, i, arr) => c && arr.indexOf(c) === i);
     const countersHTML = tierCounters.length > 0
       ? `<div style="padding:12px;border-top:1.5px dashed ${th.border};background:${th.accentBgSubtle(tierColor)}">${tierCounters.map(c => renderCounters(c, th)).join(`<div style="height:14px"></div>`)}</div>`
       : "";
-    html += `<div style="margin-bottom:12px;border:1.5px solid ${th.border};border-radius:14px;overflow:hidden">
-      <div style="padding:10px 14px;background:${th.accentBgSubtle(tierColor)};border-bottom:1.5px solid ${th.border};display:flex;align-items:center;gap:8px">
-        ${eggImg}
-        <span style="font-size:12px;font-weight:700;color:${th.text};letter-spacing:0.5px;text-transform:uppercase">${tier}</span>
-        ${renderRaidHeads(tier)}
-      </div>
-      <div style="padding:8px;display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${tiered[tier].map(item => renderBossItem(item, tierColor, th, breakpoint !== "mobile", noSparkles, groupSize)).join("")}</div>
-      ${countersHTML}
-    </div>`;
+    const tierItemsHTML = tiered[tier].map(item => renderBossItem(item, tierColor, th, breakpoint !== "mobile", noSparkles, groupSize)).join("");
+    if (useAccordion) {
+      html += `<div style="margin-bottom:12px;border:1.5px solid ${th.border};border-radius:14px;overflow:hidden;background:${th.surface}">
+        <button class="acc-trigger" data-open="false" onclick="toggleAccordion(this)" aria-expanded="false" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:${th.accentBgSubtle(tierColor)};border:none;color:${th.text}">
+          ${eggImg}
+          <span style="font-size:12px;font-weight:700;color:${th.text};letter-spacing:0.5px;text-transform:uppercase">${tier}</span>
+          <span style="font-size:11px;font-weight:600;color:${th.textMuted};margin-left:4px">${tiered[tier].length}</span>
+          <span style="margin-left:auto;display:flex;align-items:center;gap:6px">${renderRaidHeads(tier)}${chevronSVG}</span>
+        </button>
+        <div class="acc-content" data-open="false">
+          <div style="padding:8px;display:flex;flex-direction:column;gap:5px">${tierItemsHTML}</div>
+          ${countersHTML}
+        </div>
+      </div>`;
+    } else {
+      html += `<div style="margin-bottom:12px;border:1.5px solid ${th.border};border-radius:14px;overflow:hidden">
+        <div style="padding:10px 14px;background:${th.accentBgSubtle(tierColor)};border-bottom:1.5px solid ${th.border};display:flex;align-items:center;gap:8px">
+          ${eggImg}
+          <span style="font-size:12px;font-weight:700;color:${th.text};letter-spacing:0.5px;text-transform:uppercase">${tier}</span>
+          ${renderRaidHeads(tier)}
+        </div>
+        <div style="padding:8px;display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${tierItemsHTML}</div>
+        ${countersHTML}
+      </div>`;
+    }
   });
   html += `</div>`;
   return html;
@@ -3589,7 +3641,7 @@ function renderEventDetail(event, th) {
           : `<a href="${event.url}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:#fff;text-decoration:none;padding:12px 20px;border:none;border-radius:12px;background:${event.color};transition:all 0.2s ease;box-shadow:0 2px 8px ${event.color}40;align-self:flex-start" onmouseenter="this.style.opacity='0.85';this.style.transform='translateY(-1px)';this.style.boxShadow='0 4px 12px ${event.color}60'" onmouseleave="this.style.opacity='1';this.style.transform='translateY(0)';this.style.boxShadow='0 2px 8px ${event.color}40'">\uD83D\uDD17 Official Event Page</a>`) : ""}
         ${event.details.relatedNews ? event.details.relatedNews.map(rn => `<button onclick="selectNews(${rn.id})" style="display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:${event.color};background:${th.accentBgSubtle(event.color)};border:1.5px solid ${th.countdownBorder(event.color)};border-radius:12px;padding:11px 18px;cursor:pointer;font-family:inherit;transition:all 0.2s ease;align-self:flex-start" onmouseenter="this.style.background='${event.color}';this.style.color='#fff';this.style.transform='translateY(-1px)'" onmouseleave="this.style.background='${th.accentBgSubtle(event.color)}';this.style.color='${event.color}';this.style.transform='translateY(0)'">${rn.iconImg ? `<img src="${rn.iconImg}" style="width:22px;height:22px;object-fit:contain;flex-shrink:0" />` : `<span style="font-size:16px">${rn.icon || "📰"}</span>`} ${esc(rn.label)} →</button>`).join("") : ""}
         <div class="move-deadline" data-event-id="${event.id}">${renderMoveDeadlineBanner(event, th)}</div>
-        ${event.details.bosses ? renderDetailSection(event.details.bossesTitle || (event.type === "Community Day" ? "Featured Move(s)" : "Featured Encounters"), "\uD83C\uDFAF", event.details.bosses, event.color, th, true, event.type === "Community Day", event.details.groupSize, event.details.counters) : ""}
+        ${event.details.bosses ? renderDetailSection(event.details.bossesTitle || (event.type === "Community Day" ? "Featured Move(s)" : "Featured Encounters"), "\uD83C\uDFAF", event.details.bosses, event.color, th, true, event.type === "Community Day", event.details.groupSize, event.details.counters, event.type === "GO Fest") : ""}
         ${event.type === "Community Day" && event.iconImg ? (() => {
           const cdTitle = event.title.replace("CD Classic: ","").replace("Community Day: ","").replace(/\s*\(.*?\)/,"");
           const cdNames = cdTitle.split(" & ").map(n => n.split(" + ")[0].trim());
