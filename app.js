@@ -3100,7 +3100,7 @@ function getWeekBounds(now = new Date(), weekOffset = 0) {
 
 function pillIconFor(ev) {
   if (ev.type === "Community Day") return "⚡";
-  if (ev.type === "Max Battle") return "🛡️";
+  if (ev.type === "Max Battle") return "⚙️";
   if (ev.type === "Raid") return "🔥";
   if (ev.type === "GO Fest") return "🌍";
   if (/spotlight hour/i.test(ev.time || "")) return "✨";
