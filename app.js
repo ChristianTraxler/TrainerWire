@@ -2639,7 +2639,7 @@ function renderNestsSubTab() {
 
   const countdownCard = `<div style="padding:14px 16px;border-radius:14px;border:1.5px solid ${th.border};background:${th.surface};margin-bottom:12px">
     <div style="font-size:11px;font-weight:800;color:${th.textMuted};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px">📍 Migration #${migId} · Next rotation in</div>
-    <div style="font-size:${isMobile ? 14 : 16}px;font-weight:700;color:${th.text};font-variant-numeric:tabular-nums">${countdown || "rotating now…"}</div>
+    <div id="admin-dash-nest-countdown" style="font-size:${isMobile ? 14 : 16}px;font-weight:700;color:${th.text};font-variant-numeric:tabular-nums">${countdown || "rotating now…"}</div>
   </div>`;
 
   const recent = nests.slice(0, 10);
@@ -7100,6 +7100,8 @@ setInterval(() => {
   // Update nest migration countdown & check for migration reset
   const nestEl = document.getElementById("nest-migration-countdown");
   if (nestEl) nestEl.innerHTML = renderNestCountdown();
+  const adminNestEl = document.getElementById("admin-dash-nest-countdown");
+  if (adminNestEl) adminNestEl.innerHTML = renderNestCountdown() || "rotating now…";
   checkNestMigration();
   // Update move deadline banners
   document.querySelectorAll(".move-deadline").forEach(el => {
