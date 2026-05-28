@@ -4505,7 +4505,7 @@ function renderEventDetail(event, th) {
                 <div style="display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;justify-content:center">${gp.featuredRewards.map(r => `<div style="display:flex;flex-direction:column;align-items:center;gap:6px">
                   <div style="position:relative;width:120px;height:120px;display:flex;align-items:center;justify-content:center;border-radius:16px;background:${th.surface};border:1.5px solid ${th.border}">
                     <img src="${esc(r.img)}" alt="${escAttr(r.name)}" style="width:110px;height:110px;object-fit:contain" />
-                    ${r.shiny ? `<span title="Shiny available" style="position:absolute;top:-6px;right:-6px;background:#F1C40F;color:#fff;font-size:13px;font-weight:800;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid ${th.surface};box-shadow:0 2px 6px rgba(241,196,15,0.4)">\u2728</span>` : ""}
+                    ${r.shiny ? `<img src="assets/pokemon-images/icons/shiny-badge.webp" alt="Shiny available" title="Shiny available" style="position:absolute;top:-10px;right:-10px;width:36px;height:36px;pointer-events:none" />` : ""}
                   </div>
                   <div style="font-size:12px;font-weight:700;color:${th.text};text-align:center;line-height:1.3;max-width:140px">${esc(r.name)}</div>
                 </div>`).join("")}</div>
