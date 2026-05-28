@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.06";
+const APP_VERSION = "3.07";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -2545,6 +2545,259 @@ function renderBugReportsList() {
     return `<div style="padding:24px;text-align:center;color:${th.textMuted};font-size:13px;border:1.5px dashed ${th.border};border-radius:14px">${msg}</div>`;
   }
   return `<div style="display:flex;flex-direction:column;gap:12px">${reports.map(renderBugReportCard).join("")}</div>`;
+}
+
+// --- ADMIN DASHBOARD ---
+const ADMIN_DASH_TAB_KEY = "trainerwire_admin_dash_tab";
+const ADMIN_DASH_TABS = ["analytics", "issues", "nests", "activity"];
+let _adminDashSubTab = (() => {
+  try {
+    const v = localStorage.getItem(ADMIN_DASH_TAB_KEY);
+    return ADMIN_DASH_TABS.includes(v) ? v : "analytics";
+  } catch { return "analytics"; }
+})();
+
+function setAdminDashSubTab(name) {
+  if (!ADMIN_DASH_TABS.includes(name)) return;
+  _adminDashSubTab = name;
+  try { localStorage.setItem(ADMIN_DASH_TAB_KEY, name); } catch {}
+  render();
+}
+
+function getDashStatCounts() {
+  const dayAgo = Date.now() - 86400000;
+  const views = _analyticsData && Number.isFinite(_analyticsData.views_today) ? _analyticsData.views_today : null;
+  const pending = (_bugReportsCache || []).filter(r => r.status === "pending").length;
+  const newNests = (_nestsCache || []).filter(n => {
+    const ts = n.created_at ? new Date(n.created_at).getTime() : 0;
+    return ts >= dayAgo;
+  }).length;
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const activeEvents = (typeof EVENTS !== "undefined" ? EVENTS : []).filter(e => {
+    if (!e || !e.date) return false;
+    const start = e.date;
+    const end = e.endDate || e.date;
+    return start <= todayStr && todayStr <= end;
+  }).length;
+  return { views, pending, newNests, activeEvents };
+}
+
+function renderDashStatCard(label, value, icon, accent, targetTab, isMobile) {
+  const th = t(darkMode);
+  const display = value === null || value === undefined ? "—" : (typeof value === "number" ? value.toLocaleString("en-US") : value);
+  return `<button onclick="setAdminDashSubTab('${targetTab}')" style="display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;padding:${isMobile ? "12px 14px" : "14px 16px"};border-radius:14px;border:1.5px solid ${th.border};background:${th.surface};cursor:pointer;font-family:inherit;text-align:left;transition:all 0.15s ease;min-height:${isMobile ? 80 : 90}px;box-shadow:${th.shadow}" onmouseenter="this.style.transform='translateY(-2px)';this.style.borderColor='${accent}'" onmouseleave="this.style.transform='translateY(0)';this.style.borderColor='${th.border}'">
+    <div style="display:flex;align-items:center;gap:6px;font-size:${isMobile ? 10 : 11}px;font-weight:800;color:${th.textMuted};text-transform:uppercase;letter-spacing:0.5px"><span style="font-size:14px">${icon}</span><span>${esc(label)}</span></div>
+    <div style="font-size:${isMobile ? 22 : 28}px;font-weight:800;color:${th.text};font-variant-numeric:tabular-nums;line-height:1">${display}</div>
+  </button>`;
+}
+
+function renderDashStatCards() {
+  const isMobile = breakpoint === "mobile";
+  const c = getDashStatCounts();
+  const cards = [
+    renderDashStatCard("Views (24h)", c.views, "👁", "#3498DB", "analytics", isMobile),
+    renderDashStatCard("Pending", c.pending, "🐛", "#E67E22", "issues", isMobile),
+    renderDashStatCard("New nests (24h)", c.newNests, "📍", "#27AE60", "nests", isMobile),
+    renderDashStatCard("Active events", c.activeEvents, "📅", "#9B59B6", "activity", isMobile)
+  ].join("");
+  return `<div style="display:grid;grid-template-columns:repeat(${isMobile ? 2 : 4},1fr);gap:${isMobile ? 8 : 12}px">${cards}</div>`;
+}
+
+function renderDashSubTabPills() {
+  const th = t(darkMode);
+  const isMobile = breakpoint === "mobile";
+  const pills = [
+    { id: "analytics", label: "📊 Analytics" },
+    { id: "issues", label: "🐛 Issues" },
+    { id: "nests", label: "📍 Nests" },
+    { id: "activity", label: "🕒 Activity" }
+  ];
+  const pillsHTML = pills.map(p => {
+    const active = _adminDashSubTab === p.id;
+    return `<button onclick="setAdminDashSubTab('${p.id}')" style="flex:0 0 auto;padding:${isMobile ? "8px 14px" : "10px 18px"};border-radius:999px;border:1.5px solid ${active ? "transparent" : th.border};background:${active ? "linear-gradient(135deg,#E74C3C,#F39C12)" : th.surface};color:${active ? "#fff" : th.text};font-size:${isMobile ? 12 : 13}px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.15s ease">${p.label}</button>`;
+  }).join("");
+  return `<div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;-ms-overflow-style:none">${pillsHTML}</div>`;
+}
+
+function renderIssuesSubTab() {
+  const th = t(darkMode);
+  const isMobile = breakpoint === "mobile";
+  return `${renderPendingQueue()}
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+      <h3 style="margin:0;font-size:${isMobile ? 16 : 18}px;font-weight:800;color:${th.text}">Recent Reports</h3>
+      ${renderBugReportFilterChips()}
+    </div>
+    ${renderBugReportsList()}`;
+}
+
+function renderNestsSubTab() {
+  const th = t(darkMode);
+  const isMobile = breakpoint === "mobile";
+  const migId = getCurrentMigrationId();
+  const countdown = renderNestCountdown();
+  const nests = _nestsCache || [];
+
+  const countdownCard = `<div style="padding:14px 16px;border-radius:14px;border:1.5px solid ${th.border};background:${th.surface};margin-bottom:12px">
+    <div style="font-size:11px;font-weight:800;color:${th.textMuted};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px">📍 Migration #${migId} · Next rotation in</div>
+    <div style="font-size:${isMobile ? 14 : 16}px;font-weight:700;color:${th.text};font-variant-numeric:tabular-nums">${countdown || "rotating now…"}</div>
+  </div>`;
+
+  const recent = nests.slice(0, 10);
+  const recentRows = recent.length ? recent.map((n, i) => {
+    const when = n.created_at ? new Date(n.created_at) : null;
+    const whenStr = when ? when.toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit", hour12: true }) : "—";
+    const img = n.pokemon ? getPokemonImg(n.pokemon) : null;
+    const imgHTML = img ? `<img src="${esc(img.url)}" style="width:32px;height:32px;object-fit:contain;flex-shrink:0" onerror="this.style.display='none'" />` : `<span style="font-size:22px;flex-shrink:0">📦</span>`;
+    const borderStyle = i === recent.length - 1 ? "" : `border-bottom:1px solid ${th.border};`;
+    return `<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;${borderStyle}">
+      ${imgHTML}
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13px;font-weight:700;color:${th.text};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(n.pokemon || "Unknown")}</div>
+        <div style="font-size:11px;color:${th.textMuted};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(n.location || "—")}</div>
+      </div>
+      <div style="font-size:11px;color:${th.textMuted};flex-shrink:0;white-space:nowrap">${esc(whenStr)}</div>
+    </div>`;
+  }).join("") : `<div style="padding:16px;text-align:center;font-size:12px;color:${th.textMuted}">No nest submissions this cycle yet.</div>`;
+
+  const recentCard = `<div style="border-radius:14px;border:1.5px solid ${th.border};background:${th.surface};overflow:hidden;margin-bottom:12px">
+    <div style="padding:10px 14px;border-bottom:1.5px solid ${th.border};font-size:11px;font-weight:800;color:${th.textMuted};text-transform:uppercase;letter-spacing:0.5px">Recent submissions (this cycle)</div>
+    ${recentRows}
+  </div>`;
+
+  const counts = {};
+  nests.forEach(n => {
+    const p = (n.pokemon || "").trim();
+    if (!p) return;
+    counts[p] = (counts[p] || 0) + 1;
+  });
+  const top = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  const topRows = top.length ? top.map(([name, count], i) => {
+    const img = getPokemonImg(name);
+    const imgHTML = img ? `<img src="${esc(img.url)}" style="width:28px;height:28px;object-fit:contain;flex-shrink:0" onerror="this.style.display='none'" />` : `<span style="font-size:18px;flex-shrink:0">📦</span>`;
+    const borderStyle = i === top.length - 1 ? "" : `border-bottom:1px solid ${th.border};`;
+    return `<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;${borderStyle}">
+      ${imgHTML}
+      <div style="flex:1;font-size:13px;font-weight:700;color:${th.text}">${esc(name)}</div>
+      <div style="font-size:13px;font-weight:800;color:${th.text};font-variant-numeric:tabular-nums">${count}</div>
+    </div>`;
+  }).join("") : `<div style="padding:16px;text-align:center;font-size:12px;color:${th.textMuted}">No data yet.</div>`;
+
+  const topCard = `<div style="border-radius:14px;border:1.5px solid ${th.border};background:${th.surface};overflow:hidden">
+    <div style="padding:10px 14px;border-bottom:1.5px solid ${th.border};font-size:11px;font-weight:800;color:${th.textMuted};text-transform:uppercase;letter-spacing:0.5px">Top reported Pokémon (this cycle)</div>
+    ${topRows}
+  </div>`;
+
+  return `${countdownCard}${recentCard}${topCard}`;
+}
+
+function renderActivitySubTab() {
+  const th = t(darkMode);
+  const reports = (_bugReportsCache || []).map(r => ({
+    kind: "bug",
+    ts: r.created_at ? new Date(r.created_at).getTime() : 0,
+    icon: "🐛",
+    color: "#E67E22",
+    title: (r.description || "").trim().slice(0, 80) || "(no description)",
+    sub: `${r.section || "general"} · ${r.status || "pending"}`,
+    target: "issues"
+  }));
+  const nests = (_nestsCache || []).map(n => ({
+    kind: "nest",
+    ts: n.created_at ? new Date(n.created_at).getTime() : 0,
+    icon: "📍",
+    color: "#27AE60",
+    title: n.pokemon || "Unknown Pokémon",
+    sub: n.location || "—",
+    target: "nests"
+  }));
+  const items = reports.concat(nests).filter(x => x.ts > 0).sort((a, b) => b.ts - a.ts).slice(0, 20);
+
+  if (!items.length) {
+    return `<div style="padding:24px;text-align:center;color:${th.textMuted};font-size:13px;border:1.5px dashed ${th.border};border-radius:14px">No recent activity yet.</div>`;
+  }
+
+  const fmtRel = (ts) => {
+    const diff = Date.now() - ts;
+    if (diff < 60000) return "just now";
+    if (diff < 3600000) return `${Math.floor(diff / 60000)}m ago`;
+    if (diff < 86400000) return `${Math.floor(diff / 3600000)}h ago`;
+    return `${Math.floor(diff / 86400000)}d ago`;
+  };
+
+  const rows = items.map((it, i) => {
+    const borderStyle = i === items.length - 1 ? "" : `border-bottom:1px solid ${th.border};`;
+    return `<button onclick="setAdminDashSubTab('${it.target}')" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border:none;border-left:3px solid ${it.color};${borderStyle}background:${th.surface};cursor:pointer;font-family:inherit;text-align:left;width:100%;transition:background 0.1s ease" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${th.surface}'">
+      <span style="font-size:18px;flex-shrink:0">${it.icon}</span>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13px;font-weight:700;color:${th.text};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(it.title)}</div>
+        <div style="font-size:11px;color:${th.textMuted};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(it.sub)}</div>
+      </div>
+      <div style="font-size:11px;color:${th.textMuted};flex-shrink:0;white-space:nowrap">${fmtRel(it.ts)}</div>
+    </button>`;
+  }).join("");
+
+  return `<div style="border-radius:14px;border:1.5px solid ${th.border};overflow:hidden">${rows}</div>`;
+}
+
+async function refreshAllAdminData() {
+  await Promise.all([
+    loadAnalyticsFromSupabase().catch(() => {}),
+    loadBugReportsFromSupabase().catch(() => {}),
+    loadNestsFromSupabase().catch(() => {})
+  ]);
+  render();
+}
+
+async function clearSwCachesAndReload() {
+  try {
+    if ("caches" in window) {
+      const keys = await caches.keys();
+      await Promise.all(keys.map(k => caches.delete(k)));
+    }
+  } catch {}
+  location.reload();
+}
+
+function copyAdminEmail() {
+  const email = getAdminEmail() || "";
+  if (!email) return;
+  try { navigator.clipboard && navigator.clipboard.writeText(email); } catch {}
+}
+
+function renderQuickActions() {
+  const th = t(darkMode);
+  const isMobile = breakpoint === "mobile";
+  const btn = (label, onclick, color) => `<button onclick="${onclick}" style="padding:${isMobile ? "8px 14px" : "10px 16px"};border-radius:999px;border:1.5px solid ${th.border};background:${th.surface};color:${color || th.text};font-size:${isMobile ? 12 : 13}px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s ease" onmouseenter="this.style.transform='translateY(-1px)';this.style.borderColor='${th.borderHover}'" onmouseleave="this.style.transform='translateY(0)';this.style.borderColor='${th.border}'">${label}</button>`;
+  return `<div style="margin-top:6px;padding-top:14px;border-top:1.5px solid ${th.border};display:flex;flex-wrap:wrap;gap:8px;justify-content:center">
+    ${btn("↻ Refresh all", "refreshAllAdminData()")}
+    ${btn("🗑 Clear caches", "clearSwCachesAndReload()")}
+    ${btn("📋 Copy email", "copyAdminEmail()")}
+    ${btn("↪ Sign out", "adminLogout()", "#E74C3C")}
+  </div>`;
+}
+
+function renderAdminDashboard() {
+  const th = t(darkMode);
+  const isMobile = breakpoint === "mobile";
+  let body;
+  switch (_adminDashSubTab) {
+    case "issues": body = renderIssuesSubTab(); break;
+    case "nests": body = renderNestsSubTab(); break;
+    case "activity": body = renderActivitySubTab(); break;
+    case "analytics":
+    default: body = renderAdminAnalyticsSection(); break;
+  }
+  const adminEmail = getAdminEmail() || "";
+  return `<div style="display:flex;flex-direction:column;gap:${isMobile ? 14 : 18}px;max-width:1180px;margin:0 auto;width:100%">
+    <div style="text-align:center;padding:6px 10px 0">
+      <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text}">⚙️ Admin Dashboard</h2>
+      ${adminEmail ? `<p style="margin:4px 0 0 0;font-size:${isMobile ? 11 : 12}px;color:${th.textMuted};font-weight:500">Signed in as ${esc(adminEmail)}</p>` : ""}
+    </div>
+    ${renderDashStatCards()}
+    ${renderDashSubTabPills()}
+    <div>${body}</div>
+    ${renderQuickActions()}
+  </div>`;
 }
 
 // --- POKEMON AUTOCOMPLETE ---
@@ -6630,9 +6883,11 @@ function render() {
       </div>`;
     }
 
-    // Report tab
+    // Report tab \u2014 admin sees full dashboard, public sees submission form + public bug list
     let reportTabHTML = "";
-    if (state.tab === "report") {
+    if (state.tab === "report" && isAdmin()) {
+      reportTabHTML = renderAdminDashboard();
+    } else if (state.tab === "report") {
       const isWide = !isMobile && breakpoint === "desktop";
       reportTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px;max-width:${isWide ? "1180px" : "640px"};margin:0 auto;width:100%">
         <div style="text-align:center;padding:10px">
