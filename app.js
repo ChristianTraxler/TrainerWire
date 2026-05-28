@@ -2763,6 +2763,7 @@ function renderActivitySubTab() {
       ts: new Date(e.date + "T00:00:00").getTime(),
       icon: e.icon || "📅",
       iconImg: e.iconImg || null,
+      isDynamax: e.type === "Max Battle",
       color: e.color || "#9B59B6",
       title: e.title || "Untitled event",
       sub: `${e.type || "Event"} · ${e.endDate && e.endDate !== e.date ? `ends ${e.endDate}` : `today`}`,
@@ -2785,8 +2786,11 @@ function renderActivitySubTab() {
   const rows = items.map((it, i) => {
     const borderStyle = i === items.length - 1 ? "" : `border-bottom:1px solid ${th.border};`;
     const iconHTML = it.iconImg
-      ? `<img src="${esc(it.iconImg)}" alt="" style="width:28px;height:28px;object-fit:contain;flex-shrink:0" onerror="this.outerHTML='<span style=\\'font-size:18px;flex-shrink:0\\'>${it.icon}</span>'" />`
-      : `<span style="font-size:18px;flex-shrink:0">${it.icon}</span>`;
+      ? `<div style="position:relative;width:36px;height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center">
+          <img src="${esc(it.iconImg)}" alt="" style="width:36px;height:36px;object-fit:contain;position:relative;z-index:1" onerror="this.outerHTML='<span style=\\'font-size:22px\\'>${it.icon}</span>'" />
+          ${it.isDynamax ? `<img src="assets/pokemon-images/dynamax.png" alt="" style="position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:90%;object-fit:contain;opacity:0.85;z-index:2;pointer-events:none" />` : ""}
+        </div>`
+      : `<span style="font-size:22px;flex-shrink:0;width:36px;text-align:center">${it.icon}</span>`;
     return `<button onclick="${it.onClick}" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border:none;border-left:3px solid ${it.color};${borderStyle}background:${th.surface};cursor:pointer;font-family:inherit;text-align:left;width:100%;transition:background 0.1s ease" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${th.surface}'">
       ${iconHTML}
       <div style="flex:1;min-width:0">
