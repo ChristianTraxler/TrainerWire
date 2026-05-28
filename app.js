@@ -3100,7 +3100,7 @@ function getWeekBounds(now = new Date(), weekOffset = 0) {
 
 function pillIconFor(ev) {
   if (ev.type === "Community Day") return "⚡";
-  if (ev.type === "Max Battle") return "⚙️";
+  if (ev.type === "Max Battle") return "🛡️";
   if (ev.type === "Raid") return "🔥";
   if (ev.type === "GO Fest") return "🌍";
   if (/spotlight hour/i.test(ev.time || "")) return "✨";
@@ -7080,6 +7080,11 @@ function render() {
   }
 
   // Header
+  const adminIcon = isAdmin() ? "🛡️" : "🔒";
+  const adminDot = isAdmin() ? `<span style="position:absolute;top:2px;right:2px;width:8px;height:8px;background:#2ECC71;border:1.5px solid ${th.surface};border-radius:50%"></span>` : "";
+  const adminBtnHTML = breakpoint === "desktop"
+    ? `<button id="admin-access-btn" onclick="openAdminAccess()" aria-label="${isAdmin() ? "Open admin dashboard" : "Admin sign in"}" title="${isAdmin() ? "Admin dashboard" : "Admin sign in"}" style="position:relative;background:${isAdmin() ? "linear-gradient(135deg,#E74C3C,#F39C12)" : (darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.06)")};border:1.5px solid ${isAdmin() ? "transparent" : th.border};border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all 0.25s ease;flex-shrink:0;font-family:inherit" onmouseenter="this.style.transform='scale(1.12)';this.style.boxShadow='0 4px 15px rgba(231,76,60,0.3)';" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none';">${adminIcon}${adminDot}</button>`
+    : "";
   const headerHTML = `<header style="padding:${isMobile ? "14px 18px" : "16px 32px"};border-bottom:1.5px solid ${th.border};background:${th.headerBg};backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;width:100%;display:flex;align-items:center;justify-content:space-between;padding-top:calc(${isMobile ? "14px" : "16px"} + env(safe-area-inset-top, 0px))">
     <div style="display:flex;align-items:center;gap:${isMobile ? 6 : 14}px">
     ${breakpoint !== "desktop" ? `<button onclick="toggleSidebar()" style="background:none;border:none;cursor:pointer;padding:6px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="${th.text}" stroke-width="2.5" stroke-linecap="round"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg></button>` : ""}
@@ -7124,9 +7129,7 @@ function render() {
       </nav>`;
     })() : ""}
     <div style="display:flex;align-items:center;gap:${isMobile ? 8 : 10}px;flex-shrink:0">
-      <button id="admin-access-btn" onclick="openAdminAccess()" aria-label="${isAdmin() ? "Open admin dashboard" : "Admin sign in"}" title="${isAdmin() ? "Admin dashboard" : "Admin sign in"}" style="position:relative;background:${isAdmin() ? "linear-gradient(135deg,#E74C3C,#F39C12)" : (darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.06)")};border:1.5px solid ${isAdmin() ? "transparent" : th.border};border-radius:50%;width:${isMobile ? 36 : 40}px;height:${isMobile ? 36 : 40}px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:${isMobile ? 16 : 18}px;transition:all 0.25s ease;flex-shrink:0;font-family:inherit"
-        onmouseenter="this.style.transform='scale(1.12)';this.style.boxShadow='0 4px 15px rgba(231,76,60,0.3)';"
-        onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none';">${isAdmin() ? "\uD83D\uDEE1\uFE0F" : "\uD83D\uDD12"}${isAdmin() ? `<span style="position:absolute;top:2px;right:2px;width:8px;height:8px;background:#2ECC71;border:1.5px solid ${th.surface};border-radius:50%"></span>` : ""}</button>
+      ${adminBtnHTML}
       <button id="theme-toggle" onclick="toggleDarkMode()" style="background:${darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.06)"};border:1.5px solid ${th.border};border-radius:50%;width:${isMobile ? 36 : 40}px;height:${isMobile ? 36 : 40}px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:${isMobile ? 18 : 20}px;transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);flex-shrink:0"
         onmouseenter="this.style.transform='scale(1.12)';this.style.boxShadow='0 4px 15px ${darkMode ? "rgba(255,200,50,0.2)" : "rgba(0,0,0,0.15)"}';"
         onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none';">${darkMode ? "\u2600\uFE0F" : "\uD83C\uDF19"}</button>
@@ -7308,7 +7311,14 @@ function renderSidebar(th) {
       </button>`;
       }).join("")}
     </div>
-    <div style="margin-top:auto;padding:16px 20px;border-top:1.5px solid ${th.border}">
+    <div style="margin-top:auto;padding:14px 16px;border-top:1.5px solid ${th.border}">
+      <button onclick="closeSidebar();openAdminAccess()" aria-label="${isAdmin() ? "Open admin dashboard" : "Admin sign in"}" style="position:relative;width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:12px 16px;border-radius:12px;border:1.5px solid ${isAdmin() ? "transparent" : th.border};background:${isAdmin() ? "linear-gradient(135deg,#E74C3C,#F39C12)" : "transparent"};color:${isAdmin() ? "#fff" : th.textSecondary};font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s ease">
+        <span style="font-size:18px">${isAdmin() ? "\uD83D\uDEE1\uFE0F" : "\uD83D\uDD12"}</span>
+        <span>${isAdmin() ? "Admin Dashboard" : "Admin Sign In"}</span>
+        ${isAdmin() ? `<span style="width:8px;height:8px;background:#2ECC71;border-radius:50%;margin-left:2px"></span>` : ""}
+      </button>
+    </div>
+    <div style="padding:14px 20px;border-top:1.5px solid ${th.border}">
       <div style="font-size:11px;color:${th.textFaint};text-align:center">${COMMUNITY_NAME} \u00B7 v${APP_VERSION}</div>
     </div>
   </nav>`;
