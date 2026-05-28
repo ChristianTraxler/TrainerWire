@@ -2744,7 +2744,7 @@ function renderActivitySubTab() {
     color: "#E67E22",
     title: (r.description || "").trim().slice(0, 80) || "(no description)",
     sub: `${r.section || "general"} · ${r.status || "pending"}`,
-    target: "issues"
+    onClick: `setAdminDashSubTab('issues')`
   }));
   const nests = (_nestsCache || []).map(n => ({
     kind: "nest",
@@ -2753,9 +2753,21 @@ function renderActivitySubTab() {
     color: "#27AE60",
     title: n.pokemon || "Unknown Pokémon",
     sub: n.location || "—",
-    target: "nests"
+    onClick: `setAdminDashSubTab('nests')`
   }));
-  const items = reports.concat(nests).filter(x => x.ts > 0).sort((a, b) => b.ts - a.ts).slice(0, 20);
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const events = (typeof EVENTS !== "undefined" ? EVENTS : [])
+    .filter(e => e && e.id != null && e.date && e.date <= todayStr && todayStr <= (e.endDate || e.date))
+    .map(e => ({
+      kind: "event",
+      ts: new Date(e.date + "T00:00:00").getTime(),
+      icon: e.icon || "📅",
+      color: e.color || "#9B59B6",
+      title: e.title || "Untitled event",
+      sub: `${e.type || "Event"} · ${e.endDate && e.endDate !== e.date ? `ends ${e.endDate}` : `today`}`,
+      onClick: `selectEvent(${e.id})`
+    }));
+  const items = reports.concat(nests).concat(events).filter(x => x.ts > 0).sort((a, b) => b.ts - a.ts).slice(0, 20);
 
   if (!items.length) {
     return `<div style="padding:24px;text-align:center;color:${th.textMuted};font-size:13px;border:1.5px dashed ${th.border};border-radius:14px">No recent activity yet.</div>`;
@@ -2771,7 +2783,7 @@ function renderActivitySubTab() {
 
   const rows = items.map((it, i) => {
     const borderStyle = i === items.length - 1 ? "" : `border-bottom:1px solid ${th.border};`;
-    return `<button onclick="setAdminDashSubTab('${it.target}')" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border:none;border-left:3px solid ${it.color};${borderStyle}background:${th.surface};cursor:pointer;font-family:inherit;text-align:left;width:100%;transition:background 0.1s ease" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${th.surface}'">
+    return `<button onclick="${it.onClick}" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border:none;border-left:3px solid ${it.color};${borderStyle}background:${th.surface};cursor:pointer;font-family:inherit;text-align:left;width:100%;transition:background 0.1s ease" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${th.surface}'">
       <span style="font-size:18px;flex-shrink:0">${it.icon}</span>
       <div style="flex:1;min-width:0">
         <div style="font-size:13px;font-weight:700;color:${th.text};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(it.title)}</div>
