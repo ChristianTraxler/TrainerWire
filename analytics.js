@@ -6,6 +6,7 @@
 
   const VISITOR_KEY = "trainerwire_visitor_id";
   const ADMIN_SESSION_KEY = "trainerwire_admin_session";
+  const EXCLUDE_KEY = "trainerwire_exclude_analytics";
 
   function uuid() {
     if (typeof crypto !== "undefined" && crypto.randomUUID) return crypto.randomUUID();
@@ -35,6 +36,7 @@
     if (/bot|crawler|spider|preview|lighthouse|headless/i.test(ua)) return true;
     try {
       if (localStorage.getItem(ADMIN_SESSION_KEY)) return true;
+      if (localStorage.getItem(EXCLUDE_KEY) === "1") return true;
     } catch (_) {}
     return false;
   }

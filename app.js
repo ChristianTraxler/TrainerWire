@@ -1913,6 +1913,24 @@ async function adminLoginRequest(email, password) {
     refresh_token: data.refresh_token,
     expires_at: Math.floor(Date.now() / 1000) + (data.expires_in || 3600)
   });
+  // Auto-flag this device so its pageviews stay out of analytics even after sign-out.
+  // Admin can toggle this back off from the dashboard Quick Actions.
+  try { localStorage.setItem(ANALYTICS_EXCLUDE_KEY, "1"); } catch {}
+}
+
+const ANALYTICS_EXCLUDE_KEY = "trainerwire_exclude_analytics";
+function isDeviceExcludedFromAnalytics() {
+  try { return localStorage.getItem(ANALYTICS_EXCLUDE_KEY) === "1"; } catch { return false; }
+}
+function setDeviceExcludedFromAnalytics(excluded) {
+  try {
+    if (excluded) localStorage.setItem(ANALYTICS_EXCLUDE_KEY, "1");
+    else localStorage.removeItem(ANALYTICS_EXCLUDE_KEY);
+  } catch {}
+}
+function toggleDeviceAnalyticsExclude() {
+  setDeviceExcludedFromAnalytics(!isDeviceExcludedFromAnalytics());
+  render();
 }
 
 function adminLogout() {
@@ -2848,10 +2866,13 @@ function renderQuickActions() {
   const th = t(darkMode);
   const isMobile = breakpoint === "mobile";
   const btn = (label, onclick, color) => `<button onclick="${onclick}" style="padding:${isMobile ? "8px 14px" : "10px 16px"};border-radius:999px;border:1.5px solid ${th.border};background:${th.surface};color:${color || th.text};font-size:${isMobile ? 12 : 13}px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s ease" onmouseenter="this.style.transform='translateY(-1px)';this.style.borderColor='${th.borderHover}'" onmouseleave="this.style.transform='translateY(0)';this.style.borderColor='${th.border}'">${label}</button>`;
+  const excluded = isDeviceExcludedFromAnalytics();
+  const excludeBtn = `<button onclick="toggleDeviceAnalyticsExclude()" title="${excluded ? "This device's pageviews are excluded from analytics. Click to start counting this device again." : "This device's pageviews ARE being counted in analytics. Click to exclude."}" style="padding:${isMobile ? "8px 14px" : "10px 16px"};border-radius:999px;border:1.5px solid ${excluded ? "#2ECC71" : th.border};background:${excluded ? "rgba(46,204,113,0.12)" : th.surface};color:${excluded ? "#2ECC71" : th.text};font-size:${isMobile ? 12 : 13}px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s ease" onmouseenter="this.style.transform='translateY(-1px)'" onmouseleave="this.style.transform='translateY(0)'">${excluded ? "✓ Excluded from analytics" : "📊 Counted in analytics"}</button>`;
   return `<div style="margin-top:6px;padding-top:14px;border-top:1.5px solid ${th.border};display:flex;flex-wrap:wrap;gap:8px;justify-content:center">
     ${btn("↻ Refresh all", "refreshAllAdminData()")}
     ${btn("🗑 Clear caches", "clearSwCachesAndReload()")}
     ${btn("📋 Copy email", "copyAdminEmail()")}
+    ${excludeBtn}
     ${btn("↪ Sign out", "adminLogout()", "#E74C3C")}
   </div>`;
 }
