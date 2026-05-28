@@ -1977,6 +1977,15 @@ function closeAdminLogin() {
   render();
 }
 
+// Header lock button: open login when signed out, jump to dashboard when signed in.
+function openAdminAccess() {
+  if (isAdmin()) {
+    setTab("report");
+  } else {
+    openAdminLogin();
+  }
+}
+
 async function submitAdminLogin() {
   if (_adminLoginSubmitting) return;
   const emailEl = document.getElementById("admin-login-email");
@@ -7114,9 +7123,14 @@ function render() {
         ${navBtn("setTab('tools')","PoGO Tools","tools")}
       </nav>`;
     })() : ""}
-    <button id="theme-toggle" onclick="toggleDarkMode()" style="background:${darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.06)"};border:1.5px solid ${th.border};border-radius:50%;width:${isMobile ? 36 : 40}px;height:${isMobile ? 36 : 40}px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:${isMobile ? 18 : 20}px;transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);flex-shrink:0"
-      onmouseenter="this.style.transform='scale(1.12)';this.style.boxShadow='0 4px 15px ${darkMode ? "rgba(255,200,50,0.2)" : "rgba(0,0,0,0.15)"}';"
-      onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none';">${darkMode ? "\u2600\uFE0F" : "\uD83C\uDF19"}</button>
+    <div style="display:flex;align-items:center;gap:${isMobile ? 8 : 10}px;flex-shrink:0">
+      <button id="admin-access-btn" onclick="openAdminAccess()" aria-label="${isAdmin() ? "Open admin dashboard" : "Admin sign in"}" title="${isAdmin() ? "Admin dashboard" : "Admin sign in"}" style="position:relative;background:${isAdmin() ? "linear-gradient(135deg,#E74C3C,#F39C12)" : (darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.06)")};border:1.5px solid ${isAdmin() ? "transparent" : th.border};border-radius:50%;width:${isMobile ? 36 : 40}px;height:${isMobile ? 36 : 40}px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:${isMobile ? 16 : 18}px;transition:all 0.25s ease;flex-shrink:0;font-family:inherit"
+        onmouseenter="this.style.transform='scale(1.12)';this.style.boxShadow='0 4px 15px rgba(231,76,60,0.3)';"
+        onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none';">${isAdmin() ? "\uD83D\uDEE1\uFE0F" : "\uD83D\uDD12"}${isAdmin() ? `<span style="position:absolute;top:2px;right:2px;width:8px;height:8px;background:#2ECC71;border:1.5px solid ${th.surface};border-radius:50%"></span>` : ""}</button>
+      <button id="theme-toggle" onclick="toggleDarkMode()" style="background:${darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.06)"};border:1.5px solid ${th.border};border-radius:50%;width:${isMobile ? 36 : 40}px;height:${isMobile ? 36 : 40}px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:${isMobile ? 18 : 20}px;transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);flex-shrink:0"
+        onmouseenter="this.style.transform='scale(1.12)';this.style.boxShadow='0 4px 15px ${darkMode ? "rgba(255,200,50,0.2)" : "rgba(0,0,0,0.15)"}';"
+        onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none';">${darkMode ? "\u2600\uFE0F" : "\uD83C\uDF19"}</button>
+    </div>
   </header>`;
 
   const tickerText = "\u26A1 GO Fest 2026: Global \u2014 Newton, NC \u00B7 Southside Park \u00B7 July 11\u201312, 2026 \u00B7 10 AM\u20137 PM \u00B7 Join your local trainers for a weekend full of raids, shiny hunting & community fun! Stay tuned for more details!";
