@@ -2386,6 +2386,139 @@ function renderPendingQueueCard(report) {
   </div>`;
 }
 
+// --- ADMIN ANALYTICS (Supabase pageviews → analytics_summary view) ---
+let _analyticsData = null;
+let _analyticsLoading = false;
+let _analyticsError = "";
+
+async function loadAnalyticsFromSupabase() {
+  const sess = getAdminSession();
+  if (!sess || !sess.access_token) {
+    _analyticsError = "Not logged in.";
+    return;
+  }
+  _analyticsLoading = true;
+  _analyticsError = "";
+  if (state.tab === "report") render();
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/analytics_summary?select=*`, {
+      headers: {
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${sess.access_token}`,
+      },
+    });
+    if (!res.ok) {
+      const txt = await res.text().catch(() => "");
+      throw new Error(`HTTP ${res.status}${txt ? `: ${txt.slice(0, 140)}` : ""}`);
+    }
+    const rows = await res.json();
+    _analyticsData = Array.isArray(rows) && rows.length ? rows[0] : null;
+  } catch (e) {
+    _analyticsError = e && e.message ? e.message : "Failed to load analytics.";
+    _analyticsData = null;
+  } finally {
+    _analyticsLoading = false;
+    if (state.tab === "report") render();
+  }
+}
+
+function refreshAnalytics() {
+  loadAnalyticsFromSupabase();
+}
+
+function fmtNum(n) {
+  const v = Number(n || 0);
+  return v.toLocaleString("en-US");
+}
+
+function renderAdminAnalyticsSection() {
+  if (!isAdmin()) return "";
+  const th = t(darkMode);
+
+  // Kick off initial load on first render after admin opens the report tab.
+  if (_analyticsData === null && !_analyticsLoading && !_analyticsError) {
+    loadAnalyticsFromSupabase();
+  }
+
+  const headerRow = `<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px">
+    <h3 style="margin:0;font-size:15px;font-weight:800;color:${th.text}">📊 Analytics</h3>
+    <button onclick="refreshAnalytics()" ${_analyticsLoading ? "disabled" : ""} style="padding:6px 12px;border-radius:999px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:12px;font-weight:700;cursor:${_analyticsLoading ? "wait" : "pointer"};font-family:inherit;opacity:${_analyticsLoading ? 0.6 : 1}">${_analyticsLoading ? "Loading…" : "↻ Refresh"}</button>
+  </div>`;
+
+  if (_analyticsError) {
+    return `<div style="margin-bottom:18px">${headerRow}
+      <div style="padding:12px 14px;background:${th.surface};border:1.5px solid #E74C3C;border-radius:14px;font-size:13px;color:#E74C3C">
+        Could not load analytics: ${esc(_analyticsError)}
+      </div>
+    </div>`;
+  }
+
+  if (!_analyticsData) {
+    return `<div style="margin-bottom:18px">${headerRow}
+      <div style="padding:14px 16px;background:${th.surface};border:1.5px dashed ${th.border};border-radius:14px;font-size:13px;color:${th.textMuted};text-align:center">Loading analytics…</div>
+    </div>`;
+  }
+
+  const d = _analyticsData;
+
+  const summaryCell = (val) => `<td style="padding:8px 10px;text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:${th.text}">${fmtNum(val)}</td>`;
+  const headerCell = (lbl) => `<th style="padding:8px 10px;text-align:right;font-size:11px;font-weight:700;color:${th.textMuted};text-transform:uppercase;letter-spacing:0.5px">${lbl}</th>`;
+
+  const summaryTable = `<div style="overflow-x:auto;border:1.5px solid ${th.border};border-radius:14px;background:${th.surface};margin-bottom:12px">
+    <table style="width:100%;border-collapse:collapse;font-size:13px;font-family:inherit">
+      <thead>
+        <tr style="border-bottom:1.5px solid ${th.border}">
+          <th style="padding:8px 10px;text-align:left;font-size:11px;font-weight:700;color:${th.textMuted};text-transform:uppercase;letter-spacing:0.5px"></th>
+          ${headerCell("Today")}
+          ${headerCell("7 days")}
+          ${headerCell("30 days")}
+          ${headerCell("All-time")}
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid ${th.border}">
+          <td style="padding:8px 10px;font-size:12px;font-weight:600;color:${th.textMuted}">Views</td>
+          ${summaryCell(d.views_today)}
+          ${summaryCell(d.views_7d)}
+          ${summaryCell(d.views_30d)}
+          ${summaryCell(d.views_all)}
+        </tr>
+        <tr>
+          <td style="padding:8px 10px;font-size:12px;font-weight:600;color:${th.textMuted}">Visitors</td>
+          ${summaryCell(d.visitors_today)}
+          ${summaryCell(d.visitors_7d)}
+          ${summaryCell(d.visitors_30d)}
+          ${summaryCell(d.visitors_all)}
+        </tr>
+      </tbody>
+    </table>
+  </div>`;
+
+  const renderList = (title, items, labelKey) => {
+    const rows = (items || []).length
+      ? items.map((it) => `<tr style="border-bottom:1px solid ${th.border}">
+          <td style="padding:6px 10px;font-size:13px;color:${th.text};font-weight:600">${esc(it[labelKey] || "—")}</td>
+          <td style="padding:6px 10px;text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:${th.text}">${fmtNum(it.views)}</td>
+        </tr>`).join("")
+      : `<tr><td colspan="2" style="padding:10px;text-align:center;font-size:12px;color:${th.textMuted}">No data yet</td></tr>`;
+    return `<div style="border:1.5px solid ${th.border};border-radius:14px;background:${th.surface};overflow:hidden">
+      <div style="padding:8px 12px;border-bottom:1.5px solid ${th.border};font-size:11px;font-weight:800;color:${th.textMuted};text-transform:uppercase;letter-spacing:0.5px">${esc(title)}</div>
+      <table style="width:100%;border-collapse:collapse;font-family:inherit"><tbody>${rows}</tbody></table>
+    </div>`;
+  };
+
+  const lists = `<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+    ${renderList("Top pages (30d)", d.top_pages, "page")}
+    ${renderList("Top referrers (30d)", d.top_referrers, "referrer")}
+  </div>`;
+
+  return `<div style="margin-bottom:18px">
+    ${headerRow}
+    ${summaryTable}
+    ${lists}
+  </div>`;
+}
+
 function renderPendingQueue() {
   if (!isAdmin()) return "";
   const th = t(darkMode);
@@ -4405,6 +4538,7 @@ function setTab(tab) {
   state.selectedNews = null;
   state.pokedexDetail = null;
   sessionStorage.setItem("trainerwire_tab", tab);
+  if (typeof trackPageview === "function") trackPageview(tab);
   if (tab === "nests") { loadNestsFromSupabase().then(() => render()); }
   if (tab === "report") {
     _reportSubmitMessage = { type: "", text: "" }; // clear stale banner from prior visit
@@ -6561,6 +6695,7 @@ function render() {
             </div>
           </div>
           <div>
+            ${renderAdminAnalyticsSection()}
             ${renderPendingQueue()}
             <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px">
               <h3 style="margin:0;font-size:${isMobile ? 16 : 18}px;font-weight:800;color:${th.text}">Recent Reports</h3>
@@ -6943,3 +7078,4 @@ document.addEventListener("touchend", (e) => {
 updateThemeColor();
 loadNestsFromSupabase().then(() => render());
 render();
+if (typeof trackPageview === "function") trackPageview(state.tab || "home");
