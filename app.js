@@ -2087,7 +2087,25 @@ async function loadBugReportsFromSupabase() {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/bug_reports?select=*&order=created_at.desc`, { headers });
     if (res.ok) _bugReportsCache = await res.json();
   } catch {}
+  detectNewBugReportsAndNotify();
   return _bugReportsCache;
+}
+
+// Toast notify on new bug reports for admins viewing another tab.
+let _knownBugReportIds = null; // null = uninitialized; set after first successful load
+function detectNewBugReportsAndNotify() {
+  if (!Array.isArray(_bugReportsCache)) return;
+  const currentIds = new Set(_bugReportsCache.map(r => r.id));
+  if (_knownBugReportIds === null) {
+    _knownBugReportIds = currentIds; // baseline; never toast on first load
+    return;
+  }
+  const newOnes = _bugReportsCache.filter(r => !_knownBugReportIds.has(r.id));
+  _knownBugReportIds = currentIds;
+  if (!newOnes.length) return;
+  if (!isAdmin()) return;
+  if (state.tab === "report") return; // already viewing the dashboard
+  try { showNewReportToast(newOnes); } catch {}
 }
 function loadBugReports() { return _bugReportsCache; }
 
@@ -2756,6 +2774,59 @@ async function clearSwCachesAndReload() {
     }
   } catch {}
   location.reload();
+}
+
+function ensureToastContainer() {
+  let c = document.getElementById("tw-toast-container");
+  if (!c) {
+    c = document.createElement("div");
+    c.id = "tw-toast-container";
+    c.style.cssText = "position:fixed;top:80px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:10px;pointer-events:none;max-width:min(360px,calc(100vw - 32px))";
+    document.body.appendChild(c);
+  }
+  return c;
+}
+
+function dismissToast(toast) {
+  if (!toast || !toast.parentNode) return;
+  toast.style.opacity = "0";
+  toast.style.transform = "translateY(-8px)";
+  setTimeout(() => { try { toast.remove(); } catch {} }, 280);
+}
+
+function showNewReportToast(newOnes) {
+  const th = t(darkMode);
+  const c = ensureToastContainer();
+  const n = newOnes.length;
+  const first = newOnes[0];
+  const title = n === 1 ? "🐛 New bug report" : `🐛 ${n} new bug reports`;
+  const sub = n === 1
+    ? ((first && first.description) || "").trim().slice(0, 120) || "(no description)"
+    : "Tap to review in the admin dashboard";
+
+  const toast = document.createElement("div");
+  toast.setAttribute("role", "status");
+  toast.style.cssText = `pointer-events:auto;display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:14px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-family:inherit;box-shadow:0 8px 28px rgba(0,0,0,0.22);transition:opacity 0.28s ease, transform 0.28s ease;animation:fadeSlideIn 0.28s ease-out;cursor:pointer`;
+  toast.innerHTML = `
+    <div style="flex:1;min-width:0">
+      <div style="font-size:13px;font-weight:800;color:${th.text};margin-bottom:2px">${esc(title)}</div>
+      <div style="font-size:12px;font-weight:500;color:${th.textMuted};line-height:1.45;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical">${esc(sub)}</div>
+    </div>
+    <button data-tw-toast-close aria-label="Dismiss" style="flex-shrink:0;background:transparent;border:none;color:${th.textMuted};font-size:18px;line-height:1;cursor:pointer;font-family:inherit;padding:2px 4px">×</button>`;
+
+  toast.onclick = (e) => {
+    if (e.target && e.target.closest && e.target.closest("[data-tw-toast-close]")) {
+      e.stopPropagation();
+      dismissToast(toast);
+      return;
+    }
+    dismissToast(toast);
+    try { setAdminDashSubTab("issues"); } catch {}
+    setTab("report");
+  };
+
+  c.appendChild(toast);
+  setTimeout(() => dismissToast(toast), 7000);
 }
 
 function copyAdminEmail() {
