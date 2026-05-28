@@ -4499,7 +4499,7 @@ function renderEventDetail(event, th) {
             </div>
             <div style="padding:10px;display:flex;flex-direction:column;gap:5px">${items.map(r => `<div style="padding:8px 12px;border-radius:9px;background:${th.accentBgSubtle(color)};font-size:13px;color:${th.textSecondary};line-height:1.45;display:flex;align-items:center;gap:8px"><span style="color:${color};font-weight:700">\u2022</span> ${esc(r)}</div>`).join("")}</div>
           </div>`;
-          const featuredHTML = (gp.featuredRewards && gp.featuredRewards.length) ? `<div style="display:flex;justify-content:center;margin-bottom:12px">
+          const featuredHTML = (gp.featuredRewards && gp.featuredRewards.length) ? `<div style="display:flex;justify-content:flex-start;margin-bottom:12px">
               <div style="display:inline-flex;flex-direction:column;align-items:center;gap:10px;padding:12px 18px;border-radius:14px;border:1.5px solid ${th.border};background:${th.accentBgSubtle(event.color || "#3498DB")}">
                 <div style="font-size:11px;font-weight:800;color:${th.textMuted};text-transform:uppercase;letter-spacing:0.5px">\u2728 Featured GO Pass Rewards</div>
                 <div style="display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;justify-content:center">${gp.featuredRewards.map(r => `<div style="display:flex;flex-direction:column;align-items:center;gap:6px">
