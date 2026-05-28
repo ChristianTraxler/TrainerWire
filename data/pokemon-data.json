@@ -2386,12 +2386,18 @@
     "types": [
       "Psychic",
       "Fighting"
-    ]
+    ],
+    "cp": "2294–2387",
+    "cpBoost": "2868–2984",
+    "weather": "Windy"
   },
   "Mega Mewtwo Y": {
     "types": [
       "Psychic"
-    ]
+    ],
+    "cp": "2294–2387",
+    "cpBoost": "2868–2984",
+    "weather": "Windy"
   },
   "Mega Pidgeot": {
     "types": [
