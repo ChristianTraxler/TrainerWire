@@ -7102,7 +7102,7 @@ function render() {
 
   // Header
   const adminIcon = isAdmin() ? "🛡️" : "🔒";
-  const adminDot = isAdmin() ? `<span style="position:absolute;top:2px;right:2px;width:8px;height:8px;background:#2ECC71;border:1.5px solid ${th.surface};border-radius:50%"></span>` : "";
+  const adminDot = isAdmin() ? `<span class="tw-sonar-dot" style="position:absolute;top:2px;right:2px;width:8px;height:8px;background:#2ECC71;border:1.5px solid ${th.surface};border-radius:50%"></span>` : "";
   const adminBtnHTML = breakpoint === "desktop"
     ? `<button id="admin-access-btn" onclick="openAdminAccess()" aria-label="${isAdmin() ? "Open admin dashboard" : "Admin sign in"}" title="${isAdmin() ? "Admin dashboard" : "Admin sign in"}" style="position:relative;background:${isAdmin() ? "linear-gradient(135deg,#E74C3C,#F39C12)" : (darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.06)")};border:1.5px solid ${isAdmin() ? "transparent" : th.border};border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all 0.25s ease;flex-shrink:0;font-family:inherit" onmouseenter="this.style.transform='scale(1.12)';this.style.boxShadow='0 4px 15px rgba(231,76,60,0.3)';" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none';">${adminIcon}${adminDot}</button>`
     : "";
@@ -7336,7 +7336,7 @@ function renderSidebar(th) {
       <button onclick="closeSidebar();openAdminAccess()" aria-label="${isAdmin() ? "Open admin dashboard" : "Admin sign in"}" style="position:relative;width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:12px 16px;border-radius:12px;border:1.5px solid ${isAdmin() ? "transparent" : th.border};background:${isAdmin() ? "linear-gradient(135deg,#E74C3C,#F39C12)" : "transparent"};color:${isAdmin() ? "#fff" : th.textSecondary};font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s ease">
         <span style="font-size:18px">${isAdmin() ? "\uD83D\uDEE1\uFE0F" : "\uD83D\uDD12"}</span>
         <span>${isAdmin() ? "Admin Dashboard" : "Admin Sign In"}</span>
-        ${isAdmin() ? `<span style="width:8px;height:8px;background:#2ECC71;border-radius:50%;margin-left:2px"></span>` : ""}
+        ${isAdmin() ? `<span class="tw-sonar-dot" style="width:8px;height:8px;background:#2ECC71;border-radius:50%;margin-left:2px"></span>` : ""}
       </button>
     </div>
     <div style="padding:14px 20px;border-top:1.5px solid ${th.border}">
