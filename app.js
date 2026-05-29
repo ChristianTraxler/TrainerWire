@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.10";
+const APP_VERSION = "3.11";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -317,7 +317,7 @@ async function fetchEvolutionChain(dexNum) {
       megasAdded.add(dex);
       const parentDepth = expanded.find(e => e.dexNum === dex)?.depth || maxDepth;
       for (const m of MEGA_EVOS[dex]) {
-        const triggerText = dex === 382 || dex === 383 ? "400 Primal Energy" : dex === 384 ? "300 Mega Energy + Dragon Ascent (Meteorite)" : "200 Mega Energy (first), free after";
+        const triggerText = dex === 382 || dex === 383 ? "400 Primal Energy" : dex === 384 ? "300 Mega Energy + Dragon Ascent (Meteorite)" : "200 Mega Energy first time, free after";
         expanded.push({ name: m.n, dexNum: dex, trigger: triggerText, depth: parentDepth + 1, imgFile: m.f, isMega: true });
       }
     }
@@ -5234,12 +5234,17 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
   const totalStats = data.stats.filter(s => SHOWN_STATS.includes(s.name)).reduce((sum, s) => sum + s.value, 0);
   let evoHtml = "";
   if (evolutions && evolutions.length > 1) {
-    function evoCard(evo) {
+    function evoCard(evo, compact = false) {
       const isActive = evo.dexNum === data.dexNum && (!evo.imgFile || evo.name === data.name);
-      return `<div onclick="openPokemonDetail(${evo.dexNum})" style="display:flex;flex-direction:column;align-items:center;cursor:pointer;padding:8px;border-radius:12px;background:${isActive ? th.accentBgSubtle(primaryColor) : "transparent"};border:2px solid ${isActive ? primaryColor : "transparent"};transition:all 0.2s;flex-shrink:0" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${isActive ? th.accentBgSubtle(primaryColor) : "transparent"}'">
-        <img src="${evo.isMega ? `${IMG_BASE}/Mega/regular/${getGenFolder(evo.dexNum)}/${evo.imgFile}.webp` : evo.imgFile ? formImgUrl(evo.dexNum, evo.imgFile) : pokemonImgUrl(evo.dexNum)}" style="width:56px;height:56px;object-fit:contain" onerror="this.style.opacity='0.3'" />
-        <div style="font-size:11px;font-weight:${isActive ? 700 : 500};color:${isActive ? th.text : th.textSecondary};margin-top:4px;text-align:center;max-width:90px">${esc(evo.name)}</div>
-        <div style="font-size:10px;color:${th.textMuted}">#${String(evo.dexNum).padStart(4,"0")}</div>
+      const sprite = compact ? 44 : 56;
+      const padCard = compact ? 4 : 8;
+      const nameFs = compact ? 10 : 11;
+      const dexFs = compact ? 9 : 10;
+      const maxW = compact ? 64 : 90;
+      return `<div onclick="openPokemonDetail(${evo.dexNum})" style="display:flex;flex-direction:column;align-items:center;cursor:pointer;padding:${padCard}px;border-radius:12px;background:${isActive ? th.accentBgSubtle(primaryColor) : "transparent"};border:2px solid ${isActive ? primaryColor : "transparent"};transition:all 0.2s;flex-shrink:0" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${isActive ? th.accentBgSubtle(primaryColor) : "transparent"}'">
+        <img src="${evo.isMega ? `${IMG_BASE}/Mega/regular/${getGenFolder(evo.dexNum)}/${evo.imgFile}.webp` : evo.imgFile ? formImgUrl(evo.dexNum, evo.imgFile) : pokemonImgUrl(evo.dexNum)}" style="width:${sprite}px;height:${sprite}px;object-fit:contain" onerror="this.style.opacity='0.3'" />
+        <div style="font-size:${nameFs}px;font-weight:${isActive ? 700 : 500};color:${isActive ? th.text : th.textSecondary};margin-top:4px;text-align:center;max-width:${maxW}px">${esc(evo.name)}</div>
+        <div style="font-size:${dexFs}px;color:${th.textMuted}">#${String(evo.dexNum).padStart(4,"0")}</div>
       </div>`;
     }
     // Separate Megas from regular evolutions
@@ -5322,15 +5327,19 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
       });
       evoContent = `<div style="display:flex;flex-direction:column;gap:8px;padding:12px;background:${th.surface};border-radius:12px;border:1px solid ${th.border}">${rows.join("")}</div>`;
     } else {
-      // Linear layout
+      // Linear layout \u2014 on mobile, keep all stages on one compact row (no wrap)
+      const arrowFs = isMobile ? 14 : 18;
+      const triggerFs = isMobile ? 9 : 10;
+      const arrowMargin = isMobile ? 2 : 4;
+      const triggerMaxW = isMobile ? 52 : 80;
       const evoItems = regularEvos.map((evo, i) => {
-        const arrow = i > 0 && evo.trigger ? `<div style="display:flex;flex-direction:column;align-items:center;margin:0 4px;flex-shrink:0">
-          <div style="font-size:18px;color:${th.textMuted}">\u2192</div>
-          <div style="font-size:10px;color:${th.textSecondary};text-align:center;max-width:80px;line-height:1.2">${esc(evo.trigger)}</div>
+        const arrow = i > 0 && evo.trigger ? `<div style="display:flex;flex-direction:column;align-items:center;margin:0 ${arrowMargin}px;flex-shrink:0">
+          <div style="font-size:${arrowFs}px;color:${th.textMuted}">\u2192</div>
+          <div style="font-size:${triggerFs}px;color:${th.textSecondary};text-align:center;max-width:${triggerMaxW}px;line-height:1.2">${esc(evo.trigger)}</div>
         </div>` : "";
-        return `${arrow}${evoCard(evo)}`;
+        return `${arrow}${evoCard(evo, isMobile)}`;
       }).join("");
-      evoContent = `<div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px;padding:12px;background:${th.surface};border-radius:12px;border:1px solid ${th.border}">${evoItems}</div>`;
+      evoContent = `<div style="display:flex;align-items:center;justify-content:center;flex-wrap:${isMobile ? "nowrap" : "wrap"};gap:4px;padding:12px;background:${th.surface};border-radius:12px;border:1px solid ${th.border};${isMobile ? "overflow-x:auto" : ""}">${evoItems}</div>`;
     }
 
     let megaHtml = "";
@@ -5340,7 +5349,7 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
         const shinyMegaSrc = `${IMG_BASE}/Mega/shiny/${getGenFolder(evo.dexNum)}/${evo.imgFile}.webp`;
         return `<div style="display:flex;align-items:center;gap:${isMobile ? 8 : 12}px;padding:${isMobile ? 10 : 12}px;background:${th.accentBgSubtle("#8E44AD")};border:1px solid ${th.countdownBorder("#8E44AD")};border-radius:12px">
         <img onclick="showFormModal('${megaSrc}','${esc(evo.name)}')" src="${megaSrc}" style="width:${isMobile ? 52 : 60}px;height:${isMobile ? 52 : 60}px;object-fit:contain;flex-shrink:0;cursor:pointer;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'" onerror="this.style.opacity='0.3'" />
-        <div style="flex:1;min-width:0">
+        <div style="flex:1;min-width:0;text-align:center">
           <div style="font-size:${isMobile ? 13 : 14}px;font-weight:700;color:${th.text}">${esc(evo.name)}</div>
           <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textSecondary};margin-top:2px">${esc(evo.trigger)}</div>
         </div>
@@ -7210,11 +7219,11 @@ function render() {
             const potdName = DEX_BY_NUM[potdDex] || "???";
             const potdImg = pokemonImgUrl(potdDex);
             const potdRegion = getGenFolder(potdDex).replace("Gen-","Gen ").replace("_"," \u2014 ");
-            return `<div onclick="openPokemonDetail(${potdDex})" style="padding:${isMobile ? "18px" : "24px"};background:linear-gradient(135deg,${th.heroBg("#F39C12")},${th.heroBg("#E74C3C")});border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;cursor:pointer;transition:all 0.2s ease;box-shadow:${th.shadow}" onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.15)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='${th.shadow}'">
-              <div style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:#F39C12;text-transform:uppercase;letter-spacing:1px;margin-bottom:${isMobile ? 10 : 12}px">\u2B50 Pok\u00E9mon of the Day</div>
-              <div style="display:flex;align-items:center;gap:${isMobile ? 14 : 18}px">
+            return `<div onclick="openPokemonDetail(${potdDex})" style="padding:${isMobile ? "18px" : "24px"};background:linear-gradient(135deg,${th.heroBg("#F39C12")},${th.heroBg("#E74C3C")});border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;cursor:pointer;transition:all 0.2s ease;box-shadow:${th.shadow}${isMobile ? "" : ";max-width:480px;margin-left:auto;margin-right:auto"}" onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.15)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='${th.shadow}'">
+              <div style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:#F39C12;text-transform:uppercase;letter-spacing:1px;margin-bottom:${isMobile ? 10 : 12}px;text-align:center">\u2B50 Pok\u00E9mon of the Day</div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:${isMobile ? 8 : 12}px">
                 <img src="${potdImg}" style="width:${isMobile ? 80 : 100}px;height:${isMobile ? 80 : 100}px;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.3));flex-shrink:0" onerror="this.style.opacity='0.3'" />
-                <div>
+                <div style="text-align:center">
                   <div style="font-size:${isMobile ? 20 : 24}px;font-weight:800;color:${th.text}">${esc(potdName)}</div>
                   <div style="font-size:${isMobile ? 12 : 13}px;color:${th.textMuted};margin-top:2px">#${String(potdDex).padStart(4,"0")} \u00B7 ${potdRegion}</div>
                   <div style="margin-top:8px;font-size:${isMobile ? 11 : 12}px;font-weight:600;color:#F39C12">Tap to learn more \u2192</div>
