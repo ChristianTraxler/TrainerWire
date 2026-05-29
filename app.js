@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.13";
+const APP_VERSION = "3.14";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -7574,10 +7574,12 @@ function _renderHbDiag() {
   if (!el) {
     el = document.createElement("div");
     el.id = "hb-diag";
-    el.style.cssText = "position:fixed;top:env(safe-area-inset-top,0px);left:50%;transform:translateX(-50%);z-index:100000;background:rgba(0,0,0,0.85);color:#fff;font:11px/1.2 monospace;padding:4px 10px;border-radius:0 0 8px 8px;pointer-events:none;letter-spacing:0.5px";
+    el.style.cssText = "position:fixed;top:env(safe-area-inset-top,0px);left:50%;transform:translateX(-50%);z-index:100000;background:rgba(0,0,0,0.85);color:#fff;font:11px/1.2 monospace;padding:4px 10px;border-radius:0 0 8px 8px;pointer-events:none;letter-spacing:0.5px;white-space:nowrap";
     document.body.appendChild(el);
   }
-  el.textContent = `ts:${_hbDiag.ts} pd:${_hbDiag.pd} fire:${_hbDiag.ts2}`;
+  const sb = document.getElementById("sidebar");
+  const open = sb && sb.classList && sb.classList.contains("is-open");
+  el.textContent = `ts:${_hbDiag.ts} pd:${_hbDiag.pd} fire:${_hbDiag.ts2} state:${sidebarOpen ? "1" : "0"} dom:${open ? "OPEN" : "CLOSED"}`;
 }
 // Capture-phase delegation so we catch the hamburger tap before any
 // other handler can swallow it. Also listen for touchstart/pointerdown
@@ -7601,24 +7603,23 @@ document.addEventListener("click", (e) => {
 
 let sidebarOpen = false;
 function toggleSidebar() {
-  _hbDiag.ts2++; _renderHbDiag();
-  sidebarOpen = !sidebarOpen;
+  _hbDiag.ts2++;
   const sidebar = document.getElementById("sidebar");
   const overlay = document.getElementById("sidebar-overlay");
-  if (sidebarOpen) {
-    sidebar.style.transform = "translateX(0)";
-    sidebar.style.pointerEvents = "auto";
-    overlay.style.opacity = "1";
-    overlay.style.pointerEvents = "auto";
-    overlay.style.visibility = "visible";
-  } else {
-    sidebar.style.transform = "translateX(-100%)";
-    sidebar.style.pointerEvents = "none";
-    overlay.style.opacity = "0";
-    overlay.style.pointerEvents = "none";
-    // Hide overlay after fade completes so it can't intercept any taps in the meantime.
-    setTimeout(() => { if (!sidebarOpen && overlay) overlay.style.visibility = "hidden"; }, 320);
-  }
+  if (!sidebar || !overlay) { _renderHbDiag(); return; }
+  sidebarOpen = !sidebarOpen;
+  // Clear any inline transform/opacity left over from prior v3.12/v3.13 code.
+  sidebar.style.transform = "";
+  sidebar.style.pointerEvents = "";
+  overlay.style.opacity = "";
+  overlay.style.pointerEvents = "";
+  overlay.style.visibility = "";
+  // Force the browser to flush the "current" state before changing the class —
+  // otherwise the transition can be skipped after an innerHTML re-render.
+  void sidebar.offsetWidth;
+  sidebar.classList.toggle("is-open", sidebarOpen);
+  overlay.classList.toggle("is-open", sidebarOpen);
+  _renderHbDiag();
 }
 function closeSidebar() {
   if (sidebarOpen) toggleSidebar();
@@ -7662,8 +7663,8 @@ function renderSidebar(th) {
     { id: "tools", icon: "\uD83D\uDEE0\uFE0F", label: "PoGO Tools" },
     { id: "report", icon: "\uD83D\uDCDD", label: "Report Issue" }
   ];
-  return `<div id="sidebar-overlay" onclick="closeSidebar()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:998;opacity:0;pointer-events:none;visibility:hidden;transition:opacity 0.3s ease"></div>
-  <nav id="sidebar" style="position:fixed;top:0;left:0;width:260px;height:100%;background:${th.surface};border-right:1.5px solid ${th.border};z-index:999;transform:translateX(-100%);pointer-events:none;transition:transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;overflow-y:auto">
+  return `<div id="sidebar-overlay" onclick="closeSidebar()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:998;transition:opacity 0.3s ease"></div>
+  <nav id="sidebar" style="position:fixed;top:0;left:0;width:260px;height:100%;background:${th.surface};border-right:1.5px solid ${th.border};z-index:999;transition:transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;overflow-y:auto">
     <div style="padding:24px 20px;border-bottom:1.5px solid ${th.border};display:flex;align-items:center;gap:12px">
       <img src="assets/trainerwire-logo2.webp" style="width:80px;height:80px;object-fit:contain" alt="TrainerWire" />
       <div>
