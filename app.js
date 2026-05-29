@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.12";
+const APP_VERSION = "3.13";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -7433,7 +7433,7 @@ function render() {
     : "";
   const headerHTML = `<header style="padding:${isMobile ? "14px 18px" : "16px 32px"};border-bottom:1.5px solid ${th.border};background:${th.headerBg};backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;width:100%;display:flex;align-items:center;justify-content:space-between;padding-top:calc(${isMobile ? "14px" : "16px"} + env(safe-area-inset-top, 0px));transform:translateZ(0);will-change:transform;isolation:isolate">
     <div style="display:flex;align-items:center;gap:${isMobile ? 6 : 14}px">
-    ${breakpoint !== "desktop" ? `<button onclick="toggleSidebar()" style="background:none;border:none;cursor:pointer;padding:6px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="${th.text}" stroke-width="2.5" stroke-linecap="round"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg></button>` : ""}
+    ${breakpoint !== "desktop" ? `<button data-hamburger="1" aria-label="Open menu" style="background:none;border:none;cursor:pointer;padding:11px;margin:-5px;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;touch-action:manipulation"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="${th.text}" stroke-width="2.5" stroke-linecap="round" style="pointer-events:none"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg></button>` : ""}
     <div onclick="goHome()" style="cursor:pointer;display:flex;align-items:center;gap:${isMobile ? 10 : 14}px">
       <img src="assets/trainerwire-logo2.webp" style="width:${isMobile ? 80 : 95}px;height:${isMobile ? 80 : 95}px;object-fit:contain;margin:-20px 0" alt="TrainerWire" />
       <div><div style="font-size:${isMobile ? 16 : 20}px;font-weight:800;color:${th.text};letter-spacing:-0.3px;line-height:1.2">${COMMUNITY_NAME}</div>
@@ -7564,8 +7564,44 @@ window.addEventListener("scroll", () => {
 });
 
 // --- SIDEBAR ---
+// Diagnostic counter (v3.13) — visible during regression hunt.
+// Counts: hamburger-area touchstart, hamburger pointerdown, and toggleSidebar calls.
+// If touchstart > pointerdown, taps are being swallowed by a touch handler.
+// If pointerdown > toggleSidebar, the click isn't firing (transition / click cancellation).
+let _hbDiag = { ts: 0, pd: 0, ts2: 0 };
+function _renderHbDiag() {
+  let el = document.getElementById("hb-diag");
+  if (!el) {
+    el = document.createElement("div");
+    el.id = "hb-diag";
+    el.style.cssText = "position:fixed;top:env(safe-area-inset-top,0px);left:50%;transform:translateX(-50%);z-index:100000;background:rgba(0,0,0,0.85);color:#fff;font:11px/1.2 monospace;padding:4px 10px;border-radius:0 0 8px 8px;pointer-events:none;letter-spacing:0.5px";
+    document.body.appendChild(el);
+  }
+  el.textContent = `ts:${_hbDiag.ts} pd:${_hbDiag.pd} fire:${_hbDiag.ts2}`;
+}
+// Capture-phase delegation so we catch the hamburger tap before any
+// other handler can swallow it. Also listen for touchstart/pointerdown
+// on the hamburger area for diagnostics.
+document.addEventListener("touchstart", (e) => {
+  const t = e.target.closest && e.target.closest("[data-hamburger]");
+  if (t) { _hbDiag.ts++; _renderHbDiag(); }
+}, { capture: true, passive: true });
+document.addEventListener("pointerdown", (e) => {
+  const t = e.target.closest && e.target.closest("[data-hamburger]");
+  if (t) { _hbDiag.pd++; _renderHbDiag(); }
+}, { capture: true });
+document.addEventListener("click", (e) => {
+  const t = e.target.closest && e.target.closest("[data-hamburger]");
+  if (t) {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleSidebar();
+  }
+}, { capture: true });
+
 let sidebarOpen = false;
 function toggleSidebar() {
+  _hbDiag.ts2++; _renderHbDiag();
   sidebarOpen = !sidebarOpen;
   const sidebar = document.getElementById("sidebar");
   const overlay = document.getElementById("sidebar-overlay");
