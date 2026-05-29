@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.11";
+const APP_VERSION = "3.12";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -7388,7 +7388,7 @@ function render() {
       </div>`;
     }
 
-    const welcomeHTML = state.tab === "home" ? `<div style="border-radius:${isMobile ? 18 : 24}px;padding:${isMobile ? "24px 18px" : "32px 28px"};background:linear-gradient(135deg,${th.heroBg("#E74C3C")},${th.heroBg("#F39C12")});border:1.5px solid ${th.border};overflow:hidden;position:relative;animation:fadeSlideUp 0.5s cubic-bezier(0.25,0.46,0.45,0.94)">
+    const welcomeHTML = state.tab === "home" ? `<div style="border-radius:${isMobile ? 18 : 24}px;padding:${isMobile ? "24px 18px" : "32px 28px"};background:linear-gradient(135deg,${th.heroBg("#E74C3C")},${th.heroBg("#F39C12")});border:1.5px solid ${th.border};overflow:hidden;position:relative;${state.heroRendered ? "" : "animation:fadeSlideUp 0.5s cubic-bezier(0.25,0.46,0.45,0.94)"}">
         <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:${isMobile ? 14 : 18}px">
           <img src="assets/trainerwire-logo2.webp" style="width:${isMobile ? 278 : 327}px;height:${isMobile ? 278 : 327}px;object-fit:contain;margin-top:${isMobile ? -40 : -50}px" alt="TrainerWire" />
           <h2 style="margin:-52px 0 0 0;font-size:${isMobile ? 18 : 24}px;font-weight:800;color:${th.text};line-height:1.2">Welcome to TrainerWire</h2>
@@ -7431,7 +7431,7 @@ function render() {
   const adminBtnHTML = breakpoint === "desktop"
     ? `<button id="admin-access-btn" onclick="openAdminAccess()" aria-label="${isAdmin() ? "Open admin dashboard" : "Admin sign in"}" title="${isAdmin() ? "Admin dashboard" : "Admin sign in"}" style="position:relative;background:${isAdmin() ? "linear-gradient(135deg,#E74C3C,#F39C12)" : (darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.06)")};border:1.5px solid ${isAdmin() ? "transparent" : th.border};border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all 0.25s ease;flex-shrink:0;font-family:inherit" onmouseenter="this.style.transform='scale(1.12)';this.style.boxShadow='0 4px 15px rgba(231,76,60,0.3)';" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none';">${adminIcon}${adminDot}</button>`
     : "";
-  const headerHTML = `<header style="padding:${isMobile ? "14px 18px" : "16px 32px"};border-bottom:1.5px solid ${th.border};background:${th.headerBg};backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;width:100%;display:flex;align-items:center;justify-content:space-between;padding-top:calc(${isMobile ? "14px" : "16px"} + env(safe-area-inset-top, 0px))">
+  const headerHTML = `<header style="padding:${isMobile ? "14px 18px" : "16px 32px"};border-bottom:1.5px solid ${th.border};background:${th.headerBg};backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;width:100%;display:flex;align-items:center;justify-content:space-between;padding-top:calc(${isMobile ? "14px" : "16px"} + env(safe-area-inset-top, 0px));transform:translateZ(0);will-change:transform;isolation:isolate">
     <div style="display:flex;align-items:center;gap:${isMobile ? 6 : 14}px">
     ${breakpoint !== "desktop" ? `<button onclick="toggleSidebar()" style="background:none;border:none;cursor:pointer;padding:6px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="${th.text}" stroke-width="2.5" stroke-linecap="round"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg></button>` : ""}
     <div onclick="goHome()" style="cursor:pointer;display:flex;align-items:center;gap:${isMobile ? 10 : 14}px">
@@ -7571,12 +7571,17 @@ function toggleSidebar() {
   const overlay = document.getElementById("sidebar-overlay");
   if (sidebarOpen) {
     sidebar.style.transform = "translateX(0)";
+    sidebar.style.pointerEvents = "auto";
     overlay.style.opacity = "1";
     overlay.style.pointerEvents = "auto";
+    overlay.style.visibility = "visible";
   } else {
     sidebar.style.transform = "translateX(-100%)";
+    sidebar.style.pointerEvents = "none";
     overlay.style.opacity = "0";
     overlay.style.pointerEvents = "none";
+    // Hide overlay after fade completes so it can't intercept any taps in the meantime.
+    setTimeout(() => { if (!sidebarOpen && overlay) overlay.style.visibility = "hidden"; }, 320);
   }
 }
 function closeSidebar() {
@@ -7621,8 +7626,8 @@ function renderSidebar(th) {
     { id: "tools", icon: "\uD83D\uDEE0\uFE0F", label: "PoGO Tools" },
     { id: "report", icon: "\uD83D\uDCDD", label: "Report Issue" }
   ];
-  return `<div id="sidebar-overlay" onclick="closeSidebar()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:998;opacity:0;pointer-events:none;transition:opacity 0.3s ease"></div>
-  <nav id="sidebar" style="position:fixed;top:0;left:0;width:260px;height:100%;background:${th.surface};border-right:1.5px solid ${th.border};z-index:999;transform:translateX(-100%);transition:transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;overflow-y:auto">
+  return `<div id="sidebar-overlay" onclick="closeSidebar()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:998;opacity:0;pointer-events:none;visibility:hidden;transition:opacity 0.3s ease"></div>
+  <nav id="sidebar" style="position:fixed;top:0;left:0;width:260px;height:100%;background:${th.surface};border-right:1.5px solid ${th.border};z-index:999;transform:translateX(-100%);pointer-events:none;transition:transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;overflow-y:auto">
     <div style="padding:24px 20px;border-bottom:1.5px solid ${th.border};display:flex;align-items:center;gap:12px">
       <img src="assets/trainerwire-logo2.webp" style="width:80px;height:80px;object-fit:contain" alt="TrainerWire" />
       <div>
