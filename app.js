@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.09";
+const APP_VERSION = "3.10";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -522,7 +522,7 @@ const SHINY_AVAILABLE = new Set([
   "Krabby","Hatenna","Darumaka","Eevee","Machop",
   "Hitmonchan","Hitmonlee","Drampa","Sableye","Falinks","Passimian","Beldum",
   "Cryogonal","Chansey","Grookey",
-  "Gyarados","Honedge","Dhelmise","Sinistea","Duraludon","Dreepy",
+  "Gyarados","Honedge","Dhelmise","Sinistea","Duraludon",
   "Emolga","Raichu","Alolan Raichu","Azumarill","Regidrago","Cacnea",
   "Vulpix","Goomy","Ampharos","Shiftry",
   "Chikorita","Cyndaquil","Totodile","Treecko","Torchic","Mudkip",
@@ -545,7 +545,18 @@ const SHINY_AVAILABLE = new Set([
   "Electabuzz","Jolteon","Unown","Houndour","Mudbray","Varoom","Galarian Corsola","Rotom","Wash Rotom",
   "Vaporeon","Staryu","Anorith","Galarian Mr. Mime",
   "Alolan Meowth","Ponyta","Alolan Marowak","Flareon","Nosepass","Bagon",
-  "Heracross","Beedrill","Pidgeot","Blaziken","Abomasnow","Tyranitar","Lucario"
+  "Heracross","Beedrill","Pidgeot","Blaziken","Abomasnow","Tyranitar","Lucario",
+  "Weezing","Arbok",
+  "Alolan Exeggutor","Amaura","Archen","Aron","Axew","Bidoof","Binacle","Boldore",
+  "Buneary","Bunnelby","Clamperl","Clauncher","Clefairy","Cottonee","Cubchoo",
+  "Dewpider","Diggersby","Doduo","Ducklett","Eelektrik","Elgyem","Feebas","Fletchinder",
+  "Gabite","Glameow","Grumpig","Gurdurr","Herdier","Hippopotas","Jangmo-o","Jigglypuff",
+  "Lampent","Liepard","Litleo","Lombre","Luxio","Magcargo","Magikarp","Mankey","Mantine",
+  "Marill","Mawile","Aggron","Metang","Nidorina","Nidorino","Nincada","Noctowl","Numel",
+  "Onix","Palpitoad","Phantump","Piloswine","Poliwag","Psyduck","Remoraid","Sandshrew",
+  "Seadra","Seaking","Sealeo","Skrelp","Smoliv","Snorunt","Snover","Spinda","Starmie",
+  "Stufful","Stunky","Tangela","Teddiursa","Tirtouga","Tranquill","Tyrunt","Vanillite",
+  "Whirlipede","Wingull"
 ]);
 function isShinyEligible(name) {
   if (name.includes("\u2728")) return true;
@@ -1072,6 +1083,67 @@ const EGG_TIER_IMAGES = {
   "10 km Adventure Sync": "assets/pokemon-images/eggs/egg-10.png",
   "5 km Adventure Sync Rewards": "assets/pokemon-images/eggs/egg-5.png",
   "10 km Adventure Sync Rewards": "assets/pokemon-images/eggs/egg-10.png"
+};
+
+// --- FIELD RESEARCH TASKS (Memories in Motion Season) ---
+// Source: pokemongohub.net/post/guide/pokemon-go-field-research/ (May 2026)
+const RESEARCH_BREAKTHROUGH = ["Gyarados","Honedge","Dhelmise","Sinistea","Duraludon","Dreepy"];
+const FIELD_RESEARCH_TASKS = {
+  "Throwing Tasks": [
+    { task: "Make 5 Nice Throws", rewards: ["Diglett","Alolan Diglett","Sudowoodo"] },
+    { task: "Make 3 Great Throws", rewards: ["Omanyte","Kabuto","Clamperl","Binacle","Elgyem"] },
+    { task: "Make 3 Great Throws in a row", rewards: ["Anorith","Lileep"] },
+    { task: "Make 5 Great Curveball Throws in a row", rewards: ["Spinda"] },
+    { task: "Make 2 Excellent Throws", rewards: ["Jangmo-o"] },
+    { task: "Make 3 Excellent Throws in a row", rewards: ["Gible","Larvitar","Beldum"] }
+  ],
+  "Catching Tasks": [
+    { task: "Catch a Dragon-type Pokémon", rewards: ["Dratini","Bagon","Axew"] },
+    { task: "Catch 10 Grass-type Pokémon", rewards: ["Mega Venusaur +10 Energy","Mega Sceptile +10 Energy"] },
+    { task: "Catch 10 Water-type Pokémon", rewards: ["Mega Blastoise +10 Energy","Mega Swampert +10 Energy"] },
+    { task: "Catch 10 Fire-type Pokémon", rewards: ["Mega Charizard +10 Energy","Mega Blaziken +10 Energy"] },
+    { task: "Catch 10 Normal-type Pokémon", rewards: ["Mega Pidgeot +10 Energy"] },
+    { task: "Catch 7 Pokémon", rewards: ["Magikarp","Stufful","Wimpod"] },
+    { task: "Catch 7 different species of Pokémon", rewards: ["Psyduck","Seaking","Marill","Teddiursa","Lombre","Stunky","Liepard","Darumaka","Clauncher","Dedenne","Cutiefly","Smoliv"] },
+    { task: "Catch 5 Pokémon with Weather Boost", rewards: ["Vulpix","Poliwag","Wingull","Hippopotas","Roggenrola","Snover","Vanillite"] }
+  ],
+  "Exploration Tasks": [
+    { task: "Hatch an Egg", rewards: ["Alolan Marowak","Sudowoodo","Scyther","Noctowl","Nincada","Bagon","Audino","Combee","Trubbish","Cubchoo","Tyrunt","Amaura","Stufful","Wimpod"] },
+    { task: "Hatch 2 Eggs", rewards: ["Sneasel","Mawile","Feebas"] },
+    { task: "Explore 2 km", rewards: ["Nidorina","Nidorino","Pidgeot","Paras","Mankey","Houndour","Mantine","Wailmer","Pawmi","Fidough","Yamper"] },
+    { task: "Spin 3 Pokéstops or Gyms", rewards: ["Doduo","Remoraid","Ralts","Aron"] },
+    { task: "Spin 5 Pokéstops or Gyms", rewards: ["Growlithe","Hisuian Growlithe","Slowpoke","Galarian Slowpoke","Sandshrew","Tangela","Dunsparce","Sneasel","Numel","Snorunt","Bidoof","Hippopotas","Minccino","Ducklett","Skrelp","Bounsweet","Phantump","Dewpider","Wooloo","Nickit","Tarountula","Nacli"] },
+    { task: "Take a Snapshot of a Wild Pokémon", rewards: ["Trapinch","Croagunk","Cottonee"] }
+  ],
+  "Battling Tasks": [
+    { task: "Win a Raid", rewards: ["Onix","Vaporeon","Jolteon","Flareon","Snorlax","Piloswine","Luxio","Metang","Gabite","Lampent","Sealeo","Fletchinder"] },
+    { task: "Win a Level 3 or higher raid", rewards: ["Archen","Tirtouga"] },
+    { task: "Win 5 Raids", rewards: ["Alolan Marowak","Aerodactyl","Alolan Exeggutor"] }
+  ],
+  "Training Tasks": [
+    { task: "Evolve a Pokémon", rewards: ["Eevee","Starmie","Seadra","Magcargo","Grumpig","Whirlipede","Eelektrik","Diggersby"] },
+    { task: "Power up Pokémon 3 times", rewards: ["Bulbasaur","Charmander","Squirtle","Snivy","Tepig","Oshawott"] },
+    { task: "Power up Pokémon 5 times", rewards: ["Mega Blastoise +10 Energy","Mega Charizard +10 Energy","Mega Venusaur +10 Energy","Mega Beedrill +10 Energy","Mega Pidgeot +10 Energy","Mega Manectric +10 Energy","Mega Aggron +10 Energy"] },
+    { task: "Power up Pokémon 7 times", rewards: ["Rowlet","Litten","Popplio"] }
+  ],
+  "Buddy and Friendship Tasks": [
+    { task: "Earn 2 Candies walking with your buddy", rewards: ["Bunnelby","Jigglypuff","Litleo","Dedenne","Glameow","Buneary"] },
+    { task: "Earn 3 Candies walking with your buddy", rewards: ["Stunfisk","Galarian Stunfisk"] },
+    { task: "Send 3 Gifts and add a sticker to each", rewards: ["Jigglypuff","Clefairy","Eevee","Togetic"] },
+    { task: "Trade a Pokémon", rewards: ["Herdier","Tranquill","Boldore","Gurdurr","Palpitoad"] }
+  ],
+  "Team GO Rocket Tasks": [
+    { task: "Defeat 3 Team GO Rocket Grunts", rewards: ["Meowth","Weezing","Arbok"] }
+  ]
+};
+const RESEARCH_SECTION_META = {
+  "Throwing Tasks":            { color: "#F39C12", icon: "🎯" },
+  "Catching Tasks":            { color: "#E74C3C", icon: "🔴" },
+  "Exploration Tasks":         { color: "#3498DB", icon: "🗺️" },
+  "Battling Tasks":            { color: "#9B59B6", icon: "⚔️" },
+  "Training Tasks":            { color: "#2ECC71", icon: "💪" },
+  "Buddy and Friendship Tasks":{ color: "#E91E63", icon: "💛" },
+  "Team GO Rocket Tasks":      { color: "#2C3E50", icon: "🚀" }
 };
 
 const CURRENT_RAID_BOSSES = {
@@ -1935,7 +2007,8 @@ function toggleDeviceAnalyticsExclude() {
 
 function adminLogout() {
   clearAdminSession();
-  render();
+  setTab("home");
+  openAdminLogin();
 }
 
 // Refresh the access token if it's near expiry. Returns the (possibly new) session.
@@ -2617,12 +2690,9 @@ function getDashStatCounts() {
     const ts = n.created_at ? new Date(n.created_at).getTime() : 0;
     return ts >= dayAgo;
   }).length;
-  const todayStr = new Date().toISOString().slice(0, 10);
   const activeEvents = (typeof EVENTS !== "undefined" ? EVENTS : []).filter(e => {
     if (!e || !e.date) return false;
-    const start = e.date;
-    const end = e.endDate || e.date;
-    return start <= todayStr && todayStr <= end;
+    return isActive(e);
   }).length;
   return { views, pending, newNests, activeEvents };
 }
@@ -2755,12 +2825,11 @@ function renderActivitySubTab() {
     sub: n.location || "—",
     onClick: `setAdminDashSubTab('nests')`
   }));
-  const todayStr = new Date().toISOString().slice(0, 10);
   const events = (typeof EVENTS !== "undefined" ? EVENTS : [])
-    .filter(e => e && e.id != null && e.date && e.date <= todayStr && todayStr <= (e.endDate || e.date))
+    .filter(e => e && e.id != null && e.date && isActive(e))
     .map(e => ({
       kind: "event",
-      ts: new Date(e.date + "T00:00:00").getTime(),
+      ts: getEventStartDate(e).getTime(),
       icon: e.icon || "📅",
       iconImg: e.iconImg || null,
       isDynamax: e.type === "Max Battle",
@@ -5505,6 +5574,23 @@ function scrollToEggTier(id) {
   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+function toggleResearchSection(sectionId) {
+  const body = document.getElementById(sectionId + "-body");
+  const chevron = document.getElementById(sectionId + "-chevron");
+  const btn = document.querySelector(`button[aria-controls="${sectionId}-body"]`);
+  if (!body) return;
+  const isOpen = body.style.maxHeight && body.style.maxHeight !== "0px";
+  if (isOpen) {
+    body.style.maxHeight = "0px";
+    if (chevron) chevron.style.transform = "rotate(0deg)";
+    if (btn) btn.setAttribute("aria-expanded", "false");
+  } else {
+    body.style.maxHeight = body.scrollHeight + "px";
+    if (chevron) chevron.style.transform = "rotate(180deg)";
+    if (btn) btn.setAttribute("aria-expanded", "true");
+  }
+}
+
 function setFilter(f) {
   state.filter = f;
   state.openYears = {};
@@ -6172,14 +6258,15 @@ function render() {
 
     // Tabs
     const tabsHTML = `<div style="display:flex;border-bottom:2px solid ${th.tabBorder};margin-top:4px">
-      ${["events", "calendar", "raids", "max", "rocket", "eggs", "news"].map(tb => {
+      ${["events", "calendar", "raids", "max", "rocket", "eggs", "research", "news"].map(tb => {
         const rocketIcon = `<img src="assets/pokemon-images/icons/teamrocket_r_full.png" style="width:${isMobile ? 22 : 20}px;height:${isMobile ? 22 : 20}px;object-fit:contain;vertical-align:middle" />`;
         const eggIcon = `<img src="assets/pokemon-images/eggs/egg-2.png" style="width:${isMobile ? 28 : 24}px;height:${isMobile ? 28 : 24}px;object-fit:contain;vertical-align:middle;position:relative;top:-4px" />`;
+        const researchIcon = `<img src="assets/pokemon-images/icons/green-research.png" style="width:${isMobile ? 22 : 20}px;height:${isMobile ? 22 : 20}px;object-fit:contain;vertical-align:middle" />`;
         const iconWrap = (inner) => `<span style="display:flex;align-items:center;justify-content:center;width:24px;height:24px">${inner}</span>`;
-        const mobileIcon = tb === "events" ? iconWrap(`<span style="font-size:20px">\uD83D\uDCC5</span>`) : tb === "calendar" ? iconWrap(`<span style="font-size:20px">\uD83D\uDDD3\uFE0F</span>`) : tb === "raids" ? iconWrap(`<span style="font-size:20px">\u2694\uFE0F</span>`) : tb === "max" ? iconWrap(`<span style="font-size:20px">\uD83D\uDCA5</span>`) : tb === "rocket" ? iconWrap(rocketIcon) : tb === "eggs" ? iconWrap(eggIcon) : iconWrap(`<span style="font-size:20px">\uD83D\uDCE2</span>`);
-        const mobileText = tb === "events" ? "Events" : tb === "calendar" ? "Cal" : tb === "raids" ? "Raids" : tb === "max" ? "Max" : tb === "rocket" ? "Rocket" : tb === "eggs" ? "Eggs" : "News";
+        const mobileIcon = tb === "events" ? iconWrap(`<span style="font-size:20px">\uD83D\uDCC5</span>`) : tb === "calendar" ? iconWrap(`<span style="font-size:20px">\uD83D\uDDD3\uFE0F</span>`) : tb === "raids" ? iconWrap(`<span style="font-size:20px">\u2694\uFE0F</span>`) : tb === "max" ? iconWrap(`<span style="font-size:20px">\uD83D\uDCA5</span>`) : tb === "rocket" ? iconWrap(rocketIcon) : tb === "eggs" ? iconWrap(eggIcon) : tb === "research" ? iconWrap(researchIcon) : iconWrap(`<span style="font-size:20px">\uD83D\uDCE2</span>`);
+        const mobileText = tb === "events" ? "Events" : tb === "calendar" ? "Cal" : tb === "raids" ? "Raids" : tb === "max" ? "Max" : tb === "rocket" ? "Rocket" : tb === "eggs" ? "Eggs" : tb === "research" ? "Research" : "News";
         const mobileLabel = `<span style="display:flex;flex-direction:column;align-items:center;gap:3px">${mobileIcon}<span>${mobileText}</span></span>`;
-        const desktopLabel = tb === "events" ? `\uD83D\uDCC5 Events (${upcomingEvents.length})` : tb === "calendar" ? `\uD83D\uDDD3\uFE0F Calendar` : tb === "raids" ? `\u2694\uFE0F Raids` : tb === "max" ? `\uD83D\uDCA5 Max Battles` : tb === "rocket" ? `${rocketIcon} Rocket` : tb === "eggs" ? `${eggIcon} Eggs` : `\uD83D\uDCE2 News (${filteredAnnouncements.length})`;
+        const desktopLabel = tb === "events" ? `\uD83D\uDCC5 Events (${upcomingEvents.length})` : tb === "calendar" ? `\uD83D\uDDD3\uFE0F Calendar` : tb === "raids" ? `\u2694\uFE0F Raids` : tb === "max" ? `\uD83D\uDCA5 Max Battles` : tb === "rocket" ? `${rocketIcon} Rocket` : tb === "eggs" ? `${eggIcon} Eggs` : tb === "research" ? `${researchIcon} Research` : `\uD83D\uDCE2 News (${filteredAnnouncements.length})`;
         const label = isMobile ? mobileLabel : desktopLabel;
         return `<button onclick="setTab('${tb}')" style="${isMobile ? "flex:1;padding:8px 4px" : "flex:1;padding:11px 0"};background:none;border:none;border-bottom:${state.tab === tb ? `2.5px solid ${th.tabActive}` : "2.5px solid transparent"};color:${state.tab === tb ? th.tabActive : th.tabInactive};font-size:${isMobile ? 9 : 13}px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:${isMobile ? "0.3px" : "1px"};transition:all 0.15s ease;font-family:inherit;white-space:nowrap">${label}</button>`;
       }).join("")}
@@ -6619,6 +6706,120 @@ function render() {
         <div style="display:flex;gap:${isMobile ? 6 : 8}px;overflow-x:auto;padding:0 4px 6px;-webkit-overflow-scrolling:touch;scrollbar-width:none;justify-content:center;flex-wrap:wrap">${eggNavHTML}</div>
         <div style="text-align:center;font-size:11px;color:${th.textMuted};font-weight:500;margin-top:-10px">Data sourced from LeekDuck.com</div>
         ${eggSectionsHTML}
+      </div>`;
+    }
+
+    // Field Research tab
+    let researchTabHTML = "";
+    if (state.tab === "research") {
+      const MEGA_ENERGY_ICONS = {
+        "Mega Venusaur": "Venusaur_Mega_Energy.png",
+        "Mega Sceptile": "Sceptile_Mega_Energy.png",
+        "Mega Blastoise": "Blastoise_Mega_Energy.png",
+        "Mega Swampert": "Swampert_Mega_Energy.png",
+        "Mega Charizard": "Charizard_Mega_Energy.png",
+        "Mega Charizard X": "Charizard_Mega_Energy.png",
+        "Mega Charizard Y": "Charizard_Mega_Energy.png",
+        "Mega Blaziken": "Blaziken_Mega_Energy.png",
+        "Mega Pidgeot": "Pidgeot_Mega_Energy.png",
+        "Mega Manectric": "Manectric_Mega_Energy.png",
+        "Mega Beedrill": "Beedrill_Mega_Energy.png",
+        "Mega Aggron": "Aggron_Mega_Energy.png"
+      };
+      const renderRewardTile = (rewardName, tileBg) => {
+        const energyMatch = rewardName.match(/^(.*?)\s*\+(\d+)\s*Energy$/i);
+        const baseName = energyMatch ? energyMatch[1].trim() : rewardName;
+        const energyAmt = energyMatch ? energyMatch[2] : null;
+        const imgSize = isMobile ? 76 : 110;
+        const megaIcon = energyAmt ? MEGA_ENERGY_ICONS[baseName] : null;
+        let imgEl;
+        if (megaIcon) {
+          imgEl = `<img src="assets/pokemon-images/icons/${megaIcon}" style="width:${imgSize}px;height:${imgSize}px;object-fit:contain" alt="${esc(baseName)} Energy" />`;
+        } else {
+          const pkmn = getPokemonImg(baseName);
+          imgEl = pokemonImgHTML(pkmn, imgSize);
+          if (imgEl) imgEl = wrapShinySparkles(imgEl, baseName, imgSize);
+        }
+        const fallback = `<div style="width:${imgSize}px;height:${imgSize}px;display:flex;align-items:center;justify-content:center"><div style="width:8px;height:8px;border-radius:50%;background:${th.textFaint}"></div></div>`;
+        const displayName = baseName.replace(/\s*\(Male\)/," ♂").replace(/\s*\(Female\)/," ♀");
+        const energyBadge = energyAmt ? `<div style="margin-top:3px;font-size:${isMobile ? 9 : 10}px;font-weight:700;color:#fff;background:linear-gradient(135deg,#E74C3C,#F39C12);padding:2px 6px;border-radius:8px;display:inline-block;line-height:1.2">+${energyAmt} Mega Energy</div>` : "";
+        return `<div style="border-radius:10px;background:${tileBg};border:1px solid ${th.border};display:flex;flex-direction:column;align-items:center;padding:${isMobile ? "6px 4px 6px" : "10px 6px 8px"};text-align:center;box-sizing:border-box;min-width:${isMobile ? "0" : "120px"};${isMobile ? "width:calc(33.33% - 4px)" : "flex:1;max-width:170px"}">
+          ${imgEl || fallback}
+          <div style="font-weight:700;color:${th.text};font-size:${isMobile ? 11 : 12};margin-top:2px;line-height:1.2;word-break:break-word">${esc(displayName)}</div>
+          ${energyBadge}
+        </div>`;
+      };
+
+      const breakthroughTilesHTML = RESEARCH_BREAKTHROUGH.map(name => {
+        const pkmn = getPokemonImg(name);
+        const imgSize = isMobile ? 84 : 120;
+        let imgEl = pokemonImgHTML(pkmn, imgSize);
+        if (imgEl) imgEl = wrapShinySparkles(imgEl, name, imgSize);
+        return `<div style="border-radius:12px;background:${th.accentBgSubtle("#16A085")};border:1.5px solid ${th.border};display:flex;flex-direction:column;align-items:center;padding:${isMobile ? "8px 4px" : "12px 8px"};text-align:center;box-sizing:border-box;${isMobile ? "width:calc(33.33% - 6px)" : "flex:1;min-width:130px;max-width:180px"}">
+          ${imgEl || `<div style="width:${imgSize}px;height:${imgSize}px"></div>`}
+          <div style="font-weight:700;color:${th.text};font-size:${isMobile ? 12 : 13};margin-top:4px">${esc(name)}</div>
+        </div>`;
+      }).join("");
+
+      const sectionsHTML = Object.entries(FIELD_RESEARCH_TASKS).map(([section, tasks], idx) => {
+        const meta = RESEARCH_SECTION_META[section] || { color: "#78C850", icon: "📋" };
+        const color = meta.color;
+        const sectionId = "research-section-" + idx;
+        const bodyId = sectionId + "-body";
+        const chevronId = sectionId + "-chevron";
+        const openByDefault = !isMobile;
+        const tasksHTML = tasks.map(t => {
+          const taskRowHTML = `<div style="display:flex;flex-direction:${isMobile ? "column" : "row"};gap:${isMobile ? "8px" : "14px"};align-items:${isMobile ? "stretch" : "center"};padding:${isMobile ? "10px" : "12px 14px"};background:${th.surface};border:1px solid ${th.border};border-radius:12px">
+            <div style="flex:${isMobile ? "0 0 auto" : "0 0 38%"};min-width:0;display:flex;align-items:center;gap:8px">
+              <span style="font-size:${isMobile ? 13 : 14}px;font-weight:700;color:${th.text};line-height:1.3">${esc(t.task)}</span>
+            </div>
+            <div style="flex:1;display:flex;flex-wrap:wrap;gap:${isMobile ? "5px" : "8px"};${isMobile ? "" : "justify-content:flex-start"}">
+              ${t.rewards.map(r => renderRewardTile(r, th.accentBgSubtle(color))).join("")}
+            </div>
+          </div>`;
+          return taskRowHTML;
+        }).join("");
+
+        return `<div style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden;background:${th.surface}">
+          <button type="button" onclick="toggleResearchSection('${sectionId}')" aria-expanded="${openByDefault}" aria-controls="${bodyId}" style="display:flex;align-items:center;gap:10px;width:100%;padding:12px 14px;background:${th.accentBgSubtle(color)};border:none;border-bottom:1.5px solid ${th.border};cursor:pointer;font-family:inherit;text-align:left">
+            <span style="font-size:${isMobile ? 18 : 20}px;line-height:1">${meta.icon}</span>
+            <span style="font-size:${isMobile ? 13 : 15}px;font-weight:800;color:${th.text};letter-spacing:0.4px;text-transform:uppercase;flex:1">${esc(section)}</span>
+            <span style="font-size:${isMobile ? 11 : 12}px;font-weight:800;color:#fff;background:${color};padding:3px 10px;border-radius:10px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,0.25)">${tasks.length} task${tasks.length === 1 ? "" : "s"}</span>
+            <svg id="${chevronId}" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="${th.text}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.25s ease;transform:rotate(${openByDefault ? 180 : 0}deg);flex-shrink:0"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div id="${bodyId}" style="overflow:hidden;transition:max-height 0.35s cubic-bezier(0.25,0.46,0.45,0.94);max-height:${openByDefault ? "20000px" : "0px"}">
+            <div style="display:flex;flex-direction:column;gap:${isMobile ? "8px" : "10px"};padding:${isMobile ? "10px" : "14px"}">
+              ${tasksHTML}
+            </div>
+          </div>
+        </div>`;
+      }).join("");
+
+      researchTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
+        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on May 28, 2026 at 9:47 pm</div>
+        <div style="text-align:center;padding:10px">
+          <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text};display:flex;align-items:center;justify-content:center;gap:8px"><img src="assets/pokemon-images/icons/green-research.png" style="width:${isMobile ? 30 : 36}px;height:${isMobile ? 30 : 36}px;object-fit:contain" /> Field Research Tasks</h2>
+          <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Current season tasks &amp; reward encounters</p>
+        </div>
+        <div style="text-align:center;font-size:${isMobile ? 11 : 12}px;color:${th.textMuted};font-weight:500;margin-top:-6px">Data sourced from pokemongohub.net &middot; Memories in Motion Season</div>
+
+        <div style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden;background:${th.surface}">
+          <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:${th.accentBgSubtle("#16A085")};border-bottom:1.5px solid ${th.border}">
+            <span style="font-size:${isMobile ? 18 : 20}px;line-height:1">🏆</span>
+            <span style="font-size:${isMobile ? 13 : 15}px;font-weight:800;color:${th.text};letter-spacing:0.4px;text-transform:uppercase">Research Breakthrough</span>
+          </div>
+          <div style="padding:${isMobile ? "10px" : "14px"}">
+            <p style="margin:0 0 10px 0;font-size:${isMobile ? 12 : 13}px;color:${th.textMuted};font-weight:500;line-height:1.4">Complete Field Research to unlock a Breakthrough encounter with one of these Pokémon:</p>
+            <div style="display:flex;flex-wrap:wrap;gap:${isMobile ? "6px" : "10px"};justify-content:${isMobile ? "flex-start" : "center"}">${breakthroughTilesHTML}</div>
+          </div>
+        </div>
+
+        <div style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden;background:${th.accentBgSubtle("#3498DB")};padding:${isMobile ? "10px 12px" : "14px 16px"}">
+          <div style="font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:4px">📌 A note on Seasonal Field Research</div>
+          <div style="font-size:${isMobile ? 11 : 12}px;color:${th.textMuted};line-height:1.4">During the Memories in Motion Season, most Field Research tasks are available the entire Season. Spinda (patterns 1 and 8) tasks still rotate monthly. In-game event Research can temporarily replace some tasks.</div>
+        </div>
+
+        ${sectionsHTML}
       </div>`;
     }
 
@@ -7210,7 +7411,7 @@ function render() {
       </div>` : "";
 
     content = `<main style="padding:${mainPad};display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
-      ${welcomeHTML}${!["home","tools","nests","pokedex","store","report"].includes(state.tab) ? `${isMobile ? liveCompactHTML + heroCompactHTML : `<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:${isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>`}${tabsHTML}` : ""}${state.tab === "home" ? `<div style="display:grid;grid-template-columns:${isMobile ? "1fr" : "repeat(2,1fr)"};gap:${isMobile ? 12 : isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>${renderWeekDigest(th, isMobile)}${tabsHTML}` : ""}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${rocketTabHTML}${eggsTabHTML}${newsTabHTML}${storeTabHTML}${pokedexTabHTML}${toolsTabHTML}${nestsTabHTML}${reportTabHTML}
+      ${welcomeHTML}${!["home","tools","nests","pokedex","store","report"].includes(state.tab) ? `${isMobile ? liveCompactHTML + heroCompactHTML : `<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:${isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>`}${tabsHTML}` : ""}${state.tab === "home" ? `<div style="display:grid;grid-template-columns:${isMobile ? "1fr" : "repeat(2,1fr)"};gap:${isMobile ? 12 : isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>${renderWeekDigest(th, isMobile)}${tabsHTML}` : ""}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${rocketTabHTML}${eggsTabHTML}${researchTabHTML}${newsTabHTML}${storeTabHTML}${pokedexTabHTML}${toolsTabHTML}${nestsTabHTML}${reportTabHTML}
     </main>`;
     if (hero || activeEvents.length > 0) state.heroRendered = true;
   }
@@ -7230,7 +7431,7 @@ function render() {
       <div style="font-size:${isMobile ? 10 : 12}px;color:${th.textMuted};font-weight:500;letter-spacing:0.2px">${COMMUNITY_TAGLINE}</div></div>
     </div></div>
     ${isDesktop ? (() => {
-      const currentTabs = ["raids","max","rocket","eggs"];
+      const currentTabs = ["raids","max","rocket","eggs","research"];
       const isCurrentActive = currentTabs.includes(state.tab);
       const navBtn = (fn, label, tabId) => {
         const isActive = state.tab === tabId;
@@ -7240,7 +7441,8 @@ function render() {
         {fn:"setTab('raids')",label:"Raids",icon:"\u2694\uFE0F",id:"raids"},
         {fn:"setTab('max')",label:"Max Battles",icon:"\uD83D\uDCA5",id:"max"},
         {fn:"setTab('rocket')",label:"Rocket",iconImg:"assets/pokemon-images/icons/teamrocket_r_full.png",id:"rocket"},
-        {fn:"setTab('eggs')",label:"Eggs",iconImg:"assets/pokemon-images/eggs/egg-2.png",iconSize:24,id:"eggs"}
+        {fn:"setTab('eggs')",label:"Eggs",iconImg:"assets/pokemon-images/eggs/egg-2.png",iconSize:24,id:"eggs"},
+        {fn:"setTab('research')",label:"Field Research",iconImg:"assets/pokemon-images/icons/green-research.png",iconSize:20,id:"research"}
       ];
       return `<nav style="display:flex;align-items:center;gap:4px">
         ${navBtn("goHome()","Home","home")}
@@ -7395,7 +7597,8 @@ function renderSidebar(th) {
     { id: "raids", icon: "\u2694\uFE0F", label: "Raids" },
     { id: "max", icon: "\uD83D\uDCA5", label: "Max Battles" },
     { id: "rocket", icon: "", iconImg: "assets/pokemon-images/icons/teamrocket_r_full.png", label: "Rocket" },
-    { id: "eggs", icon: "", iconImg: "assets/pokemon-images/eggs/egg-2.png", iconSize: 34, label: "Eggs" }
+    { id: "eggs", icon: "", iconImg: "assets/pokemon-images/eggs/egg-2.png", iconSize: 34, label: "Eggs" },
+    { id: "research", icon: "", iconImg: "assets/pokemon-images/icons/green-research.png", iconSize: 24, label: "Field Research" }
   ];
   const tabs = [
     { id: "home", icon: "\uD83C\uDFE0", label: "Home" },
