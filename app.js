@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.16";
+const APP_VERSION = "3.17";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -7564,23 +7564,6 @@ window.addEventListener("scroll", () => {
 });
 
 // --- SIDEBAR ---
-// Diagnostic counter (v3.13) — visible during regression hunt.
-// Counts: hamburger-area touchstart, hamburger pointerdown, and toggleSidebar calls.
-// If touchstart > pointerdown, taps are being swallowed by a touch handler.
-// If pointerdown > toggleSidebar, the click isn't firing (transition / click cancellation).
-let _hbDiag = { ts: 0, pd: 0, pu: 0, ts2: 0 };
-function _renderHbDiag() {
-  let el = document.getElementById("hb-diag");
-  if (!el) {
-    el = document.createElement("div");
-    el.id = "hb-diag";
-    el.style.cssText = "position:fixed;top:env(safe-area-inset-top,0px);left:50%;transform:translateX(-50%);z-index:100000;background:rgba(0,0,0,0.85);color:#fff;font:11px/1.2 monospace;padding:4px 10px;border-radius:0 0 8px 8px;pointer-events:none;letter-spacing:0.5px;white-space:nowrap";
-    document.body.appendChild(el);
-  }
-  const sb = document.getElementById("sidebar");
-  const open = sb && sb.classList && sb.classList.contains("is-open");
-  el.textContent = `ts:${_hbDiag.ts} pd:${_hbDiag.pd} pu:${_hbDiag.pu} fire:${_hbDiag.ts2} state:${sidebarOpen ? "1" : "0"} dom:${open ? "OPEN" : "CLOSED"}`;
-}
 // Hamburger tap handling — trigger toggleSidebar on pointerup with our own
 // slop check (bypasses the browser's `click` event, which refuses to fire if
 // the finger micro-moves between touchstart and touchend), then suppress the
@@ -7589,15 +7572,10 @@ function _renderHbDiag() {
 // sidebar — the bug that made taps "not register."
 let _hbPdAt = null;
 let _hbSuppressClickUntil = 0;
-document.addEventListener("touchstart", (e) => {
-  const t = e.target.closest && e.target.closest("[data-hamburger]");
-  if (t) { _hbDiag.ts++; _renderHbDiag(); }
-}, { capture: true, passive: true });
 document.addEventListener("pointerdown", (e) => {
   const t = e.target.closest && e.target.closest("[data-hamburger]");
   if (t) {
     _hbPdAt = { x: e.clientX, y: e.clientY, time: Date.now() };
-    _hbDiag.pd++; _renderHbDiag();
   } else {
     _hbPdAt = null;
   }
@@ -7611,13 +7589,10 @@ document.addEventListener("pointerup", (e) => {
   // Generous slop: 40px movement, 1000ms duration — well above finger jitter
   // but tight enough that a real drag/scroll won't trigger toggle.
   if (Math.abs(dx) < 40 && Math.abs(dy) < 40 && dt < 1000) {
-    _hbDiag.pu++;
     e.preventDefault();
     e.stopPropagation();
     _hbSuppressClickUntil = Date.now() + 400;
     toggleSidebar();
-  } else {
-    _renderHbDiag();
   }
 }, { capture: true });
 document.addEventListener("pointercancel", () => { _hbPdAt = null; }, { capture: true });
@@ -7639,23 +7614,15 @@ document.addEventListener("click", (e) => {
 
 let sidebarOpen = false;
 function toggleSidebar() {
-  _hbDiag.ts2++;
   const sidebar = document.getElementById("sidebar");
   const overlay = document.getElementById("sidebar-overlay");
-  if (!sidebar || !overlay) { _renderHbDiag(); return; }
+  if (!sidebar || !overlay) return;
   sidebarOpen = !sidebarOpen;
-  // Clear any inline transform/opacity left over from prior v3.12/v3.13 code.
-  sidebar.style.transform = "";
-  sidebar.style.pointerEvents = "";
-  overlay.style.opacity = "";
-  overlay.style.pointerEvents = "";
-  overlay.style.visibility = "";
   // Force the browser to flush the "current" state before changing the class —
   // otherwise the transition can be skipped after an innerHTML re-render.
   void sidebar.offsetWidth;
   sidebar.classList.toggle("is-open", sidebarOpen);
   overlay.classList.toggle("is-open", sidebarOpen);
-  _renderHbDiag();
 }
 function closeSidebar() {
   if (sidebarOpen) toggleSidebar();
