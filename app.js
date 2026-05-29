@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.17";
+const APP_VERSION = "3.18";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -7564,47 +7564,116 @@ window.addEventListener("scroll", () => {
 });
 
 // --- SIDEBAR ---
-// Hamburger tap handling — trigger toggleSidebar on pointerup with our own
-// slop check (bypasses the browser's `click` event, which refuses to fire if
-// the finger micro-moves between touchstart and touchend), then suppress the
-// synthesized `click` that follows. The click would otherwise hit the
-// freshly-revealed overlay (mid-animation) and immediately re-close the
-// sidebar — the bug that made taps "not register."
-let _hbPdAt = null;
+// Tap handling for every interactive element on/around the sidebar:
+// hamburger button, sidebar nav items, "Current" collapsible header,
+// admin button, and the overlay. Mobile browsers refuse to fire `click`
+// if the finger micro-moves more than ~10-15px between touchstart and
+// touchend (they assume scroll/swipe), so taps intermittently get dropped.
+//
+// Touch and pointer state are tracked SEPARATELY. The browser fires
+// `pointercancel` when the touch movement crosses its slop threshold
+// (interpreting it as a gesture), even though the corresponding `touchend`
+// still fires normally. We use the touch event path on touch devices so
+// pointercancel doesn't kill our detection, and pointer events for mouse /
+// stylus where touch events don't fire.
+//
+// To stay one source-of-truth with the existing inline `onclick` handlers
+// (which remain as a fallback for any environment without these listeners),
+// we invoke the element's `onclick` property directly via .call() — no
+// duplicate action wiring, no DOM changes to the sidebar render code.
+let _hbTouchStart = null;   // touch path state
+let _hbPointerStart = null; // mouse/pen path state
+let _hbFired = false;       // de-dupe between touch and pointer for the same gesture
 let _hbSuppressClickUntil = 0;
-document.addEventListener("pointerdown", (e) => {
-  const t = e.target.closest && e.target.closest("[data-hamburger]");
-  if (t) {
-    _hbPdAt = { x: e.clientX, y: e.clientY, time: Date.now() };
+
+function _hbMatchTapTarget(target) {
+  if (!target || !target.closest) return null;
+  const hamb = target.closest("[data-hamburger]");
+  if (hamb) return { el: hamb, isHamb: true };
+  // Any button inside the sidebar (nav items, "Current" toggle, admin button)
+  const sbBtn = target.closest("#sidebar button");
+  if (sbBtn) return { el: sbBtn, isHamb: false };
+  // The overlay (tap to close)
+  const ov = target.closest("#sidebar-overlay");
+  if (ov) return { el: ov, isHamb: false };
+  return null;
+}
+
+function _hbTryFire(info, endX, endY) {
+  if (_hbFired) return false;
+  const dx = endX - info.x;
+  const dy = endY - info.y;
+  const dt = Date.now() - info.time;
+  if (Math.abs(dx) >= 40 || Math.abs(dy) >= 40 || dt >= 1000) return false;
+  _hbFired = true;
+  _hbSuppressClickUntil = Date.now() + 400;
+  if (info.isHamb) {
+    toggleSidebar();
   } else {
-    _hbPdAt = null;
+    // Invoke the element's onclick property directly so we don't dispatch a
+    // new click event (which would re-enter the suppression handler below).
+    const handler = info.el.onclick;
+    if (typeof handler === "function") {
+      try {
+        handler.call(info.el, { target: info.el, currentTarget: info.el, preventDefault() {}, stopPropagation() {} });
+      } catch (err) { /* swallow — inline handler errors shouldn't break the page */ }
+    }
   }
-}, { capture: true });
-document.addEventListener("pointerup", (e) => {
-  if (!_hbPdAt) return;
-  const dx = e.clientX - _hbPdAt.x;
-  const dy = e.clientY - _hbPdAt.y;
-  const dt = Date.now() - _hbPdAt.time;
-  _hbPdAt = null;
-  // Generous slop: 40px movement, 1000ms duration — well above finger jitter
-  // but tight enough that a real drag/scroll won't trigger toggle.
-  if (Math.abs(dx) < 40 && Math.abs(dy) < 40 && dt < 1000) {
+  return true;
+}
+
+document.addEventListener("touchstart", (e) => {
+  _hbFired = false;
+  if (e.touches.length !== 1) { _hbTouchStart = null; return; }
+  const hit = _hbMatchTapTarget(e.target);
+  _hbTouchStart = hit ? { x: e.touches[0].clientX, y: e.touches[0].clientY, time: Date.now(), el: hit.el, isHamb: hit.isHamb } : null;
+}, { capture: true, passive: true });
+
+document.addEventListener("touchend", (e) => {
+  const info = _hbTouchStart;
+  _hbTouchStart = null;
+  if (!info || _hbFired) return;
+  if (e.changedTouches.length !== 1) return;
+  const t = e.changedTouches[0];
+  if (_hbTryFire(info, t.clientX, t.clientY)) {
     e.preventDefault();
     e.stopPropagation();
-    _hbSuppressClickUntil = Date.now() + 400;
-    toggleSidebar();
+  }
+}, { capture: true, passive: false });
+
+document.addEventListener("touchcancel", () => { _hbTouchStart = null; }, { capture: true });
+
+// Pointer events for mouse/pen only — touch is handled above and the browser
+// fires pointercancel for jittery touches which would defeat our slop check.
+document.addEventListener("pointerdown", (e) => {
+  if (e.pointerType === "touch") return;
+  _hbFired = false;
+  const hit = _hbMatchTapTarget(e.target);
+  _hbPointerStart = hit ? { x: e.clientX, y: e.clientY, time: Date.now(), el: hit.el, isHamb: hit.isHamb } : null;
+}, { capture: true });
+
+document.addEventListener("pointerup", (e) => {
+  if (e.pointerType === "touch") return;
+  const info = _hbPointerStart;
+  _hbPointerStart = null;
+  if (!info || _hbFired) return;
+  if (_hbTryFire(info, e.clientX, e.clientY)) {
+    e.preventDefault();
+    e.stopPropagation();
   }
 }, { capture: true });
-document.addEventListener("pointercancel", () => { _hbPdAt = null; }, { capture: true });
-// Suppress the synthesized click that follows a hamburger pointerup —
-// without this, the click hits the overlay (now visible mid-animation)
-// and closeSidebar() immediately re-closes what we just opened.
-// Targeted: only suppress clicks landing on the overlay or hamburger
-// (the only valid targets for the synth click), so a fast user can
-// still tap a sidebar nav item right after opening the menu.
+
+document.addEventListener("pointercancel", (e) => {
+  if (e.pointerType !== "touch") _hbPointerStart = null;
+}, { capture: true });
+
+// Suppress the synthesized click that follows a successful tap. The click
+// would otherwise re-trigger the same inline onclick (or, for hamburger,
+// hit the freshly-visible overlay and instantly close what we opened).
+// Scoped to the same element set so unrelated clicks elsewhere on the page
+// aren't affected.
 document.addEventListener("click", (e) => {
-  if (Date.now() < _hbSuppressClickUntil && e.target.closest &&
-      (e.target.closest("#sidebar-overlay") || e.target.closest("[data-hamburger]"))) {
+  if (Date.now() < _hbSuppressClickUntil && _hbMatchTapTarget(e.target)) {
     _hbSuppressClickUntil = 0;
     e.preventDefault();
     e.stopPropagation();
