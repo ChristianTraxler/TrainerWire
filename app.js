@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.15";
+const APP_VERSION = "3.16";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -7624,8 +7624,13 @@ document.addEventListener("pointercancel", () => { _hbPdAt = null; }, { capture:
 // Suppress the synthesized click that follows a hamburger pointerup —
 // without this, the click hits the overlay (now visible mid-animation)
 // and closeSidebar() immediately re-closes what we just opened.
+// Targeted: only suppress clicks landing on the overlay or hamburger
+// (the only valid targets for the synth click), so a fast user can
+// still tap a sidebar nav item right after opening the menu.
 document.addEventListener("click", (e) => {
-  if (Date.now() < _hbSuppressClickUntil) {
+  if (Date.now() < _hbSuppressClickUntil && e.target.closest &&
+      (e.target.closest("#sidebar-overlay") || e.target.closest("[data-hamburger]"))) {
+    _hbSuppressClickUntil = 0;
     e.preventDefault();
     e.stopPropagation();
     if (e.stopImmediatePropagation) e.stopImmediatePropagation();
