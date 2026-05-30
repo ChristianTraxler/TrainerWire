@@ -6193,9 +6193,9 @@ function render() {
           <div onclick="selectEvent(${ev.id})" style="cursor:pointer;padding:6px 0 14px;display:flex;align-items:center;gap:12px">
             <div style="flex-shrink:0">${fullIcon}</div>
             <div style="flex:1;min-width:0">
-              <div style="font-size:16px;font-weight:800;color:${th.text};margin-bottom:4px">${esc(ev.title)}</div>
-              <div style="font-size:12px;color:${th.textMuted};font-weight:500">${formatDateRange(ev.date, ev.endDate)}${ev.time ? ` \u00B7 ${esc(ev.time)}` : ""}</div>
-              <div style="margin-top:6px"><span style="font-size:10px;font-weight:700;color:#fff;background:#2ECC71;padding:2px 8px;border-radius:20px">LIVE</span></div>
+              <div style="font-size:16px;font-weight:800;color:${th.text};margin-bottom:4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span>${esc(ev.title)}</span><span style="font-size:10px;font-weight:700;color:#fff;background:#2ECC71;padding:2px 8px;border-radius:20px;flex-shrink:0">LIVE</span></div>
+              <div style="font-size:12px;color:${th.textMuted};font-weight:500">${formatDateRange(ev.date, ev.endDate)}</div>
+              ${ev.time ? `<div style="font-size:12px;color:${th.textMuted};font-weight:500;margin-top:2px">${esc(ev.time)}</div>` : ""}
             </div>
           </div>
         </div>
