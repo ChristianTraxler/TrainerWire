@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.18";
+const APP_VERSION = "3.19";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -284,6 +284,7 @@ async function fetchEvolutionChain(dexNum) {
     282:[{n:"Mega Gardevoir",f:"0282_mega"}],
     302:[{n:"Mega Sableye",f:"0302_mega"}],
     303:[{n:"Mega Mawile",f:"0303_mega"}],
+    308:[{n:"Mega Medicham",f:"0308_mega"}],
     306:[{n:"Mega Aggron",f:"0306_mega"}],
     310:[{n:"Mega Manectric",f:"0310_mega"}],
     319:[{n:"Mega Sharpedo",f:"0319_mega"}],
@@ -493,7 +494,7 @@ function pokemonImgHTML(pkmn, size) {
   }
   if (pkmn.dynamax) {
     return `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0">
-      <img src="assets/pokemon-images/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85" />
+      <img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85" />
       <img src="${pkmn.url}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
     </div>`;
   }
@@ -960,7 +961,7 @@ const ANNOUNCEMENTS = [
       { name: "Celesteela ✨ (5★ Raid)", subtitle: "Southern Hemisphere" },
       { name: "Kartana ✨ (5★ Raid)", subtitle: "Northern Hemisphere" }
     ] },
-    { heading: "Max Battles", icon: "assets/pokemon-images/dynamax.png", showImages: true, intro: "These Dynamax Pokémon may appear in Max Battles throughout Forever Forward.", items: [
+    { heading: "Max Battles", icon: "assets/pokemon-images/icons/dynamax.png", showImages: true, intro: "These Dynamax Pokémon may appear in Max Battles throughout Forever Forward.", items: [
       { name: "Dynamax Inkay ✨", dates: "June 1 – June 7" },
       { name: "Dynamax Electabuzz ✨", dates: "June 8 – June 14" },
       { name: "Dynamax Roggenrola ✨", dates: "June 15 – June 21" },
@@ -1148,16 +1149,16 @@ const RESEARCH_SECTION_META = {
 
 const CURRENT_RAID_BOSSES = {
   "1-Star Raids": [
-    "Machop (1\u2605 Raid) \u2728","Galarian Ponyta (1\u2605 Raid) \u2728","Doduo (1\u2605 Raid) \u2728","Rockruff (1\u2605 Raid) \u2728"
+    "Meowth (1\u2605 Raid) \u2728","Ponyta (1\u2605 Raid) \u2728","Electabuzz (1\u2605 Raid) \u2728","Larvitar (1\u2605 Raid) \u2728"
   ],
   "3-Star Raids": [
-    "Rapidash (3\u2605 Raid) \u2728","Scolipede (3\u2605 Raid) \u2728","Zebstrika (3\u2605 Raid) \u2728"
+    "Scyther (3\u2605 Raid) \u2728","Lapras (3\u2605 Raid) \u2728","Houndoom (3\u2605 Raid) \u2728"
   ],
   "5-Star Raids": [
-    "Buzzwole (5\u2605 Raid) \u2728","Pheromosa (5\u2605 Raid) \u2728","Xurkitree (5\u2605 Raid) \u2728"
+    "Tapu Fini (5\u2605 Raid) \u2728"
   ],
   "Mega Raids": [
-    "Mega Glalie (Mega) \u2728"
+    "Mega Medicham (Mega) \u2728"
   ],
   "Shadow 1-Star Raids": [
     "Shadow Larvitar (1\u2605 Shadow Raid) \u2728","Shadow Sableye (1\u2605 Shadow Raid) \u2728","Shadow Spheal (1\u2605 Shadow Raid) \u2728","Shadow Inkay (1\u2605 Shadow Raid) \u2728"
@@ -2857,7 +2858,7 @@ function renderActivitySubTab() {
     const iconHTML = it.iconImg
       ? `<div style="position:relative;width:36px;height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center">
           <img src="${esc(it.iconImg)}" alt="" style="width:36px;height:36px;object-fit:contain;position:relative;z-index:1" onerror="this.outerHTML='<span style=\\'font-size:22px\\'>${it.icon}</span>'" />
-          ${it.isDynamax ? `<img src="assets/pokemon-images/dynamax.png" alt="" style="position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:90%;object-fit:contain;opacity:0.85;z-index:2;pointer-events:none" />` : ""}
+          ${it.isDynamax ? `<img src="assets/pokemon-images/icons/dynamax.png" alt="" style="position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:90%;object-fit:contain;opacity:0.85;z-index:2;pointer-events:none" />` : ""}
         </div>`
       : `<span style="font-size:22px;flex-shrink:0;width:36px;text-align:center">${it.icon}</span>`;
     return `<button onclick="${it.onClick}" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border:none;border-left:3px solid ${it.color};${borderStyle}background:${th.surface};cursor:pointer;font-family:inherit;text-align:left;width:100%;transition:background 0.1s ease" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${th.surface}'">
@@ -4156,7 +4157,7 @@ function renderCalendar(th) {
                   }
                   if (ev.type === "Max Battle") {
                     return `<div style="position:relative;width:32px;height:32px;flex-shrink:0">
-                      <img src="assets/pokemon-images/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85;z-index:0" />
+                      <img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85;z-index:0" />
                       <img src="${ev.iconImg}" style="position:relative;width:100%;height:100%;object-fit:contain;border-radius:8px;z-index:1" />
                     </div>`;
                   }
@@ -4220,7 +4221,7 @@ function renderEventDetail(event, th) {
             }
             if (event.iconImg) {
               const shadowLayer = event.shadowBg ? `<img src="assets/pokemon-images/icons/shadow_icon.png" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;opacity:${darkMode ? 0.9 : 0.75};z-index:0" />` : "";
-              const dynamaxLayer = event.type === "Max Battle" ? `<img src="assets/pokemon-images/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85;z-index:0" />` : "";
+              const dynamaxLayer = event.type === "Max Battle" ? `<img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85;z-index:0" />` : "";
               const zoomable = event.type === "GO Fest";
               const zoomAttrs = zoomable ? ` onclick="showFormModal('${event.iconImg}','${esc(event.title)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showFormModal('${event.iconImg}','${esc(event.title)}')}" role="button" tabindex="0" title="Tap to view full size" aria-label="View ${esc(event.title)} badge full size"` : "";
               const zoomHint = zoomable ? `<div style="position:absolute;bottom:2px;right:2px;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,0.55);display:flex;align-items:center;justify-content:center;z-index:3;pointer-events:none"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></div>` : "";
@@ -4804,7 +4805,7 @@ function renderEventCard(event, index, th) {
           </div>` : "";
           if (event.iconImg) {
             const shadowLayer = event.shadowBg ? `<img src="assets/pokemon-images/icons/shadow_icon.png" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;opacity:${darkMode ? 0.9 : 0.75};z-index:0" />` : "";
-            const dynamaxLayer = event.type === "Max Battle" ? `<img src="assets/pokemon-images/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85;z-index:0" />` : "";
+            const dynamaxLayer = event.type === "Max Battle" ? `<img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85;z-index:0" />` : "";
             const imgStyle = event.wideIcon
               ? `width:100%;height:100%;object-fit:contain;position:relative;z-index:1`
               : `width:44px;height:44px;object-fit:contain;position:relative;z-index:1`;
@@ -5580,7 +5581,11 @@ function getEventsForDate(dateStr) {
 
 function scrollToEggTier(id) {
   const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (!el) return;
+  const header = document.querySelector('header[style*="position:sticky"], header[style*="position: sticky"]') || document.querySelector('header');
+  const headerH = header ? header.getBoundingClientRect().bottom : 0;
+  const targetTop = el.getBoundingClientRect().top + window.scrollY - headerH - 8;
+  window.scrollTo({ top: Math.max(0, targetTop), behavior: "smooth" });
 }
 
 function toggleResearchSection(sectionId) {
@@ -6133,7 +6138,7 @@ function render() {
             if (ev.type === "Max Battle" && ev.iconImg) {
               const size = isMobile ? 36 : 34;
               return `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0">
-                <img src="assets/pokemon-images/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85;z-index:0" />
+                <img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85;z-index:0" />
                 <img src="${ev.iconImg}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
               </div>`;
             }
@@ -6155,7 +6160,7 @@ function render() {
           <img src="${src}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
         </div>`;
       const dynamaxWrap = (src, size, imgSize) => `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0">
-          <img src="assets/pokemon-images/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85;z-index:0" />
+          <img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85;z-index:0" />
           <img src="${src}" style="position:relative;width:${imgSize}px;height:${imgSize}px;object-fit:contain;z-index:1;display:block;margin:0 auto" onerror="this.parentElement.style.display='none'" />
         </div>`;
       const compactIcon = (() => {
@@ -6216,6 +6221,13 @@ function render() {
                 <img src="${hero.iconImg}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
               </div>`;
             }
+            if (hero.type === "Max Battle" && hero.iconImg) {
+              const size = isMobile ? 36 : 34;
+              return `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0">
+                <img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85;z-index:0" />
+                <img src="${hero.iconImg}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
+              </div>`;
+            }
             if (hero.iconImg) return `<img src="${hero.iconImg}" style="width:${isMobile ? 36 : 34}px;height:${isMobile ? 36 : 34}px;object-fit:contain;margin-left:-4px;flex-shrink:0" onerror="this.outerHTML='${hero.icon}'" />`;
             const heroPkmn = (hero.type === "Raid" || hero.type === "Max Battle") && hero.details && hero.details.bosses && hero.details.bosses[0] ? getPokemonImg(hero.details.bosses[0]) : null;
             return heroPkmn ? `<img src="${heroPkmn.url}" style="width:${isMobile ? 36 : 34}px;height:${isMobile ? 36 : 34}px;object-fit:contain;flex-shrink:0" onerror="this.outerHTML='${hero.icon}'" />` : hero.icon;
@@ -6228,14 +6240,20 @@ function render() {
           <img src="assets/pokemon-images/icons/shadow_icon.png" style="position:absolute;top:-18%;left:-18%;width:136%;height:136%;object-fit:contain;opacity:${darkMode ? 0.9 : 0.7};z-index:0" />
           <img src="${src}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
         </div>`;
+      const heroDynamaxWrap = (src, size, imgSize) => `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0">
+          <img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85;z-index:0" />
+          <img src="${src}" style="position:relative;width:${imgSize}px;height:${imgSize}px;object-fit:contain;z-index:1;display:block;margin:0 auto" onerror="this.parentElement.style.display='none'" />
+        </div>`;
       const compactHeroIcon = (() => {
         if (hero.shadowBg && hero.iconImg) return heroShadowWrap(hero.iconImg, 32);
+        if (hero.type === "Max Battle" && hero.iconImg) return heroDynamaxWrap(hero.iconImg, 32, 28);
         if (hero.iconImg) return `<img src="${hero.iconImg}" style="width:28px;height:28px;object-fit:contain" onerror="this.outerHTML='${hero.icon}'" />`;
         const heroPkmn = (hero.type === "Raid" || hero.type === "Max Battle") && hero.details && hero.details.bosses && hero.details.bosses[0] ? getPokemonImg(hero.details.bosses[0]) : null;
         return heroPkmn ? `<img src="${heroPkmn.url}" style="width:28px;height:28px;object-fit:contain" onerror="this.outerHTML='${hero.icon}'" />` : hero.icon;
       })();
       const fullHeroIcon = (() => {
         if (hero.shadowBg && hero.iconImg) return heroShadowWrap(hero.iconImg, 60);
+        if (hero.type === "Max Battle" && hero.iconImg) return heroDynamaxWrap(hero.iconImg, 60, 50);
         if (hero.iconImg) return `<img src="${hero.iconImg}" style="width:60px;height:60px;object-fit:contain" onerror="this.outerHTML='${hero.icon}'" />`;
         const heroPkmn = (hero.type === "Raid" || hero.type === "Max Battle") && hero.details && hero.details.bosses && hero.details.bosses[0] ? getPokemonImg(hero.details.bosses[0]) : null;
         return heroPkmn ? `<img src="${heroPkmn.url}" style="width:36px;height:36px;object-fit:contain" onerror="this.outerHTML='${hero.icon}'" />` : hero.icon;
@@ -6423,33 +6441,39 @@ function render() {
     let raidsTabHTML = "";
     if (state.tab === "raids") {
       let raidSectionsHTML = "";
+      const raidChevronSVG = `<svg class="acc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
       Object.entries(CURRENT_RAID_BOSSES).forEach(([tier, bosses]) => {
         const tierColor = TIER_COLORS[tier] || "#8E44AD";
         const eggUrl = TIER_EGGS[tier];
         const usesShadowEgg = eggUrl && eggUrl.endsWith("shadow.png");
         const isShadowTier = tier.startsWith("Shadow");
         const eggImg = eggUrl ? (usesShadowEgg
-          ? `<img src="${eggUrl}" style="width:44px;height:44px;object-fit:contain;flex-shrink:0" onerror="this.style.display='none'" />`
+          ? `<img src="${eggUrl}" style="width:40px;height:31px;object-fit:contain;flex-shrink:0" onerror="this.style.display='none'" />`
           : isShadowTier
             ? `<div style="position:relative;width:28px;height:28px;flex-shrink:0;overflow:visible">
-                <div style="position:absolute;top:-15%;left:-20%;width:75%;height:70%;background:rgba(120,40,180,0.6);border-radius:60% 40% 55% 45%;filter:blur(5px);transform:rotate(-15deg);animation:flameWisp1 2.2s ease-in-out infinite"></div>
-                <div style="position:absolute;top:-25%;left:30%;width:70%;height:60%;background:rgba(100,20,160,0.5);border-radius:45% 55% 50% 40%;filter:blur(5px);transform:rotate(10deg);animation:flameWisp2 2.5s ease-in-out infinite"></div>
-                <div style="position:absolute;top:25%;left:45%;width:70%;height:65%;background:rgba(130,50,190,0.55);border-radius:50% 60% 40% 55%;filter:blur(5px);transform:rotate(20deg);animation:flameWisp3 2s ease-in-out infinite"></div>
-                <div style="position:absolute;top:40%;left:-15%;width:65%;height:60%;background:rgba(110,30,170,0.55);border-radius:55% 45% 60% 40%;filter:blur(5px);transform:rotate(-10deg);animation:flameWisp4 2.3s ease-in-out infinite"></div>
                 <img src="${eggUrl}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
+                <img src="assets/pokemon-images/icons/shadow_icon.png" style="position:absolute;top:-30%;left:-30%;width:160%;height:160%;object-fit:contain;opacity:1;z-index:2;pointer-events:none;filter:saturate(1.3) contrast(1.2)" onerror="this.style.display='none'" />
               </div>`
             : `<img src="${eggUrl}" style="width:28px;height:28px;object-fit:contain" onerror="this.style.display='none'" />`) : "";
+        const count = bosses.length;
+        const countBadge = `<span style="font-size:11px;font-weight:800;color:${tierColor};background:${th.accentBg(tierColor)};padding:3px 9px;border-radius:999px;letter-spacing:0.3px;flex-shrink:0">${count}</span>`;
+        const raidOpenDefault = !isMobile;
+        const raidOpenStr = raidOpenDefault ? "true" : "false";
         raidSectionsHTML += `<div style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden">
-          <div style="padding:10px 14px;background:${th.accentBgSubtle(tierColor)};border-bottom:1.5px solid ${th.border};display:flex;align-items:center;gap:8px">
+          <button class="acc-trigger" data-open="${raidOpenStr}" onclick="toggleAccordion(this)" aria-expanded="${raidOpenStr}" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:${th.accentBgSubtle(tierColor)};border:none;${raidOpenDefault ? `border-bottom:1.5px solid ${th.border};` : ""}width:100%;text-align:left;cursor:pointer;font-family:inherit">
             ${eggImg}
-            <span style="font-size:12px;font-weight:700;color:${th.text};letter-spacing:0.5px;text-transform:uppercase">${tier}</span>
+            <span style="font-size:12px;font-weight:700;color:${th.text};letter-spacing:0.5px;text-transform:uppercase;flex:1;min-width:0">${tier}</span>
             ${renderRaidHeads(tier)}
+            ${countBadge}
+            <span style="display:flex;align-items:center;color:${th.textMuted};flex-shrink:0">${raidChevronSVG}</span>
+          </button>
+          <div class="acc-content" data-open="${raidOpenStr}"${raidOpenDefault ? ` style="max-height:none"` : ""}>
+            <div style="padding:8px;display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${bosses.map(item => renderBossItem(item, tierColor, th, breakpoint !== "mobile")).join("")}</div>
           </div>
-          <div style="padding:8px;display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${bosses.map(item => renderBossItem(item, tierColor, th, breakpoint !== "mobile")).join("")}</div>
         </div>`;
       });
       raidsTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
-        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on May 23, 2026 at 7:24 pm</div>
+        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on May 30, 2026 at 11:36 am</div>
         <div style="text-align:center;padding:10px;font-size:14px;font-weight:600;color:${th.text}">Current Raid Bosses</div>
         <div style="text-align:center;font-size:11px;color:${th.textMuted};font-weight:500;margin-top:-10px">Data sourced from Pok\u00E9monGO.com, LeekDuck.com & Pok\u00E9monGOHUB.net</div>
         <div style="text-align:center;font-size:12px;color:${th.textMuted};font-weight:600;margin-top:2px">Tap a Pok\u00E9mon to see its weaknesses & resistances</div>
@@ -6461,63 +6485,68 @@ function render() {
     let maxTabHTML = "";
     if (state.tab === "max") {
       let maxSectionsHTML = "";
+      const maxChevronSVG = `<svg class="acc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
       Object.entries(CURRENT_MAX_BATTLES).forEach(([tier, bosses]) => {
         const tierColor = MAX_TIER_COLORS[tier] || "#78C850";
-        maxSectionsHTML += `<div style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden">
-          <div style="padding:10px 14px;background:${th.accentBgSubtle(tierColor)};border-bottom:1.5px solid ${th.border};display:flex;align-items:center;gap:8px">
-            <span style="font-size:14px">\uD83D\uDCA5</span>
-            <span style="font-size:12px;font-weight:700;color:${th.text};letter-spacing:0.5px;text-transform:uppercase">${tier}</span>
-          </div>
-          <div style="padding:8px;display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${bosses.map(b => {
+        const tierLabel = tier.replace(/^(\d+)-Star Max Battles$/, "Tier $1").replace(/^(\d+)-Star Max Battles/, "Tier $1");
+        const count = bosses.length;
+        const cardLayout = breakpoint !== "mobile";
+        const cardsHTML = bosses.map(b => {
             const imgUrl = b.gmax ? gmaxImg(b.dex) : natDexImg(b.dex, GENDER_SUFFIX[b.dex] || "");
             const pkmn = { url: imgUrl, shadow: false, dynamax: true };
-            const cardLayout = breakpoint !== "mobile";
-            const imgSize = cardLayout ? 120 : 150;
+            const imgSize = cardLayout ? 120 : 78;
             let imgEl = pokemonImgHTML(pkmn, imgSize);
             if (imgEl) imgEl = wrapShinySparkles(imgEl, b.name, imgSize);
             const rd = getRaidBossData(b.name);
-            const typesEl = rd ? `<div style="display:flex;gap:4px;margin-top:4px;flex-wrap:wrap;${cardLayout ? "justify-content:center" : ""}">${rd.types.map(t => `<span style="font-size:${cardLayout ? 11 : 13}px;font-weight:700;color:#fff;background:${TYPE_COLORS[t] || "#888"};padding:2px 8px;border-radius:10px">${t}</span>`).join("")}</div>` : "";
-            const cpEl = rd && rd.cp ? `<div style="margin-top:5px;font-size:${cardLayout ? 13 : 14}px;color:${th.text};line-height:1.6;${cardLayout ? "text-align:center" : ""}">CP <span style="font-weight:800;font-size:${cardLayout ? 15 : 16}px">${rd.cp}</span></div>` : "";
+            const typesEl = rd ? `<div style="display:flex;gap:3px;margin-top:3px;flex-wrap:wrap;justify-content:center">${rd.types.map(t => `<span style="font-size:${cardLayout ? 11 : 9}px;font-weight:700;color:#fff;background:${TYPE_COLORS[t] || "#888"};padding:${cardLayout ? "2px 8px" : "1px 5px"};border-radius:${cardLayout ? 10 : 6}px">${t}</span>`).join("")}</div>` : "";
+            const cpEl = rd && rd.cp ? `<div style="margin-top:${cardLayout ? 5 : 3}px;font-size:${cardLayout ? 13 : 10}px;color:${th.text};line-height:1.4;text-align:center">CP <span style="font-weight:800;font-size:${cardLayout ? 15 : 11}px">${rd.cp}</span></div>` : "";
             const weaknesses = rd ? getWeaknesses(rd.types) : [];
             const resistances = rd ? getResistances(rd.types) : [];
             const hasBack = weaknesses.length > 0 || resistances.length > 0;
             const backContent = hasBack ? `
-              <div style="font-size:11px;font-weight:700;color:${th.textMuted};margin-bottom:16px;text-transform:uppercase;letter-spacing:0.5px">${esc(b.name)}</div>
-              ${weaknesses.length > 0 ? `<div style="margin-bottom:20px">
-                <div style="font-size:10px;font-weight:700;color:#E74C3C;letter-spacing:0.5px;margin-bottom:4px">WEAK TO</div>
-                <div style="display:flex;gap:3px;flex-wrap:wrap;${cardLayout ? "justify-content:center" : ""}">${weaknesses.map(w =>
-                  `<span style="font-size:11px;font-weight:700;color:#fff;background:${TYPE_COLORS[w.type] || "#888"};padding:2px 7px;border-radius:8px">${w.type}${w.multiplier > 2 ? " 2\u00D7" : ""}</span>`
+              <div style="font-size:${cardLayout ? 11 : 10}px;font-weight:700;color:${th.textMuted};margin-bottom:${cardLayout ? 16 : 10}px;text-transform:uppercase;letter-spacing:0.5px">${esc(b.name)}</div>
+              ${weaknesses.length > 0 ? `<div style="margin-bottom:${cardLayout ? 20 : 10}px">
+                <div style="font-size:${cardLayout ? 10 : 9}px;font-weight:700;color:#E74C3C;letter-spacing:0.5px;margin-bottom:4px">WEAK TO</div>
+                <div style="display:flex;gap:3px;flex-wrap:wrap;justify-content:center">${weaknesses.map(w =>
+                  `<span style="font-size:${cardLayout ? 11 : 9}px;font-weight:700;color:#fff;background:${TYPE_COLORS[w.type] || "#888"};padding:${cardLayout ? "2px 7px" : "1px 5px"};border-radius:${cardLayout ? 8 : 6}px">${w.type}${w.multiplier > 2 ? " 2\u00D7" : ""}</span>`
                 ).join("")}</div>
               </div>` : ""}
               ${resistances.length > 0 ? `<div>
-                <div style="font-size:10px;font-weight:700;color:#27AE60;letter-spacing:0.5px;margin-bottom:4px">RESISTS</div>
-                <div style="display:flex;gap:3px;flex-wrap:wrap;${cardLayout ? "justify-content:center" : ""}">${resistances.map(r =>
-                  `<span style="font-size:11px;font-weight:700;color:#fff;background:${TYPE_COLORS[r.type] || "#888"};padding:2px 7px;border-radius:8px;opacity:${r.double ? "1" : "0.7"}">${r.type}${r.double ? " 2\u00D7" : ""}</span>`
+                <div style="font-size:${cardLayout ? 10 : 9}px;font-weight:700;color:#27AE60;letter-spacing:0.5px;margin-bottom:4px">RESISTS</div>
+                <div style="display:flex;gap:3px;flex-wrap:wrap;justify-content:center">${resistances.map(r =>
+                  `<span style="font-size:${cardLayout ? 11 : 9}px;font-weight:700;color:#fff;background:${TYPE_COLORS[r.type] || "#888"};padding:${cardLayout ? "2px 7px" : "1px 5px"};border-radius:${cardLayout ? 8 : 6}px;opacity:${r.double ? "1" : "0.7"}">${r.type}${r.double ? " 2\u00D7" : ""}</span>`
                 ).join("")}</div>
               </div>` : ""}
-              <div style="font-size:10px;color:${th.textFaint};margin-top:auto;padding-top:6px">Tap to flip back</div>
+              <div style="font-size:${cardLayout ? 10 : 9}px;color:${th.textFaint};margin-top:auto;padding-top:6px">Tap to flip back</div>
             ` : "";
-            if (cardLayout) {
-              const frontHTML = `<div style="display:flex;flex-direction:column;align-items:center;padding:12px 8px;font-size:13px;color:${th.textSecondary};line-height:1.45;text-align:center">
-                ${imgEl || ""}
-                <div style="margin-top:6px;font-weight:700;color:${th.text};font-size:13px">${esc(b.name)}</div>
-                ${typesEl}${cpEl}
-              </div>`;
-              if (!hasBack) return `<div style="border-radius:12px;background:${th.accentBgSubtle(tierColor)};border:1.5px solid ${th.border};flex:1;min-width:140px;max-width:200px">${frontHTML}</div>`;
-              return `<div class="flip-card" onclick="flipCard(this)" style="flex:1;min-width:140px;max-width:200px">
-                <div class="flip-card-front" style="background:${th.accentBgSubtle(tierColor)};border:1.5px solid ${th.border}">${frontHTML}</div>
-                <div class="flip-card-back" style="background:${th.accentBgSubtle(tierColor)};border:1.5px solid ${th.border};padding:14px 10px;display:flex;flex-direction:column;align-items:center;text-align:center">${backContent}</div>
-              </div>`;
-            }
-            const frontRowHTML = `<div style="display:flex;align-items:center;gap:10px;padding:4px 12px;font-size:13.5px;color:${th.textSecondary};line-height:1.45">
-              ${imgEl || ""}<div><div>${esc(b.name)}</div>${typesEl}${cpEl}</div>
+            const namePill = `<div style="margin-top:${cardLayout ? 6 : 4}px;font-weight:700;color:${th.text};font-size:${cardLayout ? 13 : 11}px;line-height:1.2;word-break:break-word">${esc(b.name)}</div>`;
+            const frontHTML = `<div style="display:flex;flex-direction:column;align-items:center;padding:${cardLayout ? "12px 8px" : "8px 4px 6px"};color:${th.textSecondary};text-align:center">
+              ${imgEl || ""}
+              ${namePill}
+              ${typesEl}${cpEl}
             </div>`;
-            if (!hasBack) return `<div style="border-radius:9px;background:${th.accentBgSubtle(tierColor)};width:100%">${frontRowHTML}</div>`;
-            return `<div class="flip-card" onclick="flipCard(this)" style="width:100%">
-              <div class="flip-card-front" style="background:${th.accentBgSubtle(tierColor)};border-radius:9px">${frontRowHTML}</div>
-              <div class="flip-card-back" style="background:${th.accentBgSubtle(tierColor)};border-radius:9px;padding:12px 14px;display:flex;flex-direction:column">${backContent}</div>
+            const cardStyle = cardLayout
+              ? `flex:1;min-width:140px;max-width:200px`
+              : `width:100%;box-sizing:border-box`;
+            if (!hasBack) return `<div style="border-radius:${cardLayout ? 12 : 10}px;background:${th.accentBgSubtle(tierColor)};border:${cardLayout ? "1.5px" : "1px"} solid ${th.border};${cardStyle}">${frontHTML}</div>`;
+            return `<div class="flip-card" onclick="flipCard(this)" style="${cardStyle}">
+              <div class="flip-card-front" style="background:${th.accentBgSubtle(tierColor)};border:${cardLayout ? "1.5px" : "1px"} solid ${th.border};border-radius:${cardLayout ? 12 : 10}px">${frontHTML}</div>
+              <div class="flip-card-back" style="background:${th.accentBgSubtle(tierColor)};border:${cardLayout ? "1.5px" : "1px"} solid ${th.border};border-radius:${cardLayout ? 12 : 10}px;padding:${cardLayout ? "14px 10px" : "10px 6px"};display:flex;flex-direction:column;align-items:center;text-align:center">${backContent}</div>
             </div>`;
-          }).join("")}</div>
+          }).join("");
+        const gridStyle = cardLayout
+          ? `padding:8px;display:flex;flex-wrap:wrap;gap:8px`
+          : `padding:8px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px`;
+        maxSectionsHTML += `<div style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden">
+          <button class="acc-trigger" data-open="true" onclick="toggleAccordion(this)" aria-expanded="true" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:${th.accentBgSubtle(tierColor)};border:none;border-bottom:1.5px solid ${th.border};width:100%;text-align:left;cursor:pointer;font-family:inherit">
+            <span style="font-size:14px">\uD83D\uDCA5</span>
+            <span style="font-size:12px;font-weight:700;color:${th.text};letter-spacing:0.5px;text-transform:uppercase;flex:1">${tierLabel}</span>
+            <span style="font-size:11px;font-weight:800;color:${tierColor};background:${th.accentBg(tierColor)};padding:3px 9px;border-radius:999px;letter-spacing:0.3px">${count}</span>
+            <span style="display:flex;align-items:center;color:${th.textMuted}">${maxChevronSVG}</span>
+          </button>
+          <div class="acc-content" data-open="true" style="max-height:none">
+            <div style="${gridStyle}">${cardsHTML}</div>
+          </div>
         </div>`;
       });
       maxTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
@@ -6665,10 +6694,13 @@ function render() {
         const eggImg = eggUrl ? `<img src="${eggUrl}" style="width:${isMobile ? 28 : 32}px;height:${isMobile ? 28 : 32}px;object-fit:contain;flex-shrink:0;position:relative;top:-2px" onerror="this.style.display='none'" />` : "";
         const badgeHTML = isAdventureSync ? `<span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${tierColor};background:${th.accentBg(tierColor)};padding:3px 10px;border-radius:10px;margin-left:auto;white-space:nowrap">Adventure Sync</span>` : isRoute ? `<span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${tierColor};background:${th.accentBg(tierColor)};padding:3px 10px;border-radius:10px;margin-left:auto;white-space:nowrap">Route Gift from Mateo</span>` : "";
         const tierId = "egg-" + tier.replace(/\s+/g, "-").toLowerCase();
+        const count = pokemon.length;
+        const countBadge = `<span style="font-size:11px;font-weight:800;color:${tierColor};background:${th.accentBg(tierColor)};padding:3px 9px;border-radius:999px;letter-spacing:0.3px">${count}</span>`;
         eggSectionsHTML += `<div id="${tierId}" style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden;scroll-margin-top:calc(${isMobile ? 80 : 100}px + env(safe-area-inset-top, 0px))">
           <div style="padding:10px 14px;background:${th.accentBgSubtle(tierColor)};border-bottom:1.5px solid ${th.border};display:flex;align-items:center;gap:10px">
             ${eggImg}
-            <span style="font-size:${isMobile ? 13 : 14}px;font-weight:700;color:${th.text};letter-spacing:0.5px;text-transform:uppercase">${tierLabel}</span>
+            <span style="font-size:${isMobile ? 13 : 14}px;font-weight:700;color:${th.text};letter-spacing:0.5px;text-transform:uppercase;flex:1">${tierLabel}</span>
+            ${countBadge}
             ${badgeHTML}
           </div>
           <div style="padding:${isMobile ? "10px" : "8px"};display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-wrap:wrap;gap:6px"}">${pokemon.map(name => {

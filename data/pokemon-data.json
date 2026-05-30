@@ -969,7 +969,10 @@
   "Electabuzz": {
     "types": [
       "Electric"
-    ]
+    ],
+    "cp": "1265–1333",
+    "cpBoost": "1582–1667",
+    "weather": "Rainy"
   },
   "Electivire": {
     "types": [
@@ -2368,6 +2371,15 @@
       "Fairy"
     ]
   },
+  "Mega Medicham": {
+    "types": [
+      "Fighting",
+      "Psychic"
+    ],
+    "cp": "764–817",
+    "cpBoost": "955–1022",
+    "weather": "Cloudy or Windy"
+  },
   "Mega Metagross": {
     "types": [
       "Steel",
@@ -2517,7 +2529,10 @@
   "Meowth": {
     "types": [
       "Normal"
-    ]
+    ],
+    "cp": "389–427",
+    "cpBoost": "486–534",
+    "weather": "Partly Cloudy"
   },
   "Mesprit": {
     "types": [
@@ -2916,7 +2931,10 @@
   "Ponyta": {
     "types": [
       "Fire"
-    ]
+    ],
+    "cp": "911–969",
+    "cpBoost": "1139–1212",
+    "weather": "Sunny"
   },
   "Poochyena": {
     "types": [
@@ -3272,7 +3290,10 @@
     "types": [
       "Bug",
       "Flying"
-    ]
+    ],
+    "cp": "1472–1546",
+    "cpBoost": "1841–1933",
+    "weather": "Rainy or Windy"
   },
   "Sealeo": {
     "types": [
