@@ -6537,16 +6537,14 @@ function render() {
         const gridStyle = cardLayout
           ? `padding:8px;display:flex;flex-wrap:wrap;gap:8px`
           : `padding:8px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px`;
-        const maxOpenDefault = !isMobile;
-        const maxOpenStr = maxOpenDefault ? "true" : "false";
         maxSectionsHTML += `<div style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden">
-          <button class="acc-trigger" data-open="${maxOpenStr}" onclick="toggleAccordion(this)" aria-expanded="${maxOpenStr}" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:${th.accentBgSubtle(tierColor)};border:none;${maxOpenDefault ? `border-bottom:1.5px solid ${th.border};` : ""}width:100%;text-align:left;cursor:pointer;font-family:inherit">
+          <button class="acc-trigger" data-open="true" onclick="toggleAccordion(this)" aria-expanded="true" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:${th.accentBgSubtle(tierColor)};border:none;border-bottom:1.5px solid ${th.border};width:100%;text-align:left;cursor:pointer;font-family:inherit">
             <span style="font-size:14px">\uD83D\uDCA5</span>
             <span style="font-size:12px;font-weight:700;color:${th.text};letter-spacing:0.5px;text-transform:uppercase;flex:1">${tierLabel}</span>
             <span style="font-size:11px;font-weight:800;color:${tierColor};background:${th.accentBg(tierColor)};padding:3px 9px;border-radius:999px;letter-spacing:0.3px">${count}</span>
             <span style="display:flex;align-items:center;color:${th.textMuted}">${maxChevronSVG}</span>
           </button>
-          <div class="acc-content" data-open="${maxOpenStr}"${maxOpenDefault ? ` style="max-height:none"` : ""}>
+          <div class="acc-content" data-open="true" style="max-height:none">
             <div style="${gridStyle}">${cardsHTML}</div>
           </div>
         </div>`;
