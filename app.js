@@ -6448,7 +6448,7 @@ function render() {
         const usesShadowEgg = eggUrl && eggUrl.endsWith("shadow.png");
         const isShadowTier = tier.startsWith("Shadow");
         const eggImg = eggUrl ? (usesShadowEgg
-          ? `<img src="${eggUrl}" style="width:40px;height:31px;object-fit:contain;flex-shrink:0" onerror="this.style.display='none'" />`
+          ? `<div style="position:relative;width:28px;height:28px;flex-shrink:0;overflow:visible"><img src="${eggUrl}" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:31px;object-fit:contain" onerror="this.parentElement.style.display='none'" /></div>`
           : isShadowTier
             ? `<div style="position:relative;width:28px;height:28px;flex-shrink:0;overflow:visible">
                 <img src="${eggUrl}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
