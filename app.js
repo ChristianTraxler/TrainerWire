@@ -1870,13 +1870,21 @@ let _bugReportsWS = null;
 let _bugReportsReconnectTimer = null;
 let _bugReportsPollTimer = null;
 
+// The admin dashboard lives on state.tab === "report", but the admin can navigate
+// from it to an event/news detail page (state.selectedEvent / state.selectedNews)
+// without state.tab changing. Background refreshes must NOT re-render in that case —
+// accordion open/closed state lives in DOM data-open attributes and would be lost.
+function isAdminDashVisible() {
+  return state.tab === "report" && !state.selectedEvent && !state.selectedNews;
+}
+
 // Polling fallback: WebSocket realtime is unreliable on iOS PWA (connection gets
 // suspended in background, resume events don't always fire). Poll every 15s as backup.
 function startBugReportsPolling() {
   if (_bugReportsPollTimer) return;
   _bugReportsPollTimer = setInterval(() => {
     loadBugReportsFromSupabase().then(() => {
-      if (state.tab === "report") render();
+      if (isAdminDashVisible()) render();
     });
   }, 15000);
 }
@@ -1895,7 +1903,7 @@ function subscribeToBugReports() {
     let msg;
     try { msg = JSON.parse(e.data); } catch { return; }
     if (msg.event === "postgres_changes") {
-      loadBugReportsFromSupabase().then(() => { if (state.tab === "report") render(); });
+      loadBugReportsFromSupabase().then(() => { if (isAdminDashVisible()) render(); });
     }
   };
   _bugReportsWS.onclose = () => {
@@ -1907,7 +1915,7 @@ function subscribeToBugReports() {
 subscribeToBugReports();
 // One-time initial cache populate so the report tab works on a fresh page load
 // (setTab/sidebarNav only trigger this on explicit navigation, not on reload).
-loadBugReportsFromSupabase().then(() => { if (state.tab === "report") render(); });
+loadBugReportsFromSupabase().then(() => { if (isAdminDashVisible()) render(); });
 startBugReportsPolling();
 
 // --- PWA / mobile resume handling ---
@@ -1925,8 +1933,8 @@ function onAppResume() {
   subscribeToBugReports();
   subscribeToNests();
   // Refresh both caches with whatever auth state we have
-  loadBugReportsFromSupabase().then(() => { if (state.tab === "report") render(); });
-  loadNestsFromSupabase().then(() => { if (state.tab === "nests") render(); });
+  loadBugReportsFromSupabase().then(() => { if (isAdminDashVisible()) render(); });
+  loadNestsFromSupabase().then(() => { if (state.tab === "nests" && !state.selectedEvent && !state.selectedNews) render(); });
 }
 document.addEventListener("visibilitychange", onAppResume);
 window.addEventListener("pageshow", onAppResume);
@@ -2518,7 +2526,7 @@ async function loadAnalyticsFromSupabase() {
   }
   _analyticsLoading = true;
   _analyticsError = "";
-  if (state.tab === "report") render();
+  if (isAdminDashVisible()) render();
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/analytics_summary?select=*`, {
       headers: {
@@ -2537,7 +2545,7 @@ async function loadAnalyticsFromSupabase() {
     _analyticsData = null;
   } finally {
     _analyticsLoading = false;
-    if (state.tab === "report") render();
+    if (isAdminDashVisible()) render();
   }
 }
 
