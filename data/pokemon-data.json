@@ -1432,6 +1432,12 @@
       "Ground"
     ]
   },
+  "Golett": {
+    "types": [
+      "Ground",
+      "Ghost"
+    ]
+  },
   "Golurk": {
     "types": [
       "Ground",
@@ -2951,6 +2957,11 @@
       "Water"
     ]
   },
+  "Porygon": {
+    "types": [
+      "Normal"
+    ]
+  },
   "Porygon-Z": {
     "types": [
       "Normal"
@@ -3384,7 +3395,10 @@
     "types": [
       "Steel",
       "Dragon"
-    ]
+    ],
+    "cp": "2145–2307",
+    "cpBoost": "2682–2884",
+    "weather": "Snow, Windy"
   },
   "Shadow Dragonite": {
     "types": [
@@ -3434,6 +3448,15 @@
     "cpBoost": "1191–1326",
     "weather": "Sunny, Windy"
   },
+  "Shadow Golett": {
+    "types": [
+      "Ground",
+      "Ghost"
+    ],
+    "cp": "592–679",
+    "cpBoost": "740–849",
+    "weather": "Sunny, Fog"
+  },
   "Shadow Heatran": {
     "types": [
       "Fire",
@@ -3445,6 +3468,22 @@
       "Electric",
       "Normal"
     ]
+  },
+  "Shadow Hitmonlee": {
+    "types": [
+      "Fighting"
+    ],
+    "cp": "1342–1472",
+    "cpBoost": "1677–1840",
+    "weather": "Cloudy"
+  },
+  "Shadow Horsea": {
+    "types": [
+      "Water"
+    ],
+    "cp": "522–603",
+    "cpBoost": "653–754",
+    "weather": "Rainy"
   },
   "Shadow Incarnate Forme Landorus": {
     "types": [
@@ -3513,6 +3552,14 @@
       "Water",
       "Dragon"
     ]
+  },
+  "Shadow Porygon": {
+    "types": [
+      "Normal"
+    ],
+    "cp": "879–982",
+    "cpBoost": "1098–1228",
+    "weather": "Partly Cloudy"
   },
   "Shadow Raikou": {
     "types": [
