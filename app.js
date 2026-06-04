@@ -2196,6 +2196,7 @@ async function submitAdminLogin() {
   try {
     await adminLoginRequest(email, password);
     closeAdminLogin();
+    setTab("report");
   } catch (e) {
     _adminLoginError = e.message || "Sign-in failed.";
     _adminLoginSubmitting = false;
