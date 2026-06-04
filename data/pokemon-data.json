@@ -2485,6 +2485,15 @@
       "Dark"
     ]
   },
+  "Mega Skarmory": {
+    "types": [
+      "Steel",
+      "Flying"
+    ],
+    "cp": "1139–1204",
+    "cpBoost": "1424–1506",
+    "weather": "Snow or Windy"
+  },
   "Mega Slowbro": {
     "types": [
       "Water",
