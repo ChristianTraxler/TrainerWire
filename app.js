@@ -2604,6 +2604,65 @@ function renderPendingQueueCard(report) {
   </div>`;
 }
 
+// Returns today's calendar-day window in America/New_York time (EST/EDT, DST-aware)
+// as ISO 8601 strings with the correct UTC offset suffix. Used to filter the
+// pageviews table for the "Views (today)" card and "Pages today (EST)" list.
+function getTodayESTWindow() {
+  const TZ = "America/New_York";
+  const fmt = new Intl.DateTimeFormat("en-US", {
+    timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit",
+    hour: "2-digit", minute: "2-digit", second: "2-digit",
+    hour12: false, timeZoneName: "shortOffset"
+  });
+  // Resolve the calendar Y/M/D for "now" in New York.
+  const partsNow = fmt.formatToParts(new Date());
+  const pick = (parts, type) => {
+    const p = parts.find(x => x.type === type);
+    return p ? p.value : "";
+  };
+  const year  = pick(partsNow, "year");
+  const month = pick(partsNow, "month");
+  const day   = pick(partsNow, "day");
+  // To get the OFFSET that's in effect at midnight ET on this calendar day
+  // (not the current offset — they differ on DST transition days), format
+  // an instant we know lands at midnight ET. We approximate with the offset
+  // currently in effect, then re-query to confirm.
+  const offsetAt = (ms) => {
+    const p = fmt.formatToParts(new Date(ms));
+    const raw = pick(p, "timeZoneName").replace("GMT", "") || "+0";
+    const sign = raw[0] === "-" ? "-" : "+";
+    const hours = String(Math.abs(parseInt(raw, 10))).padStart(2, "0");
+    return `${sign}${hours}:00`;
+  };
+  // First pass: use "now"'s offset as a guess for midnight.
+  const guess = offsetAt(Date.now());
+  const startGuess = `${year}-${month}-${day}T00:00:00${guess}`;
+  // Re-query the offset at that candidate midnight instant. On DST days,
+  // this may differ from "now"'s offset — trust the midnight one.
+  const startOffset = offsetAt(new Date(startGuess).getTime());
+  const start = `${year}-${month}-${day}T00:00:00${startOffset}`;
+  // Add 24h to get tomorrow's midnight instant, then re-query its offset.
+  const nextMs = new Date(start).getTime() + 24 * 60 * 60 * 1000;
+  const nextParts = fmt.formatToParts(new Date(nextMs));
+  const endOffset = offsetAt(nextMs);
+  const end = `${pick(nextParts, "year")}-${pick(nextParts, "month")}-${pick(nextParts, "day")}T00:00:00${endOffset}`;
+  return { start, end };
+}
+
+// Aggregate raw pageview rows into a sorted [{page, count}] list, descending by count.
+// Skips rows whose page is empty/null. Pure function — easy to unit test.
+function aggregatePagesByCount(rows) {
+  const counts = new Map();
+  for (const r of (rows || [])) {
+    const p = r && r.page;
+    if (!p) continue;
+    counts.set(p, (counts.get(p) || 0) + 1);
+  }
+  return Array.from(counts.entries())
+    .map(([page, count]) => ({ page, count }))
+    .sort((a, b) => b.count - a.count);
+}
+
 // --- ADMIN ANALYTICS (Supabase pageviews → analytics_summary view) ---
 let _analyticsData = null;
 let _analyticsLoading = false;
