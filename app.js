@@ -3105,6 +3105,7 @@ function renderActivitySubTab() {
 async function refreshAllAdminData() {
   await Promise.all([
     loadAnalyticsFromSupabase().catch(() => {}),
+    loadPagesTodayFromSupabase().catch(() => {}),
     loadBugReportsFromSupabase().catch(() => {}),
     loadNestsFromSupabase().catch(() => {})
   ]);
