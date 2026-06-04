@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.25";
+const APP_VERSION = "3.26";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -2668,6 +2668,7 @@ function aggregatePagesByCount(rows) {
 let _todayAnalytics = null;        // { views: number, pages: [{page, count}, ...] } | null
 let _todayAnalyticsLoading = false;
 let _todayAnalyticsError = "";
+let _analyticsLastRefreshed = null; // ms epoch of most recent successful load (either loader)
 
 async function loadPagesTodayFromSupabase() {
   const sess = getAdminSession();
@@ -2695,6 +2696,7 @@ async function loadPagesTodayFromSupabase() {
     const pages = aggregatePagesByCount(rows);
     const views = pages.reduce((sum, p) => sum + p.count, 0);
     _todayAnalytics = { views, pages };
+    _analyticsLastRefreshed = Date.now();
   } catch (e) {
     _todayAnalyticsError = e && e.message ? e.message : "Failed to load today's pages.";
     _todayAnalytics = null;
@@ -2731,6 +2733,7 @@ async function loadAnalyticsFromSupabase() {
     }
     const rows = await res.json();
     _analyticsData = Array.isArray(rows) && rows.length ? rows[0] : null;
+    _analyticsLastRefreshed = Date.now();
   } catch (e) {
     _analyticsError = e && e.message ? e.message : "Failed to load analytics.";
     _analyticsData = null;
@@ -2786,9 +2789,15 @@ function renderAdminAnalyticsSection() {
     loadPagesTodayFromSupabase();
   }
 
+  const lastRefreshedStr = _analyticsLastRefreshed
+    ? new Date(_analyticsLastRefreshed).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", second: "2-digit", hour12: true })
+    : "";
   const headerRow = `<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px">
     <h3 style="margin:0;font-size:15px;font-weight:800;color:${th.text}">📊 Analytics</h3>
-    <button onclick="refreshAnalytics()" ${_analyticsLoading ? "disabled" : ""} style="padding:6px 12px;border-radius:999px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:12px;font-weight:700;cursor:${_analyticsLoading ? "wait" : "pointer"};font-family:inherit;opacity:${_analyticsLoading ? 0.6 : 1}">${_analyticsLoading ? "Loading…" : "↻ Refresh"}</button>
+    <div style="display:flex;align-items:center;gap:10px">
+      ${lastRefreshedStr ? `<span style="font-size:11px;color:${th.textMuted};font-variant-numeric:tabular-nums">Last refreshed: ${lastRefreshedStr}</span>` : ""}
+      <button onclick="refreshAnalytics()" ${_analyticsLoading ? "disabled" : ""} style="padding:6px 12px;border-radius:999px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:12px;font-weight:700;cursor:${_analyticsLoading ? "wait" : "pointer"};font-family:inherit;opacity:${_analyticsLoading ? 0.6 : 1}">${_analyticsLoading ? "Loading…" : "↻ Refresh"}</button>
+    </div>
   </div>`;
 
   if (_analyticsError) {
