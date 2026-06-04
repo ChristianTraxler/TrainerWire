@@ -2749,6 +2749,30 @@ function fmtNum(n) {
   return v.toLocaleString("en-US");
 }
 
+function renderTodayPagesSection() {
+  const th = t(darkMode);
+  const card = (inner) => `<div style="border:1.5px solid ${th.border};border-radius:14px;background:${th.surface};overflow:hidden;margin-bottom:10px">
+    <div style="padding:8px 12px;border-bottom:1.5px solid ${th.border};font-size:11px;font-weight:800;color:${th.textMuted};text-transform:uppercase;letter-spacing:0.5px">Pages today (EST)</div>
+    ${inner}
+  </div>`;
+
+  if (_todayAnalyticsError) {
+    return card(`<div style="padding:12px 14px;font-size:13px;color:#E74C3C">Could not load today's pages: ${esc(_todayAnalyticsError)}</div>`);
+  }
+  if (_todayAnalytics === null) {
+    return card(`<div style="padding:14px 16px;font-size:13px;color:${th.textMuted};text-align:center;border:0">Loading…</div>`);
+  }
+  const pages = _todayAnalytics.pages || [];
+  if (pages.length === 0) {
+    return card(`<div style="padding:14px 16px;font-size:13px;color:${th.textMuted};text-align:center">No views yet today</div>`);
+  }
+  const rows = pages.map((it) => `<tr style="border-bottom:1px solid ${th.border}">
+    <td style="padding:6px 10px;font-size:13px;color:${th.text};font-weight:600">${esc(it.page)}</td>
+    <td style="padding:6px 10px;text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:${th.text}">${fmtNum(it.count)}</td>
+  </tr>`).join("");
+  return card(`<table style="width:100%;border-collapse:collapse;font-family:inherit"><tbody>${rows}</tbody></table>`);
+}
+
 function renderAdminAnalyticsSection() {
   if (!isAdmin()) return "";
   const th = t(darkMode);
@@ -2836,6 +2860,7 @@ function renderAdminAnalyticsSection() {
   return `<div style="margin-bottom:18px">
     ${headerRow}
     ${summaryTable}
+    ${renderTodayPagesSection()}
     ${lists}
   </div>`;
 }
