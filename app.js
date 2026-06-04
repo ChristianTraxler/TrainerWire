@@ -2741,6 +2741,7 @@ async function loadAnalyticsFromSupabase() {
 
 function refreshAnalytics() {
   loadAnalyticsFromSupabase();
+  loadPagesTodayFromSupabase();
 }
 
 function fmtNum(n) {
@@ -2755,6 +2756,9 @@ function renderAdminAnalyticsSection() {
   // Kick off initial load on first render after admin opens the report tab.
   if (_analyticsData === null && !_analyticsLoading && !_analyticsError) {
     loadAnalyticsFromSupabase();
+  }
+  if (_todayAnalytics === null && !_todayAnalyticsLoading && !_todayAnalyticsError) {
+    loadPagesTodayFromSupabase();
   }
 
   const headerRow = `<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px">
