@@ -2663,6 +2663,46 @@ function aggregatePagesByCount(rows) {
     .sort((a, b) => b.count - a.count);
 }
 
+// --- "Pages today (EST)" data source — client-aggregated from raw pageviews.
+let _todayAnalytics = null;        // { views: number, pages: [{page, count}, ...] } | null
+let _todayAnalyticsLoading = false;
+let _todayAnalyticsError = "";
+
+async function loadPagesTodayFromSupabase() {
+  const sess = getAdminSession();
+  if (!sess || !sess.access_token) {
+    _todayAnalyticsError = "Not logged in.";
+    return;
+  }
+  _todayAnalyticsLoading = true;
+  _todayAnalyticsError = "";
+  if (isAdminDashVisible()) render();
+  try {
+    const { start, end } = getTodayESTWindow();
+    const qs = `select=page&visited_at=gte.${encodeURIComponent(start)}&visited_at=lt.${encodeURIComponent(end)}`;
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/pageviews?${qs}`, {
+      headers: {
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${sess.access_token}`,
+      },
+    });
+    if (!res.ok) {
+      const txt = await res.text().catch(() => "");
+      throw new Error(`HTTP ${res.status}${txt ? `: ${txt.slice(0, 140)}` : ""}`);
+    }
+    const rows = await res.json();
+    const pages = aggregatePagesByCount(rows);
+    const views = pages.reduce((sum, p) => sum + p.count, 0);
+    _todayAnalytics = { views, pages };
+  } catch (e) {
+    _todayAnalyticsError = e && e.message ? e.message : "Failed to load today's pages.";
+    _todayAnalytics = null;
+  } finally {
+    _todayAnalyticsLoading = false;
+    if (isAdminDashVisible()) render();
+  }
+}
+
 // --- ADMIN ANALYTICS (Supabase pageviews → analytics_summary view) ---
 let _analyticsData = null;
 let _analyticsLoading = false;
