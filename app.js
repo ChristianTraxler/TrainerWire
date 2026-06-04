@@ -2912,7 +2912,7 @@ function setAdminDashSubTab(name) {
 
 function getDashStatCounts() {
   const dayAgo = Date.now() - 86400000;
-  const views = _analyticsData && Number.isFinite(_analyticsData.views_today) ? _analyticsData.views_today : null;
+  const views = _todayAnalytics && Number.isFinite(_todayAnalytics.views) ? _todayAnalytics.views : null;
   const pending = (_bugReportsCache || []).filter(r => r.status === "pending").length;
   const newNests = (_nestsCache || []).filter(n => {
     const ts = n.created_at ? new Date(n.created_at).getTime() : 0;
@@ -2938,7 +2938,7 @@ function renderDashStatCards() {
   const isMobile = breakpoint === "mobile";
   const c = getDashStatCounts();
   const cards = [
-    renderDashStatCard("Views (24h)", c.views, "👁", "#3498DB", "analytics", isMobile),
+    renderDashStatCard("Views (today)", c.views, "👁", "#3498DB", "analytics", isMobile),
     renderDashStatCard("Pending", c.pending, "🐛", "#E67E22", "issues", isMobile),
     renderDashStatCard("New nests (24h)", c.newNests, "📍", "#27AE60", "nests", isMobile),
     renderDashStatCard("Active events", c.activeEvents, "📅", "#9B59B6", "activity", isMobile)
