@@ -359,6 +359,12 @@
     "cpBoost": "577–630",
     "weather": "Rainy"
   },
+  "Blue Plumage Squawkabilly": {
+    "types": [
+      "Normal",
+      "Flying"
+    ]
+  },
   "Bombirdier": {
     "types": [
       "Flying",
@@ -664,6 +670,14 @@
       "Flying",
       "Steel"
     ]
+  },
+  "Corvisquire": {
+    "types": [
+      "Flying"
+    ],
+    "cp": "727–779",
+    "cpBoost": "908–974",
+    "weather": "Windy"
   },
   "Cradily": {
     "types": [
@@ -1507,6 +1521,12 @@
       "Ground"
     ]
   },
+  "Green Plumage Squawkabilly": {
+    "types": [
+      "Normal",
+      "Flying"
+    ]
+  },
   "Greninja": {
     "types": [
       "Water",
@@ -1609,6 +1629,15 @@
     "cp": "1684–1763",
     "cpBoost": "2105–2204",
     "weather": "Sunny"
+  },
+  "Hisuian Braviary": {
+    "types": [
+      "Psychic",
+      "Flying"
+    ],
+    "cp": "1531–1608",
+    "cpBoost": "1914–2010",
+    "weather": "Windy"
   },
   "Hisuian Growlithe": {
     "types": [
@@ -2926,6 +2955,12 @@
     "cpBoost": "1439–1521",
     "weather": "Partly Cloudy or Windy"
   },
+  "Pidgeotto": {
+    "types": [
+      "Normal",
+      "Flying"
+    ]
+  },
   "Pidgey": {
     "types": [
       "Normal",
@@ -3897,6 +3932,12 @@
       "Grass"
     ]
   },
+  "Squawkabilly": {
+    "types": [
+      "Normal",
+      "Flying"
+    ]
+  },
   "Squirtle": {
     "types": [
       "Water"
@@ -3930,6 +3971,15 @@
       "Normal",
       "Flying"
     ]
+  },
+  "Starly": {
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "cp": "372–410",
+    "cpBoost": "465–513",
+    "weather": "Partly Cloudy or Windy"
   },
   "Staryu": {
     "types": [
@@ -3974,7 +4024,10 @@
     "types": [
       "Normal",
       "Flying"
-    ]
+    ],
+    "cp": "429–470",
+    "cpBoost": "537–588",
+    "weather": "Partly Cloudy or Windy"
   },
   "Swampert": {
     "types": [
@@ -4398,7 +4451,10 @@
     "types": [
       "Dark",
       "Flying"
-    ]
+    ],
+    "cp": "675–726",
+    "cpBoost": "844–908",
+    "weather": "Fog or Windy"
   },
   "Vulpix": {
     "types": [
@@ -4428,6 +4484,12 @@
       "Water"
     ]
   },
+  "Wattrel": {
+    "types": [
+      "Electric",
+      "Flying"
+    ]
+  },
   "Weavile": {
     "types": [
       "Dark",
@@ -4455,6 +4517,12 @@
     "types": [
       "Dragon",
       "Ice"
+    ]
+  },
+  "White Plumage Squawkabilly": {
+    "types": [
+      "Normal",
+      "Flying"
     ]
   },
   "Wiglett": {
@@ -4542,6 +4610,12 @@
     "cp": "410–450",
     "cpBoost": "512–562",
     "weather": "Rainy"
+  },
+  "Yellow Plumage Squawkabilly": {
+    "types": [
+      "Normal",
+      "Flying"
+    ]
   },
   "Yveltal": {
     "types": [
