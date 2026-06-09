@@ -135,6 +135,15 @@
       "Flying"
     ]
   },
+  "Amped Toxtricity": {
+    "types": [
+      "Electric",
+      "Poison"
+    ],
+    "cp": "1413–1486",
+    "cpBoost": "1767–1858",
+    "weather": "Rainy or Cloudy"
+  },
   "Amoonguss": {
     "types": [
       "Grass",
@@ -252,6 +261,11 @@
     "weather": "Foggy"
   },
   "Basculin": {
+    "types": [
+      "Water"
+    ]
+  },
+  "Basculin (White Striped)": {
     "types": [
       "Water"
     ]
@@ -540,6 +554,14 @@
     "types": [
       "Fire"
     ]
+  },
+  "Chimecho": {
+    "types": [
+      "Psychic"
+    ],
+    "cp": "1224–1291",
+    "cpBoost": "1530–1614",
+    "weather": "Windy"
   },
   "Chinchou": {
     "types": [
@@ -1214,7 +1236,10 @@
   "Galarian Meowth": {
     "types": [
       "Steel"
-    ]
+    ],
+    "cp": "546–591",
+    "cpBoost": "682–739",
+    "weather": "Snow"
   },
   "Galarian Mr. Mime": {
     "types": [
@@ -1245,13 +1270,19 @@
     "types": [
       "Ground",
       "Steel"
-    ]
+    ],
+    "cp": "1169–1235",
+    "cpBoost": "1461–1544",
+    "weather": "Sunny or Snow"
   },
   "Galarian Weezing": {
     "types": [
       "Poison",
       "Fairy"
-    ]
+    ],
+    "cp": "1242–1310",
+    "cpBoost": "1553–1637",
+    "weather": "Cloudy"
   },
   "Galarian Zigzagoon": {
     "types": [
@@ -1536,7 +1567,9 @@
     "types": [
       "Psychic"
     ],
-    "cp": "451–492"
+    "cp": "451–492",
+    "cpBoost": "563–615",
+    "weather": "Windy"
   },
   "Haunter": {
     "types": [
@@ -1984,6 +2017,15 @@
     "types": [
       "Normal"
     ]
+  },
+  "Low Key Toxtricity": {
+    "types": [
+      "Electric",
+      "Poison"
+    ],
+    "cp": "1413–1486",
+    "cpBoost": "1767–1858",
+    "weather": "Rainy or Cloudy"
   },
   "Lucario": {
     "types": [
@@ -4120,6 +4162,15 @@
     "types": [
       "Fairy"
     ]
+  },
+  "Togetic": {
+    "types": [
+      "Fairy",
+      "Flying"
+    ],
+    "cp": "917–976",
+    "cpBoost": "1147–1220",
+    "weather": "Cloudy or Windy"
   },
   "Torchic": {
     "types": [

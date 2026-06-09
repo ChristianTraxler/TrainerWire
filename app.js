@@ -558,7 +558,8 @@ const SHINY_AVAILABLE = new Set([
   "Seadra","Seaking","Sealeo","Skrelp","Smoliv","Snorunt","Snover","Spinda","Starmie",
   "Stufful","Stunky","Tangela","Teddiursa","Tirtouga","Tranquill","Tyrunt","Vanillite",
   "Whirlipede","Wingull",
-  "Exeggcute","Corphish","Wynaut","Mantyke","Frigibax","Tyrogue","Budew","Druddigon"
+  "Exeggcute","Corphish","Wynaut","Mantyke","Frigibax","Tyrogue","Budew","Druddigon",
+  "Pichu","Togepi"
 ]);
 function isShinyEligible(name) {
   if (name.includes("\u2728")) return true;
@@ -1129,28 +1130,28 @@ const CURRENT_EGGS = {
     "Bulbasaur","Charmander","Squirtle","Chikorita","Cyndaquil","Totodile","Treecko","Torchic","Mudkip","Turtwig","Chimchar","Piplup","Snivy","Tepig","Oshawott","Chespin","Fennekin","Froakie","Rowlet","Litten","Popplio","Grookey","Scorbunny","Sobble","Sprigatito","Fuecoco","Quaxly"
   ],
   "2 km Eggs": [
-    "Dunsparce","Wimpod","Tadbulb","Cleffa","Igglybuff","Smoochum","Larvesta","Exeggcute","Corphish","Wynaut"
+    "Exeggcute","Pichu","Cleffa","Togepi","Corphish","Wynaut","Larvesta"
   ],
   "5 km Eggs": [
-    "Sizzlipede","Snom","Fidough","Munchlax","Indeedee (Male)","Indeedee (Female)","Larvesta","Riolu","Mantyke","Flittle"
+    "Riolu","Mantyke","Snom","Indeedee (Male)","Indeedee (Female)","Flittle","Larvesta"
   ],
   "7 km Eggs": [
     "Galarian Meowth","Galarian Corsola","Galarian Zigzagoon","Galarian Darumaka","Galarian Stunfisk","Alolan Geodude","Alolan Diglett"
   ],
   "7 km Route Eggs": [
-    "Galarian Corsola","Galarian Slowpoke","Hisuian Sneasel","Hisuian Growlithe","Hisuian Basculin"
+    "Galarian Corsola","Galarian Slowpoke","Hisuian Sneasel","Hisuian Growlithe","Basculin (White Striped)"
   ],
   "10 km Eggs": [
-    "Deino","Honedge","Impidimp","Dreepy","Charcadet","Tinkatink","Larvesta","Mawile","Absol","Frigibax"
+    "Mawile","Absol","Honedge","Charcadet","Tinkatink","Frigibax","Larvesta"
   ],
   "12 km Eggs": [
     "Sandile","Vullaby","Shroodle","Pancham","Salandit","Varoom"
   ],
   "5 km Adventure Sync": [
-    "Chingling","Happiny","Audino","Riolu","Skarmory","Tyrogue","Budew","Sableye"
+    "Budew","Chingling","Sableye","Tyrogue","Happiny"
   ],
   "10 km Adventure Sync": [
-    "Goomy","Turtonator","Toxel","Gible","Dreepy","Bagon","Drampa","Druddigon"
+    "Druddigon","Toxel","Bagon","Drampa","Gible"
   ]
 };
 const EGG_TIER_COLORS = {
@@ -1242,16 +1243,16 @@ const RESEARCH_SECTION_META = {
 
 const CURRENT_RAID_BOSSES = {
   "1-Star Raids": [
-    "Meowth (1\u2605 Raid) \u2728","Ponyta (1\u2605 Raid) \u2728","Electabuzz (1\u2605 Raid) \u2728","Larvitar (1\u2605 Raid) \u2728"
+    "Galarian Meowth (1\u2605 Raid) \u2728","Chimecho (1\u2605 Raid) \u2728","Galarian Stunfisk (1\u2605 Raid) \u2728","Hatenna (1\u2605 Raid) \u2728"
   ],
   "3-Star Raids": [
-    "Scyther (3\u2605 Raid) \u2728","Lapras (3\u2605 Raid) \u2728","Houndoom (3\u2605 Raid) \u2728"
+    "Galarian Weezing (3\u2605 Raid) \u2728","Togetic (3\u2605 Raid) \u2728","Amped Toxtricity (3\u2605 Raid) \u2728","Low Key Toxtricity (3\u2605 Raid) \u2728"
   ],
   "5-Star Raids": [
-    "Tapu Fini (5\u2605 Raid) \u2728"
+    "Reshiram (5\u2605 Raid) \u2728"
   ],
   "Mega Raids": [
-    "Mega Medicham (Mega) \u2728"
+    "Mega Audino (Mega) \u2728"
   ],
   "Shadow 1-Star Raids": [
     "Shadow Horsea (1\u2605 Shadow Raid) \u2728","Shadow Porygon (1\u2605 Shadow Raid) \u2728","Shadow Beldum (1\u2605 Shadow Raid) \u2728","Shadow Golett (1\u2605 Shadow Raid) \u2728"
@@ -1306,6 +1307,7 @@ const CURRENT_MAX_BATTLES = {
     { name: "D-Max Chansey", dex: 113 },
     { name: "D-Max Cryogonal", dex: 615 },
     { name: "D-Max Drampa", dex: 780 },
+    { name: "D-Max Electabuzz", dex: 125 },
     { name: "D-Max Falinks", dex: 870 },
     { name: "D-Max Hitmonchan", dex: 107 },
     { name: "D-Max Hitmonlee", dex: 106 },
@@ -3873,7 +3875,7 @@ function renderBossItem(item, color, th, cardLayout, noSparkles, groupSize) {
   const typesHTML = raidData ? `<div style="display:flex;gap:4px;margin-top:4px;flex-wrap:wrap;${cardLayout ? "justify-content:center" : ""}">${raidData.types.map(t =>
     `<span style="font-size:${cardLayout ? 11 : 13}px;font-weight:700;color:#fff;background:${TYPE_COLORS[t] || "#888"};padding:2px 8px;border-radius:10px">${t}</span>`
   ).join("")}</div>` : "";
-  const isRaidTier = /\(\d★\s*(?:Raid|Shadow Raid)?\)|\(Mega\)|\(Primal Raid\)|\([^)]*Super Mega Raid[^)]*\)|\(\d★\s*Max Battle|\(Shadow Raid\)|\(weekends?\)|\(final week.*?\)/i.test(item);
+  const isRaidTier = /\(\d★\s*(?:Raid|Shadow Raid)?\)|\(Mega\)|\(Primal Raid\)|\([^)]*Super Mega Raid[^)]*\)|\(\d★\s*Max Battle|\(Shadow Raid\)|\(weekends?\)|\(final week.*?\)|^(Dynamax|Gigantamax|D-Max|G-Max)\s/i.test(item);
   const cpHTML = raidData && raidData.cp && isRaidTier ? `<div style="margin-top:5px;font-size:${cardLayout ? 13 : 14}px;color:${th.text};line-height:1.6;${cardLayout ? "text-align:center" : ""}">
     <div>CP <span style="font-weight:800;font-size:${cardLayout ? 15 : 16}px">${raidData.cp}</span></div>
     ${raidData.weather ? `<div style="font-size:${cardLayout ? 11 : 13}px;color:${th.textSecondary}">\u2601\uFE0F ${raidData.weather}: <span style="font-weight:700">${raidData.cpBoost}</span></div>` : ""}
@@ -6835,12 +6837,12 @@ function render() {
             <span style="display:flex;align-items:center;color:${th.textMuted};flex-shrink:0">${raidChevronSVG}</span>
           </button>
           <div class="acc-content" data-open="${raidOpenStr}"${raidOpenDefault ? ` style="max-height:none"` : ""}>
-            <div style="padding:8px;display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${bosses.map(item => renderBossItem(item, tierColor, th, breakpoint !== "mobile")).join("")}</div>
+            <div style="padding:8px;display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${bosses.map(item => renderBossItem(item, tierColor, th, breakpoint !== "mobile", false, findGroupSizeForBoss(cleanRaidLabel(item)))).join("")}</div>
           </div>
         </div>`;
       });
       raidsTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
-        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on June 2, 2026 at 11:31 am</div>
+        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on June 8, 2026 at 10:13 pm</div>
         <div style="text-align:center;padding:10px;font-size:14px;font-weight:600;color:${th.text}">Current Raid Bosses</div>
         <div style="text-align:center;font-size:11px;color:${th.textMuted};font-weight:500;margin-top:-10px">Data sourced from Pok\u00E9monGO.com, LeekDuck.com & Pok\u00E9monGOHUB.net</div>
         <div style="text-align:center;font-size:12px;color:${th.textMuted};font-weight:600;margin-top:2px">Tap a Pok\u00E9mon to see its weaknesses & resistances</div>
@@ -7106,7 +7108,7 @@ function render() {
         </div>`;
       }).join("");
       eggsTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
-        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on June 2, 2026 at 12:16 pm</div>
+        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on June 8, 2026 at 10:19 pm</div>
         <div style="text-align:center;padding:10px">
           <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text};display:flex;align-items:center;justify-content:center;gap:8px"><img src="assets/pokemon-images/eggs/egg-2.png" style="width:${isMobile ? 34 : 38}px;height:${isMobile ? 34 : 38}px;object-fit:contain" /> Egg Hatches</h2>
           <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Current egg pool by distance tier</p>
