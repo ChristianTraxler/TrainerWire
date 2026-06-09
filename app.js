@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.27";
+const APP_VERSION = "3.28";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -6498,8 +6498,8 @@ function render() {
         <div style="display:flex;${isMobile ? "flex-direction:column;gap:10px" : "justify-content:space-between;align-items:center;gap:14px"}">
           <div style="min-width:0;${isMobile ? "" : "flex:1"}"><h2 style="margin:0 0 2px 0;font-size:${isMobile ? 18 : 18}px;font-weight:800;color:${th.text};display:flex;align-items:center;gap:8px${isMobile ? "" : (ev.shadowBg ? ";overflow:visible" : ";white-space:nowrap;overflow:hidden;text-overflow:ellipsis")}">${(() => {
             if (ev.shadowBg && ev.iconImg) {
-              const size = isMobile ? 56 : 56;
-              return `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0;overflow:visible;margin:${isMobile ? "-12px" : "-12px"} 0 ${isMobile ? "-8px" : "-8px"} 0">
+              const size = isMobile ? 40 : 40;
+              return `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0;overflow:visible;margin:-4px 0 -2px 0">
                 <img src="assets/pokemon-images/icons/shadow_icon.png" style="position:absolute;top:-18%;left:-18%;width:136%;height:136%;object-fit:contain;opacity:${darkMode ? 0.9 : 0.7};z-index:0" />
                 <img src="${ev.iconImg}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
               </div>`;
@@ -6597,7 +6597,7 @@ function render() {
                 <img src="${hero.iconImg}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
               </div>`;
             }
-            if (hero.iconImg) return `<img src="${hero.iconImg}" style="width:${isMobile ? 36 : 34}px;height:${isMobile ? 36 : 34}px;object-fit:contain;margin-left:-4px;flex-shrink:0" onerror="this.outerHTML='${hero.icon}'" />`;
+            if (hero.iconImg) return `<img src="${hero.iconImg}" style="width:${isMobile ? 36 : 34}px;height:${isMobile ? 36 : 34}px;object-fit:contain;flex-shrink:0" onerror="this.outerHTML='${hero.icon}'" />`;
             const heroPkmn = (hero.type === "Raid" || hero.type === "Max Battle") && hero.details && hero.details.bosses && hero.details.bosses[0] ? getPokemonImg(hero.details.bosses[0]) : null;
             return heroPkmn ? `<img src="${heroPkmn.url}" style="width:${isMobile ? 36 : 34}px;height:${isMobile ? 36 : 34}px;object-fit:contain;flex-shrink:0" onerror="this.outerHTML='${hero.icon}'" />` : hero.icon;
           })()} ${esc(hero.title)}</h2>
