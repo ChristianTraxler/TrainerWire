@@ -1036,18 +1036,18 @@ const ANNOUNCEMENTS = [
       { text: "Stardust", img: "assets/pokemon-images/Items/stardust_painted.png" },
       { text: "XP", img: "assets/pokemon-images/Items/luckyegg.png" },
       { text: "Max Particles", img: "assets/pokemon-images/Items/max-particles.png" },
-      { text: "And even more goodies as you rank up", img: "assets/pokemon-images/Items/rewardsIcon.png" }
+      { text: "And even more goodies as you rank up", img: "assets/pokemon-images/icons/rewardsIcon.png" }
     ] },
     { heading: "GO Pass Deluxe ($7.99)", items: [
       { text: "Everything in the free track", img: "assets/pokemon-images/Items/go_pass_deluxe.webp" },
       { text: "1 Timed Incubator (returning item — expires Tuesday, July 14, 2026 at 10:00 AM local time)", img: "assets/pokemon-images/Items/EggIncubatorTimed_Activated.png" },
       { text: "1 Super Incubator", img: "assets/pokemon-images/Items/super_incubator.webp" },
       { text: "Additional Pokémon encounters", img: "assets/pokemon-images/icons/QuestPokemonReward.png" },
-      { text: "And even more goodies", img: "assets/pokemon-images/Items/rewardsIcon.png" }
+      { text: "And even more goodies", img: "assets/pokemon-images/icons/rewardsIcon.png" }
     ] },
     { heading: "GO Pass Deluxe + 10 Ranks ($9.99)", items: [
       { text: "Everything in GO Pass Deluxe", img: "assets/pokemon-images/Items/go_pass_deluxe.webp" },
-      { text: "Auto-rank up enough GO Points to reach Rank 11 instantly", img: "assets/pokemon-images/Items/item_pass_point_01.png" }
+      { text: "Auto-rank up enough GO Points to reach Rank 11 instantly", img: "assets/pokemon-images/icons/item_pass_point_01.png" }
     ] },
     { heading: "Web Store Gift with Purchase (Deluxe or Deluxe + 10 Ranks)", items: [
       { text: "10 Ultra Balls", img: "assets/pokemon-images/Items/ultraball_sprite.png" },
@@ -1058,7 +1058,7 @@ const ANNOUNCEMENTS = [
     { heading: "GO Pass Deluxe: June Ultra Box (Web Store Exclusive)", items: [
       { text: "20 Ultra Balls", img: "assets/pokemon-images/Items/ultraball_sprite.png" },
       { text: "10 Max Revives", img: "assets/pokemon-images/Items/Max-revive.png" },
-      { text: "10 Max Potions", img: "assets/pokemon-images/Items/Max-potion.png" },
+      { text: "8 Max Potions", img: "assets/pokemon-images/Items/Max-potion.png" },
       { text: "2 Premium Battle Passes", img: "assets/pokemon-images/Items/premium-raid-pass.png" },
       { text: "1 Incubator", img: "assets/pokemon-images/Items/EggIncubatorIAP_Activated.png" },
       { text: "1 Super Incubator", img: "assets/pokemon-images/Items/super_incubator.webp" }
@@ -1499,7 +1499,7 @@ const ITEM_IMAGES = {
   "Max Mushroom": "max_mushrooms.webp",
   "Link Charge": "link_charge.webp",
   "GO Pass Deluxe": "go_pass_deluxe.webp",
-  "+10 Ranks": "item_pass_point_01.png",
+  "+10 Ranks": "../icons/item_pass_point_01.png",
   "Fashion Raid Day Ticket": "item_1608_hd.png",
   "Shadow Entei Raid Day Ticket": "item_1608_hd.png",
   "Falinks Super Mega Raid Day Ticket": "item_1608_hd.png",
@@ -1507,7 +1507,7 @@ const ITEM_IMAGES = {
   "Pok\u00E9mon Storage Upgrade": "pokemonstorageupgrade.1.png",
   "Item Bag Upgrade": "itemstorageupgrade.1.png",
   "Pok\u00E9Coin": "pokecoin.png",
-  "Reward Points": "rewardsIcon.png"
+  "Reward Points": "../icons/rewardsIcon.png"
 };
 const ITEM_IMAGES_MULTI = {
   "Egg Incubator": { 3: "limited_incubatorx3.png" },
@@ -1516,6 +1516,67 @@ const ITEM_IMAGES_MULTI = {
 };
 
 const WEB_STORE_BOXES = [
+  {
+    name: "GO Pass Deluxe: June Ultra Box",
+    price: 14.99,
+    category: "Event Bundle",
+    limited: true,
+    limitedLabel: "LIMITED-TIME ONLY",
+    oneTime: true,
+    availableFrom: "2026-06-02",
+    expires: "2026-07-07",
+    availabilityText: "Tuesday, June 2, at 10:00 a.m. to Tuesday, July 7, at 10:00 a.m. local time",
+    items: [
+      { name: "GO Pass Deluxe", qty: 1, note: "June" },
+      { name: "+10 Ranks", qty: 1000 },
+      { name: "Ultra Ball", qty: 20 },
+      { name: "Max Revive", qty: 10 },
+      { name: "Premium Battle Pass", qty: 2 },
+      { name: "Egg Incubator", qty: 1 },
+      { name: "Super Incubator", qty: 1 },
+      { name: "Max Potion", qty: 8 },
+      { name: "Reward Points", qty: 180 }
+    ]
+  },
+  {
+    name: "GO Pass Deluxe: June + 10 Ranks",
+    price: 9.99,
+    category: "Event Bundle",
+    limited: true,
+    limitedLabel: "LIMITED-TIME ONLY",
+    oneTime: true,
+    availableFrom: "2026-06-02",
+    expires: "2026-07-07",
+    availabilityText: "Tuesday, June 2, at 10:00 a.m. to Tuesday, July 7, at 10:00 a.m. local time",
+    items: [
+      { name: "GO Pass Deluxe", qty: 1, note: "June" },
+      { name: "+10 Ranks", qty: 1000 },
+      { name: "Ultra Ball", qty: 10 },
+      { name: "Max Revive", qty: 5 },
+      { name: "Premium Battle Pass", qty: 1 },
+      { name: "Max Potion", qty: 5 },
+      { name: "Reward Points", qty: 120 }
+    ]
+  },
+  {
+    name: "GO Pass Deluxe: June",
+    price: 7.99,
+    category: "Event Bundle",
+    limited: true,
+    limitedLabel: "LIMITED-TIME ONLY",
+    oneTime: true,
+    availableFrom: "2026-06-02",
+    expires: "2026-07-07",
+    availabilityText: "Tuesday, June 2, at 10:00 a.m. to Tuesday, July 7, at 10:00 a.m. local time",
+    items: [
+      { name: "GO Pass Deluxe", qty: 1, note: "June" },
+      { name: "Ultra Ball", qty: 10 },
+      { name: "Max Revive", qty: 5 },
+      { name: "Premium Battle Pass", qty: 1 },
+      { name: "Max Potion", qty: 5 },
+      { name: "Reward Points", qty: 96 }
+    ]
+  },
   {
     name: "GO Pass Deluxe: May Ultra Box",
     price: 14.99,
@@ -7586,7 +7647,7 @@ function render() {
         archiveHTML += '</div>';
       }
       storeTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
-        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on May 22, 2026 at 3:48 pm</div>
+        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on June 11, 2026 at 10:30 am</div>
         <div style="text-align:center;padding:10px">
           <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text}">\uD83D\uDED2 Web Store Box Analysis</h2>
           <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Are the current Pok\u00E9mon GO web store boxes worth it?</p>
@@ -7699,7 +7760,7 @@ function render() {
       } else {
         pokedexTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
           <div style="text-align:center;padding:10px">
-            <img src="assets/pokemon-images/Items/Main1.webp" style="width:${isMobile ? 48 : 60}px;height:${isMobile ? 48 : 60}px;object-fit:contain;margin-bottom:6px" alt="PokeDex" />
+            <img src="assets/pokemon-images/icons/Main1.webp" style="width:${isMobile ? 48 : 60}px;height:${isMobile ? 48 : 60}px;object-fit:contain;margin-bottom:6px" alt="PokeDex" />
             <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text}">National Pok\u00E9Dex</h2>
             <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">All 1,025 Pok\u00E9mon sorted by region</p>
           </div>
@@ -8223,7 +8284,7 @@ function renderSidebar(th) {
     { id: "calendar", icon: "\uD83D\uDDD3\uFE0F", label: "Calendar" },
     { id: "current", icon: "\uD83D\uDD25", label: "Current", subTabs: currentSubTabs },
     { id: "news", icon: "\uD83D\uDCE2", label: "News" },
-    { id: "pokedex", icon: "\uD83D\uDCD6", iconImg: "assets/pokemon-images/Items/Main1.webp", label: "Pok\u00E9Dex" },
+    { id: "pokedex", icon: "\uD83D\uDCD6", iconImg: "assets/pokemon-images/icons/Main1.webp", label: "Pok\u00E9Dex" },
     { id: "store", icon: "\uD83D\uDED2", label: "Deal Check" },
     { id: "nests", icon: "\uD83C\uDF33", iconImg: "assets/pokemon-images/icons/ic_grass.png", label: "Nests" },
     { id: "tools", icon: "\uD83D\uDEE0\uFE0F", label: "PoGO Tools" },
