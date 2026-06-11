@@ -309,6 +309,11 @@
       "Ice"
     ]
   },
+  "Bidoof": {
+    "types": [
+      "Normal"
+    ]
+  },
   "Blacephalon": {
     "types": [
       "Fire",
@@ -4704,6 +4709,12 @@
   "Zorua": {
     "types": [
       "Dark"
+    ]
+  },
+  "Zubat": {
+    "types": [
+      "Poison",
+      "Flying"
     ]
   }
 }
