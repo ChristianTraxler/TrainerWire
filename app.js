@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.31";
+const APP_VERSION = "3.32";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -330,6 +330,7 @@ function pokemonImgUrl(dex) { return natDexImg(dex, GENDER_SUFFIX[dex] || ""); }
 
 function getPokemonImg(name) {
   const lower = name.toLowerCase();
+  if (lower.includes("gimmighoul")) return { url: eventDexImg(999, "anniversary"), shadow: false };
   if (lower.includes("tba") || lower.includes("other ") || lower.includes("possible") || lower.includes("featured pok") || lower.includes("surprise") || lower.includes("steel-type") || lower.includes("10th anniversary") || lower.includes("raid bosses")) return null;
   const megaMatch = name.match(/Mega\s+(\w+)(?:\s+([XY]))?/);
   if (megaMatch) { const dex = DEX[megaMatch[1]]; const suffix = megaMatch[2] ? "mega" + megaMatch[2].toLowerCase() : "mega"; if (dex) return { url: megaImg(dex, suffix), shadow: false }; }
@@ -381,6 +382,15 @@ function getPokemonImg(name) {
   }
   if (lower.includes("pikachu") && lower.includes("marathon visor")) {
     return { url: costumeDexImg(25, "f3341"), shadow: false };
+  }
+  if (lower.includes("pikachu") && lower.includes("cake")) {
+    return { url: eventDexImg(25, "cake-male"), shadow: false };
+  }
+  if (lower.includes("party hat")) {
+    const PARTY_HAT = { Bulbasaur: [1, "party"], Charmander: [4, "party"], Squirtle: [7, "party"], Wurmple: [265, "party"], Eevee: [133, "party-male"] };
+    for (const [pkmn, [dex, costume]] of Object.entries(PARTY_HAT)) {
+      if (name.includes(pkmn)) return { url: eventDexImg(dex, costume), shadow: false };
+    }
   }
   if (lower.includes("pikachu") && lower.includes("team")) {
     if (lower.includes("instinct")) return { url: costumeDexImg(25, "cap-instinct"), shadow: false };
@@ -768,6 +778,7 @@ function buildThunderousDiscovery(teamHat) {
 
 // --- EVENT DATA ---
 const EVENTS = [
+  { id: 103, title: "10th Anniversary Party", type: "Event", url: "https://pokemongo.com/news/10th-anniversary-party", date: "2026-07-04", endDate: "2026-07-06", startsAt: "2026-07-04T10:00:00", endsAt: "2026-07-06T20:00:00", published: "2026-06-11", updated: "2026-06-11", lastUpdated: "June 11, 2026 at 7:47 PM", time: "10:00 AM – 8:00 PM", whenText: "Saturday, July 4, at 10:00 a.m. to Monday, July 6, 2026, at 8:00 p.m. local time", color: "#FFB300", icon: "🎉", iconImg: "assets/pokemon-images/Event-Dex/regular/Gen-9_Paldea/0999_anniversary_badge.webp", featured: true, summary: "Pokémon GO turns 10! Gimmighoul holding a 10th anniversary coin debuts via Golden Lure Modules and Coin Bags (with a Shiny chance), party-hat Kanto starters and a cake-hat Pikachu fill the wild, and 4× Catch XP + 4× Catch Stardust run all weekend.", details: { bosses: ["Pikachu wearing a cake hat ✨", "Eevee wearing a party hat ✨", "Wurmple wearing a party hat ✨", "Bulbasaur wearing a party hat ✨", "Charmander wearing a party hat ✨", "Squirtle wearing a party hat ✨", "Gimmighoul holding a 10th anniversary coin (debut) ✨", "Other event-themed Pokémon in the wild"], bonuses: [{ text: "4× XP for catching Pokémon", img: "assets/pokemon-images/icons/xp.png" }, { text: "4× Stardust for catching Pokémon", img: "assets/pokemon-images/Items/stardust_painted.png" }, { text: "Event-themed Pokémon appearing in the wild are more likely to be Shiny", img: "assets/pokemon-images/icons/shiny-sparkles.webp" }, { text: "Gimmighoul holding a 10th anniversary coin debuts via Golden Lure Modules and Coin Bags (available July 4 – July 31)", img: "assets/pokemon-images/Items/lure-module.png" }, { text: "Gimmighoul holding a 10th anniversary coin may have a Special Background", img: "assets/pokemon-images/Items/tx_ar_photo_camera.png" }, { text: "Use a Coin Bag during the event for a chance at Shiny Gimmighoul", img: "assets/pokemon-images/Items/sparkly_incense.png" }, { text: "Evolve Bulbasaur or Ivysaur during the event for a Venusaur that knows Frenzy Plant", img: "assets/pokemon-images/National-Dex/regular/Gen-1_Kanto/0003-male.webp" }, { text: "Evolve Charmander or Charmeleon during the event for a Charizard that knows Blast Burn", img: "assets/pokemon-images/National-Dex/regular/Gen-1_Kanto/0006.webp" }, { text: "Evolve Squirtle or Wartortle during the event for a Blastoise that knows Hydro Cannon", img: "assets/pokemon-images/National-Dex/regular/Gen-1_Kanto/0009.webp" }, { text: "Event-themed Field Research available", img: "assets/pokemon-images/icons/green-research.png" }, { text: "New avatar item, plus event-themed stickers from spinning PokéStops, opening Gifts, and the in-game shop", img: "assets/pokemon-images/icons/QuestGiftIcon.png" }], paidResearch: { price: "$1.99", rewards: [{ text: "1 Super Incubator", img: "assets/pokemon-images/Items/super_incubator.webp" }, { text: "1 Premium Battle Pass", img: "assets/pokemon-images/Items/premium-raid-pass.png" }, { text: "An encounter with Gimmighoul holding a 10th anniversary coin (with a Special Background)", img: "assets/pokemon-images/Event-Dex/regular/Gen-9_Paldea/0999_anniversary_badge.webp" }, { text: "And more", glyph: "+" }], note: "Paid Timed Research, also available as a $1.99 Web Store bundle. Must be completed by Monday, July 6, 2026 at 8:00 PM local time. Giftable to Great Friends or higher." }, tips: ["Stack the 4× Catch XP with a Lucky Egg for a huge XP weekend.", "Shiny Gimmighoul only comes from Coin Bags — open them during the event window.", "Gimmighoul is obtainable through July 31 via Golden Lure Modules and Coin Bags.", "Evolve your party-hat Kanto starters during the event for the exclusive Frenzy Plant / Blast Burn / Hydro Cannon moves.", "All listed times are local."] } },
   { id: 93, title: "Choose Your Path: Fossil Fun", type: "Event", url: "https://pokemongo.com/news/choose-your-path-forever-forward-2026", date: "2026-06-17", endDate: "2026-06-21", startsAt: "2026-06-17T10:00:00", endsAt: "2026-06-21T20:00:00", published: "2026-06-10", time: "Jun 17, 10 AM – Jun 21, 8 PM", color: "#A1887F", icon: "🧭", featured: false, summary: "Choose Your Path Timed Research — pick Explore, Catch, or Battle to shape the tasks and bonuses for this non-event week.", details: { bosses: ["Explore Path", "Catch Path", "Battle Path"], bonuses: ["Select one of three paths: Explore, Catch, or Battle", "Your choice shapes the Timed Research tasks and bonuses for the week", "Available during this non-event week only"], tips: ["You may get different research opportunities than other Trainers.", "All listed times are local.", "Part of the Forever Forward Choose Your Path Timed Research series."], relatedNews: [{ id: 24, label: "Choose Your Path & Daily Discoveries Update", icon: "🧭" }] } },
   { id: 94, title: "Choose Your Path: Charged Embers", type: "Event", url: "https://pokemongo.com/news/choose-your-path-forever-forward-2026", date: "2026-06-30", endDate: "2026-07-03", startsAt: "2026-06-30T10:00:00", endsAt: "2026-07-03T20:00:00", published: "2026-06-10", time: "Jun 30, 10 AM – Jul 3, 8 PM", color: "#E67E22", icon: "🧭", featured: false, summary: "Choose Your Path Timed Research — pick Explore, Catch, or Battle to shape the tasks and bonuses for this non-event week.", details: { bosses: ["Explore Path", "Catch Path", "Battle Path"], bonuses: ["Select one of three paths: Explore, Catch, or Battle", "Your choice shapes the Timed Research tasks and bonuses for the week", "Available during this non-event week only"], tips: ["You may get different research opportunities than other Trainers.", "All listed times are local.", "Part of the Forever Forward Choose Your Path Timed Research series."], relatedNews: [{ id: 24, label: "Choose Your Path & Daily Discoveries Update", icon: "🧭" }] } },
   { id: 95, title: "Choose Your Path: Fairy Trail", type: "Event", url: "https://pokemongo.com/news/choose-your-path-forever-forward-2026", date: "2026-07-28", endDate: "2026-08-03", startsAt: "2026-07-28T10:00:00", endsAt: "2026-08-03T20:00:00", published: "2026-06-10", time: "Jul 28, 10 AM – Aug 3, 8 PM", color: "#EC7FB0", icon: "🧭", featured: false, summary: "Choose Your Path Timed Research — pick Explore, Catch, or Battle to shape the tasks and bonuses for this non-event week.", details: { bosses: ["Explore Path", "Catch Path", "Battle Path"], bonuses: ["Select one of three paths: Explore, Catch, or Battle", "Your choice shapes the Timed Research tasks and bonuses for the week", "Available during this non-event week only"], tips: ["You may get different research opportunities than other Trainers.", "All listed times are local.", "Part of the Forever Forward Choose Your Path Timed Research series."], relatedNews: [{ id: 24, label: "Choose Your Path & Daily Discoveries Update", icon: "🧭" }] } },
@@ -4616,8 +4627,9 @@ function renderEventDetail(event, th) {
           </div>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center">
-          <div style="font-size:13px;color:${th.textSecondary};font-weight:500">\uD83D\uDCC5 ${formatDateRange(event.date, event.endDate)}</div>
-          ${event.time ? `<div style="font-size:13px;color:${th.textSecondary};font-weight:500">\uD83D\uDD50 ${esc(event.time)}</div>` : ""}
+          ${event.whenText
+            ? `<div style="font-size:13px;color:${th.textSecondary};font-weight:500">\uD83D\uDCC5 ${esc(event.whenText)}</div>`
+            : `<div style="font-size:13px;color:${th.textSecondary};font-weight:500">\uD83D\uDCC5 ${formatDateRange(event.date, event.endDate)}</div>${event.time ? `<div style="font-size:13px;color:${th.textSecondary};font-weight:500">\uD83D\uDD50 ${esc(event.time)}</div>` : ""}`}
         </div>
         <div style="margin-top:10px">
           <span class="countdown" data-date="${event.date}" data-color="${event.color}" data-over="${over}" data-event-id="${event.id}">${renderCountdown(event.date, event.color, over, th, event)}</span>
@@ -5131,7 +5143,7 @@ function renderEventDetail(event, th) {
         ${event.details.ticketNote ? `<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;background:${th.accentBgSubtle("#E74C3C")};border:1px solid ${th.countdownBorder("#E74C3C")}"><span style="font-size:14px">\u26A0\uFE0F</span><span style="font-size:12px;font-weight:600;color:#E74C3C">${esc(event.details.ticketNote)}</span></div>` : ""}
         ${event.details.paidResearch ? `<div><h4 style="margin:0 0 10px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>\uD83D\uDCB0</span> Paid Timed Research — ${esc(event.details.paidResearch.price)}</h4>
           <div style="display:flex;flex-direction:column;gap:6px">
-            ${event.details.paidResearch.rewards.map(r => `<div style="padding:10px 14px;border-radius:10px;background:${th.accentBgSubtle("#E67E22")};border:1px solid ${th.countdownBorder("#E67E22")};font-size:13.5px;color:${th.textSecondary};line-height:1.5;display:flex;align-items:center;gap:8px"><span style="color:#E67E22;font-weight:700">•</span> ${esc(r)}</div>`).join("")}
+            ${event.details.paidResearch.rewards.map(r => { const _rt = (r && typeof r === "object") ? r.text : r; const _ri = (r && typeof r === "object" && r.img) ? `<img src="${r.img}" style="width:26px;height:26px;object-fit:contain;flex-shrink:0" onerror="this.style.display='none'" />` : (r && typeof r === "object" && r.glyph) ? `<span style="width:26px;text-align:center;flex-shrink:0;color:#E67E22;font-weight:800;font-size:20px;line-height:1">${esc(r.glyph)}</span>` : `<span style="color:#E67E22;font-weight:700">•</span>`; return `<div style="padding:10px 14px;border-radius:10px;background:${th.accentBgSubtle("#E67E22")};border:1px solid ${th.countdownBorder("#E67E22")};font-size:13.5px;color:${th.textSecondary};line-height:1.5;display:flex;align-items:center;gap:8px">${_ri} ${esc(_rt)}</div>`; }).join("")}
             ${event.details.paidResearch.note ? `<div style="padding:10px 14px;border-radius:10px;background:${th.accentBgSubtle("#E74C3C")};border:1px solid ${th.countdownBorder("#E74C3C")};font-size:12px;color:#E74C3C;font-weight:700;line-height:1.5;display:flex;align-items:center;gap:8px"><span style="font-size:14px">\u26A0\uFE0F</span> ${esc(event.details.paidResearch.note)}</div>` : ""}
           </div></div>` : ""}
         ${event.details.milestones ? `<div><h4 style="margin:0 0 10px 0;font-size:13px;font-weight:700;color:${th.text};display:flex;align-items:center;gap:8px"><span>\uD83C\uDFC6</span> Major Milestone Bonuses</h4>
@@ -8443,8 +8455,72 @@ document.addEventListener("touchend", (e) => {
   }, { passive: true });
 })();
 
+// --- PRESERVE YOUR PLACE ACROSS RELOADS (e.g. service-worker updates) ---
+// When a new version activates, index.html reloads the page. The active tab is
+// already restored from sessionStorage, but the reload would otherwise drop the
+// open detail view (event/news/Pokedex) and your scroll position. We snapshot
+// those on unload and restore them on the next load. sessionStorage is
+// per-session, so a real app close still starts clean — only reloads restore.
+const VIEW_SNAPSHOT_KEY = "trainerwire_view";
+
+function saveViewSnapshot() {
+  try {
+    sessionStorage.setItem(VIEW_SNAPSHOT_KEY, JSON.stringify({
+      eventId: state.selectedEvent ? state.selectedEvent.id : null,
+      newsId: state.selectedNews ? state.selectedNews.id : null,
+      dexNum: state.pokedexDetail || null,
+      scrollY: window.scrollY || window.pageYOffset || 0
+    }));
+  } catch (e) { /* storage unavailable — nothing to restore, no harm */ }
+}
+
+// pagehide fires on reload (and on close); visibilitychange covers iOS quirks.
+window.addEventListener("pagehide", saveViewSnapshot);
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden") saveViewSnapshot();
+});
+
+function restoreViewSnapshot() {
+  let snap;
+  try { snap = JSON.parse(sessionStorage.getItem(VIEW_SNAPSHOT_KEY) || "null"); }
+  catch (e) { snap = null; }
+  if (!snap) return;
+  sessionStorage.removeItem(VIEW_SNAPSHOT_KEY); // one-shot: only the next reload
+
+  // Re-open whichever detail view was showing (each is keyed by id).
+  if (snap.eventId != null && typeof EVENTS !== "undefined") {
+    const ev = EVENTS.find(e => e.id === snap.eventId);
+    if (ev) state.selectedEvent = ev;
+  } else if (snap.newsId != null && typeof ANNOUNCEMENTS !== "undefined") {
+    const a = ANNOUNCEMENTS.find(n => n.id === snap.newsId);
+    if (a) state.selectedNews = a;
+  } else if (snap.dexNum != null) {
+    openPokemonDetail(snap.dexNum); // sets state, renders, then fetches + re-renders
+  }
+  render();
+
+  // Restore scroll once layout settles. Re-apply briefly to survive late
+  // re-renders (images, prefetched data), but back off the moment you scroll.
+  const targetY = snap.scrollY || 0;
+  if (targetY > 0) {
+    let userMoved = false;
+    const markMoved = () => { userMoved = true; };
+    window.addEventListener("wheel", markMoved, { passive: true });
+    window.addEventListener("touchstart", markMoved, { passive: true });
+    const apply = () => { if (!userMoved) window.scrollTo(0, targetY); };
+    requestAnimationFrame(() => requestAnimationFrame(apply));
+    setTimeout(apply, 250);
+    setTimeout(() => {
+      apply();
+      window.removeEventListener("wheel", markMoved);
+      window.removeEventListener("touchstart", markMoved);
+    }, 600);
+  }
+}
+
 // Initial render
 updateThemeColor();
 loadNestsFromSupabase().then(() => render());
 render();
+restoreViewSnapshot();
 if (typeof trackPageview === "function") trackPageview(state.tab || "home");

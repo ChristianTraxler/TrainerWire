@@ -1377,6 +1377,11 @@
       "Rock"
     ]
   },
+  "Gimmighoul": {
+    "types": [
+      "Ghost"
+    ]
+  },
   "Gigantamax Blastoise": {
     "types": [
       "Water"
@@ -4586,6 +4591,11 @@
     "types": [
       "Bug",
       "Grass"
+    ]
+  },
+  "Wurmple": {
+    "types": [
+      "Bug"
     ]
   },
   "Wynaut": {
