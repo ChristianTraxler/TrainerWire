@@ -7816,7 +7816,7 @@ function render() {
         </div>
         <div style="padding:${isMobile ? "14px 16px" : "16px 20px"};background:${th.accentBgSubtle("#2ECC71")};border:1.5px solid ${th.countdownBorder("#2ECC71")};border-radius:${isMobile ? 14 : 16}px;text-align:center">
           <div style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:#2ECC71;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px">\uD83D\uDD04 Next Nest Migration</div>
-          <div id="nest-migration-countdown" style="font-size:${isMobile ? 18 : 22}px;font-weight:800;color:${th.text};font-variant-numeric:tabular-nums">${renderNestCountdown()}</div>
+          <div id="nest-migration-countdown" style="font-size:${isMobile ? "clamp(11px,3.6vw,17px)" : "22px"};font-weight:800;color:${th.text};font-variant-numeric:tabular-nums;white-space:nowrap">${renderNestCountdown()}</div>
         </div>
         <div style="padding:${isMobile ? "20px 18px" : "24px 28px"};background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;box-shadow:${th.shadow}">
           <h3 style="margin:0 0 12px 0;font-size:${isMobile ? 16 : 18}px;font-weight:800;color:${th.text}">\uD83D\uDCD6 How Nests Work</h3>
