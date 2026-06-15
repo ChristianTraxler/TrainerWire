@@ -4313,7 +4313,10 @@ function renderGroupSizeCompact(gs, th, centered) {
 function dexForBossName(bossName) {
   if (DEX[bossName] != null) return DEX[bossName];
   const stripped = bossName.replace(/^(Mega |Shadow |Alolan |Galarian |Hisuian |Paldean )/, "").trim();
-  return DEX[stripped];
+  if (DEX[stripped] != null) return DEX[stripped];
+  // Mega X/Y forms (e.g. "Mega Raichu X") share their base species' dex number,
+  // so drop the trailing form letter to resolve them to the same Pokédex page.
+  return DEX[stripped.replace(/\s+[XY]$/, "").trim()];
 }
 // Look up a groupSize entry by cleaned boss name across all EVENTS. Returns the
 // first match — used by the news detail page to attach raid sizing data to
@@ -4331,22 +4334,32 @@ function findGroupSizeForBoss(bossName) {
   return null;
 }
 function findRaidBossInfosForDex(dexNum) {
-  const matches = [];
-  if (!Array.isArray(EVENTS)) return matches;
+  // Dedupe by bossName: the same boss (e.g. "Mega Skarmory") can be referenced by
+  // several events (a dedicated Raid Day + a weekly roundup), but the Pokédex page
+  // should show it once. Distinct forms keep separate cards because they have
+  // distinct bossNames (e.g. "Mega Raichu X" vs "Mega Raichu Y").
+  const byBoss = new Map();
+  if (!Array.isArray(EVENTS)) return [];
   for (const ev of EVENTS) {
     const gsList = ev && ev.details && ev.details.groupSize;
     if (!gsList) continue;
     const list = Array.isArray(gsList) ? gsList : [gsList];
     for (const gs of list) {
       if (!gs || !gs.bossName) continue;
-      if (dexForBossName(gs.bossName) === dexNum) {
-        const bossEntry = (ev.details.bosses || []).find(b => cleanRaidLabel(b) === gs.bossName);
-        const tier = bossEntry ? getRaidTier(bossEntry) : null;
-        matches.push({ event: ev, groupSize: gs, tier });
+      if (dexForBossName(gs.bossName) !== dexNum) continue;
+      const bossEntry = (ev.details.bosses || []).find(b => cleanRaidLabel(b) === gs.bossName);
+      const tier = bossEntry ? getRaidTier(bossEntry) : null;
+      const existing = byBoss.get(gs.bossName);
+      if (!existing) { byBoss.set(gs.bossName, { event: ev, groupSize: gs, tier }); continue; }
+      // On a clash, prefer the event whose title names this species — that's the
+      // dedicated Raid Day, a better link target than a multi-boss roundup.
+      const species = gs.bossName.replace(/^(Mega |Shadow |Alolan |Galarian |Hisuian |Paldean )/, "").replace(/\s+[XY]$/, "").trim();
+      if (ev.title.includes(species) && !existing.event.title.includes(species)) {
+        byBoss.set(gs.bossName, { event: ev, groupSize: gs, tier });
       }
     }
   }
-  return matches;
+  return Array.from(byBoss.values());
 }
 
 // Renders the "Raid Boss Info" section on the Pokemon Dex detail page. Shows
@@ -4365,11 +4378,27 @@ function renderDexRaidBossInfo(data, th, isMobile) {
       ${raidData.cpBoost && raidData.weather ? `<div style="font-size:13.5px;color:${th.text};line-height:1.5">☁️ ${esc(raidData.weather)}: <strong>${raidData.cpBoost}</strong></div>` : ""}
     </div>` : "";
     const gsHTML = renderGroupSizeCompact(gs, th, false);
+    // Show the boss with both its Normal and Shiny sprite. The shiny art lives at
+    // the same path with /regular/ swapped for /shiny/; onerror hides the cell if
+    // a Pokémon has no shiny release yet.
+    const pkmnImg = getPokemonImg(gs.bossName);
+    const spriteSize = isMobile ? 54 : 64;
+    const regEl = pokemonImgHTML(pkmnImg, spriteSize);
+    const shinyUrl = pkmnImg && pkmnImg.url && pkmnImg.url.includes("/regular/") ? pkmnImg.url.replace("/regular/", "/shiny/") : null;
+    const spriteCell = (inner, label) => `<div style="display:flex;flex-direction:column;align-items:center;gap:3px">${inner}<div style="font-size:9px;font-weight:700;color:${th.textMuted};letter-spacing:0.4px;text-transform:uppercase">${label}</div></div>`;
+    const shinyImgEl = shinyUrl ? `<img src="${shinyUrl}" style="width:${spriteSize}px;height:${spriteSize}px;object-fit:contain;flex-shrink:0" onerror="this.parentElement.style.display='none'" />` : "";
+    const spritesHTML = regEl ? `<div style="display:flex;align-items:flex-start;gap:10px;flex-shrink:0">
+      ${spriteCell(regEl, "Normal")}
+      ${shinyImgEl ? spriteCell(shinyImgEl, "✨ Shiny") : ""}
+    </div>` : "";
     const linkHTML = `<button onclick="selectEvent(${ev.id})" style="display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;color:${tierColor};background:${th.accentBgSubtle(tierColor)};border:1.5px solid ${th.countdownBorder(tierColor)};border-radius:10px;padding:10px 14px;cursor:pointer;font-family:inherit;align-self:flex-start;transition:all 0.15s ease" onmouseenter="this.style.background='${tierColor}';this.style.color='#fff'" onmouseleave="this.style.background='${th.accentBgSubtle(tierColor)}';this.style.color='${tierColor}'">View ${esc(ev.title)} →</button>`;
     return `<div style="padding:${isMobile ? "12px" : "14px"};background:${th.accentBgSubtle(tierColor)};border:1.5px solid ${th.countdownBorder(tierColor)};border-radius:12px;display:flex;flex-direction:column;gap:12px">
-      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-        <div style="font-size:14px;font-weight:700;color:${th.text}">${esc(gs.bossName)}</div>
-        <span style="font-size:10px;font-weight:700;color:#fff;background:${tierColor};padding:3px 9px;border-radius:8px;letter-spacing:0.4px;text-transform:uppercase">${esc(tierLabel)}</span>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        ${spritesHTML}
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex:1;min-width:0">
+          <div style="font-size:14px;font-weight:700;color:${th.text}">${esc(gs.bossName)}</div>
+          <span style="font-size:10px;font-weight:700;color:#fff;background:${tierColor};padding:3px 9px;border-radius:8px;letter-spacing:0.4px;text-transform:uppercase">${esc(tierLabel)}</span>
+        </div>
       </div>
       ${cpHTML}
       ${gsHTML}
