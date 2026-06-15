@@ -2521,6 +2521,22 @@
     "cpBoost": "1854–1955",
     "weather": "Rainy"
   },
+  "Mega Raichu X": {
+    "types": [
+      "Electric"
+    ],
+    "cp": "1180–1247",
+    "cpBoost": "1476–1558",
+    "weather": "Rainy"
+  },
+  "Mega Raichu Y": {
+    "types": [
+      "Electric"
+    ],
+    "cp": "1180–1247",
+    "cpBoost": "1476–1558",
+    "weather": "Rainy"
+  },
   "Mega Rayquaza": {
     "types": [
       "Dragon",
