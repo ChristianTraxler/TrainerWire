@@ -933,6 +933,11 @@
     ],
     "cp": "732–786"
   },
+  "Drizzile": {
+    "types": [
+      "Water"
+    ]
+  },
   "Drowzee": {
     "types": [
       "Psychic"
@@ -1788,6 +1793,11 @@
     "cp": "486–529",
     "cpBoost": "608–662",
     "weather": "Fog or Windy"
+  },
+  "Inteleon": {
+    "types": [
+      "Water"
+    ]
   },
   "Ivysaur": {
     "types": [
