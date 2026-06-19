@@ -707,13 +707,19 @@
     "types": [
       "Fighting",
       "Steel"
-    ]
+    ],
+    "cp": "2100–2188",
+    "cpBoost": "2625–2735",
+    "weather": "Cloudy"
   },
   "Crowned Sword Zacian": {
     "types": [
       "Fairy",
       "Steel"
-    ]
+    ],
+    "cp": "2100–2188",
+    "cpBoost": "2625–2735",
+    "weather": "Cloudy"
   },
   "Croagunk": {
     "types": [
@@ -1472,6 +1478,15 @@
     "cpBoost": "2310–2414",
     "weather": "Fog or Windy"
   },
+  "Giratina (Origin Forme)": {
+    "types": [
+      "Ghost",
+      "Dragon"
+    ],
+    "cp": "2018–2105",
+    "cpBoost": "2523–2631",
+    "weather": "Fog or Windy"
+  },
   "Glalie": {
     "types": [
       "Ice"
@@ -1635,6 +1650,12 @@
     "types": [
       "Electric",
       "Normal"
+    ]
+  },
+  "Heracross": {
+    "types": [
+      "Bug",
+      "Fighting"
     ]
   },
   "Hippowdon": {
@@ -2702,6 +2723,12 @@
   "Milotic": {
     "types": [
       "Water"
+    ]
+  },
+  "Mime Jr.": {
+    "types": [
+      "Psychic",
+      "Fairy"
     ]
   },
   "Minccino": {
@@ -3920,6 +3947,12 @@
       "Ice"
     ]
   },
+  "Snover": {
+    "types": [
+      "Grass",
+      "Ice"
+    ]
+  },
   "Snubbull": {
     "types": [
       "Fairy"
@@ -4536,6 +4569,12 @@
     "types": [
       "Dark",
       "Ice"
+    ]
+  },
+  "Weedle": {
+    "types": [
+      "Bug",
+      "Poison"
     ]
   },
   "Weepinbell": {
