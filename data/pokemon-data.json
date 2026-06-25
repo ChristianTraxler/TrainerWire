@@ -815,7 +815,8 @@
     "types": [
       "Dark",
       "Dragon"
-    ]
+    ],
+    "cp": "560–606"
   },
   "Delphox": {
     "types": [
@@ -1138,7 +1139,8 @@
   "Feebas": {
     "types": [
       "Water"
-    ]
+    ],
+    "cp": "132–157"
   },
   "Fennekin": {
     "types": [
@@ -1952,8 +1954,8 @@
       "Dragon",
       "Ice"
     ],
-    "cp": "1957–2042",
-    "cpBoost": "2446–2553",
+    "cp": "1791–2042",
+    "cpBoost": "2239–2553",
     "weather": "Snow or Windy"
   },
   "Lairon": {
@@ -2277,7 +2279,8 @@
   "Mega Aggron": {
     "types": [
       "Steel"
-    ]
+    ],
+    "cp": "1636–1714"
   },
   "Mega Alakazam": {
     "types": [
@@ -2476,8 +2479,8 @@
       "Fighting",
       "Steel"
     ],
-    "cp": "1356–1434",
-    "cpBoost": "1696–1793",
+    "cp": "1469–1544",
+    "cpBoost": "1837–1930",
     "weather": "Cloudy or Snow"
   },
   "Mega Manectric": {
@@ -2585,7 +2588,7 @@
       "Dragon",
       "Flying"
     ],
-    "cp": "1739–1825",
+    "cp": "2054–2142",
     "cpBoost": "2174–2282",
     "weather": "Windy"
   },
@@ -2594,9 +2597,9 @@
       "Grass",
       "Dragon"
     ],
-    "cp": "1421–1500",
-    "cpBoost": "1776–1875",
-    "weather": "Sunny/Clear"
+    "cp": "1500–1575",
+    "cpBoost": "1876–1969",
+    "weather": "Sunny or Windy"
   },
   "Mega Scizor": {
     "types": [
@@ -2746,7 +2749,7 @@
     ],
     "cp": "1896–1980",
     "cpBoost": "2370–2475",
-    "weather": "Sunny/Clear or Windy"
+    "weather": "Sunny or Windy"
   },
   "Morelull": {
     "types": [
@@ -3706,7 +3709,8 @@
     "types": [
       "Water",
       "Dragon"
-    ]
+    ],
+    "cp": "2118–2280"
   },
   "Shadow Porygon": {
     "types": [
