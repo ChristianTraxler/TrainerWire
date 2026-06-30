@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.37";
+const APP_VERSION = "3.38";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -1093,6 +1093,78 @@ const EVENTS = [
 ];
 
 const ANNOUNCEMENTS = [
+  { id: 30, date: "2026-06-30", published: "2026-06-30", title: "GO Pass: July — Ho-Oh & Gimmighoul's 10th Anniversary Coin", tag: "News", url: "https://pokemongo.com/en/news/go-pass-july-2026", icon: "assets/pokemon-images/National-Dex/regular/Gen-2_Johto/0250.webp", body: "July's GO Pass continues the 10th Anniversary celebration with an Ho-Oh encounter at Rank 100 and Gimmighoul holding a 10th anniversary coin at Ranks 101 and 200 — with extra items and encounters available beyond Rank 100. The free track adds 400 PokéCoins, Stardust, XP, and Max Particles. Deluxe (US$7.99) or Deluxe + 10 Ranks (US$9.99) adds 1,000 more PokéCoins (1,400 total), extra Gimmighoul encounters, and a Super Incubator. Runs July 7 – August 4, with no daily GO Points limit from August 1–2.", fullBody: "GO Pass: July runs Tuesday, July 7, at 10:00 a.m. to Tuesday, August 4, 2026, at 10:00 a.m. local time, continuing Pokémon GO's 10th Anniversary Celebration — and to mark the landmark, additional items and encounters are available beyond Rank 100. Trainers automatically receive the free GO Pass on July 7 and can collect GO Points to rank up through August 4. From Saturday, August 1, at 12:00 a.m. to Sunday, August 2, at 11:59 p.m. local time, there's no daily limit on how many GO Points you can earn. Upgrade to GO Pass Deluxe (US$7.99) for upgraded rewards and faster progression, or GO Pass Deluxe + 10 Ranks (US$9.99) to also instantly reach Rank 11. Rewards unlocked in the GO Pass expire Thursday, August 6, at 10:00 a.m. local time. All prices are in USD or the equivalent pricing tier in your local currency.", sections: [
+    { heading: "Event Window", items: [
+      "Starts: Tuesday, July 7 at 10:00 AM local time",
+      "Ends: Tuesday, August 4 at 10:00 AM local time",
+      "No daily GO Points limit: Saturday, August 1 at 12:00 AM to Sunday, August 2 at 11:59 PM local time",
+      "Rewards expire: Thursday, August 6 at 10:00 AM local time"
+    ] },
+    { heading: "GO Pass (Free) Rewards", items: [
+      { text: "Encounter with Ho-Oh at Rank 100 (Shiny possible) ✨", img: "assets/pokemon-images/National-Dex/regular/Gen-2_Johto/0250.webp" },
+      { text: "Encounter with Gimmighoul holding a 10th anniversary coin at Rank 101 and Rank 200 (Shiny possible) ✨", img: "assets/pokemon-images/icons/gimmighoul-anniversary-coin.png", imgSize: 42 },
+      { text: "400 PokéCoins", img: "assets/pokemon-images/Items/pokecoin.png" },
+      { text: "Stardust", img: "assets/pokemon-images/Items/stardust_painted.png" },
+      { text: "XP", img: "assets/pokemon-images/Items/luckyegg.png" },
+      { text: "Max Particles", img: "assets/pokemon-images/Items/max-particles.png" },
+      { text: "And even more goodies as you rank up", img: "assets/pokemon-images/icons/plus-icon.png" }
+    ] },
+    { heading: "GO Pass Deluxe ($7.99)", items: [
+      { text: "Everything in the free track", img: "assets/pokemon-images/Items/go_pass_deluxe.webp" },
+      { text: "1,000 additional PokéCoins (1,400 PokéCoins total)", img: "assets/pokemon-images/Items/pokecoin.png" },
+      { text: "Additional encounters with Gimmighoul holding a 10th anniversary coin (Shiny possible) ✨", img: "assets/pokemon-images/icons/gimmighoul-anniversary-coin.png", imgSize: 42 },
+      { text: "1 Super Incubator", img: "assets/pokemon-images/Items/super_incubator.webp" },
+      { text: "Additional encounters with even more Pokémon", img: "assets/pokemon-images/icons/QuestPokemonReward.png" },
+      { text: "And even more goodies", img: "assets/pokemon-images/icons/plus-icon.png" }
+    ] },
+    { heading: "GO Pass Deluxe + 10 Ranks ($9.99)", items: [
+      { text: "Everything in GO Pass Deluxe", img: "assets/pokemon-images/Items/go_pass_deluxe.webp" },
+      { text: "Auto-rank up enough GO Points to reach Rank 11 instantly", img: "assets/pokemon-images/icons/item_pass_point_01.png" }
+    ] },
+    { heading: "Web Store Gift with Purchase (Deluxe or Deluxe + 10 Ranks)", items: [
+      { text: "10 Ultra Balls", img: "assets/pokemon-images/Items/ultraball_sprite.png" },
+      { text: "5 Max Revives", img: "assets/pokemon-images/Items/Max-revive.png" },
+      { text: "1 Premium Battle Pass", img: "assets/pokemon-images/Items/premium-raid-pass.png" },
+      { text: "5 Max Potions", img: "assets/pokemon-images/Items/Max-potion.png" }
+    ] },
+    { heading: "GO Pass Deluxe: July Ultra Box (Web Store Exclusive)", items: [
+      { text: "20 Ultra Balls", img: "assets/pokemon-images/Items/ultraball_sprite.png" },
+      { text: "10 Max Revives", img: "assets/pokemon-images/Items/Max-revive.png" },
+      { text: "10 Max Potions", img: "assets/pokemon-images/Items/Max-potion.png" },
+      { text: "2 Premium Battle Passes", img: "assets/pokemon-images/Items/premium-raid-pass.png" },
+      { text: "1 Incubator", img: "assets/pokemon-images/Items/EggIncubatorIAP_Activated.png" },
+      { text: "1 Super Incubator", img: "assets/pokemon-images/Items/super_incubator.webp" }
+    ] },
+    { heading: "Tier 1 — Rank 1 Milestone", items: [
+      "1 additional Candy from trading Pokémon",
+      "1 guaranteed Candy XL from trading Pokémon"
+    ] },
+    { heading: "Tier 2 — Rank 25 Milestone (Free)", items: [
+      "Open up to 40 Gifts per day",
+      "Receive up to 125 Gifts per day from spinning PokéStop and Gym Photo Discs",
+      "Hold 10 more Gifts in your Item Bag"
+    ] },
+    { heading: "Tier 2 — Rank 25 Milestone (Deluxe Upgrade)", items: [
+      "Open up to 50 Gifts per day",
+      "Receive up to 150 Gifts per day from spinning PokéStop and Gym Photo Discs",
+      "Hold up to 20 more Gifts in your Item Bag"
+    ] },
+    { heading: "Tier 3 — Rank 50 Milestone", items: [
+      "2× Daily Adventure Incense duration"
+    ] },
+    { heading: "Tier 4 — Rank 75 Milestone", items: [
+      "Increased XP from hatching Eggs",
+      "Increased Stardust from hatching Eggs"
+    ] },
+    { heading: "Tips", items: [
+      "Ho-Oh (Fire/Flying) unlocks at Rank 100 and can be Shiny — push to Rank 100 and check the encounter.",
+      "Gimmighoul holding a 10th anniversary coin appears at Rank 101 and Rank 200 (and more often on Deluxe) and can be Shiny — a 10th Anniversary collectible worth chasing.",
+      "Use the no-daily-GO-Points-limit window — Saturday, August 1, 12:00 a.m. to Sunday, August 2, 11:59 p.m. local time — to bank ranks fast.",
+      "Deluxe nets 1,400 PokéCoins total (1,000 more than the free track's 400) plus a Super Incubator — it can more than pay for itself for active players.",
+      "Web Store upgrades activate Deluxe as soon as the GO Pass begins and add the gift-with-purchase bundle on top.",
+      "Claim every earned reward before Thursday, August 6, at 10:00 a.m. local time — anything unclaimed will be lost."
+    ] }
+  ] },
   { id: 29, date: "2026-06-26", published: "2026-06-26", updated: "2026-06-26", lastUpdated: "June 26, 2026 at 10:46 AM", title: "Ozone Ascent — Rayquaza & Dragon Ascent", tag: "News", url: "https://pokemongo.com/en/news/ozone-ascent-2026", icon: "assets/pokemon-images/Mega/regular/Gen-3_Hoenn/0384_mega.webp", body: "Rayquaza ascends July 25–26! Complete free Timed Research for a Meteorite and a Rayquaza encounter, or grab the US$4.99 paid Timed Research to also earn Rayquaza Mega Energy. Use Meteorites to teach Rayquaza the Charged Attack Dragon Ascent — the only way the Sky High Pokémon can Mega Evolve.", fullBody: "Ozone Ascent runs Saturday, July 25, at 10:00 a.m. to Sunday, July 26, 2026, at 8:00 p.m. local time, with Rayquaza in the spotlight. Free Timed Research rewards a Meteorite, an encounter with Rayquaza, and more, while paid Timed Research (US$4.99, or the equivalent pricing tier in your local currency) adds Rayquaza Mega Energy on top. Unlike other Mega-Evolving Pokémon, Rayquaza can't Mega Evolve with Mega Energy alone — you'll need to teach it the Charged Attack Dragon Ascent using Meteorites. Timed Research must be completed and its rewards claimed before the event ends on Sunday, July 26, at 8:00 p.m. local time. All times are local.", sections: [
     { heading: "When (all times local)", items: [
       "Saturday, July 25, 10:00 a.m. to Sunday, July 26, 2026, 8:00 p.m.",
@@ -5588,7 +5660,8 @@ function renderNewsDetail(announcement, th) {
           return `<div>${headingHTML}
           <div style="display:flex;flex-direction:column;gap:5px">${s.items.map(item => {
             if (item && typeof item === "object" && item.img) {
-              const imgEl = `<img src="${item.img}" style="width:30px;height:30px;object-fit:contain;flex-shrink:0" onerror="this.style.display='none'" />`;
+              const sz = item.imgSize || 30;
+              const imgEl = `<div style="position:relative;width:30px;height:30px;flex-shrink:0"><img src="${item.img}" style="position:absolute;top:50%;left:50%;transform:translate(-50%,calc(-50% - ${item.imgNudgeY||0}px));width:${sz}px;height:${sz}px;object-fit:contain" onerror="this.style.display='none'" /></div>`;
               return `<div style="display:flex;align-items:center;gap:10px;padding:6px 14px;border-radius:10px;background:${th.tagBg(announcement.tag)};font-size:13.5px;color:${th.textSecondary};line-height:1.5">${imgEl}<span>${esc(item.text)}</span></div>`;
             }
             return `<div style="display:flex;align-items:baseline;gap:10px;padding:8px 14px;border-radius:10px;background:${th.tagBg(announcement.tag)};font-size:13.5px;color:${th.textSecondary};line-height:1.5"><div style="width:5px;height:5px;border-radius:50%;background:${th.tagText(announcement.tag)};flex-shrink:0;margin-top:6px"></div>${esc(item)}</div>`;
