@@ -197,6 +197,11 @@
       "Rock"
     ]
   },
+  "Arrokuda": {
+    "types": [
+      "Water"
+    ]
+  },
   "Articuno": {
     "types": [
       "Ice",
@@ -684,6 +689,12 @@
     "cpBoost": "908–974",
     "weather": "Windy"
   },
+  "Cramorant": {
+    "types": [
+      "Flying",
+      "Water"
+    ]
+  },
   "Cradily": {
     "types": [
       "Rock",
@@ -889,6 +900,17 @@
     "cp": "636–686",
     "cpBoost": "795–857",
     "weather": "Partly Cloudy or Windy"
+  },
+  "Dondozo": {
+    "types": [
+      "Water"
+    ]
+  },
+  "Ducklett": {
+    "types": [
+      "Water",
+      "Flying"
+    ]
   },
   "Douse Drive Genesect": {
     "types": [
@@ -1521,6 +1543,11 @@
       "Ghost"
     ]
   },
+  "Goldeen": {
+    "types": [
+      "Water"
+    ]
+  },
   "Goodra": {
     "types": [
       "Dragon"
@@ -1698,6 +1725,12 @@
     "types": [
       "Fighting",
       "Poison"
+    ]
+  },
+  "Hisuian Samurott": {
+    "types": [
+      "Water",
+      "Dark"
     ]
   },
   "Hitmonchan": {
@@ -2231,6 +2264,12 @@
   "Mareep": {
     "types": [
       "Electric"
+    ]
+  },
+  "Mareanie": {
+    "types": [
+      "Poison",
+      "Water"
     ]
   },
   "Marowak": {
@@ -2790,6 +2829,11 @@
     "cpBoost": "2522–2630",
     "weather": "Windy"
   },
+  "Nickit": {
+    "types": [
+      "Dark"
+    ]
+  },
   "Nidoqueen": {
     "types": [
       "Poison",
@@ -3155,6 +3199,11 @@
     "cp": "1185–1307",
     "cpBoost": "1482–1634",
     "weather": "Cloudy"
+  },
+  "Psyduck": {
+    "types": [
+      "Water"
+    ]
   },
   "Probopass": {
     "types": [
@@ -3791,6 +3840,11 @@
     "cpBoost": "1468–1558",
     "weather": "Rainy or Foggy"
   },
+  "Shaymin": {
+    "types": [
+      "Grass"
+    ]
+  },
   "Shelgon": {
     "types": [
       "Dragon"
@@ -4211,6 +4265,12 @@
       "Normal"
     ]
   },
+  "Tatsugiri": {
+    "types": [
+      "Dragon",
+      "Water"
+    ]
+  },
   "Tentacool": {
     "types": [
       "Water",
@@ -4236,6 +4296,11 @@
     "cp": "2026–2113",
     "cpBoost": "2533–2641",
     "weather": "Partly Cloudy or Cloudy"
+  },
+  "Thievul": {
+    "types": [
+      "Dark"
+    ]
   },
   "Thundurus": {
     "types": [

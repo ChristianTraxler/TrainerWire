@@ -1,5 +1,6 @@
 # Local Claude Code config (personal, machine-specific)
 .claude/settings.local.json
+CLAUDE.md
 
 # Local doc-tracker tooling state
 .doc-tracker.json
