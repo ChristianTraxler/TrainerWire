@@ -4541,6 +4541,11 @@
     "cpBoost": "1712–1803",
     "weather": "Windy"
   },
+  "Vanillite": {
+    "types": [
+      "Ice"
+    ]
+  },
   "Vanilluxe": {
     "types": [
       "Ice"

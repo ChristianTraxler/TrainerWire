@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.41";
+const APP_VERSION = "3.42";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -41,6 +41,7 @@ function rewardIcon(text) {
   if (t.includes("razz")) return `${IMG_BASE}/Items/Razz-berry.png`;
   if (t.includes("lucky egg")) return `${IMG_BASE}/Items/luckyegg.png`;
   if (t.includes("lure")) return `${IMG_BASE}/Items/lure-module.png`;
+  if (t.includes("incense")) return `${IMG_BASE}/Items/Incense_0.png`;
   if (t.includes("super incubator")) return `${IMG_BASE}/Items/super_incubator.webp`;
   if (t.includes("incubator")) return `${IMG_BASE}/Items/EggIncubatorIAP_Activated.png`;
   if (t.includes("premium battle pass") || t.includes("battle pass") || t.includes("premium raid pass")) return `${IMG_BASE}/Items/premium-raid-pass.png`;
@@ -664,6 +665,7 @@ const SHINY_AVAILABLE = new Set([
   "Seadra","Seaking","Sealeo","Skrelp","Smoliv","Snorunt","Snover","Spinda","Starmie",
   "Stufful","Stunky","Tangela","Teddiursa","Tirtouga","Tranquill","Tyrunt","Vanillite",
   "Whirlipede","Wingull",
+  "Snom","Swinub","Slugma",
   "Exeggcute","Corphish","Wynaut","Mantyke","Frigibax","Tyrogue","Budew","Druddigon",
   "Pichu","Togepi",
   "Tapu Koko","Tapu Lele","Tapu Bulu","Tapu Fini"
@@ -871,6 +873,7 @@ function buildThunderousDiscovery(teamHat) {
 // --- EVENT DATA ---
 const EVENTS = [
   { id: 123, title: "GO Fest 2026: Global — Sunday Raid Battles", type: "Raid", url: "https://pokemongo.com/en/news/gofest2026-global-update", date: "2026-07-26", endDate: null, time: "10:00 AM – 7:00 PM", whenText: "Sunday, July 26, 2026, from 10:00 a.m. to 7:00 p.m. local time (for Trainers in time zones UTC+14 through UTC+0).", color: "#8E44AD", icon: "🎉", published: "2026-07-15", updated: "2026-07-15", lastUpdated: "July 15, 2026 at 11:31 AM", iconImg: "assets/pokemon-images/Mega/regular/Gen-1_Kanto/0150_megay.webp", featured: true, summary: "A special make-good raid event replays dozens of Pokémon from the Sunday of GO Fest 2026: Global. Three habitats rotate every three hours — Earthforged Domain (10 a.m.–1 p.m.), Verdant Anomaly (1–4 p.m.), and Twilight Battlefield (4–7 p.m.) — with Mega Mewtwo Y in Super Mega Raids and team-hat Pikachu in one-star raids all day. Up to nine free Raid Passes per day and no Remote Raid limit during the event window.", details: { bossesTitle: "Raid Bosses", bosses: ["★Mega Mewtwo Y (Super Mega Raid)", "Mega Metagross (Mega)", "Mega Garchomp (Mega)", "Mega Audino (Mega)", "Mega Beedrill (Mega)", "Mega Pinsir (Mega)", "Mega Sceptile (Mega)", "Mega Tyranitar (Mega)", "Mega Gardevoir (Mega)", "Mega Lucario (Mega)", "Regirock (5★ Raid)", "Regice (5★ Raid)", "Registeel (5★ Raid)", "Dialga (Origin Forme) (5★ Raid)", "Palkia (Origin Forme) (5★ Raid)", "Heatran (5★ Raid)", "Regigigas (5★ Raid)", "Tornadus (Incarnate Forme) (5★ Raid)", "Tornadus (Therian Forme) (5★ Raid)", "Thundurus (Incarnate Forme) (5★ Raid)", "Thundurus (Therian Forme) (5★ Raid)", "Landorus (Incarnate Forme) (5★ Raid)", "Landorus (Therian Forme) (5★ Raid)", "Regieleki (5★ Raid)", "Regidrago (5★ Raid)", "Enamorus (Incarnate Forme) (5★ Raid) (no shiny)", "Enamorus (Therian Forme) (5★ Raid) (no shiny)", "Attack Forme Deoxys (5★ Raid)", "Defense Forme Deoxys (5★ Raid)", "Normal Forme Deoxys (5★ Raid)", "Speed Forme Deoxys (5★ Raid)", "Genesect (5★ Raid)", "Tapu Koko (5★ Raid)", "Tapu Lele (5★ Raid)", "Tapu Bulu (5★ Raid)", "Tapu Fini (5★ Raid)", "Nihilego (5★ Raid)", "Pheromosa (5★ Raid)", "Xurkitree (5★ Raid)", "Celesteela (5★ Raid)", "Kartana (5★ Raid)", "Guzzlord (5★ Raid)", "Necrozma (5★ Raid)", "Stakataka (5★ Raid)", "Blacephalon (5★ Raid)", "Latias (5★ Raid)", "Latios (5★ Raid)", "Cresselia (5★ Raid)", "Darkrai (5★ Raid)", "Cobalion (5★ Raid)", "Terrakion (5★ Raid)", "Virizion (5★ Raid)", "Zacian (Hero of Many Battles) (5★ Raid)", "Zamazenta (Hero of Many Battles) (5★ Raid)", "Pikachu wearing Team Instinct hat (1★ Raid) ✨", "Pikachu wearing Team Mystic hat (1★ Raid) ✨", "Pikachu wearing Team Valor hat (1★ Raid) ✨"], bonuses: ["Up to nine free Raid Passes per day by spinning Photo Discs at Gyms", "Pokémon encountered after five-star and Mega Raids may have a special background", "Mewtwo encountered after Super Mega Raids may have a special background — with enhanced visual effects when it Mega Evolves", "Premier Balls will be more effective at catching Pokémon after raids", "Deluxe Pass holders receive 5,000 bonus XP, 3 bonus Candy, and 1 bonus Candy XL from five-star and Mega Raids", "No Remote Raid limit from Saturday, July 25 at 1:00 p.m. PDT to Sunday, July 26 at 12:00 p.m. PDT", "The Link Charge cap will increase to 2,000"], tips: ["Raids rotate by habitat every three hours: Earthforged Domain (10 a.m.–1 p.m.), Verdant Anomaly (1–4 p.m.), Twilight Battlefield (4–7 p.m.).", "Mega Mewtwo Y headlines Super Mega Raids all day; the three team-hat Pikachu (Instinct, Mystic, Valor) appear in one-star raids all day.", "Enamorus (Incarnate Forme) and Enamorus (Therian Forme) can NOT be Shiny; every other five-star boss can.", "Regional five-star bosses — Pheromosa: Europe/Middle East/Africa/India · Xurkitree: Asia-Pacific · Celesteela: Southern Hemisphere · Kartana: Northern Hemisphere · Stakataka: Eastern Hemisphere · Blacephalon: Western Hemisphere.", "See the full guide for the complete habitat-by-habitat boss list.", "Be aware of your surroundings and follow guidelines from local health authorities."], relatedNews: [{ id: 35, label: "GO Fest 2026: Global — Sunday Raid Battles (Full Guide)", icon: "🎉" }] } },
+  { id: 124, title: "Summer Marathon: Arctic Embers", type: "Event", url: "https://pokemongo.com/en/news/summer-marathon-2026", date: "2026-08-04", endDate: "2026-08-10", startsAt: "2026-08-04T10:00:00", endsAt: "2026-08-10T20:00:00", published: "2026-07-15", updated: "2026-07-15", lastUpdated: "July 15, 2026 at 12:00 PM", time: "Aug 4 – Aug 10", whenText: "Tuesday, August 4, at 10:00 a.m. to Monday, August 10, 2026, at 8:00 p.m. local time", color: "#48C9B0", icon: "❄️", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-8_Galar/0872.webp", featured: true, summary: "Fire up or chill out during Summer Marathon: Arctic Embers! Shiny Snom debuts through GO Pass tasks and Eggs, with boosted Shiny rates for Ponyta, Slugma, Snover, and Vanillite. Wild encounters bring Vulpix, Alolan Vulpix, Growlithe, Swinub, Snorunt, and more, 5 km Eggs hatch Sneasel, Darumaka, Galarian Darumaka, Sizzlipede, and Snom, and free Timed Research rewards 16,800 XP plus an encounter with Pikachu wearing a marathon visor. Runs August 4 (10 a.m.) to August 10 (8 p.m.) local time.", details: { bossesTitle: "Featured & Wild Encounters", bosses: ["Snom (Shiny debut)", "★Ponyta (Wild)", "★Slugma (Wild)", "★Snover (Wild)", "★Vanillite (Wild)", "Vulpix (Wild) ✨", "Alolan Vulpix (Wild) ✨", "Growlithe (Wild) ✨", "Swinub (Wild) ✨", "Snorunt (Wild) ✨", "…and more event-themed Pokémon (Wild)"], eggLabel: "5 km Eggs", eggs: ["Sneasel ✨", "Darumaka ✨", "Galarian Darumaka ✨", "Sizzlipede ✨", "Snom ✨"], bonuses: ["Tier 1 Bonus (Rank 10): 2× XP for spinning a PokéStop. GO Pass Deluxe: 3× XP for spinning a PokéStop.", "Tier 2 Bonus (Rank 20): 1/2 Egg Hatch Distance for Eggs placed in an Incubator during the event. GO Pass Deluxe: 1/4 Egg Hatch Distance.", "Keep an eye out for additional bonus tasks for this GO Pass during the event.", "Ponyta and Snover appear on alternating days: August 4, 6, 8, and 10.", "Slugma and Vanillite appear on alternating days: August 5, 7, 9, and 10.", "Free Timed Research: 16,800 XP and an encounter with Pikachu wearing a marathon visor — complete and claim before Monday, August 10 at 8:00 p.m. local time."], goPass: { free: ["Automatically received Tuesday, August 4 at 10:00 a.m. local time; collect GO Points through Monday, August 10 at 8:00 p.m.", "Encounters with event-themed Pokémon", "Stardust, XP, Rare Candy, Ultra Balls, and more goodies"], deluxe: { price: "$4.99", rewards: ["Additional encounters with more event-themed Pokémon", "Incense", "Silver Pinap Berries", "Rare Candy XL", "Candy XL", "And more goodies"] }, deluxePlus: { price: "$6.99", rewards: ["Everything in GO Pass Deluxe", "Automatically earns enough GO Points to reach Rank 7"] }, webStore: { giftWithPurchase: ["10 Ultra Balls", "5 Max Revives", "1 Premium Battle Pass", "5 Max Potions"], ultraBox: { name: "GO Pass Deluxe: Summer Marathon + 6 Ranks Ultra Box (Web Store Exclusive)", contents: ["20 Ultra Balls", "10 Max Revives", "10 Max Potions", "2 Premium Battle Passes", "1 Incubator", "1 Super Incubator"] } } }, tips: ["Shiny Snom makes its Pokémon GO debut this event — encounter it via GO Pass tasks or by hatching it from a 5 km Egg.", "Ponyta and Snover spawn August 4, 6, 8, and 10; Slugma and Vanillite spawn August 5, 7, 9, and 10 — plan your play days around the alternating schedule.", "The free Timed Research reward — Pikachu wearing a marathon visor — must be claimed before Monday, August 10 at 8:00 p.m. local time.", "GO Pass rewards expire Wednesday, August 12, 2026, at 8:00 p.m. local time — don't let anything go unclaimed.", "All listed times are local."], relatedNews: [{ id: 36, label: "Summer Marathon: Arctic Embers", icon: "❄️" }] } },
   { id: 121, title: "Ultra Unlock: Starmie Super Mega Raid Day", type: "Raid", url: "https://pokemongo.com/en/news/starmie-super-mega-raid-day-2026", date: "2026-08-22", endDate: null, time: "11:00 AM – 5:00 PM", whenText: "Saturday, August 22, 2026, from 11:00 a.m. to 5:00 p.m. local time", color: "#3498DB", icon: "🌊", published: "2026-07-15", updated: "2026-07-15", lastUpdated: "July 15, 2026 at 11:31 AM", iconImg: "assets/pokemon-images/Mega/regular/Gen-1_Kanto/0121_mega.webp", featured: true, summary: "Mega Starmie debuts in Super Mega Raids during Ultra Unlock on Saturday, August 22, from 11:00 a.m. to 5:00 p.m. local time! Shiny Starmie encounter rates are boosted, and Starmie caught from these raids will have Mega Level 1 unlocked. Free Timed Research rewards a Premium Battle Pass and a Scizor encounter.", details: { bosses: ["★Mega Starmie (Super Mega Raid)"], groupSize: [{ bossName: "Mega Starmie", tier: "Super Mega Raid", minimum: 3, optimalMin: 4, optimalMax: 6, easyAt: 7, greenAt: 8 }], bonuses: [
     { text: "An additional 5,000 XP from all raids", img: "assets/pokemon-images/icons/xp.png" },
     { text: "Increased chance to get Rare Candy XL from Raid Battles", img: "assets/pokemon-images/Items/RareXLCandy_PSD.png" },
@@ -1196,6 +1199,58 @@ const ANNOUNCEMENTS = [
     "Regional five-star bosses — Pheromosa: Europe/Middle East/Africa/India · Xurkitree: Asia-Pacific · Celesteela: Southern Hemisphere · Kartana: Northern Hemisphere · Stakataka: Eastern Hemisphere · Blacephalon: Western Hemisphere.",
     "Genesect appears with all drives.",
     "Be aware of your surroundings and follow guidelines from local health authorities."
+  ] }
+  ] },
+  { id: 36, date: "2026-07-15", published: "2026-07-15", updated: "2026-07-15", lastUpdated: "July 15, 2026 at 12:00 PM", title: "Summer Marathon: Arctic Embers", tag: "News", url: "https://pokemongo.com/en/news/summer-marathon-2026", icon: "assets/pokemon-images/National-Dex/regular/Gen-8_Galar/0872.webp", body: "Fire up or chill out during Summer Marathon: Arctic Embers, a week-long GO Pass event from Tuesday, August 4 to Monday, August 10. Shiny Snom makes its Pokémon GO debut through GO Pass tasks and Eggs, alongside boosted Shiny rates for Ponyta, Slugma, Snover, and Vanillite. Wild encounters and alternating-day spawns bring Vulpix, Alolan Vulpix, Growlithe, Swinub, Snorunt, and more, 5 km Eggs hatch Sneasel, Darumaka, Galarian Darumaka, Sizzlipede, and Snom, and free Timed Research rewards 16,800 XP plus an encounter with Pikachu wearing a marathon visor.", fullBody: "Summer Marathon: Arctic Embers runs Tuesday, August 4, 2026, at 10:00 a.m. to Monday, August 10, 2026, at 8:00 p.m. local time. Shiny Snom debuts for the first time in Pokémon GO, encountered by completing GO Pass tasks or by hatching Snom from Eggs, while Ponyta, Slugma, Snover, and Vanillite all have an increased chance of being Shiny. Fire- and Ice-themed Pokémon such as Vulpix, Alolan Vulpix, Growlithe, Swinub, Snorunt, and more appear in the wild, with Ponyta and Snover spawning August 4, 6, 8, and 10, and Slugma and Vanillite spawning August 5, 7, 9, and 10. Sneasel, Darumaka, Galarian Darumaka, Sizzlipede, and Snom hatch from 5 km Eggs. Reaching Major Milestones on the event GO Pass unlocks 2× XP for spinning PokéStops at Rank 10 (3× with GO Pass Deluxe) and 1/2 Egg Hatch Distance at Rank 20 (1/4 with GO Pass Deluxe). Free Timed Research rewards 16,800 XP and an encounter with Pikachu wearing a marathon visor, and must be completed before the event ends. GO Pass: Summer Marathon 2026 is free for all Trainers, with a US$4.99 GO Pass Deluxe and a US$6.99 GO Pass Deluxe + 6 Ranks option also available; all GO Pass rewards expire Wednesday, August 12, 2026, at 8:00 p.m. local time.", sections: [
+  { heading: "When (all times local)", items: [
+    "Tuesday, August 4, 2026, at 10:00 a.m. to Monday, August 10, 2026, at 8:00 p.m. local time.",
+    "GO Pass rewards expire Wednesday, August 12, 2026, at 8:00 p.m. local time."
+  ] },
+  { heading: "Featured Pokémon", icon: "✨", showImages: true, items: [
+    { name: "Snom", subtitle: "Shiny debuts for the first time in Pokémon GO" },
+    { name: "Ponyta", subtitle: "Increased chance of Shiny", boostedShiny: true },
+    { name: "Slugma", subtitle: "Increased chance of Shiny", boostedShiny: true },
+    { name: "Snover", subtitle: "Increased chance of Shiny", boostedShiny: true },
+    { name: "Vanillite", subtitle: "Increased chance of Shiny", boostedShiny: true }
+  ] },
+  { heading: "Wild Encounters", icon: "🌲", showImages: true, items: [
+    { name: "Vulpix" }, { name: "Alolan Vulpix" }, { name: "Growlithe" }, { name: "Swinub" }, { name: "Snorunt" }
+  ] },
+  { heading: "Wild Encounters", items: [
+    "…and more event-themed Pokémon; all listed wild encounters can be Shiny if you're lucky.",
+    "Ponyta and Snover appear on alternating days: August 4, 6, 8, and 10.",
+    "Slugma and Vanillite appear on alternating days: August 5, 7, 9, and 10."
+  ] },
+  { heading: "5 km Eggs", icon: "🥚", showImages: true, items: [
+    { name: "Sneasel" }, { name: "Darumaka" }, { name: "Galarian Darumaka" }, { name: "Sizzlipede" }, { name: "Snom" }
+  ] },
+  { heading: "5 km Eggs", items: [
+    "All five 5 km Egg hatches can be Shiny."
+  ] },
+  { heading: "Event Bonuses", items: [
+    "Tier 1 Bonus (starting at Rank 10): 2× XP for spinning a PokéStop. GO Pass Deluxe: 3× XP for spinning a PokéStop.",
+    "Tier 2 Bonus (starting at Rank 20): 1/2 Egg Hatch Distance when Eggs are placed in an Incubator during the event period. GO Pass Deluxe: 1/4 Egg Hatch Distance.",
+    "Keep an eye out for additional bonus tasks for this GO Pass during the event."
+  ] },
+  { heading: "Research", items: [
+    "Event-themed Field Research tasks reward encounters with Ponyta, Slugma, Snover, Vanillite, and more.",
+    "Free Timed Research rewards: 16,800 XP and an encounter with Pikachu wearing a marathon visor.",
+    "Timed Research tasks must be completed and rewards claimed before Monday, August 10, 2026, at 8:00 p.m. local time."
+  ] },
+  { heading: "GO Pass: Summer Marathon 2026", items: [
+    "Free GO Pass: Summer Marathon — automatically received Tuesday, August 4 at 10:00 a.m. local time; collect GO Points and rank up through Monday, August 10 at 8:00 p.m.",
+    "GO Pass Deluxe: US$4.99 — upgraded rewards and faster progression.",
+    "GO Pass Deluxe + 6 Ranks: US$6.99 — also automatically earns enough GO Points to reach Rank 7.",
+    "Deluxe lets you claim all rewards from both the free GO Pass and Deluxe; you can upgrade anytime and still collect previously unlocked ranks.",
+    "Rewards unlocked in the GO Pass expire Wednesday, August 12, 2026, at 8:00 p.m. local time.",
+    "Free GO Pass rewards: encounters with event-themed Pokémon, Stardust, XP, Rare Candy, Ultra Balls, and more goodies.",
+    "GO Pass Deluxe additional rewards: additional encounters with more event-themed Pokémon, Incense, Silver Pinap Berries, Rare Candy XL, Candy XL, and more goodies.",
+    "All prices are USD or the equivalent tier in local currency."
+  ] },
+  { heading: "Pokémon GO Web Store", items: [
+    "A GO Pass Deluxe purchased via the Web Store activates as soon as the GO Pass begins.",
+    "Gift with purchase (upgrade to GO Pass Deluxe: Summer Marathon or GO Pass Deluxe: Summer Marathon + 6 Ranks on the Web Store): 10 Ultra Balls, 5 Max Revives, 1 Premium Battle Pass, 5 Max Potions.",
+    "Web-exclusive GO Pass Deluxe: Summer Marathon + 6 Ranks Ultra Box: 20 Ultra Balls, 10 Max Revives, 10 Max Potions, 2 Premium Battle Passes, 1 Incubator, 1 Super Incubator."
   ] }
   ] },
   { id: 33, date: "2026-07-15", published: "2026-07-15", updated: "2026-07-15", lastUpdated: "July 15, 2026 at 11:31 AM", title: "Ultra Unlock: Starmie Super Mega Raid Day", tag: "News", url: "https://pokemongo.com/en/news/starmie-super-mega-raid-day-2026", icon: "assets/pokemon-images/Mega/regular/Gen-1_Kanto/0121_mega.webp", body: "Mega Starmie debuts in Super Mega Raids on Saturday, August 22, from 11:00 a.m. to 5:00 p.m. local time. Shiny Starmie rates are boosted, caught Starmie unlock Mega Level 1, and free Timed Research rewards a Premium Battle Pass and a Scizor encounter. A US$4.99 ticket adds bonus XP, more Raid Passes, and guaranteed Rare Candy XL.", fullBody: "Ultra Unlock: Starmie Super Mega Raid Day runs Saturday, August 22, 2026, from 11:00 a.m. to 5:00 p.m. local time, with Mega Starmie making its Super Mega Raid debut. During the event you'll have an increased chance of encountering Shiny Starmie, and Starmie caught from Super Mega Raids will have Mega Level 1 unlocked. Free event bonuses include an additional 5,000 XP from all raids, an increased chance to get Rare Candy XL from Raid Battles, up to six free Raid Passes from spinning Gym Photo Discs, and a Remote Raid Pass limit raised to 20 from Friday, August 21, at 2:00 p.m. to Saturday, August 22, 2026, at 8:00 p.m. PDT. Free Timed Research rewards a Premium Battle Pass and a Scizor encounter. A US$4.99 ticket (or the equivalent pricing tier in your local currency) adds an additional 5,000 XP from all raids, up to 14 Raid Passes from spinning Gym Photo Discs, an even greater chance to get Rare Candy XL from Raid Battles, and guaranteed Rare Candy XL for successfully catching Starmie from raids. Super Mega Raids may only appear at certain Gyms — locate them via the web-based raid map at pokemongo.com/map.", sections: [
@@ -5866,7 +5921,7 @@ function renderNewsDetail(announcement, th) {
               }
               const imgSize = cardLayout ? 120 : 90;
               let imgEl = pokemonImgHTML(pkmn, imgSize);
-              if (imgEl) imgEl = wrapShinySparkles(imgEl, itemName, imgSize);
+              if (imgEl) imgEl = wrapShinySparkles(imgEl, (typeof it === "object" && it.boostedShiny ? "★" : "") + itemName, imgSize);
               const raidData = getRaidBossData(itemName);
               const typesHTML = raidData ? `<div style="display:flex;gap:4px;margin-top:4px;flex-wrap:wrap;${cardLayout ? "justify-content:center" : ""}">${raidData.types.map(t =>
                 `<span style="font-size:${cardLayout ? 11 : 12}px;font-weight:700;color:#fff;background:${TYPE_COLORS[t] || "#888"};padding:2px 8px;border-radius:10px">${t}</span>`
@@ -5903,9 +5958,18 @@ function renderNewsDetail(announcement, th) {
               </div>`;
             }).join("");
             const introHTML = s.intro ? `<div style="font-size:13px;color:${th.textSecondary};margin-bottom:10px;padding:10px 14px;border-radius:10px;background:${th.tagBg(announcement.tag)};line-height:1.5">${esc(s.intro)}</div>` : "";
+            const boostedLegendHTML = s.items.some(it => it && typeof it === "object" && it.boostedShiny) ? `<div style="display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:8px;background:${th.accentBgSubtle("#FFD700")};border:1px solid ${th.countdownBorder("#FFD700")};align-self:flex-start;margin-top:10px">
+              <div style="position:relative;width:28px;height:26px;flex-shrink:0;top:-4px">
+                <div style="position:absolute;top:0;left:0;animation:boostedShiny 1.8s ease-in-out infinite">${fourPointStar(10, "#FFD700")}</div>
+                <div style="position:absolute;top:10px;left:12px;animation:boostedShiny 1.8s ease-in-out 0.4s infinite">${fourPointStar(16, "#FFD700")}</div>
+                <div style="position:absolute;top:18px;left:4px;animation:boostedShiny 1.8s ease-in-out 0.8s infinite">${fourPointStar(8, "#FFD700")}</div>
+              </div>
+              <span style="font-size:11px;font-weight:600;color:${th.textMuted}">= Boosted Shiny Rate</span>
+            </div>` : "";
             return `<div>${headingHTML}
               ${introHTML}
               <div style="display:flex;${cardLayout ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:8px"}">${cardsHTML}</div>
+              ${boostedLegendHTML}
             </div>`;
           }
           return `<div>${headingHTML}
