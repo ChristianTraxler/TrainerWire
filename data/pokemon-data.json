@@ -1468,7 +1468,8 @@
   "Gigantamax Rillaboom": {
     "types": [
       "Grass"
-    ]
+    ],
+    "cp": "1817–1899"
   },
   "Gigantamax Snorlax": {
     "types": [
@@ -2669,6 +2670,15 @@
       "Water",
       "Psychic"
     ]
+  },
+  "Mega Starmie": {
+    "types": [
+      "Water",
+      "Psychic"
+    ],
+    "cp": "1404–1476",
+    "cpBoost": "1756–1846",
+    "weather": "Rainy or Windy"
   },
   "Mega Steelix": {
     "types": [
@@ -4113,6 +4123,15 @@
     "cp": "372–410",
     "cpBoost": "465–513",
     "weather": "Partly Cloudy or Windy"
+  },
+  "Starmie": {
+    "types": [
+      "Water",
+      "Psychic"
+    ],
+    "cp": "1404–1476",
+    "cpBoost": "1756–1846",
+    "weather": "Rainy or Windy"
   },
   "Staryu": {
     "types": [
