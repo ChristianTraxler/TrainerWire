@@ -829,6 +829,12 @@
     ],
     "cp": "560–606"
   },
+  "Delibird": {
+    "types": [
+      "Ice",
+      "Flying"
+    ]
+  },
   "Delphox": {
     "types": [
       "Fire",
@@ -1022,6 +1028,37 @@
       "Bug",
       "Rock"
     ]
+  },
+  "Dynamax Beldum": {
+    "types": [
+      "Steel",
+      "Psychic"
+    ],
+    "cp": "513–558"
+  },
+  "Dynamax Eevee": {
+    "types": [
+      "Normal"
+    ],
+    "cp": "565–612"
+  },
+  "Dynamax Hitmontop": {
+    "types": [
+      "Fighting"
+    ],
+    "cp": "1166–1232"
+  },
+  "Dynamax Magikarp": {
+    "types": [
+      "Water"
+    ],
+    "cp": "132–157"
+  },
+  "Dynamax Magmar": {
+    "types": [
+      "Fire"
+    ],
+    "cp": "1298–1367"
   },
   "Eelektross": {
     "types": [
@@ -2471,7 +2508,10 @@
     "types": [
       "Water",
       "Dark"
-    ]
+    ],
+    "cp": "1855–1937",
+    "cpBoost": "2319–2422",
+    "weather": "Rainy or Windy"
   },
   "Mega Heracross": {
     "types": [
@@ -3655,6 +3695,15 @@
       "Dragon",
       "Ground"
     ]
+  },
+  "Shadow Giratina (Altered Forme)": {
+    "types": [
+      "Ghost",
+      "Dragon"
+    ],
+    "cp": "1782–1931",
+    "cpBoost": "2228–2414",
+    "weather": "Fog or Windy"
   },
   "Shadow Gligar": {
     "types": [
