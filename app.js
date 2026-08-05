@@ -2039,6 +2039,13 @@ const CURRENT_RAID_BOSSES = {
   ]
 };
 
+// Regional 5\u2605 Legendary exclusivity \u2014 rendered as a subtitle on the current-raids boss tile.
+const RAID_BOSS_REGIONS = {
+  "Uxie": "Asia-Pacific",
+  "Mesprit": "Europe, the Middle East, Africa, and India",
+  "Azelf": "The Americas and Greenland"
+};
+
 const CURRENT_MAX_BATTLES = {
   "1-Star Max Battles": [
     { name: "D-Max Abra", dex: 63 },
@@ -4732,7 +4739,7 @@ function getRaidBossData(name) {
 function cleanRaidLabel(name) {
   return name.replace(/^★/, "").replace(/\s*\(\d★\s*(?:Raid|Shadow Raid)?\)|\s*\(Super Mega Raid[^)]*\)|\s*\(Mega\)|\s*\(\d★\s*Max Battle.*?\)|\s*\(Research Breakthrough\)|\s*\(Field Research(?:\s*-\s*rare)?\)|\s*\(Mystery Box\)|\s*\(weekends?\)|\s*\(final week.*?\)|\s*\(no shiny\)/gi, "").replace(/\s*✨/g, "").trim();
 }
-function renderBossItem(item, color, th, cardLayout, noSparkles, groupSize) {
+function renderBossItem(item, color, th, cardLayout, noSparkles, groupSize, showRegion) {
   const pkmn = getPokemonImg(item);
   const imgSize = cardLayout ? 120 : 150;
   let imgEl = pokemonImgHTML(pkmn, imgSize);
@@ -4749,7 +4756,7 @@ function renderBossItem(item, color, th, cardLayout, noSparkles, groupSize) {
   const rawCleaned = cleanRaidLabel(item);
   const hemiMatch = rawCleaned.match(/\s*\((Southern|Northern)\s+Hemisphere\)\s*$/i);
   const cleanedItemName = hemiMatch ? rawCleaned.slice(0, hemiMatch.index).trim() : rawCleaned;
-  const subtitleText = hemiMatch ? hemiMatch[1].charAt(0).toUpperCase() + hemiMatch[1].slice(1).toLowerCase() + " Hemisphere" : "";
+  const subtitleText = hemiMatch ? hemiMatch[1].charAt(0).toUpperCase() + hemiMatch[1].slice(1).toLowerCase() + " Hemisphere" : (showRegion ? (RAID_BOSS_REGIONS[cleanedItemName] || "") : "");
   const subtitleHTML = subtitleText ? `<div style="margin-top:2px;font-size:${cardLayout ? 11 : 12}px;font-weight:600;color:${th.textSecondary};font-style:italic;${cardLayout ? "text-align:center" : ""}">${esc(subtitleText)}</div>` : "";
   const groupSizeList = Array.isArray(groupSize) ? groupSize : (groupSize ? [groupSize] : []);
   const matchedGroupSize = isRaidTier ? groupSizeList.find(gs => gs && gs.bossName === cleanedItemName) : null;
@@ -7801,7 +7808,7 @@ function render() {
             <span style="display:flex;align-items:center;color:${th.textMuted};flex-shrink:0">${raidChevronSVG}</span>
           </button>
           <div class="acc-content" data-open="${raidOpenStr}"${raidOpenDefault ? ` style="max-height:none"` : ""}>
-            <div style="padding:8px;display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${bosses.map(item => renderBossItem(item, tierColor, th, breakpoint !== "mobile", false, findGroupSizeForBoss(cleanRaidLabel(item)))).join("")}</div>
+            <div style="padding:8px;display:flex;${breakpoint !== "mobile" ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">${bosses.map(item => renderBossItem(item, tierColor, th, breakpoint !== "mobile", false, findGroupSizeForBoss(cleanRaidLabel(item)), true)).join("")}</div>
           </div>
         </div>`;
       });
