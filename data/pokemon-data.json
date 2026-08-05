@@ -75,7 +75,10 @@
     "types": [
       "Fire",
       "Ghost"
-    ]
+    ],
+    "cp": "988–1048",
+    "cpBoost": "1235–1311",
+    "weather": "Sunny/Clear or Fog"
   },
   "Alolan Meowth": {
     "types": [
@@ -113,7 +116,10 @@
     "types": [
       "Ice",
       "Steel"
-    ]
+    ],
+    "cp": "688–739",
+    "cpBoost": "860–924",
+    "weather": "Snow"
   },
   "Alolan Sandslash": {
     "types": [
@@ -791,7 +797,9 @@
     "types": [
       "Fire"
     ],
-    "cp": "768–823"
+    "cp": "768–823",
+    "cpBoost": "961–1030",
+    "weather": "Sunny/Clear"
   },
   "Dawn Wings Necrozma": {
     "types": [
@@ -1316,7 +1324,10 @@
   "Galarian Darumaka": {
     "types": [
       "Ice"
-    ]
+    ],
+    "cp": "768–823",
+    "cpBoost": "961–1030",
+    "weather": "Snow"
   },
   "Galarian Linoone": {
     "types": [
@@ -1733,6 +1744,15 @@
     "cpBoost": "2105–2204",
     "weather": "Sunny"
   },
+  "Hisuian Avalugg": {
+    "types": [
+      "Ice",
+      "Rock"
+    ],
+    "cp": "1892–1975",
+    "cpBoost": "2365–2469",
+    "weather": "Snow or Partly Cloudy"
+  },
   "Hisuian Braviary": {
     "types": [
       "Psychic",
@@ -1746,7 +1766,10 @@
     "types": [
       "Fire",
       "Rock"
-    ]
+    ],
+    "cp": "703–755",
+    "cpBoost": "879–944",
+    "weather": "Sunny/Clear or Partly Cloudy"
   },
   "Hisuian Qwilfish": {
     "types": [
@@ -2421,8 +2444,8 @@
       "Fire",
       "Fighting"
     ],
-    "cp": "1530–1606",
-    "cpBoost": "1913–2008",
+    "cp": "1550–1627",
+    "cpBoost": "1938–2034",
     "weather": "Sunny/Clear or Cloudy"
   },
   "Mega Camerupt": {
@@ -3600,6 +3623,14 @@
       "Grass"
     ]
   },
+  "Shadow Aipom": {
+    "types": [
+      "Normal"
+    ],
+    "cp": "678–770",
+    "cpBoost": "848–963",
+    "weather": "Partly Cloudy"
+  },
   "Shadow Alolan Marowak": {
     "types": [
       "Fire",
@@ -3636,6 +3667,15 @@
     "cp": "1494–1633",
     "cpBoost": "1867–2041",
     "weather": "Windy"
+  },
+  "Shadow Croagunk": {
+    "types": [
+      "Poison",
+      "Fighting"
+    ],
+    "cp": "466–544",
+    "cpBoost": "583–680",
+    "weather": "Cloudy"
   },
   "Shadow Darkrai": {
     "types": [
@@ -3723,6 +3763,14 @@
     "cpBoost": "740–849",
     "weather": "Sunny, Fog"
   },
+  "Shadow Grubbin": {
+    "types": [
+      "Bug"
+    ],
+    "cp": "483–562",
+    "cpBoost": "604–703",
+    "weather": "Rainy"
+  },
   "Shadow Heatran": {
     "types": [
       "Fire",
@@ -3741,6 +3789,14 @@
     ],
     "cp": "1342–1472",
     "cpBoost": "1677–1840",
+    "weather": "Cloudy"
+  },
+  "Shadow Hitmontop": {
+    "types": [
+      "Fighting"
+    ],
+    "cp": "1114–1232",
+    "cpBoost": "1393–1540",
     "weather": "Cloudy"
   },
   "Shadow Horsea": {
@@ -3765,6 +3821,15 @@
     "cp": "504–584",
     "cpBoost": "631–730",
     "weather": "Rainy"
+  },
+  "Shadow Lampent": {
+    "types": [
+      "Ghost",
+      "Fire"
+    ],
+    "cp": "871–976",
+    "cpBoost": "1089–1220",
+    "weather": "Fog or Sunny/Clear"
   },
   "Shadow Lapras": {
     "types": [
@@ -3852,6 +3917,23 @@
       "Dragon",
       "Flying"
     ]
+  },
+  "Shadow Slowpoke": {
+    "types": [
+      "Water",
+      "Psychic"
+    ],
+    "cp": "610–700",
+    "cpBoost": "763–876",
+    "weather": "Rainy or Windy"
+  },
+  "Shadow Snorlax": {
+    "types": [
+      "Normal"
+    ],
+    "cp": "1696–1843",
+    "cpBoost": "2120–2304",
+    "weather": "Partly Cloudy"
   },
   "Shadow Stantler": {
     "types": [
@@ -4809,6 +4891,15 @@
     "types": [
       "Psychic"
     ]
+  },
+  "Wyrdeer": {
+    "types": [
+      "Normal",
+      "Psychic"
+    ],
+    "cp": "1486–1561",
+    "cpBoost": "1858–1952",
+    "weather": "Partly Cloudy or Windy"
   },
   "Xerneas": {
     "types": [

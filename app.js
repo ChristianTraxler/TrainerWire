@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.48";
+const APP_VERSION = "3.49";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -2017,25 +2017,25 @@ const RESEARCH_SECTION_META = {
 
 const CURRENT_RAID_BOSSES = {
   "1-Star Raids": [
-    "Galarian Meowth (1\u2605 Raid) \u2728","Chimecho (1\u2605 Raid) \u2728","Galarian Stunfisk (1\u2605 Raid) \u2728","Hatenna (1\u2605 Raid) \u2728"
+    "Alolan Sandshrew (1\u2605 Raid) \u2728","Hisuian Growlithe (1\u2605 Raid) \u2728","Darumaka (1\u2605 Raid) \u2728","Galarian Darumaka (1\u2605 Raid) \u2728"
   ],
   "3-Star Raids": [
-    "Galarian Weezing (3\u2605 Raid) \u2728","Togetic (3\u2605 Raid) \u2728","Amped Toxtricity (3\u2605 Raid) \u2728","Low Key Toxtricity (3\u2605 Raid) \u2728"
+    "Alolan Marowak (3\u2605 Raid) \u2728","Hisuian Avalugg (3\u2605 Raid) \u2728","Wyrdeer (3\u2605 Raid) \u2728"
   ],
   "5-Star Raids": [
-    "Reshiram (5\u2605 Raid) \u2728"
+    "Uxie (5\u2605 Raid) \u2728","Mesprit (5\u2605 Raid) \u2728","Azelf (5\u2605 Raid) \u2728"
   ],
   "Mega Raids": [
-    "Mega Audino (Mega) \u2728"
+    "Mega Blaziken (Mega) \u2728"
   ],
   "Shadow 1-Star Raids": [
-    "Shadow Horsea (1\u2605 Shadow Raid) \u2728","Shadow Porygon (1\u2605 Shadow Raid) \u2728","Shadow Beldum (1\u2605 Shadow Raid) \u2728","Shadow Golett (1\u2605 Shadow Raid) \u2728"
+    "Shadow Slowpoke (1\u2605 Shadow Raid) \u2728","Shadow Aipom (1\u2605 Shadow Raid) \u2728","Shadow Croagunk (1\u2605 Shadow Raid) \u2728","Shadow Grubbin (1\u2605 Shadow Raid) \u2728"
   ],
   "Shadow 3-Star Raids": [
-    "Shadow Alolan Marowak (3\u2605 Shadow Raid) \u2728","Shadow Hitmonlee (3\u2605 Shadow Raid) \u2728","Shadow Gligar (3\u2605 Shadow Raid) \u2728"
+    "Shadow Snorlax (3\u2605 Shadow Raid) \u2728","Shadow Hitmontop (3\u2605 Shadow Raid) \u2728","Shadow Lampent (3\u2605 Shadow Raid) \u2728"
   ],
   "Shadow 5-Star Raids": [
-    "Shadow Dialga (5\u2605 Shadow Raid) \u2728"
+    "Shadow Giratina (Altered Forme) (5\u2605 Shadow Raid) \u2728"
   ]
 };
 
@@ -7806,7 +7806,7 @@ function render() {
         </div>`;
       });
       raidsTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
-        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on June 8, 2026 at 10:13 pm</div>
+        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 5, 2026 at 10:41 am</div>
         <div style="text-align:center;padding:10px;font-size:14px;font-weight:600;color:${th.text}">Current Raid Bosses</div>
         <div style="text-align:center;font-size:11px;color:${th.textMuted};font-weight:500;margin-top:-10px">Data sourced from Pok\u00E9monGO.com, LeekDuck.com & Pok\u00E9monGOHUB.net</div>
         <div style="text-align:center;font-size:12px;color:${th.textMuted};font-weight:600;margin-top:2px">Tap a Pok\u00E9mon to see its weaknesses & resistances</div>
