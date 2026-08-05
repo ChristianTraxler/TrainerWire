@@ -970,6 +970,12 @@
       "Ghost"
     ]
   },
+  "Drifloon": {
+    "types": [
+      "Ghost",
+      "Flying"
+    ]
+  },
   "Drilbur": {
     "types": [
       "Ground"
@@ -1102,6 +1108,11 @@
   "Elekid": {
     "types": [
       "Electric"
+    ]
+  },
+  "Elgyem": {
+    "types": [
+      "Psychic"
     ]
   },
   "Emboar": {
@@ -1882,7 +1893,10 @@
     "types": [
       "Dark",
       "Fairy"
-    ]
+    ],
+    "cp": "421–461",
+    "cpBoost": "526–576",
+    "weather": "Fog, Cloudy"
   },
   "Incineroar": {
     "types": [
@@ -2139,6 +2153,16 @@
     "types": [
       "Bug",
       "Grass"
+    ]
+  },
+  "Lickilicky": {
+    "types": [
+      "Normal"
+    ]
+  },
+  "Lickitung": {
+    "types": [
+      "Normal"
     ]
   },
   "Liepard": {
@@ -2965,6 +2989,12 @@
       "Rock"
     ]
   },
+  "Numel": {
+    "types": [
+      "Fire",
+      "Ground"
+    ]
+  },
   "Nuzleaf": {
     "types": [
       "Grass",
@@ -3172,7 +3202,10 @@
   "Pikachu": {
     "types": [
       "Electric"
-    ]
+    ],
+    "cp": "493–536",
+    "cpBoost": "616–670",
+    "weather": "Rain"
   },
   "Piloswine": {
     "types": [
