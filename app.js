@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.51";
+const APP_VERSION = "3.52";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -876,6 +876,25 @@ function buildThunderousDiscovery(teamHat) {
 
 // --- EVENT DATA ---
 const EVENTS = [
+  { id: 159, title: "10th Anniversary Celebration", type: "Event", url: "https://pokemongo.com/en/news/10th-anniversary-celebration", date: "2026-08-12", endDate: "2026-09-06", startsAt: "2026-08-12T16:00:00", endsAt: "2026-09-06T23:59:00", published: "2026-08-13", updated: "2026-08-13", lastUpdated: "August 13, 2026 at 4:05 PM", time: "Aug 12 – Sep 6", whenText: "Wednesday, August 12, 2026, at 4:00 p.m. PDT to Sunday, September 6, 2026, at 11:59 p.m. local time", color: "#FFB300", icon: "🎂", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-1_Kanto/0150.webp", featured: true, summary: "Every Trainer can celebrate 10 years of Pokémon GO with a special Mewtwo! Free Timed Research is available worldwide from August 12 to September 6, rewarding a Master Ball and 500 Mega Mewtwo Energy along the way, then an encounter with a fully maxed-out Mewtwo with a Special Background — and it can be Shiny. That Mewtwo also has the third Mega Level unlocked for Mega Mewtwo Y.", details: { bosses: ["Mewtwo (Free Timed Research encounter) ✨"], bonuses: [
+    "Free Timed Research: complete 2 tasks to earn a Master Ball, 500 Mega Mewtwo Energy, and an encounter with Mewtwo.",
+    "The completion-reward Mewtwo has maxed-out stats and a Special Background — and can be Shiny.",
+    "That Mewtwo also has the third Mega Level unlocked for Mega Mewtwo Y.",
+    "Timed Research tasks must be completed and rewards claimed before Sunday, September 6, 2026, at 11:59 p.m. local time.",
+    "Trainers who caught Mewtwo at the in-person Times Square event on July 9 will receive a Mewtwo with different stats and different rewards.",
+    "A Mewtwo with the Times Square background will be available again at some point in the future."
+  ], specialResearch: { title: "10th Anniversary Celebration", encounter: "Mewtwo", kicker: "Timed Research", note: "Completion reward: a fully maxed-out Mewtwo with a Special Background — it can be Shiny — and that Mewtwo also has the third Mega Level unlocked for Mega Mewtwo Y. Tasks must be completed and rewards claimed before Sunday, September 6, 2026, at 11:59 p.m. local time.", source: { label: "Pokémon GO", url: "https://pokemongo.com/en/news/10th-anniversary-celebration" }, stages: [
+    { label: "Page 1 of 1", tasks: [
+        { task: "Catch 10 Pokémon", reward: "1 × Master Ball" },
+        { task: "Power up a Pokémon 10 times", reward: "500 × Mega Mewtwo Energy" }
+      ], rewards: ["Mewtwo encounter"] }
+  ] }, tips: [
+    "Mewtwo (Psychic) is weak to Bug, Ghost, and Dark-type attacks.",
+    "Only 2 tasks this time — quick to finish, but don't let it expire before September 6 at 11:59 p.m. local time.",
+    "Bank the 500 Mega Mewtwo Energy toward unlocking or leveling up Mega Mewtwo Y.",
+    "The completion-reward Mewtwo can be Shiny — check the encounter carefully.",
+    "Be aware of your surroundings and follow guidelines from local health authorities when playing Pokémon GO."
+  ], relatedNews: [{ id: 41, label: "Every Trainer can celebrate 10 years of Pokémon GO with a special Mewtwo!", icon: "🎂" }] } },
   { id: 149, title: "Community Day Classic", type: "Community Day", url: "https://pokemongo.com/en/news/save-the-date-s24", date: "2026-09-12", endDate: null, time: "Time TBA", whenText: "Saturday, September 12, 2026. Event hours to be announced.", color: "#9B59B6", icon: "📅", featured: false, published: "2026-08-10", updated: "2026-08-10", lastUpdated: "August 10, 2026 at 4:01 PM", summary: "Save the date! Community Day Classic returns on Saturday, September 12, 2026. Featured Pokémon and event hours to be announced.", details: { bonuses: ["Event features and bonuses to be announced"], tips: ["Save the date — September 12, 2026 (Saturday).", "Event hours and full details will be announced closer to the date."] } },
   { id: 150, title: "Super Mega Raid Day — September 19", type: "Raid", url: "https://pokemongo.com/en/news/save-the-date-s24", date: "2026-09-19", endDate: null, time: "Time TBA", whenText: "Saturday, September 19, 2026. Event hours to be announced.", color: "#8E44AD", icon: "🌈", iconImg: "assets/pokemon-images/icons/MEGA_EVOLUTION_REINSTATED.png", featured: false, published: "2026-08-10", updated: "2026-08-10", lastUpdated: "August 10, 2026 at 4:01 PM", summary: "Save the date! A Super Mega Raid Day is coming Saturday, September 19, 2026. Featured Pokémon and event hours to be announced.", details: { bosses: ["Details: TBA"], bonuses: ["Event features and bonuses to be announced"], tips: ["Save the date — September 19, 2026 (Saturday).", "Event hours and full details will be announced closer to the date."] } },
   { id: 151, title: "Catch Mastery", type: "Event", url: "https://pokemongo.com/en/news/save-the-date-s24", date: "2026-09-26", endDate: null, time: "Time TBA", whenText: "Saturday, September 26, 2026. Event hours to be announced.", color: "#16A085", icon: "🎯", featured: false, published: "2026-08-10", updated: "2026-08-10", lastUpdated: "August 10, 2026 at 4:01 PM", summary: "Save the date! A Catch Mastery event is coming Saturday, September 26, 2026. Details to be announced.", details: { bonuses: ["Event features and bonuses to be announced"], tips: ["Save the date — September 26, 2026 (Saturday).", "Event hours and full details will be announced closer to the date."] } },
@@ -1205,6 +1224,28 @@ const EVENTS = [
 ];
 
 const ANNOUNCEMENTS = [
+  { id: 41, date: "2026-08-13", published: "2026-08-13", updated: "2026-08-13", lastUpdated: "August 13, 2026 at 3:53 PM", title: "Every Trainer can celebrate 10 years of Pokémon GO with a special Mewtwo!", tag: "News", url: "https://pokemongo.com/en/news/10th-anniversary-celebration", icon: "assets/pokemon-images/National-Dex/regular/Gen-1_Kanto/0150.webp", body: "Celebrate 10 years of Pokémon GO! Free Timed Research is available worldwide from August 12 through September 6, leading to a Mewtwo encounter with maxed-out stats, a Special Background, and Mega Mewtwo Y's third Mega Level unlocked.", fullBody: "Every Trainer can celebrate 10 years of Pokémon GO with a special Mewtwo! Free Timed Research is available worldwide from Wednesday, August 12, 2026, at 4:00 p.m. PDT to Sunday, September 6, 2026, at 11:59 p.m. local time, leading to an encounter with a Mewtwo that has maxed-out stats and a Special Background — that Mewtwo also has the third Mega Level unlocked for Mega Mewtwo Y. The Timed Research tasks must be completed and their rewards claimed before Sunday, September 6, 2026, at 11:59 p.m. local time. Trainers who caught Mewtwo at the in-person Times Square event on July 9 will receive a Mewtwo with different stats and different rewards — a Mewtwo with the Times Square background will be available again at some point in the future.", sections: [
+    { heading: "When (all times local)", items: [
+      "Wednesday, August 12, 2026, at 4:00 p.m. PDT to Sunday, September 6, 2026, at 11:59 p.m. local time.",
+      "Timed Research tasks must be completed and rewards claimed before Sunday, September 6, 2026, at 11:59 p.m. local time."
+    ] },
+    { heading: "Featured Pokémon", icon: "✨", showImages: true, items: [
+      { name: "Mewtwo", subtitle: "Free Timed Research reward — maxed-out stats, a Special Background, and Mega Mewtwo Y's third Mega Level unlocked" }
+    ] },
+    { heading: "Free Timed Research", items: [
+      "Available worldwide for all Trainers, free of charge.",
+      "Leads to an encounter with a Mewtwo that has maxed-out stats and a Special Background.",
+      "That Mewtwo also has the third Mega Level unlocked for Mega Mewtwo Y.",
+      "Tasks must be completed and rewards claimed before Sunday, September 6, 2026, at 11:59 p.m. local time."
+    ] },
+    { heading: "Times Square Event Trainers", items: [
+      "Trainers who caught Mewtwo at the in-person Times Square event on July 9 will receive a Mewtwo with different stats and different rewards.",
+      "A Mewtwo with the Times Square background will be available again at some point in the future."
+    ] },
+    { heading: "Good to Know", items: [
+      "Be aware of your surroundings and follow guidelines from local health authorities when playing Pokémon GO."
+    ] }
+  ] },
   { id: 40, date: "2026-08-05", published: "2026-08-05", updated: "2026-08-05", lastUpdated: "August 5, 2026 at 1:23 PM", title: "PokémonXP & the 2026 Pokémon World Championships", tag: "News", url: "https://pokemongo.com/en/news/world-championships-event-2026", icon: "🏆", body: "Celebrate PokémonXP and the 2026 Pokémon World Championships! Two new costumed Pikachu, themed wild encounters and raids, a free GO Pass, boosted GO Battle League bonuses, and Championship-exclusive featured attacks — August 25–30.", fullBody: "Pokémon GO ties into PokémonXP and the 2026 Pokémon World Championships. The PokémonXP event runs Tuesday, August 25 at 10:00 a.m. to Friday, August 28 at 10:00 a.m., and the World Championships event runs Friday, August 28 at 10:00 a.m. to Sunday, August 30 at 8:00 p.m. (local time). The top qualifying Pokémon GO players compete August 28–30 in San Francisco to be crowned the 2026 Pokémon GO World Champion — the winner earns the World Champion 2026 avatar outfit.", sections: [{ heading: "When", items: ["PokémonXP event: Tuesday, August 25 at 10:00 a.m. to Friday, August 28 at 10:00 a.m., local time.", "World Championships event: Friday, August 28 at 10:00 a.m. to Sunday, August 30 at 8:00 p.m., local time.", "2026 Pokémon World Championships: August 28–30 in San Francisco, California; live streams begin at 9:00 a.m. PDT each day."] }, { heading: "New Costumed Pikachu", items: ["Pikachu wearing a Cosmog-themed spacesuit.", "World Championships 2026 Pikachu."] }, { heading: "PokémonXP Wild Encounters (Aug 25–28)", items: ["Ralts, Numel, Spheal, Drifloon, Elgyem, Sobble, and Pawmi.", "Deino appears more rarely.", "If you're lucky, you may encounter a Shiny one!"] }, { heading: "PokémonXP One-Star Raids (Aug 25–28)", items: ["Pikachu wearing a Cosmog-themed spacesuit.", "Impidimp."] }, { heading: "World Championships Wild Encounters (Aug 28–30)", items: ["Alolan Sandshrew, Mankey, Lickitung, Totodile, Wooper, Foongus, Froakie, and Litten.", "Togetic and Beldum appear more rarely.", "If you're lucky, you may encounter a Shiny one!"] }, { heading: "World Championships One-Star Raids (Aug 28–30)", items: ["Pikachu wearing a Cosmog-themed spacesuit.", "World Championships 2026 Pikachu.", "Honedge."] }, { heading: "Event Bonuses", items: ["GO Battle League: maximum daily battle sets increase from 5 to 15 (up to 75 battles per day).", "GO Battle League reward Pokémon have a wider variance of Attack, Defense, and HP.", "No daily limit on GO Points earned from August 29 at 12:00 a.m. through August 30 at 7:59 p.m.", "Event-themed Stickers available from PokéStops, Gifts, and the in-game shop."] }, { heading: "GO Pass Major Milestone Bonuses", items: ["Starting at Rank 10: 2× Stardust for catching Pokémon.", "Starting at Rank 20 (Free GO Pass): an additional 3,000 XP from raids.", "Starting at Rank 20 (GO Pass Deluxe): up to two additional free Raid Passes from spinning Gym Photo Discs."] }, { heading: "GO Pass: PokémonXP & 2026 Worlds", items: ["Free GO Pass automatically received August 25 at 10:00 a.m. local time; collect GO Points to rank up and earn event-themed Pokémon encounters.", "GO Pass Deluxe ($4.99 USD or local equivalent): upgraded rewards and faster progression, the PokémonXP & 2026 Worlds Backpack, a Zapdos encounter with wider stat variance, and additional event-themed encounters and exclusive items.", "GO Pass Deluxe ($6.99 USD or local equivalent): the above plus automatic advancement to Rank 7.", "GO Pass rewards expire Tuesday, September 1 at 7:59 p.m. local time — claim them before they're gone."] }, { heading: "Featured Attacks", items: ["Fast Attacks — Alolan Sandslash: Shadow Claw; Walrein: Powder Snow.", "Charged Attacks — Primeape: Rage Fist; Lickitung: Body Slam; Feraligatr: Hydro Cannon; Quagsire: Aqua Tail; Gardevoir: Synchronoise; Walrein: Icicle Spear; Metagross: Meteor Mash; Lickilicky: Body Slam; Togekiss: Aura Sphere; Gallade: Synchronoise; Hydreigon: Brutal Swing; Greninja: Hydro Cannon; Decidueye: Frenzy Plant; Incineroar: Blast Burn; Inteleon: Hydro Cannon; Corviknight: Air Cutter; Annihilape: Rage Fist."] }, { heading: "Timed Research & Watch Rewards", items: ["Team Building: Great League Bonus — watch 30 minutes to choose a Lickitung, Totodile, or Paldean Wooper team-building branch.", "2025 World Champion's Timed Research — watch 60 minutes for Tinkaton (used by 2025 Champion Beezleboy, with a unique background) plus an Elite Charged TM.", "Greetings from San Francisco! Bonus — watch 45 minutes (via official co-streamers) for a World Championships 2026 Pikachu encounter.", "PokémonXP Timed Research — watch 30 minutes on the PokémonXP Twitch channel (Saturday, August 29) for a Pikachu wearing a Cosmog-themed spacesuit."] }, { heading: "Avatar Items", items: ["Free 2026 Worlds Tee (Green) — redeem a code shared during the World Championships broadcast.", "PokémonXP & 2026 Worlds Backpack — available in the in-game shop after the event.", "World Champion 2026 outfit — awarded to the 2026 Pokémon GO World Champion."] }, { heading: "Where to Watch", items: ["English streams: Days 1 & 2 on the Pokémon GO Twitch channel; Day 3 on the official Pokémon Twitch channel.", "Live streams begin at 9:00 a.m. PDT each day, August 28–30."] }] },
   { id: 39, date: "2026-07-28", published: "2026-07-28", updated: "2026-07-28", lastUpdated: "July 28, 2026 at 11:30 AM", title: "Save the Date: Pokémon GO Fest: Mega Finale", tag: "News", url: "https://pokemongo.com/en/news/gofest2026-finale-save-the-date", icon: "🗓️", body: "Save the date! Pokémon GO Fest 2026 wraps up with the Mega Finale on September 5–6, 2026. Event hours and full details are still to be announced.", fullBody: "Pokémon GO Fest: Mega Finale closes out Pokémon GO Fest 2026 the weekend of Saturday, September 5 and Sunday, September 6, 2026. Event hours, features, and ticket details have not been announced yet — save the date now and check back closer to the event for the full lineup.", sections: [{ heading: "When (Save the Date)", items: ["Saturday, September 5 and Sunday, September 6, 2026.", "Event hours: to be announced."] }, { heading: "Details", items: ["Pokémon GO Fest 2026 concludes with the Mega Finale.", "Full details, features, and ticket information will be announced closer to the date — stay tuned."] }] },
   { id: 38, date: "2026-07-22", published: "2026-07-22", updated: "2026-07-22", lastUpdated: "July 22, 2026 at 1:19 PM", title: "The Lucky Trinket returns and Latias soars into GO Pass: August!", tag: "News", url: "https://pokemongo.com/en/news/go-pass-august-2026", icon: "assets/pokemon-images/National-Dex/regular/Gen-3_Hoenn/0380-female.webp", body: "The Lucky Trinket returns and Latias joins GO Pass: August, running Tuesday, August 4 to Tuesday, September 8, 2026. Free rewards include a Latias encounter (possibly Shiny), Stardust, XP, and Max Particles, while GO Pass Deluxe (US$7.99) adds the Lucky Trinket and more Pokémon encounters. Major Milestone Bonuses unlock extra Candy, Gifts, Incense duration, and Egg rewards along the way.", fullBody: "GO Pass: August 2026 runs Tuesday, August 4, 2026, at 10:00 a.m. to Tuesday, September 8, 2026, at 10:00 a.m. local time, and there's no daily GO Points limit from Saturday, September 5, at 12:00 a.m. to Sunday, September 6, at 11:59 p.m. local time. The free GO Pass rewards an encounter with Latias — possibly Shiny if you're lucky — plus Stardust, XP, Max Particles, and more goodies as you rank up. For US$7.99, GO Pass Deluxe adds a Lucky Trinket, additional Pokémon encounters, and more goodies on top of every free-track reward; for US$9.99, GO Pass Deluxe + 10 Ranks also automatically earns enough GO Points to reach Rank 11. Major Milestone Bonuses unlock an extra Candy for trading (plus a guaranteed Candy XL at level 31+) at Rank 1, more daily Gifts and Gift storage at Rank 25, 2× Daily Adventure Incense duration at Rank 50, and increased XP and Stardust from hatching Eggs at Rank 75 — GO Pass Deluxe adds a bonus Incubator at Rank 1 and strengthens the Rank 25 Gift bonus further. Rewards unlocked in the GO Pass expire Thursday, September 10, 2026, at 10:00 a.m. local time, and the Lucky Trinket earned from GO Pass Deluxe: August expires Sunday, September 13, 2026, at 11:59 p.m. local time, regardless of when it was claimed. GO Pass Deluxe is also available on the Pokémon GO Web Store, where upgrading nets a gift with purchase of 10 Ultra Balls, 5 Max Revives, 1 Premium Battle Pass, and 5 Max Potions, or Trainers can pick up the web-exclusive GO Pass Deluxe: August Ultra Box with 20 Ultra Balls, 10 Max Revives, 10 Max Potions, and 5 Premium Battle Passes.", sections: [
@@ -4754,11 +4795,26 @@ function getRaidBossData(name) {
 function cleanRaidLabel(name) {
   return name.replace(/^★/, "").replace(/\s*\(\d★\s*(?:Raid|Shadow Raid)?\)|\s*\(Super Mega Raid[^)]*\)|\s*\(Mega\)|\s*\(\d★\s*Max Battle.*?\)|\s*\(Research Breakthrough\)|\s*\(Field Research(?:\s*-\s*rare)?\)|\s*\(Mystery Box\)|\s*\(weekends?\)|\s*\(final week.*?\)|\s*\(no shiny\)/gi, "").replace(/\s*✨/g, "").trim();
 }
+// Special Backgrounds — art shown behind a boss sprite when the encounter
+// grants an in-game Special Background (keyed on the exact boss label).
+const BOSS_BACKGROUNDS = {
+  "Mewtwo (Free Timed Research encounter) ✨": "assets/pokemon-images/backgrounds/forever-forward-earth.webp"
+};
 function renderBossItem(item, color, th, cardLayout, noSparkles, groupSize, showRegion) {
   const pkmn = getPokemonImg(item);
   const imgSize = cardLayout ? 120 : 150;
   let imgEl = pokemonImgHTML(pkmn, imgSize);
   if (imgEl && !noSparkles) imgEl = wrapShinySparkles(imgEl, item, imgSize);
+  const bossBg = BOSS_BACKGROUNDS[item];
+  if (imgEl && bossBg) {
+    // Background sits in its own absolutely-positioned, clipped layer *behind*
+    // the sprite; the sprite (and any shiny sparkles) render in a sibling
+    // layer on top so sparkles are never clipped by the rounded panel.
+    imgEl = `<div style="position:relative;width:${imgSize}px;height:${imgSize}px;flex-shrink:0">
+      <div style="position:absolute;inset:0;border-radius:12px;overflow:hidden;background:url('${bossBg}') center/cover"></div>
+      <div style="position:relative;z-index:1;width:100%;height:100%">${imgEl}</div>
+    </div>`;
+  }
   const raidData = getRaidBossData(item);
   const typesHTML = raidData ? `<div style="display:flex;gap:4px;margin-top:4px;flex-wrap:wrap;${cardLayout ? "justify-content:center" : ""}">${raidData.types.map(t =>
     `<span style="font-size:${cardLayout ? 11 : 13}px;font-weight:700;color:#fff;background:${TYPE_COLORS[t] || "#888"};padding:2px 8px;border-radius:10px">${t}</span>`
@@ -5588,6 +5644,8 @@ function renderEventDetail(event, th) {
             "Poffin": ITEM_BASE + "poffin.png",
             "Zeraora Candy": "https://db.pokemongohub.net/images/candy/small/807.png",
             "Zeraora Rare Candy XL": ITEM_BASE + "rare-xl-candy.png",
+            "Master Ball": "assets/pokemon-images/Items/masterball_sprite.png",
+            "Mega Mewtwo Energy": "https://db.pokemongohub.net/images/candy/mega/150.png",
             "Zeraora Sticker": "assets/pokemon-images/stickers/zeraora-sticker.png",
             "GO Fest 2026 Sticker": "assets/pokemon-images/stickers/go-fest-2026-sticker.png",
             "Zeraora T-shirt avatar item": "assets/pokemon-images/clothing-items/shirts/zeraora-tshirt.png",
@@ -5649,7 +5707,7 @@ function renderEventDetail(event, th) {
             <button class="acc-trigger" data-open="false" onclick="toggleAccordion(this)" aria-expanded="false" style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:transparent;border:none;color:${th.text};width:100%;text-align:left;cursor:pointer">
               <span style="font-size:22px;flex-shrink:0">\u26A1</span>
               <div style="display:flex;flex-direction:column;gap:2px;flex:1;min-width:0">
-                <div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:${accent}">Special Research</div>
+                <div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:${accent}">${esc(sr.kicker || "Special Research")}</div>
                 <div style="font-size:14.5px;font-weight:700;color:${th.text};line-height:1.4">${esc(sr.title)}${sr.encounter ? ` \u00B7 ${esc(sr.encounter)} encounter` : ""}</div>
               </div>
               <span style="display:flex;align-items:center;color:${accent};flex-shrink:0">${chevronSVG}</span>
