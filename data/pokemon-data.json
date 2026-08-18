@@ -918,7 +918,10 @@
   "Dondozo": {
     "types": [
       "Water"
-    ]
+    ],
+    "cp": "1633–1712",
+    "cpBoost": "2041–2140",
+    "weather": "Rainy"
   },
   "Ducklett": {
     "types": [
@@ -1803,7 +1806,10 @@
     "types": [
       "Water",
       "Dark"
-    ]
+    ],
+    "cp": "1525–1601",
+    "cpBoost": "1907–2001",
+    "weather": "Rainy or Fog"
   },
   "Hitmonchan": {
     "types": [
@@ -2521,8 +2527,8 @@
       "Dragon",
       "Ground"
     ],
-    "cp": "1843–1932",
-    "cpBoost": "2304–2415",
+    "cp": "2174–2264",
+    "cpBoost": "2718–2830",
     "weather": "Windy or Sunny/Clear"
   },
   "Mega Gardevoir": {
@@ -3309,7 +3315,10 @@
   "Psyduck": {
     "types": [
       "Water"
-    ]
+    ],
+    "cp": "585–632",
+    "cpBoost": "731–790",
+    "weather": "Rainy"
   },
   "Probopass": {
     "types": [
@@ -4452,7 +4461,10 @@
     "types": [
       "Dragon",
       "Water"
-    ]
+    ],
+    "cp": "1494–1569",
+    "cpBoost": "1868–1962",
+    "weather": "Windy or Rainy"
   },
   "Tentacool": {
     "types": [

@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.52";
+const APP_VERSION = "3.53";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -2073,16 +2073,16 @@ const RESEARCH_SECTION_META = {
 
 const CURRENT_RAID_BOSSES = {
   "1-Star Raids": [
-    "Alolan Sandshrew (1\u2605 Raid) \u2728","Hisuian Growlithe (1\u2605 Raid) \u2728","Darumaka (1\u2605 Raid) \u2728","Galarian Darumaka (1\u2605 Raid) \u2728"
+    "Psyduck wearing a swim ring (1\u2605 Raid) \u2728","Tatsugiri (Curly Form) (1\u2605 Raid)","Tatsugiri (Droopy Form) (1\u2605 Raid)","Tatsugiri (Stretchy Form) (1\u2605 Raid)"
   ],
   "3-Star Raids": [
-    "Alolan Marowak (3\u2605 Raid) \u2728","Hisuian Avalugg (3\u2605 Raid) \u2728","Wyrdeer (3\u2605 Raid) \u2728"
+    "Dondozo (3\u2605 Raid) \u2728","Hisuian Samurott (3\u2605 Raid) \u2728","Lapras wearing a scarf (3\u2605 Raid) \u2728"
   ],
   "5-Star Raids": [
-    "Uxie (5\u2605 Raid) \u2728","Mesprit (5\u2605 Raid) \u2728","Azelf (5\u2605 Raid) \u2728"
+    "Groudon (5\u2605 Raid) \u2728"
   ],
   "Mega Raids": [
-    "Mega Blaziken (Mega) \u2728"
+    "Mega Garchomp (Mega) \u2728"
   ],
   "Shadow 1-Star Raids": [
     "Shadow Slowpoke (1\u2605 Shadow Raid) \u2728","Shadow Aipom (1\u2605 Shadow Raid) \u2728","Shadow Croagunk (1\u2605 Shadow Raid) \u2728","Shadow Grubbin (1\u2605 Shadow Raid) \u2728"
@@ -2099,7 +2099,10 @@ const CURRENT_RAID_BOSSES = {
 const RAID_BOSS_REGIONS = {
   "Uxie": "Asia-Pacific",
   "Mesprit": "Europe, the Middle East, Africa, and India",
-  "Azelf": "The Americas and Greenland"
+  "Azelf": "The Americas and Greenland",
+  "Tatsugiri (Curly Form)": "Europe, Middle East, Africa",
+  "Tatsugiri (Droopy Form)": "Americas",
+  "Tatsugiri (Stretchy Form)": "Asia-Pacific"
 };
 
 const CURRENT_MAX_BATTLES = {
@@ -7886,7 +7889,7 @@ function render() {
         </div>`;
       });
       raidsTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
-        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 5, 2026 at 10:41 am</div>
+        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 18, 2026 at 5:00 pm</div>
         <div style="text-align:center;padding:10px;font-size:14px;font-weight:600;color:${th.text}">Current Raid Bosses</div>
         <div style="text-align:center;font-size:11px;color:${th.textMuted};font-weight:500;margin-top:-10px">Data sourced from Pok\u00E9monGO.com, LeekDuck.com & Pok\u00E9monGOHUB.net</div>
         <div style="text-align:center;font-size:12px;color:${th.textMuted};font-weight:600;margin-top:2px">Tap a Pok\u00E9mon to see its weaknesses & resistances</div>
