@@ -2002,6 +2002,12 @@
       "Water"
     ]
   },
+  "Kakuna": {
+    "types": [
+      "Bug",
+      "Poison"
+    ]
+  },
   "Kangaskhan": {
     "types": [
       "Normal"
@@ -2624,7 +2630,10 @@
     "types": [
       "Dark",
       "Fire"
-    ]
+    ],
+    "cp": "2106–2195",
+    "cpBoost": "2633–2744",
+    "weather": "Foggy or Sunny"
   },
   "Mega Kangaskhan": {
     "types": [
@@ -2660,6 +2669,15 @@
     "cp": "1469–1544",
     "cpBoost": "1837–1930",
     "weather": "Cloudy or Snow"
+  },
+  "Mega Malamar": {
+    "types": [
+      "Dark",
+      "Psychic"
+    ],
+    "cp": "1732–1796",
+    "cpBoost": "2166–2245",
+    "weather": "Foggy or Windy"
   },
   "Mega Manectric": {
     "types": [
@@ -2846,7 +2864,19 @@
     "types": [
       "Grass",
       "Poison"
-    ]
+    ],
+    "cp": "2026–2113",
+    "cpBoost": "2533–2641",
+    "weather": "Sunny or Cloudy"
+  },
+  "Mega Victreebel": {
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "cp": "1935–2003",
+    "cpBoost": "2418–2503",
+    "weather": "Sunny or Cloudy"
   },
   "Meganium": {
     "types": [
