@@ -258,9 +258,21 @@
     "cpBoost": "1061–1134",
     "weather": "Rainy, Cloudy"
   },
+  "Azurill": {
+    "types": [
+      "Normal",
+      "Fairy"
+    ]
+  },
   "Bagon": {
     "types": [
       "Dragon"
+    ]
+  },
+  "Baltoy": {
+    "types": [
+      "Ground",
+      "Psychic"
     ]
   },
   "Banette": {
@@ -1024,6 +1036,11 @@
       "Dragon"
     ]
   },
+  "Dusclops": {
+    "types": [
+      "Ghost"
+    ]
+  },
   "Dusk Mane Necrozma": {
     "types": [
       "Psychic",
@@ -1750,6 +1767,11 @@
       "Fighting"
     ]
   },
+  "Herdier": {
+    "types": [
+      "Normal"
+    ]
+  },
   "Hippowdon": {
     "types": [
       "Ground"
@@ -2031,7 +2053,10 @@
   "Klawf": {
     "types": [
       "Rock"
-    ]
+    ],
+    "cp": "1304–1373",
+    "cpBoost": "1630–1716",
+    "weather": "Partly Cloudy"
   },
   "Klink": {
     "types": [
@@ -2161,6 +2186,11 @@
       "Grass"
     ]
   },
+  "Lechonk": {
+    "types": [
+      "Normal"
+    ]
+  },
   "Lickilicky": {
     "types": [
       "Normal"
@@ -2257,6 +2287,11 @@
       "Rock"
     ]
   },
+  "Mabosstiff": {
+    "types": [
+      "Dark"
+    ]
+  },
   "Machamp": {
     "types": [
       "Fighting"
@@ -2264,6 +2299,11 @@
     "cp": "1667–1746",
     "cpBoost": "2084–2183",
     "weather": "Cloudy"
+  },
+  "Machoke": {
+    "types": [
+      "Fighting"
+    ]
   },
   "Machop": {
     "types": [
@@ -2371,6 +2411,11 @@
     "cp": "941–1048",
     "cpBoost": "1176–1311",
     "weather": "Sunny or Fog"
+  },
+  "Maschiff": {
+    "types": [
+      "Dark"
+    ]
   },
   "Maushold": {
     "types": [
@@ -2784,8 +2829,8 @@
       "Water",
       "Ground"
     ],
-    "cp": "1583–1662",
-    "cpBoost": "1979–2078",
+    "cp": "1622–1699",
+    "cpBoost": "2027–2124",
     "weather": "Rainy or Sunny/Clear"
   },
   "Mega Tyranitar": {
@@ -3213,6 +3258,11 @@
     "cpBoost": "616–670",
     "weather": "Rain"
   },
+  "Pikachu wearing a Cosmog-themed spacesuit": {
+    "types": [
+      "Electric"
+    ]
+  },
   "Piloswine": {
     "types": [
       "Ice",
@@ -3481,7 +3531,10 @@
     "types": [
       "Ground",
       "Rock"
-    ]
+    ],
+    "cp": "886–943",
+    "cpBoost": "1107–1179",
+    "weather": "Sunny or Partly Cloudy"
   },
   "Rhyperior": {
     "types": [
@@ -4113,7 +4166,10 @@
     "types": [
       "Fire",
       "Bug"
-    ]
+    ],
+    "cp": "553–599",
+    "cpBoost": "692–749",
+    "weather": "Sunny or Rainy"
   },
   "Skarmory": {
     "types": [
@@ -4288,6 +4344,12 @@
       "Flying"
     ]
   },
+  "Staravia": {
+    "types": [
+      "Normal",
+      "Flying"
+    ]
+  },
   "Starly": {
     "types": [
       "Normal",
@@ -4344,6 +4406,11 @@
     "cp": "1627–1704",
     "cpBoost": "2033–2130",
     "weather": "Rainy"
+  },
+  "Sunkern": {
+    "types": [
+      "Grass"
+    ]
   },
   "Swablu": {
     "types": [
@@ -4653,6 +4720,12 @@
       "Poison"
     ],
     "cp": "526–571"
+  },
+  "Trumbeak": {
+    "types": [
+      "Normal",
+      "Flying"
+    ]
   },
   "Tsareena": {
     "types": [

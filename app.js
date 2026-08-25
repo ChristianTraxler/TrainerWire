@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.53";
+const APP_VERSION = "3.54";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -48,7 +48,15 @@ function rewardIcon(text) {
   if (t.includes("remote raid")) return `${IMG_BASE}/Items/remote-raid-pass.png`;
   if (t.includes("raid pass")) return `${IMG_BASE}/Items/Raid-pass(free).png`;
   if (t.includes("ultra ball")) return `${IMG_BASE}/Items/ultraball_sprite.png`;
+  if (t.includes("great ball")) return `${IMG_BASE}/Items/greatball_sprite.png`;
+  if (t.includes("poké ball") || t.includes("poke ball")) return `${IMG_BASE}/Items/pokeball_sprite.png`;
   if (t.includes("max potion")) return `${IMG_BASE}/Items/maxpotion_store.10.png`;
+  if (t.includes("super potion")) return `${IMG_BASE}/Items/Super-potion.png`;
+  if (t.includes("hyper potion")) return `${IMG_BASE}/Items/Hyper-potion.png`;
+  if (t.includes("potion")) return `${IMG_BASE}/Items/potion.png`;
+  if (t.includes("max revive")) return `${IMG_BASE}/Items/Max-revive.png`;
+  if (t.includes("revive")) return `${IMG_BASE}/Items/Revive.png`;
+  if (t.includes("poffin")) return `${IMG_BASE}/Items/Poffin.png`;
   if (/\bxp\b/i.test(text)) return `${IMG_BASE}/icons/xp.png`;
   if (t.includes("encounter")) return `${IMG_BASE}/icons/QuestPokemonReward.png`;
   if (t.includes("go point")) return `${IMG_BASE}/icons/item_pass_point_01.png`;
@@ -672,7 +680,12 @@ const SHINY_AVAILABLE = new Set([
   "Snom","Swinub","Slugma",
   "Exeggcute","Corphish","Wynaut","Mantyke","Frigibax","Tyrogue","Budew","Druddigon",
   "Pichu","Togepi",
-  "Tapu Koko","Tapu Lele","Tapu Bulu","Tapu Fini"
+  "Tapu Koko","Tapu Lele","Tapu Bulu","Tapu Fini",
+  // Field Research reward encounters — shiny status verified against leekduck.com/research (Aug 2026).
+  // Not shiny per source, deliberately excluded: Sobble, Nickit, Tarountula, Nacli, Klawf.
+  "Baltoy","Dusclops","Ferroseed","Haunter","Karrablast","Lechonk","Machoke","Magmar",
+  "Makuhita","Mareanie","Nuzleaf","Nymble","Poliwhirl","Rattata","Shelmet","Staravia",
+  "Sunkern","Swablu","Trumbeak","Wobbuffet","Yamask"
 ]);
 function isShinyEligible(name) {
   if (/\(no shiny\)/i.test(name)) return false;
@@ -1187,6 +1200,7 @@ const EVENTS = [
   { id: 26, title: "5★ Raid: Ultra Beasts (Regional)", type: "Raid", date: "2026-05-13", endDate: "2026-05-19", updated: "2026-05-03", time: "Raid Hour: Wed May 13, 6–7 PM", color: "#E74C3C", icon: "🌐", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-7_Alola/0794.webp", featured: false, summary: "Regional Ultra Beasts split across hemispheres: Pheromosa (EMEA), Buzzwole (Americas), Xurkitree (Asia-Pacific). Shadow Cresselia weekends.", details: { bosses: ["Pheromosa (5★)", "Buzzwole (5★)", "Xurkitree (5★)", "Shadow Cresselia (weekends)"], bonuses: ["Raid Hour: Wednesday May 13, 6–7 PM", "Pheromosa — Europe, Middle East & Africa", "Buzzwole — The Americas", "Xurkitree — Asia-Pacific", "Shadow Cresselia in 5★ Shadow Raids on weekends"], tips: ["Regional split — coordinate Remote Raids with friends in other regions to catch all three.", "All three Ultra Beasts have Shiny releases available.", "Pheromosa & Buzzwole are Bug/Fighting; Xurkitree is pure Electric.", "Shadow Cresselia on weekends — bring Purified Gems."], counters: [{ label: "Pheromosa (Bug/Fighting) — EMEA", pokemon: [{ name: "Mega Rayquaza", fast: "Air Slash", charged: "Dragon Ascent", chargedNote: "Signature" }, { name: "Rayquaza", fast: "Air Slash", charged: "Dragon Ascent", chargedNote: "Signature" }, { name: "Shadow Moltres", fast: "Wing Attack", charged: "Fly" }, { name: "Shadow Salamence", fast: "Fire Fang", charged: "Fly" }, { name: "Mega Salamence", fast: "Fire Fang", charged: "Fly" }, { name: "Enamorus (Incarnate)", fast: "Fairy Wind", charged: "Fly" }] }, { label: "Buzzwole (Bug/Fighting) — Americas", pokemon: [{ name: "Mega Rayquaza", fast: "Air Slash", charged: "Dragon Ascent", chargedNote: "Signature" }, { name: "Rayquaza", fast: "Air Slash", charged: "Dragon Ascent", chargedNote: "Signature" }, { name: "Shadow Moltres", fast: "Wing Attack", charged: "Fly" }, { name: "Shadow Toucannon", fast: "Peck", charged: "Beak Blast", chargedNote: "CD Exclusive" }, { name: "Shadow Salamence", fast: "Fire Fang", charged: "Fly" }, { name: "Shadow Staraptor", fast: "Gust", charged: "Fly" }] }, { label: "Xurkitree (Electric) — Asia-Pacific", pokemon: [{ name: "Primal Groudon", fast: "Mud Shot", charged: "Precipice Blades", chargedNote: "Signature" }, { name: "Mega Garchomp", fast: "Mud Shot", charged: "Earth Power", chargedNote: "CD Exclusive" }, { name: "Shadow Groudon", fast: "Mud Shot", charged: "Precipice Blades", chargedNote: "Signature" }, { name: "Shadow Excadrill", fast: "Mud-Slap", charged: "Scorching Sands" }, { name: "Shadow Garchomp", fast: "Mud Shot", charged: "Earth Power", chargedNote: "CD Exclusive" }, { name: "Landorus (Therian Forme)", fast: "Mud Shot", charged: "Sandsear Storm", chargedNote: "Signature" }] }] } },
   { id: 27, title: "5★ Raid: Tapu Bulu", type: "Raid", date: "2026-05-20", endDate: "2026-05-26", updated: "2026-05-20", time: "Raid Hour: Wed May 20, 6–7 PM", color: "#27AE60", icon: "🌿", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-7_Alola/0787.webp", featured: false, summary: "Tapu Bulu in 5-Star Raids — the Land Spirit Pokémon of Ula'ula Island. Grass/Fairy. Mega Altaria in Mega Raids. Shadow Cresselia weekends.", details: { bosses: ["Tapu Bulu (5★)", "Mega Altaria (Mega)", "Shadow Cresselia (weekends)"], groupSize: [{ bossName: "Tapu Bulu", tier: "5-Star Raid", minimum: 2, optimalMin: 3, optimalMax: 4, easyAt: 5, greenAt: 5 }, { bossName: "Mega Altaria", tier: "Mega Raid", minimum: 2, optimalMin: 4, optimalMax: 6, easyAt: 7, greenAt: 5 }, { bossName: "Shadow Cresselia", tier: "5★ Shadow Raid", minimum: 4, optimalMin: 6, optimalMax: 10, easyAt: 11, greenAt: 11 }], bonuses: ["Raid Hour: Wednesday May 20, 6–7 PM", "Mega Altaria in Mega Raids", "Shadow Cresselia in 5★ Shadow Raids on weekends"], tips: ["Weak to Poison, Steel, Fire, Ice, Flying.", "Shiny Tapu Bulu is available.", "Strong PvP pick in Master League with Grass Knot + Megahorn.", "Mega Altaria is a strong Dragon/Fairy PvP & PvE pick — boosted by Windy or Cloudy.", "Shadow Cresselia on weekends — bring Purified Gems."], counters: [{ label: "Tapu Bulu (Grass/Fairy)", pokemon: [{ name: "Mega Beedrill", fast: "Poison Jab", charged: "Sludge Bomb" }, { name: "Eternatus", fast: "Poison Jab", charged: "Sludge Bomb" }, { name: "Mega Gengar", fast: "Lick", charged: "Sludge Bomb" }, { name: "Mega Rayquaza", fast: "Air Slash", charged: "Dragon Ascent", chargedNote: "Signature" }, { name: "Mega Victreebel", fast: "Acid", charged: "Sludge Bomb" }, { name: "Nihilego", fast: "Poison Jab", charged: "Sludge Bomb" }] }, { label: "Shadow Cresselia (Psychic)", pokemon: [{ name: "Dawn Wings Necrozma", fast: "Shadow Claw", charged: "Moongeist Beam", chargedNote: "Signature" }, { name: "Mega Gengar", fast: "Lick", charged: "Shadow Ball" }, { name: "Mega Tyranitar", fast: "Bite", charged: "Brutal Swing" }, { name: "Shadow Darkrai", fast: "Snarl", charged: "Shadow Ball" }, { name: "Shadow Tyranitar", fast: "Bite", charged: "Brutal Swing" }, { name: "Shadow Chandelure", fast: "Hex", charged: "Shadow Ball" }] }] } },
   { id: 28, title: "5★ Raid: Tapu Fini", type: "Raid", date: "2026-05-27", endDate: "2026-06-02", updated: "2026-05-26", time: "Raid Hour: Wed May 27, 6–7 PM", color: "#3498DB", icon: "🌊", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-7_Alola/0788.webp", featured: false, summary: "Tapu Fini closes out May — the Land Spirit Pokémon of Poni Island. Water/Fairy. Final week for Shadow Cresselia.", details: { bosses: ["Tapu Fini (5★)", "Shadow Cresselia (final weekend)"], groupSize: [{ bossName: "Tapu Fini", tier: "5-Star Raid", minimum: 3, optimalMin: 5, optimalMax: 8, easyAt: 9, greenAt: 9 }, { bossName: "Shadow Cresselia", tier: "5★ Shadow Raid", minimum: 4, optimalMin: 6, optimalMax: 10, easyAt: 11, greenAt: 11 }], bonuses: ["Raid Hour: Wednesday May 27, 6–7 PM", "Last weekend for Shadow Cresselia — leaves June 2"], tips: ["Weak to Grass, Electric, Poison.", "Shiny Tapu Fini is available.", "Bulky PvP pick — strong in Ultra and Master League with Surf + Moonblast.", "Final weekend for Shadow Cresselia — get raids in before June 2."], counters: [{ label: "Tapu Fini (Water/Fairy)", pokemon: [{ name: "Shadow Thundurus (Therian Forme)", fast: "Volt Switch", charged: "Wildbolt Storm", chargedNote: "Signature" }, { name: "Mega Sceptile", fast: "Bullet Seed", charged: "Frenzy Plant", chargedNote: "CD Exclusive" }, { name: "Kartana", fast: "Razor Leaf", charged: "Leaf Blade" }, { name: "Mega Gengar", fast: "Lick", charged: "Sludge Bomb" }, { name: "Regieleki", fast: "Lock-On", charged: "Thunder Cage", chargedNote: "Signature" }, { name: "Shadow Raikou", fast: "Thunder Shock", charged: "Wild Charge" }] }, { label: "Shadow Cresselia (Psychic)", pokemon: [{ name: "Dawn Wings Necrozma", fast: "Shadow Claw", charged: "Moongeist Beam", chargedNote: "Signature" }, { name: "Mega Gengar", fast: "Lick", charged: "Shadow Ball" }, { name: "Mega Tyranitar", fast: "Bite", charged: "Brutal Swing" }, { name: "Shadow Darkrai", fast: "Snarl", charged: "Shadow Ball" }, { name: "Shadow Tyranitar", fast: "Bite", charged: "Brutal Swing" }, { name: "Shadow Chandelure", fast: "Hex", charged: "Shadow Ball" }] }] } },
+  { id: 160, title: "Season: Twilight Trails", type: "Event", url: "https://pokemongo.com/en/seasons/twilight-trails", date: "2026-09-08", endDate: "2026-12-01", time: "10:00 AM", endHour: 10, endMin: 0, published: "2026-08-25", updated: "2026-08-25", lastUpdated: "August 25, 2026 at 11:51 AM", whenText: "Tuesday, September 8, 2026, at 10:00 a.m. to Tuesday, December 1, 2026, at 10:00 a.m. local time", color: "#6C5CE7", icon: "🌆", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-9_Paldea/0943.webp", featured: true, summary: "Pokémon GO's next season — Twilight Trails — runs September 8 to December 1, 2026. Maschiff and Mabosstiff lead a new wave of Paldea debuts, while Mega Staraptor and Mega Chandelure make their Mega Evolution debuts as Pokémon GO Fest 2026: Mega Finale gives way to a new trail. Dynamax Rhyhorn, Sneasel, and Sizzlipede join Max Battles at Power Spots, with Uxie, Mesprit, and Azelf headlining a dedicated Max Battle Day. Three Community Days (September 12, October 10, November 21) and a new GO Pass round out the Season.", details: { bossesTitle: "Max Pokémon Debuts", bosses: ["Dynamax Rhyhorn (Power Spots)", "Dynamax Sneasel (Power Spots)", "Dynamax Sizzlipede (Power Spots)", "Dynamax Uxie (Max Battle Day)", "Dynamax Mesprit (Max Battle Day)", "Dynamax Azelf (Max Battle Day)"], bonuses: ["Three Community Days: September 12 (September Community Day Classic), October 10 (October Community Day), November 21 (November Community Day)", "Mega Evolution debuts: Mega Staraptor and Mega Chandelure, as Pokémon GO Fest 2026: Mega Finale gives way to Twilight Trails", "More Paldea Pokémon debut, led by Maschiff and Mabosstiff", "GO Pass and GO Pass Deluxe available — complete Pass Tasks to earn GO Points, increase your rank, and earn rewards", "Research Breakthrough rotates through a variety of Season-themed Pokémon encounters", "New boxes rotate through the Pokémon GO Web Store throughout the Season", "Each Egg pool listed below also includes further unannounced Pokémon (\"And more!\")"], seasonBonuses: ["Once unlocked, these Major Milestone bonuses last until the current GO Pass ends", "Rank 1 (Tier 1) — Trainers level 31 and above receive one guaranteed Candy XL when trading Pokémon, plus one additional Candy for trading Pokémon", "Rank 25 (Tier 2) — Increased limits on opening Gifts, receiving Gifts from PokéStop and Gym Photo Discs, and storing Gifts", "Rank 50 (Tier 3) — 2x Daily Adventure Incense duration", "Rank 75 (Tier 4) — Increased XP and Stardust from hatching Eggs"], eggLabel: "2 km Eggs", eggs: ["Elekid ✨", "Magby ✨", "Azurill ✨"], seasonEggPools: [{ label: "5 km Eggs", items: ["Munchlax ✨", "Sizzlipede ✨", "Fidough ✨"] }, { label: "5 km Adventure Sync Rewards", items: ["Tyrogue ✨", "Sableye ✨", "Budew ✨"] }, { label: "7 km Eggs", items: ["Galarian Meowth ✨", "Galarian Zigzagoon ✨", "Galarian Stunfisk ✨"] }, { label: "7 km Eggs from Mateo's Gift Exchange", items: ["Galarian Slowpoke ✨", "Hisuian Sneasel ✨", "Galarian Corsola ✨"] }, { label: "10 km Eggs", items: ["Dratini ✨", "Honedge ✨", "Impidimp ✨"] }, { label: "10 km Adventure Sync Rewards", items: ["Bagon ✨", "Druddigon ✨", "Drampa ✨"] }], tips: ["Maschiff and Mabosstiff are pure Dark type Pokémon making their Paldea debut this Season.", "Uxie, Mesprit, and Azelf — the Max Battle Day trio — are all pure Psychic type.", "Every Egg pool Pokémon listed for Twilight Trails can be Shiny, including the Adventure Sync and Mateo's Gift Exchange rewards.", "Mateo's Gift Exchange 7 km Eggs are separate from regular 7 km Eggs — keep gifting daily to access them.", "Stockpile Staraptor and Chandelure Mega Energy ahead of time so you're ready the moment their Mega Evolutions debut.", "Mark your calendar for all three Community Days: September 12, October 10, and November 21."], relatedNews: [{ id: 42, label: "Twilight Trails Season — September 8 to December 1", icon: "🌆" }] } },
   { id: 80, title: "Season: Forever Forward", type: "Event", url: "https://pokemongo.com/en/seasons/forever-forward", date: "2026-06-02", endDate: "2026-09-08", published: "2026-05-26", updated: "2026-06-10", time: "10:00 AM", endHour: 10, endMin: 0, color: "#1ABC9C", icon: "\uD83C\uDF1F", featured: true, summary: "Pok\u00E9mon GO's next season \u2014 June 2 to September 8, 2026. Mewtwo, Zeraora, and Mega Mewtwo X & Y headline GO Fest 2026. Daily Discoveries shift to Scenic Sunday, Max Monday, and Showcase Tuesday (Spotlight Hour now returns Thursdays 6\u20137 PM). New Choose Your Path Timed Research runs on non-event weeks. Three Community Days (June 20 Frigibax, July 4, August 16), refreshed eggs, Research Breakthrough rotation, and new Dynamax debuts.", details: { bossesTitle: "Max Pok\u00e9mon Debuts", bosses: ["Dynamax Electabuzz (Power Spots)", "Dynamax Magikarp (Power Spots)", "Dynamax Feebas (Power Spots)", "Dragonite \u2728 (Research Breakthrough)", "Axew \u2728 (Research Breakthrough)", "Honedge \u2728 (Research Breakthrough)", "Jangmo-o \u2728 (Research Breakthrough)", "Indeedee \u2728 (Research Breakthrough)", "Klawf (Research Breakthrough)"], bonuses: ["Three Community Days: June 20 (Frigibax), July 4 (Sobble), August 16 (TBA)", "GO Fest 2026 Tokyo / Chicago / Copenhagen / Global", "Free Zeraora Special Research at GO Fest 2026: Global (non-expiring)", "Rotating Web Store boxes throughout the season", "Themed stickers from Pok\u00E9Stops, Gifts, and the in-game shop", "Routes feature with Buddy Pok\u00E9mon exploration", "Mateo's Gift Exchange 7 km Eggs"], seasonBonuses: ["Scenic Sunday \u2014 more wild Pok\u00E9mon, more Pok\u00E9mon on Routes, Incense attracts even more on Routes, reduced Buddy Candy distance on Routes, encounter Mateo up to 3\u00D7 daily", "Max Monday \u2014 1 Rare Candy XL per in-person Max Battle, frequent Power Spot refreshes, additional active Power Spots, rotating Dynamax battles (6 AM \u2013 9 PM)", "Showcase Tuesday \u2014 enter up to 5 Pok\u00E9Stop Showcases", "Raid Hour Wednesday \u2014 1 Rare Candy XL per in-person Raid Battle, 6 PM \u2013 7 PM (featured 5\u2605 boss)", "GO Battle Thursday & Spotlight Hour \u2014 Spotlight Hour returns 6\u20137 PM, up to 10 sets daily (50 battles), 4\u00D7 Stardust from wins", "Friendship Friday \u2014 2 Special Trades, Lucky boost, \u221210% Stardust trade cost"], dailyDiscoveries: [{ day: "Sunday", name: "Scenic Sunday", icon: "\uD83C\uDF04", color: "#16A085", desc: "More Pok\u00E9mon will appear in the wild. More Pok\u00E9mon will appear while following a Route, and Incense will attract even more on Routes. Reduced Buddy Candy distance on Routes. Encounter Mateo up to three times daily." }, { day: "Monday", name: "Max Monday", icon: "\u26A1", color: "#F39C12", desc: "One Rare Candy XL for completing in-person Max Battles. Power Spots refresh more frequently with additional active locations. Max Battles rotate featured Dynamax Pok\u00E9mon.", time: "Max Monday: 6:00 AM \u2013 9:00 PM" }, { day: "Tuesday", name: "Showcase Tuesday", icon: "\uD83C\uDFC6", color: "#3498DB", desc: "Trainers can enter up to five Pok\u00E9Stop Showcases on Tuesdays, and more Pok\u00E9Stops may host Showcases.", time: "10:00 AM \u2013 8:00 PM" }, { day: "Wednesday", name: "Raid Hour", icon: "\u2694\uFE0F", color: "#9B59B6", desc: "One Rare Candy XL for completing in-person Raid Battles. Raid Bosses for five-star raids and Mega Raids rotate at the start of each day each week. Raid Hours feature the five-star Raid Boss.", time: "6:00 PM \u2013 7:00 PM" }, { day: "Thursday", name: "GO Battle Thursday & Spotlight Hour", icon: "\uD83E\uDD4A", color: "#E67E22", desc: "Spotlight Hour returns from 6:00\u20137:00 PM local time. Up to 4\u00D7 Stardust from win rewards and 10 sets daily (50 battles total) instead of the usual 5.", time: "Spotlight Hour: 6:00 PM \u2013 7:00 PM" }, { day: "Friday", name: "Friendship Friday", icon: "\uD83E\uDD1D", color: "#2ECC71", desc: "2 Special Trades allowed, increased Lucky Trade chances, \u221210% Stardust trade cost, 2 guaranteed Candy XL from trades (level 31+)." }], eggLabel: "2 km Eggs", eggs: ["Exeggcute \u2728", "Corphish \u2728", "Wynaut \u2728"], seasonEggPools: [{ label: "5 km Eggs", items: ["Riolu \u2728", "Mantyke \u2728", "Flittle"] }, { label: "7 km Eggs", items: ["Alolan Diglett \u2728", "Galarian Corsola \u2728", "Galarian Darumaka \u2728"] }, { label: "7 km Eggs from Mateo's Gift Exchange", items: ["Hisuian Growlithe \u2728", "Hisuian Sneasel \u2728", "White-Striped Form Basculin \u2728"] }, { label: "10 km Eggs", items: ["Mawile \u2728", "Absol \u2728", "Frigibax \u2728"] }, { label: "5 km Adventure Sync Rewards", items: ["Tyrogue \u2728", "Sableye \u2728", "Budew \u2728"] }, { label: "10 km Adventure Sync Rewards", items: ["Bagon \u2728", "Druddigon \u2728", "Drampa \u2728"] }], tips: ["Mega Mewtwo X & Y debut at GO Fest 2026 \u2014 stockpile Mewtwo Mega Energy now (it converts to both forms).", "Scenic Sunday makes Routes essential \u2014 load up Routes with Buddies before the season starts.", "Research Breakthrough cycles through Dragonite, Axew, Honedge, Jangmo-o, Indeedee, and Klawf \u2014 claim weekly.", "Mateo's Gift Exchange 7 km Eggs are separate from regular 7 km Eggs.", "Three Community Days: June 20 (Frigibax), July 4 (Sobble), August 16 (fan-voted TBA).", "Adventure Sync Bagon, Drampa, and Druddigon are normally rare \u2014 stack walking distance for hatch eggs.", "GO Fest 2026: Global on July 11\u201312 is FREE for all Trainers."], relatedNews: [{ id: 24, label: "Choose Your Path & Daily Discoveries Update", icon: "\uD83E\uDDED" }, { id: 19, label: "Forever Forward \u2014 Full Season Overview", icon: "\uD83C\uDF1F" }, { id: 20, label: "GO Battle League: Forever Forward Schedule", icon: "\u2694\uFE0F" }, { id: 14, label: "GO Fest 2026: Global \u2014 FREE", icon: "\uD83C\uDF0D" }, { id: 13, label: "Mega Mewtwo X & Y \u2014 Full Breakdown", icon: "\uD83E\uDDBE" }] } },
   { id: 62, title: "Season: Memories in Motion", type: "Event", url: "https://pokemongo.com/news/welcome-to-memories-in-motion", date: "2026-03-03", endDate: "2026-06-02", time: "10:00 AM", endHour: 10, endMin: 0, color: "#9B59B6", icon: "\uD83C\uDF1F", featured: false, summary: "The current season celebrating Pok\u00E9mon's 30th anniversary and GO's 10th year. Featuring daily discovery bonuses, Volcanion Special Research, and new event formats.", details: { bosses: ["Gyarados (Research Breakthrough)", "Honedge (Research Breakthrough)", "Dhelmise (Research Breakthrough)", "Sinistea (Research Breakthrough)", "Duraludon (Research Breakthrough)", "Dreepy (Research Breakthrough)"], bonuses: ["Free Volcanion Special Research available all season", "Guaranteed Candy XL on in-person trades for level 31+", "Weekend events have moved to Saturdays this season", "In-game event calendar coming later in the season"], seasonBonuses: ["Double-Time Sundays \u2014 Incense & Lures last 2\u00D7", "Fast-Track Mondays \u2014 2\u00D7 GO Points, extra Power Spots", "Max Mondays \u2014 rotating Dynamax Pok\u00E9mon (6 AM\u20139 PM)", "Showcase Tuesdays \u2014 Pok\u00E9Stop Showcases (10 AM\u20138 PM)", "Raid Hour Wednesdays \u2014 6\u20137 PM", "GO Battle Thursdays \u2014 up to 10 sets, 4\u00D7 Stardust from wins", "Friendship Fridays \u2014 2 Special Trades, Lucky boost, \u221210% Stardust"], dailyDiscoveries: [{ day: "Sunday", name: "Double-Time Sunday", icon: "\uD83D\uDD25", color: "#E74C3C", desc: "Incense, Lure Modules, Glacial Lure Modules, Mossy Lure Modules, Magnetic Lure Modules, and Rainy Lure Modules activated on Sunday will last up to twice as long." }, { day: "Monday", name: "Fast-Track Monday & Max Monday", icon: "\u26A1", color: "#F39C12", desc: "2x GO Points from Pass Tasks for both monthly and event GO Passes. Power Spots refresh more frequently with additional locations. Max Battles rotate featured Dynamax Pokemon.", time: "Max Monday: 6:00 AM \u2013 9:00 PM" }, { day: "Tuesday", name: "Showcase Tuesday", icon: "\uD83C\uDFC6", color: "#3498DB", desc: "PokeStop Showcases will be active on Tuesdays, featuring up to 20 different categories.", time: "10:00 AM \u2013 8:00 PM" }, { day: "Wednesday", name: "Raid Hour", icon: "\u2694\uFE0F", color: "#9B59B6", desc: "Raid Bosses for five-star raids and Mega Raids will rotate at the start of the day each week. Raid Hours feature the five-star Raid Boss.", time: "6:00 PM \u2013 7:00 PM" }, { day: "Thursday", name: "GO Battle Thursday", icon: "\uD83E\uDD4A", color: "#E67E22", desc: "Trainers receive up to 4x Stardust from win rewards and can play 10 sets daily (50 battles total) instead of the usual 5 sets." }, { day: "Friday", name: "Friendship Friday", icon: "\uD83E\uDD1D", color: "#2ECC71", desc: "In-person trades feature 2 Special Trades allowed, increased Lucky Trade chances, -10% Stardust cost, and 2 guaranteed Candy XL from trades (level 31+)." }], tips: ["Free Volcanion Special Research available all season \u2014 no expiration.", "Guaranteed Candy XL on in-person trades for level 31+.", "Weekend events have moved to Saturdays this season.", "In-game event calendar coming later in the season."] } },
   { id: 60, title: "Pok\u00E9mon Pokopia Celebration", type: "Event", url: "https://pokemongo.com/news/pokemon-pokopia-celebration-event-2026", date: "2026-03-10", endDate: "2026-03-16", time: "10:00 AM \u2013 8:00 PM", color: "#E056A0", icon: "\uD83C\uDFAD", featured: false, summary: "Costumed Ditto debuts wearing a hat and cap! Boosted Shiny Sudowoodo and Zorua. Kanto starters, Lapras, Snorlax, and Dragonite in 3-Star Raids. Free Ditto Eye Mask avatar item.", details: { bosses: ["Ditto wearing a hat (debut)", "Ditto wearing a cap (debut)", "Sudowoodo (boosted Shiny)", "Zorua (boosted Shiny)", "Bulbasaur", "Charmander", "Squirtle", "Pikachu", "Lapras (3\u2605 Raid)", "Snorlax (3\u2605 Raid)", "Dragonite (3\u2605 Raid)"], bonuses: ["2\u00D7 XP for spinning Pok\u00E9Stops", "10\u00D7 XP for spinning a Pok\u00E9Stop for the first time", "Boosted Shiny rates for Sudowoodo and Zorua", "Collection Challenges with themed rewards", "Free Ditto Eye Mask avatar item in shop", "Event-themed stickers from Pok\u00E9Stops, Gyms, and Gifts"], tips: ["Catch everything \u2014 costumed Ditto transforms and hides among wild spawns.", "Shiny Zorua is extremely rare normally, take advantage of the boosted rates.", "Spin new Pok\u00E9Stops for 10\u00D7 XP \u2014 great time to explore new areas.", "Overlaps with Scorbunny Community Day on March 14."] } },
@@ -1224,6 +1238,93 @@ const EVENTS = [
 ];
 
 const ANNOUNCEMENTS = [
+  { id: 43, date: "2026-08-25", published: "2026-08-25", updated: "2026-08-25", lastUpdated: "August 25, 2026 at 1:10 PM", title: "GO Pass: September — Latios & Timed Incubator", tag: "News", url: "https://pokemongo.com/en/news/go-pass-september-2026", icon: "assets/pokemon-images/National-Dex/regular/Gen-3_Hoenn/0381-male.webp", body: "GO Pass: September brings an Encounter with Latios (Shiny possible) to the free track, running Tuesday, September 8 to Tuesday, October 6, 2026. GO Pass Deluxe (US$7.99) adds a Timed Incubator, a Super Incubator, and extra Pokémon encounters, while GO Pass Deluxe + 10 Ranks (US$9.99) also auto-ranks up to Rank 11. There's no daily GO Points limit from Saturday, October 3 to Sunday, October 4, so bank as many ranks as you can during that window. The Timed Incubator itself unlocks at Rank 20 of GO Pass Deluxe and offers unlimited Egg hatches until it expires on October 13.", fullBody: "\"Latios soars in faster than a jet for GO Pass: September!\" — that's how Pokémon GO framed this month's headline encounter. GO Pass: September runs Tuesday, September 8, at 10:00 a.m. to Tuesday, October 6, 2026, at 10:00 a.m. local time. Trainers automatically receive GO Pass: September on Tuesday, September 8, at 10:00 a.m. local time, and can complete Pass Tasks to earn GO Points and rank up for additional rewards through Tuesday, October 6, at 10:00 a.m. local time. From Saturday, October 3, at 12:00 a.m. to Sunday, October 4, at 11:59 p.m. local time, there's no daily limit on how many GO Points you can earn. For US$7.99, Trainers can upgrade to GO Pass Deluxe, a paid version of the GO Pass that offers upgraded rewards and faster progression;** for US$9.99,* Trainers can upgrade to GO Pass Deluxe + 10 Ranks to also automatically earn enough GO Points to reach Rank 11. While progressing through GO Pass Deluxe, Trainers can claim all of the rewards from both the free GO Pass and GO Pass Deluxe — you can upgrade to a GO Pass Deluxe at any time and still collect rewards from previously unlocked ranks. Rewards unlocked in the GO Pass will expire on Thursday, October 8, at 10:00 a.m. local time, so be sure to claim your rewards before they're gone. The GO Pass Deluxe will also be available on the Pokémon GO Web Store, and GO Pass Deluxe purchased via the Web Store will activate as soon as the GO Pass begins. *All prices listed are in USD or the equivalent pricing tier in your local currency. **Availability of event tickets and the GO Pass Deluxe may vary by region.", sections: [
+    { heading: "Event Window", items: [
+      "Starts: Tuesday, September 8 at 10:00 AM local time",
+      "Ends: Tuesday, October 6 at 10:00 AM local time",
+      "No daily GO Points limit: Saturday, October 3 at 12:00 AM to Sunday, October 4 at 11:59 PM local time",
+      "Rewards expire: Thursday, October 8 at 10:00 AM local time"
+    ] },
+    { heading: "GO Pass (Free) Rewards", items: [
+      { text: "Encounter with Latios (Shiny possible) ✨", img: "assets/pokemon-images/National-Dex/regular/Gen-3_Hoenn/0381-male.webp" },
+      { text: "Rare Candy XL", img: "assets/pokemon-images/Items/RareXLCandy_PSD.png" },
+      { text: "Premium Battle Pass", img: "assets/pokemon-images/Items/premium-raid-pass.png" },
+      { text: "Lucky Egg", img: "assets/pokemon-images/Items/luckyegg.png" },
+      { text: "And even more goodies!", img: "assets/pokemon-images/icons/plus-icon.png" }
+    ] },
+    { heading: "GO Pass Deluxe ($7.99)", items: [
+      { text: "Everything in the free track", img: "assets/pokemon-images/Items/go_pass_deluxe.webp" },
+      { text: "1 Timed Incubator", img: "assets/pokemon-images/Items/EggIncubatorTimed_Activated.png" },
+      { text: "1 Super Incubator", img: "assets/pokemon-images/Items/super_incubator.webp" },
+      { text: "Additional encounters with even more Pokémon", img: "assets/pokemon-images/icons/QuestPokemonReward.png" },
+      { text: "And even more goodies", img: "assets/pokemon-images/icons/plus-icon.png" }
+    ] },
+    { heading: "GO Pass Deluxe + 10 Ranks ($9.99)", items: [
+      { text: "Everything in GO Pass Deluxe", img: "assets/pokemon-images/Items/go_pass_deluxe.webp" },
+      { text: "Auto-rank up enough GO Points to reach Rank 11 instantly", img: "assets/pokemon-images/icons/item_pass_point_01.png" }
+    ] },
+    { heading: "Web Store — GO Pass Deluxe: September (Gift with Purchase)", items: [
+      "GO Pass Deluxe purchased via the Pokémon GO Web Store activates as soon as the GO Pass begins.",
+      { text: "10 Ultra Balls", img: "assets/pokemon-images/Items/ultraball_sprite.png" },
+      { text: "5 Max Revives", img: "assets/pokemon-images/Items/Max-revive.png" },
+      { text: "1 Premium Battle Pass", img: "assets/pokemon-images/Items/premium-raid-pass.png" },
+      { text: "5 Max Potions", img: "assets/pokemon-images/Items/Max-potion.png" }
+    ] },
+    { heading: "Web Store — GO Pass Deluxe: September + 10 Ranks (Gift with Purchase)", items: [
+      { text: "10 Ultra Balls", img: "assets/pokemon-images/Items/ultraball_sprite.png" },
+      { text: "5 Max Revives", img: "assets/pokemon-images/Items/Max-revive.png" },
+      { text: "2 Premium Battle Passes", img: "assets/pokemon-images/Items/premium-raid-pass.png" },
+      { text: "5 Max Potions", img: "assets/pokemon-images/Items/Max-potion.png" }
+    ] },
+    { heading: "GO Pass Deluxe: September Ultra Box (Web Store Exclusive)", items: [
+      { text: "20 Ultra Balls", img: "assets/pokemon-images/Items/ultraball_sprite.png" },
+      { text: "10 Max Revives", img: "assets/pokemon-images/Items/Max-revive.png" },
+      { text: "10 Max Potions", img: "assets/pokemon-images/Items/Max-potion.png" },
+      { text: "5 Premium Battle Passes", img: "assets/pokemon-images/Items/premium-raid-pass.png" }
+    ] },
+    { heading: "Tier 1 — Rank 1 Milestone", items: [
+      "1 additional Candy for trading Pokémon",
+      "Trainers level 31 and above will receive 1 guaranteed Candy XL when trading Pokémon"
+    ] },
+    { heading: "Tier 2 — Rank 25 Milestone (Free)", items: [
+      "Open up to 40 Gifts per day",
+      "Receive up to 125 Gifts per day from spinning PokéStop and Gym Photo Discs",
+      "Hold 10 more Gifts in your Item Bag"
+    ] },
+    { heading: "Tier 2 — Rank 25 Milestone (Deluxe Upgrade)", items: [
+      "Open up to 50 Gifts per day",
+      "Receive up to 150 Gifts per day from spinning PokéStop and Gym Photo Discs",
+      "Hold up to 20 more Gifts in your Item Bag"
+    ] },
+    { heading: "Tier 3 — Rank 50 Milestone", items: [
+      "2× Daily Adventure Incense duration"
+    ] },
+    { heading: "Tier 4 — Rank 75 Milestone", items: [
+      "Increased XP and Stardust from hatching Eggs"
+    ] },
+    { heading: "The Timed Incubator", items: [
+      "Available at Rank 20 of GO Pass Deluxe: September",
+      "An additional unlimited-use Incubator for hatching Eggs as you explore",
+      "Lasts from when it's earned until one week after the current GO Pass ends",
+      "The Timed Incubator earned from GO Pass Deluxe: September expires Tuesday, October 13, 2026 at 10:00 AM local time, regardless of when it was claimed",
+      "An Egg placed in the Timed Incubator that hasn't hatched by the expiration date will be placed in a new single-use Incubator to finish incubating — that Incubator will disappear after the Egg hatches"
+    ] },
+    { heading: "Notes", items: [
+      "All prices listed are in USD or the equivalent pricing tier in your local currency.",
+      "Availability of event tickets and the GO Pass Deluxe may vary by region.",
+      "Please be aware of your surroundings and follow guidelines from local health authorities when playing Pokémon GO.",
+      "Upcoming events are subject to change."
+    ] },
+    { heading: "Tips", items: [
+      "Latios headlines the free GO Pass track this month and can be Shiny — push for the encounter and check before you move on.",
+      "Use the no-daily-GO-Points-limit window — Saturday, October 3 at 12:00 AM to Sunday, October 4 at 11:59 PM local time — to bank ranks fast.",
+      "GO Pass Deluxe ($7.99) is an egg-hatching month: it adds a Timed Incubator at Rank 20 plus a Super Incubator, on top of extra Pokémon encounters.",
+      "Web Store Deluxe upgrades activate as soon as the GO Pass begins and add a gift bundle on top of the in-game rewards.",
+      "The Deluxe + 10 Ranks Web Store gift includes a second Premium Battle Pass compared to the base Deluxe gift (1 vs. 2).",
+      "Claim every earned reward before Thursday, October 8 at 10:00 AM local time, and load Eggs into the Timed Incubator early — it expires Tuesday, October 13 at 10:00 AM local time regardless of when it was claimed."
+    ] }
+  ] },
+  { id: 42, date: "2026-08-25", published: "2026-08-25", updated: "2026-08-25", lastUpdated: "August 25, 2026 at 11:51 AM", title: "Twilight Trails Season — September 8 to December 1", tag: "News", url: "https://pokemongo.com/en/seasons/twilight-trails", icon: "assets/pokemon-images/National-Dex/regular/Gen-9_Paldea/0943.webp", body: "Pokémon GO's next season, Twilight Trails, runs September 8 to December 1, 2026. Maschiff and Mabosstiff lead new Paldea debuts, Mega Staraptor and Mega Chandelure make their Mega Evolution debuts, and Dynamax Rhyhorn, Sneasel, and Sizzlipede join Max Battles at Power Spots. Three Community Days and a new GO Pass round out the Season.", fullBody: "The Twilight Trails Season begins Tuesday, September 8, 2026, at 10:00 a.m. and runs through Tuesday, December 1, 2026, at 10:00 a.m. local time, a length of 12 weeks. More Pokémon originally discovered in the Paldea region continue to be spotted in Pokémon GO, led by the debuts of Maschiff and Mabosstiff, with more to come. Where Pokémon GO Fest 2026: Mega Finale ends, a new trail begins — Twilight Trails brings the Mega Evolution debuts of Staraptor and Chandelure, with more teased for the upcoming Mega Squads event and September Community Day Classic. Dynamax Rhyhorn, Dynamax Sneasel, and Dynamax Sizzlipede join Max Battles at Power Spots throughout the Season, while Dynamax Uxie, Dynamax Mesprit, and Dynamax Azelf headline a dedicated Max Battle Day. Three Community Days are on the calendar — September Community Day Classic on September 12, October Community Day on October 10, and November Community Day on November 21 — alongside a refreshed lineup of Eggs, a rotating Research Breakthrough encounter, a limited-time GO Pass (with a paid GO Pass Deluxe track) offering Major Milestone bonuses at Ranks 1, 25, 50, and 75, and new boxes rotating through the Pokémon GO Web Store.", sections: [{ heading: "Season Window", items: ["Starts: Tuesday, September 8, 2026 at 10:00 AM local time", "Ends: Tuesday, December 1, 2026 at 10:00 AM local time", "Season length: 12 weeks"] }, { heading: "Pokémon Debuts", items: ["More Pokémon originally discovered in the Paldea region continue to debut in Pokémon GO", "Maschiff", "Mabosstiff", "And more!"] }, { heading: "Featured Pokémon", icon: "✨", showImages: true, items: [{ name: "Maschiff", subtitle: "Paldea debut — Dark type" }, { name: "Mabosstiff", subtitle: "Paldea debut — Dark type" }, { name: "Mega Staraptor", subtitle: "Mega Evolution debut" }, { name: "Mega Chandelure", subtitle: "Mega Evolution debut" }, { name: "Elekid", subtitle: "2 km Egg" }, { name: "Magby", subtitle: "2 km Egg" }, { name: "Azurill", subtitle: "2 km Egg" }] }, { heading: "Mega Evolution Debuts", items: ["Mega Staraptor", "Mega Chandelure", "And more Mega Evolution debuts to come", "Continue your Mega Evolution journey with the upcoming Mega Squads event and September Community Day Classic"] }, { heading: "Max Pokémon Debuts", items: ["Dynamax Rhyhorn (Power Spots)", "Dynamax Sneasel (Power Spots)", "Dynamax Sizzlipede (Power Spots)", "Dynamax Uxie (Max Battle Day)", "Dynamax Mesprit (Max Battle Day)", "Dynamax Azelf (Max Battle Day)"] }, { heading: "Community Days", items: ["September 12 — September Community Day Classic", "October 10 — October Community Day", "November 21 — November Community Day"] }, { heading: "GO Pass", items: ["GO Pass, a limited-time progression track, is available during Twilight Trails — complete Pass Tasks to earn GO Points, increase your rank, and earn rewards", "GO Pass Deluxe, a paid version of the GO Pass, is available for Trainers looking for upgraded rewards and faster progression"] }, { heading: "GO Pass Major Milestone Bonuses", items: ["Rank 1 (Tier 1) — Trainers level 31 and above receive one guaranteed Candy XL when trading Pokémon, plus one additional Candy for trading Pokémon", "Rank 25 (Tier 2) — Increased limits on opening Gifts, receiving Gifts from PokéStop and Gym Photo Discs, and storing Gifts", "Rank 50 (Tier 3) — 2x Daily Adventure Incense duration", "Rank 75 (Tier 4) — Increased XP and Stardust from hatching Eggs", "Once unlocked, these bonuses last until the current GO Pass ends"] }, { heading: "Research Breakthrough", items: ["Complete Field Research to unlock Research Breakthrough encounters with a variety of Season-themed Pokémon", "Specific Research Breakthrough Pokémon have not yet been announced — check back weekly"] }, { heading: "2 km Eggs", items: ["Elekid ✨", "Magby ✨", "Azurill ✨", "And more!"] }, { heading: "5 km Eggs", items: ["Munchlax ✨", "Sizzlipede ✨", "Fidough ✨", "And more!"] }, { heading: "5 km Adventure Sync Rewards", items: ["Tyrogue ✨", "Sableye ✨", "Budew ✨", "And more!"] }, { heading: "7 km Eggs", items: ["Galarian Meowth ✨", "Galarian Zigzagoon ✨", "Galarian Stunfisk ✨", "And more!"] }, { heading: "7 km Eggs from Mateo's Gift Exchange", items: ["Galarian Slowpoke ✨", "Hisuian Sneasel ✨", "Galarian Corsola ✨", "And more!"] }, { heading: "10 km Eggs", items: ["Dratini ✨", "Honedge ✨", "Impidimp ✨", "And more!"] }, { heading: "10 km Adventure Sync Rewards", items: ["Bagon ✨", "Druddigon ✨", "Drampa ✨", "And more!"] }, { heading: "Web Store", items: ["The Pokémon GO Web Store will have new boxes during Twilight Trails", "Check the Web Store regularly — box contents rotate throughout the Season"] }, { heading: "Not Yet Announced", items: ["Wild spawns and habitat list", "Raid bosses and raid tiers", "Field Research, Timed Research, and Special Research tasks", "Team GO Rocket content", "GO Battle League seasonal details"] }, { heading: "Tips", items: ["Maschiff and Mabosstiff are pure Dark type Pokémon making their Paldea debut this Season.", "Uxie, Mesprit, and Azelf — the Max Battle Day trio — are all pure Psychic type.", "Every Egg pool Pokémon listed for Twilight Trails can be Shiny, including the Adventure Sync and Mateo's Gift Exchange rewards.", "Mateo's Gift Exchange 7 km Eggs are separate from regular 7 km Eggs — keep gifting daily to access them.", "Stockpile Staraptor and Chandelure Mega Energy ahead of time so you're ready the moment their Mega Evolutions debut.", "Mark your calendar for all three Community Days: September 12, October 10, and November 21."] }] },
   { id: 41, date: "2026-08-13", published: "2026-08-13", updated: "2026-08-13", lastUpdated: "August 13, 2026 at 3:53 PM", title: "Every Trainer can celebrate 10 years of Pokémon GO with a special Mewtwo!", tag: "News", url: "https://pokemongo.com/en/news/10th-anniversary-celebration", icon: "assets/pokemon-images/National-Dex/regular/Gen-1_Kanto/0150.webp", body: "Celebrate 10 years of Pokémon GO! Free Timed Research is available worldwide from August 12 through September 6, leading to a Mewtwo encounter with maxed-out stats, a Special Background, and Mega Mewtwo Y's third Mega Level unlocked.", fullBody: "Every Trainer can celebrate 10 years of Pokémon GO with a special Mewtwo! Free Timed Research is available worldwide from Wednesday, August 12, 2026, at 4:00 p.m. PDT to Sunday, September 6, 2026, at 11:59 p.m. local time, leading to an encounter with a Mewtwo that has maxed-out stats and a Special Background — that Mewtwo also has the third Mega Level unlocked for Mega Mewtwo Y. The Timed Research tasks must be completed and their rewards claimed before Sunday, September 6, 2026, at 11:59 p.m. local time. Trainers who caught Mewtwo at the in-person Times Square event on July 9 will receive a Mewtwo with different stats and different rewards — a Mewtwo with the Times Square background will be available again at some point in the future.", sections: [
     { heading: "When (all times local)", items: [
       "Wednesday, August 12, 2026, at 4:00 p.m. PDT to Sunday, September 6, 2026, at 11:59 p.m. local time.",
@@ -2010,79 +2111,109 @@ const EGG_TIER_IMAGES = {
   "10 km Adventure Sync Rewards": "assets/pokemon-images/eggs/egg-10.png"
 };
 
-// --- FIELD RESEARCH TASKS (Memories in Motion Season) ---
-// Source: pokemongohub.net/post/guide/pokemon-go-field-research/ (May 2026)
-const RESEARCH_BREAKTHROUGH = ["Gyarados","Honedge","Dhelmise","Sinistea","Duraludon","Dreepy"];
+// --- FIELD RESEARCH TASKS (Forever Forward Season) ---
+// Source: leekduck.com/research/ (August 2026)
+const RESEARCH_BREAKTHROUGH = ["Dragonite","Honedge","Axew","Jangmo-o","Indeedee (Female)","Klawf"];
 const FIELD_RESEARCH_TASKS = {
+  "Pokémon XP & 2026 Worlds Tasks": [
+    { task: "Catch 5 Pokémon", rewards: ["Poké Ball ×5","Super Potion ×3","Revive ×2"] },
+    { task: "Spin 3 PokéStops or Gyms", rewards: ["Poké Ball ×5","Super Potion ×3","Revive ×2"] },
+    { task: "Spin 26 PokéStops or Gyms", rewards: ["Pikachu wearing a Cosmog-themed spacesuit"] },
+    { task: "Explore 5 km", rewards: ["Pikachu wearing a Cosmog-themed spacesuit"] }
+  ],
   "Throwing Tasks": [
     { task: "Make 5 Nice Throws", rewards: ["Diglett","Alolan Diglett","Sudowoodo"] },
+    { task: "Make 10 Nice Throws", rewards: ["Alolan Sandshrew","Machop","Magmar","Magikarp","Sunkern","Nuzleaf","Stunfisk","Trumbeak","Mareanie","Nymble"] },
     { task: "Make 3 Great Throws", rewards: ["Omanyte","Kabuto","Clamperl","Binacle","Elgyem"] },
     { task: "Make 3 Great Throws in a row", rewards: ["Anorith","Lileep"] },
-    { task: "Make 5 Great Curveball Throws in a row", rewards: ["Spinda"] },
-    { task: "Make 2 Excellent Throws", rewards: ["Jangmo-o"] },
+    { task: "Make 3 Great Curveball Throws", rewards: ["Pinap Berry ×3","Poké Ball ×10","Rare Candy ×1","Razz Berry ×9","Stardust ×1000","Ultra Ball ×5"] },
+    { task: "Make 3 Great Curveball Throws in a row", rewards: ["Golden Razz Berry ×2","Ultra Ball ×10","Stardust ×1500"] },
+    { task: "Make 5 Great Curveball Throws in a row", rewards: ["Spinda (pattern 2)","Spinda (pattern 3)"] },
+    { task: "Make 10 Curveball Throws", rewards: ["Alolan Geodude","Electabuzz","Makuhita","Swablu","Baltoy","Dusclops","Staravia","Emolga","Ferroseed","Lechonk"] },
+    { task: "Make 2 Nice Curveball Throws in a row", rewards: ["Pinap Berry ×1","Poké Ball ×5","Razz Berry ×3","Stardust ×200"] },
+    { task: "Make 5 Curveball Throws in a row", rewards: ["Great Ball ×5","Pinap Berry ×2","Razz Berry ×6","Stardust ×500"] },
+    { task: "Make 3 Nice Throws in a row", rewards: ["Great Ball ×5","Pinap Berry ×2","Stardust ×500","Ultra Ball ×2"] },
+    { task: "Make 2 Excellent Throws", rewards: ["Goomy"] },
+    { task: "Make an Excellent Throw", rewards: ["Great Ball ×5","Pinap Berry ×2","Stardust ×500","Ultra Ball ×2"] },
     { task: "Make 3 Excellent Throws in a row", rewards: ["Gible","Larvitar","Beldum"] }
   ],
   "Catching Tasks": [
     { task: "Catch a Dragon-type Pokémon", rewards: ["Dratini","Bagon","Axew"] },
-    { task: "Catch 10 Grass-type Pokémon", rewards: ["Mega Venusaur +10 Energy","Mega Sceptile +10 Energy"] },
-    { task: "Catch 10 Water-type Pokémon", rewards: ["Mega Blastoise +10 Energy","Mega Swampert +10 Energy"] },
-    { task: "Catch 10 Fire-type Pokémon", rewards: ["Mega Charizard +10 Energy","Mega Blaziken +10 Energy"] },
+    { task: "Catch a Ditto", rewards: ["Golden Razz Berry ×2","Rare Candy ×3","Stardust ×1500"] },
+    { task: "Catch 10 Grass-type Pokémon", rewards: ["Bulbasaur","Chikorita","Treecko","Turtwig","Snivy","Chespin","Rowlet","Grookey","Sprigatito","Mega Venusaur +10 Energy","Mega Sceptile +10 Energy"] },
+    { task: "Catch 10 Water-type Pokémon", rewards: ["Squirtle","Totodile","Mudkip","Piplup","Oshawott","Froakie","Popplio","Sobble","Quaxly","Mega Blastoise +10 Energy","Mega Swampert +10 Energy"] },
+    { task: "Catch 10 Fire-type Pokémon", rewards: ["Charmander","Cyndaquil","Torchic","Chimchar","Tepig","Fennekin","Litten","Scorbunny","Fuecoco","Mega Charizard +10 Energy","Mega Blaziken +10 Energy"] },
     { task: "Catch 10 Normal-type Pokémon", rewards: ["Mega Pidgeot +10 Energy"] },
     { task: "Catch 7 Pokémon", rewards: ["Magikarp","Stufful","Wimpod"] },
     { task: "Catch 7 different species of Pokémon", rewards: ["Psyduck","Seaking","Marill","Teddiursa","Lombre","Stunky","Liepard","Darumaka","Clauncher","Dedenne","Cutiefly","Smoliv"] },
-    { task: "Catch 5 Pokémon with Weather Boost", rewards: ["Vulpix","Poliwag","Wingull","Hippopotas","Roggenrola","Snover","Vanillite"] }
+    { task: "Catch 10 Pokémon", rewards: ["Poké Ball ×5","Razz Berry ×3","Pinap Berry ×1","Stardust ×200"] },
+    { task: "Catch 5 Pokémon with Weather Boost", rewards: ["Vulpix","Poliwag","Wingull","Hippopotas","Roggenrola","Snover","Vanillite"] },
+    { task: "Catch 10 Pokémon with Weather Boost", rewards: ["Great Ball ×5","Razz Berry ×6","Pinap Berry ×2","Stardust ×500"] },
+    { task: "Catch 25 Pokémon", rewards: ["Rare Candy ×1"] },
+    { task: "Catch 50 Pokémon", rewards: ["Poffin ×1"] },
+    { task: "Use 5 Berries to help catch Pokémon", rewards: ["Great Ball ×5","Razz Berry ×6","Pinap Berry ×2","Stardust ×500"] }
   ],
-  "Exploration Tasks": [
-    { task: "Hatch an Egg", rewards: ["Alolan Marowak","Sudowoodo","Scyther","Noctowl","Nincada","Bagon","Audino","Combee","Trubbish","Cubchoo","Tyrunt","Amaura","Stufful","Wimpod"] },
+  "Exploring Tasks": [
+    { task: "Earn 10000 Stardust", rewards: ["Silver Pinap Berry ×1"] },
+    { task: "Earn 10000 XP", rewards: ["Golden Razz Berry ×1"] },
+    { task: "Hatch an Egg", rewards: ["Alolan Marowak","Sudowoodo","Scyther","Dratini","Noctowl","Nincada","Audino","Combee","Cubchoo","Tyrunt","Amaura","Stufful","Wimpod"] },
     { task: "Hatch 2 Eggs", rewards: ["Sneasel","Mawile","Feebas"] },
-    { task: "Explore 2 km", rewards: ["Nidorina","Nidorino","Pidgeot","Paras","Mankey","Houndour","Mantine","Wailmer","Pawmi","Fidough","Yamper"] },
+    { task: "Hatch 5 Eggs", rewards: ["Poffin ×1"] },
+    { task: "Explore 2 km", rewards: ["Paras","Mankey","Galarian Ponyta","Ponyta","Lapras","Houndour","Mantine","Wailmer","Herdier","Pawmi"] },
     { task: "Spin 3 Pokéstops or Gyms", rewards: ["Doduo","Remoraid","Ralts","Aron"] },
-    { task: "Spin 5 Pokéstops or Gyms", rewards: ["Growlithe","Hisuian Growlithe","Slowpoke","Galarian Slowpoke","Sandshrew","Tangela","Dunsparce","Sneasel","Numel","Snorunt","Bidoof","Hippopotas","Minccino","Ducklett","Skrelp","Bounsweet","Phantump","Dewpider","Wooloo","Nickit","Tarountula","Nacli"] },
+    { task: "Spin 5 Pokéstops or Gyms", rewards: ["Alolan Rattata","Rattata","Growlithe","Hisuian Growlithe","Galarian Slowpoke","Slowpoke","Dunsparce","Sneasel","Galarian Zigzagoon","Zigzagoon","Snorunt","Bidoof","Hippopotas","Trubbish","Ducklett","Dewpider","Skwovet","Nickit","Wooloo","Tarountula","Nacli"] },
     { task: "Take a Snapshot of a Wild Pokémon", rewards: ["Trapinch","Croagunk","Cottonee"] }
   ],
   "Battling Tasks": [
+    { task: "Battle in a raid", rewards: ["Rare Candy ×1"] },
     { task: "Win a Raid", rewards: ["Onix","Vaporeon","Jolteon","Flareon","Snorlax","Piloswine","Luxio","Metang","Gabite","Lampent","Sealeo","Fletchinder"] },
-    { task: "Win a Level 3 or higher raid", rewards: ["Archen","Tirtouga"] },
-    { task: "Win 5 Raids", rewards: ["Alolan Marowak","Aerodactyl","Alolan Exeggutor"] }
+    { task: "Battle in 3 raids", rewards: ["Poffin ×1"] },
+    { task: "Win a three-star raid or higher", rewards: ["Archen","Tirtouga"] },
+    { task: "Win 5 Raids", rewards: ["Alolan Marowak","Aerodactyl","Alolan Exeggutor"] },
+    { task: "Win a Max Battle", rewards: ["Stardust ×1000"] }
   ],
   "Training Tasks": [
     { task: "Evolve a Pokémon", rewards: ["Eevee","Starmie","Seadra","Magcargo","Grumpig","Whirlipede","Eelektrik","Diggersby"] },
-    { task: "Power up Pokémon 3 times", rewards: ["Bulbasaur","Charmander","Squirtle","Snivy","Tepig","Oshawott"] },
-    { task: "Power up Pokémon 5 times", rewards: ["Mega Blastoise +10 Energy","Mega Charizard +10 Energy","Mega Venusaur +10 Energy","Mega Beedrill +10 Energy","Mega Pidgeot +10 Energy","Mega Manectric +10 Energy","Mega Aggron +10 Energy"] },
-    { task: "Power up Pokémon 7 times", rewards: ["Rowlet","Litten","Popplio"] }
+    { task: "Power up Pokémon 3 times", rewards: ["Bulbasaur","Charmander","Squirtle"] },
+    { task: "Power up Pokémon 5 times", rewards: ["Snivy","Tepig","Oshawott","Mega Blastoise +10 Energy","Mega Charizard +10 Energy","Mega Venusaur +10 Energy","Mega Beedrill +10 Energy","Mega Pidgeot +10 Energy","Mega Manectric +10 Energy","Mega Aggron +10 Energy"] },
+    { task: "Power up Pokémon 7 times", rewards: ["Rowlet","Litten","Popplio"] },
+    { task: "Power up Pokémon 15 times", rewards: ["Rare Candy ×3"] }
   ],
-  "Buddy and Friendship Tasks": [
+  "Buddy & Friendship Tasks": [
     { task: "Earn 2 Candies walking with your buddy", rewards: ["Bunnelby","Jigglypuff","Litleo","Dedenne","Glameow","Buneary"] },
     { task: "Earn 3 Candies walking with your buddy", rewards: ["Stunfisk","Galarian Stunfisk"] },
     { task: "Send 3 Gifts and add a sticker to each", rewards: ["Jigglypuff","Clefairy","Eevee","Togetic"] },
-    { task: "Trade a Pokémon", rewards: ["Herdier","Tranquill","Boldore","Gurdurr","Palpitoad"] }
+    { task: "Trade a Pokémon", rewards: ["Poliwhirl","Machoke","Haunter","Karrablast","Shelmet"] }
   ],
   "Team GO Rocket Tasks": [
-    { task: "Defeat 3 Team GO Rocket Grunts", rewards: ["Meowth","Weezing","Arbok"] }
+    { task: "Defeat a Team GO Rocket Grunt", rewards: ["Meowth","Wobbuffet","Yamask"] }
   ]
+
+
 };
 const RESEARCH_SECTION_META = {
-  "Throwing Tasks":            { color: "#F39C12", icon: "🎯" },
-  "Catching Tasks":            { color: "#E74C3C", icon: "🔴" },
-  "Exploration Tasks":         { color: "#3498DB", icon: "🗺️" },
-  "Battling Tasks":            { color: "#9B59B6", icon: "⚔️" },
-  "Training Tasks":            { color: "#2ECC71", icon: "💪" },
-  "Buddy and Friendship Tasks":{ color: "#E91E63", icon: "💛" },
-  "Team GO Rocket Tasks":      { color: "#2C3E50", icon: "🚀" }
+  "Throwing Tasks":                  { color: "#F39C12", icon: "🎯" },
+  "Catching Tasks":                  { color: "#E74C3C", icon: "🔴" },
+  "Exploring Tasks":                 { color: "#3498DB", icon: "🗺️" },
+  "Battling Tasks":                  { color: "#9B59B6", icon: "⚔️" },
+  "Training Tasks":                  { color: "#2ECC71", icon: "💪" },
+  "Buddy & Friendship Tasks":        { color: "#E91E63", icon: "💛" },
+  "Team GO Rocket Tasks":            { color: "#2C3E50", icon: "🚀" },
+  "Pokémon XP & 2026 Worlds Tasks":  { color: "#F1C40F", icon: "🏆" }
 };
 
 const CURRENT_RAID_BOSSES = {
   "1-Star Raids": [
-    "Psyduck wearing a swim ring (1\u2605 Raid) \u2728","Tatsugiri (Curly Form) (1\u2605 Raid)","Tatsugiri (Droopy Form) (1\u2605 Raid)","Tatsugiri (Stretchy Form) (1\u2605 Raid)"
+    "Pikachu wearing a Cosmog-themed spacesuit (1\u2605 Raid) \u2728","Impidimp (1\u2605 Raid) \u2728"
   ],
   "3-Star Raids": [
-    "Dondozo (3\u2605 Raid) \u2728","Hisuian Samurott (3\u2605 Raid) \u2728","Lapras wearing a scarf (3\u2605 Raid) \u2728"
+    "Dondozo (3\u2605 Raid) \u2728","Dhelmise (3\u2605 Raid) \u2728","Klawf (3\u2605 Raid)"
   ],
   "5-Star Raids": [
-    "Groudon (5\u2605 Raid) \u2728"
+    "Lunala (5\u2605 Raid) \u2728"
   ],
   "Mega Raids": [
-    "Mega Garchomp (Mega) \u2728"
+    "Mega Swampert (Mega) \u2728"
   ],
   "Shadow 1-Star Raids": [
     "Shadow Slowpoke (1\u2605 Shadow Raid) \u2728","Shadow Aipom (1\u2605 Shadow Raid) \u2728","Shadow Croagunk (1\u2605 Shadow Raid) \u2728","Shadow Grubbin (1\u2605 Shadow Raid) \u2728"
@@ -2290,6 +2421,7 @@ const ITEM_IMAGES = {
   "Link Charge": "link_charge.webp",
   "GO Pass Deluxe": "go_pass_deluxe.webp",
   "+10 Ranks": "../icons/item_pass_point_01.png",
+  "+6 Ranks": "../icons/item_pass_point_01.png",
   "Fashion Raid Day Ticket": "item_1608_hd.png",
   "Shadow Entei Raid Day Ticket": "item_1608_hd.png",
   "Falinks Super Mega Raid Day Ticket": "item_1608_hd.png",
@@ -2305,7 +2437,492 @@ const ITEM_IMAGES_MULTI = {
   "Star Piece": { 8: "starpiece.8.png" }
 };
 
+// --- ITEM DATABASE (94 items / 14 categories) ---
+const ITEMS_DB = [
+  { category: "Medicine", items: [
+    { name: "Hyper Potion", img: "hyper-potion.webp", desc: "A spray-type medicine that restores the HP of one Pokémon by 200 points." },
+    { name: "Max Potion", img: "max-potion.webp", desc: "A spray-type medicine that completely restores all HP of a single Pokémon." },
+    { name: "Max Revive", img: "max-revive.webp", desc: "A medicine that can revive fainted Pokémon. It also fully restores a fainted Pokémon's maximum HP." },
+    { name: "Potion", img: "potion.webp", desc: "A spray-type medicine that restores the HP of one Pokémon by 20 points." },
+    { name: "Revive", img: "revive.webp", desc: "A medicine that can revive fainted Pokémon. It also restores half of a fainted Pokémon's maximum HP." },
+    { name: "Super Potion", img: "super-potion.webp", desc: "A spray-type medicine that restores the HP of one Pokémon by 50 points." },
+  ] },
+  { category: "Poké Balls", items: [
+    { name: "Beast Ball", img: "beast-ball.webp", desc: "A rare, event-exclusive Poké Ball, typically used only during Ultra Beast encounters." },
+    { name: "Great Ball", img: "great-ball.webp", desc: "A high-performance Ball with a higher catch rate than a standard Poké Ball." },
+    { name: "Master Ball", img: "master-ball.webp", desc: "The best Poké Ball with the ultimate level of performance. With it, you will catch any wild Pokémon without fail." },
+    { name: "Poké Ball", img: "poke-ball.webp", desc: "A device for catching wild Pokémon. It's thrown like a ball, comfortably encapsulating its target." },
+    { name: "Premier Ball", img: "premier-ball.webp", desc: "A somewhat rare Poké Ball made to commemorate a special occasion of some sort." },
+    { name: "Safari Ball", img: "safari-ball.webp", desc: "A ball that is extremely effective for catching Pokémon. It is only available during Pokémon GO Wild Area events." },
+    { name: "Ultra Ball", img: "ultra-ball.webp", desc: "An ultra-performance Ball with a higher catch rate than a Great Ball." },
+  ] },
+  { category: "Berries", items: [
+    { name: "Golden Razz Berry", img: "golden-razz-berry.webp", desc: "Feed this to a Pokémon to make it much easier to catch." },
+    { name: "Nanab Berry", img: "nanab-berry.webp", desc: "Feed this to a Pokémon to calm it down, making it less erratic." },
+    { name: "Pinap Berry", img: "pinap-berry.webp", desc: "Feed this to a Pokémon to make it drop more Candy." },
+    { name: "Razz Berry", img: "razz-berry.webp", desc: "Feed this to a Pokémon, and it will be easier to catch on your next throw." },
+    { name: "Silver Pinap Berry", img: "silver-pinap-berry.webp", desc: "Feed this to a Pokémon to receive more Candy when you catch it and make it easier to catch." },
+  ] },
+  { category: "Gifts", items: [
+    { name: "Gift", img: "gift.webp", desc: "A box that you can send to a friend. Contains a variety of useful items." },
+    { name: "Postcard Book", img: "postcard-book.webp", desc: "A book to collect Postcards and remember locations from yours and your friends' journeys." },
+    { name: "Stickers", img: "stickers.webp", desc: "Stickers don't take up space in your Item Bag. You can carry only a certain number of each sticker." },
+  ] },
+  { category: "Trainer Boosts", items: [
+    { name: "Coin Bag", img: "coin-bag.webp", desc: "A bag of coins. Opening it causes a certain Pokémon to appear for a limited time." },
+    { name: "Daily Adventure Incense", img: "daily-adventure-incense.webp", desc: "Special Incense with a mysterious fragrance that attracts wild Pokémon to your location as you move for 15 minutes. You can receive one each day at no cost." },
+    { name: "Incense", img: "incense.webp", desc: "Incense with a mysterious fragrance that lures wild Pokémon to your location for 60 minutes. Its appearance changes when attracting specific Pokémon." },
+    { name: "Lucky Egg", img: "lucky-egg.webp", desc: "A Lucky Egg that's filled with happiness! Earns double XP for 30 minutes." },
+    { name: "Lucky Trinket", img: "lucky-trinket.webp", desc: "A keepsake that strengthens bonds, allowing you to instantly become Lucky Friends with someone you're Great Friends or higher." },
+    { name: "Max Mushroom", img: "max-mushroom.webp", desc: "Double the damage your Pokémon deal in Max Battles!" },
+    { name: "Mystery Box", img: "mystery-box.webp", desc: "A mysterious old box. Opening it causes a certain Pokémon to appear for a limited time." },
+    { name: "Star Piece", img: "star-piece.webp", desc: "A small shard of a beautiful gem. Earns 50% more Stardust for 30 minutes." },
+  ] },
+  { category: "Other Items", items: [
+    { name: "Daily Adventure Incubator", img: "daily-adventure-incubator.webp", desc: "A special Incubator that can only be used with the Daily Adventure Egg." },
+    { name: "Egg Incubator", img: "egg-incubator-empty.webp", desc: "A device that incubates an Egg as you walk until it is ready to hatch. Breaks after 3 uses." },
+    { name: "Gold Bottle Cap", img: "gold-bottle-cap.webp", desc: "Enables a year-long Hyper Training course where you can fully raise all of a Pokémon's stats." },
+    { name: "Incubator", img: "egg-incubator-unlimited-empty.webp", desc: "A device that incubates an Egg as you walk until it is ready to hatch. Unlimited use!" },
+    { name: "Max Particle Pack", img: "max-particle-pack.webp", desc: "A small pack of Max Particles. Each one holds 800 Max Particles." },
+    { name: "Mysterious Component", img: "mysterious-component.webp", desc: "When you defeat a Team GO Rocket Grunt, you can get a Mysterious Component. Collect six Mysterious Components to combine them!" },
+    { name: "Poffin", img: "poffin.webp", desc: "A special treat for your buddy!" },
+    { name: "Purified Gem", img: "purified-gem.webp", desc: "A clear gem created by purifying and combining Shadow Shards. Use it to subdue enraged Shadow Raid Bosses." },
+    { name: "Rare Candy", img: "rare-candy.webp", desc: "A mysterious candy. When used on a Pokémon, it turns into the Pokémon's candy." },
+    { name: "Rare Candy XL", img: "rare-candy-xl.webp", desc: "A mysterious candy. When used on a Pokémon, it turns into the Pokémon's Candy." },
+    { name: "Rocket Radar", img: "rocket-radar.webp", desc: "You can use this to track down Team GO Rocket Hideouts!" },
+    { name: "Shadow Shard", img: "shadow-shard.webp", desc: "A mysterious shard that emanates shadow energy. Collect four to combine them into a larger gem using the Shard Refiner!" },
+    { name: "Silver Bottle Cap", img: "silver-bottle-cap.webp", desc: "Enables a year-long Hyper Training course where you can fully raise one of a Pokémon's stats." },
+    { name: "Super Incubator", img: "super-egg-incubator.webp", desc: "A more powerful Egg Incubator helps Eggs hatch quickly. Breaks after 3 uses." },
+    { name: "Super Rocket Radar", img: "super-rocket-radar.webp", desc: "You can use this to track down Team GO Rocket Headquarters where their Boss might be!" },
+    { name: "Team Medallion", img: "team-medallion.webp", desc: "A unique coin that enables a Trainer to change teams. A Team Medallion can only be purchased from the shop once per 365 days." },
+    { name: "Timed Incubator", img: "timed-incubator.webp", desc: "An additional unlimited-use Incubator for hatching Eggs that lasts until a specified date." },
+  ] },
+  { category: "Passes", items: [
+    { name: "GO Battle League Timed Research Pass", img: "go-battle-league-timed-research-pass.webp", desc: "Grants access to GO Battle League Timed Research, allowing you to earn extra rewards by completing trainer battles." },
+    { name: "Premium Battle Pass", img: "premium-battle-pass.webp", desc: "A Premium Battle Pass can be used to join a Raid Battle or earn premium rewards in the GO Battle League." },
+    { name: "Raid Pass", img: "raid-pass.webp", desc: "Pass to join a Raid Battle. You can get a free pass at Gyms once per day if you don't already have one." },
+    { name: "Remote Raid Pass", img: "remote-raid-pass.webp", desc: "A Remote Raid Pass can be used to join a Raid Battle remotely." },
+    { name: "Ticket", img: "ticket-pink.webp", desc: "A ticket for a timed event." },
+  ] },
+  { category: "Lures", items: [
+    { name: "Glacial Lure Module", img: "glacial-lure-module.webp", desc: "A frosty Lure Module that attracts Pokémon for 30 minutes, especially ones that love the cold. It can also cause some Pokémon to evolve." },
+    { name: "Golden Lure Module", img: "golden-lure-module.webp", desc: "A glimmering Lure Module that attracts Pokémon for 30 minutes. You may find Gimmighoul Coins by spinning the Photo Disc." },
+    { name: "Lure Module", img: "lure-module.webp", desc: "A module that attracts Pokémon to a PokéStop for 30 minutes. The effect benefits other people nearby." },
+    { name: "Magnetic Lure Module", img: "magnetic-lure-module.webp", desc: "An electronic Lure Module that attracts Pokémon for 30 minutes, especially ones that possess a magnetic field. It can also cause some Pokémon to evolve." },
+    { name: "Mossy Lure Module", img: "mossy-lure-module.webp", desc: "A natural Lure Module that attracts Pokémon for 30 minutes, especially ones that love mossy scents. It can also cause some Pokémon to evolve." },
+    { name: "Rainy Lure Module", img: "rainy-lure-module.webp", desc: "A wet Lure Module that attracts Pokémon for 30 minutes, especially ones that love the rain. It can also cause some Pokémon to evolve." },
+  ] },
+  { category: "Key Items", items: [
+    { name: "Camera", img: "camera.webp", desc: "A device to capture photos of Pokémon. Photos can be shared with others." },
+    { name: "Explorere Gadget", img: "explorere-gadget.webp", desc: "A gadget that automatically throws Poké Balls and spins PokéStops for you while exploring." },
+    { name: "Link Charges", img: "link-charges.webp", desc: "Link Charges are a resource that can be used to join Mega Raids or Super Mega Raids." },
+    { name: "Link Holder", img: "link-holder.webp", desc: "A container that holds Link Charges. It can hold 600 charges at a time." },
+    { name: "Zygarde Cube", img: "zygarde-cube.webp", desc: "An item in which Zygarde Cells are gathered. You can use it to change Zygarde's form. It can hold up to 250 Zygarde Cells." },
+  ] },
+  { category: "TMs", items: [
+    { name: "Charged TM", img: "charged-tm.webp", desc: "This Technical Machine teaches the Pokémon a new Charged Attack." },
+    { name: "Elite Charged TM", img: "elite-charged-tm.webp", desc: "This Technical Machine lets you choose a Charged Attack to teach to a Pokémon." },
+    { name: "Elite Fast TM", img: "elite-fast-tm.webp", desc: "This Technical Machine lets you choose a Fast Attack to teach to a Pokémon." },
+    { name: "Fast TM", img: "fast-tm.webp", desc: "This Technical Machine teaches the Pokémon a new Fast Attack." },
+  ] },
+  { category: "Evolution Items", items: [
+    { name: "Dragon Scale", img: "dragon-scale.webp", desc: "A scale that can make certain species of Pokémon evolve. It is very tough and inflexible." },
+    { name: "Gimmighoul Coins", img: "gimmighoul-coins.webp", desc: "A coin with a mysterious air. It seems to have originated in the Paldea region." },
+    { name: "Kings Rock", img: "kings-rock.webp", desc: "A rock that can make certain species of Pokémon evolve. It looks like a crown." },
+    { name: "Metal Coat", img: "metal-coat.webp", desc: "A coating that can make certain species of Pokémon evolve. It is a special metallic film." },
+    { name: "Sinnoh Stone", img: "sinnoh-stone.webp", desc: "A special stone originally found in the Sinnoh region that can make certain species of Pokémon evolve. It is very tough and has a beautiful sheen." },
+    { name: "Sun Stone", img: "sun-stone.webp", desc: "A peculiar stone that can make certain species of Pokémon evolve. It burns as red as the evening sun." },
+    { name: "Sweet Apple", img: "sweet-apple.webp", desc: "A peculiar apple that can make a certain species of Pokémon evolve. It’s exceptionally sweet." },
+    { name: "Syrupy Apple", img: "syrupy-apple.webp", desc: "A peculiar apple that can make a certain species of Pokémon evolve. It’s exceptionally syrupy." },
+    { name: "Tart Apple", img: "tart-apple.webp", desc: "A peculiar apple that can make a certain species of Pokémon evolve. It’s exceptionally tart." },
+    { name: "Unova Stone", img: "unova-stone.webp", desc: "A rare stone that originates from the Unova region that can make certain species of Pokémon evolve. It is known for its intertwined black-and-white appearance." },
+    { name: "Upgrade", img: "upgrade.webp", desc: "A transparent device that can make certain species of Pokémon evolve. It was produced by Silph Co." },
+  ] },
+  { category: "Energy", items: [
+    { name: "Blaze Fusion Energy", img: "blaze-fusion-energy.webp", desc: "Used to fuse Kyurem and Reshiram into White Kyurem. It can be found when defeating White Kyurem in raids." },
+    { name: "Crowned Shield Energy", img: "crowned-shield-energy.webp", desc: "Used to change Zamazenta into its Crowned Shield form. It can be found when defeating Crowned Shield Zamazenta in raids." },
+    { name: "Crowned Sword Energy", img: "crowned-sword-energy.webp", desc: "Used to change Zacian into its Crowned Sword form. It can be found when defeating Crowned Sword Zacian in raids." },
+    { name: "Lunar Fusion Energy", img: "lunar-fusion-energy.webp", desc: "Used to fuse Necrozma and Lunala into Dawn Wings Necrozma. It can be found when defeating Dawn Wings Necrozma in raids." },
+    { name: "Solar Fusion Energy", img: "solar-fusion-energy.webp", desc: "Used to fuse Necrozma and Solgaleo into Dusk Mane Necrozma. It can be found when defeating Dusk Mane Necrozma in raids." },
+    { name: "Volt Fusion Energy", img: "volt-fusion-energy.webp", desc: "Used to fuse Kyurem and Zekrom into Black Kyurem. It can be found when defeating Black Kyurem in raids." },
+  ] },
+  { category: "Other", items: [
+    { name: "Max Particles", img: "max-particles.webp", desc: "Max Particles can be used to participate in Max Battles or level up Max Moves." },
+    { name: "Meteorite", img: "meteorite.webp", desc: "This stone from space can teach Rayquaza the Charged Attack Dragon Ascent." },
+    { name: "Poké Coin", img: "poke-coin.webp", desc: "Poké Coins can be used in the shop to purchase premium items." },
+    { name: "Research Breakthrough Reward", img: "research-breakthrough-reward.webp", desc: "Collect stamps to unlock Research Breakthroughs from Professor Willow!" },
+    { name: "Stardust", img: "stardust.webp", desc: "A resource used to power up Pokémon and trade Pokémon." },
+    { name: "Zygarde Cell", img: "zygarde-cell.webp", desc: "Zygarde Cells can assemble and disassemble to create different forms of Zygarde. You can carry 250 Zygarde Cells at a time." },
+  ] },
+  { category: "Eggs", items: [
+    { name: "Daily Adventure Egg", img: "daily-adventure-egg.webp", desc: "Log in daily to recieve a Daily Adventure Egg that will reward a Pokémon and 10,000 XP after exploring 1 km." },
+    { name: "2 km Egg", img: "egg-2km.webp", desc: "Acquired by spinning PokéStops and Gyms." },
+    { name: "5 km Egg", img: "egg-5km.webp", desc: "Acquired from Adventure Sync rewards or by spinning PokéStops and Gyms." },
+    { name: "7 km Egg", img: "egg-7km.webp", desc: "Acquired by opening gifts." },
+    { name: "10 km Egg", img: "egg-10km.webp", desc: "Acquired from Adventure Sync rewards or by spinning PokéStops and Gyms." },
+    { name: "12 km Egg", img: "egg-12km.webp", desc: "Acquired by defeating Team GO Rocket Leaders." },
+  ] },
+];
+const ITEMS_IMG_BASE = "assets/pokemon-images/Items/db/";
+
+// --- BACKGROUND DATABASE (234 location-card backgrounds) ---
+const BACKGROUNDS_DB = [
+  { slug: "lc-wcs-2026-san-francisco", name: "WCS 2026 San Francisco", date: "2026-08-28" },
+  { slug: "lc-nbp-chunichi-dragons", name: "NPB Chunichi Dragons 2026", date: "2026-08-21" },
+  { slug: "lc-nbp-hokkaido-nippon-ham-fighters", name: "NPB Hokkaido Nippon Ham Fighters 2026", date: "2026-08-11" },
+  { slug: "lc-2026-jp-jetred", name: "Jet Red 2026", date: "2026-07-28" },
+  { slug: "lc-nationaltrust-angleseyabbey", name: "Nationaltrust Anglesey Abbey", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-attinghampark", name: "Nationaltrust Attingham Park", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-beltonestate", name: "Nationaltrust Belton Estate", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-calkeabbey", name: "Nationaltrust Calke Abbey", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-chirk", name: "Nationaltrust Chirk", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-cliveden", name: "Nationaltrust Cliveden", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-clumberpark", name: "Nationaltrust Clumber Park", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-dunhammassey", name: "Nationaltrust Dunham Massey", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-fountainsabbey", name: "Nationaltrust Fountains Abbey", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-gibslide", name: "Nationaltrust Gibslide", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-hanburyhall", name: "Nationaltrust Hanbury Hall", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-hardwick", name: "Nationaltrust Hardwick", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-killerton", name: "Nationaltrust Killerton", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-kingstonlacy", name: "Nationaltrust Kingston Lacy", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-lacock", name: "Nationaltrust Lacock", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-lymepark", name: "Nationaltrust Lyme Park", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-mottisfont", name: "Nationaltrust Mottisfont", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-mountstewart", name: "Nationaltrust Mount Stewart", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-nymans", name: "Nationaltrust Nymans", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-polesden", name: "Nationaltrust Polesden", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-scotneycastle", name: "Nationaltrust Scotney Castle", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-stourhead", name: "Nationaltrust Stourhead", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-stowegardenpark", name: "Nationaltrust Stowe Garden Park", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-tredegarhouse", name: "Nationaltrust Tredegar House", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-trelissick", name: "Nationaltrust Trelissick", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-tyntesfield", name: "Nationaltrust Tyntesfield", date: "2026-07-18" },
+  { slug: "lc-nationaltrust-wimpoleestate", name: "Nationaltrust Wimpole Estate", date: "2026-07-18" },
+  { slug: "sb-gofest2026-global", name: "GO Fest 2026 Global", date: "2026-07-11" },
+  { slug: "sb-gofest2026-mewtwo", name: "GO Fest 2026 Mewtwo", date: "2026-07-11" },
+  { slug: "lc-times-square-2026", name: "10th Anniversary Times Square", date: "2026-07-09" },
+  { slug: "lc-pokecenter-hiroshima", name: "Pokémon Center Hiroshima", date: "2026-07-01" },
+  { slug: "lc-pokecenter-fukuoka", name: "Pokémon Center Fukuoka", date: "2026-07-01" },
+  { slug: "lc-pokecenter-golab", name: "Pokémon Center GO Lab", date: "2026-07-01" },
+  { slug: "lc-pokecenter-kagawa", name: "Pokémon Center Kagawa", date: "2026-07-01" },
+  { slug: "lc-pokecenter-kanazawa", name: "Pokémon Center Kanazawa", date: "2026-07-01" },
+  { slug: "lc-pokecenter-kyoto", name: "Pokémon Center Kyoto", date: "2026-07-01" },
+  { slug: "lc-pokecenter-megatokyo", name: "Pokémon Center Mega Tokyo", date: "2026-07-01" },
+  { slug: "lc-pokecenter-nagoya", name: "Pokémon Center Nagoya", date: "2026-07-01" },
+  { slug: "lc-pokecenter-okinawa", name: "Pokémon Center Okinawa", date: "2026-07-01" },
+  { slug: "lc-pokecenter-osaka", name: "Pokémon Center Osaka", date: "2026-07-01" },
+  { slug: "lc-pokecenter-osakadx", name: "Pokémon Center Osaka DX", date: "2026-07-01" },
+  { slug: "lc-pokecenter-sapporo", name: "Pokémon Center Sapporo", date: "2026-07-01" },
+  { slug: "lc-pokecenter-shibuya", name: "Pokémon Center Shibuya", date: "2026-07-01" },
+  { slug: "lc-pokecenter-skytreetown", name: "Pokémon Center Skytree Town", date: "2026-07-01" },
+  { slug: "lc-pokecenter-tohoku", name: "Pokémon Center Tohoku", date: "2026-07-01" },
+  { slug: "lc-pokecenter-tokyobay", name: "Pokémon Center Tokyo Bay", date: "2026-07-01" },
+  { slug: "lc-pokecenter-tokyodx", name: "Pokémon Center Tokyo DX", date: "2026-07-01" },
+  { slug: "lc-pokecenter-yokohama", name: "Pokémon Center Yokohama", date: "2026-07-01" },
+  { slug: "sb-arraia-2026", name: "Arraia 2026", date: "2026-06-23" },
+  { slug: "lc-go-fest-2026-copenhagen", name: "GO Fest 2026: Copenhagen", date: "2026-06-11" },
+  { slug: "sb-lego-2026", name: "LEGO", date: "2026-06-11" },
+  { slug: "lc-go-fest-2026-chicago", name: "GO Fest 2026: Chicago", date: "2026-06-04" },
+  { slug: "lc-go-fest-2026-tokyo", name: "GO Fest 2026: Tokyo", date: "2026-05-25" },
+  { slug: "lc-stamp-rally-2026-tokyo-koto", name: "Stamp Rally Tokyo Koto", date: "2026-05-24" },
+  { slug: "lc-stamp-rally-2026-tokyo-minato", name: "Stamp Rally Tokyo Minato", date: "2026-05-24" },
+  { slug: "lc-stamp-rally-2026-tokyo-shinagawa", name: "Stamp Rally Tokyo Shinagawa", date: "2026-05-24" },
+  { slug: "lc-nbp-yokohama-dena-baystars", name: "NPB Yokohama DeNA BayStars 2026", date: "2026-05-23" },
+  { slug: "lc-nbp-chiba-lotte-marines", name: "NPB Chiba Lotte Marines 2026", date: "2026-05-15" },
+  { slug: "lc-nbp-orix-buffaloes", name: "NPB ORIX Buffaloes 2026", date: "2026-05-08" },
+  { slug: "lc-nbp-saitama-seibu-lions", name: "NPB Saitama Seibu Lions 2026", date: "2026-05-04" },
+  { slug: "lc-nbp-softbank-hawks", name: "NPB Softbank Hawks 2026", date: "2026-05-01" },
+  { slug: "lc-npb-hiroshima-carp-2026", name: "NPB Hiroshima Carp 2026", date: "2026-04-21" },
+  { slug: "lc-npb-hanshin-tigers-2026", name: "NPB Hanshin Tigers 2026", date: "2026-04-17" },
+  { slug: "lc-npb-rakuten-eagles-2026", name: "NPB Rakuten Eagles 2026", date: "2026-04-10" },
+  { slug: "lc-npb-yomiuri-giants-2026", name: "NPB Yomiuri Giants 2026", date: "2026-04-03" },
+  { slug: "lc-taipei-flower-festival-2026", name: "Taipei Flow Festival 2026", date: "2026-03-28" },
+  { slug: "sb-pokopia-2026", name: "Pokopia", date: "2026-03-10" },
+  { slug: "sb-festivalofcolors-2026", name: "Festival of Colors", date: "2026-03-04" },
+  { slug: "sb-go-tour-2026-mega", name: "GO Tour 2026 Mega", date: "2026-02-28" },
+  { slug: "sb-go-tour-2026-x", name: "GO Tour 2026 X", date: "2026-02-27" },
+  { slug: "sb-go-tour-2026-y", name: "GO Tour 2026 Y", date: "2026-02-27" },
+  { slug: "sb-go-tour-2026-diamond", name: "GO Tour 2026 Diamond", date: "2026-02-26" },
+  { slug: "sb-go-tour-2026-pearl", name: "GO Tour 2026 Pearl", date: "2026-02-26" },
+  { slug: "sb-go-tour-2026-ruby", name: "GO Tour 2026 Ruby", date: "2026-02-25" },
+  { slug: "sb-sapphire", name: "GO Tour 2026 Sapphire", date: "2026-02-25" },
+  { slug: "sb-go-tour-2026-gold", name: "GO Tour 2026 Gold", date: "2026-02-24" },
+  { slug: "sb-go-tour-2026-silver", name: "GO Tour 2026 Silver", date: "2026-02-24" },
+  { slug: "lc-go-tour-2026-los-angeles", name: "GO Tour 2026 Los Angeles", date: "2026-02-20" },
+  { slug: "lc-go-tour-2026-tainan", name: "GO Tour 2026 Tainan", date: "2026-02-20" },
+  { slug: "lc-pokemon-park", name: "Pokemon Park", date: "2026-02-05" },
+  { slug: "lc-stamp-rally-2026-cologne", name: "Stamp Rally Cologne", date: "2026-02-03" },
+  { slug: "lc-stamp-rally-2026-rio-de-janeiro", name: "Stamp Rally Rio De Janeiro", date: "2026-02-03" },
+  { slug: "lc-pokelid-tokushima", name: "Poké Lid Tokushima", date: "2026-01-20" },
+  { slug: "lc-pyeongchang-winter-festival", name: "Pyeongchang Winter Festival", date: "2026-01-19" },
+  { slug: "lc-car-free-day-2026-indonesia", name: "Car Free Day Indonesia", date: "2026-01-11" },
+  { slug: "sb-community-days-2026", name: "Community Days 2026", date: "2026-01-04" },
+  { slug: "lc-pokelid-tottori", name: "Poké Lid Tottori", date: "2026-01-01" },
+  { slug: "lc-pokelid-yamaguchi", name: "Poké Lid Yamaguchi", date: "2026-01-01" },
+  { slug: "lc-pokelid-aichi", name: "Pokélid Aichi", date: "2026-01-01" },
+  { slug: "lc-pokelid-akita", name: "Pokélid Akita", date: "2026-01-01" },
+  { slug: "lc-pokelid-aomori", name: "Pokélid Aomori", date: "2026-01-01" },
+  { slug: "lc-pokelid-chiba", name: "Pokélid Chiba", date: "2026-01-01" },
+  { slug: "lc-pokelid-fukui", name: "Pokélid Fukui", date: "2026-01-01" },
+  { slug: "lc-pokelid-fukushima", name: "Pokélid Fukushima", date: "2026-01-01" },
+  { slug: "lc-pokelid-gifu", name: "Pokélid Gifu", date: "2026-01-01" },
+  { slug: "lc-pokelid-hokkaido", name: "Pokélid Hokkaido", date: "2026-01-01" },
+  { slug: "lc-pokelid-hyogo", name: "Pokélid Hyogo", date: "2026-01-01" },
+  { slug: "lc-pokelid-ibaraki", name: "Pokélid Ibaraki", date: "2026-01-01" },
+  { slug: "lc-pokelid-ishikawa", name: "Pokélid Ishikawa", date: "2026-01-01" },
+  { slug: "lc-pokelid-iwate", name: "Pokélid Iwate", date: "2026-01-01" },
+  { slug: "lc-pokelid-kanagawa", name: "Pokélid Kanagawa", date: "2026-01-01" },
+  { slug: "lc-pokelid-kyoto", name: "Pokélid Kyoto", date: "2026-01-01" },
+  { slug: "lc-pokelid-mie", name: "Pokélid Mie", date: "2026-01-01" },
+  { slug: "lc-pokelid-miyagi", name: "Pokélid Miyagi", date: "2026-01-01" },
+  { slug: "lc-pokelid-nara", name: "Pokélid Nara", date: "2026-01-01" },
+  { slug: "lc-pokelid-niigata", name: "Pokélid Niigata", date: "2026-01-01" },
+  { slug: "lc-pokelid-osaka", name: "Pokélid Osaka", date: "2026-01-01" },
+  { slug: "lc-pokelid-saitama", name: "Pokélid Saitama", date: "2026-01-01" },
+  { slug: "lc-pokelid-shiga", name: "Pokélid Shiga", date: "2026-01-01" },
+  { slug: "lc-pokelid-shizuoka", name: "Pokélid Shizuoka", date: "2026-01-01" },
+  { slug: "lc-pokelid-tochigi", name: "Pokélid Tochigi", date: "2026-01-01" },
+  { slug: "lc-pokelid-tokyo", name: "Pokélid Tokyo", date: "2026-01-01" },
+  { slug: "lc-pokelid-toyama", name: "Pokélid Toyama", date: "2026-01-01" },
+  { slug: "lc-pokelid-wakayama", name: "Pokélid Wakayama", date: "2026-01-01" },
+  { slug: "lc-pokelid-yamagata", name: "Pokélid Yamagata", date: "2026-01-01" },
+  { slug: "lc-nfl-arizona-cardinals", name: "NFL Arizona Cardinals", date: "2025-12-21" },
+  { slug: "lc-city-safari-2025-buenos-aires", name: "City Safari 2025 Buenos Aires", date: "2025-12-13" },
+  { slug: "lc-city-safari-2025-miami", name: "City Safari 2025 Miami", date: "2025-12-13" },
+  { slug: "lc-city-safari-2025-sydney", name: "City Safari 2025 Sydney", date: "2025-12-13" },
+  { slug: "sb-gowildarea-2025-global", name: "GO Wild Area 2025 Global", date: "2025-11-10" },
+  { slug: "lc-gowildarea-2025-nagasaki", name: "GO Wild Area 2025 Nagasaki", date: "2025-11-07" },
+  { slug: "lc-pokelid-fukuoka", name: "Pokélid Fukuoka", date: "2025-11-07" },
+  { slug: "lc-pokelid-kagoshima", name: "Pokélid Kagoshima", date: "2025-11-07" },
+  { slug: "lc-pokelid-miyazaki", name: "Pokélid Miyazaki", date: "2025-11-07" },
+  { slug: "lc-pokelid-nagasaki", name: "Pokélid Nagasaki", date: "2025-11-07" },
+  { slug: "lc-pokelid-okinawa", name: "Pokélid Okinawa", date: "2025-11-07" },
+  { slug: "lc-pokelid-saga", name: "Pokélid Saga", date: "2025-11-07" },
+  { slug: "sb-observatory-exhibition-tour", name: "Observatory Exhibition Tour", date: "2025-11-01" },
+  { slug: "lc-stamp-rally-2025-taipei", name: "Stamp Rally Taipei", date: "2025-10-21" },
+  { slug: "lc-stamp-rally-2025-jeju-island", name: "Stamp Rally Jeju Island", date: "2025-10-01" },
+  { slug: "lc-city-safari-2025-bangkok", name: "City Safari 2025 Bangkok", date: "2025-09-27" },
+  { slug: "lc-city-safari-2025-cancun", name: "City Safari 2025 Cancún", date: "2025-09-27" },
+  { slug: "lc-city-safari-2025-valencia", name: "City Safari 2025 Valencia", date: "2025-09-27" },
+  { slug: "lc-city-safari-2025-vancouver", name: "City Safari 2025 Vancouver", date: "2025-09-27" },
+  { slug: "lc-city-safari-2025-amsterdam", name: "City Safari 2025 Amsterdam", date: "2025-09-27" },
+  { slug: "lc-stamp-rally-paris-2025", name: "Stamp Rally Paris 1", date: "2025-09-13" },
+  { slug: "lc-stamp-rally-paris-2025-2", name: "Stamp Rally Paris 2", date: "2025-09-13" },
+  { slug: "sb-concierge", name: "Concierge", date: "2025-09-09" },
+  { slug: "lc-mlb-texas-rangers", name: "MLB Texas Rangers", date: "2025-09-07" },
+  { slug: "sb-season-20-tales-of-transformation", name: "Tales Of Transformation Seasonal Background", date: "2025-09-02" },
+  { slug: "lc-mlb-minnesota-twins", name: "MLB Minnesota Twins", date: "2025-08-31" },
+  { slug: "lc-mlb-boston-red-sox", name: "MLB Boston Red Sox", date: "2025-08-29" },
+  { slug: "lc-mlb-san-francisco-giants", name: "MLB San Francisco Giants", date: "2025-08-29" },
+  { slug: "lc-mlb-newyork-mets", name: "MLB New York Mets", date: "2025-08-25" },
+  { slug: "lc-roadtrip-2025-cologne", name: "Roadtrip 2025 Cologne", date: "2025-08-20" },
+  { slug: "sb-go-fest-2025-dark-skies", name: "GO Fest 2025 Dark Skies", date: "2025-08-18" },
+  { slug: "lc-roadtrip-2025-hague", name: "Roadtrip 2025 Hague", date: "2025-08-16" },
+  { slug: "lc-wcs-2025-anaheim", name: "World Championships 2025 Anaheim", date: "2025-08-15" },
+  { slug: "lc-mlb-cleveland-guardians", name: "MLB Cleveland Guardians", date: "2025-08-14" },
+  { slug: "lc-mlb-baltimore-orioles", name: "MLB Baltimore Orioles", date: "2025-08-13" },
+  { slug: "lc-mlb-chicago-whitesox", name: "MLB Chicago White Sox", date: "2025-08-11" },
+  { slug: "lc-mlb-arizona-diamondbacks", name: "MLB Arizona Diamondbacks", date: "2025-08-10" },
+  { slug: "lc-roadtrip-2025-berlin", name: "Roadtrip 2025 Berlin", date: "2025-08-09" },
+  { slug: "lc-mlb-washington-nationals", name: "MLB Washington Nationals", date: "2025-08-05" },
+  { slug: "lc-roadtrip-2025-valencia", name: "Roadtrip 2025 Valencia", date: "2025-08-02" },
+  { slug: "lc-jangheung-water-festival-2025", name: "Jangheung Water Festival 2025", date: "2025-07-28" },
+  { slug: "lc-roadtrip-2025-paris", name: "Roadtrip 2025 Paris", date: "2025-07-26" },
+  { slug: "lc-mlb-milwaukee-brewers", name: "MLB Milwaukee Brewers", date: "2025-07-25" },
+  { slug: "lc-mlb-tampa-bay-rays", name: "MLB Tampa Bay Rays", date: "2025-07-20" },
+  { slug: "lc-roadtrip-2025-london", name: "Roadtrip 2025 London", date: "2025-07-19" },
+  { slug: "lc-mlb-marlins", name: "MLB Miami Marlins", date: "2025-07-18" },
+  { slug: "lc-roadtrip-2025-manchester", name: "Roadtrip 2025 Manchester", date: "2025-07-16" },
+  { slug: "sb-9th-anniversary", name: "9th Anniversary", date: "2025-07-01" },
+  { slug: "sb-zacian-go-fest-2025", name: "Zacian GO Fest 2025", date: "2025-06-29" },
+  { slug: "sb-zamazenta-go-fest-2025", name: "Zamazenta GO Fest 2025", date: "2025-06-28" },
+  { slug: "sb-go-fest-2025", name: "GO Fest 2025", date: "2025-06-23" },
+  { slug: "lc-lotte-giants", name: "Lotte Giants", date: "2025-06-19" },
+  { slug: "lc-go-fest-2025-paris", name: "GO Fest 2025 Paris", date: "2025-06-13" },
+  { slug: "lc-go-fest-2025-jersey-city", name: "GO Fest 2025 Jersey City", date: "2025-06-06" },
+  { slug: "sb-season-19-delightful-days", name: "Delightful Days Seasonal Background", date: "2025-06-03" },
+  { slug: "lc-go-fest-2025-osaka", name: "GO Fest 2025 Osaka", date: "2025-05-29" },
+  { slug: "lc-stamp-rally-2025-expo-1", name: "Stamp Rally EXPO 2025 Pikachu", date: "2025-04-13" },
+  { slug: "lc-stamp-rally-2025-expo-2", name: "Stamp Rally EXPO 2025 Starters", date: "2025-04-13" },
+  { slug: "lc-stamp-rally-2025-suita", name: "Stamp Rally Suita City", date: "2025-04-13" },
+  { slug: "lc-cherry-blossom-fest-2025-yeouido", name: "Cherry Blossom Fest 2025 Yeouido", date: "2025-03-30" },
+  { slug: "lc-city-safari-2025-milan", name: "City Safari 2025 Milan", date: "2025-03-29" },
+  { slug: "lc-city-safari-2025-mumbai", name: "City Safari 2025 Mumbai", date: "2025-03-29" },
+  { slug: "lc-city-safari-2025-santiago", name: "City Safari 2025 Santiago", date: "2025-03-29" },
+  { slug: "lc-city-safari-2025-singapore", name: "City Safari 2025 Singapore", date: "2025-03-29" },
+  { slug: "sb-season-18-might-and-mastery", name: "Might And Mastery Seasonal Background", date: "2025-03-08" },
+  { slug: "sb-go-tour-2025-black-white", name: "GO Tour 2025 Black White", date: "2025-03-01" },
+  { slug: "sb-go-tour-2025-black", name: "GO Tour 2025 Black", date: "2025-02-24" },
+  { slug: "sb-go-tour-2025-white", name: "GO Tour 2025 White", date: "2025-02-24" },
+  { slug: "lc-go-tour-2025-los-angeles", name: "GO Tour 2025 Los Angeles", date: "2025-02-21" },
+  { slug: "sb-go-tour-2025-enigma", name: "GO Tour 2025 Enigma", date: "2025-02-21" },
+  { slug: "lc-go-tour-2025-new-taipei-city", name: "GO Tour 2025 New Taipei City", date: "2025-02-21" },
+  { slug: "sb-season-17-duel-destiny", name: "Duel Destiny Seasonal Background", date: "2025-01-05" },
+  { slug: "sb-2024-december-cd-recap", name: "December 2024 Recap Community Day", date: "2024-12-21" },
+  { slug: "lc-city-safari-2024-hongkong", name: "City Safari 2024 Hong Kong", date: "2024-12-07" },
+  { slug: "lc-city-safari-2024-saopaulo", name: "City Safari 2024 Sao Paulo", date: "2024-12-07" },
+  { slug: "sb-gowildarea-2024-global", name: "GO Wild Area 2024 Global", date: "2024-11-23" },
+  { slug: "lc-gowildarea-2024-fukuoka", name: "GO Wild Area 2024 Fukuoka", date: "2024-11-16" },
+  { slug: "lc-city-safari-2024-incheon", name: "City Safari 2024 Incheon", date: "2024-09-27" },
+  { slug: "lc-air-adv-2024-jakarta", name: "Air Adv 2024 Jakarta", date: "2024-09-21" },
+  { slug: "lc-mlb-mariners", name: "MLB Seattle Mariners", date: "2024-09-13" },
+  { slug: "lc-air-adv-2024-yogyakarta", name: "Air Adv 2024 Yogyakarta", date: "2024-08-24" },
+  { slug: "lc-wcs-2024-honolulu", name: "World Championships 2024 Honolulu", date: "2024-08-16" },
+  { slug: "sb-team-leader-blue", name: "Team Leader Blue", date: "2024-07-23" },
+  { slug: "sb-team-leader-red", name: "Team Leader Red", date: "2024-07-23" },
+  { slug: "sb-team-leader-yellow", name: "Team Leader Yellow", date: "2024-07-23" },
+  { slug: "sb-go-fest-2024-radiance", name: "GO Fest 2024 Radiance", date: "2024-07-13" },
+  { slug: "sb-go-fest-2024-umbra", name: "GO Fest 2024 Umbra", date: "2024-07-13" },
+  { slug: "sb-go-fest-2024-wormhole-moon", name: "GO Fest 2024 Wormhole Moon", date: "2024-07-13" },
+  { slug: "sb-go-fest-2024-wormhole-sun", name: "GO Fest 2024 Wormhole Sun", date: "2024-07-13" },
+  { slug: "sb-go-fest-2024-wormhole", name: "GO Fest 2024 Wormhole", date: "2024-07-08" },
+  { slug: "lc-go-fest-2024-new-york", name: "GO Fest 2024 New York", date: "2024-07-05" },
+  { slug: "lc-go-fest-2024-madrid", name: "GO Fest 2024 Madrid", date: "2024-06-14" },
+  { slug: "lc-go-fest-2024-sendai", name: "GO Fest 2024 Sendai", date: "2024-05-30" },
+  { slug: "lc-air-adv-2024-surabaya", name: "Air Adv 2024 Surabaya", date: "2024-05-11" },
+  { slug: "lc-city-safari-2024-tainan", name: "City Safari 2024 Tainan", date: "2024-03-09" },
+  { slug: "lc-air-adv-2024-bali", name: "Air Adv 2024 Bali", date: "2024-03-02" },
+  { slug: "lc-go-tour-2024-los-angeles", name: "GO Tour 2024 Los Angeles", date: "2024-02-16" },
+  { slug: "lc-city-safari-2023-mexico-city", name: "City Safari 2023 Mexico City", date: "2023-11-04" },
+  { slug: "lc-city-safari-2023-barcelona", name: "City Safari 2023 Barcelona", date: "2023-10-13" },
+  { slug: "lc-city-safari-2023-seoul", name: "City Safari 2023 Seoul", date: "2023-10-07" },
+  { slug: "lc-go-fest-2023-new-york", name: "GO Fest 2023 New York", date: "2023-08-18" },
+  { slug: "lc-go-fest-2023-london", name: "GO Fest 2023 London", date: "2023-08-04" },
+  { slug: "lc-go-fest-2023-osaka", name: "GO Fest 2023 Osaka", date: "2023-08-04" },
+  { slug: "lc-jeju-air-adv-2023", name: "Jeju Air Adv 2023", date: "2023-07-28" },
+  { slug: "lc-go-tour-2023-las-vegas", name: "GO Tour 2023 Las Vegas", date: "2023-02-18" },
+  { slug: "lc-2026-br-001", name: "2026 Br 001", date: null },
+  { slug: "lc-busanfireworksfestival-2025", name: "Busan Fireworks Festival 2025", date: null },
+  { slug: "lc-2026-npb-tokyoswallows", name: "NPB Tokyo Swallows 2026", date: null },
+  { slug: "lc-2026-npb-toyamaallstars", name: "NPB Toyama All Stars 2026", date: null },
+  { slug: "lc-pokelid-ehime", name: "Poké Lid Ehime", date: null },
+  { slug: "lc-pokelid-kagawa", name: "Poké Lid Kagawa", date: null },
+  { slug: "lc-pokelid-kochi", name: "Poké Lid Kochi", date: null },
+  { slug: "lc-pokelid-okayama", name: "Poké Lid Okayama", date: null },
+  { slug: "lc-pokelid-shimane", name: "Poké Lid Shimane", date: null },
+  { slug: "sb-s24-sep-2026", name: "S24 Sep 2026", date: null },
+];
+const BACKGROUNDS_IMG_BASE = "assets/pokemon-images/backgrounds/";
+
 const WEB_STORE_BOXES = [
+  {
+    name: "GO Pass Deluxe: August Ultra Box",
+    price: 14.99,
+    category: "Event Bundle",
+    limited: true,
+    limitedLabel: "LIMITED-TIME ONLY",
+    oneTime: true,
+    availableFrom: "2026-08-04",
+    expires: "2026-09-01",
+    availabilityText: "Tuesday, August 4, at 10:00 a.m. to Tuesday, September 1, at 10:00 a.m. local time",
+    items: [
+      { name: "GO Pass Deluxe", qty: 1, note: "August" },
+      { name: "+10 Ranks", qty: 1000 },
+      { name: "Ultra Ball", qty: 20 },
+      { name: "Max Revive", qty: 10 },
+      { name: "Premium Battle Pass", qty: 5 },
+      { name: "Max Potion", qty: 10 },
+      { name: "Reward Points", qty: 180 }
+    ]
+  },
+  {
+    name: "GO Pass Deluxe: PokémonXP & 2026 Worlds Ultra Box",
+    price: 8.99,
+    category: "Event Bundle",
+    limited: true,
+    limitedLabel: "LIMITED-TIME ONLY",
+    oneTime: true,
+    availableFrom: "2026-08-25",
+    expires: "2026-08-30",
+    availabilityText: "Tuesday, August 25, at 10:00 a.m. to Sunday, August 30, at 8:00 p.m. local time",
+    items: [
+      { name: "GO Pass Deluxe", qty: 1, note: "PokémonXP & 2026 Worlds" },
+      { name: "+6 Ranks", qty: 600 },
+      { name: "Ultra Ball", qty: 20 },
+      { name: "Max Revive", qty: 10 },
+      { name: "Premium Battle Pass", qty: 5 },
+      { name: "Max Potion", qty: 10 },
+      { name: "Reward Points", qty: 108 }
+    ]
+  },
+  {
+    name: "GO Pass Deluxe: August + 10 Ranks",
+    price: 9.99,
+    category: "Event Bundle",
+    limited: true,
+    limitedLabel: "LIMITED-TIME ONLY",
+    oneTime: true,
+    availableFrom: "2026-08-04",
+    expires: "2026-09-01",
+    availabilityText: "Tuesday, August 4, at 10:00 a.m. to Tuesday, September 1, at 10:00 a.m. local time",
+    items: [
+      { name: "GO Pass Deluxe", qty: 1, note: "August" },
+      { name: "+10 Ranks", qty: 1000 },
+      { name: "Ultra Ball", qty: 10 },
+      { name: "Max Revive", qty: 5 },
+      { name: "Premium Battle Pass", qty: 2 },
+      { name: "Max Potion", qty: 5 },
+      { name: "Reward Points", qty: 120 }
+    ]
+  },
+  {
+    name: "GO Pass Deluxe: PokémonXP & 2026 Worlds + 6 Ranks",
+    price: 6.99,
+    category: "Event Bundle",
+    limited: true,
+    limitedLabel: "LIMITED-TIME ONLY",
+    oneTime: true,
+    availableFrom: "2026-08-25",
+    expires: "2026-08-30",
+    availabilityText: "Tuesday, August 25, at 10:00 a.m. to Sunday, August 30, at 8:00 p.m. local time",
+    items: [
+      { name: "GO Pass Deluxe", qty: 1, note: "PokémonXP & 2026 Worlds" },
+      { name: "+6 Ranks", qty: 600 },
+      { name: "Ultra Ball", qty: 10 },
+      { name: "Max Revive", qty: 5 },
+      { name: "Premium Battle Pass", qty: 2 },
+      { name: "Max Potion", qty: 5 },
+      { name: "Reward Points", qty: 84 }
+    ]
+  },
+  {
+    name: "GO Pass Deluxe: PokémonXP & 2026 Worlds",
+    price: 4.99,
+    category: "Event Bundle",
+    limited: true,
+    limitedLabel: "LIMITED-TIME ONLY",
+    oneTime: true,
+    availableFrom: "2026-08-25",
+    expires: "2026-08-30",
+    availabilityText: "Tuesday, August 25, at 10:00 a.m. to Sunday, August 30, at 8:00 p.m. local time",
+    items: [
+      { name: "GO Pass Deluxe", qty: 1, note: "PokémonXP & 2026 Worlds" },
+      { name: "Ultra Ball", qty: 10 },
+      { name: "Max Revive", qty: 5 },
+      { name: "Premium Battle Pass", qty: 1 },
+      { name: "Max Potion", qty: 5 },
+      { name: "Reward Points", qty: 60 }
+    ]
+  },
+  {
+    name: "GO Pass Deluxe: August",
+    price: 7.99,
+    category: "Event Bundle",
+    limited: true,
+    limitedLabel: "LIMITED-TIME ONLY",
+    oneTime: true,
+    availableFrom: "2026-08-04",
+    expires: "2026-09-01",
+    availabilityText: "Tuesday, August 4, at 10:00 a.m. to Tuesday, September 1, at 10:00 a.m. local time",
+    items: [
+      { name: "GO Pass Deluxe", qty: 1, note: "August" },
+      { name: "Ultra Ball", qty: 10 },
+      { name: "Max Revive", qty: 5 },
+      { name: "Premium Battle Pass", qty: 1 },
+      { name: "Max Potion", qty: 5 },
+      { name: "Reward Points", qty: 96 }
+    ]
+  },
   {
     name: "GO Pass Deluxe: June Ultra Box",
     price: 14.99,
@@ -3157,6 +3774,7 @@ const BUG_SCREENSHOT_MAX_BYTES = 15 * 1024 * 1024; // 15 MB cap (matches bucket 
 let _bugReportsCache = [];
 let _bugReportFilter = "all"; // "all" | "acknowledged" | "fixing" | "fixed" | "wont_fix" | "duplicate" | "not_a_bug"
 let _bugReportMoreOpen = false;
+let _bgSort = "newest"; // "newest" | "oldest" | "az" — Backgrounds tab sort order
 let _statusMenuOpenForId = null; // id of the report whose status dropdown is open
 
 function toggleStatusMenu(id) {
@@ -3353,8 +3971,8 @@ const BUG_TYPE_LABELS = {
   "bug": "Bug", "wrong-info": "Wrong Info", "missing": "Missing", "suggestion": "Suggestion", "other": "Other"
 };
 const BUG_SECTION_LABELS = {
-  "calendar": "Calendar", "store": "Deal Check", "events": "Events", "general": "General",
-  "max-battles": "Max Battles", "nests": "Nests", "news": "News", "pokedex": "PokéDex",
+  "backgrounds": "Backgrounds", "calendar": "Calendar", "store": "Deal Check", "events": "Events", "general": "General",
+  "items": "Items", "max-battles": "Max Battles", "nests": "Nests", "news": "News", "pokedex": "PokéDex",
   "tools": "PoGO Tools", "raids": "Raids",
   "accessibility": "Accessibility", "content-data": "Content & Data", "new-feature": "New Feature",
   "notifications": "Notifications", "performance": "Performance", "ui-design": "UI / Design"
@@ -3372,6 +3990,10 @@ function relativeDate(iso) {
   const d = Math.floor(h / 24);
   if (d < 30) return `${d} day${d === 1 ? "" : "s"} ago`;
   return new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+}
+
+function formatBackgroundDate(d) {
+  return d ? new Date(d + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "—";
 }
 
 function openScreenshotLightbox(url) {
@@ -3394,6 +4016,53 @@ function openScreenshotLightbox(url) {
   const onKey = (e) => { if (e.key === "Escape") { overlay.remove(); document.removeEventListener("keydown", onKey); } };
   document.addEventListener("keydown", onKey);
   // Also clean up the keydown listener when the overlay is dismissed by click.
+  const observer = new MutationObserver(() => {
+    if (!document.body.contains(overlay)) {
+      document.removeEventListener("keydown", onKey);
+      observer.disconnect();
+    }
+  });
+  observer.observe(document.body, { childList: true });
+  document.body.appendChild(overlay);
+  closeBtn.focus();
+}
+
+function openBackgroundLightbox(slug) {
+  const bg = BACKGROUNDS_DB.find(b => b.slug === slug);
+  if (!bg) return;
+  // If a lightbox is already open, remove it first so we don't stack overlays.
+  document.getElementById("background-lightbox")?.remove();
+  const overlay = document.createElement("div");
+  overlay.id = "background-lightbox";
+  overlay.style.cssText = "position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:400;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;cursor:zoom-out";
+  const img = document.createElement("img");
+  img.src = BACKGROUNDS_IMG_BASE + slug + ".webp";
+  img.alt = bg.name;
+  img.style.cssText = "max-width:min(92vw,760px);max-height:78vh;object-fit:contain;border-radius:12px;box-shadow:0 12px 48px rgba(0,0,0,0.6)";
+  img.onclick = (e) => e.stopPropagation();
+  const caption = document.createElement("div");
+  caption.style.cssText = "text-align:center;cursor:default";
+  caption.onclick = (e) => e.stopPropagation();
+  const nameEl = document.createElement("div");
+  nameEl.style.cssText = "color:#fff;font-weight:700;font-size:16px";
+  nameEl.textContent = bg.name;
+  const dateEl = document.createElement("div");
+  dateEl.style.cssText = "color:rgba(255,255,255,0.65);font-size:13px;margin-top:4px";
+  dateEl.textContent = formatBackgroundDate(bg.date);
+  caption.appendChild(nameEl);
+  caption.appendChild(dateEl);
+  const closeBtn = document.createElement("button");
+  closeBtn.textContent = "✕";
+  closeBtn.setAttribute("aria-label", "Close background preview");
+  closeBtn.style.cssText = "position:absolute;top:20px;right:20px;width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,0.6);border:1.5px solid #fff;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center";
+  overlay.appendChild(img);
+  overlay.appendChild(caption);
+  overlay.appendChild(closeBtn);
+  overlay.onclick = () => overlay.remove();
+  // Escape key handler — listens on document so it works even before focus lands.
+  const onKey = (e) => { if (e.key === "Escape") { overlay.remove(); document.removeEventListener("keydown", onKey); } };
+  document.addEventListener("keydown", onKey);
+  // Also clean up the keydown listener when the overlay is dismissed by any route.
   const observer = new MutationObserver(() => {
     if (!document.body.contains(overlay)) {
       document.removeEventListener("keydown", onKey);
@@ -6368,6 +7037,39 @@ function searchPokedex(val) {
   resultsEl.style.display = "block";
 }
 
+// Filters the Items tab's rendered cards directly in the DOM (no render() call) so the
+// search input never loses focus mid-typing — same reasoning as searchPokedex above.
+function searchItems(val) {
+  const raw = String(val || "").trim();
+  const query = raw.toLowerCase();
+  const sections = document.querySelectorAll('[data-item-section]');
+  const emptyEl = document.getElementById("items-empty");
+  let totalVisible = 0;
+  sections.forEach(section => {
+    const cards = section.querySelectorAll('[data-item-card]');
+    let visibleCount = 0;
+    cards.forEach(card => {
+      const name = card.getAttribute("data-item-name") || "";
+      const desc = card.getAttribute("data-item-desc") || "";
+      const match = query === "" || name.includes(query) || desc.includes(query);
+      card.style.display = match ? "" : "none";
+      if (match) visibleCount++;
+    });
+    totalVisible += visibleCount;
+    section.style.display = visibleCount === 0 ? "none" : "";
+    const countEl = section.querySelector('[data-item-section-count]');
+    if (countEl) countEl.textContent = `(${visibleCount})`;
+  });
+  if (emptyEl) {
+    if (totalVisible === 0) {
+      emptyEl.textContent = `No items match "${raw}"`;
+      emptyEl.style.display = "block";
+    } else {
+      emptyEl.style.display = "none";
+    }
+  }
+}
+
 function toggleDexRegion(id) {
   const el = document.getElementById(id);
   const arrow = document.getElementById(id + '-arrow');
@@ -6411,7 +7113,7 @@ function updateReportSection() {
     select.innerHTML = `<option value="accessibility">Accessibility</option><option value="content-data">Content & Data</option><option value="general">General</option><option value="new-feature">New Feature</option><option value="notifications">Notifications & Alerts</option><option value="performance">Performance</option><option value="ui-design">UI / Design</option>`;
   } else {
     label.textContent = "Which page or section?";
-    select.innerHTML = `<option value="calendar">Calendar</option><option value="store">Deal Check</option><option value="events">Events</option><option value="general">General / Sitewide</option><option value="max-battles">Max Battles</option><option value="nests">Nests</option><option value="news">News</option><option value="pokedex">Pok\u00E9Dex</option><option value="tools">PoGO Tools</option><option value="raids">Raids</option>`;
+    select.innerHTML = `<option value="backgrounds">Backgrounds</option><option value="calendar">Calendar</option><option value="store">Deal Check</option><option value="events">Events</option><option value="general">General / Sitewide</option><option value="items">Items</option><option value="max-battles">Max Battles</option><option value="nests">Nests</option><option value="news">News</option><option value="pokedex">Pok\u00E9Dex</option><option value="tools">PoGO Tools</option><option value="raids">Raids</option>`;
   }
 }
 
@@ -7027,6 +7729,11 @@ function setFilter(f) {
 
 function setStoreFilter(f) {
   state.storeFilter = f;
+  render();
+}
+
+function setBackgroundSort(v) {
+  _bgSort = v;
   render();
 }
 
@@ -7889,7 +8596,7 @@ function render() {
         </div>`;
       });
       raidsTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
-        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 18, 2026 at 5:00 pm</div>
+        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 25, 2026 at 11:22 am</div>
         <div style="text-align:center;padding:10px;font-size:14px;font-weight:600;color:${th.text}">Current Raid Bosses</div>
         <div style="text-align:center;font-size:11px;color:${th.textMuted};font-weight:500;margin-top:-10px">Data sourced from Pok\u00E9monGO.com, LeekDuck.com & Pok\u00E9monGOHUB.net</div>
         <div style="text-align:center;font-size:12px;color:${th.textMuted};font-weight:600;margin-top:2px">Tap a Pok\u00E9mon to see its weaknesses & resistances</div>
@@ -8184,10 +8891,27 @@ function render() {
         "Mega Aggron": "Aggron_Mega_Energy.png"
       };
       const renderRewardTile = (rewardName, tileBg) => {
+        const imgSize = isMobile ? 76 : 110;
+        const fallback = `<div style="width:${imgSize}px;height:${imgSize}px;display:flex;align-items:center;justify-content:center"><div style="width:8px;height:8px;border-radius:50%;background:${th.textFaint}"></div></div>`;
+        const itemMatch = rewardName.match(/^(.+?)\s*×\s*([\d,]+)$/);
+        if (itemMatch) {
+          const itemName = itemMatch[1].trim();
+          const itemQty = itemMatch[2];
+          const itemIcon = rewardIcon(itemName);
+          // Item art is tightly cropped (unlike Pokemon sprites, which carry transparent
+          // padding), so scale it down inside a full-size box to keep tile heights aligned.
+          const itemImgSize = Math.round(imgSize * 0.58);
+          const itemImgEl = itemIcon ? `<div style="width:${imgSize}px;height:${imgSize}px;display:flex;align-items:center;justify-content:center"><img src="${itemIcon}" style="width:${itemImgSize}px;height:${itemImgSize}px;object-fit:contain" alt="${esc(itemName)}" /></div>` : fallback;
+          const itemBadge = `<div style="margin-top:3px;font-size:${isMobile ? 9 : 10}px;font-weight:700;color:#fff;background:${th.textMuted};padding:2px 6px;border-radius:8px;display:inline-block;line-height:1.2">×${itemQty}</div>`;
+          return `<div style="border-radius:10px;background:${tileBg};border:1px solid ${th.border};display:flex;flex-direction:column;align-items:center;padding:${isMobile ? "6px 4px 6px" : "10px 6px 8px"};text-align:center;box-sizing:border-box;min-width:${isMobile ? "0" : "120px"};${isMobile ? "width:calc(33.33% - 4px)" : "flex:1;max-width:170px"}">
+            ${itemImgEl}
+            <div style="font-weight:700;color:${th.text};font-size:${isMobile ? 11 : 12};margin-top:2px;line-height:1.2;word-break:break-word">${esc(itemName)}</div>
+            ${itemBadge}
+          </div>`;
+        }
         const energyMatch = rewardName.match(/^(.*?)\s*\+(\d+)\s*Energy$/i);
         const baseName = energyMatch ? energyMatch[1].trim() : rewardName;
         const energyAmt = energyMatch ? energyMatch[2] : null;
-        const imgSize = isMobile ? 76 : 110;
         const megaIcon = energyAmt ? MEGA_ENERGY_ICONS[baseName] : null;
         let imgEl;
         if (megaIcon) {
@@ -8197,7 +8921,6 @@ function render() {
           imgEl = pokemonImgHTML(pkmn, imgSize);
           if (imgEl) imgEl = wrapShinySparkles(imgEl, baseName, imgSize);
         }
-        const fallback = `<div style="width:${imgSize}px;height:${imgSize}px;display:flex;align-items:center;justify-content:center"><div style="width:8px;height:8px;border-radius:50%;background:${th.textFaint}"></div></div>`;
         const displayName = baseName.replace(/\s*\(Male\)/," ♂").replace(/\s*\(Female\)/," ♀");
         const energyBadge = energyAmt ? `<div style="margin-top:3px;font-size:${isMobile ? 9 : 10}px;font-weight:700;color:#fff;background:linear-gradient(135deg,#E74C3C,#F39C12);padding:2px 6px;border-radius:8px;display:inline-block;line-height:1.2">+${energyAmt} Mega Energy</div>` : "";
         return `<div style="border-radius:10px;background:${tileBg};border:1px solid ${th.border};display:flex;flex-direction:column;align-items:center;padding:${isMobile ? "6px 4px 6px" : "10px 6px 8px"};text-align:center;box-sizing:border-box;min-width:${isMobile ? "0" : "120px"};${isMobile ? "width:calc(33.33% - 4px)" : "flex:1;max-width:170px"}">
@@ -8212,9 +8935,10 @@ function render() {
         const imgSize = isMobile ? 84 : 120;
         let imgEl = pokemonImgHTML(pkmn, imgSize);
         if (imgEl) imgEl = wrapShinySparkles(imgEl, name, imgSize);
+        const displayName = name.replace(/\s*\(Male\)/," ♂").replace(/\s*\(Female\)/," ♀");
         return `<div style="border-radius:12px;background:${th.accentBgSubtle("#16A085")};border:1.5px solid ${th.border};display:flex;flex-direction:column;align-items:center;padding:${isMobile ? "8px 4px" : "12px 8px"};text-align:center;box-sizing:border-box;${isMobile ? "width:calc(33.33% - 6px)" : "flex:1;min-width:130px;max-width:180px"}">
           ${imgEl || `<div style="width:${imgSize}px;height:${imgSize}px"></div>`}
-          <div style="font-weight:700;color:${th.text};font-size:${isMobile ? 12 : 13};margin-top:4px">${esc(name)}</div>
+          <div style="font-weight:700;color:${th.text};font-size:${isMobile ? 12 : 13};margin-top:4px">${esc(displayName)}</div>
         </div>`;
       }).join("");
 
@@ -8253,12 +8977,12 @@ function render() {
       }).join("");
 
       researchTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
-        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on May 28, 2026 at 9:47 pm</div>
+        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 25, 2026 at 12:58 pm</div>
         <div style="text-align:center;padding:10px">
           <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text};display:flex;align-items:center;justify-content:center;gap:8px"><img src="assets/pokemon-images/icons/green-research.png" style="width:${isMobile ? 30 : 36}px;height:${isMobile ? 30 : 36}px;object-fit:contain" /> Field Research Tasks</h2>
           <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Current season tasks &amp; reward encounters</p>
         </div>
-        <div style="text-align:center;font-size:${isMobile ? 11 : 12}px;color:${th.textMuted};font-weight:500;margin-top:-6px">Data sourced from pokemongohub.net &middot; Memories in Motion Season</div>
+        <div style="text-align:center;font-size:${isMobile ? 11 : 12}px;color:${th.textMuted};font-weight:500;margin-top:-6px">Data sourced from leekduck.com &middot; Forever Forward Season</div>
 
         <div style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden;background:${th.surface}">
           <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:${th.accentBgSubtle("#16A085")};border-bottom:1.5px solid ${th.border}">
@@ -8273,7 +8997,7 @@ function render() {
 
         <div style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden;background:${th.accentBgSubtle("#3498DB")};padding:${isMobile ? "10px 12px" : "14px 16px"}">
           <div style="font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:4px">📌 A note on Seasonal Field Research</div>
-          <div style="font-size:${isMobile ? 11 : 12}px;color:${th.textMuted};line-height:1.4">During the Memories in Motion Season, most Field Research tasks are available the entire Season. Spinda (patterns 1 and 8) tasks still rotate monthly. In-game event Research can temporarily replace some tasks.</div>
+          <div style="font-size:${isMobile ? 11 : 12}px;color:${th.textMuted};line-height:1.4">During the Forever Forward Season, most Field Research tasks are available the entire Season. Spinda (patterns 2 and 3) tasks still rotate monthly. In-game event Research can temporarily replace some tasks.</div>
         </div>
 
         ${sectionsHTML}
@@ -8354,6 +9078,90 @@ function render() {
               <a href="https://play.google.com/store/apps/details?id=com.cjin.pokegenie.standard" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#3498DB;text-decoration:none">Google Play \u2192</a>
             </div>
           </div>
+        </div>
+      </div>`;
+    }
+
+    // Items tab
+    let itemsTabHTML = "";
+    if (state.tab === "items") {
+      const itemCardHTML = (item) => {
+        const imgUrl = ITEMS_IMG_BASE + item.img;
+        return `<div data-item-card="1" data-item-name="${escAttr(item.name.toLowerCase())}" data-item-desc="${escAttr(item.desc.toLowerCase())}" style="display:flex;align-items:center;gap:${isMobile ? 12 : 14}px;padding:${isMobile ? "12px 14px" : "14px 16px"};background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;box-shadow:${th.shadow};transition:all 0.2s ease" onmouseenter="this.style.borderColor='#16A085';this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 18px rgba(22,160,133,0.15)'" onmouseleave="this.style.borderColor='${th.border}';this.style.transform='translateY(0)';this.style.boxShadow='${th.shadow}'">
+          <img src="${escAttr(imgUrl)}" style="width:${isMobile ? 56 : 64}px;height:${isMobile ? 56 : 64}px;object-fit:contain;flex-shrink:0" loading="lazy" onerror="this.style.opacity='0.25'" alt="${escAttr(item.name)}" />
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:800;font-size:${isMobile ? 13 : 14}px;color:${th.text}">${esc(item.name)}</div>
+            <div style="font-size:${isMobile ? 12 : 13}px;color:${th.textMuted};line-height:1.45;margin-top:3px">${esc(item.desc)}</div>
+          </div>
+        </div>`;
+      };
+      const itemSectionsHTML = ITEMS_DB.map(cat => {
+        const cardsHTML = cat.items.map(itemCardHTML).join("");
+        return `<div data-item-section="1">
+          <h3 style="margin:0 0 ${isMobile ? 10 : 12}px 0;font-size:${isMobile ? 16 : 18}px;font-weight:800;color:${th.text}">${esc(cat.category)} <span data-item-section-count style="font-size:${isMobile ? 12 : 13}px;font-weight:600;color:${th.textMuted}">(${cat.items.length})</span></h3>
+          <div style="display:grid;grid-template-columns:${isMobile ? "1fr" : "repeat(auto-fill,minmax(280px,1fr))"};gap:${isMobile ? 10 : 14}px">
+            ${cardsHTML}
+          </div>
+        </div>`;
+      }).join("");
+      itemsTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
+        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 25, 2026 at 12:47 pm</div>
+        <div style="text-align:center;padding:10px">
+          <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text}">🎒 Items</h2>
+          <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Every obtainable item in Pokémon GO</p>
+        </div>
+        <div style="position:relative;max-width:400px;margin:0 auto;width:100%">
+          <input id="items-search" placeholder="Search items..." oninput="searchItems(this.value)" autocomplete="off" style="width:100%;padding:${isMobile ? "12px 14px 12px 40px" : "14px 16px 14px 44px"};border-radius:14px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:${isMobile ? 14 : 15}px;font-family:inherit;outline:none;box-sizing:border-box" />
+          <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;pointer-events:none">🔍</span>
+        </div>
+        <div id="items-empty" style="display:none;text-align:center;padding:${isMobile ? "30px 18px" : "40px 28px"};background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;color:${th.textMuted};font-size:${isMobile ? 13 : 14}px;box-shadow:${th.shadow}"></div>
+        ${itemSectionsHTML}
+      </div>`;
+    }
+
+    // Backgrounds tab
+    let backgroundsTabHTML = "";
+    if (state.tab === "backgrounds") {
+      const sorted = [...BACKGROUNDS_DB].sort((a, b) => {
+        if (_bgSort === "az") return a.name.localeCompare(b.name);
+        if (_bgSort === "oldest") {
+          if (a.date === null && b.date === null) return a.name.localeCompare(b.name);
+          if (a.date === null) return 1;
+          if (b.date === null) return -1;
+          return a.date === b.date ? a.name.localeCompare(b.name) : (a.date < b.date ? -1 : 1);
+        }
+        // newest (default)
+        if (a.date === null && b.date === null) return a.name.localeCompare(b.name);
+        if (a.date === null) return 1;
+        if (b.date === null) return -1;
+        return a.date === b.date ? a.name.localeCompare(b.name) : (a.date > b.date ? -1 : 1);
+      });
+      const bgCardsHTML = sorted.map(bg => {
+        const imgUrl = BACKGROUNDS_IMG_BASE + bg.slug + ".webp";
+        return `<div onclick="openBackgroundLightbox('${bg.slug}')" role="button" tabindex="0" aria-label="View ${escAttr(bg.name)} background" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openBackgroundLightbox('${bg.slug}');}" style="background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;overflow:hidden;box-shadow:${th.shadow};transition:all 0.2s ease;cursor:pointer" onmouseenter="this.style.borderColor='#16A085';this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 25px rgba(22,160,133,0.15)'" onmouseleave="this.style.borderColor='${th.border}';this.style.transform='translateY(0)';this.style.boxShadow='${th.shadow}'">
+          <img src="${escAttr(imgUrl)}" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block" loading="lazy" onerror="this.style.opacity='0.25'" alt="${escAttr(bg.name)}" />
+          <div style="padding:${isMobile ? "8px 10px 10px" : "10px 12px 12px"}">
+            <div style="font-weight:700;font-size:13px;color:${th.text};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(bg.name)}</div>
+            <div style="font-size:11px;color:${th.textMuted};margin-top:2px">${formatBackgroundDate(bg.date)}</div>
+          </div>
+        </div>`;
+      }).join("");
+      backgroundsTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
+        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 25, 2026 at 12:47 pm</div>
+        <div style="text-align:center;padding:10px">
+          <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text}">🖼️ Backgrounds</h2>
+          <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Location card backgrounds in Pokémon GO</p>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+          <span style="font-size:${isMobile ? 12 : 13}px;color:${th.textMuted}">Displaying ${BACKGROUNDS_DB.length} backgrounds</span>
+          <select onchange="setBackgroundSort(this.value)" style="padding:${isMobile ? "8px 12px" : "9px 14px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:${isMobile ? 12 : 13}px;font-weight:600;font-family:inherit;outline:none;cursor:pointer;appearance:auto">
+            <option value="newest" ${_bgSort === "newest" ? "selected" : ""}>Newest</option>
+            <option value="oldest" ${_bgSort === "oldest" ? "selected" : ""}>Oldest</option>
+            <option value="az" ${_bgSort === "az" ? "selected" : ""}>A–Z</option>
+          </select>
+        </div>
+        <div style="display:grid;grid-template-columns:${isMobile ? "repeat(2,1fr)" : "repeat(auto-fill,minmax(200px,1fr))"};gap:${isMobile ? 10 : 14}px">
+          ${bgCardsHTML}
         </div>
       </div>`;
     }
@@ -8558,7 +9366,7 @@ function render() {
         archiveHTML += '</div>';
       }
       storeTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
-        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on June 11, 2026 at 10:30 am</div>
+        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 25, 2026 at 11:31 am</div>
         <div style="text-align:center;padding:10px">
           <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text}">\uD83D\uDED2 Web Store Box Analysis</h2>
           <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Are the current Pok\u00E9mon GO web store boxes worth it?</p>
@@ -8802,10 +9610,12 @@ function render() {
               <div id="report-section-wrapper">
                 <label id="report-section-label" style="display:block;font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:6px">Which page or section?</label>
                 <select id="report-section" style="width:100%;padding:${isMobile ? "11px 14px" : "12px 16px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.bg};color:${th.text};font-size:${isMobile ? 14 : 15}px;font-family:inherit;outline:none;cursor:pointer;appearance:auto">
+                  <option value="backgrounds">Backgrounds</option>
                   <option value="calendar">Calendar</option>
                   <option value="store">Deal Check</option>
                   <option value="events">Events</option>
                   <option value="general">General / Sitewide</option>
+                  <option value="items">Items</option>
                   <option value="max-battles">Max Battles</option>
                   <option value="nests">Nests</option>
                   <option value="news">News</option>
@@ -8895,7 +9705,7 @@ function render() {
     </a>` : "";
 
     content = `<main style="padding:${mainPad};display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
-      ${welcomeHTML}${!["home","tools","nests","pokedex","store","report"].includes(state.tab) ? `${isMobile ? liveCompactHTML + heroCompactHTML : `<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:${isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>`}${tabsHTML}` : ""}${state.tab === "home" ? `${mapBannerHTML}<div style="display:grid;grid-template-columns:${isMobile ? "1fr" : "repeat(2,1fr)"};gap:${isMobile ? 12 : isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>${renderWeekDigest(th, isMobile)}${tabsHTML}` : ""}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${rocketTabHTML}${eggsTabHTML}${researchTabHTML}${newsTabHTML}${storeTabHTML}${pokedexTabHTML}${toolsTabHTML}${nestsTabHTML}${reportTabHTML}
+      ${welcomeHTML}${!["home","tools","nests","pokedex","store","report","items","backgrounds"].includes(state.tab) ? `${isMobile ? liveCompactHTML + heroCompactHTML : `<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:${isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>`}${tabsHTML}` : ""}${state.tab === "home" ? `${mapBannerHTML}<div style="display:grid;grid-template-columns:${isMobile ? "1fr" : "repeat(2,1fr)"};gap:${isMobile ? 12 : isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>${renderWeekDigest(th, isMobile)}${tabsHTML}` : ""}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${rocketTabHTML}${eggsTabHTML}${researchTabHTML}${newsTabHTML}${storeTabHTML}${pokedexTabHTML}${toolsTabHTML}${nestsTabHTML}${itemsTabHTML}${backgroundsTabHTML}${reportTabHTML}
     </main>`;
     if (hero || activeEvents.length > 0) state.heroRendered = true;
   }
@@ -8917,6 +9727,8 @@ function render() {
     ${isDesktop ? (() => {
       const currentTabs = ["raids","max","rocket","eggs","research"];
       const isCurrentActive = currentTabs.includes(state.tab);
+      const moreTabs = ["store","nests","tools","items","backgrounds"];
+      const isMoreActive = moreTabs.includes(state.tab);
       const navBtn = (fn, label, tabId) => {
         const isActive = state.tab === tabId;
         return `<button onclick="${fn}" style="padding:7px 14px;border-radius:10px;border:${isActive ? "1.5px solid #E74C3C" : "1.5px solid transparent"};background:${isActive ? th.accentBg("#E74C3C") : "transparent"};color:${isActive ? "#E74C3C" : th.text};font-size:13px;font-weight:${isActive ? "700" : "600"};cursor:pointer;font-family:inherit;transition:all 0.15s ease;white-space:nowrap" onmouseenter="this.style.background='${isActive ? th.accentBg("#E74C3C") : th.surfaceHover}'" onmouseleave="this.style.background='${isActive ? th.accentBg("#E74C3C") : "transparent"}'">${label}</button>`;
@@ -8927,6 +9739,13 @@ function render() {
         {fn:"setTab('rocket')",label:"Rocket",iconImg:"assets/pokemon-images/icons/teamrocket_r_full.png",id:"rocket"},
         {fn:"setTab('eggs')",label:"Eggs",iconImg:"assets/pokemon-images/eggs/egg-2.png",iconSize:24,id:"eggs"},
         {fn:"setTab('research')",label:"Field Research",iconImg:"assets/pokemon-images/icons/green-research.png",iconSize:20,id:"research"}
+      ];
+      const moreDropdownItems = [
+        {fn:"setTab('store')",label:"Deal Check",icon:"🛒",id:"store"},
+        {fn:"setTab('nests')",label:"Nests",iconImg:"assets/pokemon-images/icons/ic_grass.png",iconSize:20,id:"nests"},
+        {fn:"setTab('tools')",label:"PoGO Tools",icon:"🛠️",id:"tools"},
+        {fn:"setTab('items')",label:"Items",icon:"🎒",id:"items"},
+        {fn:"setTab('backgrounds')",label:"Backgrounds",icon:"🖼️",id:"backgrounds"}
       ];
       return `<nav style="display:flex;align-items:center;gap:4px">
         ${navBtn("goHome()","Home","home")}
@@ -8945,9 +9764,17 @@ function render() {
         </div>
         ${navBtn("setTab('news')","News","news")}
         ${navBtn("setTab('pokedex')","Pok\u00E9Dex","pokedex")}
-        ${navBtn("setTab('store')","Deal Check","store")}
-        ${navBtn("setTab('nests')","Nests","nests")}
-        ${navBtn("setTab('tools')","PoGO Tools","tools")}
+        <div class="nav-dropdown" onmouseenter="this.classList.add('open')" onmouseleave="this.classList.remove('open')" onclick="this.classList.toggle('open')">
+          <button class="nav-dropdown-btn" style="border:${isMoreActive ? "1.5px solid #E74C3C" : "1.5px solid transparent"};background:${isMoreActive ? th.accentBg("#E74C3C") : "transparent"};color:${isMoreActive ? "#E74C3C" : th.text};font-weight:${isMoreActive ? "700" : "600"}" onmouseenter="if(!${isMoreActive})this.style.background='${th.surfaceHover}'" onmouseleave="if(!${isMoreActive})this.style.background='transparent'">More <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 4l3 3 3-3"/></svg></button>
+          <div class="nav-dropdown-menu">
+            <div class="nav-dropdown-menu-inner" style="background:${th.surface};border:1.5px solid ${th.border};box-shadow:0 8px 30px rgba(0,0,0,0.12)">
+            ${moreDropdownItems.map(d => {
+              const active = state.tab === d.id;
+              return `<button class="nav-dropdown-item" onclick="event.stopPropagation();setTab('${d.id}')" style="color:${active ? "#E74C3C" : th.text};font-weight:${active ? "700" : "600"};background:${active ? th.accentBg("#E74C3C") : "transparent"}" onmouseenter="if(!${active})this.style.background='${th.surfaceHover}'" onmouseleave="if(!${active})this.style.background='${active ? th.accentBg("#E74C3C") : "transparent"}'">${d.iconImg ? `<span style="width:20px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0"><img src="${d.iconImg}" style="width:${d.iconSize||16}px;height:${d.iconSize||16}px;object-fit:contain" /></span>` : d.icon} ${d.label}</button>`;
+            }).join("")}
+            </div>
+          </div>
+        </div>
       </nav>`;
     })() : ""}
     <div style="display:flex;align-items:center;gap:${isMobile ? 8 : 10}px;flex-shrink:0">
@@ -9208,6 +10035,13 @@ function renderSidebar(th) {
     { id: "eggs", icon: "", iconImg: "assets/pokemon-images/eggs/egg-2.png", iconSize: 34, label: "Eggs" },
     { id: "research", icon: "", iconImg: "assets/pokemon-images/icons/green-research.png", iconSize: 24, label: "Field Research" }
   ];
+  const moreSubTabs = [
+    { id: "store", icon: "\uD83D\uDED2", label: "Deal Check" },
+    { id: "nests", icon: "\uD83C\uDF33", iconImg: "assets/pokemon-images/icons/ic_grass.png", label: "Nests" },
+    { id: "tools", icon: "\uD83D\uDEE0\uFE0F", label: "PoGO Tools" },
+    { id: "items", icon: "\uD83C\uDF92", label: "Items" },
+    { id: "backgrounds", icon: "\uD83D\uDDBC\uFE0F", label: "Backgrounds" }
+  ];
   const tabs = [
     { id: "home", icon: "\uD83C\uDFE0", label: "Home" },
     { id: "events", icon: "\uD83D\uDCC5", label: "Events" },
@@ -9215,9 +10049,7 @@ function renderSidebar(th) {
     { id: "current", icon: "\uD83D\uDD25", label: "Current", subTabs: currentSubTabs },
     { id: "news", icon: "\uD83D\uDCE2", label: "News" },
     { id: "pokedex", icon: "\uD83D\uDCD6", iconImg: "assets/pokemon-images/icons/Main1.webp", label: "Pok\u00E9Dex" },
-    { id: "store", icon: "\uD83D\uDED2", label: "Deal Check" },
-    { id: "nests", icon: "\uD83C\uDF33", iconImg: "assets/pokemon-images/icons/ic_grass.png", label: "Nests" },
-    { id: "tools", icon: "\uD83D\uDEE0\uFE0F", label: "PoGO Tools" },
+    { id: "more", icon: "\u2795", label: "More", subTabs: moreSubTabs },
     { id: "report", icon: "\uD83D\uDCDD", label: "Report Issue" }
   ];
   return `<div id="sidebar-overlay" onclick="closeSidebar()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:998;transition:opacity 0.3s ease"></div>
