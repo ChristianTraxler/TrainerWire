@@ -2553,6 +2553,12 @@
       "Flying"
     ]
   },
+  "Mega Delphox": {
+    "types": [
+      "Fire",
+      "Psychic"
+    ]
+  },
   "Mega Diancie": {
     "types": [
       "Rock",
@@ -2607,6 +2613,12 @@
     "cp": "1138–1203",
     "cpBoost": "1423–1504",
     "weather": "Snow"
+  },
+  "Mega Greninja": {
+    "types": [
+      "Water",
+      "Dark"
+    ]
   },
   "Mega Gyarados": {
     "types": [
@@ -3888,6 +3900,11 @@
     "cpBoost": "740–849",
     "weather": "Sunny, Fog"
   },
+  "Shadow Groudon": {
+    "types": [
+      "Ground"
+    ]
+  },
   "Shadow Grubbin": {
     "types": [
       "Bug"
@@ -4031,6 +4048,12 @@
       "Rock"
     ]
   },
+  "Shadow Reshiram": {
+    "types": [
+      "Dragon",
+      "Fire"
+    ]
+  },
   "Shadow Rhyperior": {
     "types": [
       "Ground",
@@ -4041,6 +4064,12 @@
     "types": [
       "Dragon",
       "Flying"
+    ]
+  },
+  "Shadow Scizor": {
+    "types": [
+      "Bug",
+      "Steel"
     ]
   },
   "Shadow Slowpoke": {
@@ -4068,6 +4097,12 @@
     "cpBoost": "1398–1546",
     "weather": "Partly Cloudy"
   },
+  "Shadow Staraptor": {
+    "types": [
+      "Normal",
+      "Flying"
+    ]
+  },
   "Shadow Stufful": {
     "types": [
       "Normal",
@@ -4089,6 +4124,18 @@
     "types": [
       "Electric",
       "Flying"
+    ]
+  },
+  "Shadow Toucannon": {
+    "types": [
+      "Normal",
+      "Flying"
+    ]
+  },
+  "Shadow Vikavolt": {
+    "types": [
+      "Bug",
+      "Electric"
     ]
   },
   "Shadow Weavile": {
