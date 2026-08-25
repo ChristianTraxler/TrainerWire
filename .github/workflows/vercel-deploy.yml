@@ -1,0 +1,75 @@
+name: Deploy to Vercel
+
+# The Vercel Git integration for this project stopped firing after 2026-08-18
+# (pushes produced github-pages deployments but no Vercel Production one).
+# This workflow deploys explicitly instead of relying on that webhook.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: vercel-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: team_ZHrqgA7Yqy4Sytp7oFx7qgqx
+      VERCEL_PROJECT_ID: prj_ETXrQv62LuZuCdQNCzcGXf2FzCIk
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Fail early if the token is missing
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "::error::VERCEL_TOKEN secret is not set. Create a team-scoped (All Projects) token and add it with: gh secret set VERCEL_TOKEN"
+            exit 1
+          fi
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Verify the token resolves to a user
+        # A project-scoped token resolves no user and fails later with
+        # "User not found" — catch that here with a clear message.
+        run: vercel whoami --token="$VERCEL_TOKEN"
+
+      - name: Pull production environment
+        run: vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
+
+      - name: Build
+        run: vercel build --prod --token="$VERCEL_TOKEN"
+
+      - name: Stage build output outside the git working tree
+        # Deploying from the repo directory attaches git commit metadata. With no
+        # Git connection on the Vercel side that gets rejected with "commit email
+        # could not be matched to a GitHub account", so deploy from a clean copy.
+        run: |
+          mkdir -p /tmp/vercel-deploy/.vercel
+          cp -R .vercel/output /tmp/vercel-deploy/.vercel/output
+          cp .vercel/project.json /tmp/vercel-deploy/.vercel/project.json
+
+      - name: Deploy to production
+        working-directory: /tmp/vercel-deploy
+        run: |
+          url=$(vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN")
+          echo "Deployed: $url"
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+        id: deploy
+
+      - name: Confirm the deployment is READY, not BLOCKED
+        run: |
+          state=$(vercel inspect "${{ steps.deploy.outputs.url }}" --token="$VERCEL_TOKEN" 2>&1 | grep -oE 'READY|BLOCKED|ERROR|QUEUED|BUILDING' | head -1)
+          echo "Deployment state: $state"
+          if [ "$state" != "READY" ]; then
+            echo "::error::Deployment is $state, not READY. A green workflow with a blocked deployment is still a failure."
+            exit 1
+          fi
