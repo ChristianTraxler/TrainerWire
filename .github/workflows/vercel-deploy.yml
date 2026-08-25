@@ -67,9 +67,16 @@ jobs:
 
       - name: Confirm the deployment is READY, not BLOCKED
         run: |
-          state=$(vercel inspect "${{ steps.deploy.outputs.url }}" --token="$VERCEL_TOKEN" 2>&1 | grep -oE 'READY|BLOCKED|ERROR|QUEUED|BUILDING' | head -1)
-          echo "Deployment state: $state"
-          if [ "$state" != "READY" ]; then
-            echo "::error::Deployment is $state, not READY. A green workflow with a blocked deployment is still a failure."
+          out=$(vercel inspect "${{ steps.deploy.outputs.url }}" --token="$VERCEL_TOKEN" 2>&1)
+          # `vercel inspect` prints e.g. "status\t● Ready" — title case, with a
+          # bullet. Strip the bullet/whitespace and compare case-insensitively;
+          # matching on uppercase READY silently matches nothing.
+          state=$(printf '%s\n' "$out" \
+            | awk '/^[[:space:]]*status/{sub(/^[[:space:]]*status[[:space:]]*/,""); gsub(/[●[:space:]]/,""); print; exit}')
+          echo "Deployment state: ${state:-<unparsed>}"
+          if [ "$(printf '%s' "$state" | tr '[:upper:]' '[:lower:]')" != "ready" ]; then
+            echo "::error::Deployment state is '${state:-<unparsed>}', not Ready. A green workflow with a blocked deployment is still a failure."
+            printf '%s\n' "$out"
             exit 1
           fi
+          echo "Deployment is Ready."
