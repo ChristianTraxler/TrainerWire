@@ -2735,13 +2735,19 @@
     "types": [
       "Dragon",
       "Psychic"
-    ]
+    ],
+    "cp": "1921–2006",
+    "cpBoost": "2402–2507",
+    "weather": "Windy"
   },
   "Mega Latios": {
     "types": [
       "Dragon",
       "Psychic"
-    ]
+    ],
+    "cp": "2090–2178",
+    "cpBoost": "2613–2723",
+    "weather": "Windy"
   },
   "Mega Lopunny": {
     "types": [
