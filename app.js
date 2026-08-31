@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.59";
+const APP_VERSION = "3.60";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -435,6 +435,9 @@ function getPokemonImg(name) {
   if (lower.includes("corsola") && lower.includes("sunglasses")) {
     return { url: eventDexImg(222, "spring_2026"), shadow: false };
   }
+  if (lower.includes("armored") && lower.includes("mewtwo")) {
+    return { url: eventDexImg(150, "armored"), shadow: false };
+  }
   if (lower.includes("pikachu") && lower.includes("marathon visor")) {
     return { url: costumeDexImg(25, "f3341"), shadow: false };
   }
@@ -693,6 +696,7 @@ const SHINY_AVAILABLE = new Set([
 ]);
 function isShinyEligible(name) {
   if (/\(no shiny\)/i.test(name)) return false;
+  if (/armored\s+mewtwo/i.test(name)) return false; // Shiny Armored Mewtwo has never been released — don't inherit the "Mewtwo" match below
   if (name.includes("\u2728")) return true;
   if (/\b(Dynamax|Gigantamax|G-Max|D-Max)\b/i.test(name)) return false;
   for (const pkmn of SHINY_AVAILABLE) {
@@ -922,7 +926,7 @@ const EVENTS = [
   { id: 156, title: "Super Mega Raid Day — October 31", type: "Raid", url: "https://pokemongo.com/en/news/save-the-date-s24", date: "2026-10-31", endDate: null, time: "Time TBA", whenText: "Saturday, October 31, 2026. Event hours to be announced.", color: "#E67E22", icon: "🌈", iconImg: "assets/pokemon-images/icons/MEGA_EVOLUTION_REINSTATED.png", featured: false, published: "2026-08-10", updated: "2026-08-10", lastUpdated: "August 10, 2026 at 4:01 PM", summary: "Save the date! A Super Mega Raid Day is coming Saturday, October 31, 2026. Featured Pokémon and event hours to be announced.", details: { bosses: ["Details: TBA"], bonuses: ["Event features and bonuses to be announced"], tips: ["Save the date — October 31, 2026 (Saturday).", "Event hours and full details will be announced closer to the date."] } },
   { id: 157, title: "Community Day — November 21", type: "Community Day", url: "https://pokemongo.com/en/news/save-the-date-s24", date: "2026-11-21", endDate: null, time: "Time TBA", whenText: "Saturday, November 21, 2026. Event hours to be announced.", color: "#3498DB", icon: "📅", featured: false, published: "2026-08-10", updated: "2026-08-10", lastUpdated: "August 10, 2026 at 4:01 PM", summary: "Save the date! Community Day returns on Saturday, November 21, 2026. Featured Pokémon and event hours to be announced.", details: { bonuses: ["Event features and bonuses to be announced"], tips: ["Save the date — November 21, 2026 (Saturday).", "Event hours and full details will be announced closer to the date."] } },
   { id: 158, title: "Super Mega Raid Day — November 28", type: "Raid", url: "https://pokemongo.com/en/news/save-the-date-s24", date: "2026-11-28", endDate: null, time: "Time TBA", whenText: "Saturday, November 28, 2026. Event hours to be announced.", color: "#2E86C1", icon: "🌈", iconImg: "assets/pokemon-images/icons/MEGA_EVOLUTION_REINSTATED.png", featured: false, published: "2026-08-10", updated: "2026-08-10", lastUpdated: "August 10, 2026 at 4:01 PM", summary: "Save the date! A Super Mega Raid Day is coming Saturday, November 28, 2026. Featured Pokémon and event hours to be announced.", details: { bosses: ["Details: TBA"], bonuses: ["Event features and bonuses to be announced"], tips: ["Save the date — November 28, 2026 (Saturday).", "Event hours and full details will be announced closer to the date."] } },
-  { id: 148, title: "Pokémon GO Fest: Mega Finale", type: "GO Fest", url: "https://pokemongo.com/en/news/gofest2026-finale-save-the-date", date: "2026-09-05", endDate: "2026-09-06", time: "Time TBA", whenText: "Saturday, September 5 to Sunday, September 6, 2026. Event hours to be announced.", color: "#6C5CE7", icon: "🎉", iconImg: "assets/pokemon-images/GO-Fest/2026/gofest-2026-mega-finale-badge.png", featured: true, published: "2026-07-18", updated: "2026-07-28", lastUpdated: "July 28, 2026 at 11:44 AM", summary: "Save the date! Pokémon GO Fest 2026 wraps up with the Mega Finale on September 5–6, 2026. Event hours and full details to be announced.", details: { bosses: ["Details: TBA"], bonuses: ["Event features and bonuses to be announced"], tips: ["Save the date — September 5–6, 2026 (Saturday & Sunday).", "Event hours and full details will be announced closer to the date."] } },
+  { id: 148, title: "Pokémon GO Fest: Mega Finale", type: "GO Fest", url: "https://pokemongo.com/en/gofest/megafinale", date: "2026-09-05", endDate: "2026-09-06", startsAt: "2026-09-05T10:00:00", endsAt: "2026-09-06T18:00:00", time: "10:00 AM – 6:00 PM", whenText: "Saturday, September 5 and Sunday, September 6, 2026, from 10:00 a.m. to 6:00 p.m. local time.", color: "#6C5CE7", icon: "🎉", iconImg: "assets/pokemon-images/GO-Fest/2026/gofest-2026-mega-finale-badge.png", featured: true, published: "2026-07-18", updated: "2026-08-31", lastUpdated: "August 31, 2026 at 1:08 AM", summary: "Pokémon GO Fest 2026: Mega Finale runs Saturday, September 5, and Sunday, September 6, 2026, from 10:00 a.m. to 6:00 p.m. local time, capping off GO Fest 2026 with Mega Mewtwo X headlining Super Mega Raids on Saturday and Mega Mewtwo Y on Sunday. Eight rotating habitats each bring their own Wild Encounters and Mega Raid bosses, with Chespin, Fennekin, and Froakie appearing everywhere as Trainers work toward choosing and Mega Evolving their Kalos first partner Pokémon. Branching Timed Research unlocks GO Pass: Mega Finale, and Pokémon caught from Mega Raids may have a Mega Evolution–themed Special Background.", details: { bossesTitle: "Featured Raid Bosses", bosses: ["Mega Mewtwo X ✨ (Super Mega Raid)", "Mega Mewtwo Y ✨ (Super Mega Raid)", "Mega Beedrill ✨ (Mega)", "Mega Victreebel ✨ (Mega)", "Mega Pinsir ✨ (Mega)", "Mega Abomasnow ✨ (Mega)", "Mega Alakazam ✨ (Mega)", "Mega Slowbro ✨ (Mega)", "Mega Starmie ✨ (Mega)", "Mega Medicham ✨ (Mega)", "Mega Gengar ✨ (Mega)", "Mega Houndoom ✨ (Mega)", "Mega Banette ✨ (Mega)", "Mega Malamar ✨ (Mega)", "Mega Raichu X ✨ (Mega)", "Mega Ampharos ✨ (Mega)", "Mega Manectric ✨ (Mega)", "Mega Steelix ✨ (Mega)", "Mega Skarmory ✨ (Mega)", "Mega Aggron ✨ (Mega)", "Mega Glalie ✨ (Mega)", "Mega Sharpedo ✨ (Mega)", "Mega Camerupt ✨ (Mega)", "Mega Lopunny ✨ (Mega)", "Mega Falinks ✨ (Mega)", "Mega Gyarados ✨ (Mega)", "Mega Aerodactyl ✨ (Mega)", "Mega Dragonite ✨ (Mega)", "Mega Altaria ✨ (Mega)", "Mega Raichu Y ✨ (Mega)", "Mega Sableye ✨ (Mega)", "Mega Mawile ✨ (Mega)", "Mega Audino ✨ (Mega)"], dailyRaids: [{ label: "Saturday · September 5", accent: "#6C5CE7", superMegaRaid: ["Mega Mewtwo X ✨ (Super Mega Raid)"], megaRaids: ["Mega Beedrill ✨ (Mega)", "Mega Victreebel ✨ (Mega)", "Mega Pinsir ✨ (Mega)", "Mega Abomasnow ✨ (Mega)", "Mega Alakazam ✨ (Mega)", "Mega Slowbro ✨ (Mega)", "Mega Starmie ✨ (Mega)", "Mega Medicham ✨ (Mega)", "Mega Gengar ✨ (Mega)", "Mega Houndoom ✨ (Mega)", "Mega Banette ✨ (Mega)", "Mega Malamar ✨ (Mega)", "Mega Raichu X ✨ (Mega)", "Mega Ampharos ✨ (Mega)", "Mega Manectric ✨ (Mega)"], note: "Mega Mewtwo X appears in Super Mega Raids at certain Gyms. At all other Gyms, only Mega Raids appear during event hours, and Raid Bosses rotate with the active habitat." }, { label: "Sunday · September 6", accent: "#E84393", superMegaRaid: ["Mega Mewtwo Y ✨ (Super Mega Raid)"], megaRaids: ["Mega Steelix ✨ (Mega)", "Mega Skarmory ✨ (Mega)", "Mega Aggron ✨ (Mega)", "Mega Glalie ✨ (Mega)", "Mega Sharpedo ✨ (Mega)", "Mega Camerupt ✨ (Mega)", "Mega Lopunny ✨ (Mega)", "Mega Falinks ✨ (Mega)", "Mega Gyarados ✨ (Mega)", "Mega Aerodactyl ✨ (Mega)", "Mega Dragonite ✨ (Mega)", "Mega Altaria ✨ (Mega)", "Mega Raichu Y ✨ (Mega)", "Mega Sableye ✨ (Mega)", "Mega Mawile ✨ (Mega)", "Mega Audino ✨ (Mega)"], note: "Mega Mewtwo Y appears in Super Mega Raids at certain Gyms. At all other Gyms, only Mega Raids appear during event hours, and Raid Bosses rotate with the active habitat." }], habitatBossesTitle: "Habitats — Wild Encounters & Mega Raids", habitatBosses: [{ name: "Sat · Verdant Overgrowth", time: "10:00 a.m.–11:00 a.m. & 2:00 p.m.–3:00 p.m.", groups: [{ label: "Wild Encounters", items: ["Weedle ✨", "Bellsprout ✨", "Scyther ✨", "Pinsir ✨", "Roselia ✨", "Snover ✨", "Venipede ✨", "Chespin ✨", "Fennekin ✨", "Froakie ✨", "Skiddo ✨"] }, { label: "Mega Raids", items: ["Mega Beedrill ✨", "Mega Victreebel ✨", "Mega Pinsir ✨", "Mega Abomasnow ✨"] }, { label: "Super Mega Raid", items: ["Mega Mewtwo X ✨"] }] }, { name: "Sat · Mindworks Canal", time: "11:00 a.m.–12:00 p.m. & 3:00 p.m.–4:00 p.m.", groups: [{ label: "Wild Encounters", items: ["Abra ✨", "Slowpoke ✨", "Staryu ✨", "Ralts ✨", "Meditite ✨", "Chespin ✨", "Fennekin ✨", "Froakie ✨", "Espurr ✨", "Binacle ✨", "Clauncher ✨"] }, { label: "Mega Raids", items: ["Mega Alakazam ✨", "Mega Slowbro ✨", "Mega Starmie ✨", "Mega Medicham ✨"] }, { label: "Super Mega Raid", items: ["Mega Mewtwo X ✨"] }] }, { name: "Sat · Eerie Alley", time: "12:00 p.m.–1:00 p.m. & 4:00 p.m.–5:00 p.m.", groups: [{ label: "Wild Encounters", items: ["Gastly ✨", "Houndour ✨", "Shuppet ✨", "Zorua ✨", "Litwick ✨", "Chespin ✨", "Fennekin ✨", "Froakie ✨", "Inkay ✨", "Phantump ✨", "Pumpkaboo (Medium Variety) ✨"] }, { label: "Mega Raids", items: ["Mega Gengar ✨", "Mega Houndoom ✨", "Mega Banette ✨", "Mega Malamar ✨"] }, { label: "Super Mega Raid", items: ["Mega Mewtwo X ✨"] }] }, { name: "Sat · Circuit Plaza", time: "1:00 p.m.–2:00 p.m. & 5:00 p.m.–6:00 p.m.", groups: [{ label: "Wild Encounters", items: ["Pikachu ✨", "Mareep ✨", "Electrike ✨", "Emolga ✨", "Tynamo ✨", "Stunfisk ✨", "Chespin ✨", "Fennekin ✨", "Froakie ✨", "Helioptile ✨", "Dedenne ✨"] }, { label: "Mega Raids", items: ["Mega Raichu X ✨", "Mega Ampharos ✨", "Mega Manectric ✨"] }, { label: "Super Mega Raid", items: ["Mega Mewtwo X ✨"] }] }, { name: "Sun · Iron Frostworks", time: "10:00 a.m.–11:00 a.m. & 2:00 p.m.–3:00 p.m.", groups: [{ label: "Wild Encounters", items: ["Onix ✨", "Skarmory ✨", "Aron ✨", "Snorunt ✨", "Beldum ✨", "Drilbur ✨", "Chespin ✨", "Fennekin ✨", "Froakie ✨", "Amaura ✨", "Bergmite ✨"] }, { label: "Mega Raids", items: ["Mega Steelix ✨", "Mega Skarmory ✨", "Mega Aggron ✨", "Mega Glalie ✨"] }, { label: "Super Mega Raid", items: ["Mega Mewtwo Y ✨"] }] }, { name: "Sun · Battle District", time: "11:00 a.m.–12:00 p.m. & 3:00 p.m.–4:00 p.m.", groups: [{ label: "Wild Encounters", items: ["Machop ✨", "Carvanha ✨", "Numel ✨", "Buneary ✨", "Sandile ✨", "Scraggy ✨", "Chespin ✨", "Fennekin ✨", "Froakie ✨", "Pancham ✨", "Falinks ✨"] }, { label: "Mega Raids", items: ["Mega Sharpedo ✨", "Mega Camerupt ✨", "Mega Lopunny ✨", "Mega Falinks ✨"] }, { label: "Super Mega Raid", items: ["Mega Mewtwo Y ✨"] }] }, { name: "Sun · Skyline Roosts", time: "12:00 p.m.–1:00 p.m. & 4:00 p.m.–5:00 p.m.", groups: [{ label: "Wild Encounters", items: ["Magikarp ✨", "Aerodactyl ✨", "Dratini ✨", "Swablu ✨", "Bagon ✨", "Chespin ✨", "Fennekin ✨", "Froakie ✨", "Fletchling ✨", "Tyrunt ✨", "Noibat ✨"] }, { label: "Mega Raids", items: ["Mega Gyarados ✨", "Mega Aerodactyl ✨", "Mega Dragonite ✨", "Mega Altaria ✨"] }, { label: "Super Mega Raid", items: ["Mega Mewtwo Y ✨"] }] }, { name: "Sun · Prism Promenade", time: "1:00 p.m.–2:00 p.m. & 5:00 p.m.–6:00 p.m.", groups: [{ label: "Wild Encounters", items: ["Pikachu ✨", "Clefairy ✨", "Sableye ✨", "Mawile ✨", "Audino ✨", "Chespin ✨", "Fennekin ✨", "Froakie ✨", "Furfrou (Natural Form) ✨", "Spritzee ✨", "Carbink ✨"] }, { label: "Mega Raids", items: ["Mega Raichu Y ✨", "Mega Sableye ✨", "Mega Mawile ✨", "Mega Audino ✨"] }, { label: "Super Mega Raid", items: ["Mega Mewtwo Y ✨"] }] }], bonusGroups: { hero: "Saturday, September 5 and Sunday, September 6 · 10:00 a.m. to 6:00 p.m. local time", habitatSchedule: [{ time: "10–11 AM & 2–3 PM", biomes: [{ name: "Verdant Overgrowth" }, { name: "Iron Frostworks" }] }, { time: "11 AM–12 PM & 3–4 PM", biomes: [{ name: "Mindworks Canal" }, { name: "Battle District" }] }, { time: "12–1 PM & 4–5 PM", biomes: [{ name: "Eerie Alley" }, { name: "Skyline Roosts" }] }, { time: "1–2 PM & 5–6 PM", biomes: [{ name: "Circuit Plaza" }, { name: "Prism Promenade" }] }], eventHours: { label: "Event Hours (10 AM – 6 PM)", items: ["There will be no limit on Remote Raids from Saturday, September 5, to Sunday, September 6, 2026.", "All Mega-Evolved Pokémon will receive an extra CP boost from Saturday, September 5, to Sunday, September 6, 2026.", "Pokémon caught from Mega Raids during the event may have a Mega Evolution–themed Special Background.", "Chespin, Fennekin, and Froakie appear across every event habitat."] }, fullDay: { label: "GO Pass Deluxe: Mega Finale Bonuses", items: ["Bonus Candy, Candy XL, and XP from Mega Raids.", "Increased chance of encountering Shiny Pokémon from certain Mega Raids and event Pokémon encounters."] } }, milestones: [{ tier: "Rank 1", bonus: "Link Charge cap increase to 2,000 · Deluxe: Increased chance of encountering your chosen partner as a Shiny Pokémon" }, { tier: "Rank 2", bonus: "Encounter with your chosen Pokémon with a Special Background · Deluxe: Increased chance of encountering Shiny Raid Bosses from four-star Mega Raids" }, { tier: "Rank 10", bonus: "Candy for your chosen Pokémon · Deluxe: Candy XL for your chosen Pokémon" }, { tier: "Rank 20", bonus: "Mega Energy for your chosen Pokémon · Deluxe: Mega Energy for your chosen Pokémon" }, { tier: "Rank 40", bonus: "Encounter with your chosen Pokémon with a Special Background · Deluxe: Avatar shirt featuring the Evolution of your chosen Pokémon" }, { tier: "Rank 60", bonus: "Mega Energy for your chosen Pokémon · Deluxe: Mega Energy for your chosen Pokémon" }, { tier: "Rank 70", bonus: "Encounter with your chosen Pokémon with a Special Background · Deluxe: Increased chance of encountering Shiny Pokémon in all wild encounters during GO Fest: Mega Finale event hours" }, { tier: "Rank 100", bonus: "Encounter with the final Evolution of your chosen partner with a Special Background · Deluxe: A large amount of Mega Energy for your chosen partner" }], tips: ["Mega Ascension runs Monday, August 31, at 10:00 a.m. to Friday, September 4, 2026, at 11:59 p.m. local time, with daily rotating Mega Raids: Monday, August 31 — Mega Victreebel, Mega Dragonite, and Mega Malamar; Tuesday, September 1 — Mega Falinks; Wednesday, September 2 — Mega Skarmory; Thursday, September 3 — Mega Starmie; Friday, September 4 — Mega Raichu X and Mega Raichu Y.", "Mega Latias and Mega Latios may also appear in Mega Raids throughout the Mega Ascension event.", "The Remote Raid Pass limit will be increased to 30 from Monday, August 31, to Friday, September 4, 2026.", "Complete the branching Timed Research to choose Chespin, Fennekin, or Froakie and receive GO Pass: Mega Finale — the free pass includes enough Mega Energy to Mega Evolve your chosen partner once, while GO Pass Deluxe: Mega Finale adds enough additional Mega Energy to raise its Mega Level.", "Chespin (Grass) Mega Evolves into Mega Chesnaught (Grass/Fighting).", "Fennekin (Fire) Mega Evolves into Mega Delphox (Fire/Psychic).", "Froakie (Water) Mega Evolves into Mega Greninja (Water/Dark).", "Kalos first partner Pokémon–inspired avatar shirts are available through GO Pass Deluxe: Mega Finale — Chesnaught T-Shirt, Delphox T-Shirt, and Greninja T-Shirt, matching the partner you chose.", "After Rank 100, Trainers can continue earning repeat bonus rewards up to Rank 600.", "If you're lucky, you may encounter a Shiny one!", "Daily Discoveries, Seasonal Mega Raids, Seasonal Five-Star Raids, Seasonal Shadow Raids, Seasonal Raid Hours, and Seasonal Spotlight Hours will not take place from Monday, August 31 at 12:01 a.m. to Sunday, September 6, 2026, at 11:59 p.m. local time."], relatedNews: [{ id: 46, label: "Additional Charged Attacks & Mega Mewtwo Adventure Effects", icon: "⚡" }, { id: 45, label: "Armored Mewtwo Returns for the Mega Finale", iconImg: "assets/pokemon-images/Event-Dex/regular/Gen-1_Kanto/0150_armored.webp" }] } },
   { id: 125, title: "PokémonXP & 2026 Worlds", type: "Event", url: "https://pokemongo.com/en/news/world-championships-event-2026", date: "2026-08-25", endDate: "2026-08-30", startsAt: "2026-08-25T10:00:00", endsAt: "2026-08-30T20:00:00", published: "2026-07-22", updated: "2026-08-05", lastUpdated: "August 5, 2026 at 2:12 PM", time: "Aug 25 – Aug 30", whenText: "PokémonXP runs Tuesday, August 25 at 10:00 a.m. to Friday, August 28 at 10:00 a.m., and the World Championships event runs Friday, August 28 at 10:00 a.m. to Sunday, August 30 at 8:00 p.m., all local time. The 2026 Pokémon World Championships are held August 28–30 in San Francisco, California, with live streams starting at 9:00 a.m. PDT each day.", color: "#8E44AD", icon: "🏆", featured: false, summary: "Pokémon GO celebrates PokémonXP and the 2026 Pokémon World Championships! The top qualifying players from around the globe compete August 28–30 in San Francisco to be crowned the 2026 Pokémon GO World Champion, with the winner earning the World Champion 2026 avatar outfit. In-game, the PokémonXP event runs August 25–28 and the World Championships event runs August 28–30 — featuring two new costumed Pikachu, themed wild encounters and one-star raids, a free PokémonXP & 2026 Worlds GO Pass, boosted GO Battle League bonuses, Championship-exclusive featured attacks, and watch-reward Timed Research.", details: { bossesTitle: "Featured Pokémon", bosses: ["Pikachu wearing a Cosmog-themed spacesuit (1★ Raid) ✨", "World Championships 2026 Pikachu (1★ Raid) ✨", "Impidimp (1★ Raid)", "Honedge (1★ Raid)", "Ralts ✨", "Numel ✨", "Spheal ✨", "Drifloon ✨", "Elgyem ✨", "Sobble ✨", "Pawmi ✨", "Deino ✨", "Alolan Sandshrew ✨", "Mankey ✨", "Lickitung ✨", "Totodile ✨", "Wooper ✨", "Foongus ✨", "Froakie ✨", "Litten ✨", "Togetic ✨", "Beldum ✨"], bonuses: ["GO Battle League: the maximum number of daily battle sets increases from 5 to 15 (up to 75 battles per day).", "GO Battle League reward Pokémon have a wider variance of Attack, Defense, and HP.", "No daily limit on GO Points earned from August 29 at 12:00 a.m. through August 30 at 7:59 p.m.", "Event-themed Stickers available from PokéStops, Gifts, and the in-game shop."], milestones: [{ tier: "Starting at Rank 10", bonus: "2× Stardust for catching Pokémon" }, { tier: "Starting at Rank 20", bonus: "Free GO Pass: an additional 3,000 XP from raids", deluxe: "Up to two additional free Raid Passes from spinning Gym Photo Discs" }], goPass: { free: ["Automatically received August 25 at 10:00 a.m. local time", "Collect GO Points to rank up and earn event-themed Pokémon encounters", "Rewards expire September 1 at 7:59 p.m. local time — claim them before they're gone"], deluxe: { price: "$4.99", rewards: ["Upgraded rewards and faster progression", "PokémonXP & 2026 Worlds Backpack avatar item", "Zapdos encounter with a wider stat variance", "Additional event-themed Pokémon encounters", "Additional exclusive items"] }, deluxePlus: { price: "$6.99", rewards: ["Everything in GO Pass Deluxe", "Automatic advancement to Rank 7"] } }, tips: ["PokémonXP (Aug 25–28) wild encounters: Ralts, Numel, Spheal, Drifloon, Elgyem, Sobble, Pawmi, and — more rarely — Deino. If you're lucky, you may find a Shiny!", "PokémonXP (Aug 25–28) one-star raids: Pikachu wearing a Cosmog-themed spacesuit and Impidimp.", "World Championships (Aug 28–30) wild encounters: Alolan Sandshrew, Mankey, Lickitung, Totodile, Wooper, Foongus, Froakie, Litten, and — more rarely — Togetic and Beldum. If you're lucky, you may find a Shiny!", "World Championships (Aug 28–30) one-star raids: Pikachu wearing a Cosmog-themed spacesuit, World Championships 2026 Pikachu, and Honedge.", "New costumed Pikachu debut this event: Pikachu wearing a Cosmog-themed spacesuit and World Championships 2026 Pikachu.", "Featured Attacks — Fast: Alolan Sandslash learns Shadow Claw; Walrein learns Powder Snow.", "Featured Attacks — Charged: Primeape (Rage Fist), Lickitung (Body Slam), Feraligatr (Hydro Cannon), Quagsire (Aqua Tail), Gardevoir (Synchronoise), Walrein (Icicle Spear), Metagross (Meteor Mash), Lickilicky (Body Slam), Togekiss (Aura Sphere), Gallade (Synchronoise), Hydreigon (Brutal Swing), Greninja (Hydro Cannon), Decidueye (Frenzy Plant), Incineroar (Blast Burn), Inteleon (Hydro Cannon), Corviknight (Air Cutter), Annihilape (Rage Fist).", "Timed Research — Team Building: Great League Bonus: watch 30 minutes to choose a Lickitung, Totodile, or Paldean Wooper team-building branch.", "Timed Research — 2025 World Champion's: watch 60 minutes for Tinkaton (used by 2025 Champion Beezleboy, with a unique background) plus an Elite Charged TM.", "Timed Research — Greetings from San Francisco! Bonus: watch 45 minutes (via official co-streamers) for a World Championships 2026 Pikachu encounter.", "Timed Research — PokémonXP: watch 30 minutes on the PokémonXP Twitch channel (Saturday, August 29) for a Pikachu wearing a Cosmog-themed spacesuit.", "Free avatar item: redeem a code shared during the World Championships broadcast for the 2026 Worlds Tee (Green).", "The PokémonXP & 2026 Worlds Backpack avatar item is available in the in-game shop after the event.", "Watch the 2026 Pokémon World Championships live from San Francisco, August 28–30, with streams starting at 9:00 a.m. PDT each day — Days 1 & 2 on the Pokémon GO Twitch channel and Day 3 on the official Pokémon Twitch channel.", "The 2026 Pokémon GO World Champion wins the World Champion 2026 outfit for their avatar."], relatedNews: [{ id: 40, label: "PokémonXP & 2026 Pokémon World Championships — Full Details", icon: "🏆" }] } },
   { id: 126, title: "Dynamax Magmar", type: "Max Battle", date: "2026-08-03", endDate: "2026-08-09", published: "2026-07-22", updated: "2026-07-22", lastUpdated: "July 22, 2026 at 9:00 AM", time: "Max Battles: Aug 3 – Aug 9", whenText: "Monday, August 3 to Sunday, August 9, 2026, local time.", color: "#E67E22", icon: "🔥", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-1_Kanto/0126.webp", featured: false, summary: "Dynamax Magmar appears in Max Battles at Power Spots throughout Forever Forward, August 3–9. Shiny Magmar available.", details: { bosses: ["Dynamax Magmar ✨"], bonuses: ["Dynamax Magmar in Max Battles August 3–9", "Power Spots all week", "Shiny Magmar available"], tips: ["Magmar (Fire) is weak to Water, Rock, and Ground.", "Evolves into Magmortar with an Elite/King's Rock-style item — bank Candy.", "Shiny Magmar is available; check every encounter."] } },
   { id: 127, title: "Dynamax Beldum", type: "Max Battle", date: "2026-08-10", endDate: "2026-08-16", published: "2026-07-22", updated: "2026-07-22", lastUpdated: "July 22, 2026 at 9:00 AM", time: "Max Battles: Aug 10 – Aug 16", whenText: "Monday, August 10 to Sunday, August 16, 2026, local time.", color: "#7F8C8D", icon: "🧲", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-3_Hoenn/0374.webp", featured: false, summary: "Dynamax Beldum appears in Max Battles at Power Spots, August 10–16. Shiny Beldum available.", details: { bosses: ["Dynamax Beldum ✨"], bonuses: ["Dynamax Beldum in Max Battles August 10–16", "Power Spots all week", "Shiny Beldum available"], tips: ["Beldum (Steel/Psychic) is weak to Fire, Ground, Ghost, and Dark.", "Bank Candy — Metagross is a top Steel/Psychic attacker.", "Shiny Beldum is available; check every encounter."] } },
@@ -1263,6 +1267,117 @@ const EVENTS = [
 ];
 
 const ANNOUNCEMENTS = [
+  { id: 46, date: "2026-08-31", published: "2026-08-31", updated: "2026-08-31", lastUpdated: "August 31, 2026 at 12:46 AM", title: "More mega moments! Additional Charged Attacks and Mega Mewtwo Adventure Effects debut during Mega Finale!", tag: "News", url: "https://pokemongo.com/en/news/more-mega-updates-2026", icon: "assets/pokemon-images/Mega/regular/Gen-1_Kanto/0150_megax.webp", body: "New battle strategies arrive during Pokémon GO Fest 2026: Mega Finale — eligible Mega-Evolved Pokémon gain an additional Charged Attack, and Mega Mewtwo X and Mega Mewtwo Y debut new Adventure Effects (Dynamic Punch+ and Future Sight+). Also new: a GO Battle League Mega Evolution expansion, Mega Ascension, a branching Kalos-partner Timed Research, and the GO Pass: Mega Finale → GO Pass Deluxe upgrade.", fullBody: "Trainers, make room for new battle strategies with an additional Charged Attack for eligible Mega-Evolved Pokémon, arriving during Pokémon GO Fest 2026: Mega Finale. Mewtwo is preparing to push Mega Evolution even further! When Mewtwo Mega Evolves into Mega Mewtwo X or Mega Mewtwo Y, it can tap into new battle power and new Adventure Effects that can help you in and beyond raids.", sections: [
+    { heading: "Live Updates from the 2026 Pokémon World Championships in San Francisco", icon: "🏆", items: [
+      "Mewtwo Adventure Effects and additional Charged Attacks for eligible Pokémon.",
+      "GBL Updates: Mega Evolution is expanding in the GO Battle League.",
+      "In the near future, the CP of Mega-Evolved Pokémon will be temporarily reduced when you select them for your GO Battle League team so that they can participate in Mega Editions of the Great League and Ultra League. CP will only be reduced for the duration of the battle and will return to the original CP after completion of the battle.",
+      "Armored Mewtwo will return for GO Fest: Mega Finale."
+    ] },
+    { heading: "Additional Charged Attacks", items: [
+      "Beginning now, Pokémon that can reach Super Max Level will have an additional Charged Attack while Mega Evolved.",
+      "Eligible Mega-Evolved Pokémon will know an additional Charged Attack, regardless of which Mega Level they are.",
+      "The power of the attacks will increase as the Pokémon's Mega Level increases.",
+      "In the future, as Pokémon gain access to Super Max Levels, they'll also get an additional Charged Attack while Mega Evolved.",
+      "Pokémon will be able to use the additional Charged Attacks in the GO Battle League.",
+      "At this time, Pokémon won't be able to use the additional Charged Attack in Gym battles against Pokémon defending a Gym."
+    ] },
+    { heading: "More Mega-Evolved Mewtwo during GO Fest: Mega Finale", items: [
+      "Mega Mewtwo X will know Dynamic Punch+",
+      "Mega Mewtwo Y will know Future Sight+"
+    ] },
+    { heading: "Adventure Effects for Mega Mewtwo X and Mega Mewtwo Y", items: [
+      "Mewtwo will also be able to use unique Adventure Effects when it first learns these moves.",
+      "Mega Mewtwo X will be able to use Dynamic Punch+ and Mega Mewtwo Y will be able to use Future Sight+. Once unlocked, Mewtwo will also be able to use these Adventure Effects when it isn't Mega Evolved.",
+      "Trainers will need to use Mega Energy and Candy to activate these effects."
+    ] },
+    { heading: "Dynamic Punch+ Adventure Effect", items: [
+      "Activate Mega Mewtwo X's Adventure Effect to increase your Pokémon's damage against Mega-Evolved Pokémon in Mega Raids and Super Mega Raids.",
+      "In Super Mega Raids, this Adventure Effect will also allow Trainers to break two shields at once instead of one."
+    ] },
+    { heading: "Future Sight+ Adventure Effect", items: [
+      "Activate Mega Mewtwo Y's Adventure Effect to see into the future and reveal Pokémon that will appraise as three-star or higher when entering a Pokémon encounter.",
+      "Upon entering an encounter with a Pokémon while the Future Sight+ Adventure Effect is active, the encountered Pokémon will glow if it will appraise with high stats."
+    ] },
+    { heading: "Additional Charged Attacks Debut During GO Fest: Mega Finale", items: [
+      "The Mega Evolutions of the Kalos first partner Pokémon are ready to rumble with an additional Charged Attack.",
+      "Mega Chesnaught will know Seed Bomb+",
+      "Mega Delphox will know Mystical Fire+",
+      "Mega Greninja will know Surf+"
+    ] },
+    { heading: "Additional Charged Attacks for Super Max Level–Eligible Pokémon", items: [
+      "Starting now, the following Pokémon will also know an additional Charged Attack while Mega Evolved.",
+      "Mega Raichu X will know Volt Tackle+",
+      "Mega Raichu Y will know Zap Cannon+",
+      "Mega Skarmory will know Drill Peck+",
+      "Mega Falinks will know Brick Break+",
+      "Mega Starmie will know Liquidation+",
+      "Mega Victreebel will know Acid Spray+",
+      "Mega Malamar will know Psybeam+",
+      "Mega Dragonite will know Outrage+"
+    ] },
+    { heading: "Ways to Collect Mega Energy", items: [
+      "Trainers can collect the most Mega Energy by defeating a Mega-Evolved Pokémon in a Mega Raid Battle.",
+      "You can also occasionally earn Mega Energy by walking with your Buddy Pokémon if you have previously Mega-Evolved a Pokémon in your Buddy Pokémon's Evolutionary line.",
+      "You will need to collect separate Mega Energy X or Mega Energy Y to Mega Evolve Pokémon that can Mega Evolve into both an X or Y form — for example, to Mega Evolve Charizard into Mega Charizard X, you will need to collect Charizard Mega Energy X.",
+      "Once you've Mega Evolved a Pokémon for the first time, it's possible to Mega Evolve them without using Mega Energy."
+    ] },
+    { heading: "How to Increase Your Pokémon's Mega Levels", items: [
+      "Right now, there are two ways to increase Mega Levels of a Pokémon.",
+      "The first is by Mega Evolving that Pokémon multiple times.",
+      "The second is by using significant amounts of Mega Energy to instantly level it up."
+    ] },
+    { heading: "Mega Mewtwo X and Mega Mewtwo Y Return for Pokémon GO Fest 2026: Mega Finale!", icon: "✨", showImages: true, intro: "Some Pokémon caught from Mega Raids during the event may have a Special Background inspired by Mega Evolution — keep an eye on your Pokémon's summary page after a successful catch, and Mega Evolve eligible Pokémon to see their backgrounds transform while they're Mega Evolved.", items: [
+      { name: "Mega Mewtwo X", subtitle: "Special Mega Raids — Saturday, September 5" },
+      { name: "Mega Mewtwo Y", subtitle: "Special Mega Raids — Sunday, September 6" }
+    ] },
+    { heading: "Mega Ascension", items: [
+      "Monday, August 31, at 10:00 a.m. to Friday, September 4, at 11:59 p.m. local time.",
+      "Get ready for Pokémon GO Fest 2026: Mega Finale with wild encounters and Mega Raids focused on featured Mega-Evolved Pokémon.",
+      "Check out your Timed Research to select which Kalos first partner Pokémon you want to encounter and Mega Evolve."
+    ] },
+    { heading: "Choose Your Kalos First Partner", icon: "✨", showImages: true, items: [
+      { name: "Chespin" },
+      { name: "Fennekin" },
+      { name: "Froakie" }
+    ] },
+    { heading: "GO Pass: Mega Finale → GO Pass Deluxe", items: [
+      "Once you've completed the Timed Research, the GO Pass will appear and you'll be able to upgrade to GO Pass Deluxe.",
+      "Exciting rewards.",
+      "New gear for your avatar.",
+      "Gain enough Mega Energy to level up your Kalos first partner Pokémon to Super Max Level.",
+      "Increased chance of encountering Shiny Pokémon during encounters with your chosen first partner (starting at Rank 1), four-star Mega Raids (starting at Rank 2), and all wild Pokémon encounters (starting at Rank 70).",
+      "Available from August 31 to September 6. Upgrade on the Pokémon GO Web Store."
+    ] },
+    { heading: "Branching Timed Research", items: [
+      "In Pokémon GO Fest: Mega Finale, your path begins with a choice.",
+      "Through a branching Timed Research path tied to GO Pass: Mega Finale, Trainers will choose Chespin, Fennekin, or Froakie and unlock a reward path built around that Pokémon.",
+      "As you progress, you will earn rewards built around your selected partner and gather the resources you need to Mega Evolve your Kalos first partner Pokémon and unlock new Mega Levels.",
+      "Whether your goal is Mega Energy, raid rewards, event bonuses, or simply celebrating your favorite Kalos first partner Pokémon, the GO Pass is designed to make your preparation feel personal from the moment you begin."
+    ] },
+    { heading: "Good to Know", items: [
+      "Please be aware of your surroundings and follow guidelines from local health authorities when playing Pokémon GO. Upcoming events are subject to change. Be sure to follow us on social media, opt in to receiving push notifications, and subscribe to our emails to stay updated."
+    ] }
+  ] },
+  { id: 45, date: "2026-08-31", published: "2026-08-31", updated: "2026-08-31", lastUpdated: "August 31, 2026 at 12:46 AM", title: "Armored Mewtwo Returns for the Mega Finale", tag: "News", url: "https://pokemongo.com/en/news/megafinale-2026-armored-mewtwo", icon: "assets/pokemon-images/Event-Dex/regular/Gen-1_Kanto/0150_armored.webp", body: "Just announced at the 2026 Pokémon World Championships in San Francisco — Armored Mewtwo is back for the first time since 2020! Armored Mewtwo appears in five-star raids both days of Pokémon GO Fest 2026: Mega Finale, Saturday, September 5 and Sunday, September 6, from 10:00 a.m. to 6:00 p.m. local time. Shiny Armored Mewtwo will not be available.", fullBody: "Just announced at the 2026 Pokémon World Championships live in San Francisco — Armored Mewtwo is back! Last spotted in 2020, Armored Mewtwo will return to Pokémon GO for a limited time during Pokémon GO Fest 2026: Mega Finale.", sections: [
+    { heading: "Pokémon GO Fest 2026: Mega Finale", items: [
+      "Saturday, September 5, and Sunday, September 6, 2026.",
+      "10:00 a.m. to 6:00 p.m. local time.",
+      "Armored Mewtwo will appear in five-star raids on both Saturday and Sunday.*",
+      "*Shiny Armored Mewtwo will not be available at this time."
+    ] },
+    { heading: "Featured Pokémon", icon: "✨", showImages: true, items: [
+      { name: "Armored Mewtwo", subtitle: "Five-star raids on both days — Shiny Armored Mewtwo will not be available" }
+    ] },
+    { heading: "The Origin of Armored Mewtwo", items: [
+      "Mewtwo strikes back in Raid Battles...in that form! Armored Mewtwo, as seen in the movie Pokémon: Mewtwo Strikes Back – Evolution (released in 2019), is a version of Mewtwo whose power is suppressed and held back by armor.",
+      "Even so, Armored Mewtwo possesses overwhelming strength that surpasses other Pokémon.",
+      "Pokémon: Mewtwo Strikes Back – Evolution is now streaming on Netflix!"
+    ] },
+    { heading: "Good to Know", items: [
+      "Please be aware of your surroundings and follow guidelines from local health authorities when playing Pokémon GO. Upcoming events are subject to change. Be sure to follow us on social media, opt in to receiving push notifications, and subscribe to our emails to stay updated."
+    ] }
+  ] },
   { id: 44, date: "2026-08-25", published: "2026-08-25", updated: "2026-08-27", lastUpdated: "August 27, 2026 at 1:48 PM", title: "September Content Update — Twilight Trails", tag: "News", url: "https://pokemongo.com/news/september-2026-content-update", body: "September 2026's full content rundown — Featured Mega Victreebel, Mega Malamar, and Shadow Thundurus (Incarnate Forme). Max Battles rotate Eevee → Ralts → Rhyhorn → the Legendary Birds → Sobble. Five-Star Raids run the Regi trio → Zacian → Zamazenta → a three-way Xurkitree/Pheromosa/Buzzwole regional split → Xerneas. Mega Raids feature Mega Gyarados, Mega Beedrill, Mega Houndoom, Mega Venusaur, Mega Malamar, and Mega Victreebel. Shadow Giratina (Altered Forme) hands off to Shadow Thundurus (Incarnate Forme) in Shadow Raids, plus Mega Ascension, GO Fest 2026: Mega Finale, Community Day Classic, Super Mega Raid Day, and the Twilight Trails season launch.", fullBody: "Pokémon GO's September 2026 Content Update launches the Twilight Trails Season, part of the game's 10th Anniversary celebrations. Mega Victreebel and Mega Malamar debut as Mega Raid bosses across the back half of the month, while Shadow Thundurus (Incarnate Forme) makes its first-ever Shadow Raid appearance once Shadow Giratina (Altered Forme) closes out its run. The five-star rotation opens with the Regi trio, moves through Zacian and Zamazenta (Hero of Many Battles), splits three ways by region for Xurkitree, Pheromosa, and Buzzwole, and closes with Xerneas. Max Battles, weekly Spotlight Hours, Raid Hours, Mega Ascension, Pokémon GO Fest 2026: Mega Finale, Community Day Classic, and the Harvest Festival round out a packed month. All times are local unless otherwise specified.", sections: [{ heading: "Featured Pokémon", icon: "✨", showImages: true, intro: "Part of the Pokémon GO 10th Anniversary · Twilight Trails Season. If you're lucky, you might encounter a Shiny one!", items: [{ name: "Mega Victreebel ✨ (Mega)" }, { name: "Shadow Thundurus (Incarnate Forme) ✨ (5★ Shadow Raid)" }, { name: "Mega Malamar ✨ (Mega)" }] }, { heading: "Spotlight Hours (6:00 PM – 7:00 PM local time)", icon: "assets/pokemon-images/icons/QuestPokemonReward.png", showImages: true, intro: "A still-unrevealed Pokémon also gets a Spotlight Hour on September 17 (2× Catch Stardust) — its identity hasn't been shown yet, though the official graphic teased a Shiny sparkle.", items: [{ name: "Weedle ✨", subtitle: "2× Transfer Candy", dates: "Thu, September 10" }, { name: "Kakuna ✨", subtitle: "2× Transfer Candy", dates: "Thu, September 10" }, { name: "Beedrill ✨", subtitle: "2× Transfer Candy", dates: "Thu, September 10" }, { name: "Houndour ✨", subtitle: "2× Transfer Candy", dates: "Sun, September 13" }, { name: "Houndoom ✨", subtitle: "2× Transfer Candy", dates: "Sun, September 13" }, { name: "Rattata ✨", subtitle: "2× Evolution XP + increased chance of XXS Rattata", dates: "Thu, September 24" }] }, { heading: "Max Battles", icon: "assets/pokemon-images/icons/dynamax.png", showImages: true, intro: "These Dynamax Pokémon may appear in Max Battles throughout Twilight Trails.", items: [{ name: "Dynamax Eevee ✨", dates: "August 31 – September 6" }, { name: "Dynamax Ralts ✨", dates: "September 7 – September 13" }, { name: "Dynamax Rhyhorn ✨", dates: "September 14 – September 20" }, { name: "Dynamax Articuno ✨", dates: "September 21 – September 27" }, { name: "Dynamax Zapdos ✨", dates: "September 21 – September 27" }, { name: "Dynamax Moltres ✨", dates: "September 21 – September 27" }, { name: "Dynamax Sobble ✨", dates: "September 28 – October 4" }] }, { heading: "Mega Raids", icon: "assets/pokemon-images/Raid-Eggs/mega.png", showImages: true, intro: "Mega Gyarados will not be available August 31 – September 4 during Mega Ascension, but returns to the raid rotation September 5–6 during Pokémon GO Fest 2026: Mega Finale.", items: [{ name: "Mega Gyarados ✨ (Mega)", dates: "August 26 – September 8" }, { name: "Mega Beedrill ✨ (Mega)", dates: "September 8 – September 15" }, { name: "Mega Houndoom ✨ (Mega)", dates: "September 11 – September 15" }, { name: "Mega Venusaur ✨ (Mega)", dates: "September 16 – September 22" }, { name: "Mega Malamar ✨ (Mega)", dates: "September 23 – September 29" }, { name: "Mega Victreebel ✨ (Mega)", dates: "September 30 – October 6" }] }, { heading: "Five-Star Raids", icon: "assets/pokemon-images/Raid-Eggs/5-star.png", showImages: true, intro: "Regirock, Regice, and Registeel will not be available August 31 – September 6 during Mega Ascension and Pokémon GO Fest 2026: Mega Finale.", items: [{ name: "Regirock ✨ (5★ Raid)", dates: "August 26 – September 8" }, { name: "Regice ✨ (5★ Raid)", dates: "August 26 – September 8" }, { name: "Registeel ✨ (5★ Raid)", dates: "August 26 – September 8" }, { name: "Zacian (Hero of Many Battles) ✨ (5★ Raid)", dates: "September 9 – September 15" }, { name: "Zamazenta (Hero of Many Battles) ✨ (5★ Raid)", dates: "September 16 – September 22" }, { name: "Xurkitree ✨ (5★ Raid)", subtitle: "Asia-Pacific", dates: "September 23 – September 29" }, { name: "Pheromosa ✨ (5★ Raid)", subtitle: "Europe, the Middle East, Africa, and India", dates: "September 23 – September 29" }, { name: "Buzzwole ✨ (5★ Raid)", subtitle: "The Americas and Greenland", dates: "September 23 – September 29" }, { name: "Xerneas ✨ (5★ Raid)", dates: "September 30 – October 6" }] }, { heading: "Events", icon: "📅", items: ["Mega Ascension — August 31 to September 4 (Daily Discoveries will not be available during this event)", "Pokémon GO Fest 2026: Mega Finale — September 5 to September 6 (Daily Discoveries will not be available during this event)", "Mega Squads — September 8 to September 14", "Community Day Classic — September 12", "??? (unrevealed) — September 16 to September 22", "Super Mega Raid Day — September 19", "Phantump Catch Mastery — September 26", "Harvest Festival — September 29 to October 5"] }, { heading: "Raid Hours (6:00 PM – 7:00 PM local time)", icon: "assets/pokemon-images/Raid-Eggs/5-star.png", showImages: true, items: [{ name: "Zacian (Hero of Many Battles) ✨ (5★ Raid)", dates: "Wed, September 9" }, { name: "Zamazenta (Hero of Many Battles) ✨ (5★ Raid)", dates: "Wed, September 16" }, { name: "Xurkitree ✨ (5★ Raid)", subtitle: "Asia-Pacific", dates: "Wed, September 23" }, { name: "Pheromosa ✨ (5★ Raid)", subtitle: "Europe, the Middle East, Africa, and India", dates: "Wed, September 23" }, { name: "Buzzwole ✨ (5★ Raid)", subtitle: "The Americas and Greenland", dates: "Wed, September 23" }, { name: "Xerneas ✨ (5★ Raid)", dates: "Wed, September 30" }] }, { heading: "Shadow Pokémon", icon: "assets/pokemon-images/Raid-Eggs/shadow.png", showImages: true, items: [{ name: "Shadow Giratina (Altered Forme) ✨ (5★ Shadow Raid)", subtitle: "First-ever appearance in Shadow Raids", dates: "August 5 – September 8" }, { name: "Shadow Thundurus (Incarnate Forme) ✨ (5★ Shadow Raid)", subtitle: "First-ever appearance in Shadow Raids", dates: "September 9 – October 6" }] }, { heading: "GO Pass", icon: "🎫", items: ["Swing by the web store or in-game shop to get September's GO Pass!"] }, { heading: "Tips", icon: "💡", items: ["Mega Victreebel and Mega Malamar debut as Featured Mega Raid bosses this month, alongside Shadow Thundurus (Incarnate Forme) — its first-ever Shadow Raid appearance, running September 9 – October 6.", "Regirock, Regice, Registeel, and Mega Gyarados all disappear August 31 – September 6 for Mega Ascension and GO Fest 2026: Mega Finale — grab them before August 31, or catch Mega Gyarados' brief September 5–6 return during the Finale.", "Zacian and Zamazenta (Hero of Many Battles) headline back-to-back weeks (September 9–15 and 16–22) with matching Wednesday Raid Hours.", "The September 23–29 five-star slot splits by region — Xurkitree (Asia-Pacific), Pheromosa (Europe, the Middle East, Africa, and India), and Buzzwole (the Americas and Greenland) — trade with friends overseas to complete the trio.", "Shadow Giratina (Altered Forme) closes out its run September 8 — Ghost/Dragon, weak to Ice, Dragon, Fairy, Ghost, and Dark attacks; bring Purified Gems.", "Four Spotlight Hours run this month, including a still-unrevealed Pokémon on September 17 — check every encounter, all are Shiny-eligible.", "Harvest Festival closes out the month (September 29 – October 5), overlapping the new Mega Victreebel Mega Raids and the Xerneas five-star rotation."] }] },
   { id: 43, date: "2026-08-25", published: "2026-08-25", updated: "2026-08-25", lastUpdated: "August 25, 2026 at 1:10 PM", title: "GO Pass: September — Latios & Timed Incubator", tag: "News", url: "https://pokemongo.com/en/news/go-pass-september-2026", icon: "assets/pokemon-images/National-Dex/regular/Gen-3_Hoenn/0381-male.webp", body: "GO Pass: September brings an Encounter with Latios (Shiny possible) to the free track, running Tuesday, September 8 to Tuesday, October 6, 2026. GO Pass Deluxe (US$7.99) adds a Timed Incubator, a Super Incubator, and extra Pokémon encounters, while GO Pass Deluxe + 10 Ranks (US$9.99) also auto-ranks up to Rank 11. There's no daily GO Points limit from Saturday, October 3 to Sunday, October 4, so bank as many ranks as you can during that window. The Timed Incubator itself unlocks at Rank 20 of GO Pass Deluxe and offers unlimited Egg hatches until it expires on October 13.", fullBody: "\"Latios soars in faster than a jet for GO Pass: September!\" — that's how Pokémon GO framed this month's headline encounter. GO Pass: September runs Tuesday, September 8, at 10:00 a.m. to Tuesday, October 6, 2026, at 10:00 a.m. local time. Trainers automatically receive GO Pass: September on Tuesday, September 8, at 10:00 a.m. local time, and can complete Pass Tasks to earn GO Points and rank up for additional rewards through Tuesday, October 6, at 10:00 a.m. local time. From Saturday, October 3, at 12:00 a.m. to Sunday, October 4, at 11:59 p.m. local time, there's no daily limit on how many GO Points you can earn. For US$7.99, Trainers can upgrade to GO Pass Deluxe, a paid version of the GO Pass that offers upgraded rewards and faster progression;** for US$9.99,* Trainers can upgrade to GO Pass Deluxe + 10 Ranks to also automatically earn enough GO Points to reach Rank 11. While progressing through GO Pass Deluxe, Trainers can claim all of the rewards from both the free GO Pass and GO Pass Deluxe — you can upgrade to a GO Pass Deluxe at any time and still collect rewards from previously unlocked ranks. Rewards unlocked in the GO Pass will expire on Thursday, October 8, at 10:00 a.m. local time, so be sure to claim your rewards before they're gone. The GO Pass Deluxe will also be available on the Pokémon GO Web Store, and GO Pass Deluxe purchased via the Web Store will activate as soon as the GO Pass begins. *All prices listed are in USD or the equivalent pricing tier in your local currency. **Availability of event tickets and the GO Pass Deluxe may vary by region.", sections: [
     { heading: "Event Window", items: [
@@ -5314,27 +5429,66 @@ function renderCatchCP(catchCP, th) {
   </div>`;
 }
 
-function renderHabitatBosses(habitatBosses, th) {
+function renderHabitatBosses(habitatBosses, th, title) {
   if (!habitatBosses || habitatBosses.length === 0) return "";
   const accent = "#6C5CE7";
-  const total = habitatBosses.reduce((n, h) => n + (h.bosses ? h.bosses.length : 0), 0);
+  const countOf = h => h.groups ? h.groups.reduce((n, g) => n + (g.items ? g.items.length : 0), 0) : (h.bosses ? h.bosses.length : 0);
+  const total = habitatBosses.reduce((n, h) => n + countOf(h), 0);
   const chevronSVG = `<svg class="acc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
-  const body = habitatBosses.map(h => `
+  // Habitats that use the newer `groups` shape (label + sprite-eligible items) render each
+  // Pokémon as a sprite tile via the shared renderBossItem helper — same tile used for raid
+  // boss accordions — instead of a bare text chip. Shiny sparkles are explicitly suppressed
+  // (noSparkles=true) since per-species shiny data isn't verified for these habitat lists.
+  // Any name getPokemonImg can't resolve falls back to the original plain text chip.
+  const habitatCardLayout = breakpoint !== "mobile";
+  const renderHabitatChip = b => `<span style="font-size:12px;font-weight:600;color:${th.textSecondary};background:${th.surface};border:1px solid ${th.border};padding:4px 10px;border-radius:10px;line-height:1.3">${esc(b)}</span>`;
+  const renderHabitatGroupItem = b => (getPokemonImg(b) ? renderBossItem(b, accent, th, habitatCardLayout, !b.includes("✨")) : renderHabitatChip(b));
+  const renderGroups = h => h.groups.map(g => `<div style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-size:11px;font-weight:700;color:${th.textMuted}">${esc(g.label)}</span>
+            <div style="display:flex;${habitatCardLayout ? "flex-wrap:wrap;gap:8px" : "flex-direction:column;gap:5px"}">
+              ${(g.items || []).map(renderHabitatGroupItem).join("")}
+            </div>
+          </div>`).join("");
+  const renderHabitat = h => `
         <div style="display:flex;flex-direction:column;gap:8px">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
             <span style="font-size:13px;font-weight:700;color:${th.text}">${esc(h.name)}</span>
             <span style="font-size:11px;font-weight:700;color:#fff;background:${accent};padding:2px 9px;border-radius:12px;letter-spacing:0.2px;white-space:nowrap">${esc(h.time)}</span>
           </div>
-          <div style="display:flex;flex-wrap:wrap;gap:6px">
+          ${h.groups ? renderGroups(h) : `<div style="display:flex;flex-wrap:wrap;gap:6px">
             ${(h.bosses || []).map(b => `<span style="font-size:12px;font-weight:600;color:${th.textSecondary};background:${th.surface};border:1px solid ${th.border};padding:4px 10px;border-radius:10px;line-height:1.3">${esc(b)}</span>`).join("")}
+          </div>`}
+        </div>`;
+  // On mobile, a `groups`-shaped habitat (the Mega Finale style with Wild Encounters + Mega
+  // Raids sub-groups) becomes its own nested accordion — closed by default — so an 8-habitat,
+  // ~127-tile list doesn't render as one long scroll. Desktop/tablet and the older flat
+  // `bosses` shape (plain chip list, no sub-groups) are untouched at every breakpoint.
+  const isMobileHabitatAcc = h => breakpoint === "mobile" && !!h.groups;
+  const renderHabitatAcc = h => `<div style="border:1.5px solid ${th.border};border-radius:12px;overflow:hidden;background:${th.surface}">
+          <button class="acc-trigger" data-open="false" onclick="toggleAccordion(this)" aria-expanded="false" style="display:flex;align-items:center;gap:8px;padding:10px 12px;border:none;color:${th.text};width:100%;text-align:left;cursor:pointer;background:transparent;flex-wrap:wrap">
+            <span style="font-size:13px;font-weight:700;color:${th.text}">${esc(h.name)}</span>
+            <span style="font-size:11px;font-weight:700;color:#fff;background:${accent};padding:2px 9px;border-radius:12px;letter-spacing:0.2px;white-space:nowrap">${esc(h.time)}</span>
+            <span style="font-size:11px;font-weight:600;color:${th.textMuted};white-space:nowrap">${countOf(h)} Pokémon</span>
+            <span style="display:flex;align-items:center;color:${th.textMuted};margin-left:auto">${chevronSVG}</span>
+          </button>
+          <div class="acc-content" data-open="false">
+            <div style="padding:0 12px 12px;display:flex;flex-direction:column;gap:8px">${renderGroups(h)}</div>
           </div>
-        </div>`).join(`<div style="height:1px;background:${th.border};margin:2px 0"></div>`);
+        </div>`;
+  const body = habitatBosses.map((h, i) => {
+    const cur = isMobileHabitatAcc(h);
+    const prev = i > 0 ? isMobileHabitatAcc(habitatBosses[i - 1]) : false;
+    const divider = (i > 0 && !prev && !cur) ? `<div style="height:1px;background:${th.border};margin:2px 0"></div>` : "";
+    return divider + (cur ? renderHabitatAcc(h) : renderHabitat(h));
+  }).join("");
+  const heading = title ? esc(title) : "5★ Bosses by Habitat";
+  const subtitle = title ? `${habitatBosses.length} habitats · ${total} Pokémon` : `${habitatBosses.length} habitats · ${total} five-star bosses`;
   return `<div style="border:1.5px solid ${th.border};border-radius:14px;overflow:hidden;background:${th.accentBgSubtle(accent)}">
     <button class="acc-trigger" data-open="false" onclick="toggleAccordion(this)" aria-expanded="false" style="display:flex;align-items:center;gap:10px;padding:12px 14px;border:none;color:${th.text};width:100%;text-align:left;cursor:pointer;background:transparent">
       <span style="font-size:16px">🌍</span>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
-        <span style="font-size:13px;font-weight:700;color:${th.text}">5★ Bosses by Habitat</span>
-        <span style="font-size:11px;color:${th.textMuted}">${habitatBosses.length} habitats · ${total} five-star bosses</span>
+        <span style="font-size:13px;font-weight:700;color:${th.text}">${heading}</span>
+        <span style="font-size:11px;color:${th.textMuted}">${subtitle}</span>
       </div>
       <span style="font-size:10px;font-weight:700;color:${accent};background:${th.accentBg(accent)};padding:3px 8px;border-radius:10px;letter-spacing:0.3px;text-transform:uppercase;white-space:nowrap">Tap to view</span>
       <span style="display:flex;align-items:center;color:${th.textMuted}">${chevronSVG}</span>
@@ -6293,7 +6447,7 @@ function renderEventDetail(event, th) {
         ${event.details.relatedNews ? event.details.relatedNews.map(rn => `<button onclick="selectNews(${rn.id})" style="display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:${event.color};background:${th.accentBgSubtle(event.color)};border:1.5px solid ${th.countdownBorder(event.color)};border-radius:12px;padding:11px 18px;cursor:pointer;font-family:inherit;transition:all 0.2s ease;align-self:flex-start" onmouseenter="this.style.background='${event.color}';this.style.color='#fff';this.style.transform='translateY(-1px)'" onmouseleave="this.style.background='${th.accentBgSubtle(event.color)}';this.style.color='${event.color}';this.style.transform='translateY(0)'">${rn.iconImg ? `<img src="${rn.iconImg}" style="width:22px;height:22px;object-fit:contain;flex-shrink:0" />` : `<span style="font-size:16px">${rn.icon || "📰"}</span>`} ${esc(rn.label)}&nbsp;→</button>`).join("") : ""}
         <div class="move-deadline" data-event-id="${event.id}">${renderMoveDeadlineBanner(event, th)}</div>
         ${event.details.bosses ? renderDetailSection(event.details.bossesTitle || (event.type === "Community Day" ? "Featured Move(s)" : "Featured Encounters"), "\uD83C\uDFAF", event.details.bosses, event.color, th, true, event.type === "Community Day", event.details.groupSize, event.details.counters, true) : ""}
-        ${event.details.habitatBosses ? renderHabitatBosses(event.details.habitatBosses, th) : ""}
+        ${event.details.habitatBosses ? renderHabitatBosses(event.details.habitatBosses, th, event.details.habitatBossesTitle) : ""}
         ${event.details.rocketLeaders ? (() => {
           const rl = event.details.rocketLeaders;
           const isMob = breakpoint === "mobile";
@@ -6837,7 +6991,6 @@ function renderEventDetail(event, th) {
             `<div style="padding:10px 14px;border-radius:10px;background:${th.tipBg};border:1px solid ${th.tipBorder};font-size:13.5px;color:${th.tipText};line-height:1.5">${esc(tip)}</div>`
           ).join("")}</div></div>` : ""}
         ${event.details.alert ? `<div style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;background:${th.accentBgSubtle("#E74C3C")};border:2px solid #E74C3C;animation:alertPulse 2s ease-in-out infinite"><span style="font-size:18px">\u26A0\uFE0F</span><span style="font-size:13px;font-weight:700;color:#E74C3C;line-height:1.4">${esc(event.details.alert)}</span></div>` : ""}
-        ${event.lastUpdated ? `<div style="font-size:${breakpoint === "mobile" ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on ${esc(event.lastUpdated)}</div>` : ""}
       </div>
     </div>
   </div>`;
@@ -8752,8 +8905,9 @@ function render() {
         </div>`;
       });
       raidsTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
-        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 26, 2026 at 5:32 pm</div>
-        <div style="text-align:center;padding:10px;font-size:14px;font-weight:600;color:${th.text}">Current Raid Bosses</div>
+        <div style="text-align:center;padding:10px;font-size:14px;font-weight:600;color:${th.text};position:relative">
+          <div style="${isMobile ? "position:static;margin:0 0 10px" : "position:absolute;top:14px;right:16px"};font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 26, 2026 at 5:32 pm</div>
+          Current Raid Bosses</div>
         <div style="text-align:center;font-size:11px;color:${th.textMuted};font-weight:500;margin-top:-10px">Data sourced from Pok\u00E9monGO.com, LeekDuck.com & Pok\u00E9monGOHUB.net</div>
         <div style="text-align:center;font-size:12px;color:${th.textMuted};font-weight:600;margin-top:2px">Tap a Pok\u00E9mon to see its weaknesses & resistances</div>
         ${raidSectionsHTML}
@@ -8940,8 +9094,8 @@ function render() {
         </div>`;
       }).join("");
       rocketTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
-        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on May 18, 2026 at 9:30 am</div>
-        <div style="text-align:center;padding:10px">
+        <div style="text-align:center;padding:10px;position:relative">
+          <div style="${isMobile ? "position:static;margin:0 0 10px" : "position:absolute;top:14px;right:16px"};font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on May 18, 2026 at 9:30 am</div>
           <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text};display:flex;align-items:center;justify-content:center;gap:8px"><img src="assets/pokemon-images/icons/teamrocket_r_full.png" style="width:${isMobile ? 24 : 30}px;height:${isMobile ? 24 : 30}px;object-fit:contain" /> Team GO Rocket</h2>
           <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Current Team GO Rocket lineups</p>
         </div>
@@ -9018,8 +9172,8 @@ function render() {
         </div>`;
       }).join("");
       eggsTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
-        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on June 8, 2026 at 10:19 pm</div>
-        <div style="text-align:center;padding:10px">
+        <div style="text-align:center;padding:10px;position:relative">
+          <div style="${isMobile ? "position:static;margin:0 0 10px" : "position:absolute;top:14px;right:16px"};font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on June 8, 2026 at 10:19 pm</div>
           <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text};display:flex;align-items:center;justify-content:center;gap:8px"><img src="assets/pokemon-images/eggs/egg-2.png" style="width:${isMobile ? 34 : 38}px;height:${isMobile ? 34 : 38}px;object-fit:contain" /> Egg Hatches</h2>
           <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Current egg pool by distance tier</p>
         </div>
@@ -9133,8 +9287,8 @@ function render() {
       }).join("");
 
       researchTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
-        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 25, 2026 at 12:58 pm</div>
-        <div style="text-align:center;padding:10px">
+        <div style="text-align:center;padding:10px;position:relative">
+          <div style="${isMobile ? "position:static;margin:0 0 10px" : "position:absolute;top:14px;right:16px"};font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 25, 2026 at 12:58 pm</div>
           <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text};display:flex;align-items:center;justify-content:center;gap:8px"><img src="assets/pokemon-images/icons/green-research.png" style="width:${isMobile ? 30 : 36}px;height:${isMobile ? 30 : 36}px;object-fit:contain" /> Field Research Tasks</h2>
           <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Current season tasks &amp; reward encounters</p>
         </div>
@@ -9261,8 +9415,8 @@ function render() {
         </div>`;
       }).join("");
       itemsTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
-        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 25, 2026 at 12:47 pm</div>
-        <div style="text-align:center;padding:10px">
+        <div style="text-align:center;padding:10px;position:relative">
+          <div style="${isMobile ? "position:static;margin:0 0 10px" : "position:absolute;top:14px;right:16px"};font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 25, 2026 at 12:47 pm</div>
           <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text}">🎒 Items</h2>
           <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Every obtainable item in Pokémon GO</p>
         </div>
@@ -9350,8 +9504,8 @@ function render() {
         </div>`;
       }).join("");
       trainerLevelsTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px;width:100%;${isDesktop ? "max-width:1100px;margin:0 auto" : ""}">
-        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 29, 2026 at 11:35 am</div>
-        <div style="text-align:center;padding:10px">
+        <div style="text-align:center;padding:10px;position:relative">
+          <div style="${isMobile ? "position:static;margin:0 0 10px" : "position:absolute;top:14px;right:16px"};font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 29, 2026 at 11:35 am</div>
           <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text};display:flex;align-items:center;justify-content:center;gap:10px"><img src="assets/pokemon-images/icons/trainer-level-badge.png" style="width:${isMobile ? 26 : 32}px;height:${isMobile ? 26 : 32}px;object-fit:contain" alt="" />Trainer Level Requirements</h2>
           <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Every Pokémon GO trainer level from 1 to 80 — XP requirements, rewards, unlocks, and level-up tasks</p>
           <p style="margin:8px 0 0 0;font-size:${isMobile ? 11 : 12}px;color:${th.textMuted};font-weight:500">Source: <a href="${escAttr(TRAINER_LEVELS_SOURCE)}" target="_blank" rel="noopener noreferrer" style="color:#16A085;font-weight:700;text-decoration:none">Leek Duck</a> · updated ${esc(TRAINER_LEVELS_SOURCE_UPDATED)}</p>
@@ -9401,8 +9555,8 @@ function render() {
         </div>`;
       }).join("");
       backgroundsTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
-        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 25, 2026 at 12:47 pm</div>
-        <div style="text-align:center;padding:10px">
+        <div style="text-align:center;padding:10px;position:relative">
+          <div style="${isMobile ? "position:static;margin:0 0 10px" : "position:absolute;top:14px;right:16px"};font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 25, 2026 at 12:47 pm</div>
           <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text}">🖼️ Backgrounds</h2>
           <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Location card backgrounds in Pokémon GO</p>
         </div>
@@ -9620,8 +9774,8 @@ function render() {
         archiveHTML += '</div>';
       }
       storeTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
-        <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 25, 2026 at 4:37 pm</div>
-        <div style="text-align:center;padding:10px">
+        <div style="text-align:center;padding:10px;position:relative">
+          <div style="${isMobile ? "position:static;margin:0 0 10px" : "position:absolute;top:14px;right:16px"};font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 25, 2026 at 4:37 pm</div>
           <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text}">\uD83D\uDED2 Web Store Box Analysis</h2>
           <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Are the current Pok\u00E9mon GO web store boxes worth it?</p>
           <p style="margin:4px 0 0 0;font-size:${isMobile ? 10 : 11}px;color:${th.textFaint};font-weight:500">Values based on individual item prices from <a href="https://store.pokemongo.com" target="_blank" rel="noopener noreferrer" style="color:${th.textMuted};text-decoration:underline">store.pokemongo.com</a></p>
@@ -10040,7 +10194,7 @@ function render() {
     </div>
   </header>`;
 
-  const tickerText = "\uD83C\uDF89 Pok\u00E9mon GO Fest: Mega Finale \u2014 September 5\u20136, 2026 \u00B7 Time: TBA";
+  const tickerText = "\uD83C\uDF89 Pok\u00E9mon GO Fest: Mega Finale \u2014 September 5\u20136, 2026 \u00B7 10:00 AM \u2013 6:00 PM local time";
   const tickerSep = "\u00a0\u2728\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0";
   const tickerSegment = tickerText + tickerSep;
   // Seamless marquee: the track is two identical halves and CSS scrolls it by -50% (one half).

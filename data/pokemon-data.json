@@ -141,6 +141,12 @@
       "Flying"
     ]
   },
+  "Amaura": {
+    "types": [
+      "Rock",
+      "Ice"
+    ]
+  },
   "Amped Toxtricity": {
     "types": [
       "Electric",
@@ -195,6 +201,11 @@
     "types": [
       "Dragon",
       "Ice"
+    ]
+  },
+  "Armored Mewtwo": {
+    "types": [
+      "Psychic"
     ]
   },
   "Aron": {
@@ -320,6 +331,11 @@
       "Poison"
     ]
   },
+  "Bergmite": {
+    "types": [
+      "Ice"
+    ]
+  },
   "Bewear": {
     "types": [
       "Normal",
@@ -335,6 +351,12 @@
   "Bidoof": {
     "types": [
       "Normal"
+    ]
+  },
+  "Binacle": {
+    "types": [
+      "Rock",
+      "Water"
     ]
   },
   "Blacephalon": {
@@ -499,6 +521,12 @@
       "Ground"
     ]
   },
+  "Carbink": {
+    "types": [
+      "Rock",
+      "Fairy"
+    ]
+  },
   "Carvanha": {
     "types": [
       "Water",
@@ -619,6 +647,11 @@
     ]
   },
   "Clamperl": {
+    "types": [
+      "Water"
+    ]
+  },
+  "Clauncher": {
     "types": [
       "Water"
     ]
@@ -1130,6 +1163,11 @@
       "Electric"
     ]
   },
+  "Electrike": {
+    "types": [
+      "Electric"
+    ]
+  },
   "Elekid": {
     "types": [
       "Electric"
@@ -1205,6 +1243,11 @@
     ]
   },
   "Espeon": {
+    "types": [
+      "Psychic"
+    ]
+  },
+  "Espurr": {
     "types": [
       "Psychic"
     ]
@@ -1339,6 +1382,11 @@
   "Fuecoco": {
     "types": [
       "Fire"
+    ]
+  },
+  "Furfrou (Natural Form)": {
+    "types": [
+      "Normal"
     ]
   },
   "Gabite": {
@@ -2439,6 +2487,12 @@
       "Fairy"
     ]
   },
+  "Meditite": {
+    "types": [
+      "Fighting",
+      "Psychic"
+    ]
+  },
   "Mega Abomasnow": {
     "types": [
       "Grass",
@@ -2466,7 +2520,9 @@
     "types": [
       "Steel"
     ],
-    "cp": "1636–1714"
+    "cp": "1636–1714",
+    "cpBoost": "2045–2143",
+    "weather": "Snow or Partly Cloudy"
   },
   "Mega Alakazam": {
     "types": [
@@ -2538,7 +2594,10 @@
     "types": [
       "Fire",
       "Ground"
-    ]
+    ],
+    "cp": "1186–1253",
+    "cpBoost": "1483–1566",
+    "weather": "Sunny"
   },
   "Mega Charizard": {
     "types": [
@@ -2558,6 +2617,12 @@
       "Flying"
     ]
   },
+  "Mega Chesnaught": {
+    "types": [
+      "Grass",
+      "Fighting"
+    ]
+  },
   "Mega Delphox": {
     "types": [
       "Fire",
@@ -2569,6 +2634,15 @@
       "Rock",
       "Fairy"
     ]
+  },
+  "Mega Dragonite": {
+    "types": [
+      "Dragon",
+      "Flying"
+    ],
+    "cp": "2096–2167",
+    "cpBoost": "2621–2709",
+    "weather": "Windy"
   },
   "Mega Falinks": {
     "types": [
@@ -2708,7 +2782,10 @@
     "types": [
       "Steel",
       "Fairy"
-    ]
+    ],
+    "cp": "877–934",
+    "cpBoost": "1096–1167",
+    "weather": "Snow or Cloudy"
   },
   "Mega Medicham": {
     "types": [
@@ -2794,7 +2871,10 @@
     "types": [
       "Dark",
       "Ghost"
-    ]
+    ],
+    "cp": "789–843",
+    "cpBoost": "986–1054",
+    "weather": "Fog"
   },
   "Mega Salamence": {
     "types": [
@@ -2827,7 +2907,10 @@
     "types": [
       "Water",
       "Dark"
-    ]
+    ],
+    "cp": "1174\u20131246",
+    "cpBoost": "1468\u20131558",
+    "weather": "Rainy or Fog"
   },
   "Mega Skarmory": {
     "types": [
@@ -2842,7 +2925,10 @@
     "types": [
       "Water",
       "Psychic"
-    ]
+    ],
+    "cp": "1382\u20131454",
+    "cpBoost": "1728\u20131817",
+    "weather": "Rainy or Windy"
   },
   "Mega Starmie": {
     "types": [
@@ -2857,7 +2943,10 @@
     "types": [
       "Steel",
       "Ground"
-    ]
+    ],
+    "cp": "1308\u20131379",
+    "cpBoost": "1635\u20131724",
+    "weather": "Snow or Sunny"
   },
   "Mega Swampert": {
     "types": [
@@ -3423,6 +3512,12 @@
       "Steel"
     ]
   },
+  "Pumpkaboo (Medium Variety)": {
+    "types": [
+      "Ghost",
+      "Grass"
+    ]
+  },
   "Quagsire": {
     "types": [
       "Water",
@@ -3620,6 +3715,12 @@
     "cp": "344–380",
     "cpBoost": "430–476",
     "weather": "Windy"
+  },
+  "Roselia": {
+    "types": [
+      "Grass",
+      "Poison"
+    ]
   },
   "Roserade": {
     "types": [
@@ -4231,6 +4332,11 @@
     ],
     "cp": "189–231"
   },
+  "Shuppet": {
+    "types": [
+      "Ghost"
+    ]
+  },
   "Silicobra": {
     "types": [
       "Ground"
@@ -4265,6 +4371,11 @@
       "Ghost"
     ]
   },
+  "Skiddo": {
+    "types": [
+      "Grass"
+    ]
+  },
   "Skwovet": {
     "types": [
       "Normal"
@@ -4277,6 +4388,12 @@
     ]
   },
   "Slowbro": {
+    "types": [
+      "Water",
+      "Psychic"
+    ]
+  },
+  "Slowpoke": {
     "types": [
       "Water",
       "Psychic"
@@ -4384,6 +4501,11 @@
   "Sprigatito": {
     "types": [
       "Grass"
+    ]
+  },
+  "Spritzee": {
+    "types": [
+      "Fairy"
     ]
   },
   "Squawkabilly": {
@@ -4825,6 +4947,11 @@
       "Grass"
     ]
   },
+  "Tynamo": {
+    "types": [
+      "Electric"
+    ]
+  },
   "Typhlosion": {
     "types": [
       "Fire"
@@ -4845,6 +4972,12 @@
   "Tyrogue": {
     "types": [
       "Fighting"
+    ]
+  },
+  "Tyrunt": {
+    "types": [
+      "Rock",
+      "Dragon"
     ]
   },
   "Unown": {
@@ -4890,6 +5023,12 @@
   "Varoom": {
     "types": [
       "Steel",
+      "Poison"
+    ]
+  },
+  "Venipede": {
+    "types": [
+      "Bug",
       "Poison"
     ]
   },
