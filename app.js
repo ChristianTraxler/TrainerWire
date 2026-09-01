@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.67";
+const APP_VERSION = "3.68";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -2807,7 +2807,7 @@ const TRAINER_LEVELS = [
 const MOVES_DB = [
   { name: "Acid", type: "Poison", cat: "fast", power: 6, energy: 8, turns: 2 },
   { name: "Acid Spray", type: "Poison", cat: "charged", power: 20, energy: 45, effect: "100% chance: Opponent −2 Def" },
-  { name: "Acid Spray+", type: "Poison", cat: "charged", power: 20, energy: 40, effect: "100% chance: Opponent −2 Def", mega: true },
+  { name: "Acid Spray+", type: "Poison", cat: "charged", power: 20, energy: 40, effect: "100% chance: Opponent −2 Def", mega: true, megaUser: "Mega Victreebel" },
   { name: "Acrobatics", type: "Flying", cat: "charged", power: 110, energy: 55 },
   { name: "Aerial Ace", type: "Flying", cat: "charged", power: 60, energy: 45 },
   { name: "Aeroblast", type: "Flying", cat: "charged", power: 170, energy: 75, effect: "13% chance: Self +2 Atk" },
@@ -2837,7 +2837,7 @@ const MOVES_DB = [
   { name: "Brave Bird", type: "Flying", cat: "charged", power: 130, energy: 55, effect: "100% chance: Self −3 Def" },
   { name: "Breaking Swipe", type: "Dragon", cat: "charged", power: 50, energy: 50, effect: "100% chance: Opponent −1 Atk" },
   { name: "Brick Break", type: "Fighting", cat: "charged", power: 50, energy: 40, effect: "100% chance: Opponent −1 Def" },
-  { name: "Brick Break+", type: "Fighting", cat: "charged", power: 40, energy: 35, effect: "100% chance: Opponent −1 Def", mega: true },
+  { name: "Brick Break+", type: "Fighting", cat: "charged", power: 40, energy: 35, effect: "100% chance: Opponent −1 Def", mega: true, megaUser: "Mega Falinks" },
   { name: "Brine", type: "Water", cat: "charged", power: 60, energy: 50 },
   { name: "Brutal Swing", type: "Dark", cat: "charged", power: 55, energy: 35 },
   { name: "Bubble", type: "Water", cat: "fast", power: 8, energy: 11, turns: 3 },
@@ -2880,12 +2880,12 @@ const MOVES_DB = [
   { name: "Drain Punch", type: "Fighting", cat: "charged", power: 40, energy: 40, effect: "100% chance: Self +1 Def" },
   { name: "Draining Kiss", type: "Fairy", cat: "charged", power: 60, energy: 55 },
   { name: "Drill Peck", type: "Flying", cat: "charged", power: 70, energy: 40 },
-  { name: "Drill Peck+", type: "Flying", cat: "charged", power: 60, energy: 35, mega: true },
+  { name: "Drill Peck+", type: "Flying", cat: "charged", power: 60, energy: 35, mega: true, megaUser: "Mega Skarmory" },
   { name: "Drill Run", type: "Ground", cat: "charged", power: 70, energy: 40 },
   { name: "Drum Beating", type: "Grass", cat: "charged", power: 60, energy: 35, effect: "100% chance: Opponent −1 Atk" },
   { name: "Dynamax Cannon", type: "Dragon", cat: "charged", power: 80, energy: 45 },
   { name: "Dynamic Punch", type: "Fighting", cat: "charged", power: 90, energy: 45 },
-  { name: "Dynamic Punch+", type: "Fighting", cat: "charged", power: 130, energy: 80, mega: true },
+  { name: "Dynamic Punch+", type: "Fighting", cat: "charged", power: 130, energy: 80, effect: "Adventure Effect: Increases your Pokémon's damage against Mega-Evolved Pokémon in Mega Raids and Super Mega Raids, and in Super Mega Raids it also lets Trainers break two shields at once instead of one.", mega: true, megaUser: "Mega Mewtwo X" },
   { name: "Earth Power", type: "Ground", cat: "charged", power: 90, energy: 50, effect: "10% chance: Opponent −1 Def" },
   { name: "Earthquake", type: "Ground", cat: "charged", power: 120, energy: 65 },
   { name: "Ember", type: "Fire", cat: "fast", power: 4, energy: 9, turns: 2 },
@@ -2918,7 +2918,7 @@ const MOVES_DB = [
   { name: "Fusion Bolt", type: "Electric", cat: "charged", power: 90, energy: 45 },
   { name: "Fusion Flare", type: "Fire", cat: "charged", power: 90, energy: 45 },
   { name: "Future Sight", type: "Psychic", cat: "charged", power: 110, energy: 65 },
-  { name: "Future Sight+", type: "Psychic", cat: "charged", power: 130, energy: 80, mega: true },
+  { name: "Future Sight+", type: "Psychic", cat: "charged", power: 130, energy: 80, effect: "Adventure Effect: Reveals Pokémon that will appraise as three-star or higher when entering an encounter — the encountered Pokémon will glow if it will appraise with high stats.", mega: true, megaUser: "Mega Mewtwo Y" },
   { name: "Geomancy", type: "Fairy", cat: "fast", power: 8, energy: 13, turns: 3 },
   { name: "Giga Drain", type: "Grass", cat: "charged", power: 50, energy: 80 },
   { name: "Giga Impact", type: "Normal", cat: "charged", power: 150, energy: 80 },
@@ -2964,7 +2964,7 @@ const MOVES_DB = [
   { name: "Leafage", type: "Grass", cat: "fast", power: 6, energy: 8, turns: 2 },
   { name: "Lick", type: "Ghost", cat: "fast", power: 3, energy: 3, turns: 1 },
   { name: "Liquidation", type: "Water", cat: "charged", power: 70, energy: 45, effect: "30% chance: Opponent −1 Def" },
-  { name: "Liquidation+", type: "Water", cat: "charged", power: 55, energy: 40, effect: "30% chance: Opponent −1 Def", mega: true },
+  { name: "Liquidation+", type: "Water", cat: "charged", power: 55, energy: 40, effect: "30% chance: Opponent −1 Def", mega: true, megaUser: "Mega Starmie" },
   { name: "Lock On", type: "Normal", cat: "fast", power: 1, energy: 5, turns: 1 },
   { name: "Low Kick", type: "Fighting", cat: "fast", power: 5, energy: 8, turns: 2 },
   { name: "Low Sweep", type: "Fighting", cat: "charged", power: 40, energy: 40 },
@@ -2990,7 +2990,7 @@ const MOVES_DB = [
   { name: "Mud Slap", type: "Ground", cat: "fast", power: 11, energy: 10, turns: 3 },
   { name: "Muddy Water", type: "Water", cat: "charged", power: 35, energy: 35, effect: "30% chance: Opponent −1 Atk" },
   { name: "Mystical Fire", type: "Fire", cat: "charged", power: 60, energy: 45, effect: "100% chance: Opponent −1 Atk" },
-  { name: "Mystical Fire+", type: "Fire", cat: "charged", power: 50, energy: 40, effect: "100% chance: Opponent −1 Atk", mega: true },
+  { name: "Mystical Fire+", type: "Fire", cat: "charged", power: 50, energy: 40, effect: "100% chance: Opponent −1 Atk", mega: true, megaUser: "Mega Delphox" },
   { name: "Nature's Madness", type: "Fairy", cat: "charged", power: 80, energy: 50, effect: "100% chance: Opponent −1 Def" },
   { name: "Night Shade", type: "Ghost", cat: "charged", power: 70, energy: 45 },
   { name: "Night Slash", type: "Dark", cat: "charged", power: 50, energy: 35, effect: "13% chance: Self +1 Atk" },
@@ -3000,7 +3000,7 @@ const MOVES_DB = [
   { name: "Ominous Wind", type: "Ghost", cat: "charged", power: 45, energy: 45, effect: "10% chance: Self +1 Atk, +1 Def" },
   { name: "Origin Pulse", type: "Water", cat: "charged", power: 130, energy: 60 },
   { name: "Outrage", type: "Dragon", cat: "charged", power: 110, energy: 60 },
-  { name: "Outrage+", type: "Dragon", cat: "charged", power: 80, energy: 50, mega: true },
+  { name: "Outrage+", type: "Dragon", cat: "charged", power: 80, energy: 50, mega: true, megaUser: "Mega Dragonite" },
   { name: "Overheat", type: "Fire", cat: "charged", power: 130, energy: 55, effect: "100% chance: Self −2 Atk" },
   { name: "Parabolic Charge", type: "Electric", cat: "charged", power: 70, energy: 50, effect: "100% chance: Self +1 Def" },
   { name: "Payback", type: "Dark", cat: "charged", power: 110, energy: 60 },
@@ -3020,7 +3020,7 @@ const MOVES_DB = [
   { name: "Precipice Blades", type: "Ground", cat: "charged", power: 130, energy: 60 },
   { name: "Present", type: "Normal", cat: "fast", power: 3, energy: 12, turns: 3 },
   { name: "Psybeam", type: "Psychic", cat: "charged", power: 70, energy: 60 },
-  { name: "Psybeam+", type: "Psychic", cat: "charged", power: 60, energy: 45, mega: true },
+  { name: "Psybeam+", type: "Psychic", cat: "charged", power: 60, energy: 45, mega: true, megaUser: "Mega Malamar" },
   { name: "Psychic", type: "Psychic", cat: "charged", power: 75, energy: 55, effect: "10% chance: Opponent −1 Def" },
   { name: "Psychic Fangs", type: "Psychic", cat: "charged", power: 40, energy: 35, effect: "100% chance: Opponent −1 Def" },
   { name: "Psycho Boost", type: "Psychic", cat: "charged", power: 70, energy: 35, effect: "100% chance: Self −2 Atk" },
@@ -3053,7 +3053,7 @@ const MOVES_DB = [
   { name: "Scratch", type: "Normal", cat: "fast", power: 4, energy: 2, turns: 1 },
   { name: "Secret Sword", type: "Fighting", cat: "charged", power: 70, energy: 35 },
   { name: "Seed Bomb", type: "Grass", cat: "charged", power: 55, energy: 40 },
-  { name: "Seed Bomb+", type: "Grass", cat: "charged", power: 60, energy: 40, mega: true },
+  { name: "Seed Bomb+", type: "Grass", cat: "charged", power: 60, energy: 40, mega: true, megaUser: "Mega Chesnaught" },
   { name: "Seed Flare", type: "Grass", cat: "charged", power: 130, energy: 75, effect: "40% chance: Opponent −2 Def" },
   { name: "Shadow Ball", type: "Ghost", cat: "charged", power: 100, energy: 50 },
   { name: "Shadow Bone", type: "Ghost", cat: "charged", power: 80, energy: 45, effect: "20% chance: Opponent −1 Def" },
@@ -3088,7 +3088,7 @@ const MOVES_DB = [
   { name: "Sunsteel Strike", type: "Steel", cat: "charged", power: 135, energy: 65 },
   { name: "Superpower", type: "Fighting", cat: "charged", power: 85, energy: 40, effect: "100% chance: Self −1 Atk, −1 Def" },
   { name: "Surf", type: "Water", cat: "charged", power: 75, energy: 45 },
-  { name: "Surf+", type: "Water", cat: "charged", power: 55, energy: 35, mega: true },
+  { name: "Surf+", type: "Water", cat: "charged", power: 55, energy: 35, mega: true, megaUser: "Mega Greninja" },
   { name: "Swift", type: "Normal", cat: "charged", power: 55, energy: 35 },
   { name: "Synchronoise", type: "Psychic", cat: "charged", power: 80, energy: 50 },
   { name: "Tackle", type: "Normal", cat: "fast", power: 3, energy: 3, turns: 1 },
@@ -3115,7 +3115,7 @@ const MOVES_DB = [
   { name: "Vise Grip", type: "Normal", cat: "charged", power: 70, energy: 40 },
   { name: "Volt Switch", type: "Electric", cat: "fast", power: 14, energy: 16, turns: 4 },
   { name: "Volt Tackle", type: "Electric", cat: "charged", power: 90, energy: 40, effect: "100% chance: Self −1 Def" },
-  { name: "Volt Tackle+", type: "Electric", cat: "charged", power: 65, energy: 35, effect: "100% chance: Self −1 Def", mega: true },
+  { name: "Volt Tackle+", type: "Electric", cat: "charged", power: 65, energy: 35, effect: "100% chance: Self −1 Def", mega: true, megaUser: "Mega Raichu X" },
   { name: "Water Gun", type: "Water", cat: "fast", power: 3, energy: 3, turns: 1 },
   { name: "Water Pulse", type: "Water", cat: "charged", power: 80, energy: 50 },
   { name: "Water Shuriken", type: "Water", cat: "fast", power: 6, energy: 14, turns: 3 },
@@ -3132,7 +3132,7 @@ const MOVES_DB = [
   { name: "X-Scissor", type: "Bug", cat: "charged", power: 65, energy: 40 },
   { name: "Yawn", type: "Normal", cat: "fast", power: 0, energy: 12, turns: 4 },
   { name: "Zap Cannon", type: "Electric", cat: "charged", power: 150, energy: 80, effect: "33% chance: Opponent −1 Atk" },
-  { name: "Zap Cannon+", type: "Electric", cat: "charged", power: 70, energy: 45, effect: "100% chance: Opponent −1 Atk", mega: true },
+  { name: "Zap Cannon+", type: "Electric", cat: "charged", power: 70, energy: 45, effect: "100% chance: Opponent −1 Atk", mega: true, megaUser: "Mega Raichu Y" },
   { name: "Zen Headbutt", type: "Psychic", cat: "fast", power: 8, energy: 6, turns: 3 }
 ];
 const MOVES_SOURCE = "https://pvpoke.com/moves";
@@ -7752,7 +7752,7 @@ function sortMoves(key) {
   if (key === _movesSort.key) {
     _movesSort.asc = !_movesSort.asc;
   } else {
-    _movesSort = { key, asc: key === "name" };
+    _movesSort = { key, asc: key === "name" || key === "type" || key === "effect" };
   }
   render();
   applyMovesSearch();
@@ -7777,11 +7777,12 @@ function applyMovesSearch() {
   rows.forEach(row => {
     const name = row.getAttribute("data-move-name") || "";
     const type = row.getAttribute("data-move-type") || "";
+    const megaUser = row.getAttribute("data-move-mega") || "";
     let match = terms.length === 0;
     if (!match) {
       match = terms.some(term => {
         if (MOVES_TYPE_NAMES.includes(term)) return type === term;
-        return name.startsWith(term);
+        return name.startsWith(term) || (megaUser && megaUser.includes(term));
       });
     }
     row.style.display = match ? "" : "none";
@@ -7923,6 +7924,7 @@ function setTab(tab) {
   sessionStorage.setItem("trainerwire_tab", tab);
   if (typeof trackPageview === "function") trackPageview(tab);
   if (tab === "nests") { loadNestsFromSupabase().then(() => render()); }
+  if (tab === "moves") _movesSearch = ""; // clear stale search from a prior visit
   if (tab === "report") {
     _reportSubmitMessage = { type: "", text: "" }; // clear stale banner from prior visit
     _bugReportFilter = "all";
@@ -9969,6 +9971,107 @@ function render() {
       </div>`;
     }
 
+    // Moves tab
+    let movesTabHTML = "";
+    if (state.tab === "moves") {
+      const movesFastCount = MOVES_DB.filter(m => m.cat === "fast").length;
+      const movesChargedCount = MOVES_DB.filter(m => m.cat === "charged").length;
+      const movesHasMegaFast = MOVES_DB.some(m => m.mega && m.cat === "fast");
+      const movesShowMegaToggle = _movesMode === "charged" || movesHasMegaFast;
+      let movesRows = MOVES_DB.filter(m => m.cat === _movesMode);
+      if (!_movesShowMega) movesRows = movesRows.filter(m => !m.mega);
+      movesRows = movesRows.map(m => {
+        const dpt = m.cat === "fast" ? Math.floor((m.power / m.turns) * 100) / 100 : null;
+        const ept = m.cat === "fast" ? Math.floor((m.energy / m.turns) * 100) / 100 : null;
+        const dpe = m.cat === "charged" ? (m.energy === 0 ? null : Math.floor((m.power / m.energy) * 100) / 100) : null;
+        return Object.assign({}, m, { dpt, ept, dpe });
+      });
+      const movesSortKey = _movesSort.key;
+      const movesSortAsc = _movesSort.asc;
+      movesRows.sort((a, b) => {
+        if (movesSortKey === "name" || movesSortKey === "type" || movesSortKey === "effect") {
+          const av = (movesSortKey === "effect" ? (a.effect || "") : a[movesSortKey]) || "";
+          const bv = (movesSortKey === "effect" ? (b.effect || "") : b[movesSortKey]) || "";
+          const cmp = av.localeCompare(bv);
+          return movesSortAsc ? cmp : -cmp;
+        }
+        const av = a[movesSortKey] == null ? -Infinity : a[movesSortKey];
+        const bv = b[movesSortKey] == null ? -Infinity : b[movesSortKey];
+        const cmp = av - bv;
+        return movesSortAsc ? cmp : -cmp;
+      });
+      const movesSortIndicator = (key) => _movesSort.key === key ? ` <span style="font-size:9px">${_movesSort.asc ? "▲" : "▼"}</span>` : "";
+      const movesHeaderCell = (key, label, align) => `<th style="padding:${isMobile ? "7px 8px" : "10px 12px"};text-align:${align};white-space:nowrap;background:${th.surfaceHover}"><button onclick="sortMoves('${key}')" style="background:none;border:none;cursor:pointer;font-family:inherit;font-size:${isMobile ? 10 : 12}px;font-weight:800;color:${th.textSecondary};padding:0;display:inline-flex;align-items:center;gap:2px;white-space:nowrap">${label}${movesSortIndicator(key)}</button></th>`;
+      const movesTypePill = (typ) => `<span style="font-size:11px;font-weight:700;color:#fff;background:${TYPE_COLORS[typ] || "#888"};padding:2px 8px;border-radius:10px">${esc(typ)}</span>`;
+      const movesNameCell = (m) => `<span style="font-weight:700;color:${th.text}">${esc(m.name)}</span>${m.mega ? ` <span style="font-size:9px;font-weight:800;text-transform:uppercase;color:#fff;background:#B37FE0;padding:1px 5px;border-radius:6px">MEGA</span>` : ""}${m.megaUser ? `<div style="font-size:${isMobile ? 9 : 11}px;color:${th.textMuted};font-weight:600;margin-top:2px">${esc(m.megaUser)}</div>` : ""}`;
+      const movesCellPad = isMobile ? "7px 8px" : "10px 12px";
+      const movesNumCellStyle = `padding:${movesCellPad};text-align:right;font-variant-numeric:tabular-nums;font-size:${isMobile ? 11 : 13}px;color:${th.text}`;
+      const rowsHTML = movesRows.map((m, i) => {
+        const isLast = i === movesRows.length - 1;
+        const rowStyle = `border-bottom:${isLast ? "none" : `1px solid ${th.border}`}`;
+        const cells = _movesMode === "fast"
+          ? `<td style="padding:${movesCellPad};font-size:${isMobile ? 11 : 13}px">${movesNameCell(m)}</td>
+            <td style="padding:${movesCellPad}">${movesTypePill(m.type)}</td>
+            <td style="${movesNumCellStyle}">${m.power}</td>
+            <td style="${movesNumCellStyle}">${m.energy}</td>
+            <td style="${movesNumCellStyle}">${m.turns}</td>
+            <td style="${movesNumCellStyle}">${m.dpt.toFixed(2)}</td>
+            <td style="${movesNumCellStyle}">${m.ept.toFixed(2)}</td>`
+          : `<td style="padding:${movesCellPad};font-size:${isMobile ? 11 : 13}px">${movesNameCell(m)}</td>
+            <td style="padding:${movesCellPad}">${movesTypePill(m.type)}</td>
+            <td style="${movesNumCellStyle}">${m.power}</td>
+            <td style="${movesNumCellStyle}">${m.energy}</td>
+            <td style="${movesNumCellStyle}">${m.dpe == null ? "—" : m.dpe.toFixed(2)}</td>
+            <td style="padding:${movesCellPad};font-size:${isMobile ? 10 : 12}px;color:${th.textMuted};line-height:1.4">${esc(m.effect || "—")}</td>`;
+        return `<tr data-move-row="1" data-move-name="${escAttr(m.name.toLowerCase())}" data-move-type="${escAttr(m.type.toLowerCase())}" data-move-mega="${escAttr((m.megaUser || "").toLowerCase())}" style="${rowStyle}" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='transparent'">${cells}</tr>`;
+      }).join("");
+      const headerRowHTML = _movesMode === "fast"
+        ? `${movesHeaderCell("name", "Move", "left")}${movesHeaderCell("type", "Type", "left")}${movesHeaderCell("power", "D", "right")}${movesHeaderCell("energy", "E", "right")}${movesHeaderCell("turns", "T", "right")}${movesHeaderCell("dpt", "DPT", "right")}${movesHeaderCell("ept", "EPT", "right")}`
+        : `${movesHeaderCell("name", "Move", "left")}${movesHeaderCell("type", "Type", "left")}${movesHeaderCell("power", "D", "right")}${movesHeaderCell("energy", "E", "right")}${movesHeaderCell("dpe", "DPE", "right")}${movesHeaderCell("effect", "Effects", "left")}`;
+      const movesLegendText = _movesMode === "fast"
+        ? "D = Damage · E = Energy gained · T = Turns · DPT = Damage per turn · EPT = Energy per turn"
+        : "D = Damage · E = Energy cost · DPE = Damage per energy";
+      const movesModeBtn = (mode, label) => {
+        const active = _movesMode === mode;
+        return `<button onclick="setMovesMode('${mode}')" style="padding:${isMobile ? "10px 14px" : "11px 16px"};border-radius:12px;border:${active ? "1.5px solid #16A085" : `1.5px solid ${th.border}`};background:${active ? th.accentBg("#16A085") : th.surface};color:${active ? "#16A085" : th.textSecondary};font-size:${isMobile ? 12 : 13}px;font-weight:${active ? 800 : 700};cursor:pointer;font-family:inherit;white-space:nowrap">${label}</button>`;
+      };
+      const movesMegaBtnHTML = movesShowMegaToggle
+        ? `<button onclick="toggleMovesMega()" style="padding:${isMobile ? "10px 14px" : "11px 16px"};border-radius:12px;border:${_movesShowMega ? "1.5px solid #16A085" : `1.5px solid ${th.border}`};background:${_movesShowMega ? th.accentBg("#16A085") : th.surface};color:${_movesShowMega ? "#16A085" : th.textSecondary};font-size:${isMobile ? 12 : 13}px;font-weight:${_movesShowMega ? 800 : 700};cursor:pointer;font-family:inherit;white-space:nowrap">Show Mega Moves (+)</button>`
+        : "";
+      movesTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px;width:100%;${isDesktop ? "max-width:1100px;margin:0 auto" : ""}">
+        <div style="text-align:center;padding:10px;position:relative">
+          <div style="${isMobile ? "position:static;margin:0 0 10px" : "position:absolute;top:14px;right:16px"};font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on September 1, 2026 at 6:10 pm</div>
+          <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text};display:flex;align-items:center;justify-content:center;gap:10px"><img src="assets/pokemon-images/Items/Charged-tm.png" style="width:${isMobile ? 26 : 32}px;height:${isMobile ? 26 : 32}px;object-fit:contain" alt="" />Pokémon Moves</h2>
+          <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Every Fast Attack and Charged Attack in Pokémon GO — PvP stats, damage, energy, and effects</p>
+          <p style="margin:8px 0 0 0;font-size:${isMobile ? 11 : 12}px;color:${th.textMuted};font-weight:500">Source: <a href="${escAttr(MOVES_SOURCE)}" target="_blank" rel="noopener noreferrer" style="color:#16A085;font-weight:700;text-decoration:none">PvPoke</a> · stats are for Trainer Battles (PvP) · Mega Move details from Pokémon GO news</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:${isMobile ? 8 : 10}px;flex-wrap:wrap;justify-content:center">
+          ${movesModeBtn("fast", `Fast Moves (${movesFastCount})`)}
+          ${movesModeBtn("charged", `Charged Moves (${movesChargedCount})`)}
+        </div>
+        <div style="display:flex;align-items:center;gap:${isMobile ? 8 : 10}px;flex-wrap:wrap;justify-content:center">
+          <div style="position:relative;max-width:400px;width:100%">
+            <input id="moves-search" placeholder="Search move or type..." oninput="searchMoves(this.value)" autocomplete="off" value="${escAttr(_movesSearch)}" style="width:100%;padding:${isMobile ? "12px 14px 12px 40px" : "14px 16px 14px 44px"};border-radius:14px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:${isMobile ? 14 : 15}px;font-family:inherit;outline:none;box-sizing:border-box" />
+            <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;pointer-events:none">🔍</span>
+          </div>
+          ${movesMegaBtnHTML}
+        </div>
+        <p style="margin:0;text-align:center;font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500">${movesLegendText}</p>
+        <div style="display:flex;align-items:center;justify-content:center">
+          <span id="moves-count" style="font-size:${isMobile ? 12 : 13}px;color:${th.textMuted}">${movesRows.length} move${movesRows.length === 1 ? "" : "s"}</span>
+        </div>
+        <div id="moves-empty" style="display:none;text-align:center;padding:${isMobile ? "30px 18px" : "40px 28px"};background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;color:${th.textMuted};font-size:${isMobile ? 13 : 14}px;box-shadow:${th.shadow}"></div>
+        <div style="background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;box-shadow:${th.shadow};overflow:hidden">
+          <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+            <table style="width:100%;border-collapse:collapse;font-family:inherit">
+              <thead><tr>${headerRowHTML}</tr></thead>
+              <tbody>${rowsHTML}</tbody>
+            </table>
+          </div>
+        </div>
+      </div>`;
+    }
+
     // Backgrounds tab
     let backgroundsTabHTML = "";
     if (state.tab === "backgrounds") {
@@ -10555,7 +10658,7 @@ function render() {
     </a>` : "";
 
     content = `<main style="padding:${mainPad};display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
-      ${welcomeHTML}${!["home","tools","nests","pokedex","store","report","items","backgrounds","trainerlevels"].includes(state.tab) ? `${isMobile ? liveCompactHTML + heroCompactHTML : `<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:${isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>`}${tabsHTML}` : ""}${state.tab === "home" ? `${mapBannerHTML}<div style="display:grid;grid-template-columns:${isMobile ? "1fr" : "repeat(2,1fr)"};gap:${isMobile ? 12 : isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>${renderWeekDigest(th, isMobile)}${tabsHTML}` : ""}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${rocketTabHTML}${eggsTabHTML}${researchTabHTML}${newsTabHTML}${storeTabHTML}${pokedexTabHTML}${toolsTabHTML}${nestsTabHTML}${itemsTabHTML}${backgroundsTabHTML}${trainerLevelsTabHTML}${reportTabHTML}
+      ${welcomeHTML}${!["home","tools","nests","pokedex","store","report","items","backgrounds","trainerlevels","moves"].includes(state.tab) ? `${isMobile ? liveCompactHTML + heroCompactHTML : `<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:${isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>`}${tabsHTML}` : ""}${state.tab === "home" ? `${mapBannerHTML}<div style="display:grid;grid-template-columns:${isMobile ? "1fr" : "repeat(2,1fr)"};gap:${isMobile ? 12 : isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>${renderWeekDigest(th, isMobile)}${tabsHTML}` : ""}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${rocketTabHTML}${eggsTabHTML}${researchTabHTML}${newsTabHTML}${storeTabHTML}${pokedexTabHTML}${toolsTabHTML}${nestsTabHTML}${itemsTabHTML}${backgroundsTabHTML}${trainerLevelsTabHTML}${movesTabHTML}${reportTabHTML}
     </main>`;
     if (hero || activeEvents.length > 0) state.heroRendered = true;
   }
@@ -10577,7 +10680,7 @@ function render() {
     ${isDesktop ? (() => {
       const currentTabs = ["raids","max","rocket","eggs","research"];
       const isCurrentActive = currentTabs.includes(state.tab);
-      const moreTabs = ["backgrounds","store","items","nests","tools","trainerlevels"];
+      const moreTabs = ["backgrounds","store","items","nests","tools","trainerlevels","moves"];
       const isMoreActive = moreTabs.includes(state.tab);
       const navBtn = (fn, label, tabId) => {
         const isActive = state.tab === tabId;
@@ -10596,6 +10699,7 @@ function render() {
         {fn:"setTab('items')",label:"Items",icon:"🎒",iconSize:19,id:"items"},
         {fn:"setTab('nests')",label:"Nests",iconImg:"assets/pokemon-images/icons/ic_grass.png",iconSize:20,id:"nests"},
         {fn:"setTab('tools')",label:"PoGO Tools",icon:"🛠️",id:"tools"},
+        {fn:"setTab('moves')",label:"Pokémon Moves",iconImg:"assets/pokemon-images/Items/Charged-tm.png",iconSize:22,id:"moves"},
         {fn:"setTab('trainerlevels')",label:"Trainer Level Requirements",iconImg:"assets/pokemon-images/icons/trainer-level-badge.png",iconSize:26,id:"trainerlevels"}
       ];
       return `<nav style="display:flex;align-items:center;gap:4px">
@@ -10867,6 +10971,7 @@ function sidebarNav(tab) {
   state.tab = tab;
   sessionStorage.setItem("trainerwire_tab", tab);
   if (tab === "nests") { loadNestsFromSupabase().then(() => render()); }
+  if (tab === "moves") _movesSearch = ""; // clear stale search from a prior visit
   if (tab === "report") {
     _reportSubmitMessage = { type: "", text: "" }; // clear stale banner from prior visit
     _bugReportFilter = "all";
@@ -10892,6 +10997,7 @@ function renderSidebar(th) {
     { id: "items", icon: "\uD83C\uDF92", iconSize: 23, label: "Items" },
     { id: "nests", icon: "\uD83C\uDF33", iconImg: "assets/pokemon-images/icons/ic_grass.png", label: "Nests" },
     { id: "tools", icon: "\uD83D\uDEE0\uFE0F", label: "PoGO Tools" },
+    { id: "moves", icon: "", iconImg: "assets/pokemon-images/Items/Charged-tm.png", iconSize: 28, label: "Pokémon Moves" },
     { id: "trainerlevels", icon: "", iconImg: "assets/pokemon-images/icons/trainer-level-badge.png", iconSize: 32, label: "Trainer Level Requirements" }
   ];
   const tabs = [
