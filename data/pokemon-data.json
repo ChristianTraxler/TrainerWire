@@ -145,7 +145,10 @@
     "types": [
       "Rock",
       "Ice"
-    ]
+    ],
+    "cp": "726–779",
+    "cpBoost": "908–974",
+    "weather": "Partly Cloudy or Snow"
   },
   "Amped Toxtricity": {
     "types": [
@@ -1881,7 +1884,19 @@
     "types": [
       "Fighting",
       "Poison"
-    ]
+    ],
+    "cp": "1107–1172",
+    "cpBoost": "1384–1465",
+    "weather": "Cloudy"
+  },
+  "Hisuian Lilligant": {
+    "types": [
+      "Grass",
+      "Fighting"
+    ],
+    "cp": "1364–1435",
+    "cpBoost": "1705–1794",
+    "weather": "Sunny or Cloudy"
   },
   "Hisuian Samurott": {
     "types": [
@@ -2941,6 +2956,15 @@
     "cp": "1382\u20131454",
     "cpBoost": "1728\u20131817",
     "weather": "Rainy or Windy"
+  },
+  "Mega Staraptor": {
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "cp": "1538–1614",
+    "cpBoost": "1922–2018",
+    "weather": "Partly Cloudy or Windy"
   },
   "Mega Starmie": {
     "types": [
@@ -4990,7 +5014,10 @@
     "types": [
       "Rock",
       "Dragon"
-    ]
+    ],
+    "cp": "877–934",
+    "cpBoost": "1096–1168",
+    "weather": "Partly Cloudy or Windy"
   },
   "Unown": {
     "types": [
