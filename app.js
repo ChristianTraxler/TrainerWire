@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.66";
+const APP_VERSION = "3.67";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -2803,6 +2803,339 @@ const TRAINER_LEVELS = [
   { level: 79, totalXP: 187353000, xpRequired: 15000000, tasks: [{ task: "Have 47 platinum medals", reward: "800 XP" }, { task: "Defeat a Team GO Rocket Leader 30 times", reward: "800 XP" }, { task: "Hatch 100 Eggs", reward: "800 XP" }, { task: "Obtain 50 Lucky Pokémon in trades", reward: "800 XP" }], rewards: [{ name: "Level 79 Hairstyle (Short)", qty: 1, type: "avatar", img: "assets/pokemon-images/trainer-levels/n-hair-lvl79-synthfade-0-icon.png" }, { name: "Level 79 Hairstyle (Long)", qty: 1, type: "avatar", img: "assets/pokemon-images/trainer-levels/n-hair-lvl79-urbanphantom-0-icon.png" }, { name: "Rare Candy XL", qty: 1, type: "item", img: "assets/pokemon-images/Items/db/rare-candy-xl.webp" }, { name: "Premium Battle Pass", qty: 1, type: "item", img: "assets/pokemon-images/Items/db/premium-battle-pass.webp" }, { name: "Max Revive", qty: 10, type: "item", img: "assets/pokemon-images/Items/db/max-revive.webp" }, { name: "Ultra Ball", qty: 30, type: "item", img: "assets/pokemon-images/Items/db/ultra-ball.webp" }, { name: "Pinap Berry", qty: 25, type: "item", img: "assets/pokemon-images/Items/db/pinap-berry.webp" }] },
   { level: 80, totalXP: 203353000, xpRequired: 16000000, tasks: [{ task: "Earn 50 platinum medals", reward: "800 XP" }, { task: "Win 80 battles in the GO Battle League", reward: "800 XP" }, { task: "Make 999 Excellent Throws", reward: "800 XP" }, { task: "Win 80 raids", reward: "800 XP" }], rewards: [{ name: "Level 80 Jacket", qty: 1, type: "avatar", img: "assets/pokemon-images/trainer-levels/n-shirt-lvl80-circuitjacket-0-icon.png" }, { name: "Pokémon Storage Upgrade", qty: 100, type: "upgrade", img: "assets/pokemon-images/Items/pokemonstorageupgrade.1.png" }, { name: "Item Storage Upgrade", qty: 100, type: "upgrade", img: "assets/pokemon-images/Items/itemstorageupgrade.1.png" }, { name: "Max Mushroom", qty: 1, type: "item", img: "assets/pokemon-images/Items/db/max-mushroom.webp" }, { name: "Lucky Egg", qty: 7, type: "item", img: "assets/pokemon-images/Items/db/lucky-egg.webp" }, { name: "Incense", qty: 7, type: "item", img: "assets/pokemon-images/Items/db/incense.webp" }, { name: "Super Incubator", qty: 5, type: "item", img: "assets/pokemon-images/Items/db/super-egg-incubator.webp" }, { name: "Max Revive", qty: 25, type: "item", img: "assets/pokemon-images/Items/db/max-revive.webp" }, { name: "Max Potion", qty: 50, type: "item", img: "assets/pokemon-images/Items/db/max-potion.webp" }, { name: "Ultra Ball", qty: 80, type: "item", img: "assets/pokemon-images/Items/db/ultra-ball.webp" }, { name: "Pinap Berry", qty: 70, type: "item", img: "assets/pokemon-images/Items/db/pinap-berry.webp" }] },
 ];
+
+const MOVES_DB = [
+  { name: "Acid", type: "Poison", cat: "fast", power: 6, energy: 8, turns: 2 },
+  { name: "Acid Spray", type: "Poison", cat: "charged", power: 20, energy: 45, effect: "100% chance: Opponent −2 Def" },
+  { name: "Acid Spray+", type: "Poison", cat: "charged", power: 20, energy: 40, effect: "100% chance: Opponent −2 Def", mega: true },
+  { name: "Acrobatics", type: "Flying", cat: "charged", power: 110, energy: 55 },
+  { name: "Aerial Ace", type: "Flying", cat: "charged", power: 60, energy: 45 },
+  { name: "Aeroblast", type: "Flying", cat: "charged", power: 170, energy: 75, effect: "13% chance: Self +2 Atk" },
+  { name: "Air Cutter", type: "Flying", cat: "charged", power: 45, energy: 35, effect: "30% chance: Self +1 Atk" },
+  { name: "Air Slash", type: "Flying", cat: "fast", power: 9, energy: 9, turns: 3 },
+  { name: "Ancient Power", type: "Rock", cat: "charged", power: 60, energy: 45, effect: "10% chance: Self +1 Atk, +1 Def" },
+  { name: "Aqua Jet", type: "Water", cat: "charged", power: 70, energy: 40 },
+  { name: "Aqua Step", type: "Water", cat: "charged", power: 55, energy: 40, effect: "100% chance: Self +1 Atk" },
+  { name: "Aqua Tail", type: "Water", cat: "charged", power: 55, energy: 35 },
+  { name: "Astonish", type: "Ghost", cat: "fast", power: 12, energy: 10, turns: 3 },
+  { name: "Aura Sphere", type: "Fighting", cat: "charged", power: 80, energy: 40 },
+  { name: "Aura Wheel", type: "Dark", cat: "charged", power: 100, energy: 45, effect: "100% chance: Self +1 Atk" },
+  { name: "Aura Wheel", type: "Electric", cat: "charged", power: 100, energy: 45, effect: "100% chance: Self +1 Atk" },
+  { name: "Aurora Beam", type: "Ice", cat: "charged", power: 80, energy: 60 },
+  { name: "Avalanche", type: "Ice", cat: "charged", power: 90, energy: 45 },
+  { name: "Beak Blast", type: "Flying", cat: "charged", power: 110, energy: 55, effect: "100% chance: Opponent −1 Atk" },
+  { name: "Behemoth Bash", type: "Steel", cat: "charged", power: 80, energy: 45 },
+  { name: "Behemoth Blade", type: "Steel", cat: "charged", power: 100, energy: 55 },
+  { name: "Bite", type: "Dark", cat: "fast", power: 4, energy: 2, turns: 1 },
+  { name: "Blast Burn", type: "Fire", cat: "charged", power: 110, energy: 50 },
+  { name: "Blaze Kick", type: "Fire", cat: "charged", power: 60, energy: 40 },
+  { name: "Bleakwind Storm", type: "Flying", cat: "charged", power: 60, energy: 45, effect: "100% chance: Opponent −1 Atk" },
+  { name: "Blizzard", type: "Ice", cat: "charged", power: 140, energy: 75 },
+  { name: "Body Slam", type: "Normal", cat: "charged", power: 55, energy: 35 },
+  { name: "Bone Club", type: "Ground", cat: "charged", power: 55, energy: 35 },
+  { name: "Boomburst", type: "Normal", cat: "charged", power: 150, energy: 70 },
+  { name: "Brave Bird", type: "Flying", cat: "charged", power: 130, energy: 55, effect: "100% chance: Self −3 Def" },
+  { name: "Breaking Swipe", type: "Dragon", cat: "charged", power: 50, energy: 50, effect: "100% chance: Opponent −1 Atk" },
+  { name: "Brick Break", type: "Fighting", cat: "charged", power: 50, energy: 40, effect: "100% chance: Opponent −1 Def" },
+  { name: "Brick Break+", type: "Fighting", cat: "charged", power: 40, energy: 35, effect: "100% chance: Opponent −1 Def", mega: true },
+  { name: "Brine", type: "Water", cat: "charged", power: 60, energy: 50 },
+  { name: "Brutal Swing", type: "Dark", cat: "charged", power: 55, energy: 35 },
+  { name: "Bubble", type: "Water", cat: "fast", power: 8, energy: 11, turns: 3 },
+  { name: "Bubble Beam", type: "Water", cat: "charged", power: 25, energy: 40, effect: "100% chance: Opponent −1 Atk" },
+  { name: "Bug Bite", type: "Bug", cat: "fast", power: 4, energy: 3, turns: 1 },
+  { name: "Bug Buzz", type: "Bug", cat: "charged", power: 100, energy: 60, effect: "30% chance: Opponent −1 Def" },
+  { name: "Bulldoze", type: "Ground", cat: "charged", power: 45, energy: 45, effect: "50% chance: Opponent −1 Def" },
+  { name: "Bullet Punch", type: "Steel", cat: "fast", power: 7, energy: 7, turns: 2 },
+  { name: "Bullet Seed", type: "Grass", cat: "fast", power: 5, energy: 13, turns: 3 },
+  { name: "Charge Beam", type: "Electric", cat: "fast", power: 5, energy: 11, turns: 3 },
+  { name: "Charm", type: "Fairy", cat: "fast", power: 12, energy: 8, turns: 3 },
+  { name: "Chilling Water", type: "Water", cat: "charged", power: 60, energy: 45, effect: "100% chance: Opponent −1 Atk" },
+  { name: "Clanging Scales", type: "Dragon", cat: "charged", power: 120, energy: 45, effect: "100% chance: Self −1 Def" },
+  { name: "Close Combat", type: "Fighting", cat: "charged", power: 100, energy: 45, effect: "100% chance: Self −2 Def" },
+  { name: "Confusion", type: "Psychic", cat: "fast", power: 16, energy: 14, turns: 4 },
+  { name: "Counter", type: "Fighting", cat: "fast", power: 8, energy: 6, turns: 2 },
+  { name: "Crabhammer", type: "Water", cat: "charged", power: 85, energy: 50, effect: "13% chance: Self +2 Atk" },
+  { name: "Cross Chop", type: "Fighting", cat: "charged", power: 55, energy: 35 },
+  { name: "Cross Poison", type: "Poison", cat: "charged", power: 50, energy: 35, effect: "13% chance: Self +2 Atk" },
+  { name: "Crunch", type: "Dark", cat: "charged", power: 70, energy: 45, effect: "20% chance: Opponent −1 Def" },
+  { name: "Crush Grip", type: "Normal", cat: "charged", power: 110, energy: 50 },
+  { name: "Cut", type: "Normal", cat: "fast", power: 3, energy: 2, turns: 1 },
+  { name: "Dark Pulse", type: "Dark", cat: "charged", power: 80, energy: 50 },
+  { name: "Darkest Lariat", type: "Dark", cat: "charged", power: 120, energy: 60 },
+  { name: "Dazzling Gleam", type: "Fairy", cat: "charged", power: 90, energy: 55 },
+  { name: "Dig", type: "Ground", cat: "charged", power: 70, energy: 50 },
+  { name: "Disarming Voice", type: "Fairy", cat: "charged", power: 70, energy: 45 },
+  { name: "Discharge", type: "Electric", cat: "charged", power: 55, energy: 40 },
+  { name: "Dive", type: "Water", cat: "charged", power: 50, energy: 40 },
+  { name: "Doom Desire", type: "Steel", cat: "charged", power: 80, energy: 40 },
+  { name: "Double Iron Bash", type: "Steel", cat: "charged", power: 55, energy: 35 },
+  { name: "Double Kick", type: "Fighting", cat: "fast", power: 8, energy: 12, turns: 3 },
+  { name: "Draco Meteor", type: "Dragon", cat: "charged", power: 150, energy: 65, effect: "100% chance: Self −2 Atk" },
+  { name: "Dragon Ascent", type: "Flying", cat: "charged", power: 110, energy: 45, effect: "100% chance: Self −1 Def" },
+  { name: "Dragon Breath", type: "Dragon", cat: "fast", power: 3, energy: 4, turns: 1 },
+  { name: "Dragon Claw", type: "Dragon", cat: "charged", power: 80, energy: 50 },
+  { name: "Dragon Energy", type: "Dragon", cat: "charged", power: 90, energy: 45 },
+  { name: "Dragon Pulse", type: "Dragon", cat: "charged", power: 90, energy: 55 },
+  { name: "Dragon Tail", type: "Dragon", cat: "fast", power: 9, energy: 12, turns: 3 },
+  { name: "Drain Punch", type: "Fighting", cat: "charged", power: 40, energy: 40, effect: "100% chance: Self +1 Def" },
+  { name: "Draining Kiss", type: "Fairy", cat: "charged", power: 60, energy: 55 },
+  { name: "Drill Peck", type: "Flying", cat: "charged", power: 70, energy: 40 },
+  { name: "Drill Peck+", type: "Flying", cat: "charged", power: 60, energy: 35, mega: true },
+  { name: "Drill Run", type: "Ground", cat: "charged", power: 70, energy: 40 },
+  { name: "Drum Beating", type: "Grass", cat: "charged", power: 60, energy: 35, effect: "100% chance: Opponent −1 Atk" },
+  { name: "Dynamax Cannon", type: "Dragon", cat: "charged", power: 80, energy: 45 },
+  { name: "Dynamic Punch", type: "Fighting", cat: "charged", power: 90, energy: 45 },
+  { name: "Dynamic Punch+", type: "Fighting", cat: "charged", power: 130, energy: 80, mega: true },
+  { name: "Earth Power", type: "Ground", cat: "charged", power: 90, energy: 50, effect: "10% chance: Opponent −1 Def" },
+  { name: "Earthquake", type: "Ground", cat: "charged", power: 120, energy: 65 },
+  { name: "Ember", type: "Fire", cat: "fast", power: 4, energy: 9, turns: 2 },
+  { name: "Energy Ball", type: "Grass", cat: "charged", power: 80, energy: 45, effect: "10% chance: Opponent −1 Def" },
+  { name: "Extrasensory", type: "Psychic", cat: "fast", power: 8, energy: 10, turns: 3 },
+  { name: "Fairy Wind", type: "Fairy", cat: "fast", power: 4, energy: 9, turns: 2 },
+  { name: "Feather Dance", type: "Flying", cat: "charged", power: 35, energy: 50, effect: "100% chance: Opponent −2 Atk" },
+  { name: "Feint Attack", type: "Dark", cat: "fast", power: 6, energy: 6, turns: 2 },
+  { name: "Fell Stinger", type: "Bug", cat: "charged", power: 20, energy: 35, effect: "100% chance: Self +1 Atk" },
+  { name: "Fire Blast", type: "Fire", cat: "charged", power: 140, energy: 80 },
+  { name: "Fire Fang", type: "Fire", cat: "fast", power: 8, energy: 6, turns: 2 },
+  { name: "Fire Punch", type: "Fire", cat: "charged", power: 60, energy: 40 },
+  { name: "Fire Spin", type: "Fire", cat: "fast", power: 11, energy: 10, turns: 3 },
+  { name: "Flame Burst", type: "Fire", cat: "charged", power: 70, energy: 55 },
+  { name: "Flame Charge", type: "Fire", cat: "charged", power: 65, energy: 50, effect: "100% chance: Self +1 Atk" },
+  { name: "Flame Wheel", type: "Fire", cat: "charged", power: 80, energy: 45 },
+  { name: "Flamethrower", type: "Fire", cat: "charged", power: 90, energy: 55 },
+  { name: "Flash Cannon", type: "Steel", cat: "charged", power: 110, energy: 65 },
+  { name: "Flower Trick", type: "Grass", cat: "charged", power: 30, energy: 35, effect: "100% chance: Self +1 Atk" },
+  { name: "Fly", type: "Flying", cat: "charged", power: 80, energy: 45 },
+  { name: "Flying Press", type: "Fighting", cat: "charged", power: 90, energy: 40 },
+  { name: "Focus Blast", type: "Fighting", cat: "charged", power: 150, energy: 75 },
+  { name: "Force Palm", type: "Fighting", cat: "fast", power: 13, energy: 10, turns: 3 },
+  { name: "Foul Play", type: "Dark", cat: "charged", power: 65, energy: 40 },
+  { name: "Freeze Shock", type: "Ice", cat: "charged", power: 120, energy: 60, effect: "30% chance: Opponent −1 Atk" },
+  { name: "Frenzy Plant", type: "Grass", cat: "charged", power: 100, energy: 45 },
+  { name: "Frost Breath", type: "Ice", cat: "fast", power: 7, energy: 5, turns: 2 },
+  { name: "Frustration", type: "Normal", cat: "charged", power: 10, energy: 70 },
+  { name: "Fury Cutter", type: "Bug", cat: "fast", power: 3, energy: 4, turns: 1 },
+  { name: "Fusion Bolt", type: "Electric", cat: "charged", power: 90, energy: 45 },
+  { name: "Fusion Flare", type: "Fire", cat: "charged", power: 90, energy: 45 },
+  { name: "Future Sight", type: "Psychic", cat: "charged", power: 110, energy: 65 },
+  { name: "Future Sight+", type: "Psychic", cat: "charged", power: 130, energy: 80, mega: true },
+  { name: "Geomancy", type: "Fairy", cat: "fast", power: 8, energy: 13, turns: 3 },
+  { name: "Giga Drain", type: "Grass", cat: "charged", power: 50, energy: 80 },
+  { name: "Giga Impact", type: "Normal", cat: "charged", power: 150, energy: 80 },
+  { name: "Gigaton Hammer", type: "Steel", cat: "charged", power: 130, energy: 60 },
+  { name: "Glaciate", type: "Ice", cat: "charged", power: 60, energy: 40, effect: "100% chance: Opponent −1 Atk" },
+  { name: "Glaive Rush", type: "Dragon", cat: "charged", power: 90, energy: 40, effect: "100% chance: Self −1 Def" },
+  { name: "Grass Knot", type: "Grass", cat: "charged", power: 90, energy: 50 },
+  { name: "Gulp Missile (Arrokuda)", type: "Water", cat: "charged", power: 15, energy: 0, effect: "100% chance: Opponent −1 Def" },
+  { name: "Gulp Missile (Pikachu)", type: "Water", cat: "charged", power: 15, energy: 0, effect: "100% chance: Opponent −2 Atk" },
+  { name: "Gunk Shot", type: "Poison", cat: "charged", power: 130, energy: 75 },
+  { name: "Gust", type: "Flying", cat: "fast", power: 16, energy: 14, turns: 4 },
+  { name: "Gyro Ball", type: "Steel", cat: "charged", power: 80, energy: 50 },
+  { name: "Heart Stamp", type: "Psychic", cat: "charged", power: 40, energy: 40 },
+  { name: "Heat Wave", type: "Fire", cat: "charged", power: 75, energy: 45 },
+  { name: "Heavy Slam", type: "Steel", cat: "charged", power: 70, energy: 50 },
+  { name: "Hex", type: "Ghost", cat: "fast", power: 7, energy: 13, turns: 3 },
+  { name: "Hidden Power", type: "Normal", cat: "fast", power: 9, energy: 8, turns: 3 },
+  { name: "High Horsepower", type: "Ground", cat: "charged", power: 100, energy: 60 },
+  { name: "High Jump Kick", type: "Fighting", cat: "charged", power: 110, energy: 55, effect: "10% chance: Self −4 Def" },
+  { name: "Horn Attack", type: "Normal", cat: "charged", power: 40, energy: 35 },
+  { name: "Hurricane", type: "Flying", cat: "charged", power: 110, energy: 60 },
+  { name: "Hydro Cannon", type: "Water", cat: "charged", power: 80, energy: 40 },
+  { name: "Hydro Pump", type: "Water", cat: "charged", power: 130, energy: 75 },
+  { name: "Hydro Pump Blastoise", type: "Water", cat: "charged", power: 90, energy: 80 },
+  { name: "Hyper Beam", type: "Normal", cat: "charged", power: 150, energy: 80 },
+  { name: "Hyper Fang", type: "Normal", cat: "charged", power: 80, energy: 50 },
+  { name: "Ice Beam", type: "Ice", cat: "charged", power: 90, energy: 55 },
+  { name: "Ice Burn", type: "Ice", cat: "charged", power: 120, energy: 60, effect: "30% chance: Opponent −1 Def" },
+  { name: "Ice Fang", type: "Ice", cat: "fast", power: 8, energy: 6, turns: 2 },
+  { name: "Ice Punch", type: "Ice", cat: "charged", power: 60, energy: 40 },
+  { name: "Ice Shard", type: "Ice", cat: "fast", power: 9, energy: 10, turns: 3 },
+  { name: "Icicle Spear", type: "Ice", cat: "charged", power: 70, energy: 40 },
+  { name: "Icy Wind", type: "Ice", cat: "charged", power: 60, energy: 45, effect: "100% chance: Opponent −1 Atk" },
+  { name: "Incinerate", type: "Fire", cat: "fast", power: 20, energy: 20, turns: 5 },
+  { name: "Infestation", type: "Bug", cat: "fast", power: 6, energy: 12, turns: 3 },
+  { name: "Iron Head", type: "Steel", cat: "charged", power: 70, energy: 50 },
+  { name: "Iron Tail", type: "Steel", cat: "fast", power: 10, energy: 7, turns: 3 },
+  { name: "Karate Chop", type: "Fighting", cat: "fast", power: 5, energy: 9, turns: 2 },
+  { name: "Last Resort", type: "Normal", cat: "charged", power: 90, energy: 55 },
+  { name: "Leaf Blade", type: "Grass", cat: "charged", power: 70, energy: 35 },
+  { name: "Leaf Storm", type: "Grass", cat: "charged", power: 130, energy: 55, effect: "100% chance: Self −2 Atk" },
+  { name: "Leaf Tornado", type: "Grass", cat: "charged", power: 45, energy: 40, effect: "50% chance: Opponent −2 Atk" },
+  { name: "Leafage", type: "Grass", cat: "fast", power: 6, energy: 8, turns: 2 },
+  { name: "Lick", type: "Ghost", cat: "fast", power: 3, energy: 3, turns: 1 },
+  { name: "Liquidation", type: "Water", cat: "charged", power: 70, energy: 45, effect: "30% chance: Opponent −1 Def" },
+  { name: "Liquidation+", type: "Water", cat: "charged", power: 55, energy: 40, effect: "30% chance: Opponent −1 Def", mega: true },
+  { name: "Lock On", type: "Normal", cat: "fast", power: 1, energy: 5, turns: 1 },
+  { name: "Low Kick", type: "Fighting", cat: "fast", power: 5, energy: 8, turns: 2 },
+  { name: "Low Sweep", type: "Fighting", cat: "charged", power: 40, energy: 40 },
+  { name: "Lunge", type: "Bug", cat: "charged", power: 60, energy: 45, effect: "100% chance: Opponent −1 Atk" },
+  { name: "Luster Purge", type: "Psychic", cat: "charged", power: 120, energy: 60, effect: "50% chance: Opponent −1 Def" },
+  { name: "Magical Leaf", type: "Grass", cat: "fast", power: 10, energy: 10, turns: 3 },
+  { name: "Magma Storm", type: "Fire", cat: "charged", power: 65, energy: 40 },
+  { name: "Magnet Bomb", type: "Steel", cat: "charged", power: 70, energy: 45 },
+  { name: "Mega Drain", type: "Grass", cat: "charged", power: 25, energy: 55 },
+  { name: "Megahorn", type: "Bug", cat: "charged", power: 110, energy: 55 },
+  { name: "Metal Claw", type: "Steel", cat: "fast", power: 5, energy: 7, turns: 2 },
+  { name: "Metal Sound", type: "Steel", cat: "fast", power: 5, energy: 8, turns: 2 },
+  { name: "Meteor Beam", type: "Rock", cat: "charged", power: 120, energy: 60, effect: "100% chance: Self +1 Atk" },
+  { name: "Meteor Mash", type: "Steel", cat: "charged", power: 100, energy: 45 },
+  { name: "Mind Blown", type: "Fire", cat: "charged", power: 90, energy: 35, effect: "100% chance: Self −4 Def" },
+  { name: "Mirror Coat", type: "Psychic", cat: "charged", power: 60, energy: 55 },
+  { name: "Mirror Shot", type: "Steel", cat: "charged", power: 35, energy: 35, effect: "30% chance: Opponent −1 Atk" },
+  { name: "Mist Ball", type: "Psychic", cat: "charged", power: 120, energy: 60, effect: "50% chance: Opponent −1 Atk" },
+  { name: "Moonblast", type: "Fairy", cat: "charged", power: 110, energy: 60, effect: "10% chance: Opponent −1 Atk" },
+  { name: "Moongeist Beam", type: "Ghost", cat: "charged", power: 135, energy: 65 },
+  { name: "Mud Bomb", type: "Ground", cat: "charged", power: 65, energy: 45 },
+  { name: "Mud Shot", type: "Ground", cat: "fast", power: 3, energy: 9, turns: 2 },
+  { name: "Mud Slap", type: "Ground", cat: "fast", power: 11, energy: 10, turns: 3 },
+  { name: "Muddy Water", type: "Water", cat: "charged", power: 35, energy: 35, effect: "30% chance: Opponent −1 Atk" },
+  { name: "Mystical Fire", type: "Fire", cat: "charged", power: 60, energy: 45, effect: "100% chance: Opponent −1 Atk" },
+  { name: "Mystical Fire+", type: "Fire", cat: "charged", power: 50, energy: 40, effect: "100% chance: Opponent −1 Atk", mega: true },
+  { name: "Nature's Madness", type: "Fairy", cat: "charged", power: 80, energy: 50, effect: "100% chance: Opponent −1 Def" },
+  { name: "Night Shade", type: "Ghost", cat: "charged", power: 70, energy: 45 },
+  { name: "Night Slash", type: "Dark", cat: "charged", power: 50, energy: 35, effect: "13% chance: Self +1 Atk" },
+  { name: "Oblivion Wing", type: "Flying", cat: "charged", power: 85, energy: 50, effect: "100% chance: Self +1 Def" },
+  { name: "Obstruct", type: "Dark", cat: "charged", power: 15, energy: 40, effect: "100% chance: Self +1 Def, Opponent −1 Def" },
+  { name: "Octazooka", type: "Water", cat: "charged", power: 50, energy: 50, effect: "50% chance: Opponent −2 Atk" },
+  { name: "Ominous Wind", type: "Ghost", cat: "charged", power: 45, energy: 45, effect: "10% chance: Self +1 Atk, +1 Def" },
+  { name: "Origin Pulse", type: "Water", cat: "charged", power: 130, energy: 60 },
+  { name: "Outrage", type: "Dragon", cat: "charged", power: 110, energy: 60 },
+  { name: "Outrage+", type: "Dragon", cat: "charged", power: 80, energy: 50, mega: true },
+  { name: "Overheat", type: "Fire", cat: "charged", power: 130, energy: 55, effect: "100% chance: Self −2 Atk" },
+  { name: "Parabolic Charge", type: "Electric", cat: "charged", power: 70, energy: 50, effect: "100% chance: Self +1 Def" },
+  { name: "Payback", type: "Dark", cat: "charged", power: 110, energy: 60 },
+  { name: "Peck", type: "Flying", cat: "fast", power: 6, energy: 8, turns: 2 },
+  { name: "Petal Blizzard", type: "Grass", cat: "charged", power: 110, energy: 65 },
+  { name: "Plasma Fists", type: "Electric", cat: "charged", power: 60, energy: 35 },
+  { name: "Play Rough", type: "Fairy", cat: "charged", power: 90, energy: 60 },
+  { name: "Poison Fang", type: "Poison", cat: "charged", power: 45, energy: 40, effect: "100% chance: Opponent −1 Def" },
+  { name: "Poison Jab", type: "Poison", cat: "fast", power: 7, energy: 7, turns: 2 },
+  { name: "Poison Sting", type: "Poison", cat: "fast", power: 4, energy: 9, turns: 2 },
+  { name: "Poltergeist", type: "Ghost", cat: "charged", power: 150, energy: 75 },
+  { name: "Pound", type: "Normal", cat: "fast", power: 4, energy: 4, turns: 2 },
+  { name: "Powder Snow", type: "Ice", cat: "fast", power: 6, energy: 8, turns: 2 },
+  { name: "Power Gem", type: "Rock", cat: "charged", power: 85, energy: 50 },
+  { name: "Power Whip", type: "Grass", cat: "charged", power: 90, energy: 50 },
+  { name: "Power-Up Punch", type: "Fighting", cat: "charged", power: 20, energy: 35, effect: "100% chance: Self +1 Atk" },
+  { name: "Precipice Blades", type: "Ground", cat: "charged", power: 130, energy: 60 },
+  { name: "Present", type: "Normal", cat: "fast", power: 3, energy: 12, turns: 3 },
+  { name: "Psybeam", type: "Psychic", cat: "charged", power: 70, energy: 60 },
+  { name: "Psybeam+", type: "Psychic", cat: "charged", power: 60, energy: 45, mega: true },
+  { name: "Psychic", type: "Psychic", cat: "charged", power: 75, energy: 55, effect: "10% chance: Opponent −1 Def" },
+  { name: "Psychic Fangs", type: "Psychic", cat: "charged", power: 40, energy: 35, effect: "100% chance: Opponent −1 Def" },
+  { name: "Psycho Boost", type: "Psychic", cat: "charged", power: 70, energy: 35, effect: "100% chance: Self −2 Atk" },
+  { name: "Psycho Cut", type: "Psychic", cat: "fast", power: 4, energy: 9, turns: 2 },
+  { name: "Psyshock", type: "Psychic", cat: "charged", power: 70, energy: 40 },
+  { name: "Psystrike", type: "Psychic", cat: "charged", power: 90, energy: 45 },
+  { name: "Psywave", type: "Psychic", cat: "fast", power: 3, energy: 4, turns: 1 },
+  { name: "Pyro Ball", type: "Fire", cat: "charged", power: 75, energy: 40 },
+  { name: "Quick Attack", type: "Normal", cat: "fast", power: 5, energy: 8, turns: 2 },
+  { name: "Rage Fist", type: "Ghost", cat: "charged", power: 50, energy: 35, effect: "100% chance: Self +1 Atk" },
+  { name: "Razor Leaf", type: "Grass", cat: "fast", power: 9, energy: 4, turns: 2 },
+  { name: "Razor Shell", type: "Water", cat: "charged", power: 35, energy: 35, effect: "50% chance: Opponent −1 Def" },
+  { name: "Rest", type: "Normal", cat: "charged", power: 50, energy: 35 },
+  { name: "Return", type: "Normal", cat: "charged", power: 130, energy: 70 },
+  { name: "Roar of Time", type: "Dragon", cat: "charged", power: 150, energy: 65 },
+  { name: "Rock Blast", type: "Rock", cat: "charged", power: 50, energy: 40 },
+  { name: "Rock Slide", type: "Rock", cat: "charged", power: 75, energy: 45 },
+  { name: "Rock Smash", type: "Fighting", cat: "fast", power: 9, energy: 7, turns: 3 },
+  { name: "Rock Throw", type: "Rock", cat: "fast", power: 8, energy: 5, turns: 2 },
+  { name: "Rock Tomb", type: "Rock", cat: "charged", power: 75, energy: 50, effect: "100% chance: Opponent −1 Atk" },
+  { name: "Rock Wrecker", type: "Rock", cat: "charged", power: 110, energy: 50 },
+  { name: "Rollout", type: "Rock", cat: "fast", power: 7, energy: 13, turns: 3 },
+  { name: "Sacred Fire", type: "Fire", cat: "charged", power: 130, energy: 65, effect: "50% chance: Opponent −1 Atk" },
+  { name: "Sacred Sword", type: "Fighting", cat: "charged", power: 60, energy: 35 },
+  { name: "Sand Attack", type: "Ground", cat: "fast", power: 2, energy: 4, turns: 1 },
+  { name: "Sand Tomb", type: "Ground", cat: "charged", power: 40, energy: 40, effect: "100% chance: Opponent −1 Def" },
+  { name: "Sandsear Storm", type: "Ground", cat: "charged", power: 60, energy: 45, effect: "100% chance: Opponent −1 Atk" },
+  { name: "Scald", type: "Water", cat: "charged", power: 85, energy: 50, effect: "30% chance: Opponent −1 Atk" },
+  { name: "Scorching Sands", type: "Ground", cat: "charged", power: 80, energy: 50, effect: "10% chance: Opponent −1 Atk" },
+  { name: "Scratch", type: "Normal", cat: "fast", power: 4, energy: 2, turns: 1 },
+  { name: "Secret Sword", type: "Fighting", cat: "charged", power: 70, energy: 35 },
+  { name: "Seed Bomb", type: "Grass", cat: "charged", power: 55, energy: 40 },
+  { name: "Seed Bomb+", type: "Grass", cat: "charged", power: 60, energy: 40, mega: true },
+  { name: "Seed Flare", type: "Grass", cat: "charged", power: 130, energy: 75, effect: "40% chance: Opponent −2 Def" },
+  { name: "Shadow Ball", type: "Ghost", cat: "charged", power: 100, energy: 50 },
+  { name: "Shadow Bone", type: "Ghost", cat: "charged", power: 80, energy: 45, effect: "20% chance: Opponent −1 Def" },
+  { name: "Shadow Claw", type: "Ghost", cat: "fast", power: 6, energy: 8, turns: 2 },
+  { name: "Shadow Force", type: "Ghost", cat: "charged", power: 120, energy: 90 },
+  { name: "Shadow Punch", type: "Ghost", cat: "charged", power: 55, energy: 35 },
+  { name: "Shadow Sneak", type: "Ghost", cat: "charged", power: 75, energy: 50 },
+  { name: "Signal Beam", type: "Bug", cat: "charged", power: 75, energy: 55, effect: "20% chance: Opponent −1 Atk, −1 Def" },
+  { name: "Silver Wind", type: "Bug", cat: "charged", power: 75, energy: 45, effect: "10% chance: Self +1 Atk, +1 Def" },
+  { name: "Skull Bash", type: "Normal", cat: "charged", power: 130, energy: 75, effect: "100% chance: Self +1 Def" },
+  { name: "Sky Attack", type: "Flying", cat: "charged", power: 75, energy: 50 },
+  { name: "Sludge", type: "Poison", cat: "charged", power: 70, energy: 40 },
+  { name: "Sludge Bomb", type: "Poison", cat: "charged", power: 80, energy: 50 },
+  { name: "Sludge Wave", type: "Poison", cat: "charged", power: 110, energy: 65 },
+  { name: "Smack Down", type: "Rock", cat: "fast", power: 11, energy: 8, turns: 3 },
+  { name: "Snarl", type: "Dark", cat: "fast", power: 5, energy: 13, turns: 3 },
+  { name: "Snipe Shot", type: "Water", cat: "charged", power: 65, energy: 35, effect: "13% chance: Self +2 Atk" },
+  { name: "Solar Beam", type: "Grass", cat: "charged", power: 150, energy: 80 },
+  { name: "Spacial Rend", type: "Dragon", cat: "charged", power: 95, energy: 55 },
+  { name: "Spark", type: "Electric", cat: "fast", power: 5, energy: 7, turns: 2 },
+  { name: "Sparkling Aria", type: "Water", cat: "charged", power: 80, energy: 45 },
+  { name: "Spirit Shackle", type: "Ghost", cat: "charged", power: 50, energy: 40, effect: "33% chance: Opponent −1 Def" },
+  { name: "Splash", type: "Water", cat: "fast", power: 0, energy: 12, turns: 4 },
+  { name: "Springtide Storm (Speculative)", type: "Fairy", cat: "charged", power: 60, energy: 45, effect: "100% chance: Opponent −1 Atk" },
+  { name: "Steel Wing", type: "Steel", cat: "fast", power: 7, energy: 5, turns: 2 },
+  { name: "Stomp", type: "Normal", cat: "charged", power: 55, energy: 40 },
+  { name: "Stone Edge", type: "Rock", cat: "charged", power: 100, energy: 55 },
+  { name: "Struggle", type: "Normal", cat: "charged", power: 35, energy: 100 },
+  { name: "Struggle Bug", type: "Bug", cat: "fast", power: 9, energy: 8, turns: 3 },
+  { name: "Submission", type: "Fighting", cat: "charged", power: 60, energy: 50 },
+  { name: "Sucker Punch", type: "Dark", cat: "fast", power: 8, energy: 7, turns: 2 },
+  { name: "Sunsteel Strike", type: "Steel", cat: "charged", power: 135, energy: 65 },
+  { name: "Superpower", type: "Fighting", cat: "charged", power: 85, energy: 40, effect: "100% chance: Self −1 Atk, −1 Def" },
+  { name: "Surf", type: "Water", cat: "charged", power: 75, energy: 45 },
+  { name: "Surf+", type: "Water", cat: "charged", power: 55, energy: 35, mega: true },
+  { name: "Swift", type: "Normal", cat: "charged", power: 55, energy: 35 },
+  { name: "Synchronoise", type: "Psychic", cat: "charged", power: 80, energy: 50 },
+  { name: "Tackle", type: "Normal", cat: "fast", power: 3, energy: 3, turns: 1 },
+  { name: "Take Down", type: "Normal", cat: "fast", power: 5, energy: 8, turns: 3 },
+  { name: "Techno Blast (Burn)", type: "Fire", cat: "charged", power: 120, energy: 55 },
+  { name: "Techno Blast (Chill)", type: "Ice", cat: "charged", power: 120, energy: 55 },
+  { name: "Techno Blast (Douse)", type: "Water", cat: "charged", power: 120, energy: 55 },
+  { name: "Techno Blast (Normal)", type: "Normal", cat: "charged", power: 120, energy: 55 },
+  { name: "Techno Blast (Shock)", type: "Electric", cat: "charged", power: 120, energy: 55 },
+  { name: "Thunder", type: "Electric", cat: "charged", power: 100, energy: 60 },
+  { name: "Thunder Cage", type: "Electric", cat: "charged", power: 60, energy: 40, effect: "100% chance: Opponent −1 Def" },
+  { name: "Thunder Fang", type: "Electric", cat: "fast", power: 8, energy: 6, turns: 2 },
+  { name: "Thunder Punch", type: "Electric", cat: "charged", power: 60, energy: 40 },
+  { name: "Thunder Shock", type: "Electric", cat: "fast", power: 4, energy: 9, turns: 2 },
+  { name: "Thunderbolt", type: "Electric", cat: "charged", power: 90, energy: 55 },
+  { name: "Torch Song", type: "Fire", cat: "charged", power: 70, energy: 45, effect: "100% chance: Self +1 Atk" },
+  { name: "Trailblaze", type: "Grass", cat: "charged", power: 65, energy: 45, effect: "100% chance: Self +1 Atk" },
+  { name: "Tri Attack", type: "Normal", cat: "charged", power: 65, energy: 50, effect: "50% chance: Opponent −1 Atk, −1 Def" },
+  { name: "Triple Axel", type: "Ice", cat: "charged", power: 60, energy: 45, effect: "100% chance: Self +1 Atk" },
+  { name: "Twister", type: "Dragon", cat: "charged", power: 70, energy: 40 },
+  { name: "Upper Hand", type: "Fighting", cat: "charged", power: 70, energy: 40, effect: "30% chance: Opponent −1 Def" },
+  { name: "V-Create", type: "Fire", cat: "charged", power: 95, energy: 40, effect: "100% chance: Self −3 Def" },
+  { name: "Vine Whip", type: "Grass", cat: "fast", power: 5, energy: 8, turns: 2 },
+  { name: "Vise Grip", type: "Normal", cat: "charged", power: 70, energy: 40 },
+  { name: "Volt Switch", type: "Electric", cat: "fast", power: 14, energy: 16, turns: 4 },
+  { name: "Volt Tackle", type: "Electric", cat: "charged", power: 90, energy: 40, effect: "100% chance: Self −1 Def" },
+  { name: "Volt Tackle+", type: "Electric", cat: "charged", power: 65, energy: 35, effect: "100% chance: Self −1 Def", mega: true },
+  { name: "Water Gun", type: "Water", cat: "fast", power: 3, energy: 3, turns: 1 },
+  { name: "Water Pulse", type: "Water", cat: "charged", power: 80, energy: 50 },
+  { name: "Water Shuriken", type: "Water", cat: "fast", power: 6, energy: 14, turns: 3 },
+  { name: "Waterfall", type: "Water", cat: "fast", power: 11, energy: 10, turns: 3 },
+  { name: "Weather Ball (Fire)", type: "Fire", cat: "charged", power: 60, energy: 35 },
+  { name: "Weather Ball (Ice)", type: "Ice", cat: "charged", power: 60, energy: 35 },
+  { name: "Weather Ball (Normal)", type: "Normal", cat: "charged", power: 60, energy: 35 },
+  { name: "Weather Ball (Rock)", type: "Rock", cat: "charged", power: 60, energy: 35 },
+  { name: "Weather Ball (Water)", type: "Water", cat: "charged", power: 60, energy: 35 },
+  { name: "Wild Charge", type: "Electric", cat: "charged", power: 100, energy: 45, effect: "100% chance: Self −2 Def" },
+  { name: "Wildbolt Storm", type: "Electric", cat: "charged", power: 60, energy: 45, effect: "100% chance: Opponent −1 Atk" },
+  { name: "Wing Attack", type: "Flying", cat: "fast", power: 5, energy: 8, turns: 2 },
+  { name: "Wrap", type: "Normal", cat: "charged", power: 70, energy: 45, effect: "100% chance: Opponent −1 Def" },
+  { name: "X-Scissor", type: "Bug", cat: "charged", power: 65, energy: 40 },
+  { name: "Yawn", type: "Normal", cat: "fast", power: 0, energy: 12, turns: 4 },
+  { name: "Zap Cannon", type: "Electric", cat: "charged", power: 150, energy: 80, effect: "33% chance: Opponent −1 Atk" },
+  { name: "Zap Cannon+", type: "Electric", cat: "charged", power: 70, energy: 45, effect: "100% chance: Opponent −1 Atk", mega: true },
+  { name: "Zen Headbutt", type: "Psychic", cat: "fast", power: 8, energy: 6, turns: 3 }
+];
+const MOVES_SOURCE = "https://pvpoke.com/moves";
 
 const ITEMS_IMG_BASE = "assets/pokemon-images/Items/db/";
 
@@ -7397,6 +7730,74 @@ function trainerLevelsExpandAll(open) {
   });
 }
 
+let _movesMode = "fast";            // "fast" | "charged"
+let _movesSort = { key: "name", asc: true };
+let _movesShowMega = false;
+let _movesSearch = "";
+
+function setMovesMode(mode) {
+  _movesMode = mode;
+  _movesSort = { key: "name", asc: true };
+  render();
+  applyMovesSearch();
+}
+
+function toggleMovesMega() {
+  _movesShowMega = !_movesShowMega;
+  render();
+  applyMovesSearch();
+}
+
+function sortMoves(key) {
+  if (key === _movesSort.key) {
+    _movesSort.asc = !_movesSort.asc;
+  } else {
+    _movesSort = { key, asc: key === "name" };
+  }
+  render();
+  applyMovesSearch();
+}
+
+function searchMoves(val) {
+  _movesSearch = val;
+  applyMovesSearch();
+}
+
+const MOVES_TYPE_NAMES = ["bug","dark","dragon","electric","fairy","fighting","fire","flying","ghost","grass","ground","ice","normal","poison","psychic","rock","steel","water"];
+
+// Filters the Moves tab's rendered rows directly in the DOM (no render() call) so the
+// search input never loses focus mid-typing — same reasoning as searchItems above.
+function applyMovesSearch() {
+  const raw = String(_movesSearch || "").trim();
+  const terms = raw.split(",").map(s => s.trim().toLowerCase()).filter(s => s.length > 0);
+  const rows = document.querySelectorAll('[data-move-row]');
+  const emptyEl = document.getElementById("moves-empty");
+  const countEl = document.getElementById("moves-count");
+  let visible = 0;
+  rows.forEach(row => {
+    const name = row.getAttribute("data-move-name") || "";
+    const type = row.getAttribute("data-move-type") || "";
+    let match = terms.length === 0;
+    if (!match) {
+      match = terms.some(term => {
+        if (MOVES_TYPE_NAMES.includes(term)) return type === term;
+        return name.startsWith(term);
+      });
+    }
+    row.style.display = match ? "" : "none";
+    if (match) visible++;
+  });
+  if (countEl) countEl.textContent = `${visible} move${visible === 1 ? "" : "s"}`;
+  if (emptyEl) {
+    if (visible === 0) {
+      emptyEl.textContent = `No moves match "${raw}"`;
+      emptyEl.style.display = "block";
+    } else {
+      emptyEl.style.display = "none";
+    }
+  }
+}
+
 function toggleDexRegion(id) {
   const el = document.getElementById(id);
   const arrow = document.getElementById(id + '-arrow');
@@ -8326,6 +8727,19 @@ function resetWeekDigest() {
   rerenderWeekDigestOnly();
 }
 
+// Date ranges (inclusive, YYYY-MM-DD) where the season's Daily Discoveries are paused in-game.
+const DAILY_DISCOVERY_PAUSES = [
+  { start: "2026-08-31", end: "2026-09-06", reason: "Daily Discoveries are paused while Mega Ascension runs." }
+];
+
+function dailyDiscoveryPauseFor(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  const key = `${y}-${m}-${d}`;
+  return DAILY_DISCOVERY_PAUSES.find(p => key >= p.start && key <= p.end) || null;
+}
+
 function renderWeekDigest(th, isMobile) {
   const ACCENT = "#5B8DEF";
   const weekOffset = state.weekDigestOffset || 0;
@@ -8382,7 +8796,7 @@ function renderWeekDigest(th, isMobile) {
     const dayDate = new Date(weekStart);
     dayDate.setDate(dayDate.getDate() + idx);
     const events = byDay[idx];
-    const dailyForDay = dailyByName[fullDayNames[idx]];
+    const dailyForDay = dailyDiscoveryPauseFor(dayDate) ? null : dailyByName[fullDayNames[idx]];
     const iconList = events.map(pillIconFor);
     if (dailyForDay) iconList.push(dailyForDay.icon || "⭐");
     const icons = [...new Set(iconList)].slice(0, 2).join(" ");
@@ -8412,7 +8826,8 @@ function renderWeekDigest(th, isMobile) {
   selectedDayDate.setDate(selectedDayDate.getDate() + selectedDay);
   const fullDayName = selectedDayDate.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
 
-  const dailyTask = dailyByName[fullDayNames[selectedDay]];
+  const dailyPause = dailyDiscoveryPauseFor(selectedDayDate);
+  const dailyTask = dailyPause ? null : dailyByName[fullDayNames[selectedDay]];
   let dailyBannerHTML = "";
   if (dailyTask && seasonEvent) {
     const dColor = dailyTask.color || ACCENT;
@@ -8427,11 +8842,20 @@ function renderWeekDigest(th, isMobile) {
       </div>
       <div style="font-size:16px;color:${dColor};flex-shrink:0;font-weight:700">›</div>
     </button>`;
+  } else if (dailyPause && seasonEvent) {
+    dailyBannerHTML = `<div style="display:flex;align-items:center;gap:12px;padding:${isMobile ? "10px 12px" : "12px 14px"};margin-bottom:10px;background:${th.surfaceHover};border:1.5px solid ${th.border};border-radius:12px;width:100%;text-align:left;font-family:inherit">
+      <span style="font-size:${isMobile ? 22 : 26}px;flex-shrink:0;line-height:1;opacity:0.75">🚫</span>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:9.5px;font-weight:800;letter-spacing:1px;color:${th.textMuted};text-transform:uppercase;margin-bottom:2px">No Daily Discovery</div>
+        <div style="font-size:${isMobile ? 13.5 : 14.5}px;font-weight:800;color:${th.text};line-height:1.25">Paused this week</div>
+        <div style="font-size:11.5px;color:${th.textMuted};font-weight:600;margin-top:2px">${esc(dailyPause.reason)}</div>
+      </div>
+    </div>`;
   }
 
   let panelHTML;
   if (dayEvents.length === 0) {
-    panelHTML = dailyTask ? "" : `<div style="padding:14px 4px;text-align:center;font-size:13px;color:${th.textMuted};font-style:italic">Nothing scheduled.</div>`;
+    panelHTML = (dailyTask || dailyPause) ? "" : `<div style="padding:14px 4px;text-align:center;font-size:13px;color:${th.textMuted};font-style:italic">Nothing scheduled.</div>`;
   } else {
     panelHTML = dayEvents.map(ev => {
       const evStartDay = new Date(ev.date + "T00:00:00");
