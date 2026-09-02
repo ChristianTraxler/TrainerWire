@@ -8724,16 +8724,19 @@ function renderGoPokedexDetailsBody(go, data, th, isMobile) {
   if (pd.isGenderless) {
     addRow("Gender", "Genderless");
   } else if (typeof pd.genderMalePct === "number" || typeof pd.genderFemalePct === "number") {
-    // The ♂/♀ glyphs render on the text baseline with their own ascent/descent, which sits
-    // noticeably higher/lower than the surrounding digits in most fonts — joining them as plain
-    // text with <br> left the symbol looking offset from its own line. Each line is its own
-    // inline-flex row instead, so the symbol is vertically centered against the text by flexbox
-    // rather than by font metrics, and a flex column keeps both lines right-aligned like every
-    // other row's value in this panel.
-    const genderLine = (symbol, pct, label) => `<div style="display:inline-flex;align-items:center;justify-content:flex-end;gap:4px"><span style="font-size:1.1em;line-height:1">${symbol}</span><span>${pct}% ${label}</span></div>`;
+    // Outfit carries no ♂/♀ glyphs, so the browser falls back to a system symbol font whose
+    // baseline and em box differ from the surrounding digits — on mobile that left the ♀ sitting
+    // visibly below its own line and the two symbols at different heights. Flexbox can only centre
+    // the glyph's *box*, not its ink, so no amount of alignment CSS fixes a fallback-font offset.
+    // Draw both symbols as inline SVG instead: the ink is centred inside the viewBox, so the icon
+    // lines up with its text on every platform, inherits the row's colour, and scales with em.
+    const genderIcon = (male) => `<svg viewBox="0 0 16 16" aria-hidden="true" style="width:1.15em;height:1.15em;flex-shrink:0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">${male
+      ? `<circle cx="6.3" cy="9.7" r="4.1" /><path d="M9.6 6.4 13.3 2.7M9.9 2.7h3.4v3.4" />`
+      : `<circle cx="8" cy="5.9" r="4.1" /><path d="M8 10v4.3M5.9 12.5h4.2" />`}</svg>`;
+    const genderLine = (male, pct, label) => `<div style="display:flex;align-items:center;justify-content:flex-end;gap:5px">${genderIcon(male)}<span>${pct}% ${label}</span></div>`;
     const lines = [];
-    if (typeof pd.genderMalePct === "number") lines.push(genderLine("♂", pd.genderMalePct, "male"));
-    if (typeof pd.genderFemalePct === "number") lines.push(genderLine("♀", pd.genderFemalePct, "female"));
+    if (typeof pd.genderMalePct === "number") lines.push(genderLine(true, pd.genderMalePct, "male"));
+    if (typeof pd.genderFemalePct === "number") lines.push(genderLine(false, pd.genderFemalePct, "female"));
     addRow("Gender", `<div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">${lines.join("")}</div>`);
   }
   if (typeof pd.buddyDistanceKm === "number") addRow("Buddy Distance", `${pd.buddyDistanceKm} km`);
