@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "3.68";
+const APP_VERSION = "4.0";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -92,6 +92,71 @@ const REGIONS = [
   { folder: "Gen-8.5_Hisui", label: "Gen 8.5 \u2014 Hisui", start: 899, end: 905 },
   { folder: "Gen-9_Paldea", label: "Gen 9 \u2014 Paldea", start: 906, end: 1025 }
 ];
+const MEGA_EVOS = {
+  3:[{n:"Mega Venusaur",f:"0003_mega"}],
+  6:[{n:"Mega Charizard X",f:"0006_megax"},{n:"Mega Charizard Y",f:"0006_megay"}],
+  9:[{n:"Mega Blastoise",f:"0009_mega"}],
+  15:[{n:"Mega Beedrill",f:"0015_mega"}],
+  18:[{n:"Mega Pidgeot",f:"0018_mega"}],
+  65:[{n:"Mega Alakazam",f:"0065_mega"}],
+  71:[{n:"Mega Victreebel",f:"0071_mega"}],
+  80:[{n:"Mega Slowbro",f:"0080_mega"}],
+  94:[{n:"Mega Gengar",f:"0094_mega"}],
+  115:[{n:"Mega Kangaskhan",f:"0115_mega-female"}],
+  121:[{n:"Mega Starmie",f:"0121_mega"}],
+  127:[{n:"Mega Pinsir",f:"0127_mega"}],
+  130:[{n:"Mega Gyarados",f:"0130_mega"}],
+  142:[{n:"Mega Aerodactyl",f:"0142_mega"}],
+  149:[{n:"Mega Dragonite",f:"0149_mega"}],
+  150:[{n:"Mega Mewtwo X",f:"0150_megax"},{n:"Mega Mewtwo Y",f:"0150_megay"}],
+  181:[{n:"Mega Ampharos",f:"0181_mega"}],
+  208:[{n:"Mega Steelix",f:"0208_mega"}],
+  212:[{n:"Mega Scizor",f:"0212_mega"}],
+  214:[{n:"Mega Heracross",f:"0214_mega"}],
+  227:[{n:"Mega Skarmory",f:"0227_mega"}],
+  229:[{n:"Mega Houndoom",f:"0229_mega"}],
+  248:[{n:"Mega Tyranitar",f:"0248_mega"}],
+  254:[{n:"Mega Sceptile",f:"0254_mega"}],
+  257:[{n:"Mega Blaziken",f:"0257_mega"}],
+  260:[{n:"Mega Swampert",f:"0260_mega"}],
+  282:[{n:"Mega Gardevoir",f:"0282_mega"}],
+  302:[{n:"Mega Sableye",f:"0302_mega"}],
+  303:[{n:"Mega Mawile",f:"0303_mega"}],
+  308:[{n:"Mega Medicham",f:"0308_mega"}],
+  306:[{n:"Mega Aggron",f:"0306_mega"}],
+  310:[{n:"Mega Manectric",f:"0310_mega"}],
+  319:[{n:"Mega Sharpedo",f:"0319_mega"}],
+  323:[{n:"Mega Camerupt",f:"0323_mega"}],
+  334:[{n:"Mega Altaria",f:"0334_mega"}],
+  354:[{n:"Mega Banette",f:"0354_mega"}],
+  359:[{n:"Mega Absol",f:"0359_mega"}],
+  362:[{n:"Mega Glalie",f:"0362_mega"}],
+  373:[{n:"Mega Salamence",f:"0373_mega"}],
+  376:[{n:"Mega Metagross",f:"0376_mega"}],
+  380:[{n:"Mega Latias",f:"0380_mega-female"}],
+  381:[{n:"Mega Latios",f:"0381_mega-male"}],
+  382:[{n:"Primal Kyogre",f:"0382_primal"}],
+  383:[{n:"Primal Groudon",f:"0383_primal"}],
+  384:[{n:"Mega Rayquaza",f:"0384_mega"}],
+  398:[{n:"Mega Staraptor",f:"0398_mega"}],
+  428:[{n:"Mega Lopunny",f:"0428_mega"}],
+  445:[{n:"Mega Garchomp",f:"0445_mega"}],
+  448:[{n:"Mega Lucario",f:"0448_mega"}],
+  460:[{n:"Mega Abomasnow",f:"0460_mega"}],
+  475:[{n:"Mega Gallade",f:"0475_mega-male"}],
+  531:[{n:"Mega Audino",f:"0531_mega"}],
+  609:[{n:"Mega Chandelure",f:"0609_mega"}],
+  652:[{n:"Mega Chesnaught",f:"0652_mega"}],
+  655:[{n:"Mega Delphox",f:"0655_mega"}],
+  658:[{n:"Mega Greninja",f:"0658_mega"}],
+  687:[{n:"Mega Malamar",f:"0687_mega"}],
+  719:[{n:"Mega Diancie",f:"0719_mega"}],
+  870:[{n:"Mega Falinks",f:"0870_mega"}]
+};
+// Mega Energy cost per species, transcribed from dittobase's evolutionChain data — [firstTimeCost,
+// subsequentCost]. Keys are the dex number, or dex+"x"/"y" for the X/Y variants (matches how
+// MEGA_EVOS names its X/Y entries, e.g. "Mega Charizard X"). Do not adjust these numbers.
+const MEGA_ENERGY_COST = {3:[200,40],"6x":[200,40],"6y":[200,40],9:[200,40],15:[100,20],18:[100,20],65:[200,40],80:[100,20],94:[200,40],115:[200,40],127:[200,40],130:[300,60],142:[200,40],"150x":[7500,150],"150y":[7500,150],181:[200,40],208:[200,40],212:[200,40],214:[200,40],229:[100,20],248:[300,60],254:[200,40],257:[200,40],260:[200,40],282:[200,40],302:[100,20],303:[200,40],306:[200,40],308:[100,20],310:[100,20],319:[200,40],323:[200,40],334:[300,60],354:[100,20],359:[200,40],362:[200,40],373:[300,60],376:[300,60],380:[300,60],381:[300,60],382:[400,80],383:[400,80],384:[400,80],428:[200,40],445:[300,60],448:[200,40],460:[200,40],475:[200,40],531:[200,40],719:[300,60],870:[300,60]};
 const POKEMON_FORMS = {
   19:[{l:"Alola",f:"0019_alola"}],20:[{l:"Alola",f:"0020_alola"}],26:[{l:"Alola",f:"0026_alola"}],27:[{l:"Alola",f:"0027_alola"}],28:[{l:"Alola",f:"0028_alola"}],37:[{l:"Alola",f:"0037_alola"}],38:[{l:"Alola",f:"0038_alola"}],50:[{l:"Alola",f:"0050_alola"}],51:[{l:"Alola",f:"0051_alola"}],52:[{l:"Alola",f:"0052_alola"},{l:"Galar",f:"0052_galarian"}],53:[{l:"Alola",f:"0053_alola"}],58:[{l:"Hisui",f:"0058_hisuian"}],59:[{l:"Hisui",f:"0059_hisuian"}],74:[{l:"Alola",f:"0074_alola"}],75:[{l:"Alola",f:"0075_alola"}],76:[{l:"Alola",f:"0076_alola"}],77:[{l:"Galar",f:"0077_galarian"}],78:[{l:"Galar",f:"0078_galarian"}],79:[{l:"Galar",f:"0079_galarian"}],80:[{l:"Galar",f:"0080_galarian"}],83:[{l:"Galar",f:"0083_galarian"}],88:[{l:"Alola",f:"0088_alola"}],89:[{l:"Alola",f:"0089_alola"}],100:[{l:"Hisui",f:"0100_hisuian"}],101:[{l:"Hisui",f:"0101_hisuian"}],103:[{l:"Alola",f:"0103_alola"}],105:[{l:"Alola",f:"0105_alola"}],
   128:[{l:"Paldea",f:"0128_paldean_combat"},{l:"Paldea Blaze",f:"0128_paldean_blaze"},{l:"Paldea Aqua",f:"0128_paldean_aqua"}],
@@ -253,7 +318,6 @@ function getRegionalEvoChain(dex, formLabel) {
 
 // --- POKEMON DETAIL VIEW ---
 const STAT_COLORS = {hp:"#FF5959",attack:"#F5AC78",defense:"#FAE078","special-attack":"#9DB7F5","special-defense":"#A7DB8D",speed:"#FA92B2"};
-const STAT_LABELS = {hp:"HP",attack:"Attack",defense:"Defense","special-attack":"Sp. Atk","special-defense":"Sp. Def",speed:"Speed"};
 const _pokeCache = {};
 async function fetchPokemonData(dexNum) {
   const key = `pokemon_${dexNum}`;
@@ -316,58 +380,8 @@ async function fetchEvolutionChain(dexNum) {
       expanded.push(s);
     }
   }
-  // Append Mega Evolutions (Pokemon GO uses Mega Energy)
-  const MEGA_EVOS = {
-    3:[{n:"Mega Venusaur",f:"0003_mega"}],
-    6:[{n:"Mega Charizard X",f:"0006_megax"},{n:"Mega Charizard Y",f:"0006_megay"}],
-    9:[{n:"Mega Blastoise",f:"0009_mega"}],
-    15:[{n:"Mega Beedrill",f:"0015_mega"}],
-    18:[{n:"Mega Pidgeot",f:"0018_mega"}],
-    65:[{n:"Mega Alakazam",f:"0065_mega"}],
-    80:[{n:"Mega Slowbro",f:"0080_mega"}],
-    94:[{n:"Mega Gengar",f:"0094_mega"}],
-    115:[{n:"Mega Kangaskhan",f:"0115_mega-female"}],
-    127:[{n:"Mega Pinsir",f:"0127_mega"}],
-    130:[{n:"Mega Gyarados",f:"0130_mega"}],
-    142:[{n:"Mega Aerodactyl",f:"0142_mega"}],
-    150:[{n:"Mega Mewtwo X",f:"0150_megax"},{n:"Mega Mewtwo Y",f:"0150_megay"}],
-    181:[{n:"Mega Ampharos",f:"0181_mega"}],
-    208:[{n:"Mega Steelix",f:"0208_mega"}],
-    212:[{n:"Mega Scizor",f:"0212_mega"}],
-    214:[{n:"Mega Heracross",f:"0214_mega"}],
-    229:[{n:"Mega Houndoom",f:"0229_mega"}],
-    248:[{n:"Mega Tyranitar",f:"0248_mega"}],
-    254:[{n:"Mega Sceptile",f:"0254_mega"}],
-    257:[{n:"Mega Blaziken",f:"0257_mega"}],
-    260:[{n:"Mega Swampert",f:"0260_mega"}],
-    282:[{n:"Mega Gardevoir",f:"0282_mega"}],
-    302:[{n:"Mega Sableye",f:"0302_mega"}],
-    303:[{n:"Mega Mawile",f:"0303_mega"}],
-    308:[{n:"Mega Medicham",f:"0308_mega"}],
-    306:[{n:"Mega Aggron",f:"0306_mega"}],
-    310:[{n:"Mega Manectric",f:"0310_mega"}],
-    319:[{n:"Mega Sharpedo",f:"0319_mega"}],
-    323:[{n:"Mega Camerupt",f:"0323_mega"}],
-    334:[{n:"Mega Altaria",f:"0334_mega"}],
-    354:[{n:"Mega Banette",f:"0354_mega"}],
-    359:[{n:"Mega Absol",f:"0359_mega"}],
-    362:[{n:"Mega Glalie",f:"0362_mega"}],
-    373:[{n:"Mega Salamence",f:"0373_mega"}],
-    376:[{n:"Mega Metagross",f:"0376_mega"}],
-    380:[{n:"Mega Latias",f:"0380_mega-female"}],
-    381:[{n:"Mega Latios",f:"0381_mega-male"}],
-    382:[{n:"Primal Kyogre",f:"0382_primal"}],
-    383:[{n:"Primal Groudon",f:"0383_primal"}],
-    384:[{n:"Mega Rayquaza",f:"0384_mega"}],
-    428:[{n:"Mega Lopunny",f:"0428_mega"}],
-    445:[{n:"Mega Garchomp",f:"0445_mega"}],
-    448:[{n:"Mega Lucario",f:"0448_mega"}],
-    460:[{n:"Mega Abomasnow",f:"0460_mega"}],
-    475:[{n:"Mega Gallade",f:"0475_mega-male"}],
-    531:[{n:"Mega Audino",f:"0531_mega"}],
-    719:[{n:"Mega Diancie",f:"0719_mega"}],
-    870:[{n:"Mega Falinks",f:"0870_mega"}]
-  };
+  // Mega Evolutions (Pokemon GO uses Mega Energy) — MEGA_EVOS is now a top-level constant
+  // (hoisted out of this function) so the GO PokeDex sprite resolver can reuse it too.
   const maxDepth = Math.max(...expanded.map(e => e.depth));
   // Check all Pokemon in the chain for Megas (e.g., Slowbro has Mega but isn't final)
   const allDexInChain = [...new Set(expanded.map(e => e.dexNum))];
@@ -377,7 +391,20 @@ async function fetchEvolutionChain(dexNum) {
       megasAdded.add(dex);
       const parentDepth = expanded.find(e => e.dexNum === dex)?.depth || maxDepth;
       for (const m of MEGA_EVOS[dex]) {
-        const triggerText = dex === 382 || dex === 383 ? "400 Primal Energy" : dex === 384 ? "300 Mega Energy + Dragon Ascent (Meteorite)" : "200 Mega Energy first time, free after";
+        // X/Y variants get their own MEGA_ENERGY_COST key (dex+"x"/"y"); everything else uses the
+        // bare dex. If a dex/variant has no entry, render the name with NO cost text — never guess.
+        let costKey = dex;
+        if (/ X$/.test(m.n)) costKey = `${dex}x`;
+        else if (/ Y$/.test(m.n)) costKey = `${dex}y`;
+        const cost = MEGA_ENERGY_COST[costKey];
+        let triggerText = "";
+        if (cost) {
+          const first = cost[0].toLocaleString();
+          const sub = cost[1];
+          if (dex === 382 || dex === 383) triggerText = `${first} Primal Energy first time, ${sub} after`;
+          else if (dex === 384) triggerText = `${first} Mega Energy first time, ${sub} after + Dragon Ascent (Meteorite)`;
+          else triggerText = `${first} Mega Energy first time, ${sub} after`;
+        }
         expanded.push({ name: m.n, dexNum: dex, trigger: triggerText, depth: parentDepth + 1, imgFile: m.f, isMega: true });
       }
     }
@@ -386,6 +413,50 @@ async function fetchEvolutionChain(dexNum) {
   return expanded;
 }
 function pokemonImgUrl(dex) { return natDexImg(dex, GENDER_SUFFIX[dex] || ""); }
+
+// --- POKEMON GO DATA (dittobase scrape: data/go/_index.json + data/go/<slug>.json) ---
+// Only a handful of sample files exist while the full ~1782-file scrape is still in progress,
+// so every lookup here must fail silently (no console noise) when a file is missing.
+async function fetchGoIndex() {
+  const key = "go_index";
+  if (_pokeCache[key]) return _pokeCache[key];
+  try {
+    const res = await fetch("data/go/_index.json");
+    const data = res.ok ? await res.json() : {};
+    _pokeCache[key] = data;
+    return data;
+  } catch {
+    return {};
+  }
+}
+// data/go/_family.json — keyed by familySlug, listing every related form (evolutions, shadow,
+// regional, mega, dynamax, gigantamax) for the "<Species> family" section. Same fail-silent
+// contract as fetchGoIndex: an empty object if the file doesn't exist yet, no console noise.
+async function fetchGoFamilyIndex() {
+  const key = "go_family";
+  if (_pokeCache[key]) return _pokeCache[key];
+  try {
+    const res = await fetch("data/go/_family.json");
+    const data = res.ok ? await res.json() : {};
+    _pokeCache[key] = data;
+    return data;
+  } catch {
+    return {};
+  }
+}
+async function fetchGoPokemon(slug) {
+  const key = `go_${slug}`;
+  if (Object.prototype.hasOwnProperty.call(_pokeCache, key)) return _pokeCache[key];
+  try {
+    const res = await fetch(`data/go/${slug}.json`);
+    const data = res.ok ? await res.json() : null;
+    _pokeCache[key] = data;
+    return data;
+  } catch {
+    _pokeCache[key] = null;
+    return null;
+  }
+}
 
 function getPokemonImg(name) {
   const lower = name.toLowerCase();
@@ -624,7 +695,7 @@ function pokemonImgHTML(pkmn, size) {
   }
   if (pkmn.dynamax) {
     return `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0">
-      <img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85" />
+      <img src="assets/pokemon-images/icons/dynamax-icon(white).webp" style="position:absolute;top:1px;right:1px;width:50%;height:50%;object-fit:contain;opacity:0.85;pointer-events:none" />
       <img src="${pkmn.url}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
     </div>`;
   }
@@ -1391,7 +1462,7 @@ const ANNOUNCEMENTS = [
       "Please be aware of your surroundings and follow guidelines from local health authorities when playing Pokémon GO. Upcoming events are subject to change. Be sure to follow us on social media, opt in to receiving push notifications, and subscribe to our emails to stay updated."
     ] }
   ] },
-  { id: 44, date: "2026-08-25", published: "2026-08-25", updated: "2026-08-31", lastUpdated: "August 31, 2026 at 1:41 PM", title: "September Content Update — Twilight Trails", tag: "News", url: "https://pokemongo.com/news/september-2026-content-update", body: "September 2026's full content rundown — Featured Mega Victreebel, Mega Malamar, and Shadow Thundurus (Incarnate Forme). Max Battles rotate Eevee → Ralts → Rhyhorn → the Legendary Birds → Sobble. Five-Star Raids run the Regi trio → Zacian → Zamazenta → a three-way Xurkitree/Pheromosa/Buzzwole regional split → Xerneas. Mega Raids feature Mega Gyarados, Mega Beedrill, Mega Houndoom, Mega Venusaur, Mega Malamar, and Mega Victreebel. Shadow Giratina (Altered Forme) hands off to Shadow Thundurus (Incarnate Forme) in Shadow Raids, plus Mega Ascension, GO Fest 2026: Mega Finale, Community Day Classic, Super Mega Raid Day, and the Twilight Trails season launch.", fullBody: "Pokémon GO's September 2026 Content Update launches the Twilight Trails Season, part of the game's 10th Anniversary celebrations. Mega Victreebel and Mega Malamar debut as Mega Raid bosses across the back half of the month, while Shadow Thundurus (Incarnate Forme) makes its first-ever Shadow Raid appearance once Shadow Giratina (Altered Forme) closes out its run. The five-star rotation opens with the Regi trio, moves through Zacian and Zamazenta (Hero of Many Battles), splits three ways by region for Xurkitree, Pheromosa, and Buzzwole, and closes with Xerneas. Max Battles, weekly Spotlight Hours, Raid Hours, Mega Ascension, Pokémon GO Fest 2026: Mega Finale, Community Day Classic, and the Harvest Festival round out a packed month. All times are local unless otherwise specified.", sections: [{ heading: "Featured Pokémon", icon: "✨", showImages: true, intro: "Part of the Pokémon GO 10th Anniversary · Twilight Trails Season. If you're lucky, you might encounter a Shiny one!", items: [{ name: "Mega Victreebel ✨ (Mega)" }, { name: "Shadow Thundurus (Incarnate Forme) ✨ (5★ Shadow Raid)" }, { name: "Mega Malamar ✨ (Mega)" }] }, { heading: "Spotlight Hours (6:00 PM – 7:00 PM local time)", icon: "assets/pokemon-images/icons/QuestPokemonReward.png", showImages: true, intro: "A still-unrevealed Pokémon also gets a Spotlight Hour on September 17 (2× Catch Stardust) — its identity hasn't been shown yet, though the official graphic teased a Shiny sparkle.", items: [{ name: "Weedle ✨", subtitle: "2× Transfer Candy", dates: "Thu, September 10" }, { name: "Kakuna ✨", subtitle: "2× Transfer Candy", dates: "Thu, September 10" }, { name: "Beedrill ✨", subtitle: "2× Transfer Candy", dates: "Thu, September 10" }, { name: "Houndour ✨", subtitle: "2× Transfer Candy", dates: "Sun, September 13" }, { name: "Houndoom ✨", subtitle: "2× Transfer Candy", dates: "Sun, September 13" }, { name: "Rattata ✨", subtitle: "2× Evolution XP + increased chance of XXS Rattata", dates: "Thu, September 24" }] }, { heading: "Max Battles", icon: "assets/pokemon-images/icons/dynamax.png", showImages: true, intro: "These Dynamax Pokémon may appear in Max Battles throughout Twilight Trails.", items: [{ name: "Dynamax Eevee ✨", dates: "August 31 – September 6" }, { name: "Dynamax Ralts ✨", dates: "September 7 – September 13" }, { name: "Dynamax Rhyhorn ✨", dates: "September 14 – September 20" }, { name: "Dynamax Articuno ✨", dates: "September 21 – September 27" }, { name: "Dynamax Zapdos ✨", dates: "September 21 – September 27" }, { name: "Dynamax Moltres ✨", dates: "September 21 – September 27" }, { name: "Dynamax Sobble ✨", dates: "September 28 – October 4" }] }, { heading: "Mega Raids", icon: "assets/pokemon-images/Raid-Eggs/mega.png", showImages: true, intro: "Mega Gyarados will not be available August 31 – September 4 during Mega Ascension, but returns to the raid rotation September 5–6 during Pokémon GO Fest 2026: Mega Finale.", items: [{ name: "Mega Gyarados ✨ (Mega)", dates: "August 26 – September 8" }, { name: "Mega Beedrill ✨ (Mega)", dates: "September 8 – September 15" }, { name: "Mega Houndoom ✨ (Mega)", dates: "September 11 – September 15" }, { name: "Mega Venusaur ✨ (Mega)", dates: "September 16 – September 22" }, { name: "Mega Malamar ✨ (Mega)", dates: "September 23 – September 29" }, { name: "Mega Victreebel ✨ (Mega)", dates: "September 30 – October 6" }] }, { heading: "Five-Star Raids", icon: "assets/pokemon-images/Raid-Eggs/5-star.png", showImages: true, intro: "Regirock, Regice, and Registeel will not be available August 31 – September 6 during Mega Ascension and Pokémon GO Fest 2026: Mega Finale.", items: [{ name: "Regirock ✨ (5★ Raid)", dates: "August 26 – September 8" }, { name: "Regice ✨ (5★ Raid)", dates: "August 26 – September 8" }, { name: "Registeel ✨ (5★ Raid)", dates: "August 26 – September 8" }, { name: "Zacian (Hero of Many Battles) ✨ (5★ Raid)", dates: "September 9 – September 15" }, { name: "Zamazenta (Hero of Many Battles) ✨ (5★ Raid)", dates: "September 16 – September 22" }, { name: "Xurkitree ✨ (5★ Raid)", subtitle: "Asia-Pacific", dates: "September 23 – September 29" }, { name: "Pheromosa ✨ (5★ Raid)", subtitle: "Europe, the Middle East, Africa, and India", dates: "September 23 – September 29" }, { name: "Buzzwole ✨ (5★ Raid)", subtitle: "The Americas and Greenland", dates: "September 23 – September 29" }, { name: "Xerneas ✨ (5★ Raid)", dates: "September 30 – October 6" }] }, { heading: "Events", icon: "📅", items: ["Mega Ascension — August 31 to September 4 (Daily Discoveries will not be available during this event)", "Pokémon GO Fest 2026: Mega Finale — September 5 to September 6 (Daily Discoveries will not be available during this event)", "Mega Squads — September 8 to September 14", "Community Day Classic: Gible — September 12", "??? (unrevealed) — September 16 to September 22", "Staraptor Super Mega Raid Day — September 19", "Phantump Catch Mastery — September 26", "Harvest Festival — September 29 to October 5"] }, { heading: "Raid Hours (6:00 PM – 7:00 PM local time)", icon: "assets/pokemon-images/Raid-Eggs/5-star.png", showImages: true, items: [{ name: "Zacian (Hero of Many Battles) ✨ (5★ Raid)", dates: "Wed, September 9" }, { name: "Zamazenta (Hero of Many Battles) ✨ (5★ Raid)", dates: "Wed, September 16" }, { name: "Xurkitree ✨ (5★ Raid)", subtitle: "Asia-Pacific", dates: "Wed, September 23" }, { name: "Pheromosa ✨ (5★ Raid)", subtitle: "Europe, the Middle East, Africa, and India", dates: "Wed, September 23" }, { name: "Buzzwole ✨ (5★ Raid)", subtitle: "The Americas and Greenland", dates: "Wed, September 23" }, { name: "Xerneas ✨ (5★ Raid)", dates: "Wed, September 30" }] }, { heading: "Shadow Pokémon", icon: "assets/pokemon-images/Raid-Eggs/shadow.png", showImages: true, items: [{ name: "Shadow Giratina (Altered Forme) ✨ (5★ Shadow Raid)", subtitle: "First-ever appearance in Shadow Raids", dates: "August 5 – September 8" }, { name: "Shadow Thundurus (Incarnate Forme) ✨ (5★ Shadow Raid)", subtitle: "First-ever appearance in Shadow Raids", dates: "September 9 – October 6" }] }, { heading: "GO Pass", icon: "🎫", items: ["Swing by the web store or in-game shop to get September's GO Pass!"] }, { heading: "Tips", icon: "💡", items: ["Mega Victreebel and Mega Malamar debut as Featured Mega Raid bosses this month, alongside Shadow Thundurus (Incarnate Forme) — its first-ever Shadow Raid appearance, running September 9 – October 6.", "Regirock, Regice, Registeel, and Mega Gyarados all disappear August 31 – September 6 for Mega Ascension and GO Fest 2026: Mega Finale — grab them before August 31, or catch Mega Gyarados' brief September 5–6 return during the Finale.", "Zacian and Zamazenta (Hero of Many Battles) headline back-to-back weeks (September 9–15 and 16–22) with matching Wednesday Raid Hours.", "The September 23–29 five-star slot splits by region — Xurkitree (Asia-Pacific), Pheromosa (Europe, the Middle East, Africa, and India), and Buzzwole (the Americas and Greenland) — trade with friends overseas to complete the trio.", "Shadow Giratina (Altered Forme) closes out its run September 8 — Ghost/Dragon, weak to Ice, Dragon, Fairy, Ghost, and Dark attacks; bring Purified Gems.", "Four Spotlight Hours run this month, including a still-unrevealed Pokémon on September 17 — check every encounter, all are Shiny-eligible.", "Harvest Festival closes out the month (September 29 – October 5), overlapping the new Mega Victreebel Mega Raids and the Xerneas five-star rotation."] }] },
+  { id: 44, date: "2026-08-25", published: "2026-08-25", updated: "2026-08-31", lastUpdated: "August 31, 2026 at 1:41 PM", title: "September Content Update — Twilight Trails", tag: "News", url: "https://pokemongo.com/news/september-2026-content-update", body: "September 2026's full content rundown — Featured Mega Victreebel, Mega Malamar, and Shadow Thundurus (Incarnate Forme). Max Battles rotate Eevee → Ralts → Rhyhorn → the Legendary Birds → Sobble. Five-Star Raids run the Regi trio → Zacian → Zamazenta → a three-way Xurkitree/Pheromosa/Buzzwole regional split → Xerneas. Mega Raids feature Mega Gyarados, Mega Beedrill, Mega Houndoom, Mega Venusaur, Mega Malamar, and Mega Victreebel. Shadow Giratina (Altered Forme) hands off to Shadow Thundurus (Incarnate Forme) in Shadow Raids, plus Mega Ascension, GO Fest 2026: Mega Finale, Community Day Classic, Super Mega Raid Day, and the Twilight Trails season launch.", fullBody: "Pokémon GO's September 2026 Content Update launches the Twilight Trails Season, part of the game's 10th Anniversary celebrations. Mega Victreebel and Mega Malamar debut as Mega Raid bosses across the back half of the month, while Shadow Thundurus (Incarnate Forme) makes its first-ever Shadow Raid appearance once Shadow Giratina (Altered Forme) closes out its run. The five-star rotation opens with the Regi trio, moves through Zacian and Zamazenta (Hero of Many Battles), splits three ways by region for Xurkitree, Pheromosa, and Buzzwole, and closes with Xerneas. Max Battles, weekly Spotlight Hours, Raid Hours, Mega Ascension, Pokémon GO Fest 2026: Mega Finale, Community Day Classic, and the Harvest Festival round out a packed month. All times are local unless otherwise specified.", sections: [{ heading: "Featured Pokémon", icon: "✨", showImages: true, intro: "Part of the Pokémon GO 10th Anniversary · Twilight Trails Season. If you're lucky, you might encounter a Shiny one!", items: [{ name: "Mega Victreebel ✨ (Mega)" }, { name: "Shadow Thundurus (Incarnate Forme) ✨ (5★ Shadow Raid)" }, { name: "Mega Malamar ✨ (Mega)" }] }, { heading: "Spotlight Hours (6:00 PM – 7:00 PM local time)", icon: "assets/pokemon-images/icons/QuestPokemonReward.png", showImages: true, intro: "A still-unrevealed Pokémon also gets a Spotlight Hour on September 17 (2× Catch Stardust) — its identity hasn't been shown yet, though the official graphic teased a Shiny sparkle.", items: [{ name: "Weedle ✨", subtitle: "2× Transfer Candy", dates: "Thu, September 10" }, { name: "Kakuna ✨", subtitle: "2× Transfer Candy", dates: "Thu, September 10" }, { name: "Beedrill ✨", subtitle: "2× Transfer Candy", dates: "Thu, September 10" }, { name: "Houndour ✨", subtitle: "2× Transfer Candy", dates: "Sun, September 13" }, { name: "Houndoom ✨", subtitle: "2× Transfer Candy", dates: "Sun, September 13" }, { name: "Rattata ✨", subtitle: "2× Evolution XP + increased chance of XXS Rattata", dates: "Thu, September 24" }] }, { heading: "Max Battles", icon: "assets/pokemon-images/icons/dynamax-icon(white).webp", showImages: true, intro: "These Dynamax Pokémon may appear in Max Battles throughout Twilight Trails.", items: [{ name: "Dynamax Eevee ✨", dates: "August 31 – September 6" }, { name: "Dynamax Ralts ✨", dates: "September 7 – September 13" }, { name: "Dynamax Rhyhorn ✨", dates: "September 14 – September 20" }, { name: "Dynamax Articuno ✨", dates: "September 21 – September 27" }, { name: "Dynamax Zapdos ✨", dates: "September 21 – September 27" }, { name: "Dynamax Moltres ✨", dates: "September 21 – September 27" }, { name: "Dynamax Sobble ✨", dates: "September 28 – October 4" }] }, { heading: "Mega Raids", icon: "assets/pokemon-images/Raid-Eggs/mega.png", showImages: true, intro: "Mega Gyarados will not be available August 31 – September 4 during Mega Ascension, but returns to the raid rotation September 5–6 during Pokémon GO Fest 2026: Mega Finale.", items: [{ name: "Mega Gyarados ✨ (Mega)", dates: "August 26 – September 8" }, { name: "Mega Beedrill ✨ (Mega)", dates: "September 8 – September 15" }, { name: "Mega Houndoom ✨ (Mega)", dates: "September 11 – September 15" }, { name: "Mega Venusaur ✨ (Mega)", dates: "September 16 – September 22" }, { name: "Mega Malamar ✨ (Mega)", dates: "September 23 – September 29" }, { name: "Mega Victreebel ✨ (Mega)", dates: "September 30 – October 6" }] }, { heading: "Five-Star Raids", icon: "assets/pokemon-images/Raid-Eggs/5-star.png", showImages: true, intro: "Regirock, Regice, and Registeel will not be available August 31 – September 6 during Mega Ascension and Pokémon GO Fest 2026: Mega Finale.", items: [{ name: "Regirock ✨ (5★ Raid)", dates: "August 26 – September 8" }, { name: "Regice ✨ (5★ Raid)", dates: "August 26 – September 8" }, { name: "Registeel ✨ (5★ Raid)", dates: "August 26 – September 8" }, { name: "Zacian (Hero of Many Battles) ✨ (5★ Raid)", dates: "September 9 – September 15" }, { name: "Zamazenta (Hero of Many Battles) ✨ (5★ Raid)", dates: "September 16 – September 22" }, { name: "Xurkitree ✨ (5★ Raid)", subtitle: "Asia-Pacific", dates: "September 23 – September 29" }, { name: "Pheromosa ✨ (5★ Raid)", subtitle: "Europe, the Middle East, Africa, and India", dates: "September 23 – September 29" }, { name: "Buzzwole ✨ (5★ Raid)", subtitle: "The Americas and Greenland", dates: "September 23 – September 29" }, { name: "Xerneas ✨ (5★ Raid)", dates: "September 30 – October 6" }] }, { heading: "Events", icon: "📅", items: ["Mega Ascension — August 31 to September 4 (Daily Discoveries will not be available during this event)", "Pokémon GO Fest 2026: Mega Finale — September 5 to September 6 (Daily Discoveries will not be available during this event)", "Mega Squads — September 8 to September 14", "Community Day Classic: Gible — September 12", "??? (unrevealed) — September 16 to September 22", "Staraptor Super Mega Raid Day — September 19", "Phantump Catch Mastery — September 26", "Harvest Festival — September 29 to October 5"] }, { heading: "Raid Hours (6:00 PM – 7:00 PM local time)", icon: "assets/pokemon-images/Raid-Eggs/5-star.png", showImages: true, items: [{ name: "Zacian (Hero of Many Battles) ✨ (5★ Raid)", dates: "Wed, September 9" }, { name: "Zamazenta (Hero of Many Battles) ✨ (5★ Raid)", dates: "Wed, September 16" }, { name: "Xurkitree ✨ (5★ Raid)", subtitle: "Asia-Pacific", dates: "Wed, September 23" }, { name: "Pheromosa ✨ (5★ Raid)", subtitle: "Europe, the Middle East, Africa, and India", dates: "Wed, September 23" }, { name: "Buzzwole ✨ (5★ Raid)", subtitle: "The Americas and Greenland", dates: "Wed, September 23" }, { name: "Xerneas ✨ (5★ Raid)", dates: "Wed, September 30" }] }, { heading: "Shadow Pokémon", icon: "assets/pokemon-images/Raid-Eggs/shadow.png", showImages: true, items: [{ name: "Shadow Giratina (Altered Forme) ✨ (5★ Shadow Raid)", subtitle: "First-ever appearance in Shadow Raids", dates: "August 5 – September 8" }, { name: "Shadow Thundurus (Incarnate Forme) ✨ (5★ Shadow Raid)", subtitle: "First-ever appearance in Shadow Raids", dates: "September 9 – October 6" }] }, { heading: "GO Pass", icon: "🎫", items: ["Swing by the web store or in-game shop to get September's GO Pass!"] }, { heading: "Tips", icon: "💡", items: ["Mega Victreebel and Mega Malamar debut as Featured Mega Raid bosses this month, alongside Shadow Thundurus (Incarnate Forme) — its first-ever Shadow Raid appearance, running September 9 – October 6.", "Regirock, Regice, Registeel, and Mega Gyarados all disappear August 31 – September 6 for Mega Ascension and GO Fest 2026: Mega Finale — grab them before August 31, or catch Mega Gyarados' brief September 5–6 return during the Finale.", "Zacian and Zamazenta (Hero of Many Battles) headline back-to-back weeks (September 9–15 and 16–22) with matching Wednesday Raid Hours.", "The September 23–29 five-star slot splits by region — Xurkitree (Asia-Pacific), Pheromosa (Europe, the Middle East, Africa, and India), and Buzzwole (the Americas and Greenland) — trade with friends overseas to complete the trio.", "Shadow Giratina (Altered Forme) closes out its run September 8 — Ghost/Dragon, weak to Ice, Dragon, Fairy, Ghost, and Dark attacks; bring Purified Gems.", "Four Spotlight Hours run this month, including a still-unrevealed Pokémon on September 17 — check every encounter, all are Shiny-eligible.", "Harvest Festival closes out the month (September 29 – October 5), overlapping the new Mega Victreebel Mega Raids and the Xerneas five-star rotation."] }] },
   { id: 43, date: "2026-08-25", published: "2026-08-25", updated: "2026-08-25", lastUpdated: "August 25, 2026 at 1:10 PM", title: "GO Pass: September — Latios & Timed Incubator", tag: "News", url: "https://pokemongo.com/en/news/go-pass-september-2026", icon: "assets/pokemon-images/National-Dex/regular/Gen-3_Hoenn/0381-male.webp", body: "GO Pass: September brings an Encounter with Latios (Shiny possible) to the free track, running Tuesday, September 8 to Tuesday, October 6, 2026. GO Pass Deluxe (US$7.99) adds a Timed Incubator, a Super Incubator, and extra Pokémon encounters, while GO Pass Deluxe + 10 Ranks (US$9.99) also auto-ranks up to Rank 11. There's no daily GO Points limit from Saturday, October 3 to Sunday, October 4, so bank as many ranks as you can during that window. The Timed Incubator itself unlocks at Rank 20 of GO Pass Deluxe and offers unlimited Egg hatches until it expires on October 13.", fullBody: "\"Latios soars in faster than a jet for GO Pass: September!\" — that's how Pokémon GO framed this month's headline encounter. GO Pass: September runs Tuesday, September 8, at 10:00 a.m. to Tuesday, October 6, 2026, at 10:00 a.m. local time. Trainers automatically receive GO Pass: September on Tuesday, September 8, at 10:00 a.m. local time, and can complete Pass Tasks to earn GO Points and rank up for additional rewards through Tuesday, October 6, at 10:00 a.m. local time. From Saturday, October 3, at 12:00 a.m. to Sunday, October 4, at 11:59 p.m. local time, there's no daily limit on how many GO Points you can earn. For US$7.99, Trainers can upgrade to GO Pass Deluxe, a paid version of the GO Pass that offers upgraded rewards and faster progression;** for US$9.99,* Trainers can upgrade to GO Pass Deluxe + 10 Ranks to also automatically earn enough GO Points to reach Rank 11. While progressing through GO Pass Deluxe, Trainers can claim all of the rewards from both the free GO Pass and GO Pass Deluxe — you can upgrade to a GO Pass Deluxe at any time and still collect rewards from previously unlocked ranks. Rewards unlocked in the GO Pass will expire on Thursday, October 8, at 10:00 a.m. local time, so be sure to claim your rewards before they're gone. The GO Pass Deluxe will also be available on the Pokémon GO Web Store, and GO Pass Deluxe purchased via the Web Store will activate as soon as the GO Pass begins. *All prices listed are in USD or the equivalent pricing tier in your local currency. **Availability of event tickets and the GO Pass Deluxe may vary by region.", sections: [
     { heading: "Event Window", items: [
       "Starts: Tuesday, September 8 at 10:00 AM local time",
@@ -1920,7 +1991,7 @@ const ANNOUNCEMENTS = [
       "Don't let the free Timed Research expire — claim your rewards by Monday, July 27, 2026, at 8:00 p.m. local time."
     ] }
   ] },
-  { id: 27, date: "2026-06-25", published: "2026-06-25", updated: "2026-06-26", lastUpdated: "June 26, 2026 at 10:46 AM", title: "July Content Update — Forever Forward", tag: "News", url: "https://pokemongo.com/news/july-2026-content-update", body: "July 2026's full content rundown — Featured Mega Aggron, Kyurem, and the Shiny Solgaleo debut. Max Battles rotate Chansey → Deino → Trubbish → Feebas. 5★ Raids run the Legendary Birds → Kyogre → Solgaleo → Kyurem. Mega Raids feature Mega Lucario, Mega Sceptile, Mega Salamence, and Mega Aggron. Shadow Palkia runs in Shadow Raids all month, plus July Community Day, the 10th Anniversary Party, The Road of Legends, GO Fest 2026: Global, and more.", fullBody: "Pokémon GO's July 2026 Content Update continues the Forever Forward Season and the game's 10th Anniversary celebrations. The Shiny Solgaleo debut headlines the 5★ raid rotation, which opens with the Kanto Legendary Birds (returning briefly mid-month) before running Kyogre, Solgaleo, and Kyurem. Max Battles, Mega Raids, Raid Hours, July Community Day, the 10th Anniversary Party, The Road of Legends, the FREE GO Fest 2026: Global, and Shadow Palkia round out a packed month. All times are local unless otherwise specified.", sections: [{ heading: "Featured Pokémon", icon: "✨", showImages: true, intro: "Part of the Pokémon GO 10th Anniversary · Forever Forward Season. If you're lucky, you might encounter a Shiny one!", items: [{ name: "Mega Aggron ✨ (Mega)" }, { name: "Kyurem ✨ (5★ Raid)" }, { name: "Solgaleo ✨ (5★ Raid)", subtitle: "Shiny debut" }] }, { heading: "Max Battles", icon: "assets/pokemon-images/icons/dynamax.png", showImages: true, intro: "These Dynamax Pokémon may appear in Max Battles throughout Forever Forward.", items: [{ name: "Dynamax Chansey ✨", dates: "July 6 – July 12" }, { name: "Dynamax Deino ✨", dates: "July 13 – July 19" }, { name: "Dynamax Trubbish ✨", dates: "July 20 – July 26" }, { name: "Dynamax Feebas ✨", dates: "July 27 – August 2" }] }, { heading: "Five-Star Raids", icon: "assets/pokemon-images/Raid-Eggs/5-star.png", showImages: true, items: [{ name: "Articuno ✨ (5★ Raid)", dates: "July 1 – 5 & July 13 – 14" }, { name: "Zapdos ✨ (5★ Raid)", dates: "July 1 – 5 & July 13 – 14" }, { name: "Moltres ✨ (5★ Raid)", dates: "July 1 – 5 & July 13 – 14" }, { name: "Kyogre ✨ (5★ Raid)", dates: "July 15 – July 21" }, { name: "Solgaleo ✨ (5★ Raid)", subtitle: "Shiny debut", dates: "July 22 – July 28" }, { name: "Kyurem ✨ (5★ Raid)", dates: "July 29 – August 4" }] }, { heading: "Mega Raids", icon: "assets/pokemon-images/Raid-Eggs/mega.png", showImages: true, items: [{ name: "Mega Lucario ✨ (Mega)", dates: "July 1 – 5 & July 13 – 14" }, { name: "Mega Sceptile ✨ (Mega)", dates: "July 15 – July 21" }, { name: "Mega Salamence ✨ (Mega)", dates: "July 22 – July 28" }, { name: "Mega Aggron ✨ (Mega)", dates: "July 29 – August 4" }] }, { heading: "Events", icon: "📅", items: ["July Community Day: Sobble — July 4 (2 PM – 5 PM local)", "10th Anniversary Party — July 4 to July 6", "The Road of Legends — July 6 to July 10", "GO Fest 2026: Global — July 11 to July 12 (FREE for all Trainers)", "Special Anniversary Pikachu Celebration — July 13 to July 20", "Raichu Super Mega Raid Day — July 18 (Mega Raichu X & Y debut in Super Mega Raids)", "Happy Birthday, Professor Willow! — July 21 (Willow's Birthday Research; Professor Willow's assistant Pikachu debuts; free Timed Research through July 27)", "Ozone Ascent — July 25 to July 26 (Rayquaza Timed Research; teach Rayquaza Dragon Ascent with Meteorites; paid Timed Research US$4.99)", "Choose Your Path Timed Research — additional bonuses on non-event weeks"] }, { heading: "Raid Hours (6:00 PM – 7:00 PM local time)", icon: "assets/pokemon-images/Raid-Eggs/5-star.png", showImages: true, items: [{ name: "Articuno ✨ (5★ Raid)", dates: "Wed, July 1" }, { name: "Zapdos ✨ (5★ Raid)", dates: "Wed, July 1" }, { name: "Moltres ✨ (5★ Raid)", dates: "Wed, July 1" }, { name: "Kyogre ✨ (5★ Raid)", dates: "Wed, July 15" }, { name: "Solgaleo ✨ (5★ Raid)", subtitle: "Shiny debut", dates: "Wed, July 22" }, { name: "Kyurem ✨ (5★ Raid)", dates: "Wed, July 29" }] }, { heading: "Shadow Pokémon", icon: "assets/pokemon-images/Raid-Eggs/shadow.png", showImages: true, items: [{ name: "Shadow Palkia ✨ (5★ Shadow Raid)", dates: "July 1 – August 4" }] }, { heading: "GO Pass", icon: "🎫", items: ["Swing by the web store or in-game shop to get July's GO Pass"] }, { heading: "Tips", icon: "💡", items: ["Shiny Solgaleo debuts July 22 – 28 — its first-ever Shiny release, with a matching July 22 Raid Hour. Top priority for collectors.", "The Kanto Legendary Birds bookend the month — July 1–5 (with the July 1 Raid Hour) and again July 13–14. Stack Articuno/Zapdos/Moltres catches and Shiny checks across both windows.", "Kyurem closes the month (July 29 – Aug 4) and fuses with Reshiram/Zekrom into White/Black Kyurem — grab extras while it's available.", "Shadow Palkia runs the entire month (July 1 – Aug 4) in 5★ Shadow Raids — Water/Dragon, weak to Dragon and Fairy; bring Purified Gems.", "Mega rotation: Lucario → Sceptile → Salamence → Aggron. Mega Salamence (July 22–28) is double weak to Ice — pair it with the Solgaleo week's Ice attackers (White Kyurem, Mega Mewtwo Y with Ice Beam).", "Packed event stretch July 4–12: July Community Day (Sobble), the 10th Anniversary Party, The Road of Legends, and the FREE GO Fest 2026: Global.", "All featured Pokémon can be Shiny — check every encounter."] }] },
+  { id: 27, date: "2026-06-25", published: "2026-06-25", updated: "2026-06-26", lastUpdated: "June 26, 2026 at 10:46 AM", title: "July Content Update — Forever Forward", tag: "News", url: "https://pokemongo.com/news/july-2026-content-update", body: "July 2026's full content rundown — Featured Mega Aggron, Kyurem, and the Shiny Solgaleo debut. Max Battles rotate Chansey → Deino → Trubbish → Feebas. 5★ Raids run the Legendary Birds → Kyogre → Solgaleo → Kyurem. Mega Raids feature Mega Lucario, Mega Sceptile, Mega Salamence, and Mega Aggron. Shadow Palkia runs in Shadow Raids all month, plus July Community Day, the 10th Anniversary Party, The Road of Legends, GO Fest 2026: Global, and more.", fullBody: "Pokémon GO's July 2026 Content Update continues the Forever Forward Season and the game's 10th Anniversary celebrations. The Shiny Solgaleo debut headlines the 5★ raid rotation, which opens with the Kanto Legendary Birds (returning briefly mid-month) before running Kyogre, Solgaleo, and Kyurem. Max Battles, Mega Raids, Raid Hours, July Community Day, the 10th Anniversary Party, The Road of Legends, the FREE GO Fest 2026: Global, and Shadow Palkia round out a packed month. All times are local unless otherwise specified.", sections: [{ heading: "Featured Pokémon", icon: "✨", showImages: true, intro: "Part of the Pokémon GO 10th Anniversary · Forever Forward Season. If you're lucky, you might encounter a Shiny one!", items: [{ name: "Mega Aggron ✨ (Mega)" }, { name: "Kyurem ✨ (5★ Raid)" }, { name: "Solgaleo ✨ (5★ Raid)", subtitle: "Shiny debut" }] }, { heading: "Max Battles", icon: "assets/pokemon-images/icons/dynamax-icon(white).webp", showImages: true, intro: "These Dynamax Pokémon may appear in Max Battles throughout Forever Forward.", items: [{ name: "Dynamax Chansey ✨", dates: "July 6 – July 12" }, { name: "Dynamax Deino ✨", dates: "July 13 – July 19" }, { name: "Dynamax Trubbish ✨", dates: "July 20 – July 26" }, { name: "Dynamax Feebas ✨", dates: "July 27 – August 2" }] }, { heading: "Five-Star Raids", icon: "assets/pokemon-images/Raid-Eggs/5-star.png", showImages: true, items: [{ name: "Articuno ✨ (5★ Raid)", dates: "July 1 – 5 & July 13 – 14" }, { name: "Zapdos ✨ (5★ Raid)", dates: "July 1 – 5 & July 13 – 14" }, { name: "Moltres ✨ (5★ Raid)", dates: "July 1 – 5 & July 13 – 14" }, { name: "Kyogre ✨ (5★ Raid)", dates: "July 15 – July 21" }, { name: "Solgaleo ✨ (5★ Raid)", subtitle: "Shiny debut", dates: "July 22 – July 28" }, { name: "Kyurem ✨ (5★ Raid)", dates: "July 29 – August 4" }] }, { heading: "Mega Raids", icon: "assets/pokemon-images/Raid-Eggs/mega.png", showImages: true, items: [{ name: "Mega Lucario ✨ (Mega)", dates: "July 1 – 5 & July 13 – 14" }, { name: "Mega Sceptile ✨ (Mega)", dates: "July 15 – July 21" }, { name: "Mega Salamence ✨ (Mega)", dates: "July 22 – July 28" }, { name: "Mega Aggron ✨ (Mega)", dates: "July 29 – August 4" }] }, { heading: "Events", icon: "📅", items: ["July Community Day: Sobble — July 4 (2 PM – 5 PM local)", "10th Anniversary Party — July 4 to July 6", "The Road of Legends — July 6 to July 10", "GO Fest 2026: Global — July 11 to July 12 (FREE for all Trainers)", "Special Anniversary Pikachu Celebration — July 13 to July 20", "Raichu Super Mega Raid Day — July 18 (Mega Raichu X & Y debut in Super Mega Raids)", "Happy Birthday, Professor Willow! — July 21 (Willow's Birthday Research; Professor Willow's assistant Pikachu debuts; free Timed Research through July 27)", "Ozone Ascent — July 25 to July 26 (Rayquaza Timed Research; teach Rayquaza Dragon Ascent with Meteorites; paid Timed Research US$4.99)", "Choose Your Path Timed Research — additional bonuses on non-event weeks"] }, { heading: "Raid Hours (6:00 PM – 7:00 PM local time)", icon: "assets/pokemon-images/Raid-Eggs/5-star.png", showImages: true, items: [{ name: "Articuno ✨ (5★ Raid)", dates: "Wed, July 1" }, { name: "Zapdos ✨ (5★ Raid)", dates: "Wed, July 1" }, { name: "Moltres ✨ (5★ Raid)", dates: "Wed, July 1" }, { name: "Kyogre ✨ (5★ Raid)", dates: "Wed, July 15" }, { name: "Solgaleo ✨ (5★ Raid)", subtitle: "Shiny debut", dates: "Wed, July 22" }, { name: "Kyurem ✨ (5★ Raid)", dates: "Wed, July 29" }] }, { heading: "Shadow Pokémon", icon: "assets/pokemon-images/Raid-Eggs/shadow.png", showImages: true, items: [{ name: "Shadow Palkia ✨ (5★ Shadow Raid)", dates: "July 1 – August 4" }] }, { heading: "GO Pass", icon: "🎫", items: ["Swing by the web store or in-game shop to get July's GO Pass"] }, { heading: "Tips", icon: "💡", items: ["Shiny Solgaleo debuts July 22 – 28 — its first-ever Shiny release, with a matching July 22 Raid Hour. Top priority for collectors.", "The Kanto Legendary Birds bookend the month — July 1–5 (with the July 1 Raid Hour) and again July 13–14. Stack Articuno/Zapdos/Moltres catches and Shiny checks across both windows.", "Kyurem closes the month (July 29 – Aug 4) and fuses with Reshiram/Zekrom into White/Black Kyurem — grab extras while it's available.", "Shadow Palkia runs the entire month (July 1 – Aug 4) in 5★ Shadow Raids — Water/Dragon, weak to Dragon and Fairy; bring Purified Gems.", "Mega rotation: Lucario → Sceptile → Salamence → Aggron. Mega Salamence (July 22–28) is double weak to Ice — pair it with the Solgaleo week's Ice attackers (White Kyurem, Mega Mewtwo Y with Ice Beam).", "Packed event stretch July 4–12: July Community Day (Sobble), the 10th Anniversary Party, The Road of Legends, and the FREE GO Fest 2026: Global.", "All featured Pokémon can be Shiny — check every encounter."] }] },
   { id: 26, date: "2026-06-25", published: "2026-06-25", title: "Special Anniversary Pikachu Celebration — Every Costumed Pikachu", tag: "News", url: "https://pokemongo.com/en/news/special-anniversary-pikachu-celebration", icon: "assets/pokemon-images/National-Event-Costume-Dex/regular/Gen-1_Kanto/0025_f2867.webp", body: "Keep the festivities going! From July 13–20, three back-to-back celebrations spotlight different costumed Pikachu. Tricks & Treats, Winter Carnival, and summer-flair Pikachu appear in the wild, while nine costumed Pikachu — Dapper red/yellow/blue, safari hat, varsity jacket, amethyst crown, and World Championships 2022–2024 — fill one-star raids. A free event GO Pass adds 2×/3× transfer Candy and catch Stardust bonuses.", fullBody: "The Special Anniversary Pikachu Celebration runs Monday, July 13, at 10:00 a.m. to Monday, July 20, 2026, at 8:00 p.m. local time. The event is split into three celebrations, each featuring different costumed Pikachu to find in the wild and in Field Research tasks. Standard Pikachu also appears more frequently in the wild and is easier to catch, and a free event GO Pass (with a paid GO Pass Deluxe upgrade) delivers milestone bonuses and rewards throughout.", sections: [
     { heading: "When (all times local)", items: [
       "Overall: Monday, July 13, 10:00 a.m. to Monday, July 20, 2026, 8:00 p.m.",
@@ -2139,7 +2210,7 @@ const ANNOUNCEMENTS = [
       { name: "Celesteela ✨ (5★ Raid)", subtitle: "Southern Hemisphere" },
       { name: "Kartana ✨ (5★ Raid)", subtitle: "Northern Hemisphere" }
     ] },
-    { heading: "Max Battles", icon: "assets/pokemon-images/icons/dynamax.png", showImages: true, intro: "These Dynamax Pokémon may appear in Max Battles throughout Forever Forward.", items: [
+    { heading: "Max Battles", icon: "assets/pokemon-images/icons/dynamax-icon(white).webp", showImages: true, intro: "These Dynamax Pokémon may appear in Max Battles throughout Forever Forward.", items: [
       { name: "Dynamax Inkay ✨", dates: "June 1 – June 7" },
       { name: "Dynamax Electabuzz ✨", dates: "June 8 – June 14" },
       { name: "Dynamax Roggenrola ✨", dates: "June 15 – June 21" },
@@ -3986,6 +4057,14 @@ let state = {
   pokedexDetail: null,
   pokedexDetailData: null,
   pokedexDetailEvolutions: null,
+  pokedexDetailGoForms: null,
+  pokedexDetailGoSlug: null,
+  pokedexDetailGoData: null,
+  pokedexDetailGoLoading: false,
+  pokedexDetailGoEverLoaded: false,
+  pokedexDetailGoMovesetPage: 1,
+  pokedexDetailGoOpenSections: {},
+  pokedexDetailGoShinyBySlug: {},
   storeFilter: "All",
   storeGuideOpen: false,
   openStoreArchiveYears: {},
@@ -5259,7 +5338,7 @@ function renderActivitySubTab() {
     const iconHTML = it.iconImg
       ? `<div style="position:relative;width:36px;height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center">
           <img src="${esc(it.iconImg)}" alt="" style="width:36px;height:36px;object-fit:contain;position:relative;z-index:1" onerror="this.outerHTML='<span style=\\'font-size:22px\\'>${it.icon}</span>'" />
-          ${it.isDynamax ? `<img src="assets/pokemon-images/icons/dynamax.png" alt="" style="position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:90%;object-fit:contain;opacity:0.85;z-index:2;pointer-events:none" />` : ""}
+          ${it.isDynamax ? `<img src="assets/pokemon-images/icons/dynamax-icon(white).webp" alt="" style="position:absolute;top:-2px;right:-2px;width:50%;height:50%;object-fit:contain;opacity:0.85;z-index:2;pointer-events:none" />` : ""}
         </div>`
       : `<span style="font-size:22px;flex-shrink:0;width:36px;text-align:center">${it.icon}</span>`;
     return `<button onclick="${it.onClick}" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border:none;border-left:3px solid ${it.color};${borderStyle}background:${th.surface};cursor:pointer;font-family:inherit;text-align:left;width:100%;transition:background 0.1s ease" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${th.surface}'">
@@ -6003,6 +6082,246 @@ function getResistances(types) {
     .map(([t, v]) => ({ type: t, double: v < 0.5 }));
 }
 
+// --- POKEMON GO TYPE CHART (for the GO PokéDex detail sections) ---
+// Defender-centric chart (mainline Gen 6+ matchups, which GO's chart mirrors), including
+// mainline "no effect" matchups — GO has no true immunities, so those become a double
+// resist (0.390625x) instead of 0x. This differs from TYPE_EFFECTIVENESS above (which
+// only tracks single-step weak/resist and treats no-effect matchups as a plain resist),
+// so it needs its own matrix rather than reusing that one.
+const GO_TYPE_CHART = {
+  "Normal":   { weak: ["Fighting"], resist: [], doubleResist: ["Ghost"] },
+  "Fire":     { weak: ["Water","Ground","Rock"], resist: ["Fire","Grass","Ice","Bug","Steel","Fairy"], doubleResist: [] },
+  "Water":    { weak: ["Electric","Grass"], resist: ["Fire","Water","Ice","Steel"], doubleResist: [] },
+  "Electric": { weak: ["Ground"], resist: ["Electric","Flying","Steel"], doubleResist: [] },
+  "Grass":    { weak: ["Fire","Ice","Poison","Flying","Bug"], resist: ["Water","Electric","Grass","Ground"], doubleResist: [] },
+  "Ice":      { weak: ["Fire","Fighting","Rock","Steel"], resist: ["Ice"], doubleResist: [] },
+  "Fighting": { weak: ["Flying","Psychic","Fairy"], resist: ["Rock","Bug","Dark"], doubleResist: [] },
+  "Poison":   { weak: ["Ground","Psychic"], resist: ["Grass","Fighting","Poison","Bug","Fairy"], doubleResist: [] },
+  "Ground":   { weak: ["Water","Grass","Ice"], resist: ["Poison","Rock"], doubleResist: ["Electric"] },
+  "Flying":   { weak: ["Electric","Ice","Rock"], resist: ["Grass","Fighting","Bug"], doubleResist: ["Ground"] },
+  "Psychic":  { weak: ["Bug","Ghost","Dark"], resist: ["Fighting","Psychic"], doubleResist: [] },
+  "Bug":      { weak: ["Fire","Flying","Rock"], resist: ["Grass","Fighting","Ground"], doubleResist: [] },
+  "Rock":     { weak: ["Water","Grass","Fighting","Ground","Steel"], resist: ["Normal","Fire","Poison","Flying"], doubleResist: [] },
+  "Ghost":    { weak: ["Ghost","Dark"], resist: ["Poison","Bug"], doubleResist: ["Normal","Fighting"] },
+  "Dragon":   { weak: ["Ice","Dragon","Fairy"], resist: ["Fire","Water","Electric","Grass"], doubleResist: [] },
+  "Dark":     { weak: ["Fighting","Bug","Fairy"], resist: ["Ghost","Dark"], doubleResist: ["Psychic"] },
+  "Steel":    { weak: ["Fire","Fighting","Ground"], resist: ["Normal","Grass","Ice","Flying","Psychic","Bug","Rock","Dragon","Steel","Fairy"], doubleResist: ["Poison"] },
+  "Fairy":    { weak: ["Poison","Steel"], resist: ["Fighting","Bug","Dark"], doubleResist: ["Dragon"] }
+};
+// Computes GO-accurate incoming-damage multipliers for a (possibly dual-typed) defender.
+// types: lowercase type slugs straight from data/go/<slug>.json, e.g. ["dark"] or ["fighting","flying"].
+// Multipliers stack multiplicatively across both defending types, matching in-game behavior.
+function computeGoTypeEffectiveness(types) {
+  const capTypes = (types || []).map(tt => tt.charAt(0).toUpperCase() + tt.slice(1));
+  const multipliers = {};
+  Object.keys(GO_TYPE_CHART).forEach(atk => { multipliers[atk] = 1; });
+  capTypes.forEach(d => {
+    const eff = GO_TYPE_CHART[d];
+    if (!eff) return;
+    eff.weak.forEach(a => { multipliers[a] *= 1.6; });
+    eff.resist.forEach(a => { multipliers[a] *= 0.625; });
+    eff.doubleResist.forEach(a => { multipliers[a] *= 0.390625; });
+  });
+  const weak = Object.entries(multipliers).filter(([, v]) => v > 1.001).sort((a, b) => b[1] - a[1]).map(([type, v]) => ({ type, multiplier: v }));
+  const resist = Object.entries(multipliers).filter(([, v]) => v < 0.999).sort((a, b) => a[1] - b[1]).map(([type, v]) => ({ type, multiplier: v }));
+  return { weak, resist };
+}
+// Formats a GO multiplier as a percentage: 1.6 -> "160%", 0.625 -> "62.5%", 0.390625 -> "39.1%".
+function formatGoPct(mult) {
+  let s = (mult * 100).toFixed(1);
+  if (s.endsWith(".0")) s = s.slice(0, -2);
+  return s + "%";
+}
+function goTypeColor(t) {
+  const s = t || "";
+  return TYPE_COLORS[s.charAt(0).toUpperCase() + s.slice(1)] || "#888";
+}
+
+// --- POKEMON GO WEATHER BOOSTS (standard, static game rules — same on every Pokemon GO server) ---
+// Naming matches this project's own weather vocabulary used elsewhere (e.g. the raid CP "weather"
+// field ~line 216's "Partly Cloudy"), with "Sunny/Clear" covering both the day (Sunny) and night
+// (Clear) states, which share an identical type boost in-game.
+const GO_WEATHER_TYPE_BOOSTS = {
+  "Sunny/Clear": ["Grass", "Ground", "Fire"],
+  "Rainy": ["Water", "Electric", "Bug"],
+  "Partly Cloudy": ["Normal", "Rock"],
+  "Cloudy": ["Fairy", "Fighting", "Poison"],
+  "Windy": ["Dragon", "Flying", "Psychic"],
+  "Snow": ["Ice", "Steel"],
+  "Fog": ["Dark", "Ghost"]
+};
+// Which weather conditions boost a (possibly dual-typed) Pokemon — deduped, since a Pokemon whose
+// two types share a weather (e.g. Fire/Ground both boosted by Sunny/Clear) must show one icon, not two.
+function getBoostingWeathers(types) {
+  const capTypes = (types || []).map(t => t.charAt(0).toUpperCase() + t.slice(1));
+  return Object.keys(GO_WEATHER_TYPE_BOOSTS).filter(w => GO_WEATHER_TYPE_BOOSTS[w].some(t => capTypes.includes(t)));
+}
+// English list join for the popover sentence: ["A","B","C"] -> "A-, B-, and C-type".
+function joinTypesForSentence(types) {
+  if (types.length === 1) return `${types[0]}-type`;
+  if (types.length === 2) return `${types[0]}- and ${types[1]}-type`;
+  return types.slice(0, -1).map(t => `${t}-`).join(", ") + `, and ${types[types.length - 1]}-type`;
+}
+// One simple, single-colour (currentColor) glyph per weather condition — this project has no
+// weather icon assets and shouldn't hotlink dittobase's, so these are inline SVG like raidHeadIcon.
+function weatherIconSvg(weather, size) {
+  const s = size || 16;
+  const common = `width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"`;
+  switch (weather) {
+    case "Sunny/Clear":
+      return `<svg ${common}><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1.5" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22.5" y2="12"/><line x1="4.6" y1="4.6" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.4" y2="19.4"/><line x1="4.6" y1="19.4" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.4" y2="4.6"/></g></svg>`;
+    case "Rainy":
+      return `<svg ${common}><path d="M6.5 15a4.5 4.5 0 0 1 .4-8.98A6 6 0 0 1 18.4 9.02 4 4 0 0 1 18 17H7a4.5 4.5 0 0 1-.5-2Z" fill="currentColor"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="8" y1="19" x2="7" y2="21.5"/><line x1="12" y1="19" x2="11" y2="21.5"/><line x1="16" y1="19" x2="15" y2="21.5"/></g></svg>`;
+    case "Partly Cloudy":
+      return `<svg ${common}><circle cx="8" cy="8" r="3.6" fill="currentColor"/><path d="M9 20a4.5 4.5 0 0 1 .3-9 6 6 0 0 1 11.2 2.2A3.7 3.7 0 0 1 20 20H9Z" fill="currentColor" opacity="0.85"/></svg>`;
+    case "Cloudy":
+      return `<svg ${common}><path d="M6.5 18a4.8 4.8 0 0 1 .4-9.6A6.3 6.3 0 0 1 19 9.4 4.2 4.2 0 0 1 18.5 18H6.5Z" fill="currentColor"/></svg>`;
+    case "Windy":
+      return `<svg ${common}><g stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"><path d="M2 8h13a2.5 2.5 0 1 0-2.3-3.5"/><path d="M2 12.5h17a2.7 2.7 0 1 1-2.5 3.8"/><path d="M2 17h10a2.2 2.2 0 1 1-2 3"/></g></svg>`;
+    case "Snow":
+      return `<svg ${common}><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="22"/><line x1="4" y1="7" x2="20" y2="17"/><line x1="4" y1="17" x2="20" y2="7"/><line x1="8" y1="4" x2="10" y2="7"/><line x1="16" y1="4" x2="14" y2="7"/><line x1="8" y1="20" x2="10" y2="17"/><line x1="16" y1="20" x2="14" y2="17"/></g></svg>`;
+    case "Fog":
+      return `<svg ${common}><g stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="8" x2="21" y2="8"/><line x1="5" y1="12" x2="19" y2="12"/><line x1="3" y1="16" x2="21" y2="16"/></g></svg>`;
+    default:
+      return "";
+  }
+}
+// Popover for a single weather icon — follows the existing showFormModal/showRocketPopup idiom:
+// a full-screen overlay appended to document.body, dismissed on click-outside or the × button.
+function showWeatherPopup(weatherName) {
+  const th = t(darkMode);
+  const boostedTypes = GO_WEATHER_TYPE_BOOSTS[weatherName] || [];
+  const sentence = `${weatherName} weather boosts ${joinTypesForSentence(boostedTypes)} moves and Pokémon.`;
+  const typesHTML = boostedTypes.map(ty => `<div style="display:flex;flex-direction:column;align-items:center;gap:5px">
+      <div style="width:34px;height:34px;border-radius:50%;background:${TYPE_COLORS[ty] || "#888"};box-shadow:0 2px 6px rgba(0,0,0,0.25)"></div>
+      <span style="font-size:11px;font-weight:600;color:${th.textSecondary}">${ty}</span>
+    </div>`).join("");
+  const overlay = document.createElement("div");
+  overlay.id = "weather-popup";
+  overlay.style.cssText = "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:9999;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:fadeIn 0.2s ease";
+  overlay.onclick = () => overlay.remove();
+  overlay.innerHTML = `<div onclick="event.stopPropagation()" style="background:${th.bg};border:1.5px solid ${th.border};border-radius:20px;padding:24px;max-width:320px;width:88vw;text-align:center;cursor:default;animation:scaleIn 0.25s ease;position:relative">
+    <div onclick="this.parentElement.parentElement.remove()" style="position:absolute;top:12px;right:16px;font-size:20px;color:${th.textMuted};cursor:pointer;font-weight:700">×</div>
+    <div style="width:52px;height:52px;border-radius:50%;background:${th.surface};border:1px solid ${th.border};display:flex;align-items:center;justify-content:center;margin:0 auto;color:${th.textSecondary}">${weatherIconSvg(weatherName, 28)}</div>
+    <div style="font-size:18px;font-weight:800;color:${th.text};margin-top:10px">${esc(weatherName)}</div>
+    <div style="font-size:13px;color:${th.textSecondary};margin-top:8px;line-height:1.5">${esc(sentence)}</div>
+    <div style="font-size:11px;font-weight:700;color:${th.textMuted};letter-spacing:0.5px;margin-top:18px;margin-bottom:10px;text-transform:uppercase">Boosted Types</div>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">${typesHTML}</div>
+  </div>`;
+  document.body.appendChild(overlay);
+}
+// Small row of clickable weather icons for the GO sprite card — one per weather that boosts the
+// ACTIVE FORM's own types (go.types), so it re-evaluates on every form switch.
+function renderWeatherIcons(types, th, isMobile) {
+  const weathers = getBoostingWeathers(types);
+  if (weathers.length === 0) return "";
+  const bg = th.dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.06)";
+  const btns = weathers.map(w => `<button onclick="showWeatherPopup('${w}')" title="Boosted by ${escAttr(w)} weather" aria-label="Boosted by ${escAttr(w)} weather" style="width:${isMobile ? 24 : 26}px;height:${isMobile ? 24 : 26}px;border-radius:50%;border:none;background:${bg};color:${th.textSecondary};display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;flex-shrink:0;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.12)'" onmouseleave="this.style.transform='scale(1)'">${weatherIconSvg(w, isMobile ? 13 : 14)}</button>`).join("");
+  // Sits directly under the type badges on the sprite card — 8px read as crowded against them,
+  // so give the row its own breathing space.
+  return `<div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:${isMobile ? 14 : 18}px">${btns}</div>`;
+}
+
+// Resolves a GO-scraped form (dexNum + slug) to a LOCAL sprite path, reusing this project's
+// existing National-Dex/Mega asset constants (MEGA_EVOS, POKEMON_FORMS, pokemonImgUrl, etc)
+// instead of any dittobase.com URL — the GO feature must never reference a remote image host.
+// Falls back to the base species sprite when no dedicated local art exists for a given form
+// (Arceus types, cosmetic patterns, and other forms this project's asset set doesn't cover).
+// Pokemon GO spells these two Unown forms out in words; the local art files use short suffixes
+// (0201_zem = "!", 0201_zim = "?"). Maps the slug's form part onto the filename's suffix.
+const FORM_SLUG_ALIASES = { exclamationpoint: "zem", questionmark: "zim" };
+function goFormImg(dexNum, slug, shiny) {
+  const s = (slug || "").replace(/-shadow$/, ""); // Shadow forms reuse their base/mega/regional art
+
+  // Primal (Kyogre/Groudon)
+  if (/-primal$/.test(s)) {
+    return `${IMG_BASE}/Mega/${shiny ? "shiny" : "regular"}/${getGenFolder(dexNum)}/${dexPad(dexNum)}_primal.webp`;
+  }
+
+  // Gigantamax has its own art, but — unlike Mega/National-Dex — every Gigantamax file lives
+  // under a single fixed "Gen-8_Galar" folder regardless of the Pokemon's own native generation
+  // (confirmed on disk: dex 3/Venusaur's Gigantamax art sits in Gen-8_Galar, not Gen-1_Kanto).
+  // Dynamax does not change appearance and deliberately has no branch — a "-dynamax" slug
+  // matches nothing below and falls through to the base sprite.
+  if (/-(gigantamax|gmax)$/.test(s)) {
+    return `${IMG_BASE}/Gigantamax/${shiny ? "shiny" : "regular"}/Gen-8_Galar/${dexPad(dexNum)}_gigamax.webp`;
+  }
+
+  // Mega, including X/Y and any speculative variant this project's data may add (e.g. "-mega-z")
+  if (/-mega(-[a-z])?$/.test(s)) {
+    const entries = MEGA_EVOS[dexNum];
+    if (entries && entries.length) {
+      let entry = null;
+      if (/-mega-x$/.test(s)) entry = entries.find(e => / X$/.test(e.n));
+      else if (/-mega-y$/.test(s)) entry = entries.find(e => / Y$/.test(e.n));
+      if (!entry) entry = entries[0]; // single-mega species, or an unmatched/speculative variant
+      return `${IMG_BASE}/Mega/${shiny ? "shiny" : "regular"}/${getGenFolder(dexNum)}/${entry.f}.webp`;
+    }
+    // No MEGA_EVOS entry at all for this dex (e.g. a GO-only mega with no real-game art) —
+    // fall through to the base species sprite below.
+  }
+
+  // Armored Mewtwo (dittobase slug "mewtwo-a") is a GO-only form whose art lives in the
+  // Event-Dex set, not National-Dex, so without this branch it falls through to plain Mewtwo.
+  if (dexNum === 150 && /-a$/.test(s)) {
+    return `${IMG_BASE}/Event-Dex/${shiny ? "shiny" : "regular"}/${getGenFolder(dexNum)}/${dexPad(dexNum)}_armored.webp`;
+  }
+
+  // Gender-difference forms (Meowstic, Indeedee, Basculegion, Oinkologne) use the project's
+  // "<dexPad>-female" file convention rather than a POKEMON_FORMS entry, so they need their own
+  // branch — without it the Female pill fell through to the base sprite and showed the male.
+  if (/-female$/.test(s)) {
+    return shiny ? shinyDexImg(dexNum, "-female") : natDexImg(dexNum, "-female");
+  }
+
+  // Regional / cosmetic forms — match the slug against POKEMON_FORMS[dexNum] by filename suffix.
+  // Filenames and slugs don't always agree on exact wording (form "0423_west" vs slug
+  // "gastrodon-west-sea"), so a substring test is still the fallback. Two guards matter:
+  // the species name is stripped first, and an EXACT suffix match beats any substring. Without
+  // them "unown-o" matched the "n" inside "unown" itself (forms run in A-Z order, so "n" was
+  // tested before "o") and every Unown from O onward rendered as Unown N. GO also spells two
+  // Unown forms out in words, so those are aliased onto their real filename suffixes.
+  const forms = POKEMON_FORMS[dexNum];
+  if (forms && forms.length) {
+    const species = (DEX_BY_NUM[dexNum] || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+    let rest = s.toLowerCase().replace(/[-_]/g, "");
+    if (species && rest.startsWith(species) && rest.length > species.length) rest = rest.slice(species.length);
+    rest = FORM_SLUG_ALIASES[rest] || rest;
+    // Several form files carry a trailing gender qualifier that the slug never has
+    // ("0413_plant-female" vs slug "wormadam-plant", "0905_incarnate-female" vs
+    // "enamorus-incarnate"), so each candidate matches on its degendered key as well. Without it
+    // Wormadam's 3 cloaks, the 15 Flabébé/Floette/Florges colours and both Enamorus formes all
+    // missed and fell back to the base sprite — Enamorus to a path that does not even exist.
+    const cands = forms.map(fm => {
+      const suffix = fm.f.replace(/^0*\d+_/, "").toLowerCase().replace(/[-_]/g, "");
+      const bare = suffix.replace(/(fe)?male$/, "");
+      const keys = [suffix, bare].filter((v, i, a) => v && a.indexOf(v) === i);
+      return { fm, keys, len: Math.max(0, ...keys.map(k => k.length)) };
+    }).filter(c => c.keys.length);
+    const exact = cands.find(c => c.keys.includes(rest));
+    const subs = exact ? null : cands.filter(c => c.keys.some(k => rest.includes(k))).sort((a, b) => b.len - a.len);
+    const match = exact ? exact.fm : (subs && subs.length ? subs[0].fm : null);
+    if (match) return shiny ? shinyFormImgUrl(dexNum, match.f) : formImgUrl(dexNum, match.f);
+  }
+
+  // Base species sprite — the universal fallback for any form with no dedicated local art.
+  return shiny ? shinyDexImg(dexNum, GENDER_SUFFIX[dexNum] || "") : pokemonImgUrl(dexNum);
+}
+// Reverse slug -> dexNum lookup, built once (lazily) from the already-cached full GO index, for
+// the counters table (counter objects carry a slug + name but no dexNum of their own).
+let _goSlugToDexMap = null;
+function getGoSlugToDexMap() {
+  if (_goSlugToDexMap) return _goSlugToDexMap;
+  const idx = _pokeCache["go_index"];
+  if (!idx) return null;
+  const map = {};
+  Object.keys(idx).forEach(dexStr => {
+    (idx[dexStr] || []).forEach(f => { map[f.slug] = Number(dexStr); });
+  });
+  _goSlugToDexMap = map;
+  return map;
+}
+
 function flipCard(el) {
   const card = el.closest('.flip-card') || el;
   card.classList.toggle('flipped');
@@ -6415,17 +6734,21 @@ function renderGroupSizeCompact(gs, th, centered) {
   </div>`;
 }
 
-// Looks up Raid Boss Info for a given dex number by scanning EVENTS for any
-// groupSize entry whose bossName resolves (via DEX, with Mega/Shadow/regional
-// prefixes stripped) to this dexNum. Returns an array of matches so a Pokemon
-// with multiple raid forms (e.g. regular + Mega) can show all of them.
+// Resolves a cleaned raid-boss label (from cleanRaidLabel) to a dex number, used
+// by findRaidBossInfosForDex below to attach raid data to the right Pokédex page.
 function dexForBossName(bossName) {
   if (DEX[bossName] != null) return DEX[bossName];
-  const stripped = bossName.replace(/^(Mega |Shadow |Alolan |Galarian |Hisuian |Paldean )/, "").trim();
+  const stripped = bossName.replace(/^(Mega |Shadow |Alolan |Galarian |Hisuian |Paldean |Primal |Gigantamax |Dynamax )/, "").trim();
   if (DEX[stripped] != null) return DEX[stripped];
   // Mega X/Y forms (e.g. "Mega Raichu X") share their base species' dex number,
   // so drop the trailing form letter to resolve them to the same Pokédex page.
-  return DEX[stripped.replace(/\s+[XY]$/, "").trim()];
+  const noXY = stripped.replace(/\s+[XY]$/, "").trim();
+  if (DEX[noXY] != null) return DEX[noXY];
+  // Forme/region descriptors in a trailing parenthetical (e.g. "Zacian (Hero of
+  // Many Battles)", "Giratina (Altered Forme)") share their base species' page too.
+  const noForme = noXY.replace(/\s*\([^)]*\)\s*$/, "").trim();
+  if (noForme !== noXY && DEX[noForme] != null) return DEX[noForme];
+  return undefined;
 }
 // Look up a groupSize entry by cleaned boss name across all EVENTS. Returns the
 // first match — used by the news detail page to attach raid sizing data to
@@ -6442,55 +6765,126 @@ function findGroupSizeForBoss(bossName) {
   }
   return null;
 }
+// dexForBossName only strips a leading regional/Mega/Shadow word, so form-qualified raid labels
+// ("Attack Forme Deoxys", "Crowned Sword Zacian", "Douse Drive Genesect") and costume labels
+// ("Pikachu wearing a safari hat", "Costume Dragonite") resolve to nothing and their Pokémon
+// silently lose the Raids section — 54 of 214 raid boss names. This widens resolution for the
+// raid lookup ONLY, leaving the shared dexForBossName untouched: drop any region suffix and
+// parenthetical, then test contiguous word windows longest-first so multi-word species
+// ("Tapu Koko", "Mr. Mime") still beat a single-word match inside the same label.
+function dexForRaidBossName(bossName) {
+  const direct = dexForBossName(bossName);
+  if (direct != null) return direct;
+  const cleaned = bossName
+    .replace(/\s*[—–-]\s*(Northern|Southern) Hemisphere.*$/i, "")
+    .replace(/\s*[—–]\s.*$/, "")
+    .replace(/\s*\([^)]*\)/g, "")
+    .trim();
+  const viaClean = dexForBossName(cleaned);
+  if (viaClean != null) return viaClean;
+  const words = cleaned.split(/\s+/).filter(Boolean);
+  for (let len = Math.min(3, words.length); len >= 1; len--) {
+    for (let i = 0; i + len <= words.length; i++) {
+      const hit = dexForBossName(words.slice(i, i + len).join(" "));
+      if (hit != null) return hit;
+    }
+  }
+  return undefined;
+}
+
 function findRaidBossInfosForDex(dexNum) {
+  // Sourced from details.bosses — every raid this Pokemon has EVER headlined — rather than from
+  // details.groupSize. Gating on groupSize hid the section for 139 of the 187 raid bosses in
+  // EVENTS, since only 48 carry sizing data; groupSize is now attached when present and simply
+  // left off otherwise. details.bosses is also used for wild spawns and event features
+  // ("Bulbasaur wearing a party hat", "Battle Path"), so a label only counts when getRaidTier
+  // buckets it as an actual raid — that function also returns Lure/Field Research/Mystery Box
+  // tiers, which are excluded here.
   // Dedupe by bossName: the same boss (e.g. "Mega Skarmory") can be referenced by
   // several events (a dedicated Raid Day + a weekly roundup), but the Pokédex page
   // should show it once. Distinct forms keep separate cards because they have
   // distinct bossNames (e.g. "Mega Raichu X" vs "Mega Raichu Y").
   const byBoss = new Map();
   if (!Array.isArray(EVENTS)) return [];
+  const RAID_TIER = /Raid|Max Battle/i;
+  // GO Fest events keep their raid line-ups in nested objects instead of details.bosses.
+  const NESTED_RAID_KEYS = ["parkRaids", "saturdayRaids", "sundayRaids"];
   for (const ev of EVENTS) {
-    const gsList = ev && ev.details && ev.details.groupSize;
-    if (!gsList) continue;
-    const list = Array.isArray(gsList) ? gsList : [gsList];
-    for (const gs of list) {
-      if (!gs || !gs.bossName) continue;
-      if (dexForBossName(gs.bossName) !== dexNum) continue;
-      const bossEntry = (ev.details.bosses || []).find(b => cleanRaidLabel(b) === gs.bossName);
-      const tier = bossEntry ? getRaidTier(bossEntry) : null;
-      const existing = byBoss.get(gs.bossName);
-      if (!existing) { byBoss.set(gs.bossName, { event: ev, groupSize: gs, tier }); continue; }
-      // On a clash, prefer the event whose title names this species — that's the
-      // dedicated Raid Day, a better link target than a multi-boss roundup.
-      const species = gs.bossName.replace(/^(Mega |Shadow |Alolan |Galarian |Hisuian |Paldean )/, "").replace(/\s+[XY]$/, "").trim();
-      if (ev.title.includes(species) && !existing.event.title.includes(species)) {
-        byBoss.set(gs.bossName, { event: ev, groupSize: gs, tier });
+    const d = ev && ev.details;
+    if (!d) continue;
+    const gsRaw = d.groupSize ? (Array.isArray(d.groupSize) ? d.groupSize : [d.groupSize]) : [];
+    const gsByName = new Map();
+    for (const gs of gsRaw) if (gs && gs.bossName) gsByName.set(gs.bossName, gs);
+    const labels = [...(d.bosses || [])];
+    for (const key of NESTED_RAID_KEYS) {
+      const nested = d[key];
+      if (!nested || typeof nested !== "object") continue;
+      for (const v of Object.values(nested)) if (Array.isArray(v)) labels.push(...v);
+    }
+    for (const rawLabel of labels) {
+      const label = typeof rawLabel === "string" ? rawLabel : (rawLabel && rawLabel.name) || "";
+      if (!label) continue;
+      const tier = getRaidTier(label);
+      if (!tier || !RAID_TIER.test(tier)) continue;
+      const bossName = cleanRaidLabel(label);
+      if (!bossName || dexForRaidBossName(bossName) !== dexNum) continue;
+      const entry = { event: ev, groupSize: gsByName.get(bossName) || null, tier, bossName };
+      // ONE card per Pokémon, not one per boss label. Pikachu alone carries 16 raid labels (every
+      // costume, the World Championships set, Gigantamax) and Giratina/Deoxys/Genesect carry one
+      // per forme — but the raid data behind them is the same, so extra cards were pure noise.
+      // Shadow variants collapse in here too. Best candidate wins: real group-size data first,
+      // then an event whose title names this species, then the most recent appearance.
+      const species = bossName.replace(/^(Mega |Shadow |Alolan |Galarian |Hisuian |Paldean )/, "").replace(/\s+[XY]$/, "").trim();
+      // A label is a real Pokémon/form only if it resolves through the strict resolver. Anything
+      // else is a cosmetic descriptor ("Pikachu wearing a safari hat", "Costume Dragonite",
+      // "Attack Forme Deoxys") — those still count as a raid appearance, but the card shows the
+      // plain species so a Pokédex page never fronts a costume as if it were the Pokémon.
+      const isKnownForm = DEX[bossName] != null || dexForBossName(bossName) != null;
+      const canonical = DEX_BY_NUM[dexNum] || bossName;
+      entry.displayName = isKnownForm ? bossName : canonical;
+      // Rank the plain species ABOVE its Mega/Shadow/Gigantamax variants, so Pikachu's card is a
+      // normal Pikachu (its costume raids are ordinary 1★ Pikachu data) rather than Gigantamax,
+      // and Giratina shows Giratina rather than Shadow Giratina. A variant still wins when it is
+      // the only raid on record — Venusaur has only ever headlined as Mega Venusaur.
+      const isPlain = entry.displayName === canonical;
+      entry._score = (isPlain ? 8 : 0) + (entry.groupSize ? 4 : 0) + (ev.title.includes(species) ? 2 : 0);
+      entry._date = ev.date || "";
+      // Group-size data often sits on a different label than the one that wins the name (the
+      // plain "Zacian" appearance carries none while "Zacian (Hero of Many Battles)" does). Bank
+      // sizing per tier so the winning card can still show the widget — same Pokémon, same tier,
+      // so the numbers apply; never borrowed across tiers, where they genuinely differ.
+      if (entry.groupSize && !byBoss.has("gs:" + tier)) byBoss.set("gs:" + tier, entry.groupSize);
+      const cur = byBoss.get("only");
+      if (!cur || entry._score > cur._score || (entry._score === cur._score && entry._date > cur._date)) {
+        byBoss.set("only", entry);
       }
     }
   }
-  return Array.from(byBoss.values());
+  const best = byBoss.get("only");
+  if (!best) return [];
+  if (!best.groupSize) best.groupSize = byBoss.get("gs:" + best.tier) || null;
+  return [best];
 }
 
 // Renders the "Raid Boss Info" section on the Pokemon Dex detail page. Shows
 // one card per matching raid form: the tier, CP ranges (from pokemon-data.json
 // via getRaidBossData), the compact group-size widget, and a link to the event.
-function renderDexRaidBossInfo(data, th, isMobile) {
-  const infos = findRaidBossInfosForDex(data.dexNum);
-  if (!infos || infos.length === 0) return "";
-  const cards = infos.map(({ event: ev, groupSize: gs, tier }) => {
+function renderRaidBossCards(infos, th, isMobile) {
+  const cards = infos.map(({ event: ev, groupSize: gs, tier, bossName, displayName }) => {
+    const shownName = displayName || bossName;
     const tierColor = TIER_COLORS[tier] || "#8E44AD";
-    const raidData = getRaidBossData(gs.bossName);
-    const tierLabel = tier ? tier.replace("Raids", "Raid").replace("Star", "★") : (gs.tier || "Raid Boss");
+    const raidData = getRaidBossData(shownName) || getRaidBossData(bossName);
+    const tierLabel = tier ? tier.replace("Raids", "Raid").replace("Star", "★") : ((gs && gs.tier) || "Raid Boss");
     const cpHTML = raidData && raidData.cp ? `<div style="padding:12px 14px;background:${th.surface};border-radius:10px;border:1px solid ${th.border};display:flex;flex-direction:column;gap:6px">
-      <div style="font-size:11px;font-weight:700;color:${th.textMuted};letter-spacing:0.5px;text-transform:uppercase">Catchable CP</div>
+      <div style="font-size:11px;font-weight:700;color:${th.textMuted};letter-spacing:0.5px;text-transform:uppercase">As a raid boss (${esc(shownName)})</div>
       <div style="font-size:13.5px;color:${th.text};line-height:1.5">CP <strong>${raidData.cp}</strong></div>
       ${raidData.cpBoost && raidData.weather ? `<div style="font-size:13.5px;color:${th.text};line-height:1.5">☁️ ${esc(raidData.weather)}: <strong>${raidData.cpBoost}</strong></div>` : ""}
     </div>` : "";
-    const gsHTML = renderGroupSizeCompact(gs, th, false);
+    const gsHTML = gs ? renderGroupSizeCompact(gs, th, false) : "";
     // Show the boss with both its Normal and Shiny sprite. The shiny art lives at
     // the same path with /regular/ swapped for /shiny/; onerror hides the cell if
     // a Pokémon has no shiny release yet.
-    const pkmnImg = getPokemonImg(gs.bossName);
+    const pkmnImg = getPokemonImg(shownName) || getPokemonImg(bossName);
     const spriteSize = isMobile ? 54 : 64;
     const regEl = pokemonImgHTML(pkmnImg, spriteSize);
     const shinyUrl = pkmnImg && pkmnImg.url && pkmnImg.url.includes("/regular/") ? pkmnImg.url.replace("/regular/", "/shiny/") : null;
@@ -6500,23 +6894,29 @@ function renderDexRaidBossInfo(data, th, isMobile) {
       ${spriteCell(regEl, "Normal")}
       ${shinyImgEl ? spriteCell(shinyImgEl, "✨ Shiny") : ""}
     </div>` : "";
-    const linkHTML = `<button onclick="selectEvent(${ev.id})" style="display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;color:${tierColor};background:${th.accentBgSubtle(tierColor)};border:1.5px solid ${th.countdownBorder(tierColor)};border-radius:10px;padding:10px 14px;cursor:pointer;font-family:inherit;align-self:flex-start;transition:all 0.15s ease" onmouseenter="this.style.background='${tierColor}';this.style.color='#fff'" onmouseleave="this.style.background='${th.accentBgSubtle(tierColor)}';this.style.color='${tierColor}'">View ${esc(ev.title)} →</button>`;
     return `<div style="padding:${isMobile ? "12px" : "14px"};background:${th.accentBgSubtle(tierColor)};border:1.5px solid ${th.countdownBorder(tierColor)};border-radius:12px;display:flex;flex-direction:column;gap:12px">
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
         ${spritesHTML}
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex:1;min-width:0">
-          <div style="font-size:14px;font-weight:700;color:${th.text}">${esc(gs.bossName)}</div>
+          <div style="font-size:14px;font-weight:700;color:${th.text}">${esc(shownName)}</div>
           <span style="font-size:10px;font-weight:700;color:#fff;background:${tierColor};padding:3px 9px;border-radius:8px;letter-spacing:0.4px;text-transform:uppercase">${esc(tierLabel)}</span>
         </div>
       </div>
       ${cpHTML}
       ${gsHTML}
-      ${linkHTML}
     </div>`;
   }).join("");
-  return `<div style="margin-top:20px">
+  return cards;
+}
+
+// Standalone "Raid Boss Info" block — used only on the pre-GO-data fallback view. Once GO data
+// loads, these same cards are folded into the merged "Raids" section (renderGoRaidsBody).
+function renderDexRaidBossInfo(data, th, isMobile) {
+  const infos = findRaidBossInfosForDex(data.dexNum);
+  if (!infos || infos.length === 0) return "";
+  return `<div style="margin-top:20px;min-width:0">
     <div style="font-size:14px;font-weight:700;color:${th.text};margin-bottom:10px">⚔️ Raid Boss Info</div>
-    <div style="display:flex;flex-direction:column;gap:12px">${cards}</div>
+    <div style="display:flex;flex-direction:column;gap:12px">${renderRaidBossCards(infos, th, isMobile)}</div>
   </div>`;
 }
 
@@ -6691,7 +7091,7 @@ function renderCalendar(th) {
                   }
                   if (ev.type === "Max Battle") {
                     return `<div style="position:relative;width:32px;height:32px;flex-shrink:0">
-                      <img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85;z-index:0" />
+                      <img src="assets/pokemon-images/icons/dynamax-icon(white).webp" style="position:absolute;top:1px;right:1px;width:50%;height:50%;object-fit:contain;opacity:0.85;z-index:0;pointer-events:none" />
                       <img src="${ev.iconImg}" style="position:relative;width:100%;height:100%;object-fit:contain;border-radius:8px;z-index:1" />
                     </div>`;
                   }
@@ -6757,7 +7157,7 @@ function renderEventDetail(event, th) {
             }
             if (event.iconImg) {
               const shadowLayer = event.shadowBg ? `<img src="assets/pokemon-images/icons/shadow_icon.png" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;opacity:${darkMode ? 0.9 : 0.75};z-index:0" />` : "";
-              const dynamaxLayer = event.type === "Max Battle" ? `<img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85;z-index:0" />` : "";
+              const dynamaxLayer = event.type === "Max Battle" ? `<img src="assets/pokemon-images/icons/dynamax-icon(white).webp" style="position:absolute;top:1px;right:1px;width:50%;height:50%;object-fit:contain;opacity:0.85;z-index:0;pointer-events:none" />` : "";
               const zoomable = event.type === "GO Fest";
               const zoomAttrs = zoomable ? ` onclick="showFormModal('${event.iconImg}','${esc(event.title)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showFormModal('${event.iconImg}','${esc(event.title)}')}" role="button" tabindex="0" title="Tap to view full size" aria-label="View ${esc(event.title)} badge full size"` : "";
               const zoomHint = zoomable ? `<div style="position:absolute;bottom:2px;right:2px;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,0.55);display:flex;align-items:center;justify-content:center;z-index:3;pointer-events:none"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></div>` : "";
@@ -7365,9 +7765,13 @@ function renderNewsDetail(announcement, th) {
         <p style="margin:0;font-size:14.5px;color:${th.textSecondary};line-height:1.65">${esc(announcement.fullBody)}</p>
         ${announcement.url ? `<a href="${announcement.url}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-self:flex-start;align-items:center;gap:6px;font-size:13px;font-weight:600;color:${th.tagText(announcement.tag)};text-decoration:none;padding:8px 14px;border:1.5px solid ${th.tagText(announcement.tag)}40;border-radius:10px;background:${th.tagBg(announcement.tag)};transition:all 0.2s ease" onmouseenter="this.style.borderColor='${th.tagText(announcement.tag)}'" onmouseleave="this.style.borderColor='${th.tagText(announcement.tag)}40'">\uD83D\uDD17 For more information, click here</a>` : ""}
         ${announcement.sections ? announcement.sections.map(s => {
+          // The Dynamax marker (dynamax-icon(white).webp) is a solid-white silhouette — invisible
+          // against this heading row's near-white light-mode background (th.surface). Every OTHER
+          // heading icon here (Raid-Eggs/mega.png, 5-star.png, QuestPokemonReward.png, etc.) is
+          // full-color art that must NOT be inverted, so the filter is scoped to that one path.
           const iconHTML = s.icon
             ? (s.icon.includes("/") || s.icon.endsWith(".png") || s.icon.endsWith(".webp")
-                ? `<img src="${s.icon}" style="width:22px;height:22px;object-fit:contain;flex-shrink:0" onerror="this.style.display='none'" />`
+                ? `<img src="${s.icon}" style="width:22px;height:22px;object-fit:contain;flex-shrink:0${s.icon.includes("dynamax-icon") && !darkMode ? ";filter:invert(1)" : ""}" onerror="this.style.display='none'" />`
                 : `<span style="font-size:18px;line-height:1">${s.icon}</span>`)
             : "";
           const headingHTML = s.icon
@@ -7505,7 +7909,7 @@ function renderEventCard(event, index, th) {
           </div>` : "";
           if (event.iconImg) {
             const shadowLayer = event.shadowBg ? `<img src="assets/pokemon-images/icons/shadow_icon.png" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;opacity:${darkMode ? 0.9 : 0.75};z-index:0" />` : "";
-            const dynamaxLayer = event.type === "Max Battle" ? `<img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85;z-index:0" />` : "";
+            const dynamaxLayer = event.type === "Max Battle" ? `<img src="assets/pokemon-images/icons/dynamax-icon(white).webp" style="position:absolute;top:1px;right:1px;width:50%;height:50%;object-fit:contain;opacity:0.85;z-index:0;pointer-events:none" />` : "";
             const imgStyle = event.wideIcon
               ? `width:100%;height:100%;object-fit:contain;position:relative;z-index:1`
               : `width:44px;height:44px;object-fit:contain;position:relative;z-index:1`;
@@ -7636,9 +8040,12 @@ function schedulePotdUpdate() {
 }
 schedulePotdUpdate();
 
-function searchPokedex(val) {
+// Shared by the list page's own search box and the Pokedex detail nav-row search \u2014 takes the
+// element ids as parameters (defaulting to the list page's original ids) so a second input on the
+// page can reuse this exact lookup/render logic instead of forking it.
+function searchPokedex(val, inputId = "dex-search", resultsId = "dex-search-results") {
   const query = val.trim().toLowerCase();
-  const resultsEl = document.getElementById("dex-search-results");
+  const resultsEl = document.getElementById(resultsId);
   if (!resultsEl || query.length < 1) { if (resultsEl) resultsEl.style.display = "none"; return; }
   const th = t(darkMode);
   const matches = DEX_NAMES.filter(n => n.toLowerCase().includes(query)).slice(0, 12);
@@ -7646,7 +8053,7 @@ function searchPokedex(val) {
   resultsEl.innerHTML = matches.map(m => {
     const dex = DEX[m];
     const img = pokemonImgUrl(dex);
-    return `<div onclick="openPokemonDetail(${dex});document.getElementById('dex-search').value='';document.getElementById('dex-search-results').style.display='none'" style="display:flex;align-items:center;gap:10px;padding:8px 14px;cursor:pointer;transition:background 0.1s ease" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='transparent'">
+    return `<div onclick="openPokemonDetail(${dex});document.getElementById('${inputId}').value='';document.getElementById('${resultsId}').style.display='none'" style="display:flex;align-items:center;gap:10px;padding:8px 14px;cursor:pointer;transition:background 0.1s ease" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='transparent'">
       <img src="${img}" style="width:36px;height:36px;object-fit:contain" onerror="this.style.opacity='0.3'" />
       <div><div style="font-size:14px;font-weight:600;color:${th.text}">${esc(m)}</div><div style="font-size:11px;color:${th.textMuted}">#${String(dex).padStart(4,"0")}</div></div>
     </div>`;
@@ -7952,7 +8359,11 @@ function toggleCompactCard(headerEl) {
   }
 }
 
-async function openPokemonDetail(dexNum) {
+// preferredSlug (optional): used by the Family section to open a specific form directly (e.g.
+// clicking "Dynamax Venusaur" from Bulbasaur's family grid) instead of defaulting to "Normal".
+// It's resolved against the FULL, unfiltered index entry — not the switcher's filtered list —
+// so a dynamax/gigantamax slug still loads correctly even though it gets no switcher pill.
+async function openPokemonDetail(dexNum, preferredSlug) {
   // Save which regions are open
   state.pokedexOpenRegions = {};
   for (let i = 0; i < REGIONS.length; i++) {
@@ -7962,13 +8373,127 @@ async function openPokemonDetail(dexNum) {
   state.pokedexDetail = dexNum;
   state.pokedexDetailData = null;
   state.pokedexDetailEvolutions = null;
+  state.pokedexDetailGoForms = null;
+  state.pokedexDetailGoSlug = null;
+  state.pokedexDetailGoData = null;
+  state.pokedexDetailGoLoading = false;
+  state.pokedexDetailGoEverLoaded = false;
+  state.pokedexDetailGoMovesetPage = 1;
+  state.pokedexDetailGoOpenSections = {};
+  state.pokedexDetailGoShinyBySlug = {};
   render();
+  let rawForms = null;
   try {
-    const [data, evolutions] = await Promise.all([fetchPokemonData(dexNum), fetchEvolutionChain(dexNum)]);
+    const [data, evolutions, goIndex] = await Promise.all([fetchPokemonData(dexNum), fetchEvolutionChain(dexNum), fetchGoIndex(), fetchGoFamilyIndex()]);
     state.pokedexDetailData = data;
     state.pokedexDetailEvolutions = evolutions;
+    rawForms = (goIndex && goIndex[String(dexNum)]) || null;
+    // The top switcher shows real forms only — Normal, Shadow, Mega, regional, Gigantamax.
+    // Dynamax is excluded (it doesn't change appearance and has no distinct art, so it lives in
+    // the Family section below), as are the two Pikachu costumes.
+    const switcherForms = rawForms ? normalizeGoSwitcherForms(rawForms.filter(f => !f.dynamax && !GO_COSTUME_SLUGS.has(f.slug) && !GO_UNRELEASED_GIGANTAMAX.has(f.slug)), dexNum) : null;
+    state.pokedexDetailGoForms = switcherForms && switcherForms.length > 0 ? switcherForms : null;
   } catch (err) { console.error("Failed to load Pokemon detail:", err); }
   render();
+  // Lazily load the default (or preferred) Pokemon GO form's data — this must never block the
+  // base PokeAPI-driven view above, and must fail silently if that form's file isn't scraped yet.
+  if (rawForms && rawForms.length > 0 && state.pokedexDetail === dexNum) {
+    const defaultForm = (preferredSlug && rawForms.find(f => f.slug === preferredSlug))
+      || rawForms.find(f => f.label === "Normal")
+      || rawForms[0];
+    state.pokedexDetailGoSlug = defaultForm.slug;
+    state.pokedexDetailGoLoading = true;
+    render();
+    const goData = await fetchGoPokemon(defaultForm.slug);
+    if (state.pokedexDetail === dexNum && state.pokedexDetailGoSlug === defaultForm.slug) {
+      state.pokedexDetailGoData = goData;
+      state.pokedexDetailGoLoading = false;
+      if (goData) state.pokedexDetailGoEverLoaded = true;
+      render();
+    }
+  }
+  // Non-blocking prefetch for the family cards' shiny chips: neither _index.json nor _family.json
+  // carry a shiny flag, only each form's own data/go/<slug>.json does (flags.isShinyReleased). The
+  // Family grid spans every member of this species' family (evolutions, Mega, regional,
+  // Gigantamax, Shadow) — not just the switcher's forms — so this has to wait until the default
+  // form's own data is in, since familySlug comes off that record (same lookup renderGoBlock's
+  // Family section IIFE does off _pokeCache["go_family"]). Unioned with the switcher's own slugs
+  // (as a Set, so duplicates collapse) so a form that's in the switcher but missing from the
+  // family index still gets warmed. Deliberately NOT awaited by the caller — this fires after the
+  // function's real work is done and settles on its own time. fetchGoPokemon already caches in
+  // _pokeCache, so the default form fetched above is a free hit here rather than a second
+  // network round-trip. A large family (Eevee) means this can be ~20-40 small background fetches —
+  // acceptable, no batching/progress UI needed.
+  if (state.pokedexDetail === dexNum) {
+    const familyIdx = _pokeCache["go_family"] || {};
+    const goData = state.pokedexDetailGoData;
+    const familySlug = goData && goData.family && goData.family.familySlug;
+    const familyEntries = familySlug ? (familyIdx[familySlug] || []) : [];
+    const slugSet = new Set(familyEntries.map(f => f.slug));
+    (state.pokedexDetailGoForms || []).forEach(f => slugSet.add(f.slug));
+    if (slugSet.size > 0) {
+      const slugsToWarm = [...slugSet];
+      Promise.all(slugsToWarm.map(slug => fetchGoPokemon(slug))).then(results => {
+        // Stale guard: bail if the user navigated to a different species while these were in
+        // flight, same check used everywhere else in this feature (selectGoForm, the default-form
+        // load above).
+        if (state.pokedexDetail !== dexNum) return;
+        const shinyMap = {};
+        results.forEach((formData, i) => {
+          shinyMap[slugsToWarm[i]] = !!(formData && formData.flags && formData.flags.isShinyReleased === true);
+        });
+        state.pokedexDetailGoShinyBySlug = shinyMap;
+        render();
+      }).catch(() => {}); // fail-silent per the contract at line ~417 — a missing form file is expected while the scrape is incomplete
+    }
+  }
+}
+// Switches the active Pokemon GO form. Deliberately does NOT reset pokedexDetailGoEverLoaded
+// on failure: once we've shown real GO data for this Pokemon, a later failed form switch must
+// keep the GO block on screen (with an inline "couldn't load" message) rather than falling back
+// to the legacy PokeAPI-only header — that fallback is for the "never loaded anything" case only.
+async function selectGoForm(slug) {
+  if (state.pokedexDetailGoSlug === slug && (state.pokedexDetailGoData || state.pokedexDetailGoLoading)) return;
+  const dexNum = state.pokedexDetail;
+  state.pokedexDetailGoSlug = slug;
+  state.pokedexDetailGoData = null;
+  state.pokedexDetailGoLoading = true;
+  state.pokedexDetailGoMovesetPage = 1;
+  render();
+  const goData = await fetchGoPokemon(slug);
+  if (state.pokedexDetail === dexNum && state.pokedexDetailGoSlug === slug) {
+    state.pokedexDetailGoData = goData;
+    state.pokedexDetailGoLoading = false;
+    if (goData) state.pokedexDetailGoEverLoaded = true;
+    render();
+  }
+}
+// Clicking a card in the Family section — either just switches form (same species already open)
+// or navigates to a different species and selects that exact form via openPokemonDetail's
+// preferredSlug, rather than landing on that species' default "Normal" form.
+function selectGoFamilyMember(dexNum, slug) {
+  if (state.pokedexDetail === dexNum) selectGoForm(slug);
+  else openPokemonDetail(dexNum, slug);
+}
+function goMovesetPage(delta) {
+  const go = state.pokedexDetailGoData;
+  if (!go) return;
+  const perPage = 10;
+  const totalPages = Math.max(1, Math.ceil((go.movesets || []).length / perPage));
+  const page = Math.min(Math.max((state.pokedexDetailGoMovesetPage || 1) + delta, 1), totalPages);
+  if (page === state.pokedexDetailGoMovesetPage) return;
+  state.pokedexDetailGoMovesetPage = page;
+  render();
+}
+// Thin wrapper around the project's existing accordion system (toggleAccordion, in styles.css
+// as .acc-content/.acc-chevron with the smooth max-height transition) — GO sections reuse that
+// animation and chevron rather than a bespoke one. The only GO-specific behavior added here is
+// persisting each section's open/closed state in state.pokedexDetailGoOpenSections so it survives
+// a full re-render (form switch, moveset pagination), which toggleAccordion itself has no concept of.
+function toggleGoAccordion(el, id) {
+  toggleAccordion(el);
+  if (!state.pokedexDetailGoOpenSections) state.pokedexDetailGoOpenSections = {};
+  state.pokedexDetailGoOpenSections[id] = el.dataset.open === "true";
 }
 function closePokemonDetail() {
   const dex = state.pokedexDetail;
@@ -7976,6 +8501,14 @@ function closePokemonDetail() {
   state.pokedexDetail = null;
   state.pokedexDetailData = null;
   state.pokedexDetailEvolutions = null;
+  state.pokedexDetailGoForms = null;
+  state.pokedexDetailGoSlug = null;
+  state.pokedexDetailGoData = null;
+  state.pokedexDetailGoLoading = false;
+  state.pokedexDetailGoEverLoaded = false;
+  state.pokedexDetailGoMovesetPage = 1;
+  state.pokedexDetailGoOpenSections = {};
+  state.pokedexDetailGoShinyBySlug = {};
   render();
   // Restore open regions
   requestAnimationFrame(() => {
@@ -8051,6 +8584,823 @@ function showRocketPopup(name) {
   document.body.appendChild(overlay);
 }
 
+// --- POKEMON GO POKEDEX DETAIL SECTIONS (data/go/<slug>.json) ---
+// A generic collapsible section shell shared by all six GO sections below. Mirrors the
+// existing toggleDexRegion idiom (data-open attribute + arrow rotation, no re-render needed
+// on toggle) but remembers each section's open/closed state in state.pokedexDetailGoOpenSections
+// so it survives a full render() triggered elsewhere (form switch, moveset pagination).
+function renderGoSection(id, title, subtitle, bodyHtml, defaultOpen, th, isMobile) {
+  const overrides = state.pokedexDetailGoOpenSections || {};
+  const open = Object.prototype.hasOwnProperty.call(overrides, id) ? overrides[id] : defaultOpen;
+  const openAttr = open ? "true" : "false";
+  // Reuses the project's existing accordion system (toggleAccordion / .acc-content / .acc-chevron
+  // in styles.css) instead of a bespoke display:none toggle, so GO sections get the same smooth
+  // max-height transition as every other accordion in the app. A section that starts OPEN needs
+  // an explicit max-height:none on first paint (matching the pattern at ~line 10136) so its
+  // content isn't clipped by the CSS default of max-height:0 before any click has happened —
+  // this is recomputed on every render (not just first paint), so a moveset page change that
+  // resizes an already-open section's content never leaves it cropped.
+  const chevronSVG = `<svg class="acc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
+  return `<div style="background:${th.surface};border:1px solid ${th.border};border-radius:14px;overflow:hidden;min-width:0">
+    <button class="acc-trigger" data-open="${openAttr}" onclick="toggleGoAccordion(this,'${id}')" aria-expanded="${openAttr}" style="width:100%;padding:${isMobile ? "12px 14px" : "14px 18px"};background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;font-family:inherit;text-align:left;box-sizing:border-box;color:${th.text}">
+      <div style="min-width:0">
+        <div style="font-size:${isMobile ? 14 : 15}px;font-weight:800;color:${th.text}">${esc(title)}</div>
+        ${subtitle ? `<div style="font-size:${isMobile ? 11 : 12}px;color:${th.textMuted};margin-top:2px">${esc(subtitle)}</div>` : ""}
+      </div>
+      <span style="display:flex;align-items:center;color:${th.text};flex-shrink:0">${chevronSVG}</span>
+    </button>
+    <div id="${id}" class="acc-content" data-open="${openAttr}"${open ? ' style="max-height:none"' : ""}>
+      <div style="padding:${isMobile ? "0 14px 14px" : "0 18px 18px"};min-width:0">${bodyHtml}</div>
+    </div>
+  </div>`;
+}
+
+// The GO index spells Unown's two symbol forms out in words ("Exclamation Point" / "Question
+// Mark") and sorts them alphabetically, so they land between E/F and Q/R with wordy pill labels.
+// Relabel them "!" and "?" and move them to the end of the switcher, after Z. Display-only —
+// data/go/_index.json stays exactly as scraped.
+// _index.json carries no isCostume flag, but the per-form files do — and across all 2057 entries
+// exactly two are costumes, both Pikachu. Listed here so the form switcher shows real forms only
+// (Normal / Shadow / Mega / regional / Gigantamax) rather than fronting Pop Star and Rock Star as
+// if they were forms. Regenerate by scanning data/go/*.json for forms.isCostume === true.
+// Gigantamax forms the game has not released yet — no artwork exists for them anywhere, so the
+// pill would open onto a broken sprite. Hidden from the form switcher until the art lands.
+// Regenerate by listing gigantamax slugs in data/go/_index.json with no matching file under
+// assets/pokemon-images/Gigantamax/regular/Gen-8_Galar/.
+const GO_UNRELEASED_GIGANTAMAX = new Set([
+  "eevee-gigantamax", "melmetal-gigantamax", "corviknight-gigantamax",
+  "orbeetle-gigantamax", "drednaw-gigantamax", "coalossal-gigantamax",
+  "flapple-gigantamax", "appletun-gigantamax", "sandaconda-gigantamax",
+  "centiskorch-gigantamax", "hatterene-gigantamax", "alcremie-gigantamax",
+  "copperajah-gigantamax", "duraludon-gigantamax", "urshifu-gigantamax-rapid-strike",
+  "urshifu-gigantamax-single-strike",
+]);
+
+const GO_COSTUME_SLUGS = new Set(["pikachu-pop-star", "pikachu-rock-star"]);
+
+const GO_FORM_LABEL_OVERRIDES = { "exclamation-point": "!", "question-mark": "?" };
+function normalizeGoSwitcherForms(forms, dexNum) {
+  const keys = Object.keys(GO_FORM_LABEL_OVERRIDES);
+  // The index derives a form's label from the slug tail, which mangles every species whose own
+  // name contains a hyphen: "mr-mime" became "Mime", "ho-oh" became "Oh", "nidoran-f" became "F",
+  // "porygon-z" became "Z". Those entries ARE the base form — their `name` still equals the
+  // canonical species name — so relabel them "Normal". A real variant never matches, because its
+  // name carries the qualifier ("Alolan Raichu", "Basculegion Female", "Unown A").
+  const canonicalName = DEX_BY_NUM[dexNum];
+  forms = forms.map(f => (canonicalName && f.name === canonicalName && f.label !== "Normal")
+    ? { ...f, label: "Normal" }
+    : f);
+  const head = [], tail = [];
+  for (const f of forms) {
+    const key = keys.find(k => f.slug.endsWith("-" + k));
+    if (key) tail.push({ ...f, label: GO_FORM_LABEL_OVERRIDES[key], _k: key });
+    else head.push(f);
+  }
+  tail.sort((a, b) => keys.indexOf(a._k) - keys.indexOf(b._k));
+  // _index.json is ordered by slug, which alphabetises Gigantamax ahead of Mega. Impose the
+  // in-game reading order instead: base, then regional, other formes, Mega, Gigantamax, Shadow.
+  // Stable sort, so Unown's A-Z (all "other forme") keep their existing sequence and the two
+  // symbol pills stay pinned to the tail.
+  const rank = (f) => {
+    const l = f.label || "";
+    if (f.shadow || /^(Apex )?Shadow\b/i.test(l)) return 5;
+    if (f.gigantamax || /^Gigantamax$/i.test(l)) return 4;
+    if (f.mega || /^Mega\b/i.test(l)) return 3;
+    if (/^(Alolan|Galarian|Hisuian|Paldean)$/i.test(l)) return 1;
+    if (/^Normal$/i.test(l)) return 0;
+    return 2;
+  };
+  head.sort((a, b) => rank(a) - rank(b));
+  return head.concat(tail.map(({ _k, ...f }) => f));
+}
+
+function renderGoFormSwitcher(forms, currentSlug, primaryColor, th, isMobile) {
+  const c = primaryColor || "#3498DB";
+  const pills = forms.map(f => {
+    const active = f.slug === currentSlug;
+    return `<button onclick="selectGoForm('${f.slug}')" style="padding:${isMobile ? "6px 13px" : "7px 15px"};border-radius:999px;border:1.5px solid ${active ? c : th.border};background:${active ? th.accentBg(c) : th.surface};color:${active ? c : th.textSecondary};font-size:${isMobile ? 12 : 13}px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s ease;white-space:nowrap" onmouseenter="this.style.borderColor='${c}'" onmouseleave="this.style.borderColor='${active ? c : th.border}'">${esc(f.label)}</button>`;
+  }).join("");
+  return `<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">${pills}</div>`;
+}
+
+function renderGoPokedexDetailsBody(go, data, th, isMobile) {
+  const pd = go.pokedex || {};
+  const valFs = isMobile ? 12.5 : 13.5;
+  const rowsArr = [];
+  const addRow = (label, valueHtml) => rowsArr.push(`<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid ${th.border}">
+    <div style="font-size:${isMobile ? 11 : 12}px;color:${th.textMuted};font-weight:700;text-transform:uppercase;letter-spacing:0.3px;flex-shrink:0">${label}</div>
+    <div style="font-size:${valFs}px;color:${th.text};font-weight:700;text-align:right">${valueHtml}</div>
+  </div>`);
+  const resIcon = (file) => `<img src="${IMG_BASE}/Items/${file}" style="width:15px;height:15px;object-fit:contain;vertical-align:-2px;margin-right:4px" />`;
+  if (typeof go.dexNum === "number") addRow("Pokédex No.", "#" + String(go.dexNum).padStart(4, "0"));
+  // The source's own category is the same text as the PokeAPI genus ("Seed Pokémon" etc) — fall
+  // back to data.genus only for the records missing it (mostly Gen 9) so the row still fills in,
+  // never show both since that would duplicate the same text.
+  const category = pd.category || (data && data.genus);
+  if (category) addRow("Category", esc(category));
+  if (typeof go.dexNum === "number") addRow("Region", `${getGenFolder(go.dexNum).replace("Gen-", "Gen ").replace("_", " — ")} Region`);
+  // Always show the Shiny row, both ways round: a gold "Shiny available" pill when it's released
+  // and a muted "No" when it isn't. Omitting the row for unreleased shinies read as missing data
+  // rather than as the answer "no shiny yet".
+  {
+    const shinyOut = !!(go.flags && go.flags.isShinyReleased === true);
+    // Short "what changes" blurb (16-55 chars) that used to live in the standalone Shiny Variant
+    // block at the bottom of the page. Shown ONLY when the shiny is unreleased: where it exists
+    // the sprite card already shows it side by side and the words add nothing, but where it does
+    // not the card shows a circle-and-slash placeholder — and then this is the only description
+    // of what the shiny will look like.
+    const shinyBlurb = !shinyOut ? (SHINY_DESC[go.dexNum] || "") : "";
+    addRow("Shiny", shinyOut
+      ? `<span style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:999px;background:${th.dark ? "rgba(243,156,18,0.18)" : "rgba(243,156,18,0.14)"};border:1px solid rgba(243,156,18,0.35);color:#F39C12;font-size:11px;font-weight:800;white-space:nowrap">Shiny available ✨</span>`
+      : `<span style="display:inline-flex;align-items:center;padding:2px 8px;border-radius:999px;background:${th.dark ? "rgba(231,76,60,0.18)" : "rgba(231,76,60,0.14)"};border:1px solid rgba(231,76,60,0.35);color:#E74C3C;font-size:11px;font-weight:800;white-space:nowrap">Not available</span>`);
+    // Its own row rather than a sub-line on the pill above, so it reads as a normal label/value
+    // pair like every other row in this panel. Only present for unreleased shinies — see above.
+    if (shinyBlurb) {
+      addRow("Shiny Description", `<span style="font-weight:600;color:${th.textSecondary};font-size:${isMobile ? 11.5 : 12.5}px;line-height:1.4;white-space:normal;display:inline-block;max-width:230px">${esc(shinyBlurb)}</span>`);
+    }
+  }
+  if (typeof pd.heightM === "number") addRow("Height", `${pd.heightM} m`);
+  if (typeof pd.weightKg === "number") addRow("Weight", `${pd.weightKg} kg`);
+  if (pd.isGenderless) {
+    addRow("Gender", "Genderless");
+  } else if (typeof pd.genderMalePct === "number" || typeof pd.genderFemalePct === "number") {
+    const lines = [];
+    if (typeof pd.genderMalePct === "number") lines.push(`♂ ${pd.genderMalePct}% male`);
+    if (typeof pd.genderFemalePct === "number") lines.push(`♀ ${pd.genderFemalePct}% female`);
+    addRow("Gender", lines.join("<br>"));
+  }
+  if (typeof pd.buddyDistanceKm === "number") addRow("Buddy Distance", `${pd.buddyDistanceKm} km`);
+  if (pd.secondMove && (pd.secondMove.stardust || pd.secondMove.candy)) {
+    const sm = pd.secondMove;
+    const parts = [];
+    if (sm.stardust) parts.push(`<span style="white-space:nowrap">${resIcon("stardust_painted.png")}${sm.stardust.toLocaleString()}</span>`);
+    if (sm.candy) parts.push(`<span style="white-space:nowrap">${resIcon("pokemon_details_candy.png")}${sm.candy.toLocaleString()}</span>`);
+    addRow("Second Move", `<div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap">${parts.join("")}</div>`);
+  }
+  if (pd.purification && (pd.purification.stardust || pd.purification.candy)) {
+    const pu = pd.purification;
+    const parts = [];
+    if (pu.stardust) parts.push(`<span style="white-space:nowrap">${resIcon("stardust_painted.png")}${pu.stardust.toLocaleString()}</span>`);
+    if (pu.candy) parts.push(`<span style="white-space:nowrap">${resIcon("pokemon_details_candy.png")}${pu.candy.toLocaleString()}</span>`);
+    addRow("Purification", `<div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap">${parts.join("")}</div>`);
+  }
+  // The flavour-text quote (from the PokeAPI record, not the GO record) lives at the bottom
+  // of this panel as a full-width block — not a label/value row, so it gets no left label.
+  const flavorText = data && data.flavorText;
+  if (rowsArr.length === 0 && !flavorText) return `<div style="padding:10px 0;color:${th.textMuted};font-size:13px">No Pokédex data available.</div>`;
+  if (rowsArr.length > 0) {
+    rowsArr[rowsArr.length - 1] = rowsArr[rowsArr.length - 1].replace(`border-bottom:1px solid ${th.border}`, "border-bottom:none");
+  }
+  const flavorHtml = flavorText ? `<div style="${rowsArr.length ? `margin-top:12px;padding-top:12px;border-top:1px solid ${th.border};` : ""}font-size:${isMobile ? 12 : 13}px;color:${th.textSecondary};font-style:italic;line-height:1.55">"${esc(flavorText)}"</div>` : "";
+  return `<div>${rowsArr.join("")}${flavorHtml}</div>`;
+}
+
+function renderGoStatsBody(go, th, isMobile) {
+  const stats = go.stats || {};
+  const ranks = go.statRanks || {};
+  const MAX_STAT = 350;
+  const statDefs = [
+    { key: "attack", label: "Attack", color: STAT_COLORS.attack },
+    { key: "defense", label: "Defense", color: STAT_COLORS.defense },
+    { key: "stamina", label: "Stamina", color: STAT_COLORS.hp }
+  ];
+  const rowsArr = [];
+  statDefs.forEach(sd => {
+    const val = stats[sd.key];
+    if (typeof val !== "number") return;
+    const pct = Math.min((val / MAX_STAT) * 100, 100);
+    const rank = ranks[sd.key];
+    const rankLabel = typeof rank === "number" ? `Top ${rank}%` : "";
+    rowsArr.push(`<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <div style="width:${isMobile ? 56 : 64}px;text-align:right;font-size:${isMobile ? 11 : 12}px;font-weight:600;color:${th.textSecondary};flex-shrink:0">${sd.label}</div>
+      <div style="width:${isMobile ? 30 : 36}px;text-align:right;font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};flex-shrink:0">${val}</div>
+      <div style="flex:1;height:10px;background:${th.border};border-radius:5px;overflow:hidden;min-width:30px">
+        <div style="width:${pct}%;height:100%;background:${sd.color};border-radius:5px"></div>
+      </div>
+      <div style="width:${isMobile ? 52 : 60}px;text-align:right;font-size:${isMobile ? 10 : 11}px;font-weight:600;color:${th.textMuted};flex-shrink:0">${rankLabel}</div>
+    </div>`);
+  });
+  const totalHtml = typeof stats.total === "number" ? `<div style="margin-top:6px;padding-top:8px;border-top:1px solid ${th.border}">
+    <span style="font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text}">Total: </span><span style="font-size:${isMobile ? 13 : 14}px;font-weight:800;color:${th.text}">${stats.total}</span>
+  </div>` : "";
+  if (rowsArr.length === 0 && !totalHtml) return `<div style="padding:10px 0;color:${th.textMuted};font-size:13px">No stat data available.</div>`;
+  return `<div>${rowsArr.join("")}${totalHtml}</div>`;
+}
+
+// The merged "Raids" card: every raid this Pokemon has headlined, plus BOTH CP sets it can show.
+// Those two sets describe different Pokemon — a Mega Raid card lists Mega Venusaur's catchable CP
+// while go.cp is plain Venusaur's — so each is labelled with the name it actually belongs to
+// rather than both just saying "CP". Returns "" when there is neither raid history nor CP data,
+// so the caller can drop the whole section instead of rendering an empty shell.
+function renderGoRaidsBody(go, data, th, isMobile) {
+  const infos = findRaidBossInfosForDex(data.dexNum);
+  const cpBody = renderGoRaidCpBody(go, th, isMobile);
+  const hasCp = !cpBody.includes("No CP data available");
+  const counters = go.counters || [];
+  if (infos.length === 0 && !hasCp && counters.length === 0) return "";
+
+  const cardCols = (isMobile || infos.length < 2) ? "minmax(0,1fr)" : "repeat(auto-fit,minmax(320px,1fr))";
+  const cardsHtml = infos.length > 0
+    ? `<div style="display:grid;grid-template-columns:${cardCols};gap:12px;align-items:start">${renderRaidBossCards(infos, th, isMobile)}</div>`
+    : "";
+
+  const subLabel = (text) => `<div style="font-size:11px;font-weight:700;color:${th.textMuted};letter-spacing:0.5px;text-transform:uppercase;margin-bottom:2px">${text}</div>`;
+  const catchHtml = hasCp
+    ? `<div style="margin-top:${infos.length > 0 ? 16 : 0}px;min-width:0">${subLabel(`When you catch it (${esc(go.name)})`)}${cpBody}</div>`
+    : "";
+
+  // Only print the asterisk's footnote when a group-size widget actually rendered one —
+  // renderGroupSizeCompact appends "*" to its "Group Size" label on Mega/Super Mega tiers only.
+  const hasMegaAsterisk = infos.some(i => i.groupSize && /mega raid/i.test(i.groupSize.tier || ""));
+  const footnoteHtml = hasMegaAsterisk ? `<div style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;background:${th.accentBgSubtle("#8E44AD")};border:2px solid #8E44AD;margin-top:14px"><img src="assets/pokemon-images/Mega/regular/Gen-1_Kanto/0150_megax.webp" alt="Mega Mewtwo X" style="width:24px;height:24px;flex-shrink:0" onerror="this.style.display='none'"><span style="font-size:${isMobile ? 12 : 13}px;font-weight:600;color:${th.tipText};line-height:1.45"><strong style="color:#8E44AD">${esc("*Group sizing may differ if a Trainer has Mega Mewtwo X's Dynamic Punch+ Adventure Effect active.")}</strong> ${esc("It increases your Pokémon's damage against Mega-Evolved Pokémon in Mega Raids and Super Mega Raids, and in Super Mega Raids it also lets Trainers break two shields at once instead of one.")}</span></div>` : "";
+
+  // Counters live in here rather than as their own top-level section: "best attackers to use
+  // against this Pokémon in raids" is raid content, and it reads better next to the tier and
+  // group size than three sections further down. Nested accordion (toggleAccordion grows open
+  // ancestors, so this expands correctly inside the Raids card) and still collapsed by default —
+  // a 10-row, 9-column table shouldn't unfold the moment the Raids card is opened.
+  const countersHtml = counters.length > 0
+    ? `<div style="margin-top:16px;min-width:0">${renderGoSection("go-sec-counters", `Top ${counters.length} ${esc(go.name)} Raid Counters`, "Best attackers to use against this Pokémon in raids.", renderGoCountersBody(go, th, isMobile) + renderGoAttribution(th), false, th, isMobile)}</div>`
+    : "";
+
+  return `<div style="min-width:0">${cardsHtml}${catchHtml}${footnoteHtml}${countersHtml}</div>`;
+}
+
+function renderGoRaidCpBody(go, th, isMobile) {
+  const cp = go.cp || {};
+  const rowsArr = [];
+  const addRow = (label, sub, min, max, ivCaption) => rowsArr.push(`<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid ${th.border}">
+    <div>
+      <div style="font-size:${isMobile ? 12.5 : 13.5}px;font-weight:700;color:${th.text}">${label}</div>
+      <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted}">${sub}</div>
+    </div>
+    <div style="text-align:right">
+      <div style="font-size:${isMobile ? 13 : 14}px;font-weight:800;color:${th.text}">${min} - ${max} CP</div>
+      <div style="font-size:${isMobile ? 9.5 : 10.5}px;color:${th.textMuted}">${ivCaption}</div>
+    </div>
+  </div>`);
+  if (cp.raid) addRow("Raids", "Lv. 20", cp.raid.min, cp.raid.max, "10/10/10 - 15/15/15");
+  if (cp.raidWeatherBoosted) addRow("Raids (WB)", "Lv. 25", cp.raidWeatherBoosted.min, cp.raidWeatherBoosted.max, "10/10/10 - 15/15/15");
+  if (cp.shadowRaid) addRow("Shadow Raids", "Lv. 20", cp.shadowRaid.min, cp.shadowRaid.max, "10/10/10 - 15/15/15");
+  // No "Wild" row — dittobase never had one; it was a locally-derived (and mislabeled) figure.
+  // Only these three raid-based CP fields come straight from the source.
+  if (rowsArr.length === 0) return `<div style="padding:10px 0;color:${th.textMuted};font-size:13px">No CP data available.</div>`;
+  rowsArr[rowsArr.length - 1] = rowsArr[rowsArr.length - 1].replace(`border-bottom:1px solid ${th.border}`, "border-bottom:none");
+  return `<div>${rowsArr.join("")}</div>`;
+}
+
+function renderGoTypeChartBody(go, th, isMobile) {
+  const { weak, resist } = computeGoTypeEffectiveness(go.types || []);
+  const pillFs = isMobile ? 11.5 : 12.5;
+  const pill = (entry) => `<span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;background:${goTypeColor(entry.type)};color:#fff;font-size:${pillFs}px;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,0.25)">${esc(entry.type)} <span style="opacity:0.9;font-weight:800">${formatGoPct(entry.multiplier)}</span></span>`;
+  const weakHtml = weak.length ? `<div style="margin-bottom:${resist.length ? 14 : 0}px">
+    <div style="font-size:11px;font-weight:700;color:#E74C3C;letter-spacing:0.5px;margin-bottom:8px;text-transform:uppercase">Weak To</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">${weak.map(pill).join("")}</div>
+  </div>` : "";
+  const resistHtml = resist.length ? `<div>
+    <div style="font-size:11px;font-weight:700;color:#27AE60;letter-spacing:0.5px;margin-bottom:8px;text-transform:uppercase">Resists</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">${resist.map(pill).join("")}</div>
+  </div>` : "";
+  if (!weakHtml && !resistHtml) return `<div style="padding:10px 0;color:${th.textMuted};font-size:13px">No type data available.</div>`;
+  return `${weakHtml}${resistHtml}`;
+}
+
+function renderGoMovesetsBody(go, th, isMobile) {
+  const movesets = go.movesets || [];
+  if (movesets.length === 0) return `<div style="padding:14px 0;text-align:center;color:${th.textMuted};font-size:13px">No moveset data available.</div>`;
+  const fastBySlug = {}; ((go.moves && go.moves.fast) || []).forEach(m => fastBySlug[m.slug] = m);
+  const chargedBySlug = {}; ((go.moves && go.moves.charged) || []).forEach(m => chargedBySlug[m.slug] = m);
+  const perPage = 10;
+  const totalPages = Math.max(1, Math.ceil(movesets.length / perPage));
+  const page = Math.min(Math.max(state.pokedexDetailGoMovesetPage || 1, 1), totalPages);
+  const startIdx = (page - 1) * perPage;
+  const pageRows = movesets.slice(startIdx, startIdx + perPage);
+  const th11 = `padding:8px 10px;text-align:left;color:${th.textMuted};font-size:11px;text-transform:uppercase;letter-spacing:0.4px;white-space:nowrap`;
+  const rowsHtml = pageRows.map((ms, i) => {
+    const rank = startIdx + i + 1;
+    const fm = fastBySlug[ms.fastMove.slug];
+    const cm = chargedBySlug[ms.chargedMove.slug];
+    const fmElite = fm && (fm.isElite || fm.isLegacy);
+    const fmColor = fm ? goTypeColor(fm.typeSlug) : th.text;
+    const cmColor = cm ? goTypeColor(cm.typeSlug) : th.text;
+    return `<tr style="border-bottom:1px solid ${th.border}">
+      <td style="padding:8px 10px;color:${th.textMuted};font-weight:600">${rank}</td>
+      <td style="padding:8px 10px;color:${fmColor};font-weight:700;white-space:nowrap">${esc(ms.fastMove.name)}${fmElite ? " *" : ""}</td>
+      <td style="padding:8px 10px;color:${cmColor};font-weight:700;white-space:nowrap">${esc(ms.chargedMove.name)}</td>
+      <td style="padding:8px 10px;color:${th.text};font-weight:700">${Number(ms.dps).toFixed(2)}</td>
+      <td style="padding:8px 10px;color:${th.textSecondary}">${Number(ms.tdo).toFixed(1)}</td>
+      <td style="padding:8px 10px;color:${th.textSecondary};white-space:nowrap">${Number(ms.ttw).toFixed(1)}s</td>
+      <td style="padding:8px 10px;color:${th.textSecondary}">${Number(ms.edps).toFixed(2)}</td>
+    </tr>`;
+  }).join("");
+  const table = `<div style="overflow-x:auto;width:100%">
+    <table style="border-collapse:collapse;width:100%;min-width:${isMobile ? 560 : 620}px;font-size:${isMobile ? "11.5px" : "13px"}">
+      <thead><tr style="border-bottom:1.5px solid ${th.border}">
+        <th style="${th11}">#</th><th style="${th11}">Fast Move</th><th style="${th11}">Charged Move</th>
+        <th style="${th11}">DPS</th><th style="${th11}">TDO</th><th style="${th11}">TTW</th><th style="${th11}">eDPS</th>
+      </tr></thead>
+      <tbody>${rowsHtml}</tbody>
+    </table>
+  </div>`;
+  const rangeStart = startIdx + 1;
+  const rangeEnd = Math.min(startIdx + perPage, movesets.length);
+  const pagerBtn = (label, disabled, delta) => `<button ${disabled ? "disabled" : `onclick="goMovesetPage(${delta})"`} style="padding:6px 14px;border-radius:8px;border:1.5px solid ${th.border};background:${th.surface};color:${disabled ? th.textFaint : th.text};font-size:12px;font-weight:700;cursor:${disabled ? "default" : "pointer"};font-family:inherit;opacity:${disabled ? 0.5 : 1}">${label}</button>`;
+  const pager = movesets.length > perPage ? `<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;flex-wrap:wrap">
+    <div style="font-size:12px;color:${th.textMuted};font-weight:600">${rangeStart}–${rangeEnd} of ${movesets.length}</div>
+    <div style="display:flex;gap:8px">${pagerBtn("← Prev", page <= 1, -1)}${pagerBtn("Next →", page >= totalPages, 1)}</div>
+  </div>` : "";
+  return `${table}${pager}`;
+}
+
+// MOVES_DB carries a handful of Community Day-style "+" moves (mega:true) that are ONLY usable
+// while a species is Mega Evolved into the exact form named in megaUser (e.g. "Mega Raichu X").
+// Resolves megaUser down to the base species by stripping "Mega " and, for split formes like
+// Raichu X/Y, a trailing " X"/" Y" — but only when what's left is a real DEX entry, so a species
+// that legitimately ends in "X" or "Y" can't be mangled by a blind regex strip. Keyed off dexNum
+// (not go.name) so the base form and the Mega form of the same species show the same moves.
+function megaMovesForDexNum(dexNum) {
+  const baseName = DEX_BY_NUM[dexNum];
+  if (!baseName) return [];
+  const baseLower = baseName.toLowerCase();
+  return MOVES_DB.filter(m => {
+    if (!m.mega || !m.megaUser) return false;
+    let user = m.megaUser.replace(/^Mega\s+/i, "");
+    const formeSplit = user.match(/^(.+)\s[XY]$/);
+    if (formeSplit && Object.prototype.hasOwnProperty.call(DEX, formeSplit[1])) user = formeSplit[1];
+    return user.toLowerCase() === baseLower;
+  });
+}
+
+function renderGoMovePoolBody(go, th, isMobile) {
+  const fast = (go.moves && go.moves.fast) || [];
+  const charged = (go.moves && go.moves.charged) || [];
+  // isElite and isLegacy are always set together in this dataset (never independently) — both
+  // mean the same thing here: not obtainable from a regular TM.
+  const hasStarredMove = fast.some(m => m.isElite || m.isLegacy) || charged.some(m => m.isElite || m.isLegacy);
+  function moveRow(m, isCharged) {
+    const color = goTypeColor(m.typeSlug);
+    const elite = m.isElite || m.isLegacy;
+    const dot = `<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${color};margin-right:6px;flex-shrink:0"></span>`;
+    const barsCell = isCharged ? `<td style="padding:7px 8px;color:${th.textSecondary};letter-spacing:1px">${"●".repeat(m.bars || 0)}</td>` : "";
+    return `<tr style="border-bottom:1px solid ${th.border}">
+      <td style="padding:7px 8px;white-space:nowrap"><span style="display:inline-flex;align-items:center;color:${color};font-weight:700">${dot}${esc(m.name)}${elite ? " *" : ""}</span></td>
+      ${barsCell}
+      <td style="padding:7px 8px;color:${th.textSecondary}">${m.power}</td>
+      <td style="padding:7px 8px;color:${th.textSecondary}">${isCharged ? m.energy : "+" + m.energy}</td>
+      <td style="padding:7px 8px;color:${th.textSecondary};white-space:nowrap">${Number(m.durationSec).toFixed(1)}s</td>
+      <td style="padding:7px 8px;color:${th.text};font-weight:700">${Number(m.dps).toFixed(2)}</td>
+    </tr>`;
+  }
+  function moveTable(moves, isCharged, title) {
+    if (moves.length === 0) return "";
+    const rows = moves.map(m => moveRow(m, isCharged)).join("");
+    const th10 = `padding:7px 8px;text-align:left;color:${th.textMuted};font-size:10.5px;text-transform:uppercase;white-space:nowrap`;
+    const barsHead = isCharged ? `<th style="${th10}">Bars</th>` : "";
+    return `<div>
+      <div style="font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:6px">${title}</div>
+      <div style="overflow-x:auto;width:100%">
+        <table style="border-collapse:collapse;width:100%;min-width:${isMobile ? 320 : 360}px;font-size:${isMobile ? "11.5px" : "12.5px"}">
+          <thead><tr style="border-bottom:1.5px solid ${th.border}">
+            <th style="${th10}">Name</th>${barsHead}<th style="${th10}">Power</th><th style="${th10}">Energy</th><th style="${th10}">Duration</th><th style="${th10}">DPS</th>
+          </tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+    </div>`;
+  }
+  const fastHtml = moveTable(fast, false, "Fast Attacks");
+  const chargedHtml = moveTable(charged, true, "Charged Attacks");
+  if (!fastHtml && !chargedHtml) return `<div style="padding:10px 0;color:${th.textMuted};font-size:13px">No move data available.</div>`;
+  const tablesHtml = `<div style="display:grid;grid-template-columns:${isMobile ? "minmax(0,1fr)" : "minmax(0,1fr) minmax(0,1fr)"};gap:${isMobile ? 16 : 20}px">${fastHtml}${chargedHtml}</div>`;
+  // Mega Moves sub-block: separate from the Fast/Charged tables above (not appended as rows)
+  // because MOVES_DB's power/energy are Trainer Battle (PvP) stats, while the tables above are
+  // raid (PvE) stats (durationSec/dps/bars) — mixing the two would misrepresent both.
+  const megaMoves = megaMovesForDexNum(go.dexNum);
+  const baseName = DEX_BY_NUM[go.dexNum] || go.name;
+  const th10 = `padding:7px 8px;text-align:left;color:${th.textMuted};font-size:10.5px;text-transform:uppercase;white-space:nowrap`;
+  const megaMovesHtml = megaMoves.length ? `<div style="margin-top:${isMobile ? 16 : 20}px">
+    <div style="font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:6px">Mega Moves</div>
+    <div style="font-size:${isMobile ? 10.5 : 11.5}px;color:${th.textMuted};margin-bottom:8px"><strong style="color:${th.textSecondary}">Only usable while ${esc(baseName)} is Mega Evolved</strong> — these Charged Attacks aren't available on the regular form.</div>
+    <div style="overflow-x:auto;width:100%">
+      <table style="border-collapse:collapse;width:100%;min-width:${isMobile ? 320 : 400}px;font-size:${isMobile ? "11.5px" : "12.5px"}">
+        <thead><tr style="border-bottom:1.5px solid ${th.border}">
+          <th style="${th10}">Name</th><th style="${th10}">Power</th><th style="${th10}">Energy</th><th style="${th10}">Effect</th>
+        </tr></thead>
+        <tbody>${megaMoves.map(m => {
+          const color = goTypeColor(m.type.toLowerCase());
+          const dot = `<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${color};margin-right:6px;flex-shrink:0"></span>`;
+          return `<tr style="border-bottom:1px solid ${th.border}">
+            <td style="padding:7px 8px;white-space:nowrap"><span style="display:inline-flex;align-items:center;color:${color};font-weight:700">${dot}${esc(m.name)}</span> <span style="font-size:9px;font-weight:800;text-transform:uppercase;color:#fff;background:#B37FE0;padding:1px 5px;border-radius:6px">MEGA</span></td>
+            <td style="padding:7px 8px;color:${th.textSecondary}">${m.power}</td>
+            <td style="padding:7px 8px;color:${th.textSecondary}">${m.energy}</td>
+            <td style="padding:7px 8px;color:${th.textSecondary}">${m.effect ? esc(m.effect) : ""}</td>
+          </tr>`;
+        }).join("")}</tbody>
+      </table>
+    </div>
+    <div style="font-size:${isMobile ? 10.5 : 11.5}px;color:${th.textMuted};margin-top:6px">Power and Energy above are Trainer Battle (PvP) stats — the tables above are raid (PvE) stats and aren't directly comparable.</div>
+  </div>` : "";
+  const starFootnote = hasStarredMove ? `<div style="margin-top:${isMobile ? 12 : 14}px;font-size:${isMobile ? 10.5 : 11.5}px;color:${th.textMuted}">* Elite TM or legacy move — not learnable with a regular TM; only obtainable through an Elite TM or a limited-time event.</div>` : "";
+  return `${tablesHtml}${megaMovesHtml}${starFootnote}`;
+}
+
+function renderGoCountersBody(go, th, isMobile) {
+  const counters = go.counters || [];
+  if (counters.length === 0) return `<div style="padding:14px 0;text-align:center;color:${th.textMuted};font-size:13px">No counter data available.</div>`;
+  // Counters carry a slug + name but no dexNum of their own — resolve one via the reverse
+  // slug -> dexNum map built from the GO index, then run it through the same local-asset
+  // resolver as the sprite card. A slug missing from the index just hides that sprite (no
+  // remote fetch, ever) rather than showing a broken image.
+  const slugToDex = getGoSlugToDexMap();
+  const th11 = `padding:8px 10px;text-align:left;color:${th.textMuted};font-size:11px;text-transform:uppercase;letter-spacing:0.4px;white-space:nowrap`;
+  const rows = counters.map((c, i) => {
+    const cDex = slugToDex ? slugToDex[c.slug] : undefined;
+    // Shadow counters (slug ends "-shadow", e.g. "mewtwo-shadow") get the same purple aura
+    // behind the sprite as the rest of the app, sized like the other small-sprite auras (e.g.
+    // line 682) — wrapped in its own 32x32 relative box so the aura's -15%/130% overflow can't
+    // affect row layout.
+    const isShadowCounter = /-shadow$/.test(c.slug);
+    const spriteStyle = isShadowCounter
+      ? "position:relative;width:100%;height:100%;object-fit:contain;z-index:1"
+      : "width:32px;height:32px;object-fit:contain;flex-shrink:0";
+    const spriteHtml = typeof cDex === "number"
+      ? `<img src="${goFormImg(cDex, c.slug, false)}" style="${spriteStyle}" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='${pokemonImgUrl(cDex)}';}else{this.style.visibility='hidden';}" />`
+      : "";
+    const imgHtml = spriteHtml && isShadowCounter
+      ? `<div style="position:relative;width:32px;height:32px;flex-shrink:0"><img src="assets/pokemon-images/icons/shadow_icon.png" style="position:absolute;top:-15%;left:-15%;width:130%;height:130%;object-fit:contain;opacity:${darkMode ? 0.85 : 0.6};z-index:0;pointer-events:none" onerror="this.style.display='none'" />${spriteHtml}</div>`
+      : spriteHtml;
+    return `<tr style="border-bottom:1px solid ${th.border}">
+      <td style="padding:8px 10px;color:${th.textMuted};font-weight:600">${i + 1}</td>
+      <td style="padding:8px 10px">
+        <div style="display:flex;align-items:center;gap:8px;min-width:150px">
+          ${imgHtml}
+          <span style="color:${th.text};font-weight:700;white-space:nowrap">${esc(c.name)}</span>
+        </div>
+      </td>
+      <td style="padding:8px 10px;white-space:nowrap;color:${th.textSecondary}">${esc(c.fastMove.name)}</td>
+      <td style="padding:8px 10px;white-space:nowrap;color:${th.textSecondary}">${esc(c.chargedMove.name)}</td>
+      <td style="padding:8px 10px;color:${th.text};font-weight:700">${Number(c.dps).toFixed(2)}</td>
+      <td style="padding:8px 10px;color:${th.textSecondary}">${Number(c.tdo).toFixed(1)}</td>
+      <td style="padding:8px 10px;color:${th.textSecondary}">${Number(c.faints).toFixed(1)}</td>
+      <td style="padding:8px 10px;color:${th.textSecondary};white-space:nowrap">${Number(c.ttw).toFixed(1)}s</td>
+      <td style="padding:8px 10px;color:${th.textSecondary}">${Number(c.edps).toFixed(2)}</td>
+    </tr>`;
+  }).join("");
+  return `<div style="overflow-x:auto;width:100%">
+    <table style="border-collapse:collapse;width:100%;min-width:${isMobile ? 660 : 720}px;font-size:${isMobile ? "11.5px" : "13px"}">
+      <thead><tr style="border-bottom:1.5px solid ${th.border}">
+        <th style="${th11}">#</th><th style="${th11}">Pokémon</th><th style="${th11}">Fast Move</th><th style="${th11}">Charged Move</th>
+        <th style="${th11}">DPS</th><th style="${th11}">TDO</th><th style="${th11}">Faints</th><th style="${th11}">TTW</th><th style="${th11}">eDPS</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  </div>`;
+}
+
+// The "<Species> family" grid at the bottom of the GO block: every related form (evolutions,
+// shadow, regional, mega, dynamax, gigantamax) from data/go/_family.json, keyed by familySlug.
+// Clicking a card either switches form (same species) or navigates to a different species and
+// selects that exact form (selectGoFamilyMember). All sprites are LOCAL via goFormImg — same
+// rule as everywhere else in this feature, no dittobase.com references.
+// Each card also carries a "✨ Shiny" chip at the bottom, below the type dots, when THIS family
+// member's own shiny is confirmed released. _index.json/_family.json carry no shiny flag — only
+// each form's own data/go/<slug>.json does (flags.isShinyReleased) — so the chip is gated on
+// state.pokedexDetailGoShinyBySlug, a slug->bool map filled in by a background prefetch kicked off
+// in openPokemonDetail (see there for the fail-silent contract). Until that prefetch resolves, a
+// card simply renders without a chip. Family entries span MULTIPLE dex numbers (this species' full
+// evolution line, plus Mega/regional/Gigantamax/Shadow), so the shiny sprite is keyed off each
+// entry's OWN f.dexNum — never the active form's go.dexNum, or every non-active card would show
+// the wrong species' shiny.
+function renderGoFamilyBody(familyEntries, go, primaryColor, th, isMobile) {
+  const gridCols = isMobile ? "repeat(auto-fill,minmax(140px,1fr))" : "repeat(auto-fill,minmax(130px,1fr))";
+  const shinyMap = state.pokedexDetailGoShinyBySlug || {};
+  const markerFor = f => {
+    if (f.shadow) return "assets/pokemon-images/icons/shadow_icon.png";
+    if (f.gigantamax) return "assets/pokemon-images/icons/gigantamax_icon.webp";
+    if (f.dynamax) return "assets/pokemon-images/icons/dynamax(white).webp";
+    if (f.mega) return "assets/pokemon-images/icons/dna-twist-sticker.webp";
+    return null;
+  };
+  const cards = familyEntries.map(f => {
+    const isActive = f.slug === go.slug;
+    const spriteSrc = goFormImg(f.dexNum, f.slug, false);
+    const baseSpriteSrc = pokemonImgUrl(f.dexNum);
+    const marker = markerFor(f);
+    const markerSize = isMobile ? 18 : 20;
+    const shinySize = isMobile ? 22 : 26;
+    const typeDots = (f.types || []).map(t => `<span title="${escAttr(t.charAt(0).toUpperCase() + t.slice(1))}" style="display:inline-block;width:11px;height:11px;border-radius:50%;background:${goTypeColor(t)};box-shadow:0 0 0 1.5px ${th.surface}"></span>`).join("");
+    const shinyChip = shinyMap[f.slug] === true ? `<div style="display:flex;align-items:center;gap:4px;margin-top:3px;padding:2px 9px 2px 4px;border-radius:999px;background:${th.accentBgSubtle(primaryColor)};border:1px solid ${th.countdownBorder(primaryColor)}">
+      <img src="${goFormImg(f.dexNum, f.slug, true)}" style="width:${shinySize}px;height:${shinySize}px;object-fit:contain" onerror="this.parentElement.style.display='none'" />
+      <img src="assets/pokemon-images/icons/shiny-sparkles.webp" alt="" aria-hidden="true" style="width:11px;height:11px;object-fit:contain" onerror="this.style.display='none'" />
+      <span style="font-size:${isMobile ? 9.5 : 10.5}px;font-weight:700;color:${th.textSecondary}">Shiny</span>
+    </div>` : "";
+    return `<div onclick="selectGoFamilyMember(${f.dexNum},'${f.slug}')" style="cursor:pointer;position:relative;border-radius:12px;border:1.5px solid ${isActive ? primaryColor : th.border};background:${isActive ? th.accentBgSubtle(primaryColor) : th.surface};padding:${isMobile ? "10px 6px 8px" : "10px 8px 8px"};display:flex;flex-direction:column;align-items:center;gap:3px;transition:border-color 0.15s ease" onmouseenter="this.style.borderColor='${primaryColor}'" onmouseleave="this.style.borderColor='${isActive ? primaryColor : th.border}'">
+      ${marker ? `<img src="${marker}" style="position:absolute;top:5px;left:5px;width:${markerSize}px;height:${markerSize}px;object-fit:contain;pointer-events:none" />` : ""}
+      <img src="${spriteSrc}" style="width:${isMobile ? 54 : 60}px;height:${isMobile ? 54 : 60}px;object-fit:contain" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='${baseSpriteSrc}';}" />
+      <div style="font-size:${isMobile ? 10.5 : 11.5}px;font-weight:700;color:${th.text};text-align:center;line-height:1.25;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(f.name)}</div>
+      <div style="font-size:${isMobile ? 9 : 10}px;color:${th.textMuted}">#${String(f.dexNum).padStart(4, "0")}</div>
+      <div style="display:flex;gap:3px;margin-top:1px">${typeDots}</div>
+      ${shinyChip}
+    </div>`;
+  }).join("");
+  return `<div style="display:grid;grid-template-columns:${gridCols};gap:${isMobile ? 8 : 10}px">${cards}</div>`;
+}
+
+// Measures how much of a same-origin sprite's canvas its actual artwork occupies AND where within
+// the canvas that artwork sits, so callers can size AND center on the real content rather than the
+// canvas. Two Pokemon at the same box size can have wildly different content fill (e.g. Bulbasaur
+// ~0.35 vs Ivysaur ~0.70), so a fixed aura % or fixed sprite size either frames/reads well for
+// small-fill sprites and hides/dwarfs large-fill ones, or vice versa — and the artwork isn't
+// always centered in its canvas either (a measured 142 of 1442 sprite pairs in this project's
+// library have off-center or mismatched framing), so a naive "scale around the middle" would still
+// mis-center those. Cached per image src (module-level map) so each sprite is only canvas-scanned
+// once per session. Returns null (never throws) if measurement isn't possible — callers must fall
+// back to their default fixed sizing already baked into the markup.
+// Shape: { x, y, w, h, frac } — x/y/w/h are the alpha-bbox as FRACTIONS of the canvas (x,y = top
+// left; w,h = size), frac = max(w, h), the single-number "how much of the canvas is filled" used
+// by the Shadow aura sizing below.
+const _spriteContentBBoxCache = {};
+function getSpriteContentBBox(imgEl) {
+  const src = imgEl.currentSrc || imgEl.src;
+  if (Object.prototype.hasOwnProperty.call(_spriteContentBBoxCache, src)) return _spriteContentBBoxCache[src];
+  try {
+    const w = imgEl.naturalWidth, h = imgEl.naturalHeight;
+    if (!w || !h) return null;
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(imgEl, 0, 0, w, h);
+    const data = ctx.getImageData(0, 0, w, h).data;
+    let minX = w, minY = h, maxX = -1, maxY = -1;
+    for (let y = 0; y < h; y++) {
+      for (let x = 0; x < w; x++) {
+        if (data[(y * w + x) * 4 + 3] > 8) {
+          if (x < minX) minX = x;
+          if (x > maxX) maxX = x;
+          if (y < minY) minY = y;
+          if (y > maxY) maxY = y;
+        }
+      }
+    }
+    let result = null;
+    if (maxX >= 0) {
+      const bboxW = (maxX - minX + 1) / w, bboxH = (maxY - minY + 1) / h;
+      result = { x: minX / w, y: minY / h, w: bboxW, h: bboxH, frac: Math.max(bboxW, bboxH) };
+    }
+    _spriteContentBBoxCache[src] = result;
+    return result;
+  } catch (e) {
+    _spriteContentBBoxCache[src] = null;
+    return null;
+  }
+}
+// Thin single-number accessor for callers (the Shadow aura) that only need the fill fraction.
+function getSpriteContentFraction(imgEl) {
+  const bbox = getSpriteContentBBox(imgEl);
+  return bbox ? bbox.frac : null;
+}
+// Fired via onload on each Shadow-form sprite <img>. Resizes its Shadow aura sibling (the
+// .go-shadow-aura <img> rendered immediately before it in the markup) from the sprite's measured
+// content fraction rather than the fixed 95%/95% the aura starts with — that starting size is the
+// silent fallback if measurement fails for any reason. Across the ~467 Shadow-capable dex entries,
+// canvas fill ranges from ~0.22 (e.g. Cyndaquil) to ~1.00 (e.g. Heatran) — a LINEAR multiplier
+// saturates at both ends of that range (either the small-fill sprites drown or the full-fill ones
+// balloon), so this uses a sub-linear sqrt mapping instead, which compresses the top end smoothly
+// with no hard clamp: auraFraction = AURA_K * sqrt(contentFraction). At AURA_K=1.35: a 0.22 fill
+// (Cyndaquil) gets ~0.63x box (2.9x the artwork), 0.35 (Bulbasaur, the reference) gets ~0.80x
+// (2.3x), the ~0.61 median gets ~1.05x, and a 1.00 fill (Heatran/Lapras) gets 1.35x — still a
+// visible halo, only 35% past the sprite box. Runs on Normal and Shiny sprites independently.
+const AURA_K = 1.35;
+// Both halves of the Normal | Shiny pair sit in identical boxes under object-fit:contain, so how
+// big each one LOOKS is set purely by how much of its own canvas the artwork fills — and across
+// the scraped set that varies a lot between a Pokemon and its own shiny (Greninja, Basculegion,
+// Flittle at 3.0x). Measure both, scale each so its artwork spans the same fraction of its box,
+// and re-centre on the measured content bbox rather than the canvas (art is often off-centre).
+// Upscaling is safe here because sources are 256-475px rendered into a ~197px box; the cap keeps
+// the rendered artwork within 1.6x of its real pixels so nothing visibly softens.
+// Also owns the Shadow aura sizing, which has to follow the post-scale fill to stay wrapped
+// around the sprite.
+function applyPairSpriteScale(imgEl) {
+  try {
+    const row = imgEl.closest("[data-sprite-pair]");
+    if (!row) return;
+    const measured = [];
+    for (const im of row.querySelectorAll("img[data-pair-sprite]")) {
+      // Bail until every sprite in the row has decoded — the last one to load runs the real pass.
+      if (!im.complete || !im.naturalWidth) return;
+      const bbox = getSpriteContentBBox(im);
+      const box = im.clientWidth || im.offsetWidth;
+      if (!bbox || !bbox.frac || !box) return;
+      measured.push({ im, bbox, box });
+    }
+    if (!measured.length) return;
+    // Aim for the largest fill in the row, but never past what the softest sprite can reach — a
+    // shared target every sprite can actually hit means the pair matches EXACTLY rather than one
+    // half stopping short at its sharpness cap (Flittle's normal is only 85px of real artwork).
+    const reach = m => m.bbox.frac * Math.max(1, (1.6 * (m.im.naturalWidth || m.box)) / m.box);
+    const target = Math.min(Math.max(...measured.map(m => m.bbox.frac)), ...measured.map(reach));
+    for (const { im, bbox, box } of measured) {
+      const scale = target / bbox.frac;
+      const cx = (bbox.x + bbox.w / 2) * box, cy = (bbox.y + bbox.h / 2) * box;
+      im.style.transformOrigin = `${cx}px ${cy}px`;
+      im.style.transform = `translate(${box / 2 - cx}px, ${box / 2 - cy}px) scale(${scale})`;
+      const aura = im.previousElementSibling;
+      if (aura && aura.classList && aura.classList.contains("go-shadow-aura")) {
+        const px = Math.round(AURA_K * Math.sqrt(Math.min(1, bbox.frac * scale)) * box);
+        aura.style.width = px + "px";
+        aura.style.height = px + "px";
+      }
+    }
+  } catch (e) { /* leave the sprites at their natural object-fit sizing */ }
+}
+
+// Fired via onload on each prev/next Pokedex-nav-bar sprite <img>. Normalizes the sprite's VISUAL
+// size — scoped ONLY to these nav bars, not the main sprite card, Family cards, evolution chain,
+// or counters table — so a low-fill Pokemon (e.g. Charmander) doesn't read as tiny next to a
+// full-canvas one at the same fixed box size. Scales the image up by 1/max(bbox.w, bbox.h) so the
+// artwork's larger dimension exactly fills its (overflow:hidden) wrapper, capped at 3x so a very
+// low-fill sprite doesn't blow up into a blur, then re-centers using the MEASURED content bbox
+// center rather than assuming the artwork is centered in its own canvas (it often isn't). The math:
+// with transform-origin pinned to the content-bbox center (in the img's own untransformed px
+// space, valid 1:1 against the box since object-fit:contain on a square canvas in a square wrapper
+// never letterboxes), `translate(dx,dy) scale(s)` scales every point relative to that pinned
+// center and THEN slides the whole thing by (dx,dy) — so setting dx/dy to "box center minus
+// content center" lands the content's center exactly on the box's center post-scale.
+function applyNavSpriteScale(imgEl) {
+  try {
+    const bbox = getSpriteContentBBox(imgEl);
+    if (!bbox) return;
+    const boxSize = imgEl.clientWidth || imgEl.offsetWidth;
+    if (!boxSize) return;
+    const scale = Math.min(3, 1 / Math.max(bbox.w, bbox.h));
+    const contentCenterX = (bbox.x + bbox.w / 2) * boxSize;
+    const contentCenterY = (bbox.y + bbox.h / 2) * boxSize;
+    const boxCenter = boxSize / 2;
+    const dx = boxCenter - contentCenterX;
+    const dy = boxCenter - contentCenterY;
+    imgEl.style.transformOrigin = `${contentCenterX}px ${contentCenterY}px`;
+    imgEl.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
+  } catch (e) { /* leave the fallback fixed sizing in place (no transform applied) */ }
+}
+// The sprite card that sits to the left of Pokédex Details at the top of the GO block.
+// Resolves the ACTIVE FORM's own local sprite via goFormImg (go.dexNum + go.slug) rather than
+// reusing the base species PokeAPI sprite above, since this card re-renders per form switch.
+function renderGoImageCard(go, data, primaryColor, th, isMobile) {
+  // All sprite URLs are resolved to LOCAL project assets via goFormImg — no dittobase.com
+  // reference anywhere on this card. goFormImg is the single place that knows how to turn a
+  // (dexNum, slug) pair into a path, so swapping the art source later stays a one-function change.
+  const imgSrc = goFormImg(go.dexNum, go.slug, false);
+  const baseImgSrc = pokemonImgUrl(go.dexNum);
+  const imgLabel = go.name || data.name;
+  // Built from the ACTIVE FORM's own types (go.types), not the base species — so Mega/Alolan/
+  // Galarian forms whose typing differs from the base show their correct typing here. The dex
+  // number now lives in the Pokédex Details panel instead, so it isn't repeated on this card.
+  const typeBadges = (go.types || []).map(t => `<span style="display:inline-block;padding:4px 14px;border-radius:20px;background:${goTypeColor(t)};color:#fff;font-size:13px;font-weight:600;text-transform:capitalize;margin:0 3px;text-shadow:0 1px 2px rgba(0,0,0,0.3)">${esc(t)}</span>`).join("");
+  // Shadow forms get a purple smoke aura BEHIND each sprite (the existing shadow_icon.png asset,
+  // z-index 1) rather than a tinted card background — the card background/glow always stay
+  // type-derived (primaryColor), exactly like the non-Shadow case. Centered (top/left 50% +
+  // translate) rather than the raid-tier egg's -30%/160% overscan, which was tuned for a 28px egg
+  // and, at this card's much larger sprite boxes, stretched the aura to ~3x the Pokemon. The
+  // 95%/95% here is only the FALLBACK size (used if the runtime content-fraction measurement
+  // below fails) — applyPairSpriteScale resizes this element per-sprite once its sibling image
+  // loads, since artwork fills wildly different fractions of the sprite canvas per Pokemon (e.g.
+  // Bulbasaur ~0.35 vs Ivysaur ~0.70) and a fixed percent can't frame both well.
+  const isShadowForm = !!(go.forms && go.forms.isShadow);
+  const shadowAuraHtml = (boxPx) => `<img class="go-shadow-aura" data-box-px="${boxPx}" src="assets/pokemon-images/icons/shadow_icon.png" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:95%;height:95%;object-fit:contain;opacity:1;z-index:1;pointer-events:none;filter:saturate(1.3) contrast(1.2)" onerror="this.style.display='none'" />`;
+  const weatherIconsHtml = renderWeatherIcons(go.types, th, isMobile);
+
+  // Always render the Normal | Shiny pair. A form whose shiny isn't released yet has no art to
+  // draw, so its shiny slot gets a circle-and-slash placeholder instead of collapsing the card to
+  // a single sprite — the layout then stays identical whether or not a shiny exists.
+  const shinyReleased = !!(go.flags && go.flags.isShinyReleased === true);
+  const pairBox = isMobile ? 109 : 197; // desktop bumped another ~28% (154 -> 197); mobile untouched, already at its fit limit
+  // Fallback chain: form-specific art -> base dex sprite -> (shiny half only) hide the unit.
+  // `this.dataset.fb` guards against an infinite onerror loop if the base sprite ALSO 404s.
+  // Sparkle badge marks the shiny half at a glance. Pinned to the sprite box's top-right corner
+  // and above the sprite (z-index 3) so it reads as a badge on the artwork, and inert so it never
+  // steals the click that opens the form modal.
+  const sparkleSize = isMobile ? 22 : 30;
+  const sparkleHtml = `<img src="assets/pokemon-images/icons/shiny-sparkles.webp" alt="" aria-hidden="true" style="position:absolute;top:0;right:0;width:${sparkleSize}px;height:${sparkleSize}px;object-fit:contain;z-index:3;pointer-events:none;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.45))" onerror="this.style.display='none'" />`;
+  const spriteUnit = (src, baseSrc, label, caption, glow, hideOnDoubleFail, sparkle) => `<div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+    <div style="position:relative;width:${pairBox}px;height:${pairBox}px;overflow:visible">
+      ${sparkle ? sparkleHtml : ""}
+      ${isShadowForm ? shadowAuraHtml(pairBox) : ""}
+      <img data-pair-sprite="1" onclick="showFormModal('${src}','${esc(label)}')" src="${src}" style="position:relative;width:100%;height:100%;object-fit:contain;filter:${glow};cursor:pointer;z-index:2" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='${baseSrc}';}${hideOnDoubleFail ? "else{this.parentElement.parentElement.style.display='none';}" : ""}" onload="applyPairSpriteScale(this)" />
+    </div>
+    <div style="font-size:${isMobile ? 9 : 10}px;font-weight:600;color:${th.textMuted}">${caption}</div>
+  </div>`;
+  // No shiny art exists for this form — draw the "not available" mark at the same box size so the
+  // two captions still line up. Deliberately inert: nothing to open in the form modal.
+  const shinyPlaceholderUnit = (caption) => {
+    const mark = Math.round(pairBox * 0.46);
+    return `<div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+      <div style="width:${pairBox}px;height:${pairBox}px;display:flex;align-items:center;justify-content:center">
+        <svg width="${mark}" height="${mark}" viewBox="0 0 100 100" fill="none" stroke="${th.textMuted}" stroke-width="7" stroke-linecap="round" opacity="0.5" aria-hidden="true">
+          <circle cx="50" cy="50" r="40" />
+          <line x1="21.7" y1="78.3" x2="78.3" y2="21.7" />
+        </svg>
+      </div>
+      <div style="font-size:${isMobile ? 9 : 10}px;font-weight:600;color:${th.textMuted}">${caption}</div>
+    </div>`;
+  };
+  const normalUnit = spriteUnit(imgSrc, baseImgSrc, imgLabel, "Normal", "drop-shadow(0 6px 18px rgba(0,0,0,0.38))", false);
+  let shinyUnit;
+  if (shinyReleased) {
+    const shinyUrl = goFormImg(go.dexNum, go.slug, true);
+    const baseShinyUrl = shinyDexImg(go.dexNum, GENDER_SUFFIX[go.dexNum] || "");
+    shinyUnit = spriteUnit(shinyUrl, baseShinyUrl, `Shiny ${imgLabel}`, "Shiny", "drop-shadow(0 6px 18px rgba(0,0,0,0.38))", true, true);
+  } else {
+    shinyUnit = shinyPlaceholderUnit("Shiny");
+  }
+  const spriteRowHtml = `<div data-sprite-pair="1" style="display:flex;align-items:flex-start;justify-content:center;gap:${isMobile ? 14 : 22}px">${normalUnit}${shinyUnit}</div>`;
+
+  // The card intentionally stretches to match the Pokédex Details panel's height (align-items:
+  // stretch on the grid row above) — the space above/below the sprite pair is that height-match,
+  // kept centred via justify-content:center, not stray padding to trim. overflow:hidden here
+  // (rather than on the inner sprite box, which stays overflow:visible so the aura can bleed
+  // beyond the sprite and read as a halo) contains the Shadow aura at its largest — a full-canvas
+  // sprite (contentFraction ~1.0) sizes the aura to ~1.35x the sprite box, which at this card's
+  // padding can exceed it — so it clips at the card's own rounded edge instead of bleeding into
+  // the page and risking horizontal overflow, while every normal-size aura still reads unclipped.
+  return `<div style="background:linear-gradient(135deg,${primaryColor}22,${primaryColor}08);border:1px solid ${th.border};border-radius:14px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:${isMobile ? "20px 14px" : "24px 20px"};box-sizing:border-box;height:100%;min-height:${isMobile ? 190 : 240}px">
+    ${spriteRowHtml}
+    <div style="font-size:${isMobile ? 15 : 17}px;font-weight:800;color:${th.text};margin-top:10px;text-align:center">${esc(imgLabel)}</div>
+    ${typeBadges ? `<div style="margin-top:8px">${typeBadges}</div>` : ""}
+    ${weatherIconsHtml}
+  </div>`;
+}
+// Small muted one-line credit shown under the two heaviest tables (movesets, counters).
+function renderGoAttribution(th) {
+  return `<div style="margin-top:10px;font-size:10.5px;color:${th.textMuted}">Battle data from dittobase.com · captured 1 Sep 2026</div>`;
+}
+
+// Orchestrates the whole GO block: the form switcher plus the six collapsible sections.
+// Returns "" (renders nothing) only when there's truly nothing to show yet for this dex number
+// (no index entry, or the very first form fetch this session hasn't succeeded even once) — the
+// legacy PokeAPI-only header covers that case instead. Once ANY form has loaded successfully
+// (goCtx.everLoaded), the block stays on screen for the rest of the session: a later failed form
+// switch shows an inline message in place of the sections rather than collapsing the whole block
+// back to the legacy header, which would be a jarring full-page swap.
+function renderGoBlock(goCtx, data, primaryColor, th, isMobile, evoInnerHtml) {
+  const forms = goCtx && goCtx.forms;
+  if (!forms || forms.length === 0) return "";
+  const switcherHtml = forms.length > 1 ? renderGoFormSwitcher(forms, goCtx.slug, primaryColor, th, isMobile) : "";
+  const go = goCtx.data;
+  let bodyHtml = "";
+  if (goCtx.loading) {
+    bodyHtml = `<div style="padding:20px 0;text-align:center;color:${th.textMuted};font-size:13px">🔄 Loading Pokémon GO data...</div>`;
+  } else if (go) {
+    const gap = isMobile ? "12px" : "16px";
+    // Top row: sprite card (left) + Pokédex Details (right), roughly 60/40 on desktop, mirroring
+    // the source layout — stacked on mobile since a side-by-side split is unreadable at that width.
+    const topCols = isMobile ? "minmax(0,1fr)" : "minmax(0,3fr) minmax(0,2fr)";
+    const gridCols = isMobile ? "minmax(0,1fr)" : "minmax(0,1fr) minmax(0,1fr)";
+    // Raid Boss Info and Raid CP used to be a two-column pair, which left a tall ragged gap and
+    // put two differently-scoped CP blocks side by side with nothing saying they described
+    // different Pokémon. They are now one full-width "Raids" card below the stats row.
+    const raidsBody = renderGoRaidsBody(go, data, th, isMobile);
+    bodyHtml = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 14 : 18}px;min-width:0">
+      <div style="display:grid;grid-template-columns:${topCols};gap:${gap};align-items:stretch">
+        ${renderGoImageCard(go, data, primaryColor, th, isMobile)}
+        ${renderGoSection("go-sec-details", "Pokédex Details", "Category, size, buddy distance, and second-move costs.", renderGoPokedexDetailsBody(go, data, th, isMobile), true, th, isMobile)}
+      </div>
+      <div style="display:grid;grid-template-columns:${gridCols};gap:${gap};align-items:start">
+        ${renderGoSection("go-sec-stats", "GO Stats", "Base Attack, Defense, and Stamina compared to all Pokémon.", renderGoStatsBody(go, th, isMobile), true, th, isMobile)}
+        ${renderGoSection("go-sec-types", `${esc(go.name)} Type Chart`, "Incoming damage multipliers based on typing alone.", renderGoTypeChartBody(go, th, isMobile), true, th, isMobile)}
+      </div>
+      ${raidsBody ? renderGoSection("go-sec-raids", "Raids", "Raid appearances, group sizes, and the CP ranges you’ll see.", raidsBody, true, th, isMobile) : ""}
+      ${renderGoSection("go-sec-movesets", "All Movesets Ranked by DPS", "Every fast + charged move combination, sorted by DPS.", renderGoMovesetsBody(go, th, isMobile) + renderGoAttribution(th), false, th, isMobile)}
+      ${renderGoSection("go-sec-movepool", `${esc(go.name)}'s Move Pool`, "All fast and charged moves this Pokémon can learn.", renderGoMovePoolBody(go, th, isMobile), true, th, isMobile)}
+      ${(() => {
+        // Family index is fetched eagerly (alongside _index.json) in openPokemonDetail and cached
+        // in _pokeCache the same way getGoSlugToDexMap reads it — no extra state field needed.
+        const familyIdx = _pokeCache["go_family"] || {};
+        const familySlug = go.family && go.family.familySlug;
+        const familyEntries = familySlug ? (familyIdx[familySlug] || []) : [];
+        const hasFamily = familyEntries.length > 1;
+        if (!hasFamily && !evoInnerHtml) return "";
+        // The old standalone "Evolution Chain" block listed the same Pokémon this grid already
+        // shows, under a title with no card around it. It now sits at the top of this card, where
+        // it still contributes the one thing the grid lacks: the candy cost per evolution step.
+        const evoPart = evoInnerHtml
+          ? `<div style="margin-bottom:${hasFamily ? (isMobile ? 14 : 16) : 0}px;min-width:0">${evoInnerHtml}</div>`
+          : "";
+        const gridPart = hasFamily ? renderGoFamilyBody(familyEntries, go, primaryColor, th, isMobile) : "";
+        return renderGoSection("go-sec-family", `${esc(go.name)} family & evolutions`, `Every Pokémon related to ${esc(go.name)} — its evolution line with candy costs, plus shadow, regional, Mega, Dynamax and Gigantamax forms.`, evoPart + gridPart, true, th, isMobile);
+      })()}
+    </div>`;
+  } else if (goCtx.everLoaded) {
+    // A form switch failed (e.g. that form's file 404s) after we'd already shown real data this
+    // session — keep the block + switcher on screen so the user can pick a form that works.
+    bodyHtml = `<div style="padding:20px 0;text-align:center;color:${th.textMuted};font-size:13px">Couldn't load data for this form.</div>`;
+  }
+  // else: nothing has EVER loaded for this dex — stay silent here (no error, no empty shell) and
+  // let the legacy PokeAPI-only header above cover it instead.
+  if (!switcherHtml && !bodyHtml) return "";
+  return `<div style="margin-top:20px;display:flex;flex-direction:column;gap:16px">${switcherHtml}${bodyHtml}</div>`;
+}
+
 function renderPokemonDetail(data, evolutions, th, isMobile) {
   if (!data) {
     return `<div style="padding:24px;text-align:center;color:${th.textMuted}">
@@ -8064,22 +9414,7 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
   const typeBadges = data.types.map(t => `<span style="display:inline-block;padding:4px 14px;border-radius:20px;background:${typeColor(t)};color:#fff;font-size:13px;font-weight:600;text-transform:capitalize;margin-right:6px;text-shadow:0 1px 2px rgba(0,0,0,0.3)">${t}</span>`).join("");
   const heightM = (data.height / 10).toFixed(1);
   const weightKg = (data.weight / 10).toFixed(1);
-  const SHOWN_STATS = ["hp", "attack", "defense"];
-  // const SHOWN_STATS = ["hp", "attack", "defense", "special-attack", "special-defense", "speed"];
-  const statBars = data.stats.filter(s => SHOWN_STATS.includes(s.name)).map(s => {
-    const pct = Math.min((s.value / 255) * 100, 100);
-    const color = STAT_COLORS[s.name] || primaryColor;
-    const label = STAT_LABELS[s.name] || s.name;
-    return `<div style="display:flex;align-items:center;margin-bottom:6px;gap:8px">
-      <div style="width:70px;text-align:right;font-size:12px;font-weight:600;color:${th.textSecondary};flex-shrink:0">${label}</div>
-      <div style="width:32px;text-align:right;font-size:13px;font-weight:700;color:${th.text};flex-shrink:0">${s.value}</div>
-      <div style="flex:1;height:10px;background:${th.border};border-radius:5px;overflow:hidden">
-        <div style="width:${pct}%;height:100%;background:${color};border-radius:5px"></div>
-      </div>
-    </div>`;
-  }).join("");
-  const totalStats = data.stats.filter(s => SHOWN_STATS.includes(s.name)).reduce((sum, s) => sum + s.value, 0);
-  let evoHtml = "";
+  let evoHtml = "", evoInnerHtml = "";
   if (evolutions && evolutions.length > 1) {
     function evoCard(evo, compact = false) {
       const isActive = evo.dexNum === data.dexNum && (!evo.imgFile || evo.name === data.name);
@@ -8201,7 +9536,7 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
           <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textSecondary};margin-top:2px">${esc(evo.trigger)}</div>
         </div>
         <div onclick="showFormModal('${shinyMegaSrc}','Shiny ${esc(evo.name)}')" style="display:flex;flex-direction:column;align-items:center;cursor:pointer;flex-shrink:0;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'">
-          <img src="${shinyMegaSrc}" style="width:${isMobile ? 44 : 52}px;height:${isMobile ? 44 : 52}px;object-fit:contain;filter:drop-shadow(0 1px 4px rgba(255,215,0,0.4))" onerror="this.parentElement.style.display='none'" />
+          <img src="${shinyMegaSrc}" style="width:${isMobile ? 44 : 52}px;height:${isMobile ? 44 : 52}px;object-fit:contain;filter:drop-shadow(0 1px 4px rgba(0,0,0,0.32))" onerror="this.parentElement.style.display='none'" />
           <div style="font-size:${isMobile ? 9 : 10}px;font-weight:600;color:#F39C12;margin-top:2px">✨ Shiny</div>
         </div>
       </div>`;
@@ -8212,22 +9547,83 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
       </div>`;
     }
 
+    // Kept headless so the GO block can drop it straight into the Family card. evoHtml is the
+    // standalone wrapper, still used on the pre-GO-data fallback view where there is no Family
+    // section to fold it into.
+    evoInnerHtml = `${evoContent}${megaHtml}`;
     evoHtml = `<div style="margin-top:20px">
       <div style="font-size:14px;font-weight:700;color:${th.text};margin-bottom:10px">Evolution Chain</div>
-      ${evoContent}
-      ${megaHtml}
+      ${evoInnerHtml}
     </div>`;
   }
   const pad = isMobile ? "16px" : "24px";
-  return `<div style="padding:${pad};max-width:480px;margin:0 auto">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-      <button onclick="closePokemonDetail()" style="display:flex;align-items:center;gap:6px;background:none;border:none;color:${th.textSecondary};font-size:14px;font-weight:600;cursor:pointer;padding:8px 0;font-family:inherit" onmouseenter="this.style.color='${th.text}'" onmouseleave="this.style.color='${th.textSecondary}'">\u2190 Back</button>
-      <div style="display:flex;gap:8px">
-        ${data.dexNum > 1 ? `<button onclick="openPokemonDetail(${data.dexNum - 1})" style="width:36px;height:36px;border-radius:10px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;transition:all 0.15s ease" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${th.surface}'">\u25C0</button>` : ""}
-        ${data.dexNum < 1025 ? `<button onclick="openPokemonDetail(${data.dexNum + 1})" style="width:36px;height:36px;border-radius:10px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;transition:all 0.15s ease" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${th.surface}'">\u25B6</button>` : ""}
-      </div>
-    </div>
-    <div style="text-align:center;padding:20px 0;background:linear-gradient(135deg,${primaryColor}22,${primaryColor}08);border-radius:16px;margin-bottom:16px;position:relative;overflow:hidden">
+  // Pokemon GO data (dittobase) is fetched lazily by openPokemonDetail/selectGoForm and lives
+  // in state rather than being passed as a param, same as the rest of the pokedex-detail state.
+  const goCtx = {
+    forms: state.pokedexDetailGoForms,
+    slug: state.pokedexDetailGoSlug,
+    data: state.pokedexDetailGoData,
+    loading: state.pokedexDetailGoLoading,
+    everLoaded: state.pokedexDetailGoEverLoaded
+  };
+  // "GO data ready" mirrors the exact condition renderGoBlock uses to enter its `else if (go)`
+  // branch (not loading, and real GO data present) \u2014 that's the only branch that renders the
+  // Raid CP section, so it's the only case where Raid Boss Info should pair with it instead of
+  // rendering standalone in its legacy position near the bottom of the page. Computed once here
+  // and passed through so renderDexRaidBossInfo is only called a single time per render.
+  const goDataReady = !!(goCtx.forms && goCtx.forms.length > 0 && !goCtx.loading && goCtx.data);
+  const raidBossInfoHtml = renderDexRaidBossInfo(data, th, isMobile);
+  const goBlockHtml = renderGoBlock(goCtx, data, primaryColor, th, isMobile, evoInnerHtml);
+  // Only widen past the classic 480px column when there's an actual GO block to show \u2014
+  // a Pokemon with no scraped GO data must render byte-for-byte like it did before this feature.
+  const outerMaxWidth = goBlockHtml ? 1180 : 480;
+  // Prev/next nav bars: two flex:1 cards spanning the full content width as a pair (mirrors a
+  // user-supplied reference layout, restyled with this project's existing surface/border/hover
+  // idiom rather than the reference's own colors). When only one side exists (dex 1 or dex 1025)
+  // flex:1 alone makes it fill the whole row instead of leaving a gap or a half-width orphan.
+  const prevDex = data.dexNum - 1;
+  const nextDex = data.dexNum + 1;
+  const navSpriteSize = isMobile ? 30 : 40;
+  const navBarHeight = isMobile ? 50 : 60;
+  const navBtnBase = `flex:1;min-width:0;height:${navBarHeight}px;border-radius:12px;border:1.5px solid ${th.border};background:${th.surface};cursor:pointer;font-family:inherit;transition:all 0.15s ease;padding:0 ${isMobile ? 10 : 16}px;display:flex;align-items:center;gap:${isMobile ? 8 : 10}px;overflow:hidden`;
+  // Wrapped in a fixed-size, overflow:hidden box so applyNavSpriteScale (onload) can scale+center
+  // the sprite on its MEASURED artwork rather than its raw 256x256 canvas \u2014 normalizes visual size
+  // across Pokemon whose art fills wildly different fractions of that canvas (this nav bar only;
+  // the main sprite card, Family cards, evolution chain, and counters table are untouched).
+  const navSprite = (src) => `<div style="position:relative;width:${navSpriteSize}px;height:${navSpriteSize}px;overflow:hidden;flex-shrink:0">
+      <img src="${src}" style="width:100%;height:100%;object-fit:contain;display:block" onerror="this.parentElement.style.display='none'" onload="applyNavSpriteScale(this)" />
+    </div>`;
+  const prevBtn = data.dexNum > 1 ? `<button onclick="openPokemonDetail(${prevDex})" style="${navBtnBase};justify-content:flex-start" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${th.surface}'">
+    <span style="font-size:${isMobile ? 15 : 18}px;color:${th.textSecondary};flex-shrink:0">\u25C0</span>
+    ${navSprite(pokemonImgUrl(prevDex))}
+    <span style="font-size:${isMobile ? 12 : 14}px;font-weight:700;color:${th.text};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">${esc(DEX_BY_NUM[prevDex] || ("#" + prevDex))}</span>
+  </button>` : "";
+  const nextBtn = data.dexNum < 1025 ? `<button onclick="openPokemonDetail(${nextDex})" style="${navBtnBase};justify-content:flex-end" onmouseenter="this.style.background='${th.surfaceHover}'" onmouseleave="this.style.background='${th.surface}'">
+    <span style="font-size:${isMobile ? 12 : 14}px;font-weight:700;color:${th.text};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">${esc(DEX_BY_NUM[nextDex] || ("#" + nextDex))}</span>
+    ${navSprite(pokemonImgUrl(nextDex))}
+    <span style="font-size:${isMobile ? 15 : 18}px;color:${th.textSecondary};flex-shrink:0">\u25B6</span>
+  </button>` : "";
+  // Nav-row search: a middle search box between prev/next so a Trainer can jump straight to any
+  // dex entry from here too. Reuses searchPokedex/DEX_NAMES via its own id pair rather than a
+  // second search implementation. Desktop: a fixed-ish flex-basis cell holds prev/next to equal
+  // flex:1 widths on either side. Mobile: prev/next stay a tight two-up row (no room for a third
+  // inline child at mobile sizes) and the search drops to its own row underneath instead.
+  const navSearchInputId = "dex-nav-search";
+  const navSearchResultsId = "dex-nav-search-results";
+  const navSearchCell = `<div style="position:relative;${isMobile ? "width:100%" : "flex:3 1 0;min-width:200px"};height:${navBarHeight}px">
+    <input id="${navSearchInputId}" placeholder="Search…" oninput="searchPokedex(this.value,'${navSearchInputId}','${navSearchResultsId}')" autocomplete="off" style="width:100%;height:100%;padding:0 12px 0 ${isMobile ? 34 : 38}px;border-radius:12px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:${isMobile ? 13 : 14}px;font-family:inherit;outline:none;box-sizing:border-box" />
+    <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:${isMobile ? 14 : 16}px;pointer-events:none">🔍</span>
+    <div id="${navSearchResultsId}" style="display:none;position:absolute;top:100%;left:0;right:0;max-height:300px;overflow-y:auto;background:${th.surface};border:1.5px solid ${th.border};border-radius:12px;margin-top:4px;z-index:100;box-shadow:0 8px 24px rgba(0,0,0,0.2)"></div>
+  </div>`;
+  const navRowHtml = (prevBtn || nextBtn) ? (isMobile
+    ? `<div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;margin-bottom:16px;min-width:0">${navSearchCell}<div style="display:flex;gap:8px;min-width:0">${prevBtn}${nextBtn}</div></div>`
+    : `<div style="display:flex;gap:10px;margin-top:10px;margin-bottom:16px;min-width:0">${prevBtn}${navSearchCell}${nextBtn}</div>`)
+    : "";
+  return `<div style="padding:${pad};max-width:${outerMaxWidth}px;margin:0 auto;width:100%;min-width:0;box-sizing:border-box">
+    <button onclick="closePokemonDetail()" style="display:flex;align-items:center;gap:6px;background:none;border:none;color:${th.textSecondary};font-size:14px;font-weight:600;cursor:pointer;padding:8px 0;font-family:inherit" onmouseenter="this.style.color='${th.text}'" onmouseleave="this.style.color='${th.textSecondary}'">\u2190 Back</button>
+    ${navRowHtml}
+    <div style="max-width:480px;margin:0 auto;width:100%;min-width:0">
+    ${!goCtx.everLoaded ? `<div style="text-align:center;padding:20px 0;background:linear-gradient(135deg,${primaryColor}22,${primaryColor}08);border-radius:16px;margin-bottom:16px;position:relative;overflow:hidden">
       <div style="position:absolute;top:8px;right:12px;font-size:28px;font-weight:800;color:${primaryColor};opacity:0.7">${dexStr}</div>
       <img onclick="showFormModal('${pokemonImgUrl(data.dexNum)}','${esc(data.name)}')" src="${pokemonImgUrl(data.dexNum)}" style="width:${isMobile ? 140 : 180}px;height:${isMobile ? 140 : 180}px;object-fit:contain;filter:drop-shadow(0 4px 12px ${primaryColor}40);cursor:pointer" onerror="this.style.opacity='0.3'" />
     </div>
@@ -8265,25 +9661,25 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
       <div style="text-align:center"><div style="font-size:11px;font-weight:600;color:${th.textMuted};text-transform:uppercase;letter-spacing:0.5px">Height</div><div style="font-size:16px;font-weight:700;color:${th.text}">${heightM} m</div></div>
       <div style="width:1px;background:${th.border}"></div>
       <div style="text-align:center"><div style="font-size:11px;font-weight:600;color:${th.textMuted};text-transform:uppercase;letter-spacing:0.5px">Weight</div><div style="font-size:16px;font-weight:700;color:${th.text}">${weightKg} kg</div></div>
+    </div>` : ""}
+    ${(!goCtx.everLoaded && data.flavorText) ? `<div style="padding:14px;background:${th.surface};border-radius:12px;border:1px solid ${th.border};margin-bottom:16px;font-size:13px;color:${th.textSecondary};line-height:1.6;font-style:italic;text-align:center">"${esc(data.flavorText)}"</div>` : ""}
     </div>
-    ${data.flavorText ? `<div style="padding:14px;background:${th.surface};border-radius:12px;border:1px solid ${th.border};margin-bottom:16px;font-size:13px;color:${th.textSecondary};line-height:1.6;font-style:italic;text-align:center">"${esc(data.flavorText)}"</div>` : ""}
-    <div style="margin-bottom:16px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <div style="font-size:14px;font-weight:700;color:${th.text}">Base Stats</div>
-        <div style="font-size:12px;color:${th.textMuted};font-weight:600">Total: ${totalStats}</div>
-      </div>
-      <div style="padding:14px;background:${th.surface};border-radius:12px;border:1px solid ${th.border}">${statBars}</div>
-    </div>
-    ${evoHtml}
+    ${goBlockHtml}
+    <div style="max-width:480px;margin:0 auto;width:100%">
+    ${goBlockHtml ? "" : evoHtml}
     ${(() => {
+      // The GO sprite card already shows Normal | Shiny side by side, and the shiny blurb now sits
+      // in the Pokédex Details panel — so this whole block is redundant there. It stays only for
+      // the fallback view rendered when GO data failed to load.
+      if (goBlockHtml) return "";
       const shinySrc = shinyDexImg(data.dexNum, GENDER_SUFFIX[data.dexNum] || "");
       const shinyLabel = "Shiny " + data.name;
       const shinyDesc = SHINY_DESC[data.dexNum] || "";
       return `<div style="margin-top:20px">
         <div style="font-size:14px;font-weight:700;color:${th.text};margin-bottom:10px">\u2728 Shiny Variant</div>
-        <div onclick="showFormModal('${shinySrc}','${esc(shinyLabel)}')" style="display:flex;align-items:center;gap:${isMobile ? 12 : 16}px;padding:${isMobile ? 14 : 16}px;background:${th.surface};border-radius:12px;border:1px solid ${th.border};cursor:pointer;transition:transform 0.15s ease,box-shadow 0.15s ease" onmouseenter="this.style.transform='scale(1.02)';this.style.boxShadow='0 4px 16px rgba(255,215,0,0.2)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none'">
+        <div onclick="showFormModal('${shinySrc}','${esc(shinyLabel)}')" style="display:flex;align-items:center;gap:${isMobile ? 12 : 16}px;padding:${isMobile ? 14 : 16}px;background:${th.surface};border-radius:12px;border:1px solid ${th.border};cursor:pointer;transition:transform 0.15s ease,box-shadow 0.15s ease" onmouseenter="this.style.transform='scale(1.02)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.25)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none'">
           <div style="position:relative;flex-shrink:0">
-            <img src="${shinySrc}" style="width:${isMobile ? 80 : 100}px;height:${isMobile ? 80 : 100}px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(255,215,0,0.3))" onerror="this.style.opacity='0.3'" />
+            <img src="${shinySrc}" style="width:${isMobile ? 80 : 100}px;height:${isMobile ? 80 : 100}px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.32))" onerror="this.style.opacity='0.3'" />
           </div>
           <div>
             <div style="font-size:${isMobile ? 15 : 16}px;font-weight:700;color:${th.text}">${esc(shinyLabel)}</div>
@@ -8351,7 +9747,7 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
               <div style="font-size:${isMobile ? 9 : 10}px;font-weight:600;color:${th.textSecondary};margin-top:4px">Regular</div>
             </div>
             <div onclick="showFormModal('${shinyfSrc}','${esc(shinyFormFullName)}')" style="display:flex;flex-direction:column;align-items:center;cursor:pointer;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'">
-              <img src="${shinyfSrc}" style="width:${isMobile ? 72 : 84}px;height:${isMobile ? 72 : 84}px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(255,215,0,0.3))" onerror="this.parentElement.style.display='none'" />
+              <img src="${shinyfSrc}" style="width:${isMobile ? 72 : 84}px;height:${isMobile ? 72 : 84}px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.32))" onerror="this.parentElement.style.display='none'" />
               <div style="font-size:${isMobile ? 9 : 10}px;font-weight:600;color:${th.textMuted};margin-top:4px">\u2728 Shiny</div>
             </div>
           </div>
@@ -8372,8 +9768,8 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
               <span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${th.text};text-align:center">${esc(formFullName)}</span>
               <span style="font-size:${isMobile ? 9 : 10}px;color:${th.textMuted}">#${String(data.dexNum).padStart(4,"0")}</span>
             </div>
-            <div onclick="showFormModal('${shinyfSrc}','${esc(shinyFormFullName)}')" style="cursor:pointer;margin-top:4px;padding:4px 8px;border-radius:8px;background:${th.surface};border:1px solid ${th.border};display:flex;align-items:center;gap:6px;transition:transform 0.15s ease,box-shadow 0.15s ease" onmouseenter="this.style.transform='scale(1.05)';this.style.boxShadow='0 2px 8px rgba(255,215,0,0.15)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none'">
-              <img src="${shinyfSrc}" style="width:${isMobile ? 28 : 32}px;height:${isMobile ? 28 : 32}px;object-fit:contain;filter:drop-shadow(0 1px 4px rgba(255,215,0,0.3))" onerror="this.parentElement.style.display='none'" />
+            <div onclick="showFormModal('${shinyfSrc}','${esc(shinyFormFullName)}')" style="cursor:pointer;margin-top:4px;padding:4px 8px;border-radius:8px;background:${th.surface};border:1px solid ${th.border};display:flex;align-items:center;gap:6px;transition:transform 0.15s ease,box-shadow 0.15s ease" onmouseenter="this.style.transform='scale(1.05)';this.style.boxShadow='0 2px 8px rgba(0,0,0,0.22)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none'">
+              <img src="${shinyfSrc}" style="width:${isMobile ? 28 : 32}px;height:${isMobile ? 28 : 32}px;object-fit:contain;filter:drop-shadow(0 1px 4px rgba(0,0,0,0.32))" onerror="this.parentElement.style.display='none'" />
               <span style="font-size:${isMobile ? 9 : 10}px;font-weight:600;color:${th.textSecondary}">\u2728 Shiny</span>
             </div>
           </div>`;
@@ -8386,7 +9782,10 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
         <div style="display:flex;flex-direction:column;gap:10px">${formsHTML}</div>
       </div>`;
     })()}
-    ${renderDexRaidBossInfo(data, th, isMobile)}
+    </div>
+    <div style="max-width:480px;margin:0 auto;width:100%">
+    ${goDataReady ? "" : raidBossInfoHtml}
+    </div>
   </div>`;
 }
 
@@ -8876,7 +10275,7 @@ function renderWeekDigest(th, isMobile) {
 
       let iconHTML;
       if (ev.type === "Max Battle" && ev.iconImg) {
-        iconHTML = `<div style="position:relative;width:32px;height:32px;flex-shrink:0"><img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85;z-index:0" /><img src="${ev.iconImg}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" /></div>`;
+        iconHTML = `<div style="position:relative;width:32px;height:32px;flex-shrink:0"><img src="assets/pokemon-images/icons/dynamax-icon(white).webp" style="position:absolute;top:1px;right:1px;width:50%;height:50%;object-fit:contain;opacity:0.85;z-index:0;pointer-events:none" /><img src="${ev.iconImg}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" /></div>`;
       } else if (ev.iconImg) {
         iconHTML = `<img src="${ev.iconImg}" style="width:32px;height:32px;object-fit:contain;flex-shrink:0" onerror="this.outerHTML='<span style=\\'font-size:22px\\'>${ev.icon || pillIconFor(ev)}</span>'" />`;
       } else {
@@ -9014,7 +10413,7 @@ function render() {
             if (ev.type === "Max Battle" && ev.iconImg) {
               const size = isMobile ? 36 : 34;
               return `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0">
-                <img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85;z-index:0" />
+                <img src="assets/pokemon-images/icons/dynamax-icon(white).webp" style="position:absolute;top:1px;right:1px;width:50%;height:50%;object-fit:contain;opacity:0.85;z-index:0;pointer-events:none" />
                 <img src="${ev.iconImg}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
               </div>`;
             }
@@ -9036,7 +10435,7 @@ function render() {
           <img src="${src}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
         </div>`;
       const dynamaxWrap = (src, size, imgSize) => `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0">
-          <img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85;z-index:0" />
+          <img src="assets/pokemon-images/icons/dynamax-icon(white).webp" style="position:absolute;top:1px;right:1px;width:50%;height:50%;object-fit:contain;opacity:0.85;z-index:0;pointer-events:none" />
           <img src="${src}" style="position:relative;width:${imgSize}px;height:${imgSize}px;object-fit:contain;z-index:1;display:block;margin:0 auto" onerror="this.parentElement.style.display='none'" />
         </div>`;
       const compactIcon = (() => {
@@ -9100,7 +10499,7 @@ function render() {
             if (hero.type === "Max Battle" && hero.iconImg) {
               const size = isMobile ? 36 : 34;
               return `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0">
-                <img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85;z-index:0" />
+                <img src="assets/pokemon-images/icons/dynamax-icon(white).webp" style="position:absolute;top:1px;right:1px;width:50%;height:50%;object-fit:contain;opacity:0.85;z-index:0;pointer-events:none" />
                 <img src="${hero.iconImg}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
               </div>`;
             }
@@ -9117,7 +10516,7 @@ function render() {
           <img src="${src}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
         </div>`;
       const heroDynamaxWrap = (src, size, imgSize) => `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0">
-          <img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;object-fit:contain;opacity:0.85;z-index:0" />
+          <img src="assets/pokemon-images/icons/dynamax-icon(white).webp" style="position:absolute;top:1px;right:1px;width:50%;height:50%;object-fit:contain;opacity:0.85;z-index:0;pointer-events:none" />
           <img src="${src}" style="position:relative;width:${imgSize}px;height:${imgSize}px;object-fit:contain;z-index:1;display:block;margin:0 auto" onerror="this.parentElement.style.display='none'" />
         </div>`;
       const compactHeroIcon = (() => {
