@@ -9692,7 +9692,11 @@ function renderGoBlock(goCtx, data, primaryColor, th, isMobile, evoInnerHtml) {
         // in _pokeCache the same way getGoSlugToDexMap reads it — no extra state field needed.
         const familyIdx = _pokeCache["go_family"] || {};
         const familySlug = go.family && go.family.familySlug;
-        const rawFamilyEntries = familySlug ? (familyIdx[familySlug] || []) : [];
+        // Costume forms are dropped here: they are cosmetic, not evolutionary relatives, and since
+        // v4.02 they have their own "Costume Variants" section below — listing them in both places
+        // showed the same Pop Star / Rock Star Pikachu twice on one page. Same set the top form
+        // switcher already excludes.
+        const rawFamilyEntries = (familySlug ? (familyIdx[familySlug] || []) : []).filter(f => !GO_COSTUME_SLUGS.has(f.slug));
         // _family.json is ordered by dex number, which puts every BABY Pokemon last — Pichu (#172)
         // landed after Raichu (#26) in its own family. Order by the evolution chain instead so the
         // line reads pre-evolution -> evolution, matching the candy-cost chain rendered above.
