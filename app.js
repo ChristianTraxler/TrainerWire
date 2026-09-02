@@ -8724,10 +8724,17 @@ function renderGoPokedexDetailsBody(go, data, th, isMobile) {
   if (pd.isGenderless) {
     addRow("Gender", "Genderless");
   } else if (typeof pd.genderMalePct === "number" || typeof pd.genderFemalePct === "number") {
+    // The ♂/♀ glyphs render on the text baseline with their own ascent/descent, which sits
+    // noticeably higher/lower than the surrounding digits in most fonts — joining them as plain
+    // text with <br> left the symbol looking offset from its own line. Each line is its own
+    // inline-flex row instead, so the symbol is vertically centered against the text by flexbox
+    // rather than by font metrics, and a flex column keeps both lines right-aligned like every
+    // other row's value in this panel.
+    const genderLine = (symbol, pct, label) => `<div style="display:inline-flex;align-items:center;justify-content:flex-end;gap:4px"><span style="font-size:1.1em;line-height:1">${symbol}</span><span>${pct}% ${label}</span></div>`;
     const lines = [];
-    if (typeof pd.genderMalePct === "number") lines.push(`♂ ${pd.genderMalePct}% male`);
-    if (typeof pd.genderFemalePct === "number") lines.push(`♀ ${pd.genderFemalePct}% female`);
-    addRow("Gender", lines.join("<br>"));
+    if (typeof pd.genderMalePct === "number") lines.push(genderLine("♂", pd.genderMalePct, "male"));
+    if (typeof pd.genderFemalePct === "number") lines.push(genderLine("♀", pd.genderFemalePct, "female"));
+    addRow("Gender", `<div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">${lines.join("")}</div>`);
   }
   if (typeof pd.buddyDistanceKm === "number") addRow("Buddy Distance", `${pd.buddyDistanceKm} km`);
   if (pd.secondMove && (pd.secondMove.stardust || pd.secondMove.candy)) {
