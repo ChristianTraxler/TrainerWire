@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "4.01";
+const APP_VERSION = "4.02";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -22,8 +22,11 @@ function dexPad(d) { return String(d).padStart(4, "0"); }
 function natDexImg(dex, suffix) { return `${IMG_BASE}/National-Dex/regular/${getGenFolder(dex)}/${dexPad(dex)}${suffix || ""}.webp`; }
 function shinyDexImg(dex, suffix) { return `${IMG_BASE}/National-Dex/shiny/${getGenFolder(dex)}/${dexPad(dex)}${suffix || ""}.webp`; }
 function eventDexImg(dex, costume) { return `${IMG_BASE}/Event-Dex/regular/${getGenFolder(dex)}/${dexPad(dex)}_${costume}.webp`; }
-function costumeDexImg(dex, formId) { return `${IMG_BASE}/National-Event-Costume-Dex/regular/${getGenFolder(dex)}/${dexPad(dex)}_${formId}.webp`; }
-function shinyCostumeDexImg(dex, formId) { return `${IMG_BASE}/National-Event-Costume-Dex/shiny/${getGenFolder(dex)}/${dexPad(dex)}_${formId}_s.webp`; }
+// `folder` overrides the dex-derived generation folder: a few REGIONAL-form costumes are filed
+// under the region that introduced the form (Galarian Ponyta #77 -> Gen-8_Galar, Hisuian Ursaluna
+// #901 -> Gen-8.5_Hisui), not the species' own generation. data/costume-index.json carries it.
+function costumeDexImg(dex, formId, folder) { return `${IMG_BASE}/National-Event-Costume-Dex/regular/${folder || getGenFolder(dex)}/${dexPad(dex)}_${formId}.webp`; }
+function shinyCostumeDexImg(dex, formId, folder) { return `${IMG_BASE}/National-Event-Costume-Dex/shiny/${folder || getGenFolder(dex)}/${dexPad(dex)}_${formId}_s.webp`; }
 // Map a reward/bonus string to an item icon (GO Pass tracks + Milestone Bonuses). Returns null if no confident match.
 // Order matters: more specific keywords must be checked before generic ones.
 function rewardIcon(text) {
@@ -223,9 +226,9 @@ const POKEMON_FORMS = {
   1013:[{l:"Masterpiece",f:"1013_masterpiece"},{l:"Unremarkable",f:"1013_unremarkable"}]
 };
 const POGO_EVO = {
-  2:"25 Candy",3:"100 Candy",5:"25 Candy",6:"100 Candy",8:"25 Candy",9:"100 Candy",11:"12 Candy",12:"50 Candy",14:"12 Candy",15:"50 Candy",17:"12 Candy",18:"50 Candy",20:"25 Candy",22:"50 Candy",24:"50 Candy",26:"50 Candy",28:"50 Candy",30:"25 Candy",31:"100 Candy",33:"25 Candy",34:"100 Candy",36:"50 Candy",38:"50 Candy",40:"50 Candy",42:"25 Candy",44:"25 Candy",45:"100 Candy",47:"50 Candy",49:"50 Candy",51:"50 Candy",53:"50 Candy",55:"50 Candy",57:"50 Candy",59:"50 Candy",61:"25 Candy",62:"100 Candy",64:"25 Candy",65:"100 Candy or Trade",67:"25 Candy",68:"100 Candy or Trade",70:"25 Candy",71:"100 Candy",73:"50 Candy",75:"25 Candy",76:"100 Candy or Trade",78:"50 Candy",80:"50 Candy",82:"25 Candy",85:"50 Candy",87:"50 Candy",89:"50 Candy",91:"50 Candy",93:"25 Candy",94:"100 Candy or Trade",97:"50 Candy",99:"50 Candy",101:"50 Candy",103:"50 Candy",105:"50 Candy",110:"50 Candy",112:"50 Candy",117:"50 Candy",119:"50 Candy",121:"50 Candy",124:"25 Candy",125:"25 Candy",126:"25 Candy",130:"400 Candy",134:"25 Candy",135:"25 Candy",136:"25 Candy",139:"50 Candy",141:"50 Candy",143:"50 Candy",148:"25 Candy",149:"100 Candy",
-  153:"25 Candy",154:"100 Candy",156:"25 Candy",157:"100 Candy",159:"25 Candy",160:"100 Candy",162:"50 Candy",164:"50 Candy",166:"25 Candy",168:"50 Candy",169:"100 Candy",171:"50 Candy",176:"25 Candy",178:"50 Candy",180:"25 Candy",181:"100 Candy",182:"100 Candy + Sun Stone",184:"25 Candy",186:"100 Candy + King's Rock",188:"25 Candy",189:"100 Candy",192:"50 Candy + Sun Stone",195:"50 Candy",196:"25 Candy + Walk 10km (Day)",197:"25 Candy + Walk 10km (Night)",199:"50 Candy + King's Rock",202:"25 Candy",205:"50 Candy",208:"50 Candy + Metal Coat",210:"50 Candy",212:"50 Candy + Metal Coat",217:"50 Candy",219:"50 Candy",221:"25 Candy",224:"50 Candy",229:"50 Candy",230:"100 Candy + Dragon Scale",232:"50 Candy",233:"50 Candy + Up-Grade",237:"25 Candy",242:"50 Candy",247:"25 Candy",248:"100 Candy",
-  253:"25 Candy",254:"100 Candy",256:"25 Candy",257:"100 Candy",259:"25 Candy",260:"100 Candy",262:"50 Candy",264:"50 Candy",266:"12 Candy",267:"50 Candy",268:"12 Candy",269:"50 Candy",271:"25 Candy",272:"100 Candy",274:"25 Candy",275:"100 Candy",277:"50 Candy",279:"50 Candy",281:"25 Candy",282:"100 Candy",284:"50 Candy",286:"50 Candy",288:"25 Candy",289:"100 Candy",291:"50 Candy",292:"50 Candy",294:"12 Candy",295:"50 Candy",297:"50 Candy",301:"50 Candy",305:"25 Candy",306:"100 Candy",308:"50 Candy",310:"50 Candy",317:"50 Candy",319:"50 Candy",321:"400 Candy",323:"50 Candy",326:"50 Candy",329:"25 Candy",330:"100 Candy",332:"50 Candy",334:"400 Candy",340:"50 Candy",342:"50 Candy",344:"50 Candy",346:"50 Candy",348:"50 Candy",350:"100 Candy + Walk 20km",354:"50 Candy",356:"25 Candy",362:"50 Candy",364:"25 Candy",365:"100 Candy",367:"50 Candy (Random)",368:"50 Candy (Random)",372:"25 Candy",373:"100 Candy",375:"25 Candy",376:"100 Candy",
+  2:"25 Candy",3:"100 Candy",5:"25 Candy",6:"100 Candy",8:"25 Candy",9:"100 Candy",11:"12 Candy",12:"50 Candy",14:"12 Candy",15:"50 Candy",17:"12 Candy",18:"50 Candy",20:"25 Candy",22:"50 Candy",24:"50 Candy",25:"25 Candy",26:"50 Candy",28:"50 Candy",30:"25 Candy",31:"100 Candy",33:"25 Candy",34:"100 Candy",35:"25 Candy",36:"50 Candy",38:"50 Candy",39:"25 Candy",40:"50 Candy",42:"25 Candy",44:"25 Candy",45:"100 Candy",47:"50 Candy",49:"50 Candy",51:"50 Candy",53:"50 Candy",55:"50 Candy",57:"50 Candy",59:"50 Candy",61:"25 Candy",62:"100 Candy",64:"25 Candy",65:"100 Candy or Trade",67:"25 Candy",68:"100 Candy or Trade",70:"25 Candy",71:"100 Candy",73:"50 Candy",75:"25 Candy",76:"100 Candy or Trade",78:"50 Candy",80:"50 Candy",82:"25 Candy",85:"50 Candy",87:"50 Candy",89:"50 Candy",91:"50 Candy",93:"25 Candy",94:"100 Candy or Trade",97:"50 Candy",99:"50 Candy",101:"50 Candy",103:"50 Candy",105:"50 Candy",110:"50 Candy",112:"50 Candy",113:"25 Candy",117:"50 Candy",119:"50 Candy",121:"50 Candy",122:"25 Candy",124:"25 Candy",125:"25 Candy",126:"25 Candy",130:"400 Candy",134:"25 Candy",135:"25 Candy",136:"25 Candy",139:"50 Candy",141:"50 Candy",143:"50 Candy",148:"25 Candy",149:"100 Candy",
+  153:"25 Candy",154:"100 Candy",156:"25 Candy",157:"100 Candy",159:"25 Candy",160:"100 Candy",162:"50 Candy",164:"50 Candy",166:"25 Candy",168:"50 Candy",169:"100 Candy",171:"50 Candy",176:"25 Candy",178:"50 Candy",180:"25 Candy",181:"100 Candy",182:"100 Candy + Sun Stone",183:"25 Candy",184:"25 Candy",185:"25 Candy",186:"100 Candy + King's Rock",188:"25 Candy",189:"100 Candy",192:"50 Candy + Sun Stone",195:"50 Candy",196:"25 Candy + Walk 10km (Day)",197:"25 Candy + Walk 10km (Night)",199:"50 Candy + King's Rock",202:"25 Candy",205:"50 Candy",208:"50 Candy + Metal Coat",210:"50 Candy",212:"50 Candy + Metal Coat",217:"50 Candy",219:"50 Candy",221:"25 Candy",224:"50 Candy",226:"25 Candy",229:"50 Candy",230:"100 Candy + Dragon Scale",232:"50 Candy",233:"50 Candy + Up-Grade",237:"25 Candy",242:"50 Candy",247:"25 Candy",248:"100 Candy",
+  253:"25 Candy",254:"100 Candy",256:"25 Candy",257:"100 Candy",259:"25 Candy",260:"100 Candy",262:"50 Candy",264:"50 Candy",266:"12 Candy",267:"50 Candy",268:"12 Candy",269:"50 Candy",271:"25 Candy",272:"100 Candy",274:"25 Candy",275:"100 Candy",277:"50 Candy",279:"50 Candy",281:"25 Candy",282:"100 Candy",284:"50 Candy",286:"50 Candy",288:"25 Candy",289:"100 Candy",291:"50 Candy",292:"50 Candy",294:"12 Candy",295:"50 Candy",297:"50 Candy",301:"50 Candy",305:"25 Candy",306:"100 Candy",308:"50 Candy",310:"50 Candy",315:"25 Candy",317:"50 Candy",319:"50 Candy",321:"400 Candy",323:"50 Candy",326:"50 Candy",329:"25 Candy",330:"100 Candy",332:"50 Candy",334:"400 Candy",340:"50 Candy",342:"50 Candy",344:"50 Candy",346:"50 Candy",348:"50 Candy",350:"100 Candy + Walk 20km",354:"50 Candy",356:"25 Candy",358:"25 Candy",362:"50 Candy",364:"25 Candy",365:"100 Candy",367:"50 Candy (Random)",368:"50 Candy (Random)",372:"25 Candy",373:"100 Candy",375:"25 Candy",376:"100 Candy",
   388:"25 Candy",389:"100 Candy",391:"25 Candy",392:"100 Candy",394:"25 Candy",395:"100 Candy",397:"25 Candy",398:"100 Candy",400:"50 Candy",402:"50 Candy",404:"25 Candy",405:"100 Candy",407:"100 Candy + Sinnoh Stone",409:"50 Candy",411:"50 Candy",413:"50 Candy",414:"50 Candy",416:"50 Candy (\u2640 Only)",419:"50 Candy",421:"50 Candy",423:"50 Candy",424:"100 Candy + Sinnoh Stone",426:"50 Candy",428:"50 Candy",429:"100 Candy + Sinnoh Stone",430:"100 Candy + Sinnoh Stone",432:"50 Candy",435:"50 Candy",437:"50 Candy",444:"25 Candy",445:"100 Candy",448:"50 Candy",450:"50 Candy",452:"50 Candy",454:"50 Candy",457:"50 Candy",460:"50 Candy",461:"100 Candy + Sinnoh Stone",462:"100 Candy + Magnetic Lure",463:"100 Candy + Sinnoh Stone",464:"100 Candy + Sinnoh Stone",465:"100 Candy + Sinnoh Stone",466:"100 Candy + Sinnoh Stone",467:"100 Candy + Sinnoh Stone",468:"100 Candy + Sinnoh Stone",469:"100 Candy + Sinnoh Stone",470:"25 Candy + Mossy Lure",471:"25 Candy + Glacial Lure",472:"100 Candy + Sinnoh Stone",473:"100 Candy + Sinnoh Stone",474:"100 Candy + Sinnoh Stone",475:"100 Candy + Sinnoh Stone (\u2642 Only)",476:"100 Candy + Magnetic Lure",477:"100 Candy + Sinnoh Stone",478:"100 Candy + Sinnoh Stone (\u2640 Only)",
   496:"25 Candy",497:"100 Candy",499:"25 Candy",500:"100 Candy",502:"25 Candy",503:"100 Candy",505:"50 Candy",507:"25 Candy",508:"100 Candy",510:"50 Candy",512:"100 Candy + Unova Stone",514:"100 Candy + Unova Stone",516:"100 Candy + Unova Stone",518:"50 Candy",520:"12 Candy",521:"50 Candy",523:"50 Candy",525:"25 Candy",526:"200 Candy or Trade",528:"50 Candy + Walk 1km (Buddy)",530:"50 Candy",533:"25 Candy",534:"200 Candy or Trade",536:"25 Candy",537:"100 Candy",541:"25 Candy",542:"100 Candy",544:"25 Candy",545:"100 Candy",547:"50 Candy + Sun Stone",549:"50 Candy + Sun Stone",552:"25 Candy",553:"100 Candy",555:"50 Candy",558:"50 Candy",560:"50 Candy",563:"50 Candy",565:"50 Candy",567:"50 Candy",569:"50 Candy",571:"50 Candy",573:"50 Candy",575:"25 Candy",576:"100 Candy",578:"25 Candy",579:"100 Candy",581:"50 Candy",583:"25 Candy",584:"100 Candy",586:"50 Candy",589:"200 Candy or Trade",591:"50 Candy",593:"50 Candy",596:"50 Candy",598:"50 Candy",600:"25 Candy",601:"100 Candy",603:"25 Candy",604:"100 Candy + Unova Stone",606:"50 Candy",608:"25 Candy",609:"100 Candy + Unova Stone",611:"25 Candy",612:"100 Candy",614:"50 Candy",617:"200 Candy or Trade",620:"50 Candy",623:"50 Candy",625:"50 Candy",628:"50 Candy",630:"50 Candy",634:"25 Candy",635:"100 Candy",637:"400 Candy",
   651:"25 Candy",652:"100 Candy",654:"25 Candy",655:"100 Candy",657:"25 Candy",658:"100 Candy",660:"50 Candy",662:"25 Candy",663:"100 Candy",665:"25 Candy",666:"100 Candy",668:"50 Candy",673:"50 Candy",675:"50 Candy",680:"25 Candy",681:"100 Candy",683:"50 Candy + Use Incense (Buddy)",685:"50 Candy + Feed 25 Treats (Buddy)",687:"50 Candy (Phone Upside Down)",689:"50 Candy",691:"50 Candy",693:"50 Candy",695:"50 Candy",697:"50 Candy",699:"50 Candy",700:"25 Candy + Earn 70 Hearts (Buddy)",705:"25 Candy",706:"100 Candy (Rainy Weather or Rainy Lure)",709:"200 Candy or Trade",711:"50 Candy",713:"50 Candy",715:"400 Candy",
@@ -437,6 +440,21 @@ async function fetchGoFamilyIndex() {
   if (_pokeCache[key]) return _pokeCache[key];
   try {
     const res = await fetch("data/go/_family.json");
+    const data = res.ok ? await res.json() : {};
+    _pokeCache[key] = data;
+    return data;
+  } catch {
+    return {};
+  }
+}
+// data/costume-index.json — keyed by dex number as a string, listing every costumed sprite that
+// exists in National-Event-Costume-Dex for that dex ({id, shiny}[]). Same fail-silent contract as
+// fetchGoIndex/fetchGoFamilyIndex: an empty object if the file doesn't exist yet, no console noise.
+async function fetchCostumeIndex() {
+  const key = "costume_index";
+  if (_pokeCache[key]) return _pokeCache[key];
+  try {
+    const res = await fetch("data/costume-index.json");
     const data = res.ok ? await res.json() : {};
     _pokeCache[key] = data;
     return data;
@@ -2447,7 +2465,7 @@ const CURRENT_RAID_BOSSES = {
     "Regirock (5\u2605 Raid) \u2728","Regice (5\u2605 Raid) \u2728","Registeel (5\u2605 Raid) \u2728"
   ],
   "Mega Raids": [
-    "Mega Falinks (Mega) \u2728"
+    "Mega Skarmory (Mega) \u2728"
   ],
   "Shadow 1-Star Raids": [
     "Shadow Slowpoke (1\u2605 Shadow Raid) \u2728","Shadow Aipom (1\u2605 Shadow Raid) \u2728","Shadow Croagunk (1\u2605 Shadow Raid) \u2728","Shadow Grubbin (1\u2605 Shadow Raid) \u2728"
@@ -4074,6 +4092,7 @@ let state = {
   pokedexDetailGoMovesetPage: 1,
   pokedexDetailGoOpenSections: {},
   pokedexDetailGoShinyBySlug: {},
+  pokedexDetailGoMoveMode: { fast: "raids", charged: "raids" },
   storeFilter: "All",
   storeGuideOpen: false,
   openStoreArchiveYears: {},
@@ -5733,6 +5752,15 @@ function escAttr(str) {
     .replace(/>/g, "&gt;");
 }
 
+// Renders a value as a JS string LITERAL for use inside a double-quoted HTML attribute
+// (e.g. onclick="fn(<here>)"). esc() is not enough: it escapes only &<>, so a value containing
+// an apostrophe — "Rei's Cap", "Professor Willow's assistant", "Farfetch'd" — closes the JS
+// string early and throws on click. JSON.stringify produces a correctly quoted+escaped literal;
+// escAttr then makes its double quotes safe inside the attribute.
+function jsAttr(value) {
+  return escAttr(JSON.stringify(String(value ?? "")));
+}
+
 // --- COUNTDOWN TIMER ---
 function getEndCountdown(ev) {
   if (!ev) return null;
@@ -6445,8 +6473,8 @@ function renderBossItem(item, color, th, cardLayout, noSparkles, groupSize, show
   const subtitleText = hemiMatch ? hemiMatch[1].charAt(0).toUpperCase() + hemiMatch[1].slice(1).toLowerCase() + " Hemisphere" : (showRegion ? (RAID_BOSS_REGIONS[cleanedItemName] || "") : "");
   const subtitleHTML = subtitleText ? `<div style="margin-top:2px;font-size:${cardLayout ? 11 : 12}px;font-weight:600;color:${th.textSecondary};font-style:italic;${cardLayout ? "text-align:center" : ""}">${esc(subtitleText)}</div>` : "";
   const groupSizeList = Array.isArray(groupSize) ? groupSize : (groupSize ? [groupSize] : []);
-  const matchedGroupSize = isRaidTier ? groupSizeList.find(gs => gs && gs.bossName === cleanedItemName) : null;
-  const groupSizeHTML = matchedGroupSize ? renderGroupSizeCompact(matchedGroupSize, th, cardLayout) : "";
+  const matchedGroupSizes = isRaidTier ? groupSizeList.filter(gs => gs && gs.bossName === cleanedItemName) : [];
+  const groupSizeHTML = matchedGroupSizes.map(gs => renderGroupSizeCompact(gs, th, cardLayout)).join("");
   const weaknesses = raidData ? getWeaknesses(raidData.types) : [];
   const resistances = raidData ? getResistances(raidData.types) : [];
   const hasBack = weaknesses.length > 0 || resistances.length > 0;
@@ -6736,8 +6764,9 @@ function renderGroupSizeCompact(gs, th, centered) {
   const optimalText = gs.optimalMin === gs.optimalMax ? `${gs.optimalMin}` : `${gs.optimalMin}–${gs.optimalMax}`;
   const align = centered ? "center" : "flex-start";
   const isMegaRaidTier = /mega raid/i.test(gs.tier || "");
+  const isSuperMegaTier = /super mega raid/i.test(gs.tier || "");
   return `<div style="margin-top:8px;display:flex;flex-direction:column;align-items:${align};gap:5px">
-    <div style="font-size:10px;font-weight:700;color:${th.textMuted};letter-spacing:0.5px;text-transform:uppercase">Group Size${isMegaRaidTier ? "*" : ""}</div>
+    <div style="font-size:10px;font-weight:700;color:${th.textMuted};letter-spacing:0.5px;text-transform:uppercase">Group Size${isMegaRaidTier ? "*" : ""}${isSuperMegaTier ? " (in a Super Mega Raid)" : ""}</div>
     <div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:${align}">${cells.join("")}</div>
     <div style="font-size:11px;color:${th.textSecondary};line-height:1.4;text-align:${centered ? "center" : "left"}">Min <strong style="color:${th.text}">${gs.minimum}</strong> · Optimal <strong style="color:${th.text}">${optimalText}</strong> · Easy <strong style="color:${th.text}">${gs.easyAt}+</strong></div>
   </div>`;
@@ -6759,20 +6788,26 @@ function dexForBossName(bossName) {
   if (noForme !== noXY && DEX[noForme] != null) return DEX[noForme];
   return undefined;
 }
-// Look up a groupSize entry by cleaned boss name across all EVENTS. Returns the
-// first match — used by the news detail page to attach raid sizing data to
+// Look up all groupSize entries by cleaned boss name across all EVENTS. Returns
+// an array of all unique matching group sizes (regular tiers first, Super Mega
+// tiers last) — used by the news detail page to attach raid sizing data to
 // boss cards without duplicating the data on the announcement itself.
 function findGroupSizeForBoss(bossName) {
-  if (!bossName || !Array.isArray(EVENTS)) return null;
+  if (!bossName || !Array.isArray(EVENTS)) return [];
+  const seen = new Set(), out = [];
   for (const ev of EVENTS) {
     const gsList = ev && ev.details && ev.details.groupSize;
     if (!gsList) continue;
     const list = Array.isArray(gsList) ? gsList : [gsList];
     for (const gs of list) {
-      if (gs && gs.bossName === bossName) return gs;
+      if (gs && gs.bossName === bossName) {
+        const key = [gs.tier, gs.minimum, gs.optimalMin, gs.optimalMax, gs.easyAt, gs.greenAt].join("|");
+        if (!seen.has(key)) { seen.add(key); out.push(gs); }
+      }
     }
   }
-  return null;
+  out.sort((a, b) => (/super mega/i.test(a.tier || "") ? 1 : 0) - (/super mega/i.test(b.tier || "") ? 1 : 0));
+  return out;
 }
 // dexForBossName only strips a leading regional/Mega/Shadow word, so form-qualified raid labels
 // ("Attack Forme Deoxys", "Crowned Sword Zacian", "Douse Drive Genesect") and costume labels
@@ -6833,7 +6868,7 @@ function findRaidBossInfosForDex(dexNum) {
     for (const rawLabel of labels) {
       const label = typeof rawLabel === "string" ? rawLabel : (rawLabel && rawLabel.name) || "";
       if (!label) continue;
-      const tier = getRaidTier(label);
+      const tier = getRaidTier(label) || (/Super Mega Raid/i.test(label) ? "Mega Raids" : null);
       if (!tier || !RAID_TIER.test(tier)) continue;
       const bossName = cleanRaidLabel(label);
       if (!bossName || dexForRaidBossName(bossName) !== dexNum) continue;
@@ -6875,16 +6910,106 @@ function findRaidBossInfosForDex(dexNum) {
   return [best];
 }
 
+// Tier names getRaidTier can return for a Shadow Raid label — derived from TIER_COLORS (the
+// single place all raid tier strings are enumerated) rather than hardcoded, so a new Shadow tier
+// added there is picked up automatically.
+const SHADOW_TIER_NAMES = new Set(Object.keys(TIER_COLORS).filter(t => /^Shadow .*Raids$/.test(t)));
+
+// Pre-2026 Shadow Raid bosses this site has no EVENTS/NEWS/pokemon-data.json coverage for. Kept
+// separate and EMPTY on purpose — raid data only ever goes in from a verified source (LeekDuck /
+// pokemongohub), never from memory. Entries here are plain raid-boss label strings, resolved the
+// same way as the other sources (cleanRaidLabel + dexForRaidBossName) — e.g. "Shadow Mewtwo".
+const SHADOW_RAID_HISTORY_EXTRA = [];
+
+// Builds the set of dex numbers with a real, on-record Shadow Raid appearance, from the union of:
+// EVENTS (details.bosses + the NESTED_RAID_KEYS GO Fest sub-objects, same traversal as
+// findRaidBossInfosForDex), ANNOUNCEMENTS (sections[].items[], e.g. NEWS id 27's "Shadow Palkia
+// (5★ Shadow Raid)"), CURRENT_RAID_BOSSES' Shadow tiers, pokemon-data.json's "Shadow X" entries
+// that carry a cp (only added there because the species was a verified Shadow Raid boss), and
+// SHADOW_RAID_HISTORY_EXTRA. dittobase computes a cp.shadowRaid figure for EVERY species
+// mechanically (from base stats), Shadow-raidable or not, so that field alone is not evidence —
+// this set is what actually gates whether the Shadow Raids row may be shown.
+function computeShadowRaidHistoryDexSet() {
+  const set = new Set();
+  const addFromLabel = (label) => {
+    if (!label) return;
+    const text = typeof label === "string" ? label : (label && label.name) || "";
+    if (!text) return;
+    const tier = getRaidTier(text);
+    if (!tier || !SHADOW_TIER_NAMES.has(tier)) return;
+    const dex = dexForRaidBossName(cleanRaidLabel(text));
+    if (dex != null) set.add(dex);
+  };
+  // Same nested-raid keys findRaidBossInfosForDex reads (GO Fest events keep their raid line-ups
+  // there instead of details.bosses).
+  const NESTED_RAID_KEYS = ["parkRaids", "saturdayRaids", "sundayRaids"];
+  if (Array.isArray(EVENTS)) {
+    for (const ev of EVENTS) {
+      const d = ev && ev.details;
+      if (!d) continue;
+      (d.bosses || []).forEach(addFromLabel);
+      for (const key of NESTED_RAID_KEYS) {
+        const nested = d[key];
+        if (!nested || typeof nested !== "object") continue;
+        for (const v of Object.values(nested)) if (Array.isArray(v)) v.forEach(addFromLabel);
+      }
+    }
+  }
+  if (Array.isArray(ANNOUNCEMENTS)) {
+    for (const ann of ANNOUNCEMENTS) {
+      const sections = ann && ann.sections;
+      if (!Array.isArray(sections)) continue;
+      for (const sec of sections) {
+        const items = sec && sec.items;
+        if (Array.isArray(items)) items.forEach(addFromLabel);
+      }
+    }
+  }
+  if (typeof CURRENT_RAID_BOSSES === "object" && CURRENT_RAID_BOSSES) {
+    for (const [tierKey, labels] of Object.entries(CURRENT_RAID_BOSSES)) {
+      if (!SHADOW_TIER_NAMES.has(tierKey) || !Array.isArray(labels)) continue;
+      labels.forEach(addFromLabel);
+    }
+  }
+  for (const [pkmn, data] of Object.entries(RAID_BOSS_DATA)) {
+    if (!/^Shadow /.test(pkmn) || !data || !data.cp) continue;
+    const dex = dexForRaidBossName(pkmn);
+    if (dex != null) set.add(dex);
+  }
+  for (const label of SHADOW_RAID_HISTORY_EXTRA) {
+    const dex = dexForRaidBossName(cleanRaidLabel(label));
+    if (dex != null) set.add(dex);
+  }
+  return set;
+}
+
+let _shadowRaidHistorySet = null;
+// RAID_BOSS_DATA (pokemon-data.json) loads asynchronously after this script first runs, so a call
+// to hasShadowRaidHistory that races ahead of that fetch would otherwise memoize a permanently
+// incomplete set. Recompute (cheap — a handful of array walks) until RAID_BOSS_DATA has data, then
+// stop recomputing on every render as required.
+let _shadowRaidHistoryLocked = false;
+function hasShadowRaidHistory(dexNum) {
+  if (!_shadowRaidHistoryLocked) {
+    _shadowRaidHistorySet = computeShadowRaidHistoryDexSet();
+    if (Object.keys(RAID_BOSS_DATA).length > 0) _shadowRaidHistoryLocked = true;
+  }
+  return _shadowRaidHistorySet.has(dexNum);
+}
+
 // Renders the "Raid Boss Info" section on the Pokemon Dex detail page. Shows
 // one card per matching raid form: the tier, CP ranges (from pokemon-data.json
 // via getRaidBossData), the compact group-size widget, and a link to the event.
-function renderRaidBossCards(infos, th, isMobile) {
+function renderRaidBossCards(infos, th, isMobile, extraHtml = "", suppressCp = false) {
   const cards = infos.map(({ event: ev, groupSize: gs, tier, bossName, displayName }) => {
     const shownName = displayName || bossName;
     const tierColor = TIER_COLORS[tier] || "#8E44AD";
     const raidData = getRaidBossData(shownName) || getRaidBossData(bossName);
     const tierLabel = tier ? tier.replace("Raids", "Raid").replace("Star", "★") : ((gs && gs.tier) || "Raid Boss");
-    const cpHTML = raidData && raidData.cp ? `<div style="padding:12px 14px;background:${th.surface};border-radius:10px;border:1px solid ${th.border};display:flex;flex-direction:column;gap:6px">
+    // Suppressed whenever the caller (renderGoRaidsBody) folds this same CP data into its own
+    // panel via extraHtml instead — as a single merged group, or as a goCpRow() row group inside
+    // that panel for the Mega/variant case — so it's never shown twice in two different styles.
+    const cpHTML = !suppressCp && raidData && raidData.cp ? `<div style="padding:12px 14px;background:${th.surface};border-radius:10px;border:1px solid ${th.border};display:flex;flex-direction:column;gap:6px">
       <div style="font-size:11px;font-weight:700;color:${th.textMuted};letter-spacing:0.5px;text-transform:uppercase">As a raid boss (${esc(shownName)})</div>
       <div style="font-size:13.5px;color:${th.text};line-height:1.5">CP <strong>${raidData.cp}</strong></div>
       ${raidData.cpBoost && raidData.weather ? `<div style="font-size:13.5px;color:${th.text};line-height:1.5">☁️ ${esc(raidData.weather)}: <strong>${raidData.cpBoost}</strong></div>` : ""}
@@ -6912,6 +7037,7 @@ function renderRaidBossCards(infos, th, isMobile) {
         </div>
       </div>
       ${cpHTML}
+      ${extraHtml}
       ${gsHTML}
     </div>`;
   }).join("");
@@ -7168,7 +7294,7 @@ function renderEventDetail(event, th) {
               const shadowLayer = event.shadowBg ? `<img src="assets/pokemon-images/icons/shadow_icon.png" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;opacity:${darkMode ? 0.9 : 0.75};z-index:0" />` : "";
               const dynamaxLayer = event.type === "Max Battle" ? `<img src="assets/pokemon-images/icons/dynamax-icon(white).webp" style="position:absolute;top:1px;right:1px;width:50%;height:50%;object-fit:contain;opacity:0.85;z-index:0;pointer-events:none" />` : "";
               const zoomable = event.type === "GO Fest";
-              const zoomAttrs = zoomable ? ` onclick="showFormModal('${event.iconImg}','${esc(event.title)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showFormModal('${event.iconImg}','${esc(event.title)}')}" role="button" tabindex="0" title="Tap to view full size" aria-label="View ${esc(event.title)} badge full size"` : "";
+              const zoomAttrs = zoomable ? ` onclick="showFormModal(${jsAttr(event.iconImg)},${jsAttr(event.title)})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showFormModal(${jsAttr(event.iconImg)},${jsAttr(event.title)})}" role="button" tabindex="0" title="Tap to view full size" aria-label="View ${esc(event.title)} badge full size"` : "";
               const zoomHint = zoomable ? `<div style="position:absolute;bottom:2px;right:2px;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,0.55);display:flex;align-items:center;justify-content:center;z-index:3;pointer-events:none"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></div>` : "";
               return `<div${zoomAttrs} style="${zoomable ? "cursor:zoom-in;" : ""}width:70px;height:70px;border-radius:16px;background:${th.accentBg(event.color)};border:2px solid ${th.countdownBorder(event.color)};display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;overflow:hidden">${shadowLayer}${dynamaxLayer}<img src="${event.iconImg}" style="width:62px;height:62px;object-fit:contain;position:relative;z-index:1" onerror="this.parentElement.innerHTML='${event.icon}'" />${shinySparkleDetail}${zoomHint}</div>`;
             }
@@ -7529,7 +7655,7 @@ function renderEventDetail(event, th) {
             const rbd = getRaidBossData(chainName);
             const types = f.isAlolan ? (ALOLAN_TYPES[f.dexNum] || null) : f.isGalarian ? (GALARIAN_TYPES[f.dexNum] || null) : f.isPaldean ? (PALDEAN_TYPES[f.dexNum] || null) : (rbd ? rbd.types : null);
             const typesEl = types ? `<div style="display:flex;gap:3px;margin-top:3px;justify-content:center;flex-wrap:wrap">${types.map(t => { const cap = t.charAt(0).toUpperCase()+t.slice(1); return `<span style="font-size:${isMob ? 8 : 9}px;font-weight:700;color:#fff;background:${TYPE_COLORS[cap] || "#888"};padding:1px 6px;border-radius:8px">${cap}</span>`; }).join("")}</div>` : "";
-            return `${arrow}<div onclick="showFormModal('${src}','${esc(name)}')" style="${cardStyle}${isShiny ? ";position:relative" : ""};cursor:pointer;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.03)'" onmouseleave="this.style.transform='scale(1)'">
+            return `${arrow}<div onclick="showFormModal(${jsAttr(src)},${jsAttr(name)})" style="${cardStyle}${isShiny ? ";position:relative" : ""};cursor:pointer;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.03)'" onmouseleave="this.style.transform='scale(1)'">
               ${isShiny ? `<div style="position:absolute;top:6%;right:10%;z-index:2;font-size:20px">\u2728</div>` : ""}
               <img src="${src}" style="width:${imgSize}px;height:${imgSize}px;object-fit:contain" onerror="this.style.opacity='0.3'" />
               <div style="margin-top:4px;font-weight:700;color:${nameColor};font-size:${isMob ? 9 : 12}px">${esc(name)}</div>
@@ -7559,7 +7685,7 @@ function renderEventDetail(event, th) {
             const baseTypes = baseRbd ? baseRbd.types : null;
             const baseTypesEl = baseTypes ? `<div style="display:flex;gap:3px;margin-top:3px;justify-content:center;flex-wrap:wrap">${baseTypes.map(t => `<span style="font-size:9px;font-weight:700;color:#fff;background:${TYPE_COLORS[t] || "#888"};padding:1px 6px;border-radius:8px">${t}</span>`).join("")}</div>` : "";
             const baseCard = `<div style="display:flex;flex-direction:column;align-items:center;margin-bottom:8px">
-              <div onclick="showFormModal('${baseSrc}','${esc(baseName)}')" style="${cardStyle}${isShiny ? ";position:relative" : ""};cursor:pointer;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.03)'" onmouseleave="this.style.transform='scale(1)'">
+              <div onclick="showFormModal(${jsAttr(baseSrc)},${jsAttr(baseName)})" style="${cardStyle}${isShiny ? ";position:relative" : ""};cursor:pointer;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.03)'" onmouseleave="this.style.transform='scale(1)'">
                 ${isShiny ? `<div style="position:absolute;top:6%;right:10%;z-index:2;font-size:20px">\u2728</div>` : ""}
                 <img src="${baseSrc}" style="width:${imgSize}px;height:${imgSize}px;object-fit:contain" />
                 <div style="margin-top:4px;font-weight:700;color:${nameColor};font-size:${isMob ? 9 : 12}px">${esc(baseName)}</div>
@@ -7576,7 +7702,7 @@ function renderEventDetail(event, th) {
               const rbd = getRaidBossData(name);
               const types = rbd ? rbd.types : null;
               const typesEl = types ? `<div style="display:flex;gap:3px;margin-top:3px;justify-content:center;flex-wrap:wrap">${types.map(t => `<span style="font-size:${isMob ? 8 : 9}px;font-weight:700;color:#fff;background:${TYPE_COLORS[t] || "#888"};padding:1px 5px;border-radius:6px">${t}</span>`).join("")}</div>` : "";
-              return `<div onclick="showFormModal('${src}','${esc(name)}')" style="display:flex;flex-direction:column;align-items:center;padding:${isMob ? "8px 4px" : "8px 6px"};border-radius:10px;background:${th.accentBgSubtle(event.color)};border:1px solid ${th.border};text-align:center;cursor:pointer;transition:transform 0.15s ease${isShiny ? ";position:relative" : ""}" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'">
+              return `<div onclick="showFormModal(${jsAttr(src)},${jsAttr(name)})" style="display:flex;flex-direction:column;align-items:center;padding:${isMob ? "8px 4px" : "8px 6px"};border-radius:10px;background:${th.accentBgSubtle(event.color)};border:1px solid ${th.border};text-align:center;cursor:pointer;transition:transform 0.15s ease${isShiny ? ";position:relative" : ""}" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'">
                 ${isShiny ? `<div style="position:absolute;top:4px;right:6px;font-size:14px">\u2728</div>` : ""}
                 <img src="${src}" style="width:${isMob ? 48 : 60}px;height:${isMob ? 48 : 60}px;object-fit:contain" />
                 <div style="font-size:${isMob ? 10 : 11}px;font-weight:700;color:${nameColor};margin-top:3px">${esc(name)}</div>
@@ -7839,8 +7965,8 @@ function renderNewsDetail(announcement, th) {
               const subtitleHTML = subtitle ? `<div style="margin-top:4px;font-size:${cardLayout ? 11 : 12}px;font-weight:600;color:${th.textSecondary};${cardLayout ? "text-align:center" : ""};font-style:italic">${esc(subtitle)}</div>` : "";
               const dateHTML = dates ? `<div style="margin-top:8px;font-size:${cardLayout ? 11 : 12}px;font-weight:700;color:${tagColor};${cardLayout ? "text-align:center" : ""};padding:4px 8px;background:${th.tagBg(announcement.tag)};border-radius:8px;align-self:stretch">${esc(dates)}</div>` : "";
               const cleanedName = cleanRaidLabel(itemName);
-              const matchedGroupSize = findGroupSizeForBoss(cleanedName);
-              const groupSizeHTML = matchedGroupSize ? renderGroupSizeCompact(matchedGroupSize, th, cardLayout) : "";
+              const matchedGroupSizes = findGroupSizeForBoss(cleanedName);
+              const groupSizeHTML = matchedGroupSizes.map(gs => renderGroupSizeCompact(gs, th, cardLayout)).join("");
               if (cardLayout) {
                 return `<div style="border-radius:12px;background:${th.accentBgSubtle(tagColor)};border:1.5px solid ${th.border};flex:1 1 160px;min-width:160px;max-width:220px;display:flex;flex-direction:column">
                   <div style="display:flex;flex-direction:column;align-items:center;padding:12px 8px;font-size:13px;color:${th.textSecondary};line-height:1.45;text-align:center;flex:1">
@@ -8390,10 +8516,11 @@ async function openPokemonDetail(dexNum, preferredSlug) {
   state.pokedexDetailGoMovesetPage = 1;
   state.pokedexDetailGoOpenSections = {};
   state.pokedexDetailGoShinyBySlug = {};
+  state.pokedexDetailGoMoveMode = { fast: "raids", charged: "raids" };
   render();
   let rawForms = null;
   try {
-    const [data, evolutions, goIndex] = await Promise.all([fetchPokemonData(dexNum), fetchEvolutionChain(dexNum), fetchGoIndex(), fetchGoFamilyIndex()]);
+    const [data, evolutions, goIndex] = await Promise.all([fetchPokemonData(dexNum), fetchEvolutionChain(dexNum), fetchGoIndex(), fetchGoFamilyIndex(), fetchCostumeIndex()]);
     state.pokedexDetailData = data;
     state.pokedexDetailEvolutions = evolutions;
     rawForms = (goIndex && goIndex[String(dexNum)]) || null;
@@ -8494,6 +8621,16 @@ function goMovesetPage(delta) {
   state.pokedexDetailGoMovesetPage = page;
   render();
 }
+// Independent Gyms & Raids / Trainer Battles toggle for the Move Pool section's Fast and Charged
+// tables — "kind" picks which of the two tables the click affects, so switching one never moves
+// the other. Mirrors selectGoForm/goMovesetPage: mutate state, re-render, no data refetch needed
+// (both raids and PvP stats already live in the same GO payload / MOVES_DB).
+function setGoMoveMode(kind, mode) {
+  if (!state.pokedexDetailGoMoveMode) state.pokedexDetailGoMoveMode = { fast: "raids", charged: "raids" };
+  if (state.pokedexDetailGoMoveMode[kind] === mode) return;
+  state.pokedexDetailGoMoveMode[kind] = mode;
+  render();
+}
 // Thin wrapper around the project's existing accordion system (toggleAccordion, in styles.css
 // as .acc-content/.acc-chevron with the smooth max-height transition) — GO sections reuse that
 // animation and chevron rather than a bespoke one. The only GO-specific behavior added here is
@@ -8518,6 +8655,7 @@ function closePokemonDetail() {
   state.pokedexDetailGoMovesetPage = 1;
   state.pokedexDetailGoOpenSections = {};
   state.pokedexDetailGoShinyBySlug = {};
+  state.pokedexDetailGoMoveMode = { fast: "raids", charged: "raids" };
   render();
   // Restore open regions
   requestAnimationFrame(() => {
@@ -8714,16 +8852,15 @@ function renderGoPokedexDetailsBody(go, data, th, isMobile) {
   {
     const shinyOut = !!(go.flags && go.flags.isShinyReleased === true);
     // Short "what changes" blurb (16-55 chars) that used to live in the standalone Shiny Variant
-    // block at the bottom of the page. Shown ONLY when the shiny is unreleased: where it exists
-    // the sprite card already shows it side by side and the words add nothing, but where it does
-    // not the card shows a circle-and-slash placeholder — and then this is the only description
-    // of what the shiny will look like.
-    const shinyBlurb = !shinyOut ? (SHINY_DESC[go.dexNum] || "") : "";
+    // block at the bottom of the page. Shown for every Pokémon that has one, released or not —
+    // the sprite card's side-by-side (or, for an unreleased shiny, circle-and-slash placeholder)
+    // shows the colors but not what specifically changed, so the words still add information.
+    const shinyBlurb = SHINY_DESC[go.dexNum] || "";
     addRow("Shiny", shinyOut
       ? `<span style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:999px;background:${th.dark ? "rgba(243,156,18,0.18)" : "rgba(243,156,18,0.14)"};border:1px solid rgba(243,156,18,0.35);color:#F39C12;font-size:11px;font-weight:800;white-space:nowrap">Shiny available ✨</span>`
       : `<span style="display:inline-flex;align-items:center;padding:2px 8px;border-radius:999px;background:${th.dark ? "rgba(231,76,60,0.18)" : "rgba(231,76,60,0.14)"};border:1px solid rgba(231,76,60,0.35);color:#E74C3C;font-size:11px;font-weight:800;white-space:nowrap">Not available</span>`);
     // Its own row rather than a sub-line on the pill above, so it reads as a normal label/value
-    // pair like every other row in this panel. Only present for unreleased shinies — see above.
+    // pair like every other row in this panel.
     if (shinyBlurb) {
       addRow("Shiny Description", `<span style="font-weight:600;color:${th.textSecondary};font-size:${isMobile ? 11.5 : 12.5}px;line-height:1.4;white-space:normal;display:inline-block;max-width:230px">${esc(shinyBlurb)}</span>`);
     }
@@ -8806,26 +8943,84 @@ function renderGoStatsBody(go, th, isMobile) {
   return `<div>${rowsArr.join("")}${totalHtml}</div>`;
 }
 
-// The merged "Raids" card: every raid this Pokemon has headlined, plus BOTH CP sets it can show.
-// Those two sets describe different Pokemon — a Mega Raid card lists Mega Venusaur's catchable CP
-// while go.cp is plain Venusaur's — so each is labelled with the name it actually belongs to
-// rather than both just saying "CP". Returns "" when there is neither raid history nor CP data,
-// so the caller can drop the whole section instead of rendering an empty shell.
+// Small-caps section header printed above every CP row group (a raid-boss group, the normal-raid
+// catch group, the Shadow Raid catch group) — shared so renderGoRaidCpBody can build its own
+// group headers directly instead of every caller wrapping one on by hand.
+function subLabel(th, text) {
+  return `<div style="font-size:11px;font-weight:700;color:${th.textMuted};letter-spacing:0.5px;text-transform:uppercase;margin-bottom:2px">${text}</div>`;
+}
+
+// Single CP row, used by both the GO catch-table (renderGoRaidCpBody) and the "As a raid boss"
+// row group folded into it (renderGoRaidsBody's Mega/variant branch) — factored out so the two
+// groups stay pixel-identical instead of drifting into a prose block vs. a table. `max` is
+// optional: pass null to print a single CP value instead of a range (some raid-boss CP entries
+// in pokemon-data.json have no range).
+function goCpRow(th, isMobile, label, sub, min, max, ivCaption) {
+  const cpText = max != null ? `${min} - ${max}` : `${min}`;
+  return `<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid ${th.border}">
+    <div>
+      <div style="font-size:${isMobile ? 12.5 : 13.5}px;font-weight:700;color:${th.text}">${label}</div>
+      <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted}">${sub}</div>
+    </div>
+    <div style="text-align:right">
+      <div style="font-size:${isMobile ? 13 : 14}px;font-weight:800;color:${th.text}">${cpText} CP</div>
+      <div style="font-size:${isMobile ? 9.5 : 10.5}px;color:${th.textMuted}">${ivCaption}</div>
+    </div>
+  </div>`;
+}
+
+// Strips the trailing divider off the last row of a goCpRow() group so two groups stacked in the
+// same panel (as a raid boss / when you catch it) don't double up their border line.
+function finalizeCpRows(th, rowsArr) {
+  if (rowsArr.length === 0) return "";
+  rowsArr[rowsArr.length - 1] = rowsArr[rowsArr.length - 1].replace(`border-bottom:1px solid ${th.border}`, "border-bottom:none");
+  return rowsArr.join("");
+}
+
+// The merged "Raids" card: every raid this Pokemon has headlined, plus its catch CP data — always
+// as ONE surface panel per raid-boss card, never a raid-boss-specific CP block. A Mega/Shadow/
+// variant card (e.g. Venusaur's card is Mega Venusaur) shows a DIFFERENT Pokémon from what beating
+// that raid actually catches — beating a Mega Falinks raid catches a plain Falinks, so Mega
+// Falinks' own CP range corresponds to nothing the player can catch — so no card, variant or not,
+// prints the boss's own CP. Every nested case shows the same thing: go's own catch group(s) from
+// renderGoRaidCpBody (a normal-raid group, plus a Shadow Raid group when this species has real
+// Shadow Raid history). Returns "" when there is neither raid history nor CP data, so the caller
+// can drop the whole section instead of rendering an empty shell.
 function renderGoRaidsBody(go, data, th, isMobile) {
   const infos = findRaidBossInfosForDex(data.dexNum);
-  const cpBody = renderGoRaidCpBody(go, th, isMobile);
-  const hasCp = !cpBody.includes("No CP data available");
+  const hasCp = !renderGoRaidCpBody(go, th, isMobile, data.dexNum).includes("No CP data available");
   const counters = go.counters || [];
   if (infos.length === 0 && !hasCp && counters.length === 0) return "";
 
   const cardCols = (isMobile || infos.length < 2) ? "minmax(0,1fr)" : "repeat(auto-fit,minmax(320px,1fr))";
-  const cardsHtml = infos.length > 0
-    ? `<div style="display:grid;grid-template-columns:${cardCols};gap:12px;align-items:start">${renderRaidBossCards(infos, th, isMobile)}</div>`
-    : "";
 
-  const subLabel = (text) => `<div style="font-size:11px;font-weight:700;color:${th.textMuted};letter-spacing:0.5px;text-transform:uppercase;margin-bottom:2px">${text}</div>`;
-  const catchHtml = hasCp
-    ? `<div style="margin-top:${infos.length > 0 ? 16 : 0}px;min-width:0">${subLabel(`When you catch it (${esc(go.name)})`)}${cpBody}</div>`
+  // Same surface-panel styling the raid card's own (now-always-suppressed) CP panel used, so the
+  // nested catch table still reads as "a CP panel" rather than bare text.
+  const surfacePanel = (inner) => `<div style="padding:12px 14px;background:${th.surface};border-radius:10px;border:1px solid ${th.border}">${inner}</div>`;
+
+  // With exactly one raid-boss card, fold the catch table inside it — instead of rendering it as
+  // its own block below the grid — and always suppress the card's own CP panel. With zero or 2+
+  // cards there's no single boss the table unambiguously belongs to, so it keeps rendering
+  // standalone below the grid exactly as before.
+  const nestInCard = hasCp && infos.length === 1;
+
+  let cardExtraHtml = "";
+  let catchHtml = "";
+  let suppressCp = false;
+
+  if (nestInCard) {
+    suppressCp = true;
+    const cpBody = renderGoRaidCpBody(go, th, isMobile, data.dexNum);
+    cardExtraHtml = `<div style="min-width:0">${surfacePanel(cpBody)}</div>`;
+  } else if (hasCp) {
+    // Zero or 2+ raid cards: no single boss the table unambiguously belongs to, so it renders
+    // standalone below the grid, unstyled, exactly as before.
+    const cpBody = renderGoRaidCpBody(go, th, isMobile, data.dexNum);
+    catchHtml = `<div style="margin-top:${infos.length > 0 ? 16 : 0}px;min-width:0">${cpBody}</div>`;
+  }
+
+  const cardsHtml = infos.length > 0
+    ? `<div style="display:grid;grid-template-columns:${cardCols};gap:12px;align-items:start">${renderRaidBossCards(infos, th, isMobile, cardExtraHtml, suppressCp)}</div>`
     : "";
 
   // Only print the asterisk's footnote when a group-size widget actually rendered one —
@@ -8845,27 +9040,47 @@ function renderGoRaidsBody(go, data, th, isMobile) {
   return `<div style="min-width:0">${cardsHtml}${catchHtml}${footnoteHtml}${countersHtml}</div>`;
 }
 
-function renderGoRaidCpBody(go, th, isMobile) {
+// Builds the "When catching it..." portion of the Raids card: a "from a normal raid" row group
+// (Raids, Raids (Weather Boosted)) and, only for species with real Shadow Raid history, a second
+// "from a Shadow Raid" group below a divider. The two are kept visually and semantically separate
+// — dittobase computes cp.shadowRaid mechanically for every species (Shadow-raidable or not), so
+// showing it under the same "normal raid" heading would misrepresent Pokémon (e.g. Falinks) that
+// have never actually been a Shadow Raid boss. `dexNum` gates that check. The weather-boosted
+// row's weather is derived from go's OWN types (getBoostingWeathers), never from a raid-boss
+// card's data — a Mega's typing can differ from its base form (Mega Gyarados is Water/Dark,
+// Gyarados is Water/Flying), so the weather that boosts the catchable Pokémon can differ too.
+function renderGoRaidCpBody(go, th, isMobile, dexNum) {
   const cp = go.cp || {};
-  const rowsArr = [];
-  const addRow = (label, sub, min, max, ivCaption) => rowsArr.push(`<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid ${th.border}">
-    <div>
-      <div style="font-size:${isMobile ? 12.5 : 13.5}px;font-weight:700;color:${th.text}">${label}</div>
-      <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted}">${sub}</div>
-    </div>
-    <div style="text-align:right">
-      <div style="font-size:${isMobile ? 13 : 14}px;font-weight:800;color:${th.text}">${min} - ${max} CP</div>
-      <div style="font-size:${isMobile ? 9.5 : 10.5}px;color:${th.textMuted}">${ivCaption}</div>
-    </div>
-  </div>`);
-  if (cp.raid) addRow("Raids", "Lv. 20", cp.raid.min, cp.raid.max, "10/10/10 - 15/15/15");
-  if (cp.raidWeatherBoosted) addRow("Raids (WB)", "Lv. 25", cp.raidWeatherBoosted.min, cp.raidWeatherBoosted.max, "10/10/10 - 15/15/15");
-  if (cp.shadowRaid) addRow("Shadow Raids", "Lv. 20", cp.shadowRaid.min, cp.shadowRaid.max, "10/10/10 - 15/15/15");
+  const normalRowsArr = [];
+  const addNormalRow = (label, sub, min, max, ivCaption) => normalRowsArr.push(goCpRow(th, isMobile, label, sub, min, max, ivCaption));
+  if (cp.raid) addNormalRow("Raids", "Lv. 20", cp.raid.min, cp.raid.max, "10/10/10 - 15/15/15");
+  if (cp.raidWeatherBoosted) {
+    // Multi-weather species (e.g. Charizard, Fire/Flying) get one icon per boosting weather.
+    // Falls back to the bare "(WB)" / "Lv. 25" label only when the species' types are missing or
+    // resolve to no boosting weather at all.
+    const weathers = getBoostingWeathers(go.types || []);
+    const wbLabel = weathers.length > 0 ? "Raids (Weather Boosted)" : "Raids (WB)";
+    const wbSub = weathers.length > 0
+      ? `Lv. 25 · ${weathers.map(w => `<span style="display:inline-flex;align-items:center;gap:4px;vertical-align:middle;color:${th.textMuted}">${weatherIconSvg(w, 13)}${esc(w)}</span>`).join(" · ")}`
+      : "Lv. 25";
+    addNormalRow(wbLabel, wbSub, cp.raidWeatherBoosted.min, cp.raidWeatherBoosted.max, "10/10/10 - 15/15/15");
+  }
   // No "Wild" row — dittobase never had one; it was a locally-derived (and mislabeled) figure.
-  // Only these three raid-based CP fields come straight from the source.
-  if (rowsArr.length === 0) return `<div style="padding:10px 0;color:${th.textMuted};font-size:13px">No CP data available.</div>`;
-  rowsArr[rowsArr.length - 1] = rowsArr[rowsArr.length - 1].replace(`border-bottom:1px solid ${th.border}`, "border-bottom:none");
-  return `<div>${rowsArr.join("")}</div>`;
+  const showShadowRow = Boolean(cp.shadowRaid) && hasShadowRaidHistory(dexNum);
+
+  if (normalRowsArr.length === 0 && !showShadowRow) {
+    return `<div style="padding:10px 0;color:${th.textMuted};font-size:13px">No CP data available.</div>`;
+  }
+
+  const normalGroup = normalRowsArr.length > 0
+    ? `${subLabel(th, `When catching it from a normal raid (${esc(go.name)})`)}${finalizeCpRows(th, normalRowsArr)}`
+    : "";
+  if (!showShadowRow) return normalGroup;
+
+  const shadowRowsArr = [goCpRow(th, isMobile, "Shadow Raids", "Lv. 20", cp.shadowRaid.min, cp.shadowRaid.max, "10/10/10 - 15/15/15")];
+  const shadowGroup = `${subLabel(th, `When catching it from a Shadow Raid (${esc(go.name)})`)}${finalizeCpRows(th, shadowRowsArr)}`;
+  if (!normalGroup) return shadowGroup;
+  return `${normalGroup}<div style="margin-top:12px;padding-top:12px;border-top:1px solid ${th.border}">${shadowGroup}</div>`;
 }
 
 function renderGoTypeChartBody(go, th, isMobile) {
@@ -8882,6 +9097,21 @@ function renderGoTypeChartBody(go, th, isMobile) {
   </div>` : "";
   if (!weakHtml && !resistHtml) return `<div style="padding:10px 0;color:${th.textMuted};font-size:13px">No type data available.</div>`;
   return `${weakHtml}${resistHtml}`;
+}
+
+// One pip per energy bar a charged move costs (1-3), shown right after the move's name wherever
+// a charged move name appears (Move Pool's charged table, the movesets table). Parallelogram
+// (skewed block) rather than a plain square/dot to read as an energy-bar meter at a glance, filled
+// in the move's own type color. Returns "" for fast moves / anything without a positive bar count
+// so callers can always append the result with no extra branching.
+function renderGoMoveBars(bars, typeSlug, isMobile) {
+  const n = Number(bars);
+  if (!(n > 0)) return "";
+  const color = goTypeColor(typeSlug);
+  const w = isMobile ? 8 : 9;
+  const h = isMobile ? 11 : 13;
+  const pip = `<span style="display:inline-block;width:${w}px;height:${h}px;background:${color};transform:skewX(-18deg);flex-shrink:0"></span>`;
+  return `<span style="display:inline-flex;align-items:center;gap:3px;margin-left:6px;vertical-align:middle">${pip.repeat(n)}</span>`;
 }
 
 function renderGoMovesetsBody(go, th, isMobile) {
@@ -8902,10 +9132,11 @@ function renderGoMovesetsBody(go, th, isMobile) {
     const fmElite = fm && (fm.isElite || fm.isLegacy);
     const fmColor = fm ? goTypeColor(fm.typeSlug) : th.text;
     const cmColor = cm ? goTypeColor(cm.typeSlug) : th.text;
+    const cmBars = cm ? renderGoMoveBars(cm.bars, cm.typeSlug, isMobile) : "";
     return `<tr style="border-bottom:1px solid ${th.border}">
       <td style="padding:8px 10px;color:${th.textMuted};font-weight:600">${rank}</td>
       <td style="padding:8px 10px;color:${fmColor};font-weight:700;white-space:nowrap">${esc(ms.fastMove.name)}${fmElite ? " *" : ""}</td>
-      <td style="padding:8px 10px;color:${cmColor};font-weight:700;white-space:nowrap">${esc(ms.chargedMove.name)}</td>
+      <td style="padding:8px 10px;color:${cmColor};font-weight:700;white-space:nowrap">${esc(ms.chargedMove.name)}${cmBars}</td>
       <td style="padding:8px 10px;color:${th.text};font-weight:700">${Number(ms.dps).toFixed(2)}</td>
       <td style="padding:8px 10px;color:${th.textSecondary}">${Number(ms.tdo).toFixed(1)}</td>
       <td style="padding:8px 10px;color:${th.textSecondary};white-space:nowrap">${Number(ms.ttw).toFixed(1)}s</td>
@@ -8950,45 +9181,84 @@ function megaMovesForDexNum(dexNum) {
   });
 }
 
-function renderGoMovePoolBody(go, th, isMobile) {
+// Segmented Gyms & Raids / Trainer Battles toggle shown above each of the Move Pool's two tables
+// (Fast, Charged) — styled to match renderGoFormSwitcher's active/inactive pill treatment so the
+// two toggles read as the same control language as the form switcher above them.
+function renderGoMoveModeToggle(kind, mode, primaryColor, th, isMobile) {
+  const c = primaryColor || "#3498DB";
+  const opt = (label, val) => {
+    const active = mode === val;
+    return `<button onclick="setGoMoveMode('${kind}','${val}')" style="padding:${isMobile ? "5px 11px" : "6px 13px"};border-radius:999px;border:1.5px solid ${active ? c : th.border};background:${active ? th.accentBg(c) : th.surface};color:${active ? c : th.textSecondary};font-size:${isMobile ? 10.5 : 11.5}px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s ease;white-space:nowrap" onmouseenter="this.style.borderColor='${c}'" onmouseleave="this.style.borderColor='${active ? c : th.border}'">${label}</button>`;
+  };
+  return `<div style="display:flex;gap:6px;flex-shrink:0">${opt("Gyms & Raids", "raids")}${opt("Trainer Battles", "pvp")}</div>`;
+}
+
+function renderGoMovePoolBody(go, th, isMobile, primaryColor) {
   const fast = (go.moves && go.moves.fast) || [];
   const charged = (go.moves && go.moves.charged) || [];
   // isElite and isLegacy are always set together in this dataset (never independently) — both
   // mean the same thing here: not obtainable from a regular TM.
   const hasStarredMove = fast.some(m => m.isElite || m.isLegacy) || charged.some(m => m.isElite || m.isLegacy);
-  function moveRow(m, isCharged) {
+  const moveMode = state.pokedexDetailGoMoveMode || { fast: "raids", charged: "raids" };
+  // Trainer Battle (PvP) stats come from MOVES_DB, joined by exact name + cat — a raid-only or
+  // Mega-exclusive move (e.g. Mega moves, which get their own sub-block below) has no PvP entry,
+  // so callers must handle a null return rather than assume every GO move has one.
+  function pvpEntry(name, isCharged) {
+    return MOVES_DB.find(m => m.name === name && m.cat === (isCharged ? "charged" : "fast")) || null;
+  }
+  function moveRow(m, isCharged, mode) {
     const color = goTypeColor(m.typeSlug);
     const elite = m.isElite || m.isLegacy;
     const dot = `<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${color};margin-right:6px;flex-shrink:0"></span>`;
-    const barsCell = isCharged ? `<td style="padding:7px 8px;color:${th.textSecondary};letter-spacing:1px">${"●".repeat(m.bars || 0)}</td>` : "";
+    const barsHtml = isCharged ? renderGoMoveBars(m.bars, m.typeSlug, isMobile) : "";
+    const nameCell = `<td style="padding:7px 8px;white-space:nowrap"><span style="display:inline-flex;align-items:center;color:${color};font-weight:700">${dot}${esc(m.name)}${elite ? " *" : ""}${barsHtml}</span></td>`;
+    if (mode === "pvp") {
+      const pv = pvpEntry(m.name, isCharged);
+      const power = pv ? pv.power : "—";
+      const energy = pv ? (isCharged ? "-" + pv.energy : "+" + pv.energy) : "—";
+      const third = pv
+        ? (isCharged ? (pv.effect ? esc(pv.effect) : "—") : (typeof pv.turns === "number" ? pv.turns : "—"))
+        : "—";
+      return `<tr style="border-bottom:1px solid ${th.border}">
+        ${nameCell}
+        <td style="padding:7px 8px;color:${th.textSecondary}">${power}</td>
+        <td style="padding:7px 8px;color:${th.textSecondary}">${energy}</td>
+        <td style="padding:7px 8px;color:${th.textSecondary}">${third}</td>
+      </tr>`;
+    }
     return `<tr style="border-bottom:1px solid ${th.border}">
-      <td style="padding:7px 8px;white-space:nowrap"><span style="display:inline-flex;align-items:center;color:${color};font-weight:700">${dot}${esc(m.name)}${elite ? " *" : ""}</span></td>
-      ${barsCell}
+      ${nameCell}
       <td style="padding:7px 8px;color:${th.textSecondary}">${m.power}</td>
       <td style="padding:7px 8px;color:${th.textSecondary}">${isCharged ? m.energy : "+" + m.energy}</td>
       <td style="padding:7px 8px;color:${th.textSecondary};white-space:nowrap">${Number(m.durationSec).toFixed(1)}s</td>
       <td style="padding:7px 8px;color:${th.text};font-weight:700">${Number(m.dps).toFixed(2)}</td>
     </tr>`;
   }
-  function moveTable(moves, isCharged, title) {
+  function moveTable(moves, isCharged, title, kind) {
     if (moves.length === 0) return "";
-    const rows = moves.map(m => moveRow(m, isCharged)).join("");
+    const mode = (moveMode[kind]) || "raids";
+    const rows = moves.map(m => moveRow(m, isCharged, mode)).join("");
     const th10 = `padding:7px 8px;text-align:left;color:${th.textMuted};font-size:10.5px;text-transform:uppercase;white-space:nowrap`;
-    const barsHead = isCharged ? `<th style="${th10}">Bars</th>` : "";
+    const headCells = mode === "pvp"
+      ? `<th style="${th10}">Name</th><th style="${th10}">Power</th><th style="${th10}">Energy</th><th style="${th10}">${isCharged ? "Effect" : "Turns"}</th>`
+      : `<th style="${th10}">Name</th><th style="${th10}">Power</th><th style="${th10}">Energy</th><th style="${th10}">Duration</th><th style="${th10}">DPS</th>`;
     return `<div>
-      <div style="font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};margin-bottom:6px">${title}</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:8px">
+        <div style="font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text}">${title}</div>
+        ${renderGoMoveModeToggle(kind, mode, primaryColor, th, isMobile)}
+      </div>
       <div style="overflow-x:auto;width:100%">
         <table style="border-collapse:collapse;width:100%;min-width:${isMobile ? 320 : 360}px;font-size:${isMobile ? "11.5px" : "12.5px"}">
           <thead><tr style="border-bottom:1.5px solid ${th.border}">
-            <th style="${th10}">Name</th>${barsHead}<th style="${th10}">Power</th><th style="${th10}">Energy</th><th style="${th10}">Duration</th><th style="${th10}">DPS</th>
+            ${headCells}
           </tr></thead>
           <tbody>${rows}</tbody>
         </table>
       </div>
     </div>`;
   }
-  const fastHtml = moveTable(fast, false, "Fast Attacks");
-  const chargedHtml = moveTable(charged, true, "Charged Attacks");
+  const fastHtml = moveTable(fast, false, "Fast Attacks", "fast");
+  const chargedHtml = moveTable(charged, true, "Charged Attacks", "charged");
   if (!fastHtml && !chargedHtml) return `<div style="padding:10px 0;color:${th.textMuted};font-size:13px">No move data available.</div>`;
   const tablesHtml = `<div style="display:grid;grid-template-columns:${isMobile ? "minmax(0,1fr)" : "minmax(0,1fr) minmax(0,1fr)"};gap:${isMobile ? 16 : 20}px">${fastHtml}${chargedHtml}</div>`;
   // Mega Moves sub-block: separate from the Fast/Charged tables above (not appended as rows)
@@ -9119,6 +9389,32 @@ function renderGoFamilyBody(familyEntries, go, primaryColor, th, isMobile) {
       <div style="font-size:${isMobile ? 10.5 : 11.5}px;font-weight:700;color:${th.text};text-align:center;line-height:1.25;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(f.name)}</div>
       <div style="font-size:${isMobile ? 9 : 10}px;color:${th.textMuted}">#${String(f.dexNum).padStart(4, "0")}</div>
       <div style="display:flex;gap:3px;margin-top:1px">${typeDots}</div>
+      ${shinyChip}
+    </div>`;
+  }).join("");
+  return `<div style="display:grid;grid-template-columns:${gridCols};gap:${isMobile ? 8 : 10}px">${cards}</div>`;
+}
+
+// Costume sprites for this dex (data/costume-index.json) — purely cosmetic variants with no
+// Pokemon GO record of their own, so cards carry no active state and no marker icon, and clicking
+// one just opens the sprite modal (never selectGoForm/selectGoFamilyMember). There's no
+// human-readable costume name yet, so the raw form-id (e.g. "c11") IS the label — do not invent
+// or prettify one. Mirrors renderGoFamilyBody for grid/card sizing and the shiny chip markup.
+function renderGoCostumesBody(costumes, dexNum, primaryColor, th, isMobile) {
+  const gridCols = isMobile ? "repeat(auto-fill,minmax(140px,1fr))" : "repeat(auto-fill,minmax(130px,1fr))";
+  const shinySize = isMobile ? 22 : 26;
+  const baseSpriteSrc = pokemonImgUrl(dexNum);
+  const cards = costumes.map(c => {
+    const spriteSrc = costumeDexImg(dexNum, c.id, c.folder);
+    const shinyChip = c.shiny === true ? `<div style="display:flex;align-items:center;gap:4px;margin-top:3px;padding:2px 9px 2px 4px;border-radius:999px;background:${th.accentBgSubtle(primaryColor)};border:1px solid ${th.countdownBorder(primaryColor)}">
+      <img src="${shinyCostumeDexImg(dexNum, c.id, c.folder)}" style="width:${shinySize}px;height:${shinySize}px;object-fit:contain" onerror="this.parentElement.style.display='none'" />
+      <img src="assets/pokemon-images/icons/shiny-sparkles.webp" alt="" aria-hidden="true" style="width:11px;height:11px;object-fit:contain" onerror="this.style.display='none'" />
+      <span style="font-size:${isMobile ? 9.5 : 10.5}px;font-weight:700;color:${th.textSecondary}">Shiny</span>
+    </div>` : "";
+    return `<div onclick="showFormModal(${jsAttr(spriteSrc)},${jsAttr(c.name || c.id)})" style="cursor:pointer;position:relative;border-radius:12px;border:1.5px solid ${th.border};background:${th.surface};padding:${isMobile ? "10px 6px 8px" : "10px 8px 8px"};display:flex;flex-direction:column;align-items:center;gap:3px;transition:border-color 0.15s ease" onmouseenter="this.style.borderColor='${primaryColor}'" onmouseleave="this.style.borderColor='${th.border}'">
+      <img src="${spriteSrc}" style="width:${isMobile ? 54 : 60}px;height:${isMobile ? 54 : 60}px;object-fit:contain" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='${baseSpriteSrc}';}" />
+      <div style="font-size:${isMobile ? 10.5 : 11.5}px;font-weight:700;color:${th.text};text-align:center;line-height:1.25;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(c.name || c.id)}</div>
+      <div style="font-size:${isMobile ? 9 : 10}px;color:${th.textMuted}">#${String(dexNum).padStart(4, "0")}</div>
       ${shinyChip}
     </div>`;
   }).join("");
@@ -9305,7 +9601,7 @@ function renderGoImageCard(go, data, primaryColor, th, isMobile) {
     <div style="position:relative;width:${pairBox}px;height:${pairBox}px;overflow:visible">
       ${sparkle ? sparkleHtml : ""}
       ${isShadowForm ? shadowAuraHtml(pairBox) : ""}
-      <img data-pair-sprite="1" onclick="showFormModal('${src}','${esc(label)}')" src="${src}" style="position:relative;width:100%;height:100%;object-fit:contain;filter:${glow};cursor:pointer;z-index:2" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='${baseSrc}';}${hideOnDoubleFail ? "else{this.parentElement.parentElement.style.display='none';}" : ""}" onload="applyPairSpriteScale(this)" />
+      <img data-pair-sprite="1" onclick="showFormModal(${jsAttr(src)},${jsAttr(label)})" src="${src}" style="position:relative;width:100%;height:100%;object-fit:contain;filter:${glow};cursor:pointer;z-index:2" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='${baseSrc}';}${hideOnDoubleFail ? "else{this.parentElement.parentElement.style.display='none';}" : ""}" onload="applyPairSpriteScale(this)" />
     </div>
     <div style="font-size:${isMobile ? 9 : 10}px;font-weight:600;color:${th.textMuted}">${caption}</div>
   </div>`;
@@ -9389,14 +9685,23 @@ function renderGoBlock(goCtx, data, primaryColor, th, isMobile, evoInnerHtml) {
         ${renderGoSection("go-sec-types", `${esc(go.name)} Type Chart`, "Incoming damage multipliers based on typing alone.", renderGoTypeChartBody(go, th, isMobile), true, th, isMobile)}
       </div>
       ${raidsBody ? renderGoSection("go-sec-raids", "Raids", "Raid appearances, group sizes, and the CP ranges you’ll see.", raidsBody, true, th, isMobile) : ""}
+      ${renderGoSection("go-sec-movepool", `${esc(go.name)}'s Move Pool`, "All fast and charged moves this Pokémon can learn.", renderGoMovePoolBody(go, th, isMobile, primaryColor), true, th, isMobile)}
       ${renderGoSection("go-sec-movesets", "All Movesets Ranked by DPS", "Every fast + charged move combination, sorted by DPS.", renderGoMovesetsBody(go, th, isMobile) + renderGoAttribution(th), false, th, isMobile)}
-      ${renderGoSection("go-sec-movepool", `${esc(go.name)}'s Move Pool`, "All fast and charged moves this Pokémon can learn.", renderGoMovePoolBody(go, th, isMobile), true, th, isMobile)}
       ${(() => {
         // Family index is fetched eagerly (alongside _index.json) in openPokemonDetail and cached
         // in _pokeCache the same way getGoSlugToDexMap reads it — no extra state field needed.
         const familyIdx = _pokeCache["go_family"] || {};
         const familySlug = go.family && go.family.familySlug;
-        const familyEntries = familySlug ? (familyIdx[familySlug] || []) : [];
+        const rawFamilyEntries = familySlug ? (familyIdx[familySlug] || []) : [];
+        // _family.json is ordered by dex number, which puts every BABY Pokemon last — Pichu (#172)
+        // landed after Raichu (#26) in its own family. Order by the evolution chain instead so the
+        // line reads pre-evolution -> evolution, matching the candy-cost chain rendered above.
+        // Stable sort, so the forms within one species keep their existing order (Normal, then
+        // regional/Mega/Dynamax/Gigantamax). Anything not in the chain (or when the chain hasn't
+        // loaded) keeps its original position by falling back to a rank past the end.
+        const evoOrder = new Map((state.pokedexDetailEvolutions || []).map((st, i) => [st.dexNum, i]));
+        const evoRank = (f) => evoOrder.has(f.dexNum) ? evoOrder.get(f.dexNum) : evoOrder.size + (f.dexNum || 0);
+        const familyEntries = rawFamilyEntries.slice().sort((a, b) => evoRank(a) - evoRank(b));
         const hasFamily = familyEntries.length > 1;
         if (!hasFamily && !evoInnerHtml) return "";
         // The old standalone "Evolution Chain" block listed the same Pokémon this grid already
@@ -9407,6 +9712,16 @@ function renderGoBlock(goCtx, data, primaryColor, th, isMobile, evoInnerHtml) {
           : "";
         const gridPart = hasFamily ? renderGoFamilyBody(familyEntries, go, primaryColor, th, isMobile) : "";
         return renderGoSection("go-sec-family", `${esc(go.name)} family & evolutions`, `Every Pokémon related to ${esc(go.name)} — its evolution line with candy costs, plus shadow, regional, Mega, Dynamax and Gigantamax forms.`, evoPart + gridPart, true, th, isMobile);
+      })()}
+      ${(() => {
+        // Costume index is fetched eagerly (alongside _index.json / _family.json) in
+        // openPokemonDetail and cached in _pokeCache — same read pattern as the family IIFE above,
+        // no extra state field needed. Hidden entirely (no header, no placeholder) when this dex
+        // has no costumes, per the spec — never render an empty section.
+        const costumeIdx = _pokeCache["costume_index"] || {};
+        const costumes = costumeIdx[String(go.dexNum)] || [];
+        if (costumes.length === 0) return "";
+        return renderGoSection("go-sec-costumes", "Costume Variants", `Every costumed sprite that's appeared for ${esc(go.name)} — a look back, not a current form.`, renderGoCostumesBody(costumes, go.dexNum, primaryColor, th, isMobile), false, th, isMobile);
       })()}
     </div>`;
   } else if (goCtx.everLoaded) {
@@ -9549,12 +9864,12 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
         const megaSrc = `${IMG_BASE}/Mega/regular/${getGenFolder(evo.dexNum)}/${evo.imgFile}.webp`;
         const shinyMegaSrc = `${IMG_BASE}/Mega/shiny/${getGenFolder(evo.dexNum)}/${evo.imgFile}.webp`;
         return `<div style="display:flex;align-items:center;gap:${isMobile ? 8 : 12}px;padding:${isMobile ? 10 : 12}px;background:${th.accentBgSubtle("#8E44AD")};border:1px solid ${th.countdownBorder("#8E44AD")};border-radius:12px">
-        <img onclick="showFormModal('${megaSrc}','${esc(evo.name)}')" src="${megaSrc}" style="width:${isMobile ? 52 : 60}px;height:${isMobile ? 52 : 60}px;object-fit:contain;flex-shrink:0;cursor:pointer;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'" onerror="this.style.opacity='0.3'" />
+        <img onclick="showFormModal(${jsAttr(megaSrc)},${jsAttr(evo.name)})" src="${megaSrc}" style="width:${isMobile ? 52 : 60}px;height:${isMobile ? 52 : 60}px;object-fit:contain;flex-shrink:0;cursor:pointer;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'" onerror="this.style.opacity='0.3'" />
         <div style="flex:1;min-width:0;text-align:center">
           <div style="font-size:${isMobile ? 13 : 14}px;font-weight:700;color:${th.text}">${esc(evo.name)}</div>
           <div style="font-size:${isMobile ? 10 : 11}px;color:${th.textSecondary};margin-top:2px">${esc(evo.trigger)}</div>
         </div>
-        <div onclick="showFormModal('${shinyMegaSrc}','Shiny ${esc(evo.name)}')" style="display:flex;flex-direction:column;align-items:center;cursor:pointer;flex-shrink:0;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'">
+        <div onclick="showFormModal(${jsAttr(shinyMegaSrc)},${jsAttr("Shiny " + (evo.name))})" style="display:flex;flex-direction:column;align-items:center;cursor:pointer;flex-shrink:0;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'">
           <img src="${shinyMegaSrc}" style="width:${isMobile ? 44 : 52}px;height:${isMobile ? 44 : 52}px;object-fit:contain;filter:drop-shadow(0 1px 4px rgba(0,0,0,0.32))" onerror="this.parentElement.style.display='none'" />
           <div style="font-size:${isMobile ? 9 : 10}px;font-weight:600;color:#F39C12;margin-top:2px">✨ Shiny</div>
         </div>
@@ -9644,7 +9959,7 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
     <div style="max-width:480px;margin:0 auto;width:100%;min-width:0">
     ${!goCtx.everLoaded ? `<div style="text-align:center;padding:20px 0;background:linear-gradient(135deg,${primaryColor}22,${primaryColor}08);border-radius:16px;margin-bottom:16px;position:relative;overflow:hidden">
       <div style="position:absolute;top:8px;right:12px;font-size:28px;font-weight:800;color:${primaryColor};opacity:0.7">${dexStr}</div>
-      <img onclick="showFormModal('${pokemonImgUrl(data.dexNum)}','${esc(data.name)}')" src="${pokemonImgUrl(data.dexNum)}" style="width:${isMobile ? 140 : 180}px;height:${isMobile ? 140 : 180}px;object-fit:contain;filter:drop-shadow(0 4px 12px ${primaryColor}40);cursor:pointer" onerror="this.style.opacity='0.3'" />
+      <img onclick="showFormModal(${jsAttr(pokemonImgUrl(data.dexNum))},${jsAttr(data.name)})" src="${pokemonImgUrl(data.dexNum)}" style="width:${isMobile ? 140 : 180}px;height:${isMobile ? 140 : 180}px;object-fit:contain;filter:drop-shadow(0 4px 12px ${primaryColor}40);cursor:pointer" onerror="this.style.opacity='0.3'" />
     </div>
     <div style="text-align:center;margin-bottom:16px">
       <div style="font-size:12px;font-weight:700;color:${th.textMuted};letter-spacing:1px">${dexStr}</div>
@@ -9696,7 +10011,7 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
       const shinyDesc = SHINY_DESC[data.dexNum] || "";
       return `<div style="margin-top:20px">
         <div style="font-size:14px;font-weight:700;color:${th.text};margin-bottom:10px">\u2728 Shiny Variant</div>
-        <div onclick="showFormModal('${shinySrc}','${esc(shinyLabel)}')" style="display:flex;align-items:center;gap:${isMobile ? 12 : 16}px;padding:${isMobile ? 14 : 16}px;background:${th.surface};border-radius:12px;border:1px solid ${th.border};cursor:pointer;transition:transform 0.15s ease,box-shadow 0.15s ease" onmouseenter="this.style.transform='scale(1.02)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.25)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none'">
+        <div onclick="showFormModal(${jsAttr(shinySrc)},${jsAttr(shinyLabel)})" style="display:flex;align-items:center;gap:${isMobile ? 12 : 16}px;padding:${isMobile ? 14 : 16}px;background:${th.surface};border-radius:12px;border:1px solid ${th.border};cursor:pointer;transition:transform 0.15s ease,box-shadow 0.15s ease" onmouseenter="this.style.transform='scale(1.02)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.25)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none'">
           <div style="position:relative;flex-shrink:0">
             <img src="${shinySrc}" style="width:${isMobile ? 80 : 100}px;height:${isMobile ? 80 : 100}px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.32))" onerror="this.style.opacity='0.3'" />
           </div>
@@ -9761,11 +10076,11 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
             </div>
           </div>
           <div style="display:flex;align-items:flex-end;justify-content:center;gap:${isMobile ? 20 : 28}px">
-            <div onclick="showFormModal('${fSrc}','${esc(formFullName)}')" style="display:flex;flex-direction:column;align-items:center;cursor:pointer">
+            <div onclick="showFormModal(${jsAttr(fSrc)},${jsAttr(formFullName)})" style="display:flex;flex-direction:column;align-items:center;cursor:pointer">
               <img src="${fSrc}" style="width:${isMobile ? 72 : 84}px;height:${isMobile ? 72 : 84}px;object-fit:contain" onerror="this.style.opacity='0.3'" />
               <div style="font-size:${isMobile ? 9 : 10}px;font-weight:600;color:${th.textSecondary};margin-top:4px">Regular</div>
             </div>
-            <div onclick="showFormModal('${shinyfSrc}','${esc(shinyFormFullName)}')" style="display:flex;flex-direction:column;align-items:center;cursor:pointer;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'">
+            <div onclick="showFormModal(${jsAttr(shinyfSrc)},${jsAttr(shinyFormFullName)})" style="display:flex;flex-direction:column;align-items:center;cursor:pointer;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'">
               <img src="${shinyfSrc}" style="width:${isMobile ? 72 : 84}px;height:${isMobile ? 72 : 84}px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.32))" onerror="this.parentElement.style.display='none'" />
               <div style="font-size:${isMobile ? 9 : 10}px;font-weight:600;color:${th.textMuted};margin-top:4px">\u2728 Shiny</div>
             </div>
@@ -9782,12 +10097,12 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
           const formFullName = `${fm.l} ${fullName}`;
           const shinyFormFullName = `Shiny ${fm.l} ${fullName}`;
           return `<div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:${isMobile ? "10px 6px" : "12px 8px"};border-radius:12px;background:${th.accentBgSubtle(primaryColor)};border:1px solid ${th.border}">
-            <div onclick="showFormModal('${fSrc}','${esc(formFullName)}')" style="cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'">
+            <div onclick="showFormModal(${jsAttr(fSrc)},${jsAttr(formFullName)})" style="cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'">
               <img src="${fSrc}" style="width:${isMobile ? 64 : 76}px;height:${isMobile ? 64 : 76}px;object-fit:contain" onerror="this.style.opacity='0.3'" />
               <span style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${th.text};text-align:center">${esc(formFullName)}</span>
               <span style="font-size:${isMobile ? 9 : 10}px;color:${th.textMuted}">#${String(data.dexNum).padStart(4,"0")}</span>
             </div>
-            <div onclick="showFormModal('${shinyfSrc}','${esc(shinyFormFullName)}')" style="cursor:pointer;margin-top:4px;padding:4px 8px;border-radius:8px;background:${th.surface};border:1px solid ${th.border};display:flex;align-items:center;gap:6px;transition:transform 0.15s ease,box-shadow 0.15s ease" onmouseenter="this.style.transform='scale(1.05)';this.style.boxShadow='0 2px 8px rgba(0,0,0,0.22)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none'">
+            <div onclick="showFormModal(${jsAttr(shinyfSrc)},${jsAttr(shinyFormFullName)})" style="cursor:pointer;margin-top:4px;padding:4px 8px;border-radius:8px;background:${th.surface};border:1px solid ${th.border};display:flex;align-items:center;gap:6px;transition:transform 0.15s ease,box-shadow 0.15s ease" onmouseenter="this.style.transform='scale(1.05)';this.style.boxShadow='0 2px 8px rgba(0,0,0,0.22)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none'">
               <img src="${shinyfSrc}" style="width:${isMobile ? 28 : 32}px;height:${isMobile ? 28 : 32}px;object-fit:contain;filter:drop-shadow(0 1px 4px rgba(0,0,0,0.32))" onerror="this.parentElement.style.display='none'" />
               <span style="font-size:${isMobile ? 9 : 10}px;font-weight:600;color:${th.textSecondary}">\u2728 Shiny</span>
             </div>
@@ -10768,7 +11083,7 @@ function render() {
       });
       raidsTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
         <div style="text-align:center;padding:10px;font-size:14px;font-weight:600;color:${th.text};position:relative">
-          <div style="${isMobile ? "position:static;margin:0 0 10px" : "position:absolute;top:14px;right:16px"};font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on September 1, 2026 at 1:36 pm</div>
+          <div style="${isMobile ? "position:static;margin:0 0 10px" : "position:absolute;top:14px;right:16px"};font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on September 2, 2026 at 11:30 am</div>
           Current Raid Bosses</div>
         <div style="text-align:center;font-size:11px;color:${th.textMuted};font-weight:500;margin-top:-10px">Data sourced from Pok\u00E9monGO.com, LeekDuck.com & Pok\u00E9monGOHUB.net</div>
         <div style="text-align:center;font-size:12px;color:${th.textMuted};font-weight:600;margin-top:2px">Tap a Pok\u00E9mon to see its weaknesses & resistances</div>
