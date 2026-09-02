@@ -2101,6 +2101,11 @@
     "cpBoost": "2512–2626",
     "weather": "Sunny/Clear or Snow"
   },
+  "Kecleon": {
+    "types": [
+      "Normal"
+    ]
+  },
   "Keldeo (Resolute Forme)": {
     "types": [
       "Water",
