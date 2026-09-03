@@ -1219,7 +1219,7 @@
 {
 "id": "wondervoyage",
 "name": "Friede's Goggles",
-"shiny": false
+"shiny": true
 }
 ],
 "40": [
@@ -1362,8 +1362,7 @@
 {
 "id": "wondervoyage",
 "name": "Friede's Goggles",
-"shiny": false,
-"noSprite": true
+"shiny": true
 }
 ],
 "50": [
@@ -1453,8 +1452,7 @@
 {
 "id": "wondervoyage",
 "name": "Friede's Goggles",
-"shiny": false,
-"noSprite": true
+"shiny": true
 }
 ],
 "613": [

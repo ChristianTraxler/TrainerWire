@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "4.024";
+const APP_VERSION = "4.025";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -477,6 +477,193 @@ async function fetchGoPokemon(slug) {
   }
 }
 
+// --- SPECIAL RESEARCH (data/special-research.json — pre-scraped from Serebii, 298 entries) ---
+// Same fail-silent contract as fetchGoIndex/fetchCostumeIndex: an empty array if the file is
+// missing or the fetch fails, no console noise. Loaded once and cached for the session.
+const SPECIAL_RESEARCH_SOURCE = "https://www.serebii.net/pokemongo/specialresearch.shtml";
+let SPECIAL_RESEARCH_DB = null; // null = not loaded yet; [] = loaded (or failed) with no entries
+let _specialResearchLoading = false;
+async function fetchSpecialResearch() {
+  if (SPECIAL_RESEARCH_DB) return SPECIAL_RESEARCH_DB;
+  if (_specialResearchLoading) return SPECIAL_RESEARCH_DB || [];
+  _specialResearchLoading = true;
+  try {
+    const res = await fetch("data/special-research.json");
+    const data = res.ok ? await res.json() : [];
+    SPECIAL_RESEARCH_DB = Array.isArray(data) ? data : [];
+  } catch {
+    SPECIAL_RESEARCH_DB = [];
+  } finally {
+    _specialResearchLoading = false;
+  }
+  return SPECIAL_RESEARCH_DB;
+}
+// A reward string like "Great Ball * 10" displays as "Great Ball ×10". A small number of scraped
+// rewards end with a dangling " *" and no quantity (Serebii's own source omits it, e.g. "Silver
+// Pinap Berry *", "Charged TM *", "Pose 6 *") — strip that bare trailing asterisk first. Then only
+// convert " * <number>" into " ×<number>" — some rewards use " * " to separate qualifier text
+// instead of a quantity ("Battle * Sierra", "Rock Star Pose * 1 If Pikachu Rock Star Chosen"), so
+// any remaining bare asterisk becomes a plain " — " separator rather than a bogus "×".
+function fmtSRReward(s) {
+  return String(s).replace(/\s*\*\s*$/, "").replace(/\s*\*\s*(\d[\d,]*)/, " ×$1").replace(/\s*\*\s*/, " — ").trim();
+}
+// getPokemonImg's costume-name fallback matches via name.includes(pkmn) against the shared DEX
+// object, which keys names without accents or apostrophes ("Flabébé" -> "Flabebe", "Farfetch'd"
+// -> "Farfetchd") — so Serebii's punctuated/accented names (focal Pokémon header, and now
+// "Farfetch'd Encounter" reward pills) resolve to nothing. Don't touch getPokemonImg/DEX (shared
+// by every other page); just retry here with accents and apostrophes stripped. Labels elsewhere
+// still show the original "Flabébé" / "Farfetch'd" — this only affects sprite lookup.
+function srPokemonImg(name) {
+  if (!name) return null;
+  const direct = getPokemonImg(name);
+  if (direct) return direct;
+  const cleaned = name.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/['']/g, "");
+  return getPokemonImg(cleaned);
+}
+// Reward pill icons. Keyed by lowercased item base name → local asset path (verified to exist on
+// disk). Covers item/costume/sticker art that doesn't fit a general rule below; Pokémon Encounter
+// rewards, Candy, Candy XL, Mega/Primal Energy, XP, and Stardust are handled generically instead
+// of listed here one-by-one.
+const SR_REWARD_ICONS = {
+  "baile style oricorio hat": "assets/pokemon-images/clothing-items/hats/baile-style-oricorio-hat.png",
+  "battle": "assets/pokemon-images/icons/teamrocket_r_full.png",
+  "bidoof hat": "assets/pokemon-images/clothing-items/hats/bidoof-hat.png",
+  "blaze fusion energy": "assets/pokemon-images/Items/db/blaze-fusion-energy.webp",
+  "charge tm": "assets/pokemon-images/Items/db/charged-tm.webp",
+  "charged tm": "assets/pokemon-images/Items/db/charged-tm.webp",
+  "crowned shield energy": "assets/pokemon-images/Items/db/crowned-shield-energy.webp",
+  "crowned sword energy": "assets/pokemon-images/Items/db/crowned-sword-energy.webp",
+  "daily adventure incense": "assets/pokemon-images/Items/db/daily-adventure-incense.webp",
+  "diancie t-shirt": "assets/pokemon-images/clothing-items/shirts/diancie-t-shirt.png",
+  "dragon scale": "assets/pokemon-images/Items/db/dragon-scale.webp",
+  "dynamax band": "assets/pokemon-images/clothing-items/gloves/dynamax-band.png",
+  "eevee t-shirt": "assets/pokemon-images/clothing-items/shirts/eevee-t-shirt.png",
+  "egg incubator": "assets/pokemon-images/Items/db/egg-incubator-empty.webp",
+  "elite charged tm": "assets/pokemon-images/Items/db/elite-charged-tm.webp",
+  "elite fast tm": "assets/pokemon-images/Items/db/elite-fast-tm.webp",
+  "fast tm": "assets/pokemon-images/Items/db/fast-tm.webp",
+  "flareon t-shirt": "assets/pokemon-images/clothing-items/shirts/flareon-t-shirt.png",
+  "genesect cap": "assets/pokemon-images/clothing-items/hats/genesect-cap.png",
+  "glacial lure module": "assets/pokemon-images/Items/db/glacial-lure-module.webp",
+  "go fest 2026 sticker": "assets/pokemon-images/stickers/go-fest-2026-sticker.png",
+  "golden razz berry": "assets/pokemon-images/Items/db/golden-razz-berry.webp",
+  "great ball": "assets/pokemon-images/Items/db/great-ball.webp",
+  "greatball": "assets/pokemon-images/Items/db/great-ball.webp",
+  "groudon primal energy": "assets/pokemon-images/Items/pokemon_details_mega_candy.png",
+  "ho-oh t-shirt": "assets/pokemon-images/clothing-items/shirts/ho-oh-t-shirt.png",
+  "ho-oh wings": "assets/pokemon-images/clothing-items/backpacks/ho-oh-wings.png",
+  "hoopa t-shirt": "assets/pokemon-images/clothing-items/shirts/hoopa-t-shirt.png",
+  "hyper potion": "assets/pokemon-images/Items/db/hyper-potion.webp",
+  "incense": "assets/pokemon-images/Items/db/incense.webp",
+  "jirachi t-shirt": "assets/pokemon-images/clothing-items/shirts/jirachi-t-shirt.png",
+  "jolteon t-shirt": "assets/pokemon-images/clothing-items/shirts/jolteon-t-shirt.png",
+  "keldeo t-shirt": "assets/pokemon-images/clothing-items/shirts/keldeo-t-shirt.png",
+  "kings rock": "assets/pokemon-images/Items/db/kings-rock.webp",
+  "kyogre primal energy": "assets/pokemon-images/Items/pokemon_details_mega_candy.png",
+  "land forme shaymin t-shirt": "assets/pokemon-images/clothing-items/shirts/land-forme-shaymin-t-shirt.png",
+  "lucky egg": "assets/pokemon-images/Items/db/lucky-egg.webp",
+  "lugia t-shirt": "assets/pokemon-images/clothing-items/shirts/lugia-t-shirt.png",
+  "lunar fusion energy": "assets/pokemon-images/Items/db/lunar-fusion-energy.webp",
+  "lure module": "assets/pokemon-images/Items/db/lure-module.webp",
+  "magnetic lure module": "assets/pokemon-images/Items/db/magnetic-lure-module.webp",
+  "marshadow t-shirt": "assets/pokemon-images/clothing-items/shirts/marshadow-t-shirt.png",
+  "master ball": "assets/pokemon-images/Items/db/master-ball.webp",
+  "max mushroom": "assets/pokemon-images/Items/db/max-mushroom.webp",
+  "max particle": "assets/pokemon-images/Items/max-particles.png",
+  "max particle pack": "assets/pokemon-images/Items/db/max-particle-pack.webp",
+  "max particles": "assets/pokemon-images/Items/db/max-particles.webp",
+  "max potion": "assets/pokemon-images/Items/db/max-potion.webp",
+  "max revive": "assets/pokemon-images/Items/db/max-revive.webp",
+  "meloetta t-shirt": "assets/pokemon-images/clothing-items/shirts/meloetta-t-shirt.png",
+  "metal coat": "assets/pokemon-images/Items/db/metal-coat.webp",
+  "meteorite": "assets/pokemon-images/Items/db/meteorite.webp",
+  "mossy lure module": "assets/pokemon-images/Items/db/mossy-lure-module.webp",
+  "mysterious component": "assets/pokemon-images/Items/db/mysterious-component.webp",
+  "nanab berry": "assets/pokemon-images/Items/db/nanab-berry.webp",
+  "p'au style oricorio hat": "assets/pokemon-images/clothing-items/hats/pau-style-oricorio-hat.png",
+  "pinap berry": "assets/pokemon-images/Items/db/pinap-berry.webp",
+  "poffin": "assets/pokemon-images/Items/db/poffin.webp",
+  "poke ball": "assets/pokemon-images/Items/db/poke-ball.webp",
+  "poke ball shades": "assets/pokemon-images/clothing-items/glasses/poke-ball-shades.png",
+  "pom-pom style oricorio hat": "assets/pokemon-images/clothing-items/hats/pom-pom-style-oricorio-hat.png",
+  "potion": "assets/pokemon-images/Items/db/potion.webp",
+  "premium battle pass": "assets/pokemon-images/Items/db/premium-battle-pass.webp",
+  "premium raid pass": "assets/pokemon-images/Items/premium-raid-pass.png",
+  "rainy lure module": "assets/pokemon-images/Items/db/rainy-lure-module.webp",
+  "razz berry": "assets/pokemon-images/Items/db/razz-berry.webp",
+  "revive": "assets/pokemon-images/Items/db/revive.webp",
+  "rhi-style helmet": "assets/pokemon-images/clothing-items/hats/rhi-style-helmet.png",
+  "rocket radar": "assets/pokemon-images/Items/db/rocket-radar.webp",
+  "sensu style oricorio hat": "assets/pokemon-images/clothing-items/hats/sensu-style-oricorio-hat.png",
+  "silver pinap": "assets/pokemon-images/Items/Silver-pinap-berry.png",
+  "silver pinap berry": "assets/pokemon-images/Items/db/silver-pinap-berry.webp",
+  "sinnoh stone": "assets/pokemon-images/Items/db/sinnoh-stone.webp",
+  "sky forme shaymin t-shirt": "assets/pokemon-images/clothing-items/shirts/sky-forme-shaymin-t-shirt.png",
+  "solar fusion energy": "assets/pokemon-images/Items/db/solar-fusion-energy.webp",
+  "star piece": "assets/pokemon-images/Items/db/star-piece.webp",
+  "sun stone": "assets/pokemon-images/Items/db/sun-stone.webp",
+  "super incubator": "assets/pokemon-images/Items/super_incubator.webp",
+  "super potion": "assets/pokemon-images/Items/db/super-potion.webp",
+  "super rocket radar": "assets/pokemon-images/Items/db/super-rocket-radar.webp",
+  "ticket": "assets/pokemon-images/Items/db/ticket-pink.webp",
+  "ultra ball": "assets/pokemon-images/Items/db/ultra-ball.webp",
+  "unova stone": "assets/pokemon-images/Items/db/unova-stone.webp",
+  "up-grade": "assets/pokemon-images/Items/db/upgrade.webp",
+  "upgrade": "assets/pokemon-images/Items/db/upgrade.webp",
+  "vaporeon t-shirt": "assets/pokemon-images/clothing-items/shirts/vaporeon-t-shirt.png",
+  "victini tee": "assets/pokemon-images/clothing-items/shirts/victini-tee.png",
+  "volcanion t-shirt": "assets/pokemon-images/clothing-items/shirts/volcanion-t-shirt.png",
+  "volt fusion energy": "assets/pokemon-images/Items/db/volt-fusion-energy.webp",
+  "zeraora sticker": "assets/pokemon-images/stickers/zeraora-sticker.png",
+  "zeraora t-shirt": "assets/pokemon-images/clothing-items/shirts/zeraora-t-shirt.png",
+  "zygarde cube": "assets/pokemon-images/Items/db/zygarde-cube.webp",
+};
+// Resolves a reward pill's icon. Must be called with the RAW reward string (not fmtSRReward's
+// output) — base name is derived by splitting on the first "*", same as the raw quantity suffix
+// fmtSRReward strips, so lookups like SR_REWARD_ICONS["battle"] still match "Battle * Sierra" even
+// though its formatted display text becomes "Battle — Sierra". Returns { url, kind } where kind is
+// "pokemon" (render at the larger sprite size) or "item" (render at ~58% of that), or null to
+// render the pill text-only (Poses/Medals/Badges — no art in the repo, expected for ~55 rewards).
+function srRewardIcon(raw) {
+  const base = String(raw).split("*")[0].trim();
+  if (!base) return null;
+  if (/\bEncounter$/i.test(base)) {
+    const species = base.replace(/\s*Encounter$/i, "").trim();
+    const pkmn = srPokemonImg(species);
+    return pkmn ? { url: pkmn.url, kind: "pokemon" } : null;
+  }
+  if (/candy xl$/i.test(base)) return { url: "assets/pokemon-images/trainer-levels/candy-xl-icon-colored.png", kind: "item" };
+  if (/candy$/i.test(base)) return { url: "assets/pokemon-images/Items/pokemon_details_candy.png", kind: "item" };
+  if (/(mega|primal) energy$/i.test(base)) return { url: "assets/pokemon-images/Items/pokemon_details_mega_candy.png", kind: "item" };
+  if (/^[\d,]+ XP$/.test(base)) return { url: "assets/pokemon-images/icons/xp.png", kind: "item" };
+  if (/^stardust$/i.test(base)) return { url: "assets/pokemon-images/Items/db/stardust.webp", kind: "item" };
+  const known = SR_REWARD_ICONS[base.toLowerCase()];
+  if (known) return { url: known, kind: "item" };
+  if (/sticker$/i.test(base)) return { url: "assets/pokemon-images/Items/db/stickers.webp", kind: "item" };
+  return null;
+}
+// Lenient date parser for sort order only — Serebii's scraped date strings are inconsistent
+// ("March 30th 2018", "July 14th - July 15th 2018", "Decemer 19th - 20th 2020" typos, "July 25th"
+// with no year at all). Extracts the first month name (matched by its first 3 letters, which
+// survives the typos above) + first day number + first 4-digit year it can find; returns null
+// when a year can't be found so callers can fall back to original array order instead of guessing.
+const SR_MONTHS = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
+function parseSRDateTs(str) {
+  if (!str) return null;
+  const s = String(str);
+  const monthMatch = s.match(/[A-Za-z]{3,}/);
+  if (!monthMatch) return null;
+  const key = monthMatch[0].slice(0, 3).toLowerCase();
+  if (!(key in SR_MONTHS)) return null;
+  const yearMatch = s.match(/\b(19|20)\d{2}\b/);
+  if (!yearMatch) return null;
+  const year = parseInt(yearMatch[0], 10);
+  const withoutYear = s.slice(0, yearMatch.index) + s.slice(yearMatch.index + yearMatch[0].length);
+  const dayMatch = withoutYear.match(/\d{1,2}/);
+  const day = dayMatch ? parseInt(dayMatch[0], 10) : 1;
+  return new Date(year, SR_MONTHS[key], day).getTime();
+}
+
 function getPokemonImg(name) {
   const lower = name.toLowerCase();
   if (lower.includes("and more event")) return { url: `${IMG_BASE}/icons/mystery-pokemon.webp`, shadow: false }; // "…and more event-themed Pokémon" → "Who's That Pokémon?" silhouette card tile
@@ -545,8 +732,14 @@ function getPokemonImg(name) {
   if (lower.includes("pikachu") && lower.includes("cap") && lower.includes("hat")) {
     return { url: eventDexImg(25, "horizons-male"), shadow: false }; // Pokémon Horizons — Captain Pikachu's hat
   }
-  if (lower.includes("charmander") && lower.includes("goggles")) {
-    return { url: costumeDexImg(4, "wondervoyage"), shadow: false }; // Pokémon Horizons — Charmander wearing Friede's goggles
+  // Pokémon Horizons — Friede's goggles. The whole Charmander line wears it (evolve with 25 then
+  // 100 Candy), so all three stages need their own sprite: without the Charmeleon/Charizard arms
+  // they fall through to the plain-species lookup and an event tile labelled "Charizard wearing
+  // Friede's goggles" draws a bare Charizard.
+  if (lower.includes("goggles")) {
+    if (lower.includes("charmander")) return { url: costumeDexImg(4, "wondervoyage"), shadow: false };
+    if (lower.includes("charmeleon")) return { url: costumeDexImg(5, "wondervoyage"), shadow: false };
+    if (lower.includes("charizard")) return { url: costumeDexImg(6, "wondervoyage"), shadow: false };
   }
   // Special Anniversary Pikachu Celebration costumes (raids.nl form IDs)
   if (lower.includes("pikachu") && lower.includes("dapper")) {
@@ -2288,7 +2481,7 @@ const ANNOUNCEMENTS = [
     ] }
   ] },
   { id: 19, date: "2026-05-26", published: "2026-05-26", updated: "2026-06-18", lastUpdated: "June 18, 2026 at 10:47 AM", title: "Forever Forward Season — June 2 to September 8", tag: "News", url: "https://pokemongo.com/en/seasons/forever-forward", body: "Pokémon GO's next season runs June 2 – September 8, 2026. Mewtwo, Zeraora, and Mega Mewtwo X & Y headline GO Fest 2026. Daily Discoveries shift to Scenic Sunday, Max Monday, and Showcase Tuesday (Spotlight Hour now returns Thursdays 6\u20137 PM). New Choose Your Path Timed Research runs on non-event weeks. Three Community Days (June 20 Frigibax, July 4, August 16), refreshed eggs, Research Breakthrough rotation, Dynamax debuts, and new Adventure Sync rewards.", fullBody: "The Forever Forward Season begins Tuesday, June 2, 2026 at 10:00 AM and runs through Tuesday, September 8, 2026 at 10:00 AM local time. Building on Memories in Motion, the season pushes the meta forward with the Mega Mewtwo X & Y debuts at GO Fest 2026, the global Zeraora debut, refreshed Daily Discoveries, three Community Days, and new Dynamax Pokémon at Power Spots.", sections: [{ heading: "Season Window", items: ["Starts: Tuesday, June 2, 2026 at 10:00 AM local time", "Ends: Tuesday, September 8, 2026 at 10:00 AM local time", "Season length: ~14 weeks"] }, { heading: "Featured Pokémon", items: ["Mewtwo (5★ Raids during GO Fest 2026)", "Mega Mewtwo X (Super Mega Raid debut — Saturday, July 11)", "Mega Mewtwo Y (Super Mega Raid debut — Sunday, July 12)", "Zeraora (Mythical — Global debut via Special Research at GO Fest 2026: Global)"] }, { heading: "Major Events", items: ["Pokémon GO Fest 2026: Tokyo — May 29 – June 1 (Citywide May 25 – June 1)", "Pokémon GO Fest 2026: Chicago — June 5 – 7 (Citywide June 4 – 7)", "Pokémon GO Fest 2026: Copenhagen — June 12 – 14 (Citywide June 11 – 14)", "Pokémon GO Fest 2026: Global — July 11 – 12 (FREE for all Trainers)", "Community Day: Frigibax — Saturday, June 20 (2 PM – 5 PM local)", "Community Day: Sobble — Saturday, July 4 (2 PM – 5 PM local)", "Community Day: August — Sunday, August 16 (TBA, fan-voted)"] }, { heading: "Research Breakthrough Encounters", items: ["Dragonite ✨", "Axew ✨", "Honedge ✨", "Jangmo-o ✨", "Indeedee ✨", "Klawf"] }, { heading: "2 km Eggs", items: ["Exeggcute ✨", "Corphish ✨", "Wynaut ✨", "And more!"] }, { heading: "5 km Eggs", items: ["Riolu ✨", "Mantyke ✨", "Flittle", "And more!"] }, { heading: "7 km Eggs", items: ["Alolan Diglett ✨", "Galarian Corsola ✨", "Galarian Darumaka ✨"] }, { heading: "7 km Eggs from Mateo's Gift Exchange", items: ["Hisuian Growlithe ✨", "Hisuian Sneasel ✨", "White-Striped Form Basculin ✨", "And more!"] }, { heading: "10 km Eggs", items: ["Mawile ✨", "Absol ✨", "Frigibax ✨", "And more!"] }, { heading: "Dynamax Debuts at Power Spots", items: ["Dynamax Electabuzz", "Dynamax Magikarp", "Dynamax Feebas", "Additional Dynamax Pokémon rotate through Max Mondays", "Max Battles available 6:00 AM – 9:00 PM local time"] }, { heading: "Daily Discoveries", items: ["Scenic Sunday (NEW — replaces Double-Time Sunday) — more Pokémon on Routes, reduced Buddy Candy distance on Routes, encounter Mateo up to 3× daily", "Max Monday — frequent Power Spot refreshes, additional active Power Spots, rotating Dynamax battles", "Showcase Tuesday — enter up to 5 PokéStop Showcases", "Raid Hour Wednesdays — 6:00 PM – 7:00 PM (featured 5★ boss)", "GO Battle Thursdays — up to 10 sets daily (50 battles), 4× Stardust from wins", "Friendship Fridays — 2 Special Trades, increased Lucky chance, −10% Stardust trade cost"] }, { heading: "Adventure Sync Rewards — 5 km", items: ["Tyrogue ✨", "Sableye ✨", "Budew ✨", "And more!"] }, { heading: "Adventure Sync Rewards — 10 km", items: ["Bagon ✨", "Druddigon ✨", "Drampa ✨", "And more!"] }, { heading: "GO Pass System", items: ["Free and Deluxe GO Pass available each event", "Milestone bonuses at Ranks 1, 25, 50, 75", "Bonuses include extra Candy, increased Gift/Disc limits, extended Incense, bonus XP/Stardust"] }, { heading: "Additional Features", items: ["Themed stickers via PokéStops, Gifts, and the in-game shop", "GO Battle League: Forever Forward (separate news post — full schedule)", "Rotating Web Store boxes throughout the season", "Routes feature with Buddy Pokémon exploration"] }, { heading: "Tips", items: ["The Mega Mewtwo X & Y debuts are the headline — stockpile Mewtwo Mega Energy now (it converts to both X and Y).", "Scenic Sunday encourages Route gameplay — load up Routes with Buddies before the season starts.", "Research Breakthrough rotates through six strong shinies — claim your weekly Breakthrough every week.", "Mateo's Gift Exchange 7 km Eggs are separate from regular 7 km Eggs — keep gifting daily.", "Adventure Sync Bagon, Drampa, and Druddigon are normally rare — stack walking distance for hatch eggs.", "All three Community Days fall in summer — plan vacation time around June 20, July 4, and August 16."] }] },
-  { id: 20, date: "2026-05-26", published: "2026-05-26", title: "GO Battle League: Forever Forward — Full Schedule", tag: "Update", url: "https://pokemongo.com/news/go-battle-league-forever-forward", body: "GO Battle League returns June 2 – September 8 with North American International Championships 2026 Cup, Summer/Sunshine/Retro/Master Premier/Weather/Evolution/Scroll Cups, Master League: Mega Edition, and rank-up encounters for Gabite, Lucario, Honedge, Dreepy, and Pikachu Libre.", fullBody: "The GO Battle League: Forever Forward season runs from Tuesday, June 2, 2026 at 1:00 PM PDT through Tuesday, September 8, 2026 at 1:00 PM PDT. Your rank will be reset at the start of the season. Cynthia-inspired avatar items unlock at Ranks 10, 15, 20, Ace, and Legend.", sections: [{ heading: "Weekly Schedule", items: ["Jun 2 – 9: Great League · Pokémon NAIC 2026 (Great League)", "Jun 9 – 16: Ultra League · Pokémon NAIC 2026 (Great League)", "Jun 16 – 23: Master League: Mega Edition* · Sunshine Cup: Great League Edition*", "Jun 23 – 30: All Three Leagues* · All Three Leagues*", "Jun 30 – Jul 7: Great League · Summer Cup: Great League Edition", "Jul 7 – 14: Ultra League · Fantasy Cup: Ultra League Edition", "Jul 14 – 21: Master League* · Retro Cup: Great League Edition*", "Jul 21 – 28: All Three Leagues* · All Three Leagues*", "Jul 28 – Aug 4: Great League* · Master Premier*", "Aug 4 – 11: Ultra League · Weather Cup: Great League Edition", "Aug 11 – 18: Master League* · Evolution Cup: Great League Edition*", "Aug 18 – 25: Great League · Scroll Cup: Great League Edition", "Aug 25 – Sep 1: All Three Leagues* · All Three Leagues*", "Sep 1 – 8: All Mega Editions* · All Mega Editions*", "* = 4× Stardust from win rewards (excludes end-of-set rewards)"] }, { heading: "Cup Rules", items: ["Great League cups: Pokémon at or below 1,500 CP (type/eligibility varies)", "Ultra League / Ultra League cups: 2,500 CP cap", "Master League / Master League: Mega Edition: no CP cap", "Fantasy Cup: Ultra League CP cap (2,500)", "Master Premier: no CP cap, excludes Mythical and Legendary Pokémon"] }, { heading: "Rank-Up Encounters (Once per Season)", items: ["Gabite ✨", "Lucario ✨", "Honedge ✨", "Dreepy ✨", "Pikachu Libre ✨"] }, { heading: "Seasonal Rewards", items: ["Cynthia-inspired avatar items unlock at Rank 10, Rank 15, Rank 20, Ace, and Legend", "Free Timed Research Pass — Rare Candy XL, Elite TMs, and Stardust for completing pages (100 battles or 50 wins per page)"] }, { heading: "Daily Discoveries: GO Battle Thursday", items: ["Thursdays: 4× Stardust from win rewards", "Thursdays: up to 10 sets per day (50 battles), instead of the usual 5"] }, { heading: "Tips", items: ["Save Elite TMs for Master League: Mega Edition (June 16 – 23) and the September finale.", "The Sunshine Cup is Great League-restricted — check the type restrictions before locking in a team.", "Fantasy Cup uses Ultra League CP (2,500) — check the cup-specific eligibility list before building.", "Rank 20 unlocks the Pikachu Libre encounter — it has boosted Shiny odds once per season.", "GO Battle Thursdays compound with Star Pieces — best dust day of the week."] }] },
+  { id: 20, date: "2026-05-26", published: "2026-05-26", title: "GO Battle League: Forever Forward — Full Schedule", tag: "Update", url: "https://pokemongo.com/news/go-battle-league-forever-forward", body: "GO Battle League returns June 2 – September 8 with North American International Championships 2026 Cup, Summer/Sunshine/Retro/Master Premier/Weather/Evolution/Scroll Cups, Master League: Mega Edition, and rank-up encounters for Gabite, Lucario, Honedge, Dreepy, and Pikachu Libre.", fullBody: "The GO Battle League: Forever Forward season runs from Tuesday, June 2, 2026 at 1:00 PM PDT through Tuesday, September 8, 2026 at 1:00 PM PDT. Your rank will be reset at the start of the season. Cynthia-inspired avatar items unlock at Ranks 10, 15, 20, Ace, and Legend.", sections: [{ heading: "Weekly Schedule", items: ["Jun 2 – 9: Great League · Pokémon NAIC 2026 (Great League)", "Jun 9 – 16: Ultra League · Pokémon NAIC 2026 (Great League)", "Jun 16 – 23: Master League: Mega Edition* · Sunshine Cup: Great League Edition*", "Jun 23 – 30: All Three Leagues* · All Three Leagues*", "Jun 30 – Jul 7: Great League · Summer Cup: Great League Edition", "Jul 7 – 14: Ultra League · Fantasy Cup: Ultra League Edition", "Jul 14 – 21: Master League* · Retro Cup: Great League Edition*", "Jul 21 – 28: All Three Leagues* · All Three Leagues*", "Jul 28 – Aug 4: Great League* · Master Premier*", "Aug 4 – 11: Ultra League · Weather Cup: Great League Edition", "Aug 11 – 18: Master League* · Evolution Cup: Great League Edition*", "Aug 18 – 25: Great League · Scroll Cup: Great League Edition", "Aug 25 – Sep 1: All Three Leagues* · All Three Leagues*", "Sep 1 – 8: All Mega Editions* · All Mega Editions*", "* = 4× Stardust from win rewards (excludes end-of-set rewards)"] }, { heading: "Cup Rules", items: ["Great League cups: Pokémon at or below 1,500 CP (type/eligibility varies)", "Ultra League / Ultra League cups: 2,500 CP cap", "Master League / Master League: Mega Edition: no CP cap", "Fantasy Cup: Ultra League CP cap (2,500)", "Master Premier: no CP cap, excludes Mythical and Legendary Pokémon"] }, { heading: "Rank-Up Encounters (Once per Season)", items: ["Gabite ✨", "Lucario ✨", "Honedge ✨", "Dreepy", "Pikachu Libre ✨"] }, { heading: "Seasonal Rewards", items: ["Cynthia-inspired avatar items unlock at Rank 10, Rank 15, Rank 20, Ace, and Legend", "Free Timed Research Pass — Rare Candy XL, Elite TMs, and Stardust for completing pages (100 battles or 50 wins per page)"] }, { heading: "Daily Discoveries: GO Battle Thursday", items: ["Thursdays: 4× Stardust from win rewards", "Thursdays: up to 10 sets per day (50 battles), instead of the usual 5"] }, { heading: "Tips", items: ["Save Elite TMs for Master League: Mega Edition (June 16 – 23) and the September finale.", "The Sunshine Cup is Great League-restricted — check the type restrictions before locking in a team.", "Fantasy Cup uses Ultra League CP (2,500) — check the cup-specific eligibility list before building.", "Rank 20 unlocks the Pikachu Libre encounter — it has boosted Shiny odds once per season.", "GO Battle Thursdays compound with Star Pieces — best dust day of the week."] }] },
   { id: 18, date: "2026-05-26", published: "2026-05-26", title: "Frigibax Community Day — June 20", tag: "Alert", url: "https://pokemongo.com/news/communityday-june-2026-frigibax", body: "Frigibax stars in June! 3× Catch Stardust, 2× Candy, and exclusive Glaive Rush for Baxcalibur.", fullBody: "Frigibax, the Ice Fin Pokémon, takes the spotlight on Saturday, June 20, 2026, from 2:00–5:00 PM local time:", sections: [{ heading: "Event Details", items: ["Saturday, June 20, 2:00–5:00 PM local", "Frigibax appears more frequently in the wild", "Possible Shiny encounters & Special Background variants", "Evolve Arctibax to Baxcalibur for Glaive Rush (until 9 PM)"] }, { heading: "Bonuses (2–5 PM)", items: ["3× Catch Stardust", "2× Catch Candy", "2× Candy XL chance (Level 31+)", "3-hour Incense", "Snapshot surprise"] }, { heading: "Extended (2–9 PM)", items: ["1-hour Lure Modules (attracts Frigibax)", "1 extra Special Trade (max 2 daily)", "50% less Trade Stardust"] }, { heading: "Glaive Rush (Charged Attack)", items: ["Trainer Battles: 90 power (lowers your Defense by 1 stage)", "Gyms & Raids: 105 power", "Dragon-type STAB for Baxcalibur (Dragon/Ice)"] }, { heading: "Special Research ($1.99)", items: ["3 Special Background Frigibax encounters", "Additional Frigibax encounters", "1 Premium Battle Pass", "1 Rare Candy XL", "Tickets giftable to Great Friends+"] }] },
   { id: 17, date: "2026-05-18", published: "2026-05-18", title: "Summer Quest Events 2026 — Blanche, Spark & Candela", tag: "News", url: "https://pokemongo.com/news/global-events-gofest2026-overlays", body: "Three consecutive GO Pass events from May 26 – June 15, 2026 lead into GO Fest 2026: Global. Each Team Leader hosts their own week — Blanche (research), Spark (eggs), Candela (raids) — with themed encounters, GO Pass rewards, and an Unlimited Point Weekend.", fullBody: "The Summer Quest Events 2026 series spans three back-to-back weeks (May 26 – June 15, 2026, 10 AM – 8 PM local time), with each Team Leader hosting their own themed event. The series culminates in Pokémon GO Fest 2026: Global on July 11–12.", sections: [{ heading: "Blanche's Quest for Knowledge — May 26 to June 1", items: ["Theme: Research-focused adventure (Field Research & Incense)", "Wild: Squirtle ✨, Alolan Vulpix ✨, Krabby ✨, Staryu ✨, Galarian Zigzagoon ✨; rare: Lapras ✨, Vaporeon ✨, Larvitar ✨", "Incense: Cubone ✨, Horsea ✨, Lapras ✨, Vaporeon ✨, Larvitar ✨, Sableye ✨, Clamperl ✨, Cubchoo ✨", "Field Research: Squirtle ✨, Alolan Vulpix ✨, Krabby ✨, Cubone ✨, Horsea ✨, Staryu ✨, Lapras ✨, Larvitar ✨, Sableye ✨, Cubchoo ✨, Sinistea ✨, Tandemaus ✨", "Rank 10+: +1 evolve Candy & boosted Candy XL chance (L31+)", "Rank 20+: 2× Incense duration", "Unlimited Point Weekend: May 30 – June 1", "Featured rewards: Vaporeon, Larvitar, Lapras + Blanche-themed accessory", "Reward expiration: June 3 at 7:59 PM"] }, { heading: "Spark's Caretaking Quest — June 2 to June 8", items: ["Theme: Exploration-driven adventure (hatching Eggs)", "Wild: Bulbasaur ✨, Alolan Raichu ✨, Drowzee ✨, Jolteon ✨, Dratini ✨, Houndour ✨, Lileep ✨, Combee ✨", "7 km Eggs: Pichu ✨, Elekid ✨, Shinx ✨, Varoom ✨, Galarian Corsola ✨, Hisuian Qwilfish ✨", "Field Research: Bulbasaur ✨, Drowzee ✨, Jolteon ✨, Dratini ✨, Houndour ✨, Lileep ✨, Combee ✨, Galarian Corsola ✨, Alolan Raichu ✨", "Rank 10+: 1/2 Hatch Distance", "Rank 20+: 1.5× Hatch Candy (Deluxe also adds 1.5× Hatch Stardust)", "Unlimited Point Weekend: June 6 – 8", "Featured rewards: Jolteon, Galarian Corsola, Elekid + Spark-themed accessory", "Reward expiration: June 10 at 7:59 PM"] }, { heading: "Candela's Quest for Victory — June 9 to June 15", items: ["Theme: Raids and battling — push your limits", "Wild: Charmander ✨, Mankey ✨, Hisuian Growlithe ✨, Machop ✨, Ponyta ✨, Scyther ✨, Flareon ✨, Slugma ✨, Fletchling ✨", "Raid Bosses: Hisuian Growlithe ✨, Machamp ✨, Scizor ✨, Magcargo ✨, Scraggy ✨, Honedge ✨, Rockruff ✨", "Field Research: Charmander ✨, Mankey ✨, Hisuian Growlithe ✨, Machop ✨, Scyther ✨, Flareon ✨, Slugma ✨, Scraggy ✨, Fletchling ✨, Honedge ✨, Rockruff ✨", "Rank 10+: Increased Attack bonus from friends in raids", "Rank 20+: 1.5× Raid Stardust (Deluxe also adds up to 2 Raid Passes from Photo Discs)", "Unlimited Point Weekend: June 13 – 15", "Featured rewards: Flareon, Rockruff, Ponyta + Candela-themed accessory", "Reward expiration: June 17 at 7:59 PM"] }, { heading: "GO Pass Pricing (All Three Weeks)", items: ["GO Pass Deluxe: $4.99", "GO Pass Deluxe + 6 Ranks: $6.99", "Web Store purchases include: 10 Ultra Balls, 5 Max Revives, 1 Premium Battle Pass, 5 Max Potions", "Ultra Box upgrade: 20 Ultra Balls, 10 Max Revives, 10 Max Potions, 2 Premium Battle Passes, 1 Incubator, 1 Super Incubator", "All featured Pokémon can be Shiny"] }, { heading: "GO Fest 2026: Global — July 11–12", items: ["Legendary Raid Features: Mega Mewtwo X, Mega Mewtwo Y, Zeraora", "FREE for all Trainers — Special Research and bonuses available without cost"] }, { heading: "Real-World Event Locations", items: ["Tokyo, Japan — Event Days: May 29 – June 1 (Citywide: May 25 – June 1)", "Chicago, Illinois — Event Days: June 5 – 7 (Citywide: June 4 – 7)", "Copenhagen, Denmark — Event Days: June 12 – 14 (Citywide: June 11 – 14)", "Community Ambassadors host meetups throughout each event"] }, { heading: "Tips", items: ["Three back-to-back GO Passes — plan your stamina; each week has its own grind.", "Unlimited Point Weekends are the prime time to push to Rank 20+ each week.", "Blanche week favors Incense farmers; Spark week favors hatchers; Candela week favors raiders.", "All featured Pokémon are Shiny eligible — check every encounter.", "Each week's rewards expire ~2 days after the event ends — claim promptly.", "These weekly events lead directly into the FREE GO Fest 2026: Global on July 11–12."] }] },
   { id: 13, date: "2026-04-28", published: "2026-04-28", title: "Mega Mewtwo X & Y Debut at GO Fest 2026", tag: "News", url: "https://pokemongo.com/news/mega-mewtwo-gofest-2026", body: "Mega Mewtwo X and Mega Mewtwo Y debut at GO Fest 2026 — Mega Mewtwo X in Saturday Super Mega Raids (Counter), Mega Mewtwo Y on Sunday (Psystrike). Caught Mewtwo arrive with Mega Level 1+ already unlocked.", fullBody: "Mega Mewtwo X and Mega Mewtwo Y, the Mega Evolutions of the Genetic Pokémon Mewtwo, make their Pokémon GO debuts during GO Fest 2026:", sections: [{ heading: "Super Mega Raid Debuts (GO Fest Global)", items: ["Saturday, July 11: Mega Mewtwo X — knows Counter (Fast Attack)", "Sunday, July 12: Mega Mewtwo Y — knows Psystrike (Charged Attack)", "Caught Mewtwo arrive with at least Mega Level 1 unlocked (chance at Level 2 or 3)"] }, { heading: "Mega Energy Mechanics", items: ["Mega Mewtwo X and Y require significantly more Mega Energy than other Pokémon", "Earn Mega Energy by defeating either form in Super Mega Raids", "Earn additional Mega Energy by completing GO Fest Timed Research", "Mega Level advancement tracks independently for each form (X and Y)", "Optional fast-track Mega Level progression by spending extra Mega Energy", "Existing Mewtwo Mega Energy converts to both X and Y variants — same split mechanic applied to Charizard"] }, { heading: "Branching GO Fest Timed Research", items: ["Choose between Mega Mewtwo X or Mega Mewtwo Y — you cannot get both from research", "Pick the form that fits your raid strategy and energy stockpile"] }, { heading: "In-Person GO Fest Events (City Explorer or Full GO Fest Ticket)", items: ["Tokyo: May 25 – June 1, 2026 (citywide window)", "Chicago: June 4 – June 7, 2026 (citywide window)", "Copenhagen: June 11 – June 14, 2026 (citywide window)", "Both City Explorer and full GO Fest ticket holders get early Mega Mewtwo access", "City Experience Timed Research — four branching Trainer Challenges across city districts, available on the first day of the event", "Complete at least two challenges to encounter Mega Mewtwo X or Y (Mega Level 1 pre-unlocked)", "Earn the exclusive \"Pokémon GO Expert\" commemorative medal", "Attending multiple GO Fest cities? Earn one set of Timed Research (including the bonus Timed Research) and rewards per city — up to three sets total"] }, { heading: "Park Session Finale (In-Person)", items: ["30-minute Super Mega Raid accommodating 1,000+ Trainers", "Both Mega Mewtwo X and Y available", "Caught Mewtwo receive an event-specific Location Background", "In-person captures know Counter (Fast) and Psystrike (Charged)"] }, { heading: "Tips", items: ["Stockpile Mewtwo Mega Energy now — it converts to both X and Y after the split.", "Decide your branching research choice (X or Y) based on which form you raid more.", "Mewtwo X is a Psychic / Fighting attacker; Mewtwo Y is pure Psychic with massive Attack — plan your team.", "Saturday = X, Sunday = Y in Super Mega Raids — plan your raid weekend accordingly.", "Use Party Play during GO Fest hours to chain Super Mega Raids for maximum Mega Energy."] }] },
@@ -2466,7 +2659,7 @@ const CURRENT_RAID_BOSSES = {
     "Regirock (5\u2605 Raid) \u2728","Regice (5\u2605 Raid) \u2728","Registeel (5\u2605 Raid) \u2728"
   ],
   "Mega Raids": [
-    "Mega Skarmory (Mega) \u2728"
+    "Mega Starmie (Mega) \u2728"
   ],
   "Shadow 1-Star Raids": [
     "Shadow Slowpoke (1\u2605 Shadow Raid) \u2728","Shadow Aipom (1\u2605 Shadow Raid) \u2728","Shadow Croagunk (1\u2605 Shadow Raid) \u2728","Shadow Grubbin (1\u2605 Shadow Raid) \u2728"
@@ -6175,11 +6368,32 @@ function goTypeColor(t) {
   return TYPE_COLORS[s.charAt(0).toUpperCase() + s.slice(1)] || "#888";
 }
 
-// Slugs where this project HOLDS shiny art but GO has not released the shiny. The species itself
-// is out (so it never lands in GO_UNRELEASED_SLUGS), yet the artwork exists and is worth showing —
-// draw it, and let the Pokedex Details pill keep saying "Not available". Add a slug here whenever
-// a shiny sprite is sourced ahead of its in-game release.
-const GO_SHINY_ART_UNRELEASED = new Set(["zeraora"]);
+// Lightning for the Electric-type sprite card. This is real strike footage rather than
+// hand-authored SVG: 22 frames on a 2s loop, converted from the source GIF to animated WebP
+// (255 KB -> 35 KB) at 512x288. The clip is white-on-pure-black with no alpha channel, so it is
+// composited with mix-blend-mode:screen — black drops out to nothing and only the bolt lights up
+// the card. See .tw-strike-clip in styles.css.
+const GO_CARD_LIGHTNING = `${IMG_BASE}/effects/lightning-strike.webp`;
+
+// Slugs whose data/go/<slug>.json currently has flags.isShinyReleased:false because the shiny has
+// a KNOWN future in-game debut — the scraped flag won't flip to true until data/go is re-captured
+// after that date, so this is a stopgap that flips the app's own answer at the right instant with
+// no code change needed on the day itself. Values are local wall-clock timestamps, parsed the same
+// way EVENTS' startsAt/endsAt values are elsewhere in this file (new Date() on a string with no
+// timezone suffix parses as local time) — so a shiny flips visible at exactly the moment its event
+// starts. Safe to prune an entry once data/go is re-captured post-debut and the real flag is true.
+const GO_SHINY_RELEASE_AT = {
+  flamigo: "2026-09-08T10:00:00" // Shiny Flamigo debuts at Mega Squads (EVENTS id 180)
+};
+// Single source of truth for "is this form's shiny actually catchable right now" — every caller
+// (the sprite card, the Pokedex Details availability pill, the Family grid's shiny chips) must
+// route through this rather than reading flags.isShinyReleased directly, so a scheduled release
+// above takes effect everywhere at once instead of the sprite card and the pill disagreeing.
+function goShinyReleased(go) {
+  if (go && go.flags && go.flags.isShinyReleased === true) return true;
+  const at = go && GO_SHINY_RELEASE_AT[go.slug];
+  return !!at && new Date(at) <= new Date();
+}
 
 // Form slugs Pokemon GO has never released — same signal as GO_MEGA_AVAILABLE_DEX below, but kept
 // per-form so the sprite card can flag the exact form on screen: dittobase serves real art from
@@ -6193,24 +6407,27 @@ const GO_UNRELEASED_SLUGS = new Set([
   "flapple-gigantamax", "floette-mega", "froslass-mega", "garchomp-mega-z", "glimmora-mega",
   "golisopod-mega", "golurk-mega", "hawlucha-mega", "heatran-mega", "lucario-mega-z",
   "magearna-mega", "meganium-mega", "meowstic-mega", "pyroar-mega", "scolipede-mega",
-  "scovillain-mega", "scrafty-mega", "staraptor-mega", "starmie-mega", "tatsugiri-curly-mega",
+  "scovillain-mega", "scrafty-mega", "staraptor-mega", "tatsugiri-curly-mega",
   "tatsugiri-droopy-mega", "tatsugiri-stretchy-mega", "zeraora-mega", "zygarde-mega"
 ]);
 
 // Dex numbers whose Mega is actually IN Pokemon GO, for the "Mega Available" row in the Pokedex
 // Details panel. MEGA_EVOS is NOT the right source — it also carries art for Megas that only
-// exist in Pokemon Legends: Z-A (Mega Clefable, Mega Starmie, the "-mega-z" variants, ...), which
-// GO has never released. Neither is flags.isTradable: that is null for every untradable MYTHICAL
-// (base Mew, Celebi and Darkrai are all null and all long released), so it says nothing about
-// release. The signal that does work is dittobase's own image path: real art lives under
-// /go/pokemon/, unreleased forms fall back to /go/pokemon-placeholder/.
+// exist in Pokemon Legends: Z-A (Mega Clefable, the "-mega-z" variants, ...), which GO has never
+// released. Neither is flags.isTradable: that is null for every untradable MYTHICAL (base Mew,
+// Celebi and Darkrai are all null and all long released), so it says nothing about release. The
+// signal that does work is dittobase's own image path: real art lives under /go/pokemon/,
+// unreleased forms fall back to /go/pokemon-placeholder/. Caveat: this heuristic can misfire for
+// a Mega that launches in GO after the data/go capture date — dittobase just hadn't re-scraped
+// its art yet — which is exactly what happened with Mega Starmie (dex 121, debuted 22 Aug 2026)
+// and had to be corrected by hand.
 //
 // Regenerate after a new Mega launches (data/go was captured 1 Sep 2026):
 //   python3 -c "import json,glob,os;print(sorted({json.load(open(p))['dexNum'] for p in glob.glob('data/go/*.json') if not os.path.basename(p).startswith('_') and (json.load(open(p)).get('forms') or {}).get('isMega') and 'placeholder' not in (json.load(open(p)).get('imageUrl') or '')}))"
 const GO_MEGA_AVAILABLE_DEX = new Set([
-  3, 6, 9, 15, 18, 26, 65, 71, 80, 94, 115, 127, 130, 142, 149, 150, 181, 208, 212, 214, 227, 229,
-  248, 254, 257, 260, 282, 302, 303, 306, 308, 310, 319, 323, 334, 354, 359, 362, 373, 376, 380,
-  381, 384, 428, 445, 448, 460, 475, 531, 652, 655, 658, 687, 719, 870
+  3, 6, 9, 15, 18, 26, 65, 71, 80, 94, 115, 121, 127, 130, 142, 149, 150, 181, 208, 212, 214, 227,
+  229, 248, 254, 257, 260, 282, 302, 303, 306, 308, 310, 319, 323, 334, 354, 359, 362, 373, 376,
+  380, 381, 384, 428, 445, 448, 460, 475, 531, 652, 655, 658, 687, 719, 870
 ]);
 
 // Type badge art for the 18 types (assets/pokemon-images/pokemon-types/POKEMON_TYPE_<TYPE>.png).
@@ -6523,7 +6740,14 @@ function renderBossItem(item, color, th, cardLayout, noSparkles, groupSize, show
   const subtitleText = hemiMatch ? hemiMatch[1].charAt(0).toUpperCase() + hemiMatch[1].slice(1).toLowerCase() + " Hemisphere" : (showRegion ? (RAID_BOSS_REGIONS[cleanedItemName] || "") : "");
   const subtitleHTML = subtitleText ? `<div style="margin-top:2px;font-size:${cardLayout ? 11 : 12}px;font-weight:600;color:${th.textSecondary};font-style:italic;${cardLayout ? "text-align:center" : ""}">${esc(subtitleText)}</div>` : "";
   const groupSizeList = Array.isArray(groupSize) ? groupSize : (groupSize ? [groupSize] : []);
-  const matchedGroupSizes = isRaidTier ? groupSizeList.filter(gs => gs && gs.bossName === cleanedItemName) : [];
+  // A bossName match alone isn't enough: the SAME species can have separate historical groupSize
+  // entries under different tiers (e.g. a Mega debuted in Super Mega Raids, then later rotates
+  // into plain Mega Raids with no sizing data of its own) — matching by name only would surface
+  // the wrong tier's numbers under this label. Require the entry's own "super mega"-ness to match
+  // what this item's label actually says, so a plain "(Mega)" item never pulls in stale Super Mega
+  // Raid sizing (or vice versa).
+  const itemIsSuperMega = /super mega raid/i.test(item);
+  const matchedGroupSizes = isRaidTier ? groupSizeList.filter(gs => gs && gs.bossName === cleanedItemName && /super mega/i.test(gs.tier || "") === itemIsSuperMega) : [];
   const groupSizeHTML = matchedGroupSizes.map(gs => renderGroupSizeCompact(gs, th, cardLayout)).join("");
   const weaknesses = raidData ? getWeaknesses(raidData.types) : [];
   const resistances = raidData ? getResistances(raidData.types) : [];
@@ -8508,6 +8732,81 @@ async function submitReport() {
   }
 }
 
+// --- Special Research tab state ---
+let _srSearch = "";                 // search box text
+let _srCategory = "all";            // "all" | "In-Game" | "Real-Life Event"
+let _srSelected = null;             // slug of the open research, or null for the list view
+let _srSort = "newest";             // "newest" | "oldest" | "az"
+
+// Filters the Special Research list view's rendered cards directly in the DOM (no render() call)
+// so the search input never loses focus mid-typing — same reasoning as searchMoves/searchItems.
+function applySRSearch() {
+  const raw = String(_srSearch || "").trim();
+  const query = raw.toLowerCase();
+  const cards = document.querySelectorAll('[data-sr-card]');
+  const emptyEl = document.getElementById("sr-empty");
+  const countEl = document.getElementById("sr-count");
+  let visible = 0;
+  cards.forEach(card => {
+    const blob = card.getAttribute("data-sr-search") || "";
+    const match = query === "" || blob.includes(query);
+    card.style.display = match ? "" : "none";
+    if (match) visible++;
+  });
+  if (countEl) countEl.textContent = `${visible} research stor${visible === 1 ? "y" : "ies"}`;
+  if (emptyEl) {
+    if (visible === 0) {
+      emptyEl.textContent = `No Special Research matches "${raw}"`;
+      emptyEl.style.display = "block";
+    } else {
+      emptyEl.style.display = "none";
+    }
+  }
+}
+function searchSpecialResearch(val) {
+  _srSearch = val;
+  applySRSearch();
+}
+function setSpecialResearchCategory(cat) {
+  _srCategory = cat;
+  render();
+  applySRSearch();
+}
+function setSpecialResearchSort(sort) {
+  _srSort = sort;
+  render();
+  applySRSearch();
+}
+function openSpecialResearch(slug) {
+  _srSelected = slug;
+  render();
+  window.scrollTo(0, 0);
+}
+function closeSpecialResearch() {
+  _srSelected = null;
+  render();
+  window.scrollTo(0, 0);
+}
+function toggleSRStep(i) {
+  const body = document.getElementById('sr-step-body-' + i);
+  const arrow = document.getElementById('sr-step-arrow-' + i);
+  if (!body) return;
+  const isOpen = body.dataset.open === 'true';
+  body.dataset.open = isOpen ? 'false' : 'true';
+  body.style.display = isOpen ? 'none' : 'block';
+  if (arrow) arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+}
+function specialResearchExpandAll(open) {
+  document.querySelectorAll('[data-sr-step]').forEach(card => {
+    const body = card.querySelector('[id^="sr-step-body-"]');
+    const arrow = card.querySelector('[id^="sr-step-arrow-"]');
+    if (!body) return;
+    body.dataset.open = open ? 'true' : 'false';
+    body.style.display = open ? 'block' : 'none';
+    if (arrow) arrow.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
+  });
+}
+
 function setTab(tab) {
   state.tab = tab;
   state.selectedEvent = null;
@@ -8517,6 +8816,7 @@ function setTab(tab) {
   if (typeof trackPageview === "function") trackPageview(tab);
   if (tab === "nests") { loadNestsFromSupabase().then(() => render()); }
   if (tab === "moves") _movesSearch = ""; // clear stale search from a prior visit
+  if (tab === "specialresearch") { _srSearch = ""; _srCategory = "all"; _srSelected = null; fetchSpecialResearch().then(() => render()); }
   if (tab === "report") {
     _reportSubmitMessage = { type: "", text: "" }; // clear stale banner from prior visit
     _bugReportFilter = "all";
@@ -8600,8 +8900,9 @@ async function openPokemonDetail(dexNum, preferredSlug) {
     }
   }
   // Non-blocking prefetch for the family cards' shiny chips: neither _index.json nor _family.json
-  // carry a shiny flag, only each form's own data/go/<slug>.json does (flags.isShinyReleased). The
-  // Family grid spans every member of this species' family (evolutions, Mega, regional,
+  // carry a shiny flag, only each form's own data/go/<slug>.json does — read via goShinyReleased,
+  // which also layers in the GO_SHINY_RELEASE_AT scheduled-release override. The Family grid spans
+  // every member of this species' family (evolutions, Mega, regional,
   // Gigantamax, Shadow) — not just the switcher's forms — so this has to wait until the default
   // form's own data is in, since familySlug comes off that record (same lookup renderGoBlock's
   // Family section IIFE does off _pokeCache["go_family"]). Unioned with the switcher's own slugs
@@ -8627,7 +8928,7 @@ async function openPokemonDetail(dexNum, preferredSlug) {
         if (state.pokedexDetail !== dexNum) return;
         const shinyMap = {};
         results.forEach((formData, i) => {
-          shinyMap[slugsToWarm[i]] = !!(formData && formData.flags && formData.flags.isShinyReleased === true);
+          shinyMap[slugsToWarm[i]] = goShinyReleased(formData);
         });
         state.pokedexDetailGoShinyBySlug = shinyMap;
         render();
@@ -8911,7 +9212,7 @@ function renderGoPokedexDetailsBody(go, data, th, isMobile) {
   // and a muted "No" when it isn't. Omitting the row for unreleased shinies read as missing data
   // rather than as the answer "no shiny yet".
   {
-    const shinyOut = !!(go.flags && go.flags.isShinyReleased === true);
+    const shinyOut = goShinyReleased(go);
     // Short "what changes" blurb (16-55 chars) that used to live in the standalone Shiny Variant
     // block at the bottom of the page. Shown for every Pokémon that has one, released or not —
     // the sprite card's side-by-side (or, for an unreleased shiny, circle-and-slash placeholder)
@@ -9413,8 +9714,8 @@ function renderGoCountersBody(go, th, isMobile) {
 // selects that exact form (selectGoFamilyMember). All sprites are LOCAL via goFormImg — same
 // rule as everywhere else in this feature, no dittobase.com references.
 // Each card also carries a "✨ Shiny" chip at the bottom, below the type dots, when THIS family
-// member's own shiny is confirmed released. _index.json/_family.json carry no shiny flag — only
-// each form's own data/go/<slug>.json does (flags.isShinyReleased) — so the chip is gated on
+// member's own shiny is confirmed released (per goShinyReleased). _index.json/_family.json carry
+// no shiny flag — only each form's own data/go/<slug>.json does — so the chip is gated on
 // state.pokedexDetailGoShinyBySlug, a slug->bool map filled in by a background prefetch kicked off
 // in openPokemonDetail (see there for the fail-silent contract). Until that prefetch resolves, a
 // card simply renders without a chip. Family entries span MULTIPLE dex numbers (this species' full
@@ -9685,6 +9986,15 @@ function renderGoImageCard(go, data, primaryColor, th, isMobile) {
   const unreleasedChip = GO_UNRELEASED_SLUGS.has(go.slug)
     ? `<span style="display:inline-flex;align-items:center;padding:2px 9px;border-radius:999px;background:rgba(231,76,60,${th.dark ? "0.18" : "0.14"});border:1px solid rgba(231,76,60,0.35);color:#E74C3C;font-size:11px;font-weight:800;letter-spacing:0.3px;white-space:nowrap;vertical-align:middle;margin-left:8px">Unreleased</span>`
     : "";
+  // Lightning background for Electric-type cards — DISABLED for now, kept for later.
+  // Nothing else was removed: GO_CARD_LIGHTNING above, the clip at
+  // assets/pokemon-images/effects/lightning-strike.webp, and the .tw-strike-field /
+  // .tw-strike-clip rules in styles.css are all still in place. To turn it back on, swap the two
+  // statements below — restore the commented expression and drop the empty-string assignment.
+  // const boltLayer = (go.types || []).some(t => String(t).toLowerCase() === "electric")
+  //   ? `<div class="tw-strike-field" aria-hidden="true"><img class="tw-strike-clip" src="${GO_CARD_LIGHTNING}" alt="" onerror="this.parentElement.style.display='none'" /></div>`
+  //   : "";
+  const boltLayer = "";
   const isShadowForm = !!(go.forms && go.forms.isShadow);
   // Dynamax reuses the base species art, so the form is only legible from the red Max-energy
   // clouds drawn over the sprite's head — the same marker the Max Battle cards and the family
@@ -9695,18 +10005,33 @@ function renderGoImageCard(go, data, primaryColor, th, isMobile) {
   const shadowAuraHtml = (boxPx) => `<img class="go-shadow-aura" data-box-px="${boxPx}" src="assets/pokemon-images/icons/shadow_icon.png" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:95%;height:95%;object-fit:contain;opacity:1;z-index:1;pointer-events:none;filter:saturate(1.3) contrast(1.2)" onerror="this.style.display='none'" />`;
   const weatherIconsHtml = renderWeatherIcons(go.types, th, isMobile);
 
-  // Always render the Normal | Shiny pair. A form whose shiny isn't released yet has no art to
-  // draw, so its shiny slot gets a circle-and-slash placeholder instead of collapsing the card to
-  // a single sprite — the layout then stays identical whether or not a shiny exists.
-  // Two different questions, deliberately decoupled. isShinyReleased answers "can you catch this
-  // shiny in GO", and drives the availability pill over in the Pokedex Details panel. Whether to
-  // DRAW the shiny half is a separate question: an unreleased form's art exists and is worth
-  // showing, it just isn't obtainable — the red Unreleased pill next to the name already says so.
-  // Without this split, telling the truth in the pill would blank out artwork we deliberately
-  // downloaded.
-  const shinyReleased = !!(go.flags && go.flags.isShinyReleased === true);
-  const showShinyArt = shinyReleased || GO_UNRELEASED_SLUGS.has(go.slug) || GO_SHINY_ART_UNRELEASED.has(go.slug);
-  const pairBox = isMobile ? 109 : 197; // desktop bumped another ~28% (154 -> 197); mobile untouched, already at its fit limit
+  // Always render the Normal | Shiny pair. The shiny half mirrors real in-game availability: if
+  // you can't catch it, the card doesn't show it as if you could — the shiny slot gets a
+  // circle-and-slash placeholder instead of art, at the same box size, so the layout stays
+  // identical either way rather than collapsing to a single sprite. goShinyReleased is the same
+  // check the Pokedex Details availability pill uses, so the two never disagree.
+  const showShinyArt = goShinyReleased(go);
+  // Shared by the row's own gap (spriteRowHtml below) and the mobile fluid-width calc so the two
+  // can never drift out of sync with each other.
+  const pairGap = isMobile ? 14 : 22;
+  const pairBox = isMobile ? 128 : 197; // desktop bumped another ~28% (154 -> 197); mobile's old 109 was a fixed guess at its fit limit — it's now a 128 CAP that flexes down via unitWidthCss/boxSizeCss below, so a 320px-wide card (the narrowest supported viewport) gets exactly what it can hold instead of being stuck under one hand-picked number
+  // The per-unit column (box + caption) is the actual flex item inside the sprite row, so IT'S
+  // the one that needs a definite width for the box's percentage sizing below to resolve against
+  // — putting width:min(...) directly on the box would try to resolve its percentage against this
+  // shrink-to-fit wrapper, which is circular (the wrapper's own auto width depends on the box).
+  // Desktop keeps this empty so the wrapper stays exactly as auto/content-sized as it always was.
+  const unitWidthCss = isMobile ? `width:min(${pairBox}px, calc((100% - ${pairGap}px) / 2));` : "";
+  // The box just fills its now-definite-width wrapper on mobile (aspect-ratio keeps it square
+  // since a percentage HEIGHT wouldn't resolve here — the wrapper's height is auto, not definite).
+  // min-height:0 is load-bearing, not decorative: with overflow:visible (needed so the Shadow
+  // aura can bleed past the sprite) a box with children — the sprite <img> itself — picks up a
+  // content-based automatic minimum height that wins over the aspect-ratio height whenever it's
+  // larger (measured 112px content floor vs. a 108px aspect-ratio square at 320px), silently
+  // un-squaring the box. Explicit min-height:0 overrides that floor so aspect-ratio wins outright.
+  // Desktop is untouched: still a fixed pairBox square. Shared between spriteUnit and
+  // shinyPlaceholderUnit's boxes below so the two can never end up different widths and knock the
+  // Normal/Shiny captions out of alignment.
+  const boxSizeCss = isMobile ? "width:100%;height:auto;aspect-ratio:1;min-height:0;" : `width:${pairBox}px;height:${pairBox}px;`;
   // Fallback chain: form-specific art -> base dex sprite -> (shiny half only) hide the unit.
   // `this.dataset.fb` guards against an infinite onerror loop if the base sprite ALSO 404s.
   // Sparkle badge marks the shiny half at a glance. Pinned to the sprite box's top-right corner
@@ -9714,8 +10039,8 @@ function renderGoImageCard(go, data, primaryColor, th, isMobile) {
   // steals the click that opens the form modal.
   const sparkleSize = isMobile ? 22 : 30;
   const sparkleHtml = `<img src="assets/pokemon-images/icons/shiny-sparkles.webp" alt="" aria-hidden="true" style="position:absolute;top:0;right:0;width:${sparkleSize}px;height:${sparkleSize}px;object-fit:contain;z-index:3;pointer-events:none;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.45))" onerror="this.style.display='none'" />`;
-  const spriteUnit = (src, baseSrc, label, caption, glow, hideOnDoubleFail, sparkle) => `<div style="display:flex;flex-direction:column;align-items:center;gap:4px">
-    <div style="position:relative;width:${pairBox}px;height:${pairBox}px;overflow:visible">
+  const spriteUnit = (src, baseSrc, label, caption, glow, hideOnDoubleFail, sparkle) => `<div style="display:flex;flex-direction:column;align-items:center;gap:4px;${unitWidthCss}">
+    <div style="position:relative;${boxSizeCss}overflow:visible">
       ${sparkle ? sparkleHtml : ""}
       ${isShadowForm ? shadowAuraHtml(pairBox) : ""}
       ${isDynamaxForm ? dynamaxCloudHtml : ""}
@@ -9727,8 +10052,8 @@ function renderGoImageCard(go, data, primaryColor, th, isMobile) {
   // two captions still line up. Deliberately inert: nothing to open in the form modal.
   const shinyPlaceholderUnit = (caption) => {
     const mark = Math.round(pairBox * 0.46);
-    return `<div style="display:flex;flex-direction:column;align-items:center;gap:4px">
-      <div style="width:${pairBox}px;height:${pairBox}px;display:flex;align-items:center;justify-content:center">
+    return `<div style="display:flex;flex-direction:column;align-items:center;gap:4px;${unitWidthCss}">
+      <div style="${boxSizeCss}display:flex;align-items:center;justify-content:center">
         <svg width="${mark}" height="${mark}" viewBox="0 0 100 100" fill="none" stroke="${th.textMuted}" stroke-width="7" stroke-linecap="round" opacity="0.5" aria-hidden="true">
           <circle cx="50" cy="50" r="40" />
           <line x1="21.7" y1="78.3" x2="78.3" y2="21.7" />
@@ -9746,7 +10071,11 @@ function renderGoImageCard(go, data, primaryColor, th, isMobile) {
   } else {
     shinyUnit = shinyPlaceholderUnit("Shiny");
   }
-  const spriteRowHtml = `<div data-sprite-pair="1" style="display:flex;align-items:flex-start;justify-content:center;gap:${isMobile ? 14 : 22}px">${normalUnit}${shinyUnit}</div>`;
+  // width:100% (mobile only) is what makes unitWidthCss's percentage above resolve to something
+  // definite — without it this row is itself shrink-to-fit, and a shrink-to-fit flex container
+  // can't be the containing block for a child's percentage width (the same circularity unitWidthCss
+  // was introduced to avoid one level down). Desktop leaves this row exactly as it was.
+  const spriteRowHtml = `<div data-sprite-pair="1" style="display:flex;align-items:flex-start;justify-content:center;gap:${pairGap}px${isMobile ? ";width:100%" : ""}">${normalUnit}${shinyUnit}</div>`;
 
   // The card intentionally stretches to match the Pokédex Details panel's height (align-items:
   // stretch on the grid row above) — the space above/below the sprite pair is that height-match,
@@ -9756,11 +10085,17 @@ function renderGoImageCard(go, data, primaryColor, th, isMobile) {
   // sprite (contentFraction ~1.0) sizes the aura to ~1.35x the sprite box, which at this card's
   // padding can exceed it — so it clips at the card's own rounded edge instead of bleeding into
   // the page and risking horizontal overflow, while every normal-size aura still reads unclipped.
-  return `<div style="background:linear-gradient(135deg,${primaryColor}22,${primaryColor}08);border:1px solid ${th.border};border-radius:14px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:${isMobile ? "20px 14px" : "24px 20px"};box-sizing:border-box;height:100%;min-height:${isMobile ? 190 : 240}px">
-    ${spriteRowHtml}
-    <div style="font-size:${isMobile ? 15 : 17}px;font-weight:800;color:${th.text};margin-top:10px;text-align:center">${esc(imgLabel)}${unreleasedChip}</div>
-    ${typeBadges ? `<div style="margin-top:8px">${typeBadges}</div>` : ""}
-    ${weatherIconsHtml}
+  // position:relative anchors the bolt layer; the content is wrapped in its own z-index:1 stacking
+  // context so every part of it (captions and labels included, which are not positioned) paints
+  // above the motif rather than under it.
+  return `<div style="position:relative;background:linear-gradient(135deg,${primaryColor}22,${primaryColor}08);border:1px solid ${th.border};border-radius:14px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:${isMobile ? "20px 14px" : "24px 20px"};box-sizing:border-box;height:100%;min-height:${isMobile ? 190 : 240}px">
+    ${boltLayer}
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%">
+      ${spriteRowHtml}
+      <div style="font-size:${isMobile ? 15 : 17}px;font-weight:800;color:${th.text};margin-top:10px;text-align:center">${esc(imgLabel)}${unreleasedChip}</div>
+      ${typeBadges ? `<div style="margin-top:8px">${typeBadges}</div>` : ""}
+      ${weatherIconsHtml}
+    </div>
   </div>`;
 }
 // Small muted one-line credit shown under the two heaviest tables (movesets, counters).
@@ -11205,7 +11540,7 @@ function render() {
       });
       raidsTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
         <div style="text-align:center;padding:10px;font-size:14px;font-weight:600;color:${th.text};position:relative">
-          <div style="${isMobile ? "position:static;margin:0 0 10px" : "position:absolute;top:14px;right:16px"};font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on September 2, 2026 at 11:30 am</div>
+          <div style="${isMobile ? "position:static;margin:0 0 10px" : "position:absolute;top:14px;right:16px"};font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on September 3, 2026 at 2:05 pm</div>
           Current Raid Bosses</div>
         <div style="text-align:center;font-size:11px;color:${th.textMuted};font-weight:500;margin-top:-10px">Data sourced from Pok\u00E9monGO.com, LeekDuck.com & Pok\u00E9monGOHUB.net</div>
         <div style="text-align:center;font-size:12px;color:${th.textMuted};font-weight:600;margin-top:2px">Tap a Pok\u00E9mon to see its weaknesses & resistances</div>
@@ -11927,6 +12262,171 @@ function render() {
       </div>`;
     }
 
+    // Special Research tab
+    let specialResearchTabHTML = "";
+    if (state.tab === "specialresearch") {
+      const srAll = SPECIAL_RESEARCH_DB || [];
+      const srCatCount = (cat) => cat === "all" ? srAll.length : srAll.filter(r => r.category === cat).length;
+      const srCatPill = (cat, label) => {
+        const active = _srCategory === cat;
+        return `<button onclick="setSpecialResearchCategory('${cat}')" style="padding:${isMobile ? "6px 14px" : "7px 16px"};border-radius:20px;border:1.5px solid ${active ? "#E74C3C" : th.border};background:${active ? th.accentBg("#E74C3C") : th.surface};color:${active ? "#E74C3C" : th.textSecondary};font-size:${isMobile ? 11 : 12}px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s ease;white-space:nowrap">${label} (${srCatCount(cat)})</button>`;
+      };
+      const srHeaderHTML = `<div style="text-align:center;padding:10px;position:relative">
+        <div style="${isMobile ? "position:static;margin:0 0 10px" : "position:absolute;top:14px;right:16px"};font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on September 3, 2026 at 1:50 pm</div>
+        <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text};display:flex;align-items:center;justify-content:center;gap:10px"><img src="assets/pokemon-images/icons/PROFESSOR_WILLOW_v3.png" style="width:${isMobile ? 26 : 32}px;height:${isMobile ? 26 : 32}px;object-fit:contain" alt="" />Special Research</h2>
+        <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Every Special Research story in Pokémon GO — all steps, tasks, and rewards</p>
+        <p style="margin:8px 0 0 0;font-size:${isMobile ? 11 : 12}px;color:${th.textMuted};font-weight:500">Source: <a href="${escAttr(SPECIAL_RESEARCH_SOURCE)}" target="_blank" rel="noopener noreferrer" style="color:#16A085;font-weight:700;text-decoration:none">Serebii</a></p>
+      </div>`;
+
+      if (_srSelected === null) {
+        // ---------- LIST VIEW ----------
+        let rows = _srCategory === "all" ? srAll : srAll.filter(r => r.category === _srCategory);
+        const withMeta = rows.map((r, i) => ({ r, i, ts: parseSRDateTs(r.date) }));
+        withMeta.sort((a, b) => {
+          if (_srSort === "az") return a.r.name.localeCompare(b.r.name);
+          if (a.ts == null && b.ts == null) return a.i - b.i; // unparseable dates keep their original relative order
+          if (a.ts == null) return 1;
+          if (b.ts == null) return -1;
+          return _srSort === "oldest" ? a.ts - b.ts : b.ts - a.ts;
+        });
+        rows = withMeta.map(x => x.r);
+
+        const srCardHTML = (r) => {
+          const pkmn = r.focal ? srPokemonImg(r.focal) : null;
+          const imgHTML = pkmn
+            ? `<img src="${escAttr(pkmn.url)}" style="width:${isMobile ? 76 : 88}px;height:${isMobile ? 76 : 88}px;object-fit:contain;flex-shrink:0" loading="lazy" onerror="this.style.opacity='0.25'" alt="${escAttr(r.focal)}" />`
+            : `<span style="width:${isMobile ? 76 : 88}px;height:${isMobile ? 76 : 88}px;display:flex;align-items:center;justify-content:center;font-size:${isMobile ? 36 : 42}px;flex-shrink:0">📜</span>`;
+          const stepCount = r.steps.length;
+          const taskCount = r.steps.reduce((sum, s) => sum + s.tasks.length, 0);
+          const catColor = r.category === "Real-Life Event" ? "#9B59B6" : "#16A085";
+          const searchParts = [r.name, r.focal || ""];
+          r.steps.forEach(s => s.tasks.forEach(t => searchParts.push(t.task)));
+          const searchBlob = escAttr(searchParts.join(" ").toLowerCase());
+          return `<div data-sr-card="1" data-sr-search="${searchBlob}" onclick="openSpecialResearch(${jsAttr(r.slug)})" role="button" tabindex="0" aria-label="View ${escAttr(r.name)}" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openSpecialResearch(${jsAttr(r.slug)});}" style="display:flex;align-items:center;gap:${isMobile ? 12 : 14}px;padding:${isMobile ? "12px 14px" : "14px 16px"};background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;box-shadow:${th.shadow};cursor:pointer;transition:all 0.2s ease" onmouseenter="this.style.borderColor='#16A085';this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 18px rgba(22,160,133,0.15)'" onmouseleave="this.style.borderColor='${th.border}';this.style.transform='translateY(0)';this.style.boxShadow='${th.shadow}'">
+            ${imgHTML}
+            <div style="flex:1;min-width:0">
+              <div style="font-weight:800;font-size:${isMobile ? 13 : 14}px;color:${th.text};line-height:1.3">${esc(r.name)}</div>
+              <div style="font-size:${isMobile ? 11 : 12}px;color:${th.textMuted};font-weight:500;margin-top:2px">${esc(r.date)}</div>
+              <div style="display:flex;align-items:center;gap:6px;margin-top:6px;flex-wrap:wrap">
+                <span style="font-size:10px;font-weight:700;color:${catColor};background:${th.accentBgSubtle(catColor)};padding:2px 8px;border-radius:10px">${esc(r.category)}</span>
+                <span style="font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500">${stepCount} step${stepCount === 1 ? "" : "s"} · ${taskCount} task${taskCount === 1 ? "" : "s"}</span>
+              </div>
+            </div>
+          </div>`;
+        };
+        const cardsHTML = rows.map(srCardHTML).join("");
+        const bodyHTML = SPECIAL_RESEARCH_DB === null
+          ? `<div style="text-align:center;padding:40px;color:${th.textMuted};font-size:14px">Loading Special Research…</div>`
+          : rows.length === 0
+            ? `<div style="text-align:center;padding:${isMobile ? "30px 18px" : "40px 28px"};background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;color:${th.textMuted};font-size:${isMobile ? 13 : 14}px;box-shadow:${th.shadow}">No Special Research in this category.</div>`
+            : `<div style="display:grid;grid-template-columns:${isMobile ? "1fr" : isDesktop ? "repeat(3,1fr)" : "repeat(2,1fr)"};gap:${isMobile ? 10 : 14}px">${cardsHTML}</div>`;
+        specialResearchTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px;width:100%;${isDesktop ? "max-width:1200px;margin:0 auto" : ""}">
+          ${srHeaderHTML}
+          <div style="display:flex;align-items:center;gap:${isMobile ? 8 : 10}px;flex-wrap:wrap;justify-content:center">
+            <div style="position:relative;max-width:400px;width:100%">
+              <input id="special-research-search" placeholder="Search research, Pokémon, or tasks..." oninput="searchSpecialResearch(this.value)" autocomplete="off" value="${escAttr(_srSearch)}" style="width:100%;padding:${isMobile ? "12px 14px 12px 40px" : "14px 16px 14px 44px"};border-radius:14px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:${isMobile ? 14 : 15}px;font-family:inherit;outline:none;box-sizing:border-box" />
+              <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;pointer-events:none">🔍</span>
+            </div>
+            <select onchange="setSpecialResearchSort(this.value)" style="padding:${isMobile ? "10px 12px" : "11px 14px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:${isMobile ? 12 : 13}px;font-weight:600;font-family:inherit;outline:none;cursor:pointer;appearance:auto">
+              <option value="newest" ${_srSort === "newest" ? "selected" : ""}>Newest</option>
+              <option value="oldest" ${_srSort === "oldest" ? "selected" : ""}>Oldest</option>
+              <option value="az" ${_srSort === "az" ? "selected" : ""}>A–Z</option>
+            </select>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center">
+            ${srCatPill("all", "All")}${srCatPill("In-Game", "In-Game")}${srCatPill("Real-Life Event", "Real-Life Event")}
+          </div>
+          <div style="display:flex;align-items:center;justify-content:center">
+            <span id="sr-count" style="font-size:${isMobile ? 12 : 13}px;color:${th.textMuted}">${rows.length} research stor${rows.length === 1 ? "y" : "ies"}</span>
+          </div>
+          <div id="sr-empty" style="display:none;text-align:center;padding:${isMobile ? "30px 18px" : "40px 28px"};background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;color:${th.textMuted};font-size:${isMobile ? 13 : 14}px;box-shadow:${th.shadow}"></div>
+          ${bodyHTML}
+        </div>`;
+      } else {
+        // ---------- DETAIL VIEW ----------
+        const entry = srAll.find(r => r.slug === _srSelected);
+        if (!entry) {
+          specialResearchTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px;width:100%;${isDesktop ? "max-width:1100px;margin:0 auto" : ""}">
+            <button onclick="closeSpecialResearch()" style="align-self:flex-start;padding:${isMobile ? "9px 14px" : "10px 16px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:${isMobile ? 12 : 13}px;font-weight:700;cursor:pointer;font-family:inherit">← Back to all Special Research</button>
+            <div style="text-align:center;padding:${isMobile ? "30px 18px" : "40px 28px"};background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;color:${th.textMuted};font-size:${isMobile ? 13 : 14}px;box-shadow:${th.shadow}">${SPECIAL_RESEARCH_DB === null ? "Loading Special Research…" : "Research not found."}</div>
+          </div>`;
+        } else {
+          const pkmn = entry.focal ? srPokemonImg(entry.focal) : null;
+          const imgHTML = pkmn ? `<img src="${escAttr(pkmn.url)}" style="width:${isMobile ? 112 : 132}px;height:${isMobile ? 112 : 132}px;object-fit:contain;flex-shrink:0" loading="lazy" onerror="this.style.opacity='0.25'" alt="${escAttr(entry.focal)}" />` : "";
+          const catColor = entry.category === "Real-Life Event" ? "#9B59B6" : "#16A085";
+          // Icon + text content for a reward pill. srRewardIcon must see the RAW reward string
+          // (it splits on "*" itself) — pass the same `r` to both it and fmtSRReward, don't chain
+          // the formatted text through it. Pokémon-sprite icons render larger than item icons.
+          // NOTE: this deliberately overrides the project's usual ~58% item:sprite scale rule —
+          // the ratio here is ~72%, raised at the user's explicit request for legibility on this
+          // page specifically. Not a general precedent for other pages.
+          const srRewardPillContent = (r) => {
+            const icon = srRewardIcon(r);
+            let iconHTML = "";
+            if (icon) {
+              const isPk = icon.kind === "pokemon";
+              const size = isPk ? (isMobile ? 42 : 50) : (isMobile ? 30 : 36);
+              // National-Dex sprite PNGs carry a big transparent margin baked into the asset —
+              // Nickit's art fills only ~54% of its 256px canvas — which reads as dead space
+              // inside the pill. Draw Pokémon sprites 1.25x larger than their layout box and pull
+              // the overflow back with a negative margin, so the visible Pokémon grows while the
+              // pill stays the same size. Item icons are already tight-cropped, so leave them be.
+              const draw = isPk ? Math.round(size * 1.45) : size;
+              const bleed = isPk ? Math.round((draw - size) / 2) : 0;
+              iconHTML = `<img src="${escAttr(icon.url)}" alt="" loading="lazy" style="width:${draw}px;height:${draw}px;${bleed ? `margin:-${bleed}px;` : ""}object-fit:contain;flex-shrink:0" onerror="this.style.display='none'" />`;
+            }
+            return `${iconHTML}<span>${esc(fmtSRReward(r))}</span>`;
+          };
+          const taskRowHTML = (t) => {
+            const rewardsHTML = (t.reward || []).map(r => `<span style="display:inline-flex;align-items:center;gap:2px;font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${th.textMuted};background:${th.accentBgSubtle("#16A085")};padding:3px 8px;border-radius:10px;white-space:nowrap">${srRewardPillContent(r)}</span>`).join("");
+            return `<div style="display:flex;align-items:${isMobile ? "flex-start" : "center"};justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid ${th.border};${isMobile ? "flex-direction:column" : ""}">
+              <span style="display:flex;align-items:flex-start;gap:8px;font-size:${isMobile ? 12 : 14}px;color:${th.text};font-weight:600;min-width:0"><span style="color:#16A085;font-weight:900;flex-shrink:0;line-height:1.35">•</span><span>${esc(t.task)}</span></span>
+              ${rewardsHTML ? `<span style="display:flex;gap:4px;flex-wrap:wrap;flex-shrink:0;${isMobile ? "margin-left:16px" : ""}">${rewardsHTML}</span>` : ""}
+            </div>`;
+          };
+          const stepRewardsHTML = (rewards) => rewards && rewards.length ? `<div style="margin-top:10px;padding:${isMobile ? "10px 12px" : "12px 14px"};border-radius:14px;background:${th.accentBgSubtle("#F39C12")};border:1px solid ${th.countdownBorder("#F39C12")}">
+            <div style="font-size:${isMobile ? 10 : 11}px;font-weight:800;color:#F39C12;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px">Step Rewards</div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">${rewards.map(r => `<span style="display:inline-flex;align-items:center;gap:6px;font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};background:${th.surface};border:1px solid ${th.border};padding:5px 12px;border-radius:10px;white-space:nowrap">${srRewardPillContent(r)}</span>`).join("")}</div>
+          </div>` : "";
+          const stepCardHTML = (step, i) => {
+            const label = step.label || `Step ${i + 1}`;
+            const tasksHTML = step.tasks.map(taskRowHTML).join("");
+            return `<div data-sr-step="1" style="background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;box-shadow:${th.shadow};overflow:hidden;transition:border-color 0.2s ease" onmouseenter="this.style.borderColor='#16A085'" onmouseleave="this.style.borderColor='${th.border}'">
+              <div onclick="toggleSRStep(${i})" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:${isMobile ? "12px 14px" : "14px 18px"}">
+                <div style="font-weight:800;font-size:${isMobile ? 13 : 15}px;color:${th.text}">${esc(label)}</div>
+                <span id="sr-step-arrow-${i}" style="font-size:14px;color:${th.textMuted};transition:transform 0.2s ease;flex-shrink:0;display:inline-block;transform:rotate(180deg)">▾</span>
+              </div>
+              <div id="sr-step-body-${i}" data-open="true" style="display:block;padding:0 ${isMobile ? "14px 14px" : "18px 18px"}">
+                <div>${tasksHTML}</div>
+                ${stepRewardsHTML(step.rewards)}
+              </div>
+            </div>`;
+          };
+          const stepsHTML = entry.steps.length
+            ? `<div style="display:flex;flex-direction:column;gap:${isMobile ? 10 : 12}px">${entry.steps.map(stepCardHTML).join("")}</div>`
+            : `<div style="text-align:center;padding:${isMobile ? "30px 18px" : "40px 28px"};background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;color:${th.textMuted};font-size:${isMobile ? 13 : 14}px;box-shadow:${th.shadow}">No tasks listed for this research.</div>`;
+          specialResearchTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px;width:100%;${isDesktop ? "max-width:1100px;margin:0 auto" : ""}">
+            <button onclick="closeSpecialResearch()" style="align-self:flex-start;padding:${isMobile ? "9px 14px" : "10px 16px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:${isMobile ? 12 : 13}px;font-weight:700;cursor:pointer;font-family:inherit" onmouseenter="this.style.borderColor='#16A085'" onmouseleave="this.style.borderColor='${th.border}'">← Back to all Special Research</button>
+            <div style="text-align:center;padding:10px;display:flex;flex-direction:column;align-items:center;gap:8px">
+              ${imgHTML}
+              <h2 style="margin:0;font-size:${isMobile ? 19 : 24}px;font-weight:800;color:${th.text};line-height:1.3">${esc(entry.name)}</h2>
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center">
+                <span style="font-size:${isMobile ? 11 : 12}px;color:${th.textMuted};font-weight:500">${esc(entry.date)}</span>
+                <span style="font-size:10px;font-weight:700;color:${catColor};background:${th.accentBgSubtle(catColor)};padding:2px 8px;border-radius:10px">${esc(entry.category)}</span>
+              </div>
+              ${entry.desc ? `<p style="margin:4px 0 0 0;max-width:640px;font-size:${isMobile ? 12.5 : 14}px;color:${th.textSecondary};line-height:1.6">${esc(entry.desc)}</p>` : ""}
+              ${entry.source ? `<a href="${escAttr(entry.source)}" target="_blank" rel="noopener noreferrer" style="font-size:${isMobile ? 11 : 12}px;font-weight:700;color:#16A085;text-decoration:none">View on Serebii →</a>` : ""}
+            </div>
+            ${entry.steps.length ? `<div style="display:flex;align-items:center;gap:8px;justify-content:center">
+              <button onclick="specialResearchExpandAll(true)" style="padding:${isMobile ? "10px 14px" : "11px 16px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:${isMobile ? 12 : 13}px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap" onmouseenter="this.style.borderColor='#16A085'" onmouseleave="this.style.borderColor='${th.border}'">Expand All</button>
+              <button onclick="specialResearchExpandAll(false)" style="padding:${isMobile ? "10px 14px" : "11px 16px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:${isMobile ? 12 : 13}px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap" onmouseenter="this.style.borderColor='#16A085'" onmouseleave="this.style.borderColor='${th.border}'">Collapse All</button>
+            </div>` : ""}
+            ${stepsHTML}
+          </div>`;
+        }
+      }
+    }
+
     // Backgrounds tab
     let backgroundsTabHTML = "";
     if (state.tab === "backgrounds") {
@@ -12513,7 +13013,7 @@ function render() {
     </a>` : "";
 
     content = `<main style="padding:${mainPad};display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
-      ${welcomeHTML}${!["home","tools","nests","pokedex","store","report","items","backgrounds","trainerlevels","moves"].includes(state.tab) ? `${isMobile ? liveCompactHTML + heroCompactHTML : `<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:${isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>`}${tabsHTML}` : ""}${state.tab === "home" ? `${mapBannerHTML}<div style="display:grid;grid-template-columns:${isMobile ? "1fr" : "repeat(2,1fr)"};gap:${isMobile ? 12 : isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>${renderWeekDigest(th, isMobile)}${tabsHTML}` : ""}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${rocketTabHTML}${eggsTabHTML}${researchTabHTML}${newsTabHTML}${storeTabHTML}${pokedexTabHTML}${toolsTabHTML}${nestsTabHTML}${itemsTabHTML}${backgroundsTabHTML}${trainerLevelsTabHTML}${movesTabHTML}${reportTabHTML}
+      ${welcomeHTML}${!["home","tools","nests","pokedex","store","report","items","backgrounds","trainerlevels","moves","specialresearch"].includes(state.tab) ? `${isMobile ? liveCompactHTML + heroCompactHTML : `<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:${isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>`}${tabsHTML}` : ""}${state.tab === "home" ? `${mapBannerHTML}<div style="display:grid;grid-template-columns:${isMobile ? "1fr" : "repeat(2,1fr)"};gap:${isMobile ? 12 : isDesktop ? 16 : 14}px">${liveHTML}${heroHTML}</div>${renderWeekDigest(th, isMobile)}${tabsHTML}` : ""}${eventsTabHTML}${calendarTabHTML}${raidsTabHTML}${maxTabHTML}${rocketTabHTML}${eggsTabHTML}${researchTabHTML}${newsTabHTML}${storeTabHTML}${pokedexTabHTML}${toolsTabHTML}${nestsTabHTML}${itemsTabHTML}${backgroundsTabHTML}${trainerLevelsTabHTML}${movesTabHTML}${specialResearchTabHTML}${reportTabHTML}
     </main>`;
     if (hero || activeEvents.length > 0) state.heroRendered = true;
   }
@@ -12535,7 +13035,7 @@ function render() {
     ${isDesktop ? (() => {
       const currentTabs = ["raids","max","rocket","eggs","research"];
       const isCurrentActive = currentTabs.includes(state.tab);
-      const moreTabs = ["backgrounds","store","items","nests","tools","trainerlevels","moves"];
+      const moreTabs = ["backgrounds","store","items","nests","tools","trainerlevels","moves","specialresearch"];
       const isMoreActive = moreTabs.includes(state.tab);
       const navBtn = (fn, label, tabId) => {
         const isActive = state.tab === tabId;
@@ -12555,6 +13055,7 @@ function render() {
         {fn:"setTab('nests')",label:"Nests",iconImg:"assets/pokemon-images/icons/ic_grass.png",iconSize:20,id:"nests"},
         {fn:"setTab('tools')",label:"PoGO Tools",icon:"🛠️",id:"tools"},
         {fn:"setTab('moves')",label:"Pokémon Moves",iconImg:"assets/pokemon-images/Items/Charged-tm.png",iconSize:22,id:"moves"},
+        {fn:"setTab('specialresearch')",label:"Special Research",iconImg:"assets/pokemon-images/icons/PROFESSOR_WILLOW_v3.png",iconSize:24,id:"specialresearch"},
         {fn:"setTab('trainerlevels')",label:"Trainer Level Requirements",iconImg:"assets/pokemon-images/icons/trainer-level-badge.png",iconSize:26,id:"trainerlevels"}
       ];
       return `<nav style="display:flex;align-items:center;gap:4px">
@@ -12827,6 +13328,7 @@ function sidebarNav(tab) {
   sessionStorage.setItem("trainerwire_tab", tab);
   if (tab === "nests") { loadNestsFromSupabase().then(() => render()); }
   if (tab === "moves") _movesSearch = ""; // clear stale search from a prior visit
+  if (tab === "specialresearch") { _srSearch = ""; _srCategory = "all"; _srSelected = null; fetchSpecialResearch().then(() => render()); }
   if (tab === "report") {
     _reportSubmitMessage = { type: "", text: "" }; // clear stale banner from prior visit
     _bugReportFilter = "all";
@@ -12853,6 +13355,7 @@ function renderSidebar(th) {
     { id: "nests", icon: "\uD83C\uDF33", iconImg: "assets/pokemon-images/icons/ic_grass.png", label: "Nests" },
     { id: "tools", icon: "\uD83D\uDEE0\uFE0F", label: "PoGO Tools" },
     { id: "moves", icon: "", iconImg: "assets/pokemon-images/Items/Charged-tm.png", iconSize: 28, label: "Pokémon Moves" },
+    { id: "specialresearch", icon: "", iconImg: "assets/pokemon-images/icons/PROFESSOR_WILLOW_v3.png", iconSize: 30, label: "Special Research" },
     { id: "trainerlevels", icon: "", iconImg: "assets/pokemon-images/icons/trainer-level-badge.png", iconSize: 32, label: "Trainer Level Requirements" }
   ];
   const tabs = [
@@ -13084,6 +13587,12 @@ function restoreViewSnapshot() {
 // Initial render
 updateThemeColor();
 loadNestsFromSupabase().then(() => render());
+// Cold-load fix: state.tab is restored from sessionStorage above, but fetchSpecialResearch() is
+// otherwise only triggered from setTab()/sidebarNav(). A reload while already on the Special
+// Research tab would never call it, leaving SPECIAL_RESEARCH_DB null and the page stuck empty.
+// Guarded (not unconditional like the nests load above) so the 563 KB JSON never downloads for
+// people who haven't opened this page.
+if (state.tab === "specialresearch") fetchSpecialResearch().then(() => render());
 render();
 restoreViewSnapshot();
 if (typeof trackPageview === "function") trackPageview(state.tab || "home");

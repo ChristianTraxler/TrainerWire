@@ -96,3 +96,30 @@ button svg { pointer-events: none; }
 @media (prefers-reduced-motion: reduce) {
   .tw-sonar-dot::before, .tw-sonar-dot::after { animation: none; }
 }
+
+/* Lightning behind the Electric-type Pokedex sprite card — real strike footage, not drawn shapes.
+   The clip is white-on-pure-black with no alpha, so mix-blend-mode:screen is what makes it usable:
+   screen leaves black untouched and only adds the bright pixels, so the bolt lights the card and
+   the background of the clip disappears. object-fit:cover keeps it filling the card at any size,
+   and the whole layer is inert. Opacity is held below 1 so a strike never overpowers the sprites.
+   The clip animates itself, so there is no CSS animation here to pause — reduced motion has to
+   drop the element instead. */
+/* Deliberately NO z-index here. A z-index on a positioned element creates a stacking context,
+   which isolates mix-blend-mode: the clip would then screen against this layer's own
+   transparent backdrop instead of the card's gradient, and composite as flat black over it.
+   With z-index:auto the clip blends against the card, and the content wrapper's z-index:1
+   still keeps sprites and text above it. */
+.tw-strike-field { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.tw-strike-clip {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  mix-blend-mode: screen;
+  /* No opacity and no filter here on purpose: either one puts this element in its own group, and
+     its black then composites OVER the card instead of screening against it, flattening the card's
+     type-coloured gradient to near-black. Screen-blending over an already dark card needs no tame-down, so the clip ships at full
+     brightness. */
+}
+@media (prefers-reduced-motion: reduce) {
+  .tw-strike-field { display: none; }
+}
