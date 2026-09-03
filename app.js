@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "4.023";
+const APP_VERSION = "4.024";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -144,7 +144,7 @@ const MEGA_EVOS = {
   398:[{n:"Mega Staraptor",f:"0398_mega"}],
   428:[{n:"Mega Lopunny",f:"0428_mega"}],
   445:[{n:"Mega Garchomp",f:"0445_mega"}],
-  448:[{n:"Mega Lucario",f:"0448_mega"}],
+  448:[{n:"Mega Lucario",f:"0448_mega"},{n:"Mega Lucario Z",f:"0448_megaz"}],
   460:[{n:"Mega Abomasnow",f:"0460_mega"}],
   475:[{n:"Mega Gallade",f:"0475_mega-male"}],
   531:[{n:"Mega Audino",f:"0531_mega"}],
@@ -154,6 +154,7 @@ const MEGA_EVOS = {
   658:[{n:"Mega Greninja",f:"0658_mega"}],
   687:[{n:"Mega Malamar",f:"0687_mega"}],
   719:[{n:"Mega Diancie",f:"0719_mega"}],
+  807:[{n:"Mega Zeraora",f:"0807_mega"}],
   870:[{n:"Mega Falinks",f:"0870_mega"}]
 };
 // Mega Energy cost per species, transcribed from dittobase's evolutionChain data — [firstTimeCost,
@@ -6174,6 +6175,54 @@ function goTypeColor(t) {
   return TYPE_COLORS[s.charAt(0).toUpperCase() + s.slice(1)] || "#888";
 }
 
+// Slugs where this project HOLDS shiny art but GO has not released the shiny. The species itself
+// is out (so it never lands in GO_UNRELEASED_SLUGS), yet the artwork exists and is worth showing —
+// draw it, and let the Pokedex Details pill keep saying "Not available". Add a slug here whenever
+// a shiny sprite is sourced ahead of its in-game release.
+const GO_SHINY_ART_UNRELEASED = new Set(["zeraora"]);
+
+// Form slugs Pokemon GO has never released — same signal as GO_MEGA_AVAILABLE_DEX below, but kept
+// per-form so the sprite card can flag the exact form on screen: dittobase serves real art from
+// /go/pokemon/ and falls back to /go/pokemon-placeholder/ for anything not in the game. Almost all
+// of these are Pokemon Legends: Z-A Megas. Regenerate alongside GO_MEGA_AVAILABLE_DEX:
+//   python3 -c "import json,glob,os;print(sorted({json.load(open(p))['slug'] for p in glob.glob('data/go/*.json') if not os.path.basename(p).startswith('_') and 'placeholder' in (json.load(open(p)).get('imageUrl') or '')}))"
+const GO_UNRELEASED_SLUGS = new Set([
+  "absol-mega-z", "appletun-gigantamax", "barbaracle-mega", "baxcalibur-mega", "chandelure-mega",
+  "chimecho-mega", "clefable-mega", "crabominable-mega", "darkrai-mega", "dragalge-mega",
+  "drampa-mega", "eelektross-mega", "emboar-mega", "excadrill-mega", "feraligatr-mega",
+  "flapple-gigantamax", "floette-mega", "froslass-mega", "garchomp-mega-z", "glimmora-mega",
+  "golisopod-mega", "golurk-mega", "hawlucha-mega", "heatran-mega", "lucario-mega-z",
+  "magearna-mega", "meganium-mega", "meowstic-mega", "pyroar-mega", "scolipede-mega",
+  "scovillain-mega", "scrafty-mega", "staraptor-mega", "starmie-mega", "tatsugiri-curly-mega",
+  "tatsugiri-droopy-mega", "tatsugiri-stretchy-mega", "zeraora-mega", "zygarde-mega"
+]);
+
+// Dex numbers whose Mega is actually IN Pokemon GO, for the "Mega Available" row in the Pokedex
+// Details panel. MEGA_EVOS is NOT the right source — it also carries art for Megas that only
+// exist in Pokemon Legends: Z-A (Mega Clefable, Mega Starmie, the "-mega-z" variants, ...), which
+// GO has never released. Neither is flags.isTradable: that is null for every untradable MYTHICAL
+// (base Mew, Celebi and Darkrai are all null and all long released), so it says nothing about
+// release. The signal that does work is dittobase's own image path: real art lives under
+// /go/pokemon/, unreleased forms fall back to /go/pokemon-placeholder/.
+//
+// Regenerate after a new Mega launches (data/go was captured 1 Sep 2026):
+//   python3 -c "import json,glob,os;print(sorted({json.load(open(p))['dexNum'] for p in glob.glob('data/go/*.json') if not os.path.basename(p).startswith('_') and (json.load(open(p)).get('forms') or {}).get('isMega') and 'placeholder' not in (json.load(open(p)).get('imageUrl') or '')}))"
+const GO_MEGA_AVAILABLE_DEX = new Set([
+  3, 6, 9, 15, 18, 26, 65, 71, 80, 94, 115, 127, 130, 142, 149, 150, 181, 208, 212, 214, 227, 229,
+  248, 254, 257, 260, 282, 302, 303, 306, 308, 310, 319, 323, 334, 354, 359, 362, 373, 376, 380,
+  381, 384, 428, 445, 448, 460, 475, 531, 652, 655, 658, 687, 719, 870
+]);
+
+// Type badge art for the 18 types (assets/pokemon-images/pokemon-types/POKEMON_TYPE_<TYPE>.png).
+// Accepts either the GO index's lowercase slug ("fire") or this project's capitalised
+// TYPE_COLORS key ("Fire"), and returns null for anything outside the 18 so callers fall back to
+// the colour swatch rather than emitting a 404.
+const TYPE_ICON_KEYS = new Set(Object.keys(TYPE_COLORS).map(k => k.toUpperCase()));
+function typeIconImg(type) {
+  const key = String(type || "").toUpperCase();
+  return TYPE_ICON_KEYS.has(key) ? `${IMG_BASE}/pokemon-types/POKEMON_TYPE_${key}.png` : null;
+}
+
 // --- POKEMON GO WEATHER BOOSTS (standard, static game rules — same on every Pokemon GO server) ---
 // Naming matches this project's own weather vocabulary used elsewhere (e.g. the raid CP "weather"
 // field ~line 216's "Partly Cloudy"), with "Sunny/Clear" covering both the day (Sunny) and night
@@ -6253,7 +6302,7 @@ function renderWeatherIcons(types, th, isMobile) {
   const weathers = getBoostingWeathers(types);
   if (weathers.length === 0) return "";
   const bg = th.dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.06)";
-  const btns = weathers.map(w => `<button onclick="showWeatherPopup('${w}')" title="Boosted by ${escAttr(w)} weather" aria-label="Boosted by ${escAttr(w)} weather" style="width:${isMobile ? 24 : 26}px;height:${isMobile ? 24 : 26}px;border-radius:50%;border:none;background:${bg};color:${th.textSecondary};display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;flex-shrink:0;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.12)'" onmouseleave="this.style.transform='scale(1)'">${weatherIconSvg(w, isMobile ? 13 : 14)}</button>`).join("");
+  const btns = weathers.map(w => `<button onclick="showWeatherPopup('${w}')" title="Boosted by ${escAttr(w)} weather" aria-label="Boosted by ${escAttr(w)} weather" style="width:${isMobile ? 30 : 33}px;height:${isMobile ? 30 : 33}px;border-radius:50%;border:none;background:${bg};color:${th.text};display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;flex-shrink:0;transition:transform 0.15s ease" onmouseenter="this.style.transform='scale(1.12)'" onmouseleave="this.style.transform='scale(1)'">${weatherIconSvg(w, isMobile ? 17 : 19)}</button>`).join("");
   // Sits directly under the type badges on the sprite card — 8px read as crowded against them,
   // so give the row its own breathing space.
   return `<div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:${isMobile ? 14 : 18}px">${btns}</div>`;
@@ -6291,6 +6340,7 @@ function goFormImg(dexNum, slug, shiny) {
       let entry = null;
       if (/-mega-x$/.test(s)) entry = entries.find(e => / X$/.test(e.n));
       else if (/-mega-y$/.test(s)) entry = entries.find(e => / Y$/.test(e.n));
+      else if (/-mega-z$/.test(s)) entry = entries.find(e => / Z$/.test(e.n));
       if (!entry) entry = entries[0]; // single-mega species, or an unmatched/speculative variant
       return `${IMG_BASE}/Mega/${shiny ? "shiny" : "regular"}/${getGenFolder(dexNum)}/${entry.f}.webp`;
     }
@@ -8849,6 +8899,14 @@ function renderGoPokedexDetailsBody(go, data, th, isMobile) {
   const category = pd.category || (data && data.genus);
   if (category) addRow("Category", esc(category));
   if (typeof go.dexNum === "number") addRow("Region", `${getGenFolder(go.dexNum).replace("Gen-", "Gen ").replace("_", " — ")} Region`);
+  // Availability of this species' Mega in GO. Keyed off the base dex number, not the active form,
+  // so the answer is the same whichever form is selected. See GO_MEGA_AVAILABLE_DEX for why the
+  // dittobase image path — not MEGA_EVOS, not flags.isTradable — is the source of truth.
+  if (typeof go.dexNum === "number") {
+    const megaOut = GO_MEGA_AVAILABLE_DEX.has(go.dexNum);
+    const pill = (color, rgb, text) => `<span style="display:inline-flex;align-items:center;padding:2px 10px;border-radius:999px;background:rgba(${rgb},${th.dark ? "0.18" : "0.14"});border:1px solid rgba(${rgb},0.35);color:${color};font-size:11px;font-weight:800;white-space:nowrap">${text}</span>`;
+    addRow("Mega Available", megaOut ? pill("#2ECC71", "46,204,113", "Yes") : pill("#E74C3C", "231,76,60", "No"));
+  }
   // Always show the Shiny row, both ways round: a gold "Shiny available" pill when it's released
   // and a muted "No" when it isn't. Omitting the row for unreleased shinies read as missing data
   // rather than as the answer "no shiny yet".
@@ -8860,7 +8918,7 @@ function renderGoPokedexDetailsBody(go, data, th, isMobile) {
     // shows the colors but not what specifically changed, so the words still add information.
     const shinyBlurb = SHINY_DESC[go.dexNum] || "";
     addRow("Shiny", shinyOut
-      ? `<span style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:999px;background:${th.dark ? "rgba(243,156,18,0.18)" : "rgba(243,156,18,0.14)"};border:1px solid rgba(243,156,18,0.35);color:#F39C12;font-size:11px;font-weight:800;white-space:nowrap">Shiny available ✨</span>`
+      ? `<span style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:999px;background:${th.dark ? "rgba(243,156,18,0.18)" : "rgba(243,156,18,0.14)"};border:1px solid rgba(243,156,18,0.35);color:${th.dark ? "#FFD700" : "#B8860B"};font-size:11px;font-weight:800;white-space:nowrap">Shiny available ✨</span>`
       : `<span style="display:inline-flex;align-items:center;padding:2px 8px;border-radius:999px;background:${th.dark ? "rgba(231,76,60,0.18)" : "rgba(231,76,60,0.14)"};border:1px solid rgba(231,76,60,0.35);color:#E74C3C;font-size:11px;font-weight:800;white-space:nowrap">Not available</span>`);
     // Its own row rather than a sub-line on the pill above, so it reads as a normal label/value
     // pair like every other row in this panel.
@@ -9390,7 +9448,16 @@ function renderGoFamilyBody(familyEntries, go, primaryColor, th, isMobile) {
           <img src="${spriteSrc}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="${spriteOnError}" />
         </div>`
       : `<img src="${spriteSrc}" style="width:${spriteBox}px;height:${spriteBox}px;object-fit:contain" onerror="${spriteOnError}" />`;
-    const typeDots = (f.types || []).map(t => `<span title="${escAttr(t.charAt(0).toUpperCase() + t.slice(1))}" style="display:inline-block;width:11px;height:11px;border-radius:50%;background:${goTypeColor(t)};box-shadow:0 0 0 1.5px ${th.surface}"></span>`).join("");
+    // Real type badge art, with the old colour swatch kept as the fallback for any type that has
+    // no icon file (typeIconImg returns null) — the row never collapses to nothing.
+    const typeIconPx = isMobile ? 16 : 18;
+    const typeDots = (f.types || []).map(t => {
+      const label = escAttr(t.charAt(0).toUpperCase() + t.slice(1));
+      const icon = typeIconImg(t);
+      return icon
+        ? `<img src="${icon}" alt="${label}" title="${label}" style="width:${typeIconPx}px;height:${typeIconPx}px;object-fit:contain;display:block" onerror="this.style.display='none'" />`
+        : `<span title="${label}" style="display:inline-block;width:11px;height:11px;border-radius:50%;background:${goTypeColor(t)};box-shadow:0 0 0 1.5px ${th.surface}"></span>`;
+    }).join("");
     const shinyChip = shinyMap[f.slug] === true ? `<div style="display:flex;align-items:center;gap:4px;margin-top:3px;padding:2px 9px 2px 4px;border-radius:999px;background:${th.accentBgSubtle(primaryColor)};border:1px solid ${th.countdownBorder(primaryColor)}">
       <img src="${goFormImg(f.dexNum, f.slug, true)}" style="width:${shinySize}px;height:${shinySize}px;object-fit:contain" onerror="this.parentElement.style.display='none'" />
       <img src="assets/pokemon-images/icons/shiny-sparkles.webp" alt="" aria-hidden="true" style="width:11px;height:11px;object-fit:contain" onerror="this.style.display='none'" />
@@ -9417,7 +9484,19 @@ function renderGoCostumesBody(costumes, dexNum, primaryColor, th, isMobile) {
   const gridCols = isMobile ? "repeat(auto-fill,minmax(140px,1fr))" : "repeat(auto-fill,minmax(130px,1fr))";
   const shinySize = isMobile ? 22 : 26;
   const baseSpriteSrc = pokemonImgUrl(dexNum);
+  const spriteBox = isMobile ? 54 : 60;
+  // A costume with `noSprite: true` in data/costume-index.json is one we know exists in-game but
+  // have no art for yet. It still gets a card (so the name is on record) but draws the same
+  // circle-and-slash mark renderGoImageCard uses for an unreleased shiny, and stays inert —
+  // there is nothing to open in the form modal, so no onclick and no pointer cursor.
+  const missingSpriteMark = `<div style="width:${spriteBox}px;height:${spriteBox}px;display:flex;align-items:center;justify-content:center">
+      <svg width="${Math.round(spriteBox * 0.72)}" height="${Math.round(spriteBox * 0.72)}" viewBox="0 0 100 100" fill="none" stroke="${th.textMuted}" stroke-width="7" stroke-linecap="round" opacity="0.5" aria-hidden="true">
+        <circle cx="50" cy="50" r="40" />
+        <line x1="21.7" y1="78.3" x2="78.3" y2="21.7" />
+      </svg>
+    </div>`;
   const cards = costumes.map(c => {
+    const noSprite = c.noSprite === true;
     const spriteSrc = costumeDexImg(dexNum, c.id, c.folder);
     const shinySrc = shinyCostumeDexImg(dexNum, c.id, c.folder);
     // The chip opens the SHINY sprite full size, not the card's regular one — so it needs its own
@@ -9425,13 +9504,14 @@ function renderGoCostumesBody(costumes, dexNum, primaryColor, th, isMobile) {
     // regular sprite instead. Keyboard-reachable for the same reason the card is clickable at all.
     const shinyLabel = `Shiny ${c.name || c.id}`;
     const shinyOpen = `event.stopPropagation();showFormModal(${jsAttr(shinySrc)},${jsAttr(shinyLabel)})`;
-    const shinyChip = c.shiny === true ? `<div role="button" tabindex="0" aria-label="View ${escAttr(shinyLabel)} full size" title="Tap to view full size" onclick="${shinyOpen}" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();${shinyOpen}}" style="cursor:zoom-in;display:flex;align-items:center;gap:4px;margin-top:3px;padding:2px 9px 2px 4px;border-radius:999px;background:${th.accentBgSubtle(primaryColor)};border:1px solid ${th.countdownBorder(primaryColor)}">
+    const shinyChip = c.shiny === true && !noSprite ? `<div role="button" tabindex="0" aria-label="View ${escAttr(shinyLabel)} full size" title="Tap to view full size" onclick="${shinyOpen}" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();${shinyOpen}}" style="cursor:zoom-in;display:flex;align-items:center;gap:4px;margin-top:3px;padding:2px 9px 2px 4px;border-radius:999px;background:${th.accentBgSubtle(primaryColor)};border:1px solid ${th.countdownBorder(primaryColor)}">
       <img src="${shinySrc}" style="width:${shinySize}px;height:${shinySize}px;object-fit:contain" onerror="this.parentElement.style.display='none'" />
       <img src="assets/pokemon-images/icons/shiny-sparkles.webp" alt="" aria-hidden="true" style="width:11px;height:11px;object-fit:contain" onerror="this.style.display='none'" />
       <span style="font-size:${isMobile ? 9.5 : 10.5}px;font-weight:700;color:${th.textSecondary}">Shiny</span>
     </div>` : "";
-    return `<div onclick="showFormModal(${jsAttr(spriteSrc)},${jsAttr(c.name || c.id)})" style="cursor:pointer;position:relative;border-radius:12px;border:1.5px solid ${th.border};background:${th.surface};padding:${isMobile ? "10px 6px 8px" : "10px 8px 8px"};display:flex;flex-direction:column;align-items:center;gap:3px;transition:border-color 0.15s ease" onmouseenter="this.style.borderColor='${primaryColor}'" onmouseleave="this.style.borderColor='${th.border}'">
-      <img src="${spriteSrc}" style="width:${isMobile ? 54 : 60}px;height:${isMobile ? 54 : 60}px;object-fit:contain" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='${baseSpriteSrc}';}" />
+    const cardOpen = noSprite ? "" : ` onclick="showFormModal(${jsAttr(spriteSrc)},${jsAttr(c.name || c.id)})" onmouseenter="this.style.borderColor='${primaryColor}'" onmouseleave="this.style.borderColor='${th.border}'"`;
+    return `<div${cardOpen} style="cursor:${noSprite ? "default" : "pointer"};position:relative;border-radius:12px;border:1.5px solid ${th.border};background:${th.surface};padding:${isMobile ? "10px 6px 8px" : "10px 8px 8px"};display:flex;flex-direction:column;align-items:center;gap:3px;transition:border-color 0.15s ease">
+      ${noSprite ? missingSpriteMark : `<img src="${spriteSrc}" style="width:${spriteBox}px;height:${spriteBox}px;object-fit:contain" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='${baseSpriteSrc}';}" />`}
       <div style="font-size:${isMobile ? 10.5 : 11.5}px;font-weight:700;color:${th.text};text-align:center;line-height:1.25;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(c.name || c.id)}</div>
       <div style="font-size:${isMobile ? 9 : 10}px;color:${th.textMuted}">#${String(dexNum).padStart(4, "0")}</div>
       ${shinyChip}
@@ -9590,7 +9670,7 @@ function renderGoImageCard(go, data, primaryColor, th, isMobile) {
   // Built from the ACTIVE FORM's own types (go.types), not the base species — so Mega/Alolan/
   // Galarian forms whose typing differs from the base show their correct typing here. The dex
   // number now lives in the Pokédex Details panel instead, so it isn't repeated on this card.
-  const typeBadges = (go.types || []).map(t => `<span style="display:inline-block;padding:4px 14px;border-radius:20px;background:${goTypeColor(t)};color:#fff;font-size:13px;font-weight:600;text-transform:capitalize;margin:0 3px;text-shadow:0 1px 2px rgba(0,0,0,0.3)">${esc(t)}</span>`).join("");
+  const typeBadges = (go.types || []).map(t => `<span style="display:inline-block;padding:3px 12px;border-radius:20px;background:${goTypeColor(t)};color:#fff;font-size:11.5px;font-weight:600;text-transform:capitalize;margin:0 3px;text-shadow:0 1px 2px rgba(0,0,0,0.3)">${esc(t)}</span>`).join("");
   // Shadow forms get a purple smoke aura BEHIND each sprite (the existing shadow_icon.png asset,
   // z-index 1) rather than a tinted card background — the card background/glow always stay
   // type-derived (primaryColor), exactly like the non-Shadow case. Centered (top/left 50% +
@@ -9600,6 +9680,11 @@ function renderGoImageCard(go, data, primaryColor, th, isMobile) {
   // below fails) — applyPairSpriteScale resizes this element per-sprite once its sibling image
   // loads, since artwork fills wildly different fractions of the sprite canvas per Pokemon (e.g.
   // Bulbasaur ~0.35 vs Ivysaur ~0.70) and a fixed percent can't frame both well.
+  // Forms Pokemon GO has never released still get a full card (the art exists and people look it
+  // up), but say so next to the name so nobody reads it as catchable.
+  const unreleasedChip = GO_UNRELEASED_SLUGS.has(go.slug)
+    ? `<span style="display:inline-flex;align-items:center;padding:2px 9px;border-radius:999px;background:rgba(231,76,60,${th.dark ? "0.18" : "0.14"});border:1px solid rgba(231,76,60,0.35);color:#E74C3C;font-size:11px;font-weight:800;letter-spacing:0.3px;white-space:nowrap;vertical-align:middle;margin-left:8px">Unreleased</span>`
+    : "";
   const isShadowForm = !!(go.forms && go.forms.isShadow);
   // Dynamax reuses the base species art, so the form is only legible from the red Max-energy
   // clouds drawn over the sprite's head — the same marker the Max Battle cards and the family
@@ -9613,7 +9698,14 @@ function renderGoImageCard(go, data, primaryColor, th, isMobile) {
   // Always render the Normal | Shiny pair. A form whose shiny isn't released yet has no art to
   // draw, so its shiny slot gets a circle-and-slash placeholder instead of collapsing the card to
   // a single sprite — the layout then stays identical whether or not a shiny exists.
+  // Two different questions, deliberately decoupled. isShinyReleased answers "can you catch this
+  // shiny in GO", and drives the availability pill over in the Pokedex Details panel. Whether to
+  // DRAW the shiny half is a separate question: an unreleased form's art exists and is worth
+  // showing, it just isn't obtainable — the red Unreleased pill next to the name already says so.
+  // Without this split, telling the truth in the pill would blank out artwork we deliberately
+  // downloaded.
   const shinyReleased = !!(go.flags && go.flags.isShinyReleased === true);
+  const showShinyArt = shinyReleased || GO_UNRELEASED_SLUGS.has(go.slug) || GO_SHINY_ART_UNRELEASED.has(go.slug);
   const pairBox = isMobile ? 109 : 197; // desktop bumped another ~28% (154 -> 197); mobile untouched, already at its fit limit
   // Fallback chain: form-specific art -> base dex sprite -> (shiny half only) hide the unit.
   // `this.dataset.fb` guards against an infinite onerror loop if the base sprite ALSO 404s.
@@ -9647,7 +9739,7 @@ function renderGoImageCard(go, data, primaryColor, th, isMobile) {
   };
   const normalUnit = spriteUnit(imgSrc, baseImgSrc, imgLabel, "Normal", "drop-shadow(0 6px 18px rgba(0,0,0,0.38))", false);
   let shinyUnit;
-  if (shinyReleased) {
+  if (showShinyArt) {
     const shinyUrl = goFormImg(go.dexNum, go.slug, true);
     const baseShinyUrl = shinyDexImg(go.dexNum, GENDER_SUFFIX[go.dexNum] || "");
     shinyUnit = spriteUnit(shinyUrl, baseShinyUrl, `Shiny ${imgLabel}`, "Shiny", "drop-shadow(0 6px 18px rgba(0,0,0,0.38))", true, true);
@@ -9666,7 +9758,7 @@ function renderGoImageCard(go, data, primaryColor, th, isMobile) {
   // the page and risking horizontal overflow, while every normal-size aura still reads unclipped.
   return `<div style="background:linear-gradient(135deg,${primaryColor}22,${primaryColor}08);border:1px solid ${th.border};border-radius:14px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:${isMobile ? "20px 14px" : "24px 20px"};box-sizing:border-box;height:100%;min-height:${isMobile ? 190 : 240}px">
     ${spriteRowHtml}
-    <div style="font-size:${isMobile ? 15 : 17}px;font-weight:800;color:${th.text};margin-top:10px;text-align:center">${esc(imgLabel)}</div>
+    <div style="font-size:${isMobile ? 15 : 17}px;font-weight:800;color:${th.text};margin-top:10px;text-align:center">${esc(imgLabel)}${unreleasedChip}</div>
     ${typeBadges ? `<div style="margin-top:8px">${typeBadges}</div>` : ""}
     ${weatherIconsHtml}
   </div>`;

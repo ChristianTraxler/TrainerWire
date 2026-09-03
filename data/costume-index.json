@@ -1358,6 +1358,12 @@
 "id": "c14",
 "name": "Pikachu visor",
 "shiny": true
+},
+{
+"id": "wondervoyage",
+"name": "Friede's Goggles",
+"shiny": false,
+"noSprite": true
 }
 ],
 "50": [
@@ -1443,6 +1449,12 @@
 "id": "f951",
 "name": "Clone",
 "shiny": false
+},
+{
+"id": "wondervoyage",
+"name": "Friede's Goggles",
+"shiny": false,
+"noSprite": true
 }
 ],
 "613": [
