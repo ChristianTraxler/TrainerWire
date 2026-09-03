@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "4.025";
+const APP_VERSION = "4.026";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -497,6 +497,28 @@ async function fetchSpecialResearch() {
     _specialResearchLoading = false;
   }
   return SPECIAL_RESEARCH_DB;
+}
+// data/sprite-trim.json — per-sprite visible-content geometry (flat object, filename stem ->
+// [x0,y0,x1,y1] as integer percentages of the canvas) used to re-centre National-Dex sprites
+// inside the reward-pill media slot. Same fail-silent/cached contract as fetchSpecialResearch:
+// {} if the file is missing/fails to fetch, no console noise. Sprites that already fill their
+// canvas are simply absent from the map — callers must treat a missing key as "no correction".
+let SPRITE_TRIM_DB = null; // null = not loaded yet; {} = loaded (or failed) with no entries
+let _spriteTrimLoading = false;
+async function fetchSpriteTrim() {
+  if (SPRITE_TRIM_DB) return SPRITE_TRIM_DB;
+  if (_spriteTrimLoading) return SPRITE_TRIM_DB || {};
+  _spriteTrimLoading = true;
+  try {
+    const res = await fetch("data/sprite-trim.json");
+    const data = res.ok ? await res.json() : {};
+    SPRITE_TRIM_DB = data && typeof data === "object" ? data : {};
+  } catch {
+    SPRITE_TRIM_DB = {};
+  } finally {
+    _spriteTrimLoading = false;
+  }
+  return SPRITE_TRIM_DB;
 }
 // A reward string like "Great Ball * 10" displays as "Great Ball ×10". A small number of scraped
 // rewards end with a dangling " *" and no quantity (Serebii's own source omits it, e.g. "Silver
@@ -8750,7 +8772,10 @@ function applySRSearch() {
   cards.forEach(card => {
     const blob = card.getAttribute("data-sr-search") || "";
     const match = query === "" || blob.includes(query);
-    card.style.display = match ? "" : "none";
+    // The card markup sets display:flex inline — assigning "" DELETES that declaration and the
+    // card collapses to display:block (sprite and text stack), which is why changing sort or
+    // category scrambled the grid until a later re-render. Restore the layout value explicitly.
+    card.style.display = match ? "flex" : "none";
     if (match) visible++;
   });
   if (countEl) countEl.textContent = `${visible} research stor${visible === 1 ? "y" : "ies"}`;
@@ -8787,14 +8812,52 @@ function closeSpecialResearch() {
   render();
   window.scrollTo(0, 0);
 }
+// Shared open/close driver for a Special Research step body — used by both toggleSRStep (one
+// card) and specialResearchExpandAll (every card) so the two paths can never drift apart. Animates
+// max-height + opacity instead of toggling display, following the same pattern as
+// toggleCompactCard (~app.js:8830): read scrollHeight while the element is still laid out, then
+// animate toward the target. Closing needs a forced reflow (void body.offsetHeight) between
+// setting the starting max-height and animating to 0, otherwise the browser can coalesce both
+// writes into one paint and skip the transition entirely. Opening resolves back to max-height:none
+// once the transition ends so nested content (e.g. a step whose reward pills wrap onto a new line
+// after a resize) can still grow and later toggles keep measuring the real height. Respects
+// prefers-reduced-motion by skipping straight to the end state with no transition.
+function _srSetStepOpen(body, arrow, open) {
+  const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (arrow) arrow.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
+  if (reduced) {
+    body.style.transition = "none";
+    body.style.maxHeight = open ? "none" : "0px";
+    body.style.opacity = open ? "1" : "0";
+    return;
+  }
+  if (open) {
+    body.style.maxHeight = body.scrollHeight + "px";
+    body.style.opacity = "1";
+    const onEnd = (e) => {
+      if (e.target !== body || e.propertyName !== "max-height") return;
+      body.style.maxHeight = "none";
+      body.removeEventListener("transitionend", onEnd);
+    };
+    body.addEventListener("transitionend", onEnd);
+    setTimeout(() => { if (body.dataset.open === "true") body.style.maxHeight = "none"; }, 400);
+  } else {
+    body.style.maxHeight = body.scrollHeight + "px";
+    void body.offsetHeight; // force a reflow so the browser registers the start height before the next write
+    requestAnimationFrame(() => {
+      body.style.maxHeight = "0px";
+      body.style.opacity = "0";
+    });
+  }
+}
 function toggleSRStep(i) {
   const body = document.getElementById('sr-step-body-' + i);
   const arrow = document.getElementById('sr-step-arrow-' + i);
   if (!body) return;
   const isOpen = body.dataset.open === 'true';
-  body.dataset.open = isOpen ? 'false' : 'true';
-  body.style.display = isOpen ? 'none' : 'block';
-  if (arrow) arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+  const nextOpen = !isOpen;
+  body.dataset.open = nextOpen ? 'true' : 'false';
+  _srSetStepOpen(body, arrow, nextOpen);
 }
 function specialResearchExpandAll(open) {
   document.querySelectorAll('[data-sr-step]').forEach(card => {
@@ -8802,8 +8865,7 @@ function specialResearchExpandAll(open) {
     const arrow = card.querySelector('[id^="sr-step-arrow-"]');
     if (!body) return;
     body.dataset.open = open ? 'true' : 'false';
-    body.style.display = open ? 'block' : 'none';
-    if (arrow) arrow.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
+    _srSetStepOpen(body, arrow, open);
   });
 }
 
@@ -8816,7 +8878,7 @@ function setTab(tab) {
   if (typeof trackPageview === "function") trackPageview(tab);
   if (tab === "nests") { loadNestsFromSupabase().then(() => render()); }
   if (tab === "moves") _movesSearch = ""; // clear stale search from a prior visit
-  if (tab === "specialresearch") { _srSearch = ""; _srCategory = "all"; _srSelected = null; fetchSpecialResearch().then(() => render()); }
+  if (tab === "specialresearch") { _srSearch = ""; _srCategory = "all"; _srSelected = null; Promise.all([fetchSpecialResearch(), fetchSpriteTrim()]).then(() => render()); }
   if (tab === "report") {
     _reportSubmitMessage = { type: "", text: "" }; // clear stale banner from prior visit
     _bugReportFilter = "all";
@@ -12356,37 +12418,63 @@ function render() {
           const catColor = entry.category === "Real-Life Event" ? "#9B59B6" : "#16A085";
           // Icon + text content for a reward pill. srRewardIcon must see the RAW reward string
           // (it splits on "*" itself) — pass the same `r` to both it and fmtSRReward, don't chain
-          // the formatted text through it. Pokémon-sprite icons render larger than item icons.
-          // NOTE: this deliberately overrides the project's usual ~58% item:sprite scale rule —
-          // the ratio here is ~72%, raised at the user's explicit request for legibility on this
-          // page specifically. Not a general precedent for other pages.
+          // the formatted text through it. National-Dex sprite PNGs carry a big transparent
+          // margin baked into the asset — Nickit's art fills only ~54% of its 256px canvas — so a
+          // raw sprite reads as dead space inside a pill. A same-size negative-margin "bleed" trick
+          // was tried here before and rejected: it let the sprite visually escape the pill's
+          // rounded edge and made sprite pills a different height than item pills. Instead, every
+          // pill gets a fixed circular MEDIA SLOT (28px mobile / 32px desktop, identical for every
+          // reward kind so a row of pills is always the same height) with overflow:hidden — the
+          // img is scaled up INSIDE that slot so the crop, not a margin, removes the dead space,
+          // and it can never spill past the slot's edge. Item icons are already tight-cropped, so
+          // they render at 1x and simply fill the slot.
+          // National-Dex sprite PNGs are not centred in their own canvas: Nickit's visible art
+          // sits at content box x 26-80%, y 32-88% (centre 53%,60% — 10% below canvas centre), so
+          // a uniform scale() around the element centre drags the Pokémon down and still reads
+          // small, because the amount of "dead" transparent margin differs per sprite. Fix it with
+          // per-sprite geometry from data/sprite-trim.json (SPRITE_TRIM_DB, [x0,y0,x1,y1] as % of
+          // canvas): scale up so the CONTENT box fills 95% of the slot, then translate (in the
+          // already-scaled coordinate system — scale() must come first) to re-centre that content
+          // box on the slot centre. Sprites missing from the map (already full-canvas, or the map
+          // hasn't loaded yet) fall back to the old flat 1.45x guess so nothing regresses.
           const srRewardPillContent = (r) => {
             const icon = srRewardIcon(r);
             let iconHTML = "";
             if (icon) {
               const isPk = icon.kind === "pokemon";
-              const size = isPk ? (isMobile ? 42 : 50) : (isMobile ? 30 : 36);
-              // National-Dex sprite PNGs carry a big transparent margin baked into the asset —
-              // Nickit's art fills only ~54% of its 256px canvas — which reads as dead space
-              // inside the pill. Draw Pokémon sprites 1.25x larger than their layout box and pull
-              // the overflow back with a negative margin, so the visible Pokémon grows while the
-              // pill stays the same size. Item icons are already tight-cropped, so leave them be.
-              const draw = isPk ? Math.round(size * 1.45) : size;
-              const bleed = isPk ? Math.round((draw - size) / 2) : 0;
-              iconHTML = `<img src="${escAttr(icon.url)}" alt="" loading="lazy" style="width:${draw}px;height:${draw}px;${bleed ? `margin:-${bleed}px;` : ""}object-fit:contain;flex-shrink:0" onerror="this.style.display='none'" />`;
+              const slot = isMobile ? 32 : 38;
+              let transform = "scale(1)";
+              if (isPk) {
+                const stemMatch = icon.url.match(/([^/]+)\.webp$/);
+                const trim = (stemMatch && SPRITE_TRIM_DB) ? SPRITE_TRIM_DB[stemMatch[1]] : null;
+                if (trim) {
+                  const [x0, y0, x1, y1] = trim;
+                  const cw = (x1 - x0) / 100;
+                  const ch = (y1 - y0) / 100;
+                  const cx = (x0 + x1) / 200;
+                  const cy = (y0 + y1) / 200;
+                  const S = Math.round((0.95 / Math.max(cw, ch)) * 1000) / 1000;
+                  const TX = Math.round(-(cx - 0.5) * 100 * 100) / 100;
+                  const TY = Math.round(-(cy - 0.5) * 100 * 100) / 100;
+                  transform = `scale(${S}) translate(${TX}%, ${TY}%)`;
+                } else {
+                  transform = "scale(1.45)";
+                }
+              }
+              iconHTML = `<span style="width:${slot}px;height:${slot}px;border-radius:50%;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0"><img src="${escAttr(icon.url)}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block;transform:${transform}" onerror="this.style.display='none'" /></span>`;
             }
             return `${iconHTML}<span>${esc(fmtSRReward(r))}</span>`;
           };
           const taskRowHTML = (t) => {
-            const rewardsHTML = (t.reward || []).map(r => `<span style="display:inline-flex;align-items:center;gap:2px;font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${th.textMuted};background:${th.accentBgSubtle("#16A085")};padding:3px 8px;border-radius:10px;white-space:nowrap">${srRewardPillContent(r)}</span>`).join("");
-            return `<div style="display:flex;align-items:${isMobile ? "flex-start" : "center"};justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid ${th.border};${isMobile ? "flex-direction:column" : ""}">
+            const rewardsHTML = (t.reward || []).map(r => `<span style="display:inline-flex;align-items:center;gap:7px;font-size:${isMobile ? 11 : 12}px;font-weight:700;color:${th.text};white-space:nowrap">${srRewardPillContent(r)}</span>`).join("");
+            return `<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid ${th.border}">
               <span style="display:flex;align-items:flex-start;gap:8px;font-size:${isMobile ? 12 : 14}px;color:${th.text};font-weight:600;min-width:0"><span style="color:#16A085;font-weight:900;flex-shrink:0;line-height:1.35">•</span><span>${esc(t.task)}</span></span>
-              ${rewardsHTML ? `<span style="display:flex;gap:4px;flex-wrap:wrap;flex-shrink:0;${isMobile ? "margin-left:16px" : ""}">${rewardsHTML}</span>` : ""}
+              ${rewardsHTML ? `<span style="display:flex;gap:${isMobile ? 10 : 14}px;flex-wrap:wrap;align-items:center;justify-content:flex-end;flex-shrink:0">${rewardsHTML}</span>` : ""}
             </div>`;
           };
           const stepRewardsHTML = (rewards) => rewards && rewards.length ? `<div style="margin-top:10px;padding:${isMobile ? "10px 12px" : "12px 14px"};border-radius:14px;background:${th.accentBgSubtle("#F39C12")};border:1px solid ${th.countdownBorder("#F39C12")}">
             <div style="font-size:${isMobile ? 10 : 11}px;font-weight:800;color:#F39C12;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px">Step Rewards</div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap">${rewards.map(r => `<span style="display:inline-flex;align-items:center;gap:6px;font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};background:${th.surface};border:1px solid ${th.border};padding:5px 12px;border-radius:10px;white-space:nowrap">${srRewardPillContent(r)}</span>`).join("")}</div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center">${rewards.map(r => `<span style="display:inline-flex;align-items:center;gap:7px;font-size:${isMobile ? 12 : 13}px;font-weight:700;color:${th.text};white-space:nowrap">${srRewardPillContent(r)}</span>`).join("")}</div>
           </div>` : "";
           const stepCardHTML = (step, i) => {
             const label = step.label || `Step ${i + 1}`;
@@ -12394,11 +12482,13 @@ function render() {
             return `<div data-sr-step="1" style="background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;box-shadow:${th.shadow};overflow:hidden;transition:border-color 0.2s ease" onmouseenter="this.style.borderColor='#16A085'" onmouseleave="this.style.borderColor='${th.border}'">
               <div onclick="toggleSRStep(${i})" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:${isMobile ? "12px 14px" : "14px 18px"}">
                 <div style="font-weight:800;font-size:${isMobile ? 13 : 15}px;color:${th.text}">${esc(label)}</div>
-                <span id="sr-step-arrow-${i}" style="font-size:14px;color:${th.textMuted};transition:transform 0.2s ease;flex-shrink:0;display:inline-block;transform:rotate(180deg)">▾</span>
+                <span id="sr-step-arrow-${i}" style="color:${th.textMuted};transition:transform 0.25s cubic-bezier(0.4,0,0.2,1);flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;transform:rotate(180deg)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
               </div>
-              <div id="sr-step-body-${i}" data-open="true" style="display:block;padding:0 ${isMobile ? "14px 14px" : "18px 18px"}">
-                <div>${tasksHTML}</div>
-                ${stepRewardsHTML(step.rewards)}
+              <div id="sr-step-body-${i}" data-open="true" style="overflow:hidden;transition:max-height 0.32s cubic-bezier(0.4,0,0.2,1),opacity 0.22s ease;max-height:none;opacity:1">
+                <div style="padding:0 ${isMobile ? "14px 14px" : "18px 18px"}">
+                  <div>${tasksHTML}</div>
+                  ${stepRewardsHTML(step.rewards)}
+                </div>
               </div>
             </div>`;
           };
@@ -13328,7 +13418,7 @@ function sidebarNav(tab) {
   sessionStorage.setItem("trainerwire_tab", tab);
   if (tab === "nests") { loadNestsFromSupabase().then(() => render()); }
   if (tab === "moves") _movesSearch = ""; // clear stale search from a prior visit
-  if (tab === "specialresearch") { _srSearch = ""; _srCategory = "all"; _srSelected = null; fetchSpecialResearch().then(() => render()); }
+  if (tab === "specialresearch") { _srSearch = ""; _srCategory = "all"; _srSelected = null; Promise.all([fetchSpecialResearch(), fetchSpriteTrim()]).then(() => render()); }
   if (tab === "report") {
     _reportSubmitMessage = { type: "", text: "" }; // clear stale banner from prior visit
     _bugReportFilter = "all";
@@ -13592,7 +13682,7 @@ loadNestsFromSupabase().then(() => render());
 // Research tab would never call it, leaving SPECIAL_RESEARCH_DB null and the page stuck empty.
 // Guarded (not unconditional like the nests load above) so the 563 KB JSON never downloads for
 // people who haven't opened this page.
-if (state.tab === "specialresearch") fetchSpecialResearch().then(() => render());
+if (state.tab === "specialresearch") Promise.all([fetchSpecialResearch(), fetchSpriteTrim()]).then(() => render());
 render();
 restoreViewSnapshot();
 if (typeof trackPageview === "function") trackPageview(state.tab || "home");
