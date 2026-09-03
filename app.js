@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "4.026";
+const APP_VERSION = "4.027";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -8552,9 +8552,9 @@ function toggleTrainerLevel(level) {
   const arrow = document.getElementById('tl-arrow-' + level);
   if (!body) return;
   const isOpen = body.dataset.open === 'true';
-  body.dataset.open = isOpen ? 'false' : 'true';
-  body.style.display = isOpen ? 'none' : 'block';
-  if (arrow) arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+  const nextOpen = !isOpen;
+  body.dataset.open = nextOpen ? 'true' : 'false';
+  setCollapsibleOpen(body, arrow, nextOpen);
 }
 
 function trainerLevelsExpandAll(open) {
@@ -8563,8 +8563,7 @@ function trainerLevelsExpandAll(open) {
     const arrow = card.querySelector('[id^="tl-arrow-"]');
     if (!body) return;
     body.dataset.open = open ? 'true' : 'false';
-    body.style.display = open ? 'block' : 'none';
-    if (arrow) arrow.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
+    setCollapsibleOpen(body, arrow, open);
   });
 }
 
@@ -8812,17 +8811,18 @@ function closeSpecialResearch() {
   render();
   window.scrollTo(0, 0);
 }
-// Shared open/close driver for a Special Research step body — used by both toggleSRStep (one
-// card) and specialResearchExpandAll (every card) so the two paths can never drift apart. Animates
-// max-height + opacity instead of toggling display, following the same pattern as
-// toggleCompactCard (~app.js:8830): read scrollHeight while the element is still laid out, then
-// animate toward the target. Closing needs a forced reflow (void body.offsetHeight) between
-// setting the starting max-height and animating to 0, otherwise the browser can coalesce both
-// writes into one paint and skip the transition entirely. Opening resolves back to max-height:none
-// once the transition ends so nested content (e.g. a step whose reward pills wrap onto a new line
-// after a resize) can still grow and later toggles keep measuring the real height. Respects
-// prefers-reduced-motion by skipping straight to the end state with no transition.
-function _srSetStepOpen(body, arrow, open) {
+// Shared open/close driver for a collapsible card body — used by both the Special Research step
+// cards (toggleSRStep / specialResearchExpandAll) and the Trainer Level cards (toggleTrainerLevel /
+// trainerLevelsExpandAll) so all four call sites can never drift apart. Animates max-height +
+// opacity instead of toggling display, following the same pattern as toggleCompactCard
+// (~app.js:8830): read scrollHeight while the element is still laid out, then animate toward the
+// target. Closing needs a forced reflow (void body.offsetHeight) between setting the starting
+// max-height and animating to 0, otherwise the browser can coalesce both writes into one paint and
+// skip the transition entirely. Opening resolves back to max-height:none once the transition ends
+// so nested content (e.g. a step whose reward pills wrap onto a new line after a resize) can still
+// grow and later toggles keep measuring the real height. Respects prefers-reduced-motion by
+// skipping straight to the end state with no transition.
+function setCollapsibleOpen(body, arrow, open) {
   const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (arrow) arrow.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
   if (reduced) {
@@ -8857,7 +8857,7 @@ function toggleSRStep(i) {
   const isOpen = body.dataset.open === 'true';
   const nextOpen = !isOpen;
   body.dataset.open = nextOpen ? 'true' : 'false';
-  _srSetStepOpen(body, arrow, nextOpen);
+  setCollapsibleOpen(body, arrow, nextOpen);
 }
 function specialResearchExpandAll(open) {
   document.querySelectorAll('[data-sr-step]').forEach(card => {
@@ -8865,7 +8865,7 @@ function specialResearchExpandAll(open) {
     const arrow = card.querySelector('[id^="sr-step-arrow-"]');
     if (!body) return;
     body.dataset.open = open ? 'true' : 'false';
-    _srSetStepOpen(body, arrow, open);
+    setCollapsibleOpen(body, arrow, open);
   });
 }
 
@@ -12192,10 +12192,12 @@ function render() {
                 <div style="font-size:${isMobile ? 11 : 13}px;color:${th.textMuted};font-weight:500;margin-top:2px">${fmtXP(lvl.xpRequired)} XP required${lvl.tasks && lvl.tasks.length ? ` <span style="color:#16A085;font-weight:700">+ tasks completed</span>` : ""}</div>
               </div>
             </div>
-            <span id="tl-arrow-${lvl.level}" style="font-size:14px;color:${th.textMuted};transition:transform 0.2s ease;flex-shrink:0;display:inline-block">▾</span>
+            <span id="tl-arrow-${lvl.level}" style="color:${th.textMuted};transition:transform 0.25s cubic-bezier(0.4,0,0.2,1);flex-shrink:0;display:inline-flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
-          <div id="tl-body-${lvl.level}" data-open="false" style="display:none;padding:0 ${isMobile ? "14px 14px" : "18px 18px"}">
-            ${tasksHTML}${rewardsHTML}${unlocksHTML}
+          <div id="tl-body-${lvl.level}" data-open="false" style="overflow:hidden;transition:max-height 0.32s cubic-bezier(0.4,0,0.2,1),opacity 0.22s ease;max-height:0px;opacity:0">
+            <div style="padding:0 ${isMobile ? "14px 14px" : "18px 18px"}">
+              ${tasksHTML}${rewardsHTML}${unlocksHTML}
+            </div>
           </div>
         </div>`;
       }).join("");
