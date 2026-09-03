@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "4.027";
+const APP_VERSION = "4.028";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -8507,7 +8507,10 @@ function searchItems(val) {
       const name = card.getAttribute("data-item-name") || "";
       const desc = card.getAttribute("data-item-desc") || "";
       const match = query === "" || name.includes(query) || desc.includes(query);
-      card.style.display = match ? "" : "none";
+      // The card markup sets display:flex inline — assigning "" DELETES that declaration and the
+    // card collapses to display:block, scrambling the grid until a later re-render. Restore the
+    // layout value explicitly. Same defect previously fixed in applySRSearch.
+    card.style.display = match ? "flex" : "none";
       if (match) visibleCount++;
     });
     totalVisible += visibleCount;
