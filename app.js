@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "4.022";
+const APP_VERSION = "4.023";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -719,7 +719,7 @@ function pokemonImgHTML(pkmn, size) {
   }
   if (pkmn.dynamax) {
     return `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0">
-      <img src="assets/pokemon-images/icons/dynamax-icon(white).webp" style="position:absolute;top:1px;right:1px;width:50%;height:50%;object-fit:contain;opacity:0.85;pointer-events:none" />
+      <img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:7%;left:50%;transform:translateX(-50%);width:64%;height:auto;object-fit:contain;opacity:0.9;pointer-events:none" />
       <img src="${pkmn.url}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
     </div>`;
   }
@@ -7226,7 +7226,7 @@ function renderCalendar(th) {
                   }
                   if (ev.type === "Max Battle") {
                     return `<div style="position:relative;width:32px;height:32px;flex-shrink:0">
-                      <img src="assets/pokemon-images/icons/dynamax-icon(white).webp" style="position:absolute;top:1px;right:1px;width:50%;height:50%;object-fit:contain;opacity:0.85;z-index:0;pointer-events:none" />
+                      <img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:7%;left:50%;transform:translateX(-50%);width:64%;height:auto;object-fit:contain;opacity:0.9;z-index:0;pointer-events:none" />
                       <img src="${ev.iconImg}" style="position:relative;width:100%;height:100%;object-fit:contain;border-radius:8px;z-index:1" />
                     </div>`;
                   }
@@ -7292,7 +7292,7 @@ function renderEventDetail(event, th) {
             }
             if (event.iconImg) {
               const shadowLayer = event.shadowBg ? `<img src="assets/pokemon-images/icons/shadow_icon.png" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;opacity:${darkMode ? 0.9 : 0.75};z-index:0" />` : "";
-              const dynamaxLayer = event.type === "Max Battle" ? `<img src="assets/pokemon-images/icons/dynamax-icon(white).webp" style="position:absolute;top:1px;right:1px;width:50%;height:50%;object-fit:contain;opacity:0.85;z-index:0;pointer-events:none" />` : "";
+              const dynamaxLayer = event.type === "Max Battle" ? `<img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:7%;left:50%;transform:translateX(-50%);width:64%;height:auto;object-fit:contain;opacity:0.9;z-index:0;pointer-events:none" />` : "";
               const zoomable = event.type === "GO Fest";
               const zoomAttrs = zoomable ? ` onclick="showFormModal(${jsAttr(event.iconImg)},${jsAttr(event.title)})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showFormModal(${jsAttr(event.iconImg)},${jsAttr(event.title)})}" role="button" tabindex="0" title="Tap to view full size" aria-label="View ${esc(event.title)} badge full size"` : "";
               const zoomHint = zoomable ? `<div style="position:absolute;bottom:2px;right:2px;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,0.55);display:flex;align-items:center;justify-content:center;z-index:3;pointer-events:none"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></div>` : "";
@@ -8044,7 +8044,7 @@ function renderEventCard(event, index, th) {
           </div>` : "";
           if (event.iconImg) {
             const shadowLayer = event.shadowBg ? `<img src="assets/pokemon-images/icons/shadow_icon.png" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;opacity:${darkMode ? 0.9 : 0.75};z-index:0" />` : "";
-            const dynamaxLayer = event.type === "Max Battle" ? `<img src="assets/pokemon-images/icons/dynamax-icon(white).webp" style="position:absolute;top:1px;right:1px;width:50%;height:50%;object-fit:contain;opacity:0.85;z-index:0;pointer-events:none" />` : "";
+            const dynamaxLayer = event.type === "Max Battle" ? `<img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:7%;left:50%;transform:translateX(-50%);width:64%;height:auto;object-fit:contain;opacity:0.9;z-index:0;pointer-events:none" />` : "";
             const imgStyle = event.wideIcon
               ? `width:100%;height:100%;object-fit:contain;position:relative;z-index:1`
               : `width:44px;height:44px;object-fit:contain;position:relative;z-index:1`;
@@ -8524,10 +8524,11 @@ async function openPokemonDetail(dexNum, preferredSlug) {
     state.pokedexDetailData = data;
     state.pokedexDetailEvolutions = evolutions;
     rawForms = (goIndex && goIndex[String(dexNum)]) || null;
-    // The top switcher shows real forms only — Normal, Shadow, Mega, regional, Gigantamax.
-    // Dynamax is excluded (it doesn't change appearance and has no distinct art, so it lives in
-    // the Family section below), as are the two Pikachu costumes.
-    const switcherForms = rawForms ? normalizeGoSwitcherForms(rawForms.filter(f => !f.dynamax && !GO_COSTUME_SLUGS.has(f.slug) && !GO_UNRELEASED_GIGANTAMAX.has(f.slug)), dexNum) : null;
+    // The top switcher shows real forms only — Normal, regional, Mega, Dynamax, Gigantamax,
+    // Shadow. Dynamax shares the base species art (goFormImg has no -dynamax branch), so its
+    // sprite card marks the form with the red Max-energy clouds instead. The two Pikachu costumes
+    // stay excluded.
+    const switcherForms = rawForms ? normalizeGoSwitcherForms(rawForms.filter(f => !GO_COSTUME_SLUGS.has(f.slug) && !GO_UNRELEASED_GIGANTAMAX.has(f.slug)), dexNum) : null;
     state.pokedexDetailGoForms = switcherForms && switcherForms.length > 0 ? switcherForms : null;
   } catch (err) { console.error("Failed to load Pokemon detail:", err); }
   render();
@@ -8805,13 +8806,15 @@ function normalizeGoSwitcherForms(forms, dexNum) {
   }
   tail.sort((a, b) => keys.indexOf(a._k) - keys.indexOf(b._k));
   // _index.json is ordered by slug, which alphabetises Gigantamax ahead of Mega. Impose the
-  // in-game reading order instead: base, then regional, other formes, Mega, Gigantamax, Shadow.
+  // in-game reading order instead: base, then regional, other formes, Mega, Dynamax,
+  // Gigantamax, Shadow.
   // Stable sort, so Unown's A-Z (all "other forme") keep their existing sequence and the two
   // symbol pills stay pinned to the tail.
   const rank = (f) => {
     const l = f.label || "";
     if (f.shadow || /^(Apex )?Shadow\b/i.test(l)) return 5;
     if (f.gigantamax || /^Gigantamax$/i.test(l)) return 4;
+    if (f.dynamax || /^Dynamax$/i.test(l)) return 3.5;
     if (f.mega || /^Mega\b/i.test(l)) return 3;
     if (/^(Alolan|Galarian|Hisuian|Paldean)$/i.test(l)) return 1;
     if (/^Normal$/i.test(l)) return 0;
@@ -9377,6 +9380,16 @@ function renderGoFamilyBody(familyEntries, go, primaryColor, th, isMobile) {
     const marker = markerFor(f);
     const markerSize = isMobile ? 18 : 20;
     const shinySize = isMobile ? 22 : 26;
+    const spriteBox = isMobile ? 54 : 60;
+    const spriteOnError = `if(!this.dataset.fb){this.dataset.fb='1';this.src='${baseSpriteSrc}';}`;
+    // Dynamax forms get the red Max-energy clouds hovering over the sprite's head, matching the
+    // Max Battle event cards and the Current Max Battles grid. The top-left corner marker stays.
+    const spriteEl = f.dynamax
+      ? `<div style="position:relative;width:${spriteBox}px;height:${spriteBox}px;flex-shrink:0">
+          <img src="assets/pokemon-images/icons/dynamax.png" alt="" style="position:absolute;top:7%;left:50%;transform:translateX(-50%);width:64%;height:auto;object-fit:contain;opacity:0.9;z-index:0;pointer-events:none" />
+          <img src="${spriteSrc}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="${spriteOnError}" />
+        </div>`
+      : `<img src="${spriteSrc}" style="width:${spriteBox}px;height:${spriteBox}px;object-fit:contain" onerror="${spriteOnError}" />`;
     const typeDots = (f.types || []).map(t => `<span title="${escAttr(t.charAt(0).toUpperCase() + t.slice(1))}" style="display:inline-block;width:11px;height:11px;border-radius:50%;background:${goTypeColor(t)};box-shadow:0 0 0 1.5px ${th.surface}"></span>`).join("");
     const shinyChip = shinyMap[f.slug] === true ? `<div style="display:flex;align-items:center;gap:4px;margin-top:3px;padding:2px 9px 2px 4px;border-radius:999px;background:${th.accentBgSubtle(primaryColor)};border:1px solid ${th.countdownBorder(primaryColor)}">
       <img src="${goFormImg(f.dexNum, f.slug, true)}" style="width:${shinySize}px;height:${shinySize}px;object-fit:contain" onerror="this.parentElement.style.display='none'" />
@@ -9385,7 +9398,7 @@ function renderGoFamilyBody(familyEntries, go, primaryColor, th, isMobile) {
     </div>` : "";
     return `<div onclick="selectGoFamilyMember(${f.dexNum},'${f.slug}')" style="cursor:pointer;position:relative;border-radius:12px;border:1.5px solid ${isActive ? primaryColor : th.border};background:${isActive ? th.accentBgSubtle(primaryColor) : th.surface};padding:${isMobile ? "10px 6px 8px" : "10px 8px 8px"};display:flex;flex-direction:column;align-items:center;gap:3px;transition:border-color 0.15s ease" onmouseenter="this.style.borderColor='${primaryColor}'" onmouseleave="this.style.borderColor='${isActive ? primaryColor : th.border}'">
       ${marker ? `<img src="${marker}" style="position:absolute;top:5px;left:5px;width:${markerSize}px;height:${markerSize}px;object-fit:contain;pointer-events:none" />` : ""}
-      <img src="${spriteSrc}" style="width:${isMobile ? 54 : 60}px;height:${isMobile ? 54 : 60}px;object-fit:contain" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='${baseSpriteSrc}';}" />
+      ${spriteEl}
       <div style="font-size:${isMobile ? 10.5 : 11.5}px;font-weight:700;color:${th.text};text-align:center;line-height:1.25;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(f.name)}</div>
       <div style="font-size:${isMobile ? 9 : 10}px;color:${th.textMuted}">#${String(f.dexNum).padStart(4, "0")}</div>
       <div style="display:flex;gap:3px;margin-top:1px">${typeDots}</div>
@@ -9406,8 +9419,14 @@ function renderGoCostumesBody(costumes, dexNum, primaryColor, th, isMobile) {
   const baseSpriteSrc = pokemonImgUrl(dexNum);
   const cards = costumes.map(c => {
     const spriteSrc = costumeDexImg(dexNum, c.id, c.folder);
-    const shinyChip = c.shiny === true ? `<div style="display:flex;align-items:center;gap:4px;margin-top:3px;padding:2px 9px 2px 4px;border-radius:999px;background:${th.accentBgSubtle(primaryColor)};border:1px solid ${th.countdownBorder(primaryColor)}">
-      <img src="${shinyCostumeDexImg(dexNum, c.id, c.folder)}" style="width:${shinySize}px;height:${shinySize}px;object-fit:contain" onerror="this.parentElement.style.display='none'" />
+    const shinySrc = shinyCostumeDexImg(dexNum, c.id, c.folder);
+    // The chip opens the SHINY sprite full size, not the card's regular one — so it needs its own
+    // handler plus stopPropagation, or the card's onclick underneath would win and show the
+    // regular sprite instead. Keyboard-reachable for the same reason the card is clickable at all.
+    const shinyLabel = `Shiny ${c.name || c.id}`;
+    const shinyOpen = `event.stopPropagation();showFormModal(${jsAttr(shinySrc)},${jsAttr(shinyLabel)})`;
+    const shinyChip = c.shiny === true ? `<div role="button" tabindex="0" aria-label="View ${escAttr(shinyLabel)} full size" title="Tap to view full size" onclick="${shinyOpen}" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();${shinyOpen}}" style="cursor:zoom-in;display:flex;align-items:center;gap:4px;margin-top:3px;padding:2px 9px 2px 4px;border-radius:999px;background:${th.accentBgSubtle(primaryColor)};border:1px solid ${th.countdownBorder(primaryColor)}">
+      <img src="${shinySrc}" style="width:${shinySize}px;height:${shinySize}px;object-fit:contain" onerror="this.parentElement.style.display='none'" />
       <img src="assets/pokemon-images/icons/shiny-sparkles.webp" alt="" aria-hidden="true" style="width:11px;height:11px;object-fit:contain" onerror="this.style.display='none'" />
       <span style="font-size:${isMobile ? 9.5 : 10.5}px;font-weight:700;color:${th.textSecondary}">Shiny</span>
     </div>` : "";
@@ -9582,6 +9601,12 @@ function renderGoImageCard(go, data, primaryColor, th, isMobile) {
   // loads, since artwork fills wildly different fractions of the sprite canvas per Pokemon (e.g.
   // Bulbasaur ~0.35 vs Ivysaur ~0.70) and a fixed percent can't frame both well.
   const isShadowForm = !!(go.forms && go.forms.isShadow);
+  // Dynamax reuses the base species art, so the form is only legible from the red Max-energy
+  // clouds drawn over the sprite's head — the same marker the Max Battle cards and the family
+  // grid use. Sits at z-index 1 (under the sprite's 2) so a tall Pokemon's head tucks in front of
+  // the clouds rather than being covered by them. Mutually exclusive with the Shadow aura.
+  const isDynamaxForm = !!(go.forms && go.forms.isDynamax);
+  const dynamaxCloudHtml = `<img src="assets/pokemon-images/icons/dynamax.png" alt="" aria-hidden="true" style="position:absolute;top:1%;left:50%;transform:translateX(-50%);width:56%;height:auto;object-fit:contain;opacity:0.9;z-index:1;pointer-events:none" onerror="this.style.display='none'" />`;
   const shadowAuraHtml = (boxPx) => `<img class="go-shadow-aura" data-box-px="${boxPx}" src="assets/pokemon-images/icons/shadow_icon.png" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:95%;height:95%;object-fit:contain;opacity:1;z-index:1;pointer-events:none;filter:saturate(1.3) contrast(1.2)" onerror="this.style.display='none'" />`;
   const weatherIconsHtml = renderWeatherIcons(go.types, th, isMobile);
 
@@ -9601,6 +9626,7 @@ function renderGoImageCard(go, data, primaryColor, th, isMobile) {
     <div style="position:relative;width:${pairBox}px;height:${pairBox}px;overflow:visible">
       ${sparkle ? sparkleHtml : ""}
       ${isShadowForm ? shadowAuraHtml(pairBox) : ""}
+      ${isDynamaxForm ? dynamaxCloudHtml : ""}
       <img data-pair-sprite="1" onclick="showFormModal(${jsAttr(src)},${jsAttr(label)})" src="${src}" style="position:relative;width:100%;height:100%;object-fit:contain;filter:${glow};cursor:pointer;z-index:2" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='${baseSrc}';}${hideOnDoubleFail ? "else{this.parentElement.parentElement.style.display='none';}" : ""}" onload="applyPairSpriteScale(this)" />
     </div>
     <div style="font-size:${isMobile ? 9 : 10}px;font-weight:600;color:${th.textMuted}">${caption}</div>
@@ -10613,7 +10639,7 @@ function renderWeekDigest(th, isMobile) {
 
       let iconHTML;
       if (ev.type === "Max Battle" && ev.iconImg) {
-        iconHTML = `<div style="position:relative;width:32px;height:32px;flex-shrink:0"><img src="assets/pokemon-images/icons/dynamax-icon(white).webp" style="position:absolute;top:1px;right:1px;width:50%;height:50%;object-fit:contain;opacity:0.85;z-index:0;pointer-events:none" /><img src="${ev.iconImg}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" /></div>`;
+        iconHTML = `<div style="position:relative;width:32px;height:32px;flex-shrink:0"><img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:7%;left:50%;transform:translateX(-50%);width:64%;height:auto;object-fit:contain;opacity:0.9;z-index:0;pointer-events:none" /><img src="${ev.iconImg}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" /></div>`;
       } else if (ev.iconImg) {
         iconHTML = `<img src="${ev.iconImg}" style="width:32px;height:32px;object-fit:contain;flex-shrink:0" onerror="this.outerHTML='<span style=\\'font-size:22px\\'>${ev.icon || pillIconFor(ev)}</span>'" />`;
       } else {
@@ -10751,7 +10777,7 @@ function render() {
             if (ev.type === "Max Battle" && ev.iconImg) {
               const size = isMobile ? 36 : 34;
               return `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0">
-                <img src="assets/pokemon-images/icons/dynamax-icon(white).webp" style="position:absolute;top:1px;right:1px;width:50%;height:50%;object-fit:contain;opacity:0.85;z-index:0;pointer-events:none" />
+                <img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:7%;left:50%;transform:translateX(-50%);width:64%;height:auto;object-fit:contain;opacity:0.9;z-index:0;pointer-events:none" />
                 <img src="${ev.iconImg}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
               </div>`;
             }
@@ -10773,7 +10799,7 @@ function render() {
           <img src="${src}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
         </div>`;
       const dynamaxWrap = (src, size, imgSize) => `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0">
-          <img src="assets/pokemon-images/icons/dynamax-icon(white).webp" style="position:absolute;top:1px;right:1px;width:50%;height:50%;object-fit:contain;opacity:0.85;z-index:0;pointer-events:none" />
+          <img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:7%;left:50%;transform:translateX(-50%);width:64%;height:auto;object-fit:contain;opacity:0.9;z-index:0;pointer-events:none" />
           <img src="${src}" style="position:relative;width:${imgSize}px;height:${imgSize}px;object-fit:contain;z-index:1;display:block;margin:0 auto" onerror="this.parentElement.style.display='none'" />
         </div>`;
       const compactIcon = (() => {
@@ -10837,7 +10863,7 @@ function render() {
             if (hero.type === "Max Battle" && hero.iconImg) {
               const size = isMobile ? 36 : 34;
               return `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0">
-                <img src="assets/pokemon-images/icons/dynamax-icon(white).webp" style="position:absolute;top:1px;right:1px;width:50%;height:50%;object-fit:contain;opacity:0.85;z-index:0;pointer-events:none" />
+                <img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:7%;left:50%;transform:translateX(-50%);width:64%;height:auto;object-fit:contain;opacity:0.9;z-index:0;pointer-events:none" />
                 <img src="${hero.iconImg}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
               </div>`;
             }
@@ -10854,7 +10880,7 @@ function render() {
           <img src="${src}" style="position:relative;width:100%;height:100%;object-fit:contain;z-index:1" onerror="this.parentElement.style.display='none'" />
         </div>`;
       const heroDynamaxWrap = (src, size, imgSize) => `<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0">
-          <img src="assets/pokemon-images/icons/dynamax-icon(white).webp" style="position:absolute;top:1px;right:1px;width:50%;height:50%;object-fit:contain;opacity:0.85;z-index:0;pointer-events:none" />
+          <img src="assets/pokemon-images/icons/dynamax.png" style="position:absolute;top:7%;left:50%;transform:translateX(-50%);width:64%;height:auto;object-fit:contain;opacity:0.9;z-index:0;pointer-events:none" />
           <img src="${src}" style="position:relative;width:${imgSize}px;height:${imgSize}px;object-fit:contain;z-index:1;display:block;margin:0 auto" onerror="this.parentElement.style.display='none'" />
         </div>`;
       const compactHeroIcon = (() => {

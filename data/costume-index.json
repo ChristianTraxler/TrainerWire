@@ -390,6 +390,11 @@
 "id": "c11",
 "name": "Party hat",
 "shiny": true
+},
+{
+"id": "c14",
+"name": "Pikachu visor",
+"shiny": true
 }
 ],
 "20": [
@@ -1053,6 +1058,16 @@
 "id": "c11",
 "name": "Party hat",
 "shiny": true
+},
+{
+"id": "c14",
+"name": "Pikachu visor",
+"shiny": true
+},
+{
+"id": "f950",
+"name": "Clone",
+"shiny": false
 }
 ],
 "302": [
@@ -1193,7 +1208,7 @@
 },
 {
 "id": "c14",
-"name": "Pikavisor",
+"name": "Pikachu visor",
 "shiny": true
 },
 {
@@ -1338,6 +1353,11 @@
 "id": "c11",
 "name": "Party hat",
 "shiny": true
+},
+{
+"id": "c14",
+"name": "Pikachu visor",
+"shiny": true
 }
 ],
 "50": [
@@ -1413,6 +1433,16 @@
 "id": "c11",
 "name": "Party hat",
 "shiny": true
+},
+{
+"id": "c14",
+"name": "Pikachu visor",
+"shiny": true
+},
+{
+"id": "f951",
+"name": "Clone",
+"shiny": false
 }
 ],
 "613": [
@@ -1458,7 +1488,7 @@
 },
 {
 "id": "c14",
-"name": "Pikavisor",
+"name": "Pikachu visor",
 "shiny": true
 },
 {
@@ -1640,6 +1670,11 @@
 "shiny": true
 },
 {
+"id": "c14",
+"name": "Pikachu visor",
+"shiny": true
+},
+{
 "id": "c5",
 "name": "Sunglasses",
 "shiny": true
@@ -1694,9 +1729,19 @@
 "shiny": true
 },
 {
+"id": "c14",
+"name": "Pikachu visor",
+"shiny": true
+},
+{
 "id": "c5",
 "name": "Sunglasses",
 "shiny": true
+},
+{
+"id": "f952",
+"name": "Clone",
+"shiny": false
 }
 ],
 "901": [
