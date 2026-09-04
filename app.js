@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "4.028";
+const APP_VERSION = "4.029";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -101,6 +101,7 @@ const MEGA_EVOS = {
   9:[{n:"Mega Blastoise",f:"0009_mega"}],
   15:[{n:"Mega Beedrill",f:"0015_mega"}],
   18:[{n:"Mega Pidgeot",f:"0018_mega"}],
+  26:[{n:"Mega Raichu X",f:"0026_megax"},{n:"Mega Raichu Y",f:"0026_megay"}],
   65:[{n:"Mega Alakazam",f:"0065_mega"}],
   71:[{n:"Mega Victreebel",f:"0071_mega"}],
   80:[{n:"Mega Slowbro",f:"0080_mega"}],
@@ -9824,8 +9825,16 @@ function renderGoFamilyBody(familyEntries, go, primaryColor, th, isMobile) {
         ? `<img src="${icon}" alt="${label}" title="${label}" style="width:${typeIconPx}px;height:${typeIconPx}px;object-fit:contain;display:block" onerror="this.style.display='none'" />`
         : `<span title="${label}" style="display:inline-block;width:11px;height:11px;border-radius:50%;background:${goTypeColor(t)};box-shadow:0 0 0 1.5px ${th.surface}"></span>`;
     }).join("");
-    const shinyChip = shinyMap[f.slug] === true ? `<div style="display:flex;align-items:center;gap:4px;margin-top:3px;padding:2px 9px 2px 4px;border-radius:999px;background:${th.accentBgSubtle(primaryColor)};border:1px solid ${th.countdownBorder(primaryColor)}">
-      <img src="${goFormImg(f.dexNum, f.slug, true)}" style="width:${shinySize}px;height:${shinySize}px;object-fit:contain" onerror="this.parentElement.style.display='none'" />
+    // The chip opens the SHINY sprite full size, not the card's regular one — same idiom as
+    // renderGoCostumesBody's shinyChip below: its own handler plus stopPropagation, or the card's
+    // onclick underneath would win and navigate to that family member instead of showing the
+    // shiny. Keyboard-reachable for the same reason. goFormImg(..., true) resolves the correct
+    // shiny art for every branch (Mega/regional/Gigantamax/gender/etc), not just base species.
+    const shinyUrl = goFormImg(f.dexNum, f.slug, true);
+    const shinyLabel = `Shiny ${f.name}`;
+    const shinyOpen = `event.stopPropagation();showFormModal(${jsAttr(shinyUrl)},${jsAttr(shinyLabel)})`;
+    const shinyChip = shinyMap[f.slug] === true ? `<div role="button" tabindex="0" aria-label="View ${escAttr(shinyLabel)} full size" title="Tap to view full size" onclick="${shinyOpen}" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();${shinyOpen}}" style="cursor:zoom-in;display:flex;align-items:center;gap:4px;margin-top:3px;padding:2px 9px 2px 4px;border-radius:999px;background:${th.accentBgSubtle(primaryColor)};border:1px solid ${th.countdownBorder(primaryColor)}">
+      <img src="${shinyUrl}" style="width:${shinySize}px;height:${shinySize}px;object-fit:contain" onerror="this.parentElement.style.display='none'" />
       <img src="assets/pokemon-images/icons/shiny-sparkles.webp" alt="" aria-hidden="true" style="width:11px;height:11px;object-fit:contain" onerror="this.style.display='none'" />
       <span style="font-size:${isMobile ? 9.5 : 10.5}px;font-weight:700;color:${th.textSecondary}">Shiny</span>
     </div>` : "";
@@ -12394,7 +12403,7 @@ function render() {
               <input id="special-research-search" placeholder="Search research, Pokémon, or tasks..." oninput="searchSpecialResearch(this.value)" autocomplete="off" value="${escAttr(_srSearch)}" style="width:100%;padding:${isMobile ? "12px 14px 12px 40px" : "14px 16px 14px 44px"};border-radius:14px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:${isMobile ? 14 : 15}px;font-family:inherit;outline:none;box-sizing:border-box" />
               <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;pointer-events:none">🔍</span>
             </div>
-            <select onchange="setSpecialResearchSort(this.value)" style="padding:${isMobile ? "10px 12px" : "11px 14px"};border-radius:12px;border:1.5px solid ${th.border};background:${th.surface};color:${th.text};font-size:${isMobile ? 12 : 13}px;font-weight:600;font-family:inherit;outline:none;cursor:pointer;appearance:auto">
+            <select onchange="setSpecialResearchSort(this.value)" style="padding:${isMobile ? "10px 12px" : "11px 14px"};border-radius:12px;border:1.5px solid ${th.border};background-color:${th.surface};color:${th.text};font-size:${isMobile ? 12 : 13}px;font-weight:600;font-family:inherit;outline:none;cursor:pointer;appearance:none;-webkit-appearance:none;-moz-appearance:none;background-image:url('data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="${th.text}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`)}');background-repeat:no-repeat;background-position:right 12px center;background-size:14px;padding-right:34px">
               <option value="newest" ${_srSort === "newest" ? "selected" : ""}>Newest</option>
               <option value="oldest" ${_srSort === "oldest" ? "selected" : ""}>Oldest</option>
               <option value="az" ${_srSort === "az" ? "selected" : ""}>A–Z</option>
@@ -12466,7 +12475,7 @@ function render() {
                   transform = "scale(1.45)";
                 }
               }
-              iconHTML = `<span style="width:${slot}px;height:${slot}px;border-radius:50%;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0"><img src="${escAttr(icon.url)}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block;transform:${transform}" onerror="this.style.display='none'" /></span>`;
+              iconHTML = `<span style="width:${slot}px;height:${slot}px;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0"><img src="${escAttr(icon.url)}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block;transform:${transform}" onerror="this.style.display='none'" /></span>`;
             }
             return `${iconHTML}<span>${esc(fmtSRReward(r))}</span>`;
           };
