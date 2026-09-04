@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "4.029";
+const APP_VERSION = "4.030";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -2682,7 +2682,7 @@ const CURRENT_RAID_BOSSES = {
     "Regirock (5\u2605 Raid) \u2728","Regice (5\u2605 Raid) \u2728","Registeel (5\u2605 Raid) \u2728"
   ],
   "Mega Raids": [
-    "Mega Starmie (Mega) \u2728"
+    "Mega Raichu X (Mega) \u2728","Mega Raichu Y (Mega) \u2728"
   ],
   "Shadow 1-Star Raids": [
     "Shadow Slowpoke (1\u2605 Shadow Raid) \u2728","Shadow Aipom (1\u2605 Shadow Raid) \u2728","Shadow Croagunk (1\u2605 Shadow Raid) \u2728","Shadow Grubbin (1\u2605 Shadow Raid) \u2728"
@@ -11614,7 +11614,7 @@ function render() {
       });
       raidsTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
         <div style="text-align:center;padding:10px;font-size:14px;font-weight:600;color:${th.text};position:relative">
-          <div style="${isMobile ? "position:static;margin:0 0 10px" : "position:absolute;top:14px;right:16px"};font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on September 3, 2026 at 2:05 pm</div>
+          <div style="${isMobile ? "position:static;margin:0 0 10px" : "position:absolute;top:14px;right:16px"};font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on September 4, 2026 at 2:01 pm</div>
           Current Raid Bosses</div>
         <div style="text-align:center;font-size:11px;color:${th.textMuted};font-weight:500;margin-top:-10px">Data sourced from Pok\u00E9monGO.com, LeekDuck.com & Pok\u00E9monGOHUB.net</div>
         <div style="text-align:center;font-size:12px;color:${th.textMuted};font-weight:600;margin-top:2px">Tap a Pok\u00E9mon to see its weaknesses & resistances</div>
