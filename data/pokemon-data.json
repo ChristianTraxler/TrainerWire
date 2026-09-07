@@ -185,6 +185,12 @@
    "Bug"
   ]
  },
+ "Applin": {
+  "types": [
+   "Grass",
+   "Dragon"
+  ]
+ },
  "Aqua Paldean Tauros": {
   "types": [
    "Fighting",
@@ -747,6 +753,12 @@
   "cp": "727–779",
   "cpBoost": "908–974",
   "weather": "Windy"
+ },
+ "Cottonee": {
+  "types": [
+   "Grass",
+   "Fairy"
+  ]
  },
  "Cramorant": {
   "types": [
@@ -2730,8 +2742,8 @@
    "Water",
    "Dark"
   ],
-  "cp": "2597–2695",
-  "cpBoost": "3247–3369",
+  "cp": "1855–1937",
+  "cpBoost": "2319–2422",
   "weather": "Rainy or Windy"
  },
  "Mega Heracross": {
@@ -4445,6 +4457,12 @@
  "Slugma": {
   "types": [
    "Fire"
+  ]
+ },
+ "Smoliv": {
+  "types": [
+   "Grass",
+   "Normal"
   ]
  },
  "Smoochum": {
