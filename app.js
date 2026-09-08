@@ -12204,7 +12204,7 @@ function render() {
         </a>
         <a href="https://godex.site" target="_blank" rel="noopener noreferrer" style="display:flex;${isMobile ? "flex-direction:column" : "flex-direction:row;align-items:center"};gap:${isMobile ? 16 : 20}px;padding:${isMobile ? "20px 18px" : "24px 28px"};background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;text-decoration:none;transition:all 0.25s ease;box-shadow:${th.shadow}" onmouseenter="this.style.borderColor='#2ECC71';this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 25px rgba(46,204,113,0.15)'" onmouseleave="this.style.borderColor='${th.border}';this.style.transform='translateY(0)';this.style.boxShadow='${th.shadow}'">
           <div style="width:${isMobile ? "100%" : "80px"};display:flex;${isMobile ? "justify-content:center" : "justify-content:center;flex-shrink:0"}">
-            <img src="https://godex.site/images/icons/android-icon-192x192.webp" style="width:${isMobile ? 64 : 72}px;height:${isMobile ? 64 : 72}px;border-radius:18px;object-fit:contain" alt="GOdex" />
+            <img src="assets/godex-icon.webp" style="width:${isMobile ? 64 : 72}px;height:${isMobile ? 64 : 72}px;border-radius:18px;object-fit:contain" alt="GOdex" />
           </div>
           <div style="flex:1;${isMobile ? "text-align:center" : ""}">
             <div style="display:flex;align-items:center;gap:8px;${isMobile ? "justify-content:center" : ""}">
@@ -12224,7 +12224,7 @@ function render() {
         </a>
         <div style="display:flex;${isMobile ? "flex-direction:column" : "flex-direction:row;align-items:center"};gap:${isMobile ? 16 : 20}px;padding:${isMobile ? "20px 18px" : "24px 28px"};background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;transition:all 0.25s ease;box-shadow:${th.shadow}" onmouseenter="this.style.borderColor='#3498DB';this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 25px rgba(52,152,219,0.15)'" onmouseleave="this.style.borderColor='${th.border}';this.style.transform='translateY(0)';this.style.boxShadow='${th.shadow}'">
           <div style="width:${isMobile ? "100%" : "80px"};display:flex;${isMobile ? "justify-content:center" : "justify-content:center;flex-shrink:0"}">
-            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/33/3c/86/333c86bf-3564-63d9-06e6-8f6b73687377/AppIcon-0-0-1x_U007emarketing-0-5-85-220.png/512x512bb.jpg" style="width:${isMobile ? 64 : 72}px;height:${isMobile ? 64 : 72}px;border-radius:18px;object-fit:contain" alt="Poke Genie" />
+            <img src="assets/pokegenie-icon.jpg" style="width:${isMobile ? 64 : 72}px;height:${isMobile ? 64 : 72}px;border-radius:18px;object-fit:contain" alt="Poke Genie" />
           </div>
           <div style="flex:1;${isMobile ? "text-align:center" : ""}">
             <div style="display:flex;align-items:center;gap:8px;${isMobile ? "justify-content:center" : ""}">
