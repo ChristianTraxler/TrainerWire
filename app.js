@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "4.032";
+const APP_VERSION = "4.033";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -1566,7 +1566,7 @@ const EVENTS = [
   { id: 27, title: "5★ Raid: Tapu Bulu", type: "Raid", date: "2026-05-20", endDate: "2026-05-26", updated: "2026-05-20", time: "Raid Hour: Wed May 20, 6–7 PM", color: "#27AE60", icon: "🌿", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-7_Alola/0787.webp", featured: false, summary: "Tapu Bulu in 5-Star Raids — the Land Spirit Pokémon of Ula'ula Island. Grass/Fairy. Mega Altaria in Mega Raids. Shadow Cresselia weekends.", details: { bosses: ["Tapu Bulu (5★)", "Mega Altaria (Mega)", "Shadow Cresselia (weekends)"], groupSize: [{ bossName: "Tapu Bulu", tier: "5-Star Raid", minimum: 2, optimalMin: 3, optimalMax: 4, easyAt: 5, greenAt: 5 }, { bossName: "Mega Altaria", tier: "Mega Raid", minimum: 2, optimalMin: 4, optimalMax: 6, easyAt: 7, greenAt: 5 }, { bossName: "Shadow Cresselia", tier: "5★ Shadow Raid", minimum: 4, optimalMin: 6, optimalMax: 10, easyAt: 11, greenAt: 11 }], bonuses: ["Raid Hour: Wednesday May 20, 6–7 PM", "Mega Altaria in Mega Raids", "Shadow Cresselia in 5★ Shadow Raids on weekends"], tips: ["Weak to Poison, Steel, Fire, Ice, Flying.", "Shiny Tapu Bulu is available.", "Strong PvP pick in Master League with Grass Knot + Megahorn.", "Mega Altaria is a strong Dragon/Fairy PvP & PvE pick — boosted by Windy or Cloudy.", "Shadow Cresselia on weekends — bring Purified Gems."], counters: [{ label: "Tapu Bulu (Grass/Fairy)", pokemon: [{ name: "Mega Beedrill", fast: "Poison Jab", charged: "Sludge Bomb" }, { name: "Eternatus", fast: "Poison Jab", charged: "Sludge Bomb" }, { name: "Mega Gengar", fast: "Lick", charged: "Sludge Bomb" }, { name: "Mega Rayquaza", fast: "Air Slash", charged: "Dragon Ascent", chargedNote: "Signature" }, { name: "Mega Victreebel", fast: "Acid", charged: "Sludge Bomb" }, { name: "Nihilego", fast: "Poison Jab", charged: "Sludge Bomb" }] }, { label: "Shadow Cresselia (Psychic)", pokemon: [{ name: "Dawn Wings Necrozma", fast: "Shadow Claw", charged: "Moongeist Beam", chargedNote: "Signature" }, { name: "Mega Gengar", fast: "Lick", charged: "Shadow Ball" }, { name: "Mega Tyranitar", fast: "Bite", charged: "Brutal Swing" }, { name: "Shadow Darkrai", fast: "Snarl", charged: "Shadow Ball" }, { name: "Shadow Tyranitar", fast: "Bite", charged: "Brutal Swing" }, { name: "Shadow Chandelure", fast: "Hex", charged: "Shadow Ball" }] }] } },
   { id: 28, title: "5★ Raid: Tapu Fini", type: "Raid", date: "2026-05-27", endDate: "2026-06-02", updated: "2026-05-26", time: "Raid Hour: Wed May 27, 6–7 PM", color: "#3498DB", icon: "🌊", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-7_Alola/0788.webp", featured: false, summary: "Tapu Fini closes out May — the Land Spirit Pokémon of Poni Island. Water/Fairy. Final week for Shadow Cresselia.", details: { bosses: ["Tapu Fini (5★)", "Shadow Cresselia (final weekend)"], groupSize: [{ bossName: "Tapu Fini", tier: "5-Star Raid", minimum: 3, optimalMin: 5, optimalMax: 8, easyAt: 9, greenAt: 9 }, { bossName: "Shadow Cresselia", tier: "5★ Shadow Raid", minimum: 4, optimalMin: 6, optimalMax: 10, easyAt: 11, greenAt: 11 }], bonuses: ["Raid Hour: Wednesday May 27, 6–7 PM", "Last weekend for Shadow Cresselia — leaves June 2"], tips: ["Weak to Grass, Electric, Poison.", "Shiny Tapu Fini is available.", "Bulky PvP pick — strong in Ultra and Master League with Surf + Moonblast.", "Final weekend for Shadow Cresselia — get raids in before June 2."], counters: [{ label: "Tapu Fini (Water/Fairy)", pokemon: [{ name: "Shadow Thundurus (Therian Forme)", fast: "Volt Switch", charged: "Wildbolt Storm", chargedNote: "Signature" }, { name: "Mega Sceptile", fast: "Bullet Seed", charged: "Frenzy Plant", chargedNote: "CD Exclusive" }, { name: "Kartana", fast: "Razor Leaf", charged: "Leaf Blade" }, { name: "Mega Gengar", fast: "Lick", charged: "Sludge Bomb" }, { name: "Regieleki", fast: "Lock-On", charged: "Thunder Cage", chargedNote: "Signature" }, { name: "Shadow Raikou", fast: "Thunder Shock", charged: "Wild Charge" }] }, { label: "Shadow Cresselia (Psychic)", pokemon: [{ name: "Dawn Wings Necrozma", fast: "Shadow Claw", charged: "Moongeist Beam", chargedNote: "Signature" }, { name: "Mega Gengar", fast: "Lick", charged: "Shadow Ball" }, { name: "Mega Tyranitar", fast: "Bite", charged: "Brutal Swing" }, { name: "Shadow Darkrai", fast: "Snarl", charged: "Shadow Ball" }, { name: "Shadow Tyranitar", fast: "Bite", charged: "Brutal Swing" }, { name: "Shadow Chandelure", fast: "Hex", charged: "Shadow Ball" }] }] } },
   { id: 160, title: "Season: Twilight Trails", type: "Event", url: "https://pokemongo.com/en/seasons/twilight-trails", date: "2026-09-08", endDate: "2026-12-01", time: "10:00 AM", endHour: 10, endMin: 0, published: "2026-08-25", updated: "2026-09-07", lastUpdated: "September 7, 2026 at 5:22 PM", whenText: "Tuesday, September 8, 2026, at 10:00 a.m. to Tuesday, December 1, 2026, at 10:00 a.m. local time", color: "#6C5CE7", icon: "🌆", iconImg: "assets/pokemon-images/Seasons/twilight-trails.webp", wideIcon: true, featured: true, summary: "Pokémon GO's next season — Twilight Trails — runs September 8 to December 1, 2026. Maschiff and Mabosstiff lead a new wave of Paldea debuts, while Mega Staraptor and Mega Chandelure make their Mega Evolution debuts as Pokémon GO Fest 2026: Mega Finale gives way to a new trail. Dynamax Rhyhorn, Sneasel, and Sizzlipede join Max Battles at Power Spots, with Uxie, Mesprit, and Azelf headlining a dedicated Max Battle Day. Three Community Days (September 12, October 10, November 21) and a new GO Pass round out the Season.", details: { bossesTitle: "Max Pokémon Debuts", bosses: ["Dynamax Rhyhorn (Power Spots)", "Dynamax Sneasel (Power Spots)", "Dynamax Sizzlipede (Power Spots)", "Dynamax Uxie (Max Battle Day)", "Dynamax Mesprit (Max Battle Day)", "Dynamax Azelf (Max Battle Day)"], bonuses: ["Three Community Days: September 12 (September Community Day Classic), October 10 (October Community Day), November 21 (November Community Day)", "Mega Evolution debuts: Mega Staraptor and Mega Chandelure, as Pokémon GO Fest 2026: Mega Finale gives way to Twilight Trails", "More Paldea Pokémon debut, led by Maschiff and Mabosstiff", "GO Pass and GO Pass Deluxe available — complete Pass Tasks to earn GO Points, increase your rank, and earn rewards", "Research Breakthrough rotates through a variety of Season-themed Pokémon encounters", "New boxes rotate through the Pokémon GO Web Store throughout the Season", "Each Egg pool listed below also includes further unannounced Pokémon (\"And more!\")"], seasonBonuses: ["Once unlocked, these Major Milestone bonuses last until the current GO Pass ends", "Rank 1 (Tier 1) — Trainers level 31 and above receive one guaranteed Candy XL when trading Pokémon, plus one additional Candy for trading Pokémon", "Rank 25 (Tier 2) — Increased limits on opening Gifts, receiving Gifts from PokéStop and Gym Photo Discs, and storing Gifts", "Rank 50 (Tier 3) — 2x Daily Adventure Incense duration", "Rank 75 (Tier 4) — Increased XP and Stardust from hatching Eggs"], eggLabel: "2 km Eggs", eggs: ["Elekid ✨", "Magby ✨", "Azurill ✨"], seasonEggPools: [{ label: "5 km Eggs", items: ["Munchlax ✨", "Sizzlipede ✨", "Fidough ✨"] }, { label: "5 km Adventure Sync Rewards", items: ["Tyrogue ✨", "Sableye ✨", "Budew ✨"] }, { label: "7 km Eggs", items: ["Galarian Meowth ✨", "Galarian Zigzagoon ✨", "Galarian Stunfisk ✨"] }, { label: "7 km Eggs from Mateo's Gift Exchange", items: ["Galarian Slowpoke ✨", "Hisuian Sneasel ✨", "Galarian Corsola ✨"] }, { label: "10 km Eggs", items: ["Dratini ✨", "Honedge ✨", "Impidimp ✨"] }, { label: "10 km Adventure Sync Rewards", items: ["Bagon ✨", "Druddigon ✨", "Drampa ✨"] }], tips: ["Maschiff and Mabosstiff are pure Dark type Pokémon making their Paldea debut this Season.", "Uxie, Mesprit, and Azelf — the Max Battle Day trio — are all pure Psychic type.", "Every Egg pool Pokémon listed for Twilight Trails can be Shiny, including the Adventure Sync and Mateo's Gift Exchange rewards.", "Mateo's Gift Exchange 7 km Eggs are separate from regular 7 km Eggs — keep gifting daily to access them.", "Stockpile Staraptor and Chandelure Mega Energy ahead of time so you're ready the moment their Mega Evolutions debut.", "Mark your calendar for all three Community Days: September 12, October 10, and November 21."], relatedNews: [{ id: 42, label: "Twilight Trails Season — September 8 to December 1", icon: "🌆" }] } },
-  { id: 80, title: "Season: Forever Forward", type: "Event", url: "https://pokemongo.com/en/seasons/forever-forward", date: "2026-06-02", endDate: "2026-09-08", published: "2026-05-26", updated: "2026-06-10", time: "10:00 AM", endHour: 10, endMin: 0, color: "#1ABC9C", icon: "\uD83C\uDF1F", featured: true, summary: "Pok\u00E9mon GO's next season \u2014 June 2 to September 8, 2026. Mewtwo, Zeraora, and Mega Mewtwo X & Y headline GO Fest 2026. Daily Discoveries shift to Scenic Sunday, Max Monday, and Showcase Tuesday (Spotlight Hour now returns Thursdays 6\u20137 PM). New Choose Your Path Timed Research runs on non-event weeks. Three Community Days (June 20 Frigibax, July 4, August 16), refreshed eggs, Research Breakthrough rotation, and new Dynamax debuts.", details: { bossesTitle: "Max Pok\u00e9mon Debuts", bosses: ["Dynamax Electabuzz (Power Spots)", "Dynamax Magikarp (Power Spots)", "Dynamax Feebas (Power Spots)", "Dragonite \u2728 (Research Breakthrough)", "Axew \u2728 (Research Breakthrough)", "Honedge \u2728 (Research Breakthrough)", "Jangmo-o \u2728 (Research Breakthrough)", "Indeedee \u2728 (Research Breakthrough)", "Klawf (Research Breakthrough)"], bonuses: ["Three Community Days: June 20 (Frigibax), July 4 (Sobble), August 16 (TBA)", "GO Fest 2026 Tokyo / Chicago / Copenhagen / Global", "Free Zeraora Special Research at GO Fest 2026: Global (non-expiring)", "Rotating Web Store boxes throughout the season", "Themed stickers from Pok\u00E9Stops, Gifts, and the in-game shop", "Routes feature with Buddy Pok\u00E9mon exploration", "Mateo's Gift Exchange 7 km Eggs"], seasonBonuses: ["Scenic Sunday \u2014 more wild Pok\u00E9mon, more Pok\u00E9mon on Routes, Incense attracts even more on Routes, reduced Buddy Candy distance on Routes, encounter Mateo up to 3\u00D7 daily", "Max Monday \u2014 1 Rare Candy XL per in-person Max Battle, frequent Power Spot refreshes, additional active Power Spots, rotating Dynamax battles (6 AM \u2013 9 PM)", "Showcase Tuesday \u2014 enter up to 5 Pok\u00E9Stop Showcases", "Raid Hour Wednesday \u2014 1 Rare Candy XL per in-person Raid Battle, 6 PM \u2013 7 PM (featured 5\u2605 boss)", "GO Battle Thursday & Spotlight Hour \u2014 Spotlight Hour returns 6\u20137 PM, up to 10 sets daily (50 battles), 4\u00D7 Stardust from wins", "Friendship Friday \u2014 2 Special Trades, Lucky boost, \u221210% Stardust trade cost"], dailyDiscoveries: [{ day: "Sunday", name: "Scenic Sunday", icon: "\uD83C\uDF04", color: "#16A085", desc: "More Pok\u00E9mon will appear in the wild. More Pok\u00E9mon will appear while following a Route, and Incense will attract even more on Routes. Reduced Buddy Candy distance on Routes. Encounter Mateo up to three times daily." }, { day: "Monday", name: "Max Monday", icon: "\u26A1", color: "#F39C12", desc: "One Rare Candy XL for completing in-person Max Battles. Power Spots refresh more frequently with additional active locations. Max Battles rotate featured Dynamax Pok\u00E9mon.", time: "Max Monday: 6:00 AM \u2013 9:00 PM" }, { day: "Tuesday", name: "Showcase Tuesday", icon: "\uD83C\uDFC6", color: "#3498DB", desc: "Trainers can enter up to five Pok\u00E9Stop Showcases on Tuesdays, and more Pok\u00E9Stops may host Showcases.", time: "10:00 AM \u2013 8:00 PM" }, { day: "Wednesday", name: "Raid Hour", icon: "\u2694\uFE0F", color: "#9B59B6", desc: "One Rare Candy XL for completing in-person Raid Battles. Raid Bosses for five-star raids and Mega Raids rotate at the start of each day each week. Raid Hours feature the five-star Raid Boss.", time: "6:00 PM \u2013 7:00 PM" }, { day: "Thursday", name: "GO Battle Thursday & Spotlight Hour", icon: "\uD83E\uDD4A", color: "#E67E22", desc: "Spotlight Hour returns from 6:00\u20137:00 PM local time. Up to 4\u00D7 Stardust from win rewards and 10 sets daily (50 battles total) instead of the usual 5.", time: "Spotlight Hour: 6:00 PM \u2013 7:00 PM" }, { day: "Friday", name: "Friendship Friday", icon: "\uD83E\uDD1D", color: "#2ECC71", desc: "2 Special Trades allowed, increased Lucky Trade chances, \u221210% Stardust trade cost, 2 guaranteed Candy XL from trades (level 31+)." }], eggLabel: "2 km Eggs", eggs: ["Exeggcute \u2728", "Corphish \u2728", "Wynaut \u2728"], seasonEggPools: [{ label: "5 km Eggs", items: ["Riolu \u2728", "Mantyke \u2728", "Flittle"] }, { label: "7 km Eggs", items: ["Alolan Diglett \u2728", "Galarian Corsola \u2728", "Galarian Darumaka \u2728"] }, { label: "7 km Eggs from Mateo's Gift Exchange", items: ["Hisuian Growlithe \u2728", "Hisuian Sneasel \u2728", "White-Striped Form Basculin \u2728"] }, { label: "10 km Eggs", items: ["Mawile \u2728", "Absol \u2728", "Frigibax \u2728"] }, { label: "5 km Adventure Sync Rewards", items: ["Tyrogue \u2728", "Sableye \u2728", "Budew \u2728"] }, { label: "10 km Adventure Sync Rewards", items: ["Bagon \u2728", "Druddigon \u2728", "Drampa \u2728"] }], tips: ["Mega Mewtwo X & Y debut at GO Fest 2026 \u2014 stockpile Mewtwo Mega Energy now (it converts to both forms).", "Scenic Sunday makes Routes essential \u2014 load up Routes with Buddies before the season starts.", "Research Breakthrough cycles through Dragonite, Axew, Honedge, Jangmo-o, Indeedee, and Klawf \u2014 claim weekly.", "Mateo's Gift Exchange 7 km Eggs are separate from regular 7 km Eggs.", "Three Community Days: June 20 (Frigibax), July 4 (Sobble), August 16 (fan-voted TBA).", "Adventure Sync Bagon, Drampa, and Druddigon are normally rare \u2014 stack walking distance for hatch eggs.", "GO Fest 2026: Global on July 11\u201312 is FREE for all Trainers."], relatedNews: [{ id: 24, label: "Choose Your Path & Daily Discoveries Update", icon: "\uD83E\uDDED" }, { id: 19, label: "Forever Forward \u2014 Full Season Overview", icon: "\uD83C\uDF1F" }, { id: 20, label: "GO Battle League: Forever Forward Schedule", icon: "\u2694\uFE0F" }, { id: 14, label: "GO Fest 2026: Global \u2014 FREE", icon: "\uD83C\uDF0D" }, { id: 13, label: "Mega Mewtwo X & Y \u2014 Full Breakdown", icon: "\uD83E\uDDBE" }] } },
+  { id: 80, title: "Season: Forever Forward", type: "Event", url: "https://pokemongo.com/en/seasons/forever-forward", date: "2026-06-02", endDate: "2026-09-08", published: "2026-05-26", updated: "2026-09-08", lastUpdated: "September 8, 2026 at 6:18 PM", time: "10:00 AM", endHour: 10, endMin: 0, color: "#1ABC9C", icon: "\uD83C\uDF1F", iconImg: "assets/pokemon-images/Seasons/forever-forward.webp", wideIcon: true, featured: true, summary: "Pok\u00E9mon GO's next season \u2014 June 2 to September 8, 2026. Mewtwo, Zeraora, and Mega Mewtwo X & Y headline GO Fest 2026. Daily Discoveries shift to Scenic Sunday, Max Monday, and Showcase Tuesday (Spotlight Hour now returns Thursdays 6\u20137 PM). New Choose Your Path Timed Research runs on non-event weeks. Three Community Days (June 20 Frigibax, July 4, August 16), refreshed eggs, Research Breakthrough rotation, and new Dynamax debuts.", details: { bossesTitle: "Max Pok\u00e9mon Debuts", bosses: ["Dynamax Electabuzz (Power Spots)", "Dynamax Magikarp (Power Spots)", "Dynamax Feebas (Power Spots)", "Dragonite \u2728 (Research Breakthrough)", "Axew \u2728 (Research Breakthrough)", "Honedge \u2728 (Research Breakthrough)", "Jangmo-o \u2728 (Research Breakthrough)", "Indeedee \u2728 (Research Breakthrough)", "Klawf (Research Breakthrough)"], bonuses: ["Three Community Days: June 20 (Frigibax), July 4 (Sobble), August 16 (TBA)", "GO Fest 2026 Tokyo / Chicago / Copenhagen / Global", "Free Zeraora Special Research at GO Fest 2026: Global (non-expiring)", "Rotating Web Store boxes throughout the season", "Themed stickers from Pok\u00E9Stops, Gifts, and the in-game shop", "Routes feature with Buddy Pok\u00E9mon exploration", "Mateo's Gift Exchange 7 km Eggs"], seasonBonuses: ["Scenic Sunday \u2014 more wild Pok\u00E9mon, more Pok\u00E9mon on Routes, Incense attracts even more on Routes, reduced Buddy Candy distance on Routes, encounter Mateo up to 3\u00D7 daily", "Max Monday \u2014 1 Rare Candy XL per in-person Max Battle, frequent Power Spot refreshes, additional active Power Spots, rotating Dynamax battles (6 AM \u2013 9 PM)", "Showcase Tuesday \u2014 enter up to 5 Pok\u00E9Stop Showcases", "Raid Hour Wednesday \u2014 1 Rare Candy XL per in-person Raid Battle, 6 PM \u2013 7 PM (featured 5\u2605 boss)", "GO Battle Thursday & Spotlight Hour \u2014 Spotlight Hour returns 6\u20137 PM, up to 10 sets daily (50 battles), 4\u00D7 Stardust from wins", "Friendship Friday \u2014 2 Special Trades, Lucky boost, \u221210% Stardust trade cost"], dailyDiscoveries: [{ day: "Sunday", name: "Scenic Sunday", icon: "\uD83C\uDF04", color: "#16A085", desc: "More Pok\u00E9mon will appear in the wild. More Pok\u00E9mon will appear while following a Route, and Incense will attract even more on Routes. Reduced Buddy Candy distance on Routes. Encounter Mateo up to three times daily." }, { day: "Monday", name: "Max Monday", icon: "\u26A1", color: "#F39C12", desc: "One Rare Candy XL for completing in-person Max Battles. Power Spots refresh more frequently with additional active locations. Max Battles rotate featured Dynamax Pok\u00E9mon.", time: "Max Monday: 6:00 AM \u2013 9:00 PM" }, { day: "Tuesday", name: "Showcase Tuesday", icon: "\uD83C\uDFC6", color: "#3498DB", desc: "Trainers can enter up to five Pok\u00E9Stop Showcases on Tuesdays, and more Pok\u00E9Stops may host Showcases.", time: "10:00 AM \u2013 8:00 PM" }, { day: "Wednesday", name: "Raid Hour", icon: "\u2694\uFE0F", color: "#9B59B6", desc: "One Rare Candy XL for completing in-person Raid Battles. Raid Bosses for five-star raids and Mega Raids rotate at the start of each day each week. Raid Hours feature the five-star Raid Boss.", time: "6:00 PM \u2013 7:00 PM" }, { day: "Thursday", name: "GO Battle Thursday & Spotlight Hour", icon: "\uD83E\uDD4A", color: "#E67E22", desc: "Spotlight Hour returns from 6:00\u20137:00 PM local time. Up to 4\u00D7 Stardust from win rewards and 10 sets daily (50 battles total) instead of the usual 5.", time: "Spotlight Hour: 6:00 PM \u2013 7:00 PM" }, { day: "Friday", name: "Friendship Friday", icon: "\uD83E\uDD1D", color: "#2ECC71", desc: "2 Special Trades allowed, increased Lucky Trade chances, \u221210% Stardust trade cost, 2 guaranteed Candy XL from trades (level 31+)." }], eggLabel: "2 km Eggs", eggs: ["Exeggcute \u2728", "Corphish \u2728", "Wynaut \u2728"], seasonEggPools: [{ label: "5 km Eggs", items: ["Riolu \u2728", "Mantyke \u2728", "Flittle"] }, { label: "7 km Eggs", items: ["Alolan Diglett \u2728", "Galarian Corsola \u2728", "Galarian Darumaka \u2728"] }, { label: "7 km Eggs from Mateo's Gift Exchange", items: ["Hisuian Growlithe \u2728", "Hisuian Sneasel \u2728", "White-Striped Form Basculin \u2728"] }, { label: "10 km Eggs", items: ["Mawile \u2728", "Absol \u2728", "Frigibax \u2728"] }, { label: "5 km Adventure Sync Rewards", items: ["Tyrogue \u2728", "Sableye \u2728", "Budew \u2728"] }, { label: "10 km Adventure Sync Rewards", items: ["Bagon \u2728", "Druddigon \u2728", "Drampa \u2728"] }], tips: ["Mega Mewtwo X & Y debut at GO Fest 2026 \u2014 stockpile Mewtwo Mega Energy now (it converts to both forms).", "Scenic Sunday makes Routes essential \u2014 load up Routes with Buddies before the season starts.", "Research Breakthrough cycles through Dragonite, Axew, Honedge, Jangmo-o, Indeedee, and Klawf \u2014 claim weekly.", "Mateo's Gift Exchange 7 km Eggs are separate from regular 7 km Eggs.", "Three Community Days: June 20 (Frigibax), July 4 (Sobble), August 16 (fan-voted TBA).", "Adventure Sync Bagon, Drampa, and Druddigon are normally rare \u2014 stack walking distance for hatch eggs.", "GO Fest 2026: Global on July 11\u201312 is FREE for all Trainers."], relatedNews: [{ id: 24, label: "Choose Your Path & Daily Discoveries Update", icon: "\uD83E\uDDED" }, { id: 19, label: "Forever Forward \u2014 Full Season Overview", icon: "\uD83C\uDF1F" }, { id: 20, label: "GO Battle League: Forever Forward Schedule", icon: "\u2694\uFE0F" }, { id: 14, label: "GO Fest 2026: Global \u2014 FREE", icon: "\uD83C\uDF0D" }, { id: 13, label: "Mega Mewtwo X & Y \u2014 Full Breakdown", icon: "\uD83E\uDDBE" }] } },
   { id: 62, title: "Season: Memories in Motion", type: "Event", url: "https://pokemongo.com/news/welcome-to-memories-in-motion", date: "2026-03-03", endDate: "2026-06-02", time: "10:00 AM", endHour: 10, endMin: 0, color: "#9B59B6", icon: "\uD83C\uDF1F", featured: false, summary: "The current season celebrating Pok\u00E9mon's 30th anniversary and GO's 10th year. Featuring daily discovery bonuses, Volcanion Special Research, and new event formats.", details: { bosses: ["Gyarados (Research Breakthrough)", "Honedge (Research Breakthrough)", "Dhelmise (Research Breakthrough)", "Sinistea (Research Breakthrough)", "Duraludon (Research Breakthrough)", "Dreepy (Research Breakthrough)"], bonuses: ["Free Volcanion Special Research available all season", "Guaranteed Candy XL on in-person trades for level 31+", "Weekend events have moved to Saturdays this season", "In-game event calendar coming later in the season"], seasonBonuses: ["Double-Time Sundays \u2014 Incense & Lures last 2\u00D7", "Fast-Track Mondays \u2014 2\u00D7 GO Points, extra Power Spots", "Max Mondays \u2014 rotating Dynamax Pok\u00E9mon (6 AM\u20139 PM)", "Showcase Tuesdays \u2014 Pok\u00E9Stop Showcases (10 AM\u20138 PM)", "Raid Hour Wednesdays \u2014 6\u20137 PM", "GO Battle Thursdays \u2014 up to 10 sets, 4\u00D7 Stardust from wins", "Friendship Fridays \u2014 2 Special Trades, Lucky boost, \u221210% Stardust"], dailyDiscoveries: [{ day: "Sunday", name: "Double-Time Sunday", icon: "\uD83D\uDD25", color: "#E74C3C", desc: "Incense, Lure Modules, Glacial Lure Modules, Mossy Lure Modules, Magnetic Lure Modules, and Rainy Lure Modules activated on Sunday will last up to twice as long." }, { day: "Monday", name: "Fast-Track Monday & Max Monday", icon: "\u26A1", color: "#F39C12", desc: "2x GO Points from Pass Tasks for both monthly and event GO Passes. Power Spots refresh more frequently with additional locations. Max Battles rotate featured Dynamax Pokemon.", time: "Max Monday: 6:00 AM \u2013 9:00 PM" }, { day: "Tuesday", name: "Showcase Tuesday", icon: "\uD83C\uDFC6", color: "#3498DB", desc: "PokeStop Showcases will be active on Tuesdays, featuring up to 20 different categories.", time: "10:00 AM \u2013 8:00 PM" }, { day: "Wednesday", name: "Raid Hour", icon: "\u2694\uFE0F", color: "#9B59B6", desc: "Raid Bosses for five-star raids and Mega Raids will rotate at the start of the day each week. Raid Hours feature the five-star Raid Boss.", time: "6:00 PM \u2013 7:00 PM" }, { day: "Thursday", name: "GO Battle Thursday", icon: "\uD83E\uDD4A", color: "#E67E22", desc: "Trainers receive up to 4x Stardust from win rewards and can play 10 sets daily (50 battles total) instead of the usual 5 sets." }, { day: "Friday", name: "Friendship Friday", icon: "\uD83E\uDD1D", color: "#2ECC71", desc: "In-person trades feature 2 Special Trades allowed, increased Lucky Trade chances, -10% Stardust cost, and 2 guaranteed Candy XL from trades (level 31+)." }], tips: ["Free Volcanion Special Research available all season \u2014 no expiration.", "Guaranteed Candy XL on in-person trades for level 31+.", "Weekend events have moved to Saturdays this season.", "In-game event calendar coming later in the season."] } },
   { id: 60, title: "Pok\u00E9mon Pokopia Celebration", type: "Event", url: "https://pokemongo.com/news/pokemon-pokopia-celebration-event-2026", date: "2026-03-10", endDate: "2026-03-16", time: "10:00 AM \u2013 8:00 PM", color: "#E056A0", icon: "\uD83C\uDFAD", featured: false, summary: "Costumed Ditto debuts wearing a hat and cap! Boosted Shiny Sudowoodo and Zorua. Kanto starters, Lapras, Snorlax, and Dragonite in 3-Star Raids. Free Ditto Eye Mask avatar item.", details: { bosses: ["Ditto wearing a hat (debut)", "Ditto wearing a cap (debut)", "Sudowoodo (boosted Shiny)", "Zorua (boosted Shiny)", "Bulbasaur", "Charmander", "Squirtle", "Pikachu", "Lapras (3\u2605 Raid)", "Snorlax (3\u2605 Raid)", "Dragonite (3\u2605 Raid)"], bonuses: ["2\u00D7 XP for spinning Pok\u00E9Stops", "10\u00D7 XP for spinning a Pok\u00E9Stop for the first time", "Boosted Shiny rates for Sudowoodo and Zorua", "Collection Challenges with themed rewards", "Free Ditto Eye Mask avatar item in shop", "Event-themed stickers from Pok\u00E9Stops, Gyms, and Gifts"], tips: ["Catch everything \u2014 costumed Ditto transforms and hides among wild spawns.", "Shiny Zorua is extremely rare normally, take advantage of the boosted rates.", "Spin new Pok\u00E9Stops for 10\u00D7 XP \u2014 great time to explore new areas.", "Overlaps with Scorbunny Community Day on March 14."] } },
   { id: 61, title: "Bug Out 2026", type: "Event", url: "https://pokemongo.com/news/bug-out-2026", date: "2026-03-17", endDate: "2026-03-23", time: "10:00 AM \u2013 8:00 PM", color: "#2ECC71", icon: "\uD83D\uDC1B", featured: false, summary: "Blipbug, Dottler, and Orbeetle debut! Shiny Sizzlipede released. Rotating Lure spawns with Pinsir, Scizor, and Kleavor in 3-Star Raids.", details: { bosses: ["Blipbug (debut)", "Sizzlipede (Shiny debut)", "Caterpie", "Dwebble", "Nymble", "Scyther", "Blipbug (1\u2605 Raid)", "Pinsir (3\u2605 Raid)", "Scizor (3\u2605 Raid)", "Kleavor (3\u2605 Raid)", "Paras (Lures Mar 17\u201319)", "Cutiefly (Lures Mar 19\u201321)", "Combee (Lures Mar 21\u201323)"], bonuses: ["2\u00D7 XP for Nice Throws or better (GO Pass Tier 1)", "2\u00D7 Catch Candy (GO Pass Tier 2)", "3\u00D7 Catch Candy (GO Pass Deluxe Tier 2)", "Rotating Lure Module spawns every 2 days", "GO Pass Deluxe $4.99 or Deluxe + 6 Ranks $6.99", "Boosted Shiny rates for Lure Pok\u00E9mon"], tips: ["Blipbug evolves to Dottler (25 Candy) then Orbeetle (100 Candy) \u2014 stock up.", "Shiny Sizzlipede is brand new \u2014 check every one you see.", "Pinsir, Scizor, and Kleavor in 3-Star Raids can all be Shiny.", "Paras, Combee, and Cutiefly from Lures have boosted Shiny rates.", "GO Pass rewards expire March 25 at 8 PM."] } },
@@ -2908,6 +2908,7 @@ const ITEM_IMAGES = {
   "Shadow Entei Raid Day Ticket": "item_1608_hd.png",
   "Falinks Super Mega Raid Day Ticket": "item_1608_hd.png",
   "Skarmory Super Mega Raid Day Ticket": "item_1608_hd.png",
+  "Community Day Classic: Gible Ticket": "item_1608_hd.png",
   "Pok\u00E9mon Storage Upgrade": "pokemonstorageupgrade.1.png",
   "Item Bag Upgrade": "itemstorageupgrade.1.png",
   "Pok\u00E9Coin": "pokecoin.png",
@@ -3707,6 +3708,132 @@ const BACKGROUNDS_DB = [
 const BACKGROUNDS_IMG_BASE = "assets/pokemon-images/backgrounds/";
 
 const WEB_STORE_BOXES = [
+  {
+    name: "Community Day Classic: Gible Ultra Ticket Box",
+    price: 1.99,
+    category: "Event Bundle",
+    limited: true,
+    oneTime: true,
+    availableFrom: "2026-09-08",
+    expires: "2026-09-13",
+    items: [
+      { name: "Community Day Classic: Gible Ticket", qty: 1 },
+      { name: "Ultra Ball", qty: 5 },
+      { name: "Reward Points", qty: 24 }
+    ]
+  },
+  {
+    name: "GO Pass Deluxe: Mega Squads",
+    price: 4.99,
+    category: "Event Bundle",
+    limited: true,
+    oneTime: true,
+    availableFrom: "2026-09-08",
+    expires: "2026-09-15",
+    items: [
+      { name: "GO Pass Deluxe", qty: 1, note: "Mega Squads" },
+      { name: "Ultra Ball", qty: 10 },
+      { name: "Max Revive", qty: 5 },
+      { name: "Premium Battle Pass", qty: 1 },
+      { name: "Max Potion", qty: 5 },
+      { name: "Reward Points", qty: 60 }
+    ]
+  },
+  {
+    name: "GO Pass Deluxe: Mega Squads + 6 Ranks",
+    price: 6.99,
+    category: "Event Bundle",
+    limited: true,
+    oneTime: true,
+    availableFrom: "2026-09-08",
+    expires: "2026-09-15",
+    items: [
+      { name: "GO Pass Deluxe", qty: 1, note: "Mega Squads" },
+      { name: "+6 Ranks", qty: 600 },
+      { name: "Ultra Ball", qty: 10 },
+      { name: "Max Revive", qty: 5 },
+      { name: "Premium Battle Pass", qty: 2 },
+      { name: "Max Potion", qty: 5 },
+      { name: "Reward Points", qty: 84 }
+    ]
+  },
+  {
+    name: "GO Pass Deluxe: Mega Squads Ultra Box",
+    price: 8.99,
+    category: "Event Bundle",
+    limited: true,
+    oneTime: true,
+    availableFrom: "2026-09-08",
+    expires: "2026-09-15",
+    items: [
+      { name: "GO Pass Deluxe", qty: 1, note: "Mega Squads" },
+      { name: "+6 Ranks", qty: 600 },
+      { name: "Ultra Ball", qty: 20 },
+      { name: "Max Revive", qty: 10 },
+      { name: "Premium Battle Pass", qty: 5 },
+      { name: "Max Potion", qty: 10 },
+      { name: "Reward Points", qty: 108 }
+    ]
+  },
+  {
+    name: "GO Pass Deluxe: September",
+    price: 7.99,
+    category: "Event Bundle",
+    limited: true,
+    limitedLabel: "LIMITED-TIME ONLY",
+    oneTime: true,
+    availableFrom: "2026-09-01",
+    expires: "2026-10-06",
+    availabilityText: "Tuesday, September 1, at 10:00 a.m. to Tuesday, October 6, at 10:00 a.m. local time",
+    items: [
+      { name: "GO Pass Deluxe", qty: 1, note: "September" },
+      { name: "Ultra Ball", qty: 10 },
+      { name: "Max Revive", qty: 5 },
+      { name: "Premium Battle Pass", qty: 1 },
+      { name: "Max Potion", qty: 5 },
+      { name: "Reward Points", qty: 96 }
+    ]
+  },
+  {
+    name: "GO Pass Deluxe: September + 10 Ranks",
+    price: 9.99,
+    category: "Event Bundle",
+    limited: true,
+    limitedLabel: "LIMITED-TIME ONLY",
+    oneTime: true,
+    availableFrom: "2026-09-01",
+    expires: "2026-10-06",
+    availabilityText: "Tuesday, September 1, at 10:00 a.m. to Tuesday, October 6, at 10:00 a.m. local time",
+    items: [
+      { name: "GO Pass Deluxe", qty: 1, note: "September" },
+      { name: "+10 Ranks", qty: 1000 },
+      { name: "Ultra Ball", qty: 10 },
+      { name: "Max Revive", qty: 5 },
+      { name: "Premium Battle Pass", qty: 2 },
+      { name: "Max Potion", qty: 5 },
+      { name: "Reward Points", qty: 120 }
+    ]
+  },
+  {
+    name: "GO Pass Deluxe: September Ultra Box",
+    price: 14.99,
+    category: "Event Bundle",
+    limited: true,
+    limitedLabel: "LIMITED-TIME ONLY",
+    oneTime: true,
+    availableFrom: "2026-09-01",
+    expires: "2026-10-06",
+    availabilityText: "Tuesday, September 1, at 10:00 a.m. to Tuesday, October 6, at 10:00 a.m. local time",
+    items: [
+      { name: "GO Pass Deluxe", qty: 1, note: "September" },
+      { name: "+10 Ranks", qty: 1000 },
+      { name: "Ultra Ball", qty: 20 },
+      { name: "Max Revive", qty: 10 },
+      { name: "Premium Battle Pass", qty: 5 },
+      { name: "Max Potion", qty: 10 },
+      { name: "Reward Points", qty: 180 }
+    ]
+  },
   {
     name: "GO Pass Deluxe: August Ultra Box",
     price: 14.99,
@@ -5840,7 +5967,11 @@ function getCountdown(d, ev) {
 }
 
 function formatDate(d) {
-  return new Date(d + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+  const dt = new Date(d + "T12:00:00");
+  const base = dt.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+  // Archived events sit in year buckets going back to 2018, so a bare "Sun, Oct 12" is ambiguous.
+  // Show the year only when it isn't the current year, leaving live/current events unchanged.
+  return dt.getFullYear() === new Date().getFullYear() ? base : `${base}, ${dt.getFullYear()}`;
 }
 function formatPublishedDate(d) {
   return new Date(d + "T12:00:00").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
@@ -5849,9 +5980,13 @@ function formatPublishedDate(d) {
 function formatDateRange(s, e) {
   if (!e) return formatDate(s);
   const a = new Date(s + "T12:00:00"), b = new Date(e + "T12:00:00");
-  return a.getMonth() === b.getMonth()
-    ? `${a.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })} – ${b.toLocaleDateString("en-US", { weekday: "short", day: "numeric" })}`
-    : `${formatDate(s)} – ${formatDate(e)}`;
+  const ya = a.getFullYear(), yb = b.getFullYear(), cy = new Date().getFullYear();
+  const wmd = dt => dt.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+  const wd = dt => dt.toLocaleDateString("en-US", { weekday: "short", day: "numeric" });
+  // A range straddling New Year needs both years spelled out to stay unambiguous.
+  if (ya !== yb) return `${wmd(a)}, ${ya} – ${wmd(b)}, ${yb}`;
+  const body = a.getMonth() === b.getMonth() ? `${wmd(a)} – ${wd(b)}` : `${wmd(a)} – ${wmd(b)}`;
+  return ya === cy ? body : `${body}, ${ya}`;
 }
 
 function daysUntil(d) { return Math.ceil((new Date(d + "T10:00:00") - new Date()) / 864e5); }
@@ -12792,7 +12927,7 @@ function render() {
       }
       storeTabHTML = `<div style="display:flex;flex-direction:column;gap:${isMobile ? 16 : 20}px">
         <div style="text-align:center;padding:10px;position:relative">
-          <div style="${isMobile ? "position:static;margin:0 0 10px" : "position:absolute;top:14px;right:16px"};font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on August 25, 2026 at 4:37 pm</div>
+          <div style="${isMobile ? "position:static;margin:0 0 10px" : "position:absolute;top:14px;right:16px"};font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on September 8, 2026 at 10:00 am</div>
           <h2 style="margin:0;font-size:${isMobile ? 20 : 26}px;font-weight:800;color:${th.text}">\uD83D\uDED2 Web Store Box Analysis</h2>
           <p style="margin:6px 0 0 0;font-size:${isMobile ? 12 : 14}px;color:${th.textMuted};font-weight:500">Are the current Pok\u00E9mon GO web store boxes worth it?</p>
           <p style="margin:4px 0 0 0;font-size:${isMobile ? 10 : 11}px;color:${th.textFaint};font-weight:500">Values based on individual item prices from <a href="https://store.pokemongo.com" target="_blank" rel="noopener noreferrer" style="color:${th.textMuted};text-decoration:underline">store.pokemongo.com</a></p>
