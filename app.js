@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "4.033";
+const APP_VERSION = "4.034";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -8537,8 +8537,13 @@ function renderAnnouncementCard(announcement, index, th) {
   const iconHTML = announcement.icon
     ? `<img src="${announcement.icon}" alt="" style="width:56%;height:56%;object-fit:contain;position:relative;z-index:0" onerror="this.style.display='none'" />`
     : glyphHTML;
+  // First 2 cards are above the fold on load, so they get eager/high-priority loading; every
+  // later card is lazy so the News tab doesn't fetch all ~50 heroes up front.
+  const heroLoadAttrs = index < 2
+    ? `loading="eager" fetchpriority="high"`
+    : `loading="lazy"`;
   const heroImgHTML = announcement.heroImg
-    ? `<img src="${announcement.heroImg}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:${fit};${fit === "contain" ? "padding:8%;box-sizing:border-box;" : ""}z-index:1" onerror="this.style.display='none'" />`
+    ? `<img src="${announcement.heroImg}" alt="" ${heroLoadAttrs} decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:${fit};${fit === "contain" ? "padding:8%;box-sizing:border-box;" : ""}z-index:1" onerror="this.style.display='none'" />`
     : "";
 
   // Both breakpoints are full-bleed: the button's own padding moves onto the text column so the
