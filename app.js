@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "4.034";
+const APP_VERSION = "4.035";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -13396,7 +13396,7 @@ function render() {
     </div>
   </header>`;
 
-  const tickerText = "\uD83C\uDF89 Pok\u00E9mon GO Fest: Mega Finale \u2014 September 5\u20136, 2026 \u00B7 10:00 AM \u2013 6:00 PM local time";
+  const tickerText = "\uD83C\uDF33 Wild Area 2026 \u2014 November 14 & 15, 2026 \u00B7 Details to be announced \u00B7 Stay tuned!";
   const tickerSep = "\u00a0\u2728\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0";
   const tickerSegment = tickerText + tickerSep;
   // Seamless marquee: the track is two identical halves and CSS scrolls it by -50% (one half).
@@ -13408,7 +13408,7 @@ function render() {
   const tickerHalf = tickerSegment.repeat(tickerRepeats);
   // Keep the gentle ~15px/s scroll speed regardless of how wide the half is (distance scales, so duration must too).
   const tickerDuration = Math.max(20, Math.round((tickerRepeats * segEstPx) / 15));
-  const tickerHTML = `<div role="button" tabindex="0" aria-label="View Pokémon GO Fest: Mega Finale event details" onclick="selectEvent(148)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectEvent(148);}" onmouseenter="this.firstElementChild.style.animationPlayState='paused'" onmouseleave="this.firstElementChild.style.animationPlayState='running'" onfocus="this.style.boxShadow='inset 0 0 0 2px #fff'" onblur="this.style.boxShadow='none'" style="overflow:hidden;white-space:nowrap;background:linear-gradient(90deg,#E74C3C,#F39C12);width:100%;position:relative;display:flex;align-items:center;min-height:${isMobile ? 28 : 32}px;cursor:pointer;outline:none;transition:box-shadow 0.2s ease">
+  const tickerHTML = `<div role="button" tabindex="0" aria-label="View Save the Date: Pokémon GO Wild Area 2026" onclick="selectNews(37)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectNews(37);}" onmouseenter="this.firstElementChild.style.animationPlayState='paused'" onmouseleave="this.firstElementChild.style.animationPlayState='running'" onfocus="this.style.boxShadow='inset 0 0 0 2px #fff'" onblur="this.style.boxShadow='none'" style="overflow:hidden;white-space:nowrap;background:linear-gradient(90deg,#E74C3C,#F39C12);width:100%;position:relative;display:flex;align-items:center;min-height:${isMobile ? 28 : 32}px;cursor:pointer;outline:none;transition:box-shadow 0.2s ease">
     <div style="display:inline-block;white-space:nowrap;animation:tickerScroll ${tickerDuration}s linear infinite;font-size:${isMobile ? 11 : 13}px;font-weight:600;color:#fff;letter-spacing:0.3px;line-height:1">${tickerHalf}${tickerHalf}</div>
   </div>`;
 
