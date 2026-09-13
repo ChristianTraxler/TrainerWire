@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "4.036";
+const APP_VERSION = "4.037";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -6735,10 +6735,18 @@ function showWeatherPopup(weatherName) {
   const th = t(darkMode);
   const boostedTypes = GO_WEATHER_TYPE_BOOSTS[weatherName] || [];
   const sentence = `${weatherName} weather boosts ${joinTypesForSentence(boostedTypes)} moves and Pokémon.`;
-  const typesHTML = boostedTypes.map(ty => `<div style="display:flex;flex-direction:column;align-items:center;gap:5px">
-      <div style="width:34px;height:34px;border-radius:50%;background:${TYPE_COLORS[ty] || "#888"};box-shadow:0 2px 6px rgba(0,0,0,0.25)"></div>
+  // Type badge art (same POKEMON_TYPE_<TYPE>.png the sprite card uses) rather than a bare colour
+  // swatch; the swatch only remains as the fallback for a type with no icon file.
+  const typesHTML = boostedTypes.map(ty => {
+    const icon = typeIconImg(ty);
+    const badge = icon
+      ? `<img src="${icon}" alt="${escAttr(ty)}" style="width:34px;height:34px;object-fit:contain;display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.25))" onerror="this.style.display='none'" />`
+      : `<div style="width:34px;height:34px;border-radius:50%;background:${TYPE_COLORS[ty] || "#888"};box-shadow:0 2px 6px rgba(0,0,0,0.25)"></div>`;
+    return `<div style="display:flex;flex-direction:column;align-items:center;gap:5px">
+      ${badge}
       <span style="font-size:11px;font-weight:600;color:${th.textSecondary}">${ty}</span>
-    </div>`).join("");
+    </div>`;
+  }).join("");
   const overlay = document.createElement("div");
   overlay.id = "weather-popup";
   overlay.style.cssText = "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:9999;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:fadeIn 0.2s ease";
