@@ -303,6 +303,12 @@
   "cpBoost": "1555–1642",
   "weather": "Foggy"
  },
+ "Barboach": {
+  "types": [
+   "Water",
+   "Ground"
+  ]
+ },
  "Basculin": {
   "types": [
    "Water"
@@ -1089,6 +1095,12 @@
    "Dragon"
   ]
  },
+ "Durant": {
+  "types": [
+   "Bug",
+   "Steel"
+  ]
+ },
  "Dusclops": {
   "types": [
    "Ghost"
@@ -1123,6 +1135,12 @@
   ],
   "cp": "513–558"
  },
+ "Dynamax Dialga": {
+  "types": [
+   "Steel",
+   "Dragon"
+  ]
+ },
  "Dynamax Eevee": {
   "types": [
    "Normal"
@@ -1146,6 +1164,12 @@
    "Fire"
   ],
   "cp": "1298–1367"
+ },
+ "Dynamax Palkia": {
+  "types": [
+   "Water",
+   "Dragon"
+  ]
  },
  "Eelektross": {
   "types": [
@@ -2137,6 +2161,12 @@
    "Fighting"
   ]
  },
+ "Kingdra": {
+  "types": [
+   "Water",
+   "Dragon"
+  ]
+ },
  "Kingler": {
   "types": [
    "Water"
@@ -2167,6 +2197,12 @@
   "cp": "1304–1373",
   "cpBoost": "1630–1716",
   "weather": "Partly Cloudy"
+ },
+ "Klefki": {
+  "types": [
+   "Steel",
+   "Fairy"
+  ]
  },
  "Klink": {
   "types": [
@@ -2410,6 +2446,11 @@
   "cpBoost": "2084–2183",
   "weather": "Cloudy"
  },
+ "Machamp wearing a modern jacket": {
+  "types": [
+   "Fighting"
+  ]
+ },
  "Machoke": {
   "types": [
    "Fighting"
@@ -2456,6 +2497,12 @@
   ]
  },
  "Magneton": {
+  "types": [
+   "Electric",
+   "Steel"
+  ]
+ },
+ "Magnezone": {
   "types": [
    "Electric",
    "Steel"
@@ -2630,7 +2677,10 @@
  "Mega Blastoise": {
   "types": [
    "Water"
-  ]
+  ],
+  "cp": "1338–1409",
+  "cpBoost": "1673–1761",
+  "weather": "Rainy"
  },
  "Mega Blaziken": {
   "types": [
@@ -2660,13 +2710,19 @@
   "types": [
    "Fire",
    "Dragon"
-  ]
+  ],
+  "cp": "1574–1651",
+  "cpBoost": "1968–2064",
+  "weather": "Sunny or Windy"
  },
  "Mega Charizard Y": {
   "types": [
    "Fire",
    "Flying"
-  ]
+  ],
+  "cp": "1574–1651",
+  "cpBoost": "1968–2064",
+  "weather": "Sunny or Windy"
  },
  "Mega Chesnaught": {
   "types": [
@@ -4147,6 +4203,15 @@
   "cpBoost": "1146–1220",
   "weather": "Fog or Sunny/Clear"
  },
+ "Shadow Landorus (Incarnate Forme)": {
+  "types": [
+   "Ground",
+   "Flying"
+  ],
+  "cp": "1897–2050",
+  "cpBoost": "2372–2563",
+  "weather": "Sunny/Clear or Windy"
+ },
  "Shadow Lapras": {
   "types": [
    "Water",
@@ -4442,6 +4507,12 @@
  "Skiddo": {
   "types": [
    "Grass"
+  ]
+ },
+ "Skrelp": {
+  "types": [
+   "Poison",
+   "Water"
   ]
  },
  "Skwovet": {
@@ -5058,6 +5129,26 @@
   "weather": "Partly Cloudy or Windy"
  },
  "Unown": {
+  "types": [
+   "Psychic"
+  ]
+ },
+ "Unown D": {
+  "types": [
+   "Psychic"
+  ]
+ },
+ "Unown I": {
+  "types": [
+   "Psychic"
+  ]
+ },
+ "Unown L": {
+  "types": [
+   "Psychic"
+  ]
+ },
+ "Unown W": {
   "types": [
    "Psychic"
   ]
