@@ -4364,6 +4364,15 @@
    "Grass"
   ]
  },
+ "Shadow Thundurus (Incarnate Forme)": {
+  "types": [
+   "Electric",
+   "Flying"
+  ],
+  "cp": "1762–1911",
+  "cpBoost": "2203–2389",
+  "weather": "Rainy or Windy"
+ },
  "Shadow Thundurus (Therian Forme)": {
   "types": [
    "Electric",
