@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "4.046";
+const APP_VERSION = "4.047";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -6589,7 +6589,7 @@ function renderCatchCP(catchCP, th) {
 function renderHabitatBosses(habitatBosses, th, title, icon) {
   const headerIconHTML = icon
     ? (icon.includes("/") || icon.endsWith(".png") || icon.endsWith(".webp")
-        ? `<img src="${icon}" style="width:18px;height:18px;object-fit:contain;flex-shrink:0" onerror="this.style.display='none'" />`
+        ? `<img src="${icon}" style="width:24px;height:24px;object-fit:contain;flex-shrink:0" onerror="this.style.display='none'" />`
         : `<span style="font-size:16px">${icon}</span>`)
     : `<span style="font-size:16px">\uD83C\uDF0D</span>`;
   if (!habitatBosses || habitatBosses.length === 0) return "";
