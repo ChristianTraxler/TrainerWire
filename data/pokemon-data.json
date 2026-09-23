@@ -455,6 +455,12 @@
    "Fire"
   ]
  },
+ "Bramblin": {
+  "types": [
+   "Grass",
+   "Ghost"
+  ]
+ },
  "Brionne": {
   "types": [
    "Water"
@@ -3264,6 +3270,12 @@
   "cp": "2167–2256",
   "cpBoost": "2709–2821",
   "weather": "Partly Cloudy or Cloudy"
+ },
+ "Nincada": {
+  "types": [
+   "Bug",
+   "Ground"
+  ]
  },
  "Ninetales": {
   "types": [

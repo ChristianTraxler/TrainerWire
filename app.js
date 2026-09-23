@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "4.043";
+const APP_VERSION = "4.044";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -1042,7 +1042,8 @@ const SHINY_AVAILABLE = new Set([
   "Shroodle",
   // September 2026 Max Battle rotation (ANNOUNCEMENTS id 44) — Dynamax Rhyhorn (Sep 14–20), Dynamax Sobble (Sep 28 – Oct 4)
   "Rhyhorn",
-  "Sobble"
+  "Sobble",
+  "Electrike","Hoppip","Helioptile" // Fall Marathon: Buddy Trek (ANNOUNCEMENTS id 56)
 ]);
 function isShinyEligible(name) {
   if (/\(no shiny\)/i.test(name)) return false;
@@ -1325,7 +1326,7 @@ const EVENTS = [
   { id: 210, title: "Spotlight Hour: Morelull", type: "Event", date: "2026-10-22", endDate: "2026-10-22", startsAt: "2026-10-22T18:00:00", endsAt: "2026-10-22T19:00:00", published: "2026-09-21", updated: "2026-09-21", lastUpdated: "September 21, 2026 at 11:04 AM", time: "Spotlight Hour: 6–7 PM", whenText: "Thursday, October 22, 2026, from 6:00 p.m. to 7:00 p.m. local time.", color: "#BB8FCE", icon: "✨", iconImg: "assets/pokemon-images/icons/QuestPokemonReward.png", featured: false, summary: "Morelull in the spotlight — 2× Catch Stardust. Shiny Morelull may appear.", details: { bosses: ["Morelull ✨"], bonuses: ["2× Catch Stardust", "Shiny Morelull may appear if you are lucky"], tips: ["Spotlight Hour runs Thursday, 6–7 PM local time.", "Time-box your session to the 6–7 PM hour for the bonus."] } },
   { id: 211, title: "Spotlight Hour: Gastly", type: "Event", date: "2026-10-29", endDate: "2026-10-29", startsAt: "2026-10-29T18:00:00", endsAt: "2026-10-29T19:00:00", published: "2026-09-21", updated: "2026-09-21", lastUpdated: "September 21, 2026 at 11:04 AM", time: "Spotlight Hour: 6–7 PM", whenText: "Thursday, October 29, 2026, from 6:00 p.m. to 7:00 p.m. local time.", color: "#5B2C6F", icon: "✨", iconImg: "assets/pokemon-images/icons/QuestPokemonReward.png", featured: false, summary: "Gastly in the spotlight — 2× Evolution XP. Shiny Gastly may appear.", details: { bosses: ["Gastly ✨"], bonuses: ["2× Evolution XP", "Shiny Gastly may appear if you are lucky"], tips: ["Spotlight Hour runs Thursday, 6–7 PM local time.", "Time-box your session to the 6–7 PM hour for the bonus."] } },
   { id: 212, title: "World Space Week 2026", type: "Event", url: "https://pokemongo.com/en/news/world-space-week-2026", date: "2026-10-04", endDate: "2026-10-10", startsAt: "2026-10-04T00:00:00", endsAt: "2026-10-10T23:59:00", time: "Oct 4 – Oct 10", endHour: 23, endMin: 59, published: "2026-09-21", updated: "2026-09-21", lastUpdated: "September 21, 2026 at 3:10 PM", whenText: "Sunday, October 4, 2026, at 12:00 a.m. to Saturday, October 10, 2026, at 11:59 p.m. local time", color: "#1F3A93", icon: "🚀", iconImg: "assets/pokemon-images/National-Event-Costume-Dex/regular/Gen-1_Kanto/0025_astronaut.webp", featured: true, summary: "Astronaut Pikachu makes its Pokémon GO debut as a new costumed Pokémon during World Space Week 2026 — find it in One-Star Raids or through free Timed Research, and if you're lucky, you may encounter a Shiny one. The event runs Sunday, October 4, at 12:00 a.m. to Saturday, October 10, 2026, at 11:59 p.m. local time; Timed Research rewards must be claimed before Monday, October 12, 2026, at 11:59 p.m. local time.", details: { bossesTitle: "Featured Pokémon", bosses: ["Astronaut Pikachu ✨ (1★ Raid)"], bonuses: ["Pokémon Debut — Astronaut Pikachu, a new costumed Pokémon, appears for the first time in Pokémon GO. You might find one in raids or in Timed Research. If you're lucky, you may encounter a Shiny one!", "One-Star Raids: Astronaut Pikachu. If you're lucky, you may encounter a Shiny one!", "Free Timed Research will be available to Trainers during the event — complete the research tasks to earn an encounter with Astronaut Pikachu and more!", "Timed Research expires: tasks must be completed and rewards claimed before Monday, October 12, 2026, at 11:59 p.m. local time."], alert: "Timed Research expires — complete the tasks and claim rewards before Monday, October 12, 2026, at 11:59 p.m. local time!", tips: ["Astronaut Pikachu is a brand-new costumed Pokémon — this is its Pokémon GO debut, and it can be Shiny.", "Two ways to get one: battle it in One-Star Raids, or complete the free Timed Research for a guaranteed encounter.", "One-Star Raids are soloable — no group needed.", "The event runs the full day, 12:00 a.m. to 11:59 p.m. local time, October 4 through October 10.", "Overlaps with Community Day: Zorua on Saturday, October 10 — Astronaut Pikachu raids run the whole day alongside it.", "Timed Research rewards expire Monday, October 12, 2026, at 11:59 p.m. local time — two days after the event ends, so don't leave them unclaimed."], relatedNews: [{ id: 54, label: "Blast off with Astronaut Pikachu during World Space Week!", icon: "🚀" }] } },
-  { id: 213, title: "Fall Marathon: Buddy Trek", type: "Event", date: "2026-10-13", endDate: "2026-10-19", published: "2026-09-21", updated: "2026-09-21", lastUpdated: "September 21, 2026 at 11:04 AM", time: "Oct 13 – Oct 19", whenText: "Tuesday, October 13 to Monday, October 19, 2026, local time. Event hours to be announced.", color: "#CA6F1E", icon: "🍂", iconImg: "assets/pokemon-images/National-Event-Costume-Dex/regular/Gen-1_Kanto/0025_f3341.webp", featured: false, summary: "Fall Marathon: Buddy Trek runs Tuesday, October 13 to Monday, October 19, 2026. Featured Pokémon, bonuses, and event hours to be announced.", details: { bonuses: ["Event features and bonuses to be announced"], tips: ["Save the date — October 13 to October 19, 2026.", "Full details will be announced closer to the date."] } },
+  { id: 213, title: "Fall Marathon: Buddy Trek", type: "Event", url: "https://pokemongo.com/en/news/fall-marathon-buddy-trek-2026", date: "2026-10-13", endDate: "2026-10-19", startsAt: "2026-10-13T10:00:00", endsAt: "2026-10-19T20:00:00", endHour: 20, endMin: 0, published: "2026-09-23", updated: "2026-09-23", lastUpdated: "September 23, 2026 at 12:58 PM", time: "Oct 13 – Oct 19", whenText: "Tuesday, October 13, 2026, at 10:00 a.m. to Monday, October 19, 2026, at 8:00 p.m. local time", color: "#CA6F1E", icon: "🍂", iconImg: "assets/pokemon-images/National-Dex/regular/Gen-9_Paldea/0946.webp", featured: true, summary: "Bramblin makes its Pokémon GO debut during Fall Marathon: Buddy Trek, encountered through GO Pass tasks or Incense. Mega Manectric can be raised to Super Max Level for the first time, gaining the additional Charged Attack Discharge+ while Mega Evolved. Incense rotates between two Pokémon line-ups at the event's midpoint on October 16, with a boosted Shiny Electrike rate all event and a boosted Shiny Hisuian Growlithe rate in the second window. A free Timed Research rewards 16,800 XP and an encounter with Pikachu wearing a marathon visor, and the GO Pass: Fall Marathon runs the full window with a US$4.99 GO Pass Deluxe and a US$6.99 GO Pass Deluxe + 6 Ranks option.", details: { bossesTitle: "Featured & Wild Encounters", bosses: ["Bramblin (Debut)", "★Electrike (Wild)", "Ponyta ✨ (Wild)", "Doduo ✨ (Wild)", "Blitzle ✨ (Wild)", "Skarmory ✨ (Wild)"], wildSpawns: ["★Electrike", "Ponyta ✨", "Doduo ✨", "Blitzle ✨", "Skarmory ✨"], fieldResearch: ["Event-themed Field Research tasks will be available.", "Complete Field Research tasks to earn encounters with event-themed Pokémon, including Doduo, Electrike, Bramblin, and more! Some Field Research tasks will also award Manectric Mega Energy, or Rare Candy."], timedResearch: { free: { rewards: ["16,800 XP", "Encounter with Pikachu wearing a marathon visor"], note: "Timed Research expires — tasks must be completed and rewards claimed before Monday, October 19, 2026, at 8:00 p.m. local time." } }, milestones: [{ tier: "Tier 1 – Rank 10", bonus: "Incense (excluding Daily Adventure Incense) activated during the event will last for two hours." }, { tier: "Tier 2 – Rank 20", bonus: "Earn 5× Mega Energy by exploring with Electrike or Manectric as your buddy after Mega Evolving Manectric at least once." }], bonuses: [{ text: "Increased chance to encounter Shiny Electrike", img: "assets/pokemon-images/icons/shiny-sparkles.webp" }, { text: "Increased chance to encounter Shiny Hisuian Growlithe from Incense, October 16 (10:00 a.m.) to October 19 (8:00 p.m.)", img: "assets/pokemon-images/icons/shiny-sparkles.webp" }, { text: "Mega Manectric can be raised to Super Max Level for the first time in Pokémon GO", img: "assets/pokemon-images/Mega/regular/Gen-3_Hoenn/0310_mega.webp" }, { text: "Manectric knows the additional Charged Attack Discharge+ while Mega Evolved — 50 power in Trainer Battles, 150 power in Raid Battles, scaling with Mega Level", img: "assets/pokemon-images/icons/Manectric_Mega_Energy.png" }, { text: "Incense (excluding Daily Adventure Incense), October 13 (10:00 a.m.) to October 16 (10:00 a.m.): Galarian Ponyta, Hoppip, Electrike, Dwebble, Bramblin", img: "assets/pokemon-images/Items/Incense_1.png" }, { text: "Incense (excluding Daily Adventure Incense), October 16 (10:00 a.m.) to October 19 (8:00 p.m.): Hisuian Growlithe, Nincada, Electrike, Helioptile, Bramblin", img: "assets/pokemon-images/Items/Incense_1.png" }], goPass: { free: ["Automatically received Tuesday, October 13 at 10:00 a.m. local time; collect GO Points to rank up through Monday, October 19, 2026, at 8:00 p.m. local time.", "Encounters with event-themed Pokémon", "Incense", "Rare Candy", "Ultra Balls", "And even more goodies!"], deluxe: { price: "$4.99", rewards: ["Additional encounters with even more event-themed Pokémon", "Incense", "Manectric Mega Energy", "Rare Candy XL", "And even more goodies"] }, deluxePlus: { price: "$6.99", rewards: ["Everything in GO Pass Deluxe", "Automatically earn enough GO Points to reach Rank 7"] }, webStore: { giftWithPurchase: ["10 Ultra Balls", "5 Max Revives", "1 Premium Battle Pass", "5 Max Potions"], ultraBox: { name: "GO Pass Deluxe: Fall Marathon + 6 Ranks Ultra Box (Web Store Exclusive)", contents: ["20 Ultra Balls", "10 Max Revives", "10 Max Potions", "5 Premium Battle Passes", "1 Incubator", "1 Super Incubator"] } } }, alert: "GO Pass: Fall Marathon rewards expire Wednesday, October 21, 2026, at 8:00 p.m. local time — claim before then!", tips: ["Bramblin makes its Pokémon GO debut this event via GO Pass tasks and Incense — it's not Shiny-eligible yet, so don't burn time checking for a sparkle.", "★Electrike has a boosted Shiny rate for the whole event and appears in both Incense windows and the wild.", "The Incense line-up swaps at October 16, 10:00 a.m. local time — Hisuian Growlithe's boosted Shiny rate only applies in the second window (Oct 16–19).", "Reach GO Pass Rank 10 for two-hour Incense before you start burning it.", "Reach GO Pass Rank 20 for 5× Mega Energy by exploring with Electrike or Manectric as your buddy after Mega Evolving Manectric once — the fast route to Super Max.", "Raise Mega Manectric's Mega Level to Max before Super Max becomes available — Mega Evolving alone won't power it up.", "Claim GO Pass rewards before Wednesday, October 21, 2026, at 8:00 p.m. local time, and finish Timed Research before Monday, October 19, 2026, at 8:00 p.m. local time."], relatedNews: [{ id: 56, label: "Fall Marathon: Buddy Trek — Bramblin Debut & Mega Manectric Super Max", icon: "🍂" }] } },
   { id: 214, title: "Halloween 2026 Part I", type: "Event", date: "2026-10-27", endDate: "2026-10-31", published: "2026-09-21", updated: "2026-09-21", lastUpdated: "September 21, 2026 at 11:04 AM", time: "Oct 27 – Oct 31", whenText: "Tuesday, October 27 to Saturday, October 31, 2026, local time. Event hours to be announced.", color: "#E67E22", icon: "🎃", featured: false, summary: "Halloween 2026 Part I runs Tuesday, October 27 to Saturday, October 31, 2026. Featured Pokémon, bonuses, and event hours to be announced.", details: { bonuses: ["Event features and bonuses to be announced"], tips: ["Save the date — October 27 to October 31, 2026.", "Full details will be announced closer to the date."] } },
   { id: 215, title: "Halloween 2026 Part II", type: "Event", date: "2026-11-01", endDate: "2026-11-05", published: "2026-09-21", updated: "2026-09-21", lastUpdated: "September 21, 2026 at 11:04 AM", time: "Nov 1 – Nov 5", whenText: "Sunday, November 1 to Thursday, November 5, 2026, local time. Event hours to be announced.", color: "#6C3483", icon: "🎃", featured: false, summary: "Halloween 2026 Part II runs Sunday, November 1 to Thursday, November 5, 2026. Featured Pokémon, bonuses, and event hours to be announced.", details: { bonuses: ["Event features and bonuses to be announced"], tips: ["Save the date — November 1 to November 5, 2026.", "Full details will be announced closer to the date."] } },
   { id: 157, title: "Community Day — November 21", type: "Community Day", url: "https://pokemongo.com/en/news/save-the-date-s24", date: "2026-11-21", endDate: null, time: "Time TBA", whenText: "Saturday, November 21, 2026. Event hours to be announced.", color: "#3498DB", icon: "📅", featured: false, published: "2026-08-10", updated: "2026-08-10", lastUpdated: "August 10, 2026 at 4:01 PM", summary: "Save the date! Community Day returns on Saturday, November 21, 2026. Featured Pokémon and event hours to be announced.", details: { bonuses: ["Event features and bonuses to be announced"], tips: ["Save the date — November 21, 2026 (Saturday).", "Event hours and full details will be announced closer to the date."] } },
@@ -1675,6 +1676,131 @@ const EVENTS = [
 ];
 
 const ANNOUNCEMENTS = [
+  { id: 56, date: "2026-09-23", published: "2026-09-23", updated: "2026-09-23", lastUpdated: "September 23, 2026 at 12:58 PM", title: "Fall Marathon: Buddy Trek — Bramblin Debut & Mega Manectric Super Max", tag: "News", url: "https://pokemongo.com/en/news/fall-marathon-buddy-trek-2026", icon: "assets/pokemon-images/National-Dex/regular/Gen-9_Paldea/0946.webp", heroImg: "assets/News/fall-marathon-buddy-trek-2026.webp", body: "Bramblin makes its Pokémon GO debut during Fall Marathon: Buddy Trek, encountered by completing GO Pass tasks or using Incense—if you're lucky. Mega Manectric can be raised all the way to Super Max Level for the first time, unlocking the additional Charged Attack Discharge+ while Mega Evolved. The event runs Tuesday, October 13 to Monday, October 19, 2026, with the Incense line-up rotating midway through on October 16. A free Timed Research rewards 16,800 XP and an encounter with Pikachu wearing a marathon visor, and the GO Pass: Fall Marathon is free for all Trainers, with a US$4.99 GO Pass Deluxe and a US$6.99 GO Pass Deluxe + 6 Ranks option also available.", fullBody: "Fall Marathon: Buddy Trek runs Tuesday, October 13, at 10:00 a.m. to Monday, October 19, 2026, at 8:00 p.m. local time. For the first time in Pokémon GO, you'll be able to encounter Bramblin—if you're lucky!—when you complete GO Pass tasks or use Incense. Starting with this event, you'll be able to increase Mega Manectric's Mega Level all the way up to Super Max Level for the first time in Pokémon GO; once Mega Evolved, Manectric will be able to use an additional Charged Attack, Discharge+ (50 power in Trainer Battles, 150 power in Raid Battles, with power increasing as its Mega Level rises), though you must first raise a Pokémon's Mega Level to the third level, Max, before increasing it to Super Max, and Mega Evolving alone won't be enough—you'll need to use that Pokémon's Mega Energy to power it up. You may encounter event-themed Pokémon in the wild, including Ponyta, Doduo, Electrike, Blitzle, and more—you might even encounter Skarmory—with an increased chance to encounter Shiny Electrike throughout the event. The following Pokémon will be attracted to Incense (excluding Daily Adventure Incense) during the event: from October 13 at 10:00 a.m. to October 16 at 10:00 a.m. local time, Galarian Ponyta, Hoppip, Electrike, Dwebble, and Bramblin; from October 16 at 10:00 a.m. to October 19 at 8:00 p.m. local time, Hisuian Growlithe, Nincada, Electrike, Helioptile, and Bramblin, with an increased chance to encounter Shiny Hisuian Growlithe during that second window. Reaching Major Milestones on the event GO Pass unlocks two-hour Incense starting at Rank 10 and 5× Mega Energy from exploring with Electrike or Manectric as your buddy—after Mega Evolving Manectric at least once—starting at Rank 20. Event-themed Field Research tasks reward encounters with Pokémon such as Doduo, Electrike, and Bramblin, plus Manectric Mega Energy or Rare Candy, and a free Timed Research rewards 16,800 XP and an encounter with Pikachu wearing a marathon visor—its tasks must be completed and rewards claimed before Monday, October 19, 2026, at 8:00 p.m. local time. The GO Pass: Fall Marathon is free for all Trainers, automatically received Tuesday, October 13 at 10:00 a.m. local time, with a US$4.99 GO Pass Deluxe and a US$6.99 GO Pass Deluxe + 6 Ranks option also available; rewards unlocked in the GO Pass expire Wednesday, October 21, 2026, at 8:00 p.m. local time. *All prices listed are in USD or the equivalent pricing tier in your local currency. **Availability of event tickets and the GO Pass Deluxe may vary by region.", sections: [
+    { heading: "Event Window", items: [
+      "Starts: Tuesday, October 13 at 10:00 AM local time",
+      "Ends: Monday, October 19, 2026 at 8:00 PM local time",
+      "GO Pass rewards expire: Wednesday, October 21, 2026 at 8:00 PM local time",
+      "Timed Research must be completed and claimed before: Monday, October 19, 2026 at 8:00 PM local time"
+    ] },
+    { heading: "Pokémon Debut", icon: "✨", showImages: true, items: [
+      { name: "Bramblin", subtitle: "First time in Pokémon GO — from GO Pass tasks and Incense" }
+    ] },
+    { heading: "Super Max Debut — Mega Manectric", icon: "assets/pokemon-images/icons/dna-helix-icon.webp", showImages: true, items: [
+      { name: "Mega Manectric", subtitle: "Reaches Super Max Level for the first time in Pokémon GO" }
+    ] },
+    { heading: "Discharge+ & Super Max Level", items: [
+      "Mega Manectric can be raised to Super Max Level for the first time in Pokémon GO.",
+      "Manectric knows the additional Charged Attack Discharge+ while Mega Evolved.",
+      "Discharge+ — 50 power in Trainer Battles, 150 power in Raid Battles.",
+      "The power of this attack increases with the Pokémon's Mega Level.",
+      "You must raise a Pokémon's Mega Level to the third level, Max, before you can increase it to Super Max.",
+      "Mega Evolving alone won't be enough — you'll need to use that Pokémon's Mega Energy to power it up."
+    ] },
+    { heading: "Wild Encounters", icon: "✨", showImages: true, intro: "Event-themed Pokémon may appear in the wild, including Ponyta, Doduo, Electrike, Blitzle, and more! You might even encounter Skarmory.", items: [
+      { name: "Ponyta" },
+      { name: "Doduo" },
+      { name: "Electrike", subtitle: "Increased chance of Shiny", boostedShiny: true },
+      { name: "Blitzle" },
+      { name: "Skarmory" }
+    ] },
+    { heading: "Incense Encounters — October 13, 10:00 a.m. to October 16, 10:00 a.m.", icon: "assets/pokemon-images/Items/Incense_1.png", showImages: true, intro: "The following Pokémon will be attracted to Incense (excluding Daily Adventure Incense) during this window.", items: [
+      { name: "Galarian Ponyta" },
+      { name: "Hoppip" },
+      { name: "Electrike", subtitle: "Increased chance of Shiny", boostedShiny: true },
+      { name: "Dwebble" },
+      { name: "Bramblin" }
+    ] },
+    { heading: "Incense Encounters — October 16, 10:00 a.m. to October 19, 8:00 p.m.", icon: "assets/pokemon-images/Items/Incense_1.png", showImages: true, intro: "The following Pokémon will be attracted to Incense (excluding Daily Adventure Incense) during this window.", items: [
+      { name: "Hisuian Growlithe", subtitle: "Increased chance of Shiny (this window only)", boostedShiny: true },
+      { name: "Nincada" },
+      { name: "Electrike", subtitle: "Increased chance of Shiny", boostedShiny: true },
+      { name: "Helioptile" },
+      { name: "Bramblin" }
+    ] },
+    { heading: "Event Bonuses", items: [
+      "Increased chance to encounter Shiny Electrike.",
+      "Increased chance to encounter Shiny Hisuian Growlithe from Incense from October 16 at 10:00 a.m. to October 19, 2026, at 8:00 p.m. local time."
+    ] },
+    { heading: "GO Pass Milestone Bonuses", items: [
+      "Tier 1 — Starting at Rank 10: Incense (excluding Daily Adventure Incense) activated during the event will last for two hours.",
+      "Tier 2 — Starting at Rank 20: Earn 5× Mega Energy by exploring with Electrike or Manectric as your buddy after Mega Evolving Manectric at least once.",
+      "Keep an eye out for additional bonus tasks for this GO Pass during the event!"
+    ] },
+    { heading: "Field Research", items: [
+      "Event-themed Field Research tasks will be available.",
+      "Complete Field Research tasks to earn encounters with event-themed Pokémon, including Doduo, Electrike, Bramblin, and more! Some Field Research tasks will also award Manectric Mega Energy, or Rare Candy."
+    ] },
+    { heading: "Timed Research (Free)", icon: "assets/pokemon-images/icons/green-research.png", items: [
+      { text: "16,800 XP", img: "assets/pokemon-images/icons/xp.png" },
+      { text: "Encounter with Pikachu wearing a marathon visor", img: "assets/pokemon-images/National-Event-Costume-Dex/regular/Gen-1_Kanto/0025_f3341.webp" },
+      "Timed Research expires — the tasks associated with this Timed Research must be completed and their rewards must be claimed before Monday, October 19, 2026, at 8:00 p.m. local time."
+    ] },
+    { heading: "GO Pass: Fall Marathon", items: [
+      "A GO Pass is a free, limited-time progression track available during a specified period. By collecting GO Points, you can increase your rank to earn rewards.",
+      "Automatically received Tuesday, October 13 at 10:00 a.m. local time; collect GO Points and rank up through Monday, October 19, 2026 at 8:00 p.m. local time.",
+      "GO Pass Deluxe: US$4.99 — upgraded rewards and faster progression.",
+      "GO Pass Deluxe + 6 Ranks: US$6.99 — also automatically earn enough GO Points to reach Rank 7.",
+      "While progressing through GO Pass Deluxe, you can claim all of the rewards from both the free GO Pass and GO Pass Deluxe. You can upgrade to a GO Pass Deluxe at any time and still collect rewards from previously unlocked ranks.",
+      "Rewards unlocked in the GO Pass will expire on Wednesday, October 21, 2026, at 8:00 p.m. local time, so be sure to claim your rewards before they're gone!",
+      "Availability of event tickets and the GO Pass Deluxe may vary by region."
+    ] },
+    { heading: "GO Pass (Free) Rewards", items: [
+      { text: "Encounters with event-themed Pokémon", img: "assets/pokemon-images/icons/QuestPokemonReward.png" },
+      { text: "Incense", img: "assets/pokemon-images/Items/Incense_1.png" },
+      { text: "Rare Candy", img: "assets/pokemon-images/Items/Rare-candy.png" },
+      { text: "Ultra Balls", img: "assets/pokemon-images/Items/ultraball_sprite.png" },
+      { text: "And even more goodies!", img: "assets/pokemon-images/icons/plus-icon.png" }
+    ] },
+    { heading: "GO Pass Deluxe ($4.99)", items: [
+      { text: "Everything in the free track", img: "assets/pokemon-images/Items/go_pass_deluxe.webp" },
+      { text: "Additional encounters with even more event-themed Pokémon", img: "assets/pokemon-images/icons/QuestPokemonReward.png" },
+      { text: "Incense", img: "assets/pokemon-images/Items/Incense_1.png" },
+      { text: "Manectric Mega Energy", img: "assets/pokemon-images/icons/Manectric_Mega_Energy.png" },
+      { text: "Rare Candy XL", img: "assets/pokemon-images/Items/RareXLCandy_PSD.png" },
+      { text: "And even more goodies", img: "assets/pokemon-images/icons/plus-icon.png" }
+    ] },
+    { heading: "GO Pass Deluxe + 6 Ranks ($6.99)", items: [
+      { text: "Everything in GO Pass Deluxe", img: "assets/pokemon-images/Items/go_pass_deluxe.webp" },
+      { text: "Automatically earn enough GO Points to reach Rank 7", img: "assets/pokemon-images/icons/item_pass_point_01.png" }
+    ] },
+    { heading: "Web Store — GO Pass Deluxe: Fall Marathon (Gift with Purchase)", items: [
+      "GO Pass Deluxe purchased via the Pokémon GO Web Store activates as soon as the GO Pass begins.",
+      { text: "10 Ultra Balls", img: "assets/pokemon-images/Items/ultraball_sprite.png" },
+      { text: "5 Max Revives", img: "assets/pokemon-images/Items/Max-revive.png" },
+      { text: "1 Premium Battle Pass", img: "assets/pokemon-images/Items/premium-raid-pass.png" },
+      { text: "5 Max Potions", img: "assets/pokemon-images/Items/Max-potion.png" }
+    ] },
+    { heading: "Web Store — GO Pass Deluxe: Fall Marathon + 6 Ranks (Gift with Purchase)", items: [
+      { text: "10 Ultra Balls", img: "assets/pokemon-images/Items/ultraball_sprite.png" },
+      { text: "5 Max Revives", img: "assets/pokemon-images/Items/Max-revive.png" },
+      { text: "2 Premium Battle Passes", img: "assets/pokemon-images/Items/premium-raid-pass.png" },
+      { text: "5 Max Potions", img: "assets/pokemon-images/Items/Max-potion.png" }
+    ] },
+    { heading: "GO Pass Deluxe: Fall Marathon + 6 Ranks Ultra Box (Web Store Exclusive)", items: [
+      { text: "20 Ultra Balls", img: "assets/pokemon-images/Items/ultraball_sprite.png" },
+      { text: "10 Max Revives", img: "assets/pokemon-images/Items/Max-revive.png" },
+      { text: "10 Max Potions", img: "assets/pokemon-images/Items/Max-potion.png" },
+      { text: "5 Premium Battle Passes", img: "assets/pokemon-images/Items/premium-raid-pass.png" },
+      { text: "1 Incubator", img: "assets/pokemon-images/Items/EggIncubatorIAP_Activated.png" },
+      { text: "1 Super Incubator", img: "assets/pokemon-images/Items/super_incubator.webp" }
+    ] },
+    { heading: "Notes", items: [
+      "All prices listed are in USD or the equivalent pricing tier in your local currency.",
+      "Availability of event tickets and the GO Pass Deluxe may vary by region.",
+      "Please be aware of your surroundings and follow guidelines from local health authorities when playing Pokémon GO.",
+      "Upcoming events are subject to change."
+    ] },
+    { heading: "Tips", items: [
+      "Bramblin makes its Pokémon GO debut this event but is not Shiny-eligible yet — don't waste time checking for a sparkle.",
+      "Electrike has a boosted Shiny rate for the entire event and appears in both Incense windows — prioritize it early.",
+      "The Incense line-up swaps at October 16 at 10:00 a.m. local time — Hisuian Growlithe's boosted Shiny rate only applies during the second window (Oct 16–19).",
+      "Reach GO Pass Rank 10 before burning Incense — it unlocks two-hour Incense duration for the rest of the event.",
+      "Reach GO Pass Rank 20 for 5× Mega Energy by exploring with Electrike or Manectric as your buddy after Mega Evolving Manectric once — the fastest route to Super Max.",
+      "Raise Mega Manectric's Mega Level to Max before pushing to Super Max — Mega Evolving alone won't power it up.",
+      "Claim all GO Pass rewards before Wednesday, October 21, 2026 at 8:00 p.m. local time, and finish Timed Research before Monday, October 19, 2026 at 8:00 p.m. local time — both expire."
+    ] }
+  ] },
   { id: 55, date: "2026-09-23", published: "2026-09-23", updated: "2026-09-23", lastUpdated: "September 23, 2026 at 9:14 AM", title: "GO Pass: October — Kyogre & the Lucky Trinket", tag: "News", url: "https://pokemongo.com/en/news/go-pass-october-2026", icon: "assets/pokemon-images/National-Dex/regular/Gen-3_Hoenn/0382.webp", heroImg: "assets/News/go-pass-october-2026.webp", body: "GO Pass: October brings an Encounter with Kyogre (Shiny possible) to the free track, running Tuesday, October 6 to Tuesday, November 3, 2026. GO Pass Deluxe (US$7.99) adds a Lucky Trinket and a Super Incubator, plus extra Pokémon encounters, while GO Pass Deluxe + 10 Ranks (US$9.99) also auto-ranks up to Rank 11. There's no daily GO Points limit from Saturday, October 31 to Sunday, November 1, so bank as many ranks as you can during that window. Rewards unlocked in the GO Pass expire Thursday, November 5, so be sure to claim them before they're gone.", fullBody: "\"Kyogre makes waves and the Lucky Trinket returns in GO Pass: October!\" — that's how Pokémon GO framed this month's headline encounter. GO Pass: October runs Tuesday, October 6, at 10:00 a.m. to Tuesday, November 3, 2026, at 10:00 a.m. local time. Trainers automatically receive GO Pass: October on Tuesday, October 6, at 10:00 a.m. local time, and can complete Pass Tasks to earn GO Points and rank up for additional rewards through Tuesday, November 3, at 10:00 a.m. local time. From Saturday, October 31, at 12:00 a.m. to Sunday, November 1, at 11:59 p.m. local time, there's no daily limit on how many GO Points you can earn. For US$7.99, Trainers can upgrade to GO Pass Deluxe, a paid version of the GO Pass that offers upgraded rewards and faster progression;** for US$9.99,* Trainers can upgrade to GO Pass Deluxe + 10 Ranks to also automatically earn enough GO Points to reach Rank 11. While progressing through GO Pass Deluxe, Trainers can claim all of the rewards from both the free GO Pass and GO Pass Deluxe — you can upgrade to a GO Pass Deluxe at any time and still collect rewards from previously unlocked ranks. Rewards unlocked in the GO Pass will expire on Thursday, November 5, at 10:00 a.m. local time, so be sure to claim your rewards before they're gone. The GO Pass Deluxe will also be available on the Pokémon GO Web Store, and GO Pass Deluxe purchased via the Web Store will activate as soon as the GO Pass begins. The Lucky Trinket returns as the final reward in GO Pass Deluxe: October, and the one earned from it expires Sunday, November 8, 2026, at 11:59 p.m. local time, regardless of when it was claimed. *All prices listed are in USD or the equivalent pricing tier in your local currency. **Availability of event tickets and the GO Pass Deluxe may vary by region.", sections: [
     { heading: "Event Window", items: [
       "Starts: Tuesday, October 6 at 10:00 AM local time",
