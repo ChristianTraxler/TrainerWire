@@ -481,6 +481,11 @@
 "shiny": true
 },
 {
+"id": "astronaut",
+"name": "Astronaut",
+"shiny": true
+},
+{
 "id": "c1",
 "name": "Santa hat",
 "shiny": true
