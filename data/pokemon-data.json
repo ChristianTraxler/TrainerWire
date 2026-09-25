@@ -1962,6 +1962,24 @@
   "cpBoost": "1907–2001",
   "weather": "Rainy or Fog"
  },
+ "Hisuian Typhlosion": {
+  "types": [
+   "Fire",
+   "Ghost"
+  ],
+  "cp": "1632–1710",
+  "cpBoost": "2041–2138",
+  "weather": "Sunny or Fog"
+ },
+ "Hisuian Decidueye": {
+  "types": [
+   "Grass",
+   "Fighting"
+  ],
+  "cp": "1579–1655",
+  "cpBoost": "1974–2069",
+  "weather": "Sunny or Cloudy"
+ },
  "Hitmonchan": {
   "types": [
    "Fighting"

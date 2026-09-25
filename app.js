@@ -3094,7 +3094,7 @@ const CURRENT_RAID_BOSSES = {
     "Dratini (1\u2605 Raid) \u2728","Tyrunt (1\u2605 Raid) \u2728","Amaura (1\u2605 Raid) \u2728","Honedge (1\u2605 Raid) \u2728"
   ],
   "3-Star Raids": [
-    "Hisuian Sneasel (3\u2605 Raid) \u2728","Hisuian Lilligant (3\u2605 Raid) \u2728","Passimian (3\u2605 Raid) \u2728"
+    "Hisuian Typhlosion (3\u2605 Raid) \u2728","Hisuian Samurott (3\u2605 Raid) \u2728","Hisuian Decidueye (3\u2605 Raid) \u2728"
   ],
   "5-Star Raids": [
     "Zamazenta (Hero of Many Battles) (5\u2605 Raid) \u2728"
@@ -12282,7 +12282,7 @@ function render() {
       });
       raidsTabHTML = `<div style="display:flex;flex-direction:column;gap:14px">
         <div style="text-align:center;padding:10px;font-size:14px;font-weight:600;color:${th.text};position:relative">
-          <div style="${isMobile ? "position:static;margin:0 0 10px" : "position:absolute;top:14px;right:16px"};font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on September 21, 2026 at 7:27 pm</div>
+          <div style="${isMobile ? "position:static;margin:0 0 10px" : "position:absolute;top:14px;right:16px"};font-size:${isMobile ? 10 : 11}px;color:${th.textMuted};font-weight:500;font-style:italic;text-align:right">Last updated on September 25, 2026 at 2:46 pm</div>
           Current Raid Bosses</div>
         <div style="text-align:center;font-size:11px;color:${th.textMuted};font-weight:500;margin-top:-10px">Data sourced from Pok\u00E9monGO.com, LeekDuck.com & Pok\u00E9monGOHUB.net</div>
         <div style="text-align:center;font-size:12px;color:${th.textMuted};font-weight:600;margin-top:2px">Tap a Pok\u00E9mon to see its weaknesses & resistances</div>
