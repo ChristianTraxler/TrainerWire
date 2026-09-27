@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "4.050";
+const APP_VERSION = "4.051";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -1684,6 +1684,37 @@ const EVENTS = [
 ];
 
 const ANNOUNCEMENTS = [
+  { id: 60, date: "2026-09-27", published: "2026-09-27", updated: "2026-09-27", lastUpdated: "September 27, 2026 at 5:36 PM", title: "Pokémon TCG 30th Celebration Event", tag: "News", url: "https://pokemongo.com/en/news/tcg-30th-celebration-event", icon: "assets/pokemon-images/Mega/regular/Gen-1_Kanto/0094_mega.webp", heroImg: "assets/News/tcg-30th-celebration-event.webp", body: "Commemorate the release of the Pokémon Trading Card Game's 30th Celebration collection! Pokémon GO Trainers can take part by visiting select Best Buy, GameStop, and Target retail locations (and their websites) in the United States and taking on Mega Raids featuring Mega Gengar plus event-themed Timed Research, running Sunday, September 27, at 10:00 a.m. to Tuesday, October 20, 2026, at 10:00 p.m. local time. Trainers who redeem a Pokémon GO gift card from Target, GameStop, or Best Buy between September 27 and October 31, 2026, will also receive the Gengar Knit Cap avatar item upon redemption.", fullBody: "Trainers, commemorate the release of the Pokémon Trading Card Game's 30th Celebration collection! Pokémon GO Trainers can take part in this release by visiting select retail locations in the United States and participating in Mega Raids and event-themed Timed Research. Plus, Trainers who redeem a Pokémon GO gift card from certain retailers and online stores will receive an avatar item upon redemption! Best Buy retail stores and bestbuy.com, GameStop retail stores and gamestop.com, and Target retail stores and Target.com are all participating. Visit a participating store to enjoy everything the promotion has to offer! The Pokémon TCG 30th Celebration Event runs Sunday, September 27, at 10:00 a.m. to Tuesday, October 20, 2026, at 10:00 p.m. local time. Mega Gengar will appear more frequently in Mega Raids at participating retail locations — if you're lucky, you may encounter a Shiny Gengar! Trainers can get event-themed Timed Research throughout the event by going to one of the participating retail locations and opening Pokémon GO! Complete the research tasks to earn Poké Balls, encounters with event-themed Pokémon, and more! Please note that Timed Research can be obtained by visiting select retail locations until Tuesday, October 20, 2026, at 10:00 p.m. local time. After obtaining the Timed Research, the associated tasks must be completed and their rewards must be claimed before Friday, November 20, 2026, at 10:00 p.m. local time. Trainers who redeem a Pokémon GO gift card from Target, GameStop, or Best Buy between September 27 and October 31, 2026, will receive the Gengar Knit Cap avatar item upon redemption at https://store.pokemongo.com/offer-redemption. Offer available only for Target, GameStop, or Best Buy–purchased Pokémon GO gift card code redemptions from September 27 to October 31, 2026. Limit one per account. Trainers who already own the Gengar Knit Cap will receive an alternate item of equal value. Please be aware of your surroundings and follow guidelines from local health authorities when playing Pokémon GO. Upcoming events are subject to change. Be sure to follow us on social media, opt in to receiving push notifications, and subscribe to our emails to stay updated.", sections: [
+    { heading: "Participating Retailers", items: [
+      "Best Buy retail stores and bestbuy.com",
+      "GameStop retail stores and gamestop.com",
+      "Target retail stores and Target.com",
+      "US only — available at select retail locations in the United States",
+      "Visit a participating store to enjoy everything the promotion has to offer."
+    ] },
+    { heading: "Event Window", items: [
+      "Sunday, September 27, at 10:00 a.m. to Tuesday, October 20, 2026, at 10:00 p.m. local time"
+    ] },
+    { heading: "Featured Pokémon", icon: "✨", showImages: true, intro: "The following Pokémon will appear more frequently in Mega Raids at participating retail locations. If you're lucky, you may encounter a Shiny Gengar!", items: [
+      "Mega Gengar ✨ (Mega)"
+    ] },
+    { heading: "Timed Research", items: [
+      "Trainers can get event-themed Timed Research throughout the event by going to one of the participating retail locations and opening Pokémon GO!",
+      "Complete the research tasks to earn the following rewards:",
+      { text: "Poké Balls", img: "assets/pokemon-images/Items/db/poke-ball.webp" },
+      { text: "Encounters with event-themed Pokémon", img: "assets/pokemon-images/icons/QuestPokemonReward.png" },
+      { text: "And more!", img: "assets/pokemon-images/icons/plus-icon.png" },
+      "Timed Research can be obtained by visiting select retail locations until Tuesday, October 20, 2026, at 10:00 p.m. local time.",
+      "After obtaining the Timed Research, the associated tasks must be completed and their rewards must be claimed before Friday, November 20, 2026, at 10:00 p.m. local time."
+    ] },
+    { heading: "Bonus in-Game Item with Gift Card Purchase", items: [
+      "Trainers who redeem a Pokémon GO gift card from Target, GameStop, or Best Buy between September 27 and October 31, 2026, will receive the Gengar Knit Cap avatar item upon redemption at https://store.pokemongo.com/offer-redemption.",
+      "Offer available only for Target, GameStop, or Best Buy–purchased Pokémon GO gift card code redemptions from September 27 to October 31, 2026. Limit one per account. Trainers who already own the Gengar Knit Cap will receive an alternate item of equal value."
+    ] },
+    { heading: "Notes", items: [
+      "Please be aware of your surroundings and follow guidelines from local health authorities when playing Pokémon GO. Upcoming events are subject to change."
+    ] }
+  ] },
   { id: 59, date: "2026-09-25", published: "2026-09-25", updated: "2026-09-25", lastUpdated: "September 25, 2026 at 2:34 PM", title: "Celebrate the Festival of Lights with the return of Pikachu wearing a saree and Pikachu wearing a kurta!", tag: "News", url: "https://pokemongo.com/en/news/festival-of-lights-2026", icon: "assets/pokemon-images/Event-Dex/regular/Gen-1_Kanto/0025_saree-female.webp", heroImg: "assets/News/festival-of-lights-2026.webp", body: "The Festival of Lights is coming back to Pokémon GO! For this year's celebrations — exclusive to Trainers in India — Pikachu wearing a saree and Pikachu wearing a kurta return, running Friday, November 6, at 10:00 a.m. to Sunday, November 8, 2026, at 8:00 p.m. local time.", fullBody: "The Festival of Lights is coming back to Pokémon GO! For this year's celebrations — exclusive to Trainers in India — get ready for the return of Pikachu wearing a saree and Pikachu wearing a kurta! Festival of Lights runs Friday, November 6, at 10:00 a.m. to Sunday, November 8, 2026, at 8:00 p.m. local time. Pikachu wearing a saree and Pikachu wearing a kurta return to raids, with a chance of a Shiny encounter or one with a Special Background. During Sparkle O'Clock, event-themed Pokémon appear more frequently in the wild for five minutes at 6:00 p.m., 6:30 p.m., 7:00 p.m., and 7:30 p.m., and Lure Modules are more likely to attract the same event-themed Pokémon. Complete Branched Timed Research — available from Sunday, November 1, at 6:00 a.m. — for XP, Stardust, stickers featuring Pikachu wearing a saree or Pikachu wearing a kurta, and an encounter with one of them wearing a Special Background. Collection Challenges also reward XP and Stardust for catching event-themed Pokémon. Event bonuses include 3× Lure Module duration, stickers from spinning PokéStops, and some event-themed Pokémon will also glow.", sections: [
     { heading: "Event Window", items: [
       "Friday, November 6, at 10:00 a.m. to Sunday, November 8, 2026, at 8:00 p.m. local time",
