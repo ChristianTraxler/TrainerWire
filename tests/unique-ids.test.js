@@ -1,6 +1,8 @@
 // Guards against duplicate ids in the EVENTS and ANNOUNCEMENTS arrays.
 // No framework — run with:  node tests/unique-ids.test.js
 // Lookups use Array.find(), so a duplicate id silently opens the wrong card.
+// Also checks that every relatedNews button points at a real target
+// (`id` → ANNOUNCEMENTS, `eventId` → EVENTS).
 
 const fs = require("fs");
 const path = require("path");
@@ -8,7 +10,7 @@ const path = require("path");
 const SRC = fs.readFileSync(path.join(__dirname, "..", "app.js"), "utf8");
 
 // Walk `const NAME = [ ... ];` in app.js, skipping string and template
-// literals, and read each top-level entry's `id:`.
+// literals, and read each top-level entry's `id:` plus its relatedNews links.
 // Text-only on purpose: some entries call app functions when evaluated.
 function scanArray(name) {
   const decl = "const " + name + " = [";
@@ -28,7 +30,9 @@ function scanArray(name) {
         const text = SRC.slice(entryStart, i + 1);
         const id = text.match(/^\{\s*id:\s*(\d+)/);
         const title = (text.match(/title:\s*"([^"]*)"/) || [])[1];
-        entries.push({ id: id ? Number(id[1]) : null, title });
+        const rel = text.match(/relatedNews:\s*\[[^\]]*\]/);
+        const links = rel ? [...rel[0].matchAll(/\{\s*(id|eventId):\s*(\d+)/g)].map(m => ({ kind: m[1], id: Number(m[2]) })) : [];
+        entries.push({ id: id ? Number(id[1]) : null, title, links });
         entryStart = -1;
       }
       depth--;
@@ -60,6 +64,18 @@ for (const [name, list] of [["EVENTS", EVENTS], ["ANNOUNCEMENTS", ANNOUNCEMENTS]
   const dups = duplicates(list);
   check("no duplicate ids", dups.length === 0, "duplicated: " + dups.join(", "));
 }
+
+console.log("relatedNews links:");
+const newsIds = new Set(ANNOUNCEMENTS.map(a => a.id));
+const eventIds = new Set(EVENTS.map(e => e.id));
+const broken = [];
+for (const e of EVENTS) {
+  for (const l of e.links) {
+    const ok = l.kind === "eventId" ? eventIds.has(l.id) : newsIds.has(l.id);
+    if (!ok) broken.push("EVENTS " + e.id + " → " + l.kind + " " + l.id);
+  }
+}
+check("every relatedNews link points at an existing entry", broken.length === 0, broken.join(", "));
 
 console.log("\n" + passed + " passed, " + failed + " failed");
 process.exit(failed ? 1 : 0);
