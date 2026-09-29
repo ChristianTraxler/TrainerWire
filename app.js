@@ -235,9 +235,9 @@ const POGO_EVO = {
   496:"25 Candy",497:"100 Candy",499:"25 Candy",500:"100 Candy",502:"25 Candy",503:"100 Candy",505:"50 Candy",507:"25 Candy",508:"100 Candy",510:"50 Candy",512:"100 Candy + Unova Stone",514:"100 Candy + Unova Stone",516:"100 Candy + Unova Stone",518:"50 Candy",520:"12 Candy",521:"50 Candy",523:"50 Candy",525:"25 Candy",526:"200 Candy or Trade",528:"50 Candy + Walk 1km (Buddy)",530:"50 Candy",533:"25 Candy",534:"200 Candy or Trade",536:"25 Candy",537:"100 Candy",541:"25 Candy",542:"100 Candy",544:"25 Candy",545:"100 Candy",547:"50 Candy + Sun Stone",549:"50 Candy + Sun Stone",552:"25 Candy",553:"100 Candy",555:"50 Candy",558:"50 Candy",560:"50 Candy",563:"50 Candy",565:"50 Candy",567:"50 Candy",569:"50 Candy",571:"50 Candy",573:"50 Candy",575:"25 Candy",576:"100 Candy",578:"25 Candy",579:"100 Candy",581:"50 Candy",583:"25 Candy",584:"100 Candy",586:"50 Candy",589:"200 Candy or Trade",591:"50 Candy",593:"50 Candy",596:"50 Candy",598:"50 Candy",600:"25 Candy",601:"100 Candy",603:"25 Candy",604:"100 Candy + Unova Stone",606:"50 Candy",608:"25 Candy",609:"100 Candy + Unova Stone",611:"25 Candy",612:"100 Candy",614:"50 Candy",617:"200 Candy or Trade",620:"50 Candy",623:"50 Candy",625:"50 Candy",628:"50 Candy",630:"50 Candy",634:"25 Candy",635:"100 Candy",637:"400 Candy",
   651:"25 Candy",652:"100 Candy",654:"25 Candy",655:"100 Candy",657:"25 Candy",658:"100 Candy",660:"50 Candy",662:"25 Candy",663:"100 Candy",665:"25 Candy",666:"100 Candy",668:"50 Candy",673:"50 Candy",675:"50 Candy",680:"25 Candy",681:"100 Candy",683:"50 Candy + Use Incense (Buddy)",685:"50 Candy + Feed 25 Treats (Buddy)",687:"50 Candy (Phone Upside Down)",689:"50 Candy",691:"50 Candy",693:"50 Candy",695:"50 Candy",697:"50 Candy",699:"50 Candy",700:"25 Candy + Earn 70 Hearts (Buddy)",705:"25 Candy",706:"100 Candy (Rainy Weather or Rainy Lure)",709:"200 Candy or Trade",711:"50 Candy",713:"50 Candy",715:"400 Candy",
   723:"25 Candy",724:"100 Candy",726:"25 Candy",727:"100 Candy",729:"25 Candy",730:"100 Candy",732:"25 Candy",733:"100 Candy",735:"50 Candy",737:"25 Candy",738:"100 Candy + Magnetic Lure",740:"50 Candy",743:"50 Candy",745:"50 Candy (Day=Midday, Night=Midnight, Dusk=Event Rockruff)",748:"50 Candy",750:"50 Candy",752:"50 Candy",754:"50 Candy",756:"50 Candy",758:"50 Candy (\u2640 Only)",760:"400 Candy",762:"25 Candy",763:"100 Candy (\u2640 Only)",768:"50 Candy",770:"50 Candy",783:"25 Candy",784:"100 Candy",809:"400 Candy",
-  811:"25 Candy",812:"100 Candy",814:"25 Candy",815:"100 Candy",817:"25 Candy",818:"100 Candy",820:"50 Candy",822:"25 Candy",823:"100 Candy",825:"25 Candy",826:"100 Candy",828:"50 Candy",830:"50 Candy",832:"50 Candy",834:"50 Candy",836:"50 Candy",838:"25 Candy",839:"100 Candy",841:"50 Candy",842:"50 Candy",844:"50 Candy",847:"50 Candy",849:"50 Candy",851:"50 Candy",853:"50 Candy",855:"50 Candy",857:"25 Candy",858:"100 Candy",860:"25 Candy",861:"100 Candy",862:"100 Candy (Night)",863:"50 Candy",864:"50 Candy",865:"50 Candy",866:"100 Candy",867:"50 Candy",869:"50 Candy",873:"50 Candy",879:"50 Candy",886:"25 Candy",887:"100 Candy",
+  811:"25 Candy",812:"100 Candy",814:"25 Candy",815:"100 Candy",817:"25 Candy",818:"100 Candy",820:"50 Candy",822:"25 Candy",823:"100 Candy",825:"25 Candy",826:"100 Candy",828:"50 Candy",830:"50 Candy",832:"50 Candy",834:"50 Candy",836:"50 Candy",838:"25 Candy",839:"100 Candy",841:"200 Candy + 20 Tart Apples",842:"200 Candy + 20 Sweet Apples",844:"50 Candy",847:"50 Candy",849:"50 Candy",851:"50 Candy",853:"50 Candy",855:"50 Candy",857:"25 Candy",858:"100 Candy",860:"25 Candy",861:"100 Candy",862:"100 Candy (Night)",863:"50 Candy",864:"50 Candy",865:"50 Candy",866:"100 Candy",867:"50 Candy",869:"50 Candy",873:"50 Candy",879:"50 Candy",886:"25 Candy",887:"100 Candy",
   899:"50 Candy",900:"Max Battles Only",901:"100 Candy (During Full Moon)",902:"50 Candy",903:"100 Candy + Walk 7km (Buddy, Sunny)",904:"50 Candy + Win 10 Raids (Buddy)",
-  907:"25 Candy",908:"100 Candy",910:"25 Candy",911:"100 Candy",913:"25 Candy",914:"100 Candy",916:"50 Candy",918:"50 Candy",920:"50 Candy",922:"25 Candy",923:"100 Candy + Walk 10km",925:"25 Candy",927:"50 Candy",929:"25 Candy",930:"100 Candy",933:"25 Candy",934:"100 Candy",936:"50 Candy + Defeat 30 Psychic (Buddy)",937:"50 Candy + Defeat 30 Ghost (Buddy)",939:"50 Candy",941:"50 Candy",943:"50 Candy",945:"50 Candy",947:"50 Candy",949:"50 Candy",952:"50 Candy",954:"50 Candy",956:"50 Candy",958:"25 Candy",959:"100 Candy",961:"50 Candy",964:"50 Candy",966:"50 Candy",970:"50 Candy",972:"50 Candy",975:"50 Candy",979:"100 Candy + Defeat 30 Raids (Buddy)",980:"50 Candy",981:"50 Candy",982:"50 Candy",983:"100 Candy",997:"25 Candy",998:"100 Candy",1000:"100 Candy",1011:"50 Candy",1013:"50 Candy",1019:"100 Candy"
+  907:"25 Candy",908:"100 Candy",910:"25 Candy",911:"100 Candy",913:"25 Candy",914:"100 Candy",916:"50 Candy",918:"50 Candy",920:"50 Candy",922:"25 Candy",923:"100 Candy + Walk 10km",925:"25 Candy",927:"50 Candy",929:"25 Candy",930:"100 Candy",933:"25 Candy",934:"100 Candy",936:"50 Candy + Defeat 30 Psychic (Buddy)",937:"50 Candy + Defeat 30 Ghost (Buddy)",939:"50 Candy",941:"50 Candy",943:"50 Candy",945:"50 Candy",947:"50 Candy",949:"50 Candy",952:"50 Candy",954:"50 Candy",956:"50 Candy",958:"25 Candy",959:"100 Candy",961:"50 Candy",964:"50 Candy",966:"50 Candy",970:"50 Candy",972:"50 Candy",975:"50 Candy",979:"100 Candy + Defeat 30 Raids (Buddy)",980:"50 Candy",981:"50 Candy",982:"50 Candy",983:"100 Candy",997:"25 Candy",998:"100 Candy",1000:"100 Candy",1011:"200 Candy + 20 Syrupy Apples",1013:"50 Candy",1019:"400 Candy"
 };
 
 // Local evolution-chain fallback for Community Day cards, used when the live
@@ -350,12 +350,12 @@ async function fetchEvolutionChain(dexNum) {
   if (!res.ok) throw new Error("Failed to fetch evolution chain");
   const chain = await res.json();
   const stages = [];
-  function walk(node, depth) {
+  function walk(node, depth, parent) {
     const num = parseInt(node.species.url.split("/").filter(Boolean).pop(), 10);
-    stages.push({ name: _fmtName(node.species.name), dexNum: num, trigger: POGO_EVO[num] || "", depth });
-    for (const child of node.evolves_to) walk(child, depth + 1);
+    stages.push({ name: _fmtName(node.species.name), dexNum: num, trigger: POGO_EVO[num] || "", depth, parent });
+    for (const child of node.evolves_to) walk(child, depth + 1, num);
   }
-  walk(chain.chain, 0);
+  walk(chain.chain, 0, null);
   // Expand Pokemon with multiple evolution forms
   const EVO_FORM_EXPAND = {
     413: [
@@ -384,7 +384,7 @@ async function fetchEvolutionChain(dexNum) {
   const expanded = [];
   for (const s of stages) {
     if (EVO_FORM_EXPAND[s.dexNum]) {
-      for (const form of EVO_FORM_EXPAND[s.dexNum]) expanded.push({ ...form, depth: s.depth });
+      for (const form of EVO_FORM_EXPAND[s.dexNum]) expanded.push({ ...form, depth: s.depth, parent: s.parent });
     } else {
       expanded.push(s);
     }
@@ -11081,29 +11081,20 @@ function renderPokemonDetail(data, evolutions, th, isMobile) {
       }).join("");
       evoContent = `<div style="display:flex;flex-direction:column;gap:8px;padding:12px;background:${th.surface};border-radius:12px;border:1px solid ${th.border}">${rows}</div>`;
     } else if (hasBranch) {
-      // Build stages: each depth is either a single Pokemon or a branch group
-      const stagesHTML = depths.map((d, di) => {
-        const group = byDepth[d];
-        if (group.length === 1) {
-          // Single Pokemon at this depth
-          const evo = group[0];
-          const arrow = di > 0 ? `<div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">
-            <div style="font-size:18px;color:${th.textMuted}">\u2192</div>
-            <div style="font-size:10px;color:${th.textSecondary};text-align:center;max-width:80px;line-height:1.2">${esc(evo.trigger)}</div>
-          </div>` : "";
-          return `${arrow}${evoCard(evo)}`;
-        } else {
-          // Multiple Pokemon = branch
-          const branchRows = group.map(evo => `<div style="display:flex;align-items:center;gap:4px">
-            <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:${isMobile ? 60 : 70}px">
-              <div style="font-size:16px;color:${th.textMuted}">\u2192</div>
-              <div style="font-size:${isMobile ? 8 : 9}px;color:${th.textSecondary};text-align:center;line-height:1.2">${esc(evo.trigger)}</div>
-            </div>
-            <div style="min-width:${isMobile ? 80 : 100}px">${evoCard(evo)}</div>
-          </div>`).join("");
-          return `<div style="display:flex;flex-direction:column;gap:6px">${branchRows}</div>`;
-        }
-      }).join("");
+      // Tree layout: each Pokemon is followed by a column of the evolutions that come from it, so a
+      // later stage (e.g. Dipplin \u2192 Hydrapple) stays on its own parent's row instead of drifting
+      // to the middle of the branch column.
+      const arrowCell = (evo) => `<div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:${isMobile ? 60 : 70}px">
+        <div style="font-size:16px;color:${th.textMuted}">\u2192</div>
+        <div style="font-size:${isMobile ? 8 : 9}px;color:${th.textSecondary};text-align:center;line-height:1.2">${esc(evo.trigger)}</div>
+      </div>`;
+      const subtree = (evo) => {
+        const kids = regularEvos.filter(e => e.depth === evo.depth + 1 && e.parent === evo.dexNum);
+        if (!kids.length) return evoCard(evo);
+        const rows = kids.map(k => `<div style="display:flex;align-items:center;gap:4px">${arrowCell(k)}${subtree(k)}</div>`).join("");
+        return `<div style="display:flex;align-items:center;gap:6px">${evoCard(evo)}<div style="display:flex;flex-direction:column;gap:6px">${rows}</div></div>`;
+      };
+      const stagesHTML = regularEvos.filter(e => e.depth === 0).map(subtree).join("");
 
       evoContent = `<div style="display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;background:${th.surface};border-radius:12px;border:1px solid ${th.border};overflow-x:auto">
         ${stagesHTML}
