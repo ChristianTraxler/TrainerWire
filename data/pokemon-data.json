@@ -5591,5 +5591,32 @@
    "Poison",
    "Flying"
   ]
+ },
+ "Pikachu wearing a hat and capelet": {
+  "types": [
+   "Electric"
+  ]
+ },
+ "Zubat wearing a top hat": {
+  "types": [
+   "Poison",
+   "Flying"
+  ]
+ },
+ "Sinistea wearing a bow": {
+  "types": [
+   "Ghost"
+  ]
+ },
+ "Piplup wearing a Halloween Mischief costume": {
+  "types": [
+   "Water"
+  ]
+ },
+ "Drifblim wearing a Halloween Mischief costume": {
+  "types": [
+   "Ghost",
+   "Flying"
+  ]
  }
 }
