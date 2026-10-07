@@ -1616,6 +1616,12 @@
    "Flying"
   ]
  },
+ "Gigantamax Duraludon": {
+  "types": [
+   "Steel",
+   "Dragon"
+  ]
+ },
  "Gigantamax Cinderace": {
   "types": [
    "Fire"
