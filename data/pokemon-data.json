@@ -2759,6 +2759,12 @@
   "cpBoost": "1968–2064",
   "weather": "Sunny or Windy"
  },
+ "Mega Chandelure": {
+  "types": [
+   "Ghost",
+   "Fire"
+  ]
+ },
  "Mega Chesnaught": {
   "types": [
    "Grass",
