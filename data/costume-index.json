@@ -476,6 +476,11 @@
 ],
 "25": [
 {
+"id": "f3379",
+"name": "Hat and capelet",
+"shiny": true
+},
+{
 "id": "anniversary2026",
 "name": "Professor Willow's assistant",
 "shiny": true
@@ -1745,6 +1750,18 @@
 {
 "id": "c80",
 "name": "Holiday",
+"shiny": true
+}
+],
+"854": [
+{
+"id": "f3365",
+"name": "Bow",
+"shiny": true
+},
+{
+"id": "f3366",
+"name": "Bow (second form)",
 "shiny": true
 }
 ],
