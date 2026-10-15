@@ -1075,7 +1075,10 @@
  "Druddigon": {
   "types": [
    "Dragon"
-  ]
+  ],
+  "cp": "1487–1561",
+  "cpBoost": "1859–1951",
+  "weather": "Windy"
  },
  "Dugtrio": {
   "types": [
@@ -5046,6 +5049,12 @@
  "Togepi": {
   "types": [
    "Fairy"
+  ]
+ },
+ "Togedemaru": {
+  "types": [
+   "Electric",
+   "Steel"
   ]
  },
  "Togetic": {
