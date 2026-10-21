@@ -374,6 +374,12 @@
    "Water"
   ]
  },
+ "Bisharp": {
+  "types": [
+   "Dark",
+   "Steel"
+  ]
+ },
  "Blacephalon": {
   "types": [
    "Fire",
@@ -2197,6 +2203,12 @@
   "types": [
    "Water",
    "Fighting"
+  ]
+ },
+ "Kingambit": {
+  "types": [
+   "Dark",
+   "Steel"
   ]
  },
  "Kingdra": {
