@@ -5656,5 +5656,36 @@
    "Ghost",
    "Flying"
   ]
+ },
+ "Pikachu wearing a sun crown": {
+  "types": [
+   "Electric"
+  ],
+  "cp": "493–536",
+  "cpBoost": "616–670",
+  "weather": "Rain"
+ },
+ "Pikachu wearing a moon crown": {
+  "types": [
+   "Electric"
+  ],
+  "cp": "493–536",
+  "cpBoost": "616–670",
+  "weather": "Rain"
+ },
+ "Espeon wearing a sun scarf": {
+  "types": [
+   "Psychic"
+  ]
+ },
+ "Umbreon": {
+  "types": [
+   "Dark"
+  ]
+ },
+ "Umbreon wearing a moon scarf": {
+  "types": [
+   "Dark"
+  ]
  }
 }
