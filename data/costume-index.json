@@ -237,6 +237,13 @@
 "shiny": true
 }
 ],
+"169": [
+{
+"id": "tophat",
+"name": "Top hat",
+"shiny": true
+}
+],
 "172": [
 {
 "id": "c1",
@@ -1268,6 +1275,20 @@
 {
 "id": "c16",
 "name": "Tophat",
+"shiny": true
+}
+],
+"41": [
+{
+"id": "tophat",
+"name": "Top hat",
+"shiny": true
+}
+],
+"42": [
+{
+"id": "tophat",
+"name": "Top hat",
 "shiny": true
 }
 ],
