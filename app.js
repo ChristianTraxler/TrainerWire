@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "4.075";
+const APP_VERSION = "4.076";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -1793,6 +1793,75 @@ const EVENTS = [
 ];
 
 const ANNOUNCEMENTS = [
+  { id: 73, date: "2026-11-03", published: "2026-11-05", updated: "2026-11-05", lastUpdated: "November 5, 2026 at 12:55 PM", title: "Get ready for Pokémon GO Wild Area 2026 with Pokémon backgrounds on your Trainer profile, new avatar items, and more exciting details!", tag: "News", url: "https://pokemongo.com/en/news/get-ready-for-gowildarea-2026", icon: "assets/pokemon-images/Wild-Area/2026.png", heroImg: "assets/News/get-ready-for-gowildarea-2026.webp", body: "Starting with Pokémon GO Wild Area 2026, your buddy Pokémon's Location Background or Special Background can appear on your Trainer profile, with the Sendai and Mexico City Location Backgrounds available November 6 and the GO Wild Area 2026 Special Background and all previously released Location Backgrounds available November 9, 2026, at 10:00 a.m. local time. Dynamax Battles add a Private Group option, ticket-holding Trainers choose a Steel- or Dragon-type path in branched Special Research beginning November 14, and new avatar items arrive through GO Pass: Into the Wild and the in-game shop. Pokémon caught in GO Safari Balls can now go to Pokémon HOME, select Adventure Effects can be activated in raid and Max Battle lobbies, and event maps and ticket add-ons are available for Sendai and Mexico City.", fullBody: "Trainers, it's almost time for Pokémon GO Wild Area! As you prepare to set out on this year's mighty adventure, we've got a few more exciting updates to share with you. Read on for the latest GO Wild Area news!", sections: [
+    { heading: "Check out what's coming to Pokémon GO Wild Area 2026!", icon: "assets/pokemon-images/Wild-Area/2026.png", items: [] },
+    { heading: "Upgrade your Trainer profile with backgrounds!", icon: "🖼️", intro: "Starting with Pokémon GO Wild Area 2026, you and your friends will now be able to see your buddy Pokémon's Location Background or Special Background on your Trainer profile! We're excited to see how Trainers customize their profiles and share their adventures with this new feature.", items: [
+      "Backgrounds will be available to display on a rolling basis, beginning with the following.",
+      "The GO Wild Area 2026 Location Backgrounds for Sendai and Mexico City will be available to display beginning on November 6, 2026, at 10:00 a.m. local time.^",
+      "The GO Wild Area 2026 Special Background and all previously released Location Backgrounds will be available to display beginning on November 9, 2026, at 10:00 a.m. local time.^",
+      "Additional Special Backgrounds will become available to display in the future. Please stay tuned for more information."
+    ], footnote: "^This feature will be available to Trainers in their local time. Friends will not be able to see your buddy Pokémon's background until 10:00 a.m. in their local time." },
+    { heading: "You can now join Dynamax Battles privately!", icon: "assets/pokemon-images/icons/dynamax-icon(white).webp", items: [
+      "Starting with this year's Pokémon GO Wild Area, you'll be able to choose how you'd like to join Dynamax Battles.",
+      "When you enter the lobby, you can now choose Battle to be automatically matched with other players, or choose Private Group to enter an existing group.",
+      "You'll be asked to provide a group code in order to join an existing group.",
+      "We hope that this update helps you and your friends take on lots of Dynamax Battles during GO Wild Area and future events!"
+    ] },
+    { heading: "Are you a Steel Scholar or a Dragon Defender? Earn your type-themed event medal in new Special Research.", icon: "📜", intro: "During Pokémon GO Wild Area: Global, ticket-holding Trainers will be able to embark on a branched Special Research story, allowing you to research Steel- or Dragon-type Pokémon. The path you pick will determine certain rewards and bonuses, so choose carefully!", items: [
+      "To get the most out of these bonuses, be sure to pick up a global event ticket from the Pokémon GO Web Store and start the event Special Research story when it becomes available.",
+      "This Special Research will be available beginning on Saturday, November 14, 2026, at 10:00 a.m. local time."
+    ] },
+    { heading: "Steel-Type Path: Steel Scholar Medal", icon: "assets/pokemon-images/pokemon-types/POKEMON_TYPE_STEEL.png", intro: "Trainers who choose the Steel-type path will receive the following bonuses upon earning the Steel Scholar medal.", items: [
+      { text: "1 additional Candy XL awarded for catching Steel-type mighty Pokémon (Trainers level 31+)", img: "assets/pokemon-images/Items/RareXLCandy_PSD.png" },
+      { text: "Additional 1,000 Stardust for catching Steel-type mighty Pokémon", img: "assets/pokemon-images/Items/stardust_painted.png" }
+    ] },
+    { heading: "Dragon-Type Path: Dragon Defender Medal", icon: "assets/pokemon-images/pokemon-types/POKEMON_TYPE_DRAGON.png", intro: "Trainers who choose the Dragon-type path will receive the following bonuses upon earning the Dragon Defender medal.", items: [
+      { text: "1 additional Candy XL awarded for catching Dragon-type mighty Pokémon (Trainers level 31+)", img: "assets/pokemon-images/Items/RareXLCandy_PSD.png" },
+      { text: "Additional 1,000 Stardust for catching Dragon-type mighty Pokémon", img: "assets/pokemon-images/Items/stardust_painted.png" }
+    ] },
+    { heading: "Medal Bonus Timing", icon: "⏰", items: [
+      "These bonuses will be active upon claiming your type-themed in-game medal, and they will expire at the end of Pokémon GO Wild Area: Global on Sunday, November 15, 2026, at 6:00 p.m. local time.",
+      "Ticket-holding Trainers attending the real world Pokémon GO Wild Area events in Sendai and Mexico City will get the chance to collect both type-themed badges as a part of their event Special Research, and their bonuses will last until the end of the global event!"
+    ] },
+    { heading: "First look: All of the new avatar items you can collect during this year's Pokémon GO Wild Area!", icon: "assets/pokemon-images/Items/go_pass_deluxe.webp", items: [
+      "All Trainers can unlock the GO Wild Area 2026 Tee (Purple) as a reward in the free GO Pass: Into the Wild!",
+      "Trainers who upgrade to the paid GO Pass Deluxe: Into the Wild can unlock the Duraludon Pants as a reward as they progress.",
+      "GO Pass: Into the Wild and its upgraded version, GO Pass Deluxe, will be available from Monday, November 9, at 10:00 a.m. to Sunday, November 15, at 6:00 p.m. local time.",
+      "You can claim these avatar items, and all other rewards in GO Pass: Into the Wild, until Tuesday, November 17, at 11:59 p.m. local time."
+    ] },
+    { heading: "In-Game Shop Avatar Items", icon: "🛍️", intro: "The following avatar items will be available to purchase in the in-game shop during this event and will continue to be available after the event ends!", items: [
+      "Duraludon Helmet",
+      "Gigantamax Duraludon Backpack",
+      "Fighting-Type Jacket"
+    ] },
+    { heading: "New Avatar Pose", icon: "🕺", items: [
+      "Finally, ticket-holding Trainers who complete their event Special Research at the real-world Pokémon GO Wild Area events or Pokémon GO Wild Area: Global will receive an all-new avatar pose!"
+    ] },
+    { heading: "Update to Pokémon HOME Transfers", icon: "🏠", items: [
+      "Trainers can now send Pokémon caught in GO Safari Balls to Pokémon HOME!",
+      "The GO Safari Ball will display as a Strange Ball in Pokémon HOME."
+    ] },
+    { heading: "Don't forget your Adventure Effects!", icon: "✨", items: [
+      "Starting with the Into the Wild event, you'll be able to activate select Adventure Effects while in the lobby for a raid or Max Battle.",
+      "Want to give your group an edge in Max Battles during the event? Activate the Adventure Effects for Zacian's Behemoth Blade or Zamazenta's Behemoth Bash before starting a battle!",
+      "Plus, ticket-holding Trainers at the GO Wild Area events in Sendai and Mexico City will have early access to this new feature!"
+    ] },
+    { heading: "Prepare for the real world Pokémon GO Wild Area events in Sendai and Mexico City!", icon: "📍", items: [] },
+    { heading: "Preview your event map now!", icon: "🗺️", items: [
+      "You can get a head start on planning your visit by downloading and viewing the event map in advance.",
+      "View the Pokémon GO Wild Area: Sendai・Tohoku map here: https://pokemongo.com/gowildarea/sendai/experiences",
+      "View the Pokémon GO Wild Area: Mexico City map here: https://pokemongo.com/gowildarea/mexico-city/experiences"
+    ] },
+    { heading: "Add-ons are still available for Pokémon GO Wild Area!", icon: "🎟️", items: [
+      "There's still time to evolve your GO Wild Area fun with additional add-ons! You can enhance your event bonuses, add additional days of gameplay, and even preorder your event merchandise.",
+      "Ticket add-ons will be active Friday, November 6, through Sunday, November 8, 2026. That means you can take advantage of these bonuses all weekend!",
+      "Learn more and purchase your add-ons here: https://pokemongo.com/gowildarea"
+    ] },
+    { heading: "Notes", items: [
+      "Please be aware of your surroundings and follow guidelines from local health authorities when playing Pokémon GO. Upcoming events are subject to change. Be sure to follow us on social media, opt in to receiving push notifications, and subscribe to our emails to stay updated.",
+      "—The Pokémon GO team"
+    ] }
+  ] },
   { id: 72, date: "2026-11-02", published: "2026-11-02", updated: "2026-11-02", lastUpdated: "November 2, 2026 at 2:31 PM", title: "Gather beneath a starry sky during Twilight Wishes!", tag: "News", url: "https://pokemongo.com/en/news/twilight-wishes-2026", icon: "assets/pokemon-images/Event-Dex/regular/Gen-1_Kanto/0025_sun-male.webp", heroImg: "assets/News/twilight-wishes-2026.webp", body: "Twilight Wishes runs Tuesday, November 24, at 10:00 a.m. to Monday, November 30, 2026, at 8:00 p.m. local time, with an increased chance to encounter Shiny Staryu and Shiny Elgyem. Pikachu wearing a sun crown and Pikachu wearing a moon crown appear in one-star raids, Espeon wearing a sun scarf and Umbreon wearing a moon scarf in three-star raids, and Mega Beedrill, Mega Houndoom, Mega Sableye, and Mega Manectric in Mega Raids. Clefairy, Staryu, Elgyem, and Rockruff roam the wild, and for the Twilight Trails Season finale, Field Research brings back Applin, Maschiff, Gengar wearing a Spooky Festival costume, Drifblim wearing a Halloween Mischief costume, and Bramblin. GO Pass: Twilight Wishes unlocks Lucky trade and Lucky Friend boosts at Rank 1 and 2× Stardust at Rank 10 (3× with GO Pass Deluxe, US$4.99).", fullBody: "Twilight Wishes runs Tuesday, November 24, at 10:00 a.m. to Monday, November 30, 2026, at 8:00 p.m. local time. During the event you'll have an increased chance to encounter Shiny Staryu and Shiny Elgyem. Reach Major Milestones on your event GO Pass to unlock bonuses: Tier 1 at Rank 1 gives an increased chance to get Lucky Pokémon in trades and an increased chance to become Lucky Friends, and Tier 2 at Rank 10 gives 2× Stardust for catching Pokémon (3× with GO Pass Deluxe). Keep an eye out for additional bonus tasks for this GO Pass during the event. Stars will light up the skies during the event with colorful decor. In the wild you may encounter event-themed Pokémon including Clefairy, Staryu, Elgyem, and more, and you might even encounter Rockruff (Shiny possible for all). One-Star Raids feature Pikachu wearing a sun crown and Pikachu wearing a moon crown, Three-Star Raids feature Espeon wearing a sun scarf and Umbreon wearing a moon scarf, and Mega Raids feature Mega Beedrill, Mega Houndoom, Mega Sableye, and Mega Manectric, all Shiny possible. Event-themed Field Research tasks reward Mega Energy and encounters with event-themed Pokémon, including Staryu, Elgyem, and more. For the Season finale, Pokémon from throughout Twilight Trails will be available to encounter from Field Research tasks: Applin (Shiny possible) and Maschiff from November 24 at 10:00 a.m. to November 26 at 10:00 a.m., then Gengar wearing a Spooky Festival costume (Shiny possible), Drifblim wearing a Halloween Mischief costume (Shiny possible), and Bramblin from November 26 at 10:00 a.m. to November 30 at 8:00 p.m. GO Pass: Twilight Wishes is automatically granted on Tuesday, November 24, at 10:00 a.m. local time, and Trainers can collect GO Points and rank up through Monday, November 30, 2026, at 8:00 p.m. local time. Trainers can upgrade to the GO Pass Deluxe for US$4.99, or to the GO Pass Deluxe + 6 Ranks for US$6.99 to also automatically earn enough GO Points to reach Rank 7. The free GO Pass rewards encounters with event-themed Pokémon, a Star Piece, Rare Candy, Mega Energy for Beedrill, Houndoom, Sableye, and Manectric, and more, while GO Pass Deluxe adds additional encounters with even more event-themed Pokémon, an event-themed avatar pose, Star Pieces, Premium Battle Passes, and more. Rewards unlocked in the GO Pass expire Wednesday, December 2, 2026, at 8:00 p.m. local time. On the Pokémon GO Web Store, a GO Pass Deluxe purchase activates as soon as the GO Pass begins; upgrading to GO Pass Deluxe: Twilight Wishes gifts 10 Ultra Balls, five Max Revives, one Premium Battle Pass, and five Max Potions; upgrading to GO Pass Deluxe: Twilight Wishes + 6 Ranks instead gifts 10 Ultra Balls, five Max Revives, two Premium Battle Passes, and five Max Potions; and the web-exclusive GO Pass Deluxe: Twilight Wishes + 6 Ranks Ultra Box includes 20 Ultra Balls, 10 Max Revives, 10 Max Potions, and five Premium Battle Passes as a gift with purchase.", sections: [
     { heading: "Twilight Wishes", icon: "📅", items: [
       "Tuesday, November 24, at 10:00 a.m. to Monday, November 30, 2026, at 8:00 p.m. local time"
