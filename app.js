@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "4.079";
+const APP_VERSION = "4.080";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -1794,6 +1794,63 @@ const EVENTS = [
   { id: 216, title: "Pokémon GO Tour 2027: Alola", type: "GO Tour", url: "https://pokemongo.com/en/news/save-the-date-go-tour-2027", date: "2027-02-27", endDate: "2027-02-28", published: "2026-09-24", updated: "2026-09-25", lastUpdated: "September 25, 2026 at 2:42 PM", time: "Time TBA", whenText: "Saturday, February 27, and Sunday, February 28, 2027. Event hours to be announced.", color: "#F4A6C1", icon: "🌺", iconImg: "assets/pokemon-images/GO-Tour/gotour-2027.png", featured: false, summary: "Save the date! Pokémon GO Tour 2027 celebrates the Alola region worldwide on February 27–28, 2027, with in-person events in Kaohsiung, Taiwan, and Los Angeles, California, the weekend before. Featured Pokémon and full details are to be announced.", details: { bonuses: ["Event features and bonuses to be announced"], tips: ["Pokémon GO Tour 2027 celebrates the Alola region from Pokémon Sun, Pokémon Moon, Pokémon Ultra Sun, and Pokémon Ultra Moon.", "In-person Pokémon GO Tour events take place in Kaohsiung, Taiwan, and Los Angeles, California, from Friday, February 19, to Sunday, February 21, 2027.", "The global event on February 27–28 is the worldwide finale of this year's Pokémon GO Tour — no matter where you are, you can take part.", "Tickets for both the in-person experiences and the global in-game event will be available next Season, along with more details.", "Featured Pokémon, bonuses, and event hours have not yet been announced — check back closer to the date."] } },
   { id: 217, title: "Festival of Lights", type: "Region-Exclusive", url: "https://pokemongo.com/en/news/festival-of-lights-2026", date: "2026-11-06", endDate: "2026-11-08", startsAt: "2026-11-06T10:00:00", endsAt: "2026-11-08T20:00:00", time: "10:00 AM – 8:00 PM", whenText: "Friday, November 6, at 10:00 a.m. to Sunday, November 8, 2026, at 8:00 p.m. local time", published: "2026-09-25", updated: "2026-09-25", lastUpdated: "September 25, 2026 at 2:34 PM", color: "#F39C12", icon: "🪔", iconImg: "assets/pokemon-images/Event-Dex/regular/Gen-1_Kanto/0025_saree-female.webp", featured: true, summary: "The Festival of Lights returns to Pokémon GO — exclusive to Trainers in India — with Pikachu wearing a saree and Pikachu wearing a kurta both back in raids. Event-themed Pokémon appear more frequently in the wild during four Sparkle O'Clock windows each evening and are more likely to be attracted by Lure Modules. Complete Branched Timed Research (available from November 1) and Collection Challenges for XP, Stardust, stickers, and a Special Background Pikachu encounter.", details: { bossesTitle: "Featured Pokémon", bosses: ["Pikachu wearing a saree ✨ (Raid)", "Pikachu wearing a kurta ✨ (Raid)", "Charmander ✨ (Wild)", "Pikachu wearing a saree ✨ (Wild)", "Pikachu wearing a kurta ✨ (Wild)", "Chinchou ✨ (Wild)", "Mareep ✨ (Wild)", "Camerupt ✨ (Wild)", "Litwick ✨ (Wild)", "Lampent ✨ (Wild)", "Morelull ✨ (Wild)", "Tadbulb ✨ (Wild)"], bonuses: [{ text: "3× Lure Module duration", img: "assets/pokemon-images/Items/lure-module.png" }, { text: "Receive stickers featuring Pikachu wearing a saree or Pikachu wearing a kurta when spinning PokéStops", img: "assets/pokemon-images/Items/db/stickers.webp" }, "Some event-themed Pokémon will also glow", { text: "Branched Timed Research awarding XP, Stardust, stickers featuring Pikachu wearing a saree or Pikachu wearing a kurta, and an encounter with Pikachu wearing a saree ✨ or Pikachu wearing a kurta ✨ with a Special Background — available from Sunday, November 1 at 6:00 a.m. local time", img: "assets/pokemon-images/icons/green-research.png" }, "Collection Challenges — catch event-themed Pokémon for XP and Stardust"], tips: ["Exclusive to Trainers in India — this event is not available elsewhere.", "Sparkle O'Clock runs for five minutes at 6:00 p.m., 6:30 p.m., 7:00 p.m., and 7:30 p.m. local time, boosting wild spawn frequency for event-themed Pokémon.", "The Branched Timed Research is available starting Sunday, November 1, at 6:00 a.m. local time — well ahead of the main event window.", "The announcement doesn't specify a raid tier for Pikachu wearing a saree or Pikachu wearing a kurta, so they're listed simply as Raid here until a tier is confirmed.", "All event-themed Pokémon carry the standard Shiny rate — the announcement doesn't mention any boosted odds.", "Lure Modules last 3× as long and are more likely to attract event-themed Pokémon during the event."] } },
 ];
+
+// --- WEEKLY RECURRING EVENTS ---
+// Generated rather than hand-entered, so they continue every week until removed here.
+// To stop a series, delete it from WEEKLY_EVENT_SERIES. To skip one date, add it to skipDates
+// (the in-game calendar leaves out the week of Wild Area: Global).
+const WEEKLY_EVENTS_FIRST_DATE = "2026-11-08";
+const WEEKLY_EVENTS_WEEKS_AHEAD = 53;
+const WEEKLY_EVENT_SERIES = [
+  { key: 0, title: "Scenic Sunday", weekday: 0, color: "#27AE60", icon: "🌄", iconImg: "assets/pokemon-images/Items/Incense_0.png", skipDates: ["2026-11-15"] },
+  { key: 1, title: "Showcase Tuesday", weekday: 2, color: "#16A085", icon: "🏆", startHour: 10, endHour: 20, skipDates: ["2026-11-17"] },
+  { key: 2, title: "GO Battle Thursday", weekday: 4, color: "#3F51B5", icon: "⚔️", iconImg: "assets/pokemon-images/trainer-levels/go-battle-league-icon-colored.png", skipDates: ["2026-11-12"] },
+  { key: 3, title: "Friendship Friday", weekday: 5, color: "#E08E0B", icon: "🤝", iconImg: "assets/pokemon-images/Items/lucky_friend_applicator.png", skipDates: ["2026-11-13"] }
+];
+(function addWeeklyEvents() {
+  const pad = n => String(n).padStart(2, "0");
+  const key = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  const clock = h => h === 0 ? "12:00 AM" : h > 12 ? `${h - 12}:00 PM` : `${h}:00 AM`;
+  const horizon = new Date();
+  horizon.setDate(horizon.getDate() + WEEKLY_EVENTS_WEEKS_AHEAD * 7);
+  for (const series of WEEKLY_EVENT_SERIES) {
+    const d = new Date(WEEKLY_EVENTS_FIRST_DATE + "T12:00:00");
+    while (d.getDay() !== series.weekday) d.setDate(d.getDate() + 1);
+    for (; d <= horizon; d.setDate(d.getDate() + 7)) {
+      const date = key(d);
+      if (series.skipDates.includes(date)) continue;
+      const allDay = series.startHour == null;
+      const start = allDay ? 0 : series.startHour;
+      const timeText = `${clock(start)} – ${allDay ? "11:59 PM" : clock(series.endHour)}`;
+      const longDate = d.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" });
+      EVENTS.push({
+        // Stable per date so links keep working: well above hand-assigned ids.
+        id: 100000 + series.key * 100000 + Math.round(d.getTime() / 864e5),
+        recurring: true, seriesKey: series.key,
+        title: series.title, type: "Event", date, endDate: date,
+        startsAt: `${date}T${pad(start)}:00:00`,
+        endsAt: allDay ? `${date}T23:59:00` : `${date}T${pad(series.endHour)}:00:00`,
+        published: "2026-11-07", updated: "2026-11-07", lastUpdated: "November 7, 2026",
+        time: timeText, whenText: `${longDate}, ${timeText} local time.`,
+        color: series.color, icon: series.icon, iconImg: series.iconImg, featured: false,
+        summary: `${series.title} runs ${longDate}, ${timeText} local time.`,
+        details: {}
+      });
+    }
+  }
+})();
+
+// The Events tab lists only the next date of each weekly series, so ~200 future
+// dates don't bury everything else; the calendar and weekly digest show every date.
+function eventsForList(list) {
+  const seen = new Set();
+  return list.filter(e => {
+    if (!e.recurring) return true;
+    if (isOver(e) || seen.has(e.seriesKey)) return false;
+    seen.add(e.seriesKey);
+    return true;
+  });
+}
 
 const ANNOUNCEMENTS = [
   { id:74, date:"2026-11-05", published:"2026-11-05", updated:"2026-11-05", lastUpdated:"November 5, 2026 at 3:18 PM", title:"Dance under the moonlight during Clefable Super Mega Raid Day!", tag:"News", url:"https://pokemongo.com/en/news/clefable-super-mega-raid-day-2026", icon:"assets/pokemon-images/Mega/regular/Gen-1_Kanto/0036_mega.webp", heroImg:"assets/News/clefable-super-mega-raid-day-2026.webp", body:"Clefable Super Mega Raid Day runs Saturday, November 28, 2026, from 2:00 p.m. to 5:00 p.m. local time. Mega Clefable will make its Pokémon GO debut in Super Mega Raids, and its Mega Level can be increased all the way to Super Max for the first time. A Global Challenge, free event bonuses, Timed Research with a Premium Battle Pass and a Metagross encounter, and a US$4.99 event ticket are all part of the event.", fullBody:"Mega Clefable will make its Pokémon GO debut in Super Mega Raids on Saturday, November 28, 2026, from 2:00 p.m. to 5:00 p.m. local time. If you’re lucky, you may encounter a Shiny Clefable. You’ll be able to increase Mega Clefable’s Mega Level all the way up to Super Max Level for the first time in Pokémon GO. Clefable will now be able to use an additional Charged Attack, Moonblast+, when it’s Mega Evolved: 80 power in Trainer Battles, with a chance to reduce the opponent’s Attack by one stage, and 160 power in Raid Battles, with power increasing with the Pokémon’s Mega Level. You must increase a Pokémon’s Mega Level to the third level, Max, before you can increase it to Super Max, and you’ll need that Pokémon’s Mega Energy from Mega Raids to power it up. A Global Challenge runs from Friday, November 27, at 5:00 p.m. PST to Saturday, November 28, 2026, at 8:00 p.m. PST; based on the results, Mega Clefable receives bonuses from Monday, November 30, at 12:00 p.m. PST until Sunday, December 13, at 12:00 p.m. PST. Event bonuses include a Remote Raid limit of 20 from Friday, November 27, at 5:00 p.m. to Saturday, November 28, 2026, at 8:00 p.m. PST, up to six free Raid Passes from spinning Gym Photo Discs, Mega Level 1 unlocked on Clefable caught from Super Mega Raids, and an increased chance of encountering Shiny Clefable from Super Mega Raids. Timed Research earns a Premium Battle Pass and an encounter with Metagross. A US$4.99 ticket (or the equivalent pricing tier in your local currency) adds up to 14 Raid Passes from spinning Gym Photo Discs, an increased chance to get Rare Candy XL from Raid Battles, and an additional 5,000 XP and 5,000 Stardust from Super Mega Raids, effective Saturday, November 28, 2026, from 2:00 p.m. to 5:00 p.m. local time, and is available in the in-game shop until 5:00 p.m. local time that day. The Clefable Super Mega Raid Day Ultra Ticket Box (US$4.99) in the Pokémon GO Web Store includes an event ticket and a bonus Premium Battle Pass at no additional cost.", sections:[{"heading":"When","items":["Saturday, November 28, 2026, from 2:00 p.m. to 5:00 p.m. local time","Remote Raid limit increased to 20 from Friday, November 27, at 5:00 p.m. to Saturday, November 28, 2026, at 8:00 p.m. PST."]},{"heading":"Mega-Evolved Pokémon Debut", icon:"✨","showImages":true,"items":["The following Pokémon will make its Pokémon GO debut in Super Mega Raids!",{"name":"Mega Clefable"},"*If you’re lucky, you may encounter a Shiny Clefable!"]},{"heading":"New Mega Level: Super Max","items":["Now you’ll be able to increase Mega Clefable’s Mega Level all the way up to Super Max Level for the first time in Pokémon GO! Learn more here.","As discovered during Mega Finale, Pokémon that are eligible to unlock Super Max level can learn an additional Charged Attack while they’re Mega Evolved! Learn more here","Clefable will now be able to use an additional Charged Attack, Moonblast+, when it’s Mega Evolved.","Trainer Battles: 80 power, with a chance to reduce the opponent’s Attack by one stage.","Raid Battles: 160 power","The power of this attack will increase with the Pokémon’s Mega Level!","Remember: You must increase a Pokémon’s Mega Level to the third level, Max, before you can increase it to Super Max.","Participate in Mega Raids to help your Pokémon reach Super Max Level as Mega Evolving alone won’t be enough—you’ll need to use that Pokémon’s Mega Energy to power it up!"]},{"heading":"Global Challenge","items":["Get ready to take on a Global Challenge in celebration of Clefable Super Mega Raid Day event! Work with Trainers around the world to unlock as many tiers of the Global Challenge as possible by completing Raid Battles! The more tiers completed, the greater the bonus reward will be for Mega Clefable.","The challenge will be active from Friday, November 27, at 5:00 p.m. PST to Saturday, November 28, 2026, at 8:00 p.m. PST.","Based on the results of the Global Challenge, Mega Clefable will receive the following bonuses from Monday, November 30, at 12:00 p.m. PST until Sunday, December 13, at 12:00 p.m. PST","For Mega Clefable at the first Mega Level or higher, Moonblast+ will have its base power boosted.* **","Mega Clefable at Super Max Level will have its combat power boosted.**","*Bonus does not apply in the GO Battle League.","**The boost is based on the number of Global Challenge tiers that have been completed."]},{"heading":"Event Bonuses","items":["Remote Raid limit increased to 20 from Friday, November 27, at 5:00 p.m. to Saturday, November 28, 2026, at 8:00 p.m. PST.","Receive up to six free Raid Passes from spinning Gym Photo Discs.","Clefable caught from Super Mega Raids will have Mega Level 1 unlocked.","Increased chance of encountering Shiny Clefable from Super Mega Raids."]},{"heading":"Timed Research","items":["Timed Research will be available to Trainers during the event! Complete the research tasks to earn a Premium Battle Pass and an encounter with Metagross.","Please note that Timed Research expires. The tasks associated with Timed Research must be completed and their rewards must be claimed before the Timed Research ends."]},{"heading":"Event Ticket","items":["For US$4.99 (or the equivalent pricing tier in your local currency), you can purchase a ticket that grants the following bonuses.*","Receive up to 14 Raid Passes from spinning Gym Photo Discs.","Increased chance to get Rare Candy XL from Raid Battles.","An additional 5,000 XP from Super Mega Raids.","An additional 5,000 Stardust from Super Mega Raids.","These bonuses will be effective on Saturday, November 28, 2026, from 2:00 p.m. to 5:00 p.m. local time.","Trainers will be able to purchase and gift tickets to any of their Pokémon GO friends that they have achieved a Friendship level of Great Friends or higher with. Please note that purchases—including those made for other Trainers—are non-refundable (subject to applicable law and the exceptions set forth in the Terms of Service). Tickets cannot be purchased with PokéCoins.","*Please note that this ticket will only be available in the in-game shop until Saturday, November 28, 2026, at 5:00 p.m. local time."]},{"heading":"Where can I find Super Mega Raids?","items":["Super Mega Raids will take great teamwork and may only appear at certain Gyms, so we’re making it easier to find both these raids and other Trainers to help you take them on!","You can visit the Map to see the locations where Super Mega Raids might appear during an event, in addition to those in progress.","You can also filter the map, or check out nearby Events, to see nearby community meetups days in advance, allowing you to plan more seamlessly. These community meetups are hosted by a Community Ambassador, who receives official support to run Pokémon GO events for their communities. If there are no Community Ambassadors near you, you can also search for and find the meetups closest to you.","If you’ve never attended a meetup before, Super Mega Raids are a great reason to go out and meet your local community of Trainers for the first time. Coordinate more easily with friends, family, and other Trainers to raise the odds of success in battle together!"]},{"heading":"Pokémon GO Web Store – Clefable Super Mega Raid Day Ultra Ticket Box","items":["The Clefable Super Mega Raid Day Ultra Ticket Box will be available for US$4.99 (or the equivalent pricing tier in your local currency) and includes both an event ticket and a bonus Premium Battle Pass at no additional cost!","Check it out in the Pokémon GO Web Store soon! You never know what else you may find."]},{"heading":"Notes","items":["Article links: Learn more here (https://pokemongo.com/news/mega-evolution-2026-update), Learn more here (https://pokemongo.com/news/more-mega-updates-2026), Map (https://pokemongo.com/map), Events (https://pokemongo.com/events), Learn more and find your community (https://pokemongo.com/find-your-community), Pokémon GO Web Store (https://store.pokemongo.com/)","Please be aware of your surroundings and follow guidelines from local health authorities when playing Pokémon GO. Upcoming events are subject to change. Be sure to follow us on social media, opt in to receiving push notifications, and subscribe to our emails to stay updated.","—The Pokémon GO team"]}] },
@@ -12301,7 +12358,7 @@ function searchArchivedCDs(val) {
   const resultsEl = document.getElementById("cd-archive-results");
   if (!resultsEl || query.length < 1) { if (resultsEl) resultsEl.style.display = "none"; return; }
   const th = t(darkMode);
-  const matches = EVENTS.filter(e => (state.filter === "All" || e.type === state.filter) && isOver(e) && e.title.toLowerCase().includes(query)).slice(0, 10);
+  const matches = EVENTS.filter(e => !e.recurring && (state.filter === "All" || e.type === state.filter) && isOver(e) && e.title.toLowerCase().includes(query)).slice(0, 10);
   if (matches.length === 0) { resultsEl.innerHTML = `<div style="padding:12px;text-align:center;color:${th.textMuted};font-size:13px">No events found</div>`; resultsEl.style.display = "block"; return; }
   resultsEl.innerHTML = matches.map(ev => {
     const dateStr = formatDate(ev.date);
@@ -12325,7 +12382,7 @@ function toggleYear(y, e) {
   const existing = wrapper.querySelector("[data-year-content]");
   if (existing) existing.remove();
   if (isOpen) {
-    const filtered = [...EVENTS].sort((a, b) => new Date(a.date) - new Date(b.date));
+    const filtered = [...EVENTS].filter(e => !e.recurring).sort((a, b) => new Date(a.date) - new Date(b.date));
     const items = (state.filter !== "All" ? filtered.filter(e => e.type === state.filter) : filtered.filter(e => !isRegionExclusive(e)))
       .filter(e => isOver(e) && new Date(e.date + "T12:00:00").getFullYear() === Number(y))
       .sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -12613,7 +12670,7 @@ function render() {
   const isMobile = breakpoint === "mobile";
   const isDesktop = breakpoint === "desktop";
 
-  const filteredEvents = [...EVENTS].sort((a, b) => new Date(a.date) - new Date(b.date));
+  const filteredEvents = eventsForList([...EVENTS].sort((a, b) => new Date(a.date) - new Date(b.date)));
   const filtered = state.filter !== "All" ? filteredEvents.filter(e => e.type === state.filter) : filteredEvents.filter(e => !isRegionExclusive(e));
   const upcomingEvents = filtered.filter(e => !isOver(e));
   const pastEvents = filtered.filter(e => isOver(e));
@@ -12652,7 +12709,7 @@ function render() {
   const newsArchiveYears = Object.keys(archivedNewsByYearMonth).sort((a, b) => b - a);
 
   const activeEvents = EVENTS.filter(e => isActive(e) && !isRegionExclusive(e)).sort((a, b) => b.title.startsWith("Season:") - a.title.startsWith("Season:"));
-  const upcomingHero = EVENTS.filter(e => !isOver(e) && !isActive(e) && !isRegionExclusive(e)).sort((a, b) => new Date(a.date) - new Date(b.date))[0];
+  const upcomingHero = EVENTS.filter(e => !e.recurring && !isOver(e) && !isActive(e) && !isRegionExclusive(e)).sort((a, b) => new Date(a.date) - new Date(b.date))[0];
   const hero = upcomingHero || (activeEvents.length === 0 ? null : null);
 
   const mainPad = isMobile ? "16px 14px" : isDesktop ? "24px 32px" : "20px 24px";
