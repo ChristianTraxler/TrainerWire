@@ -4448,6 +4448,12 @@
    "Grass"
   ]
  },
+ "Shadow Tornadus (Incarnate Forme)": {
+  "types": [
+   "Flying"
+  ],
+  "weather": "Windy"
+ },
  "Shadow Thundurus (Incarnate Forme)": {
   "types": [
    "Electric",
