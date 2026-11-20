@@ -5699,5 +5699,22 @@
   "types": [
    "Dark"
   ]
+ },
+ "Chatot": {
+  "types": [
+   "Normal",
+   "Flying"
+  ]
+ },
+ "Oinkologne": {
+  "types": [
+   "Normal"
+  ]
+ },
+ "Jigglypuff": {
+  "types": [
+   "Normal",
+   "Fairy"
+  ]
  }
 }
