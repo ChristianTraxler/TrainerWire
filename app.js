@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "4.092";
+const APP_VERSION = "4.093";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -5046,6 +5046,7 @@ const WEB_STORE_BOXES = [
     oneTime: true,
     availableFrom: "2026-11-24",
     expires: "2026-12-01",
+    countdownEnds: "2026-12-01T20:00:00-08:00", // Web Store showed "7 DAYS LEFT" on November 24, 2026
     items: [
       { name: "GO Pass Deluxe", qty: 1, note: "November" },
       { name: "+10 Ranks", qty: 1000 },
@@ -5084,6 +5085,7 @@ const WEB_STORE_BOXES = [
     oneTime: true,
     availableFrom: "2026-11-24",
     expires: "2026-12-01",
+    countdownEnds: "2026-12-01T20:00:00-08:00", // Web Store showed "7 DAYS LEFT" on November 24, 2026
     items: [
       { name: "GO Pass Deluxe", qty: 1, note: "November" },
       { name: "Ultra Ball", qty: 10 },
@@ -5101,7 +5103,8 @@ const WEB_STORE_BOXES = [
     limitedLabel: "LIMITED-TIME ONLY",
     oneTime: true,
     availableFrom: "2026-11-24",
-    expires: "2026-11-30",
+    expires: "2026-12-01",
+    countdownEnds: "2026-12-01T20:00:00-08:00", // Web Store showed "7 DAYS LEFT" on November 24, 2026
     items: [
       { name: "GO Pass Deluxe", qty: 1, note: "Twilight Wishes" },
       { name: "+6 Ranks", qty: 600 },
@@ -5120,7 +5123,8 @@ const WEB_STORE_BOXES = [
     limitedLabel: "LIMITED-TIME ONLY",
     oneTime: true,
     availableFrom: "2026-11-24",
-    expires: "2026-11-30",
+    expires: "2026-12-01",
+    countdownEnds: "2026-12-01T20:00:00-08:00", // Web Store showed "7 DAYS LEFT" on November 24, 2026
     items: [
       { name: "GO Pass Deluxe", qty: 1, note: "Twilight Wishes" },
       { name: "+6 Ranks", qty: 600 },
@@ -5139,7 +5143,8 @@ const WEB_STORE_BOXES = [
     limitedLabel: "LIMITED-TIME ONLY",
     oneTime: true,
     availableFrom: "2026-11-24",
-    expires: "2026-11-30",
+    expires: "2026-12-01",
+    countdownEnds: "2026-12-01T20:00:00-08:00", // Web Store showed "7 DAYS LEFT" on November 24, 2026
     items: [
       { name: "GO Pass Deluxe", qty: 1, note: "Twilight Wishes" },
       { name: "Ultra Ball", qty: 10 },
@@ -12501,6 +12506,27 @@ function handleGuideScroll(el) {
   fade.style.opacity = distFromBottom < 10 ? "0" : "1";
 }
 
+// Black Friday 2026 (ANNOUNCEMENTS id 76): 2× Web Store Bonus Coins on bundles $19.99 and up,
+// one purchase each, November 8 at 5:00 p.m. PST to November 29, 2026, at 8:00 p.m. PST.
+const COIN_SALE = { label: "BLACK FRIDAY", startsAt: "2026-11-08T17:00:00-08:00", endsAt: "2026-11-28T20:00:00-08:00", // Web Store showed "4 DAYS LEFT" on November 24; exact end time not shown
+  endsText: "Sale ends Saturday, November 28, 2026 (Web Store countdown) · Can only be purchased 1 time",
+  // Separate one-time cards on the Web Store, shown after the regular bundles while the sale runs.
+  tiers: [
+    { coins: 2500, bonus: 400, price: 19.99, img: "Item_COIN_BUCKET_01.png", label: "Black Friday 2,900", rewardPoints: 240 },
+    { coins: 5200, bonus: 800, price: 39.99, img: "Item_COIN_BOX_01.png", label: "Black Friday 6,000", rewardPoints: 480 },
+    { coins: 14500, bonus: 2000, price: 99.99, img: "Item_COIN_HEAP_01.png", label: "Black Friday 16,500", rewardPoints: 1200 }
+  ] };
+// Pulsing pink "SALE" tag next to Deal Check in the menus while a PokéCoin sale runs.
+function navSaleTag(id) {
+  return id === "store" && coinSaleOn() ? '<span style="margin-left:8px;font-size:10px;font-weight:800;letter-spacing:0.5px;color:#fff;background:linear-gradient(90deg,#EC5A7B,#F06A8A);padding:2px 7px;border-radius:10px;animation:pulse 2s ease-in-out infinite;vertical-align:middle">SALE</span>' : "";
+}
+function coinSaleOn() { return Date.now() >= Date.parse(COIN_SALE.startsAt) && Date.now() < Date.parse(COIN_SALE.endsAt); }
+// Redraw once when the sale ends so the SALE tags (menus, PokéCoins filter) and sale cards drop off an open page.
+(function scheduleCoinSaleEnd() {
+  const ms = Date.parse(COIN_SALE.endsAt) - Date.now();
+  if (ms > 0 && ms < 2147483647) setTimeout(function() { if (typeof render === "function") render(); }, ms + 1000);
+})();
+
 function renderCoinTiers(th, isMobile) {
   const tiers = [
     { coins: 100, bonus: 10, price: 0.99, img: "Item_COIN_HANDFUL_01.png", label: "Handful" },
@@ -12511,6 +12537,8 @@ function renderCoinTiers(th, isMobile) {
     { coins: 14500, bonus: 1000, price: 99.99, img: "Item_COIN_HEAP_01.png", label: "Heap" }
   ];
   const baseRate = tiers[0].price / (tiers[0].coins + tiers[0].bonus);
+  const saleOn = coinSaleOn();
+  if (saleOn) tiers.unshift.apply(tiers, COIN_SALE.tiers.map(function(t) { return Object.assign({ sale: t }, t); })); // sale cards first
   const bestVal = tiers.reduce(function(best, t) { var v = (t.coins + t.bonus) / t.price; return v > best ? v : best; }, 0);
   var imgSize = isMobile ? 48 : 56;
   return tiers.map(function(tier, i) {
@@ -12524,28 +12552,34 @@ function renderCoinTiers(th, isMobile) {
     else if (savingsPct >= 15) { rating = "Great"; ratingColor = "#3498DB"; }
     else if (savingsPct >= 5) { rating = "Good"; ratingColor = "#F39C12"; }
     else { rating = "Base Rate"; ratingColor = th.textMuted; }
-    var cheaperHTML = i > 0 ? '<span style="font-size:' + (isMobile ? 10 : 11) + 'px;font-weight:700;color:#2ECC71">' + savingsPct + '% cheaper</span>' : "";
+    var cheaperHTML = (tier.sale || i > (saleOn ? COIN_SALE.tiers.length : 0)) ? '<span style="font-size:' + (isMobile ? 10 : 11) + 'px;font-weight:700;color:#2ECC71">' + savingsPct + '% cheaper</span>' : "";
     var bonusColor = "#F39C12";
-    var borderColor = isBest ? "#2ECC71" : th.border;
+    var borderColor = tier.sale ? "#EC5A7B" : isBest ? "#2ECC71" : th.border;
+    var saleDays = Math.max(0, Math.floor((Date.parse(COIN_SALE.endsAt) - Date.now()) / 864e5));
+    var saleTop = '<div style="background:linear-gradient(90deg,#EC5A7B,#F06A8A);color:#fff;text-align:center;font-weight:800;letter-spacing:0.6px;font-size:' + (isMobile ? 12 : 13) + 'px;padding:8px 12px">\u23F1\uFE0F ' + (saleDays < 1 ? "LAST DAY" : saleDays + " DAYS LEFT") + ' \u00B7 BLACK FRIDAY SALE</div>';
+    var saleBottom = '<div style="margin-top:auto;background:linear-gradient(90deg,#6A3FA0,#8E3A7E);color:#fff;text-align:center;font-weight:800;letter-spacing:0.5px;font-size:' + (isMobile ? 11 : 12) + 'px;padding:9px 12px;display:flex;align-items:center;justify-content:center;gap:6px"><img src="assets/pokemon-images/Items/pokecoin.png" style="width:16px;height:16px" alt="" />x2 WEB STORE BONUS COINS INCLUDED</div>';
     var ratingIcon = isBest ? "\uD83C\uDFC6" : savingsPct >= 15 ? "\u2705" : savingsPct >= 5 ? "\u2696\uFE0F" : "\u26AA";
-    return '<div style="background:' + th.surface + ';border:1.5px solid ' + borderColor + ';border-radius:' + (isMobile ? 18 : 20) + 'px;overflow:hidden;transition:all 0.25s ease;box-shadow:' + th.shadow + '"'
+    return '<div style="background:' + th.surface + ';border:' + (tier.sale ? 2.5 : 1.5) + 'px solid ' + borderColor + (tier.sale ? ';display:flex;flex-direction:column' : '') + ';border-radius:' + (isMobile ? 18 : 20) + 'px;overflow:hidden;transition:all 0.25s ease;box-shadow:' + th.shadow + '"'
       + ' onmouseenter="this.style.borderColor=\'' + ratingColor + '\';this.style.transform=\'translateY(-3px)\';this.style.boxShadow=\'0 8px 25px ' + ratingColor + '22\'"'
       + ' onmouseleave="this.style.borderColor=\'' + borderColor + '\';this.style.transform=\'translateY(0)\';this.style.boxShadow=\'' + th.shadow + '\'">'
+      + (tier.sale ? saleTop : '')
       + '<div style="padding:' + (isMobile ? "16px 16px 12px" : "20px 24px 16px") + ';display:flex;flex-direction:column;gap:10px">'
         // Title row with image, name, price
         + '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">'
           + '<div style="display:flex;align-items:center;gap:' + (isMobile ? 10 : 12) + 'px;flex:1;min-width:0">'
             + '<img src="assets/pokemon-images/Items/' + tier.img + '" style="width:' + imgSize + 'px;height:' + imgSize + 'px;object-fit:contain;flex-shrink:0" alt="' + tier.label + '" />'
             + '<div>'
-              + '<h3 style="margin:0;font-size:' + (isMobile ? 15 : 17) + 'px;font-weight:800;color:' + th.text + ';line-height:1.3">' + tier.coins.toLocaleString() + ' Pok\u00E9Coins</h3>'
+              + '<h3 style="margin:0;font-size:' + (isMobile ? 15 : 17) + 'px;font-weight:800;color:' + th.text + ';line-height:1.3">' + (tier.sale ? total : tier.coins).toLocaleString() + ' Pok\u00E9Coins</h3>'
               + '<div style="display:flex;align-items:center;gap:6px;margin-top:6px;flex-wrap:wrap">'
                 + '<span style="font-size:9px;font-weight:700;color:' + bonusColor + ';background:' + th.accentBg(bonusColor) + ';padding:3px 8px;border-radius:20px">+' + tier.bonus.toLocaleString() + ' BONUS</span>'
-                + (isBest ? '<span style="font-size:9px;font-weight:800;color:#fff;background:linear-gradient(135deg,#2ECC71,#27AE60);padding:3px 10px;border-radius:20px;letter-spacing:0.5px">\uD83C\uDFC6 BEST VALUE</span>' : "")
+                + (tier.sale ? '<span style="display:inline-flex;flex-direction:column;align-items:center;line-height:1.25;font-size:9px;font-weight:800;color:#fff;background:#111;padding:4px 10px;border-radius:12px;letter-spacing:0.5px;white-space:nowrap"><span>🛍️ ' + COIN_SALE.label + '</span><span>2× BONUS</span></span>' : "")
+                + (isBest && !tier.sale ? '<span style="font-size:9px;font-weight:800;color:#fff;background:linear-gradient(135deg,#2ECC71,#27AE60);padding:3px 10px;border-radius:20px;letter-spacing:0.5px">\uD83C\uDFC6 BEST VALUE</span>' : "")
               + '</div>'
             + '</div>'
           + '</div>'
-          + '<div style="text-align:right;flex-shrink:0">'
+          + '<div style="display:flex;align-items:center;gap:' + (isMobile ? 8 : 10) + 'px;flex-shrink:0">'
             + '<div style="font-size:' + (isMobile ? 22 : 26) + "px;font-weight:900;color:" + th.text + ";font-family:'JetBrains Mono',monospace\">$" + tier.price.toFixed(2) + '</div>'
+            + (tier.sale ? '<img src="assets/pokemon-images/icons/image.gif" style="width:' + (isMobile ? 36 : 42) + 'px;height:' + (isMobile ? 36 : 42) + 'px;object-fit:contain" alt="Web Store bundle" />' : '')
           + '</div>'
         + '</div>'
         // Rating bar
@@ -12563,9 +12597,14 @@ function renderCoinTiers(th, isMobile) {
             + '<span style="font-size:' + (isMobile ? 11 : 12) + "px;font-weight:700;color:" + th.textSecondary + ";font-family:'JetBrains Mono',monospace\">base</span>"
           + '</div>'
           + '<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid ' + th.border + '">'
-            + '<span style="font-size:' + (isMobile ? 12 : 13) + 'px;font-weight:600;color:' + th.text + '">' + tier.bonus.toLocaleString() + 'x Web Store Bonus Coins</span>'
+            + '<span style="font-size:' + (isMobile ? 12 : 13) + 'px;font-weight:600;color:' + th.text + '">' + tier.bonus.toLocaleString() + 'x Web Store Bonus Coins' + (tier.sale ? ' (2× Black Friday)' : '') + '</span>'
             + '<span style="font-size:' + (isMobile ? 11 : 12) + 'px;font-weight:700;color:' + bonusColor + '">FREE</span>'
           + '</div>'
+          + (tier.sale ? '<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid ' + th.border + '">'
+            + '<span style="font-size:' + (isMobile ? 12 : 13) + 'px;font-weight:600;color:' + th.text + '">' + tier.sale.rewardPoints.toLocaleString() + 'x Reward Points</span>'
+            + '<span style="font-size:' + (isMobile ? 11 : 12) + 'px;font-weight:700;color:' + bonusColor + '">FREE</span>'
+          + '</div>'
+          + '<div style="padding:6px 0;font-size:' + (isMobile ? 11 : 12) + 'px;font-weight:600;color:' + th.textSecondary + '">⏳ ' + COIN_SALE.endsText + '</div>' : '')
         + '</div>'
         // Bottom stats
         + '<div style="display:flex;align-items:center;justify-content:space-between;padding-top:4px">'
@@ -12576,6 +12615,7 @@ function renderCoinTiers(th, isMobile) {
           + '<span style="font-size:' + (isMobile ? 11 : 12) + 'px;font-weight:600;color:' + th.textMuted + '">' + total.toLocaleString() + ' total</span>'
         + '</div>'
       + '</div>'
+      + (tier.sale ? saleBottom : '')
     + '</div>';
   }).join("");
 }
@@ -14317,7 +14357,7 @@ function render() {
       const sortedBoxes = [...activeEventBundles, ...otherBoxes];
       const catPillsHTML = STORE_CATEGORIES.map(cat => {
         const isActive = state.storeFilter === cat;
-        return `<button onclick="setStoreFilter('${cat}')" style="padding:${isMobile ? "6px 14px" : "7px 16px"};border-radius:20px;border:1.5px solid ${isActive ? "#E74C3C" : th.border};background:${isActive ? th.accentBg("#E74C3C") : th.surface};color:${isActive ? "#E74C3C" : th.textSecondary};font-size:${isMobile ? 11 : 12}px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s ease;white-space:nowrap">${cat}</button>`;
+        return `<button onclick="setStoreFilter('${cat}')" style="padding:${isMobile ? "6px 14px" : "7px 16px"};border-radius:20px;border:1.5px solid ${isActive ? "#E74C3C" : th.border};background:${isActive ? th.accentBg("#E74C3C") : th.surface};color:${isActive ? "#E74C3C" : th.textSecondary};font-size:${isMobile ? 11 : 12}px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s ease;white-space:nowrap;display:inline-flex;align-items:center;gap:6px">${cat}${cat === "Pok\u00E9Coins" && coinSaleOn() ? `<span style="font-size:${isMobile ? 9 : 10}px;font-weight:800;letter-spacing:0.5px;color:#fff;background:linear-gradient(90deg,#EC5A7B,#F06A8A);padding:2px 7px;border-radius:10px;animation:pulse 2s ease-in-out infinite">SALE</span>` : ""}</button>`;
       }).join("");
       const boxCardsHTML = sortedBoxes.map(box => {
         const v = calcBoxValue(box);
@@ -14353,6 +14393,7 @@ function render() {
         const oneTimeHTML = box.oneTime ? `<span style="font-size:9px;font-weight:700;color:${th.textMuted};background:${th.accentBgSubtle("#888")};padding:3px 8px;border-radius:20px;white-space:nowrap">ONE-TIME</span>` : "";
         const ratingIcon = v.rating === "Great Deal" ? "\uD83D\uDD25" : v.rating === "Good Deal" ? "\u2705" : v.rating === "Fair" ? "\u2696\uFE0F" : "\u274C";
         return `<div style="background:${th.surface};border:1.5px solid ${th.border};border-radius:${isMobile ? 18 : 20}px;overflow:hidden;transition:all 0.25s ease;box-shadow:${th.shadow}" onmouseenter="this.style.borderColor='${v.ratingColor}';this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 25px ${v.ratingColor}22'" onmouseleave="this.style.borderColor='${th.border}';this.style.transform='translateY(0)';this.style.boxShadow='${th.shadow}'">
+          ${box.countdownEnds && Date.now() < Date.parse(box.countdownEnds) ? (() => { const d = Math.floor((Date.parse(box.countdownEnds) - Date.now()) / 864e5); return `<div style="background:linear-gradient(90deg,#EC5A7B,#F06A8A);color:#fff;text-align:center;font-weight:800;letter-spacing:0.6px;font-size:${isMobile ? 12 : 13}px;padding:8px 12px">\u23F1\uFE0F ${d < 1 ? "LAST DAY" : d === 1 ? "1 DAY LEFT" : d + " DAYS LEFT"}</div>`; })() : ""}
           <div style="padding:${isMobile ? "16px 16px 12px" : "20px 24px 16px"};display:flex;flex-direction:column;gap:10px">
             <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap">
               <div style="flex:1;min-width:0">
@@ -14895,7 +14936,7 @@ function render() {
             <div class="nav-dropdown-menu-inner" style="background:${th.surface};border:1.5px solid ${th.border};box-shadow:0 8px 30px rgba(0,0,0,0.12)">
             ${dropdownItems.map(d => {
               const active = state.tab === d.id;
-              return `<button class="nav-dropdown-item" onclick="event.stopPropagation();setTab('${d.id}')" style="color:${active ? "#E74C3C" : th.text};font-weight:${active ? "700" : "600"};background:${active ? th.accentBg("#E74C3C") : "transparent"}" onmouseenter="if(!${active})this.style.background='${th.surfaceHover}'" onmouseleave="if(!${active})this.style.background='${active ? th.accentBg("#E74C3C") : "transparent"}'">${d.iconImg ? `<span style="width:20px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0"><img src="${d.iconImg}" style="width:${d.iconSize||16}px;height:${d.iconSize||16}px;object-fit:contain" /></span>` : `<span style="font-size:${d.iconSize||15}px;line-height:1">${d.icon}</span>`} ${d.label}</button>`;
+              return `<button class="nav-dropdown-item" onclick="event.stopPropagation();setTab('${d.id}')" style="color:${active ? "#E74C3C" : th.text};font-weight:${active ? "700" : "600"};background:${active ? th.accentBg("#E74C3C") : "transparent"}" onmouseenter="if(!${active})this.style.background='${th.surfaceHover}'" onmouseleave="if(!${active})this.style.background='${active ? th.accentBg("#E74C3C") : "transparent"}'">${d.iconImg ? `<span style="width:20px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0"><img src="${d.iconImg}" style="width:${d.iconSize||16}px;height:${d.iconSize||16}px;object-fit:contain" /></span>` : `<span style="font-size:${d.iconSize||15}px;line-height:1">${d.icon}</span>`} ${d.label}${navSaleTag(d.id)}</button>`;
             }).join("")}
             </div>
           </div>
@@ -14908,7 +14949,7 @@ function render() {
             <div class="nav-dropdown-menu-inner" style="background:${th.surface};border:1.5px solid ${th.border};box-shadow:0 8px 30px rgba(0,0,0,0.12)">
             ${moreDropdownItems.map(d => {
               const active = state.tab === d.id;
-              return `<button class="nav-dropdown-item" onclick="event.stopPropagation();setTab('${d.id}')" style="color:${active ? "#E74C3C" : th.text};font-weight:${active ? "700" : "600"};background:${active ? th.accentBg("#E74C3C") : "transparent"}" onmouseenter="if(!${active})this.style.background='${th.surfaceHover}'" onmouseleave="if(!${active})this.style.background='${active ? th.accentBg("#E74C3C") : "transparent"}'">${d.iconImg ? `<span style="width:20px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0"><img src="${d.iconImg}" style="width:${d.iconSize||16}px;height:${d.iconSize||16}px;object-fit:contain" /></span>` : `<span style="font-size:${d.iconSize||15}px;line-height:1">${d.icon}</span>`} ${d.label}</button>`;
+              return `<button class="nav-dropdown-item" onclick="event.stopPropagation();setTab('${d.id}')" style="color:${active ? "#E74C3C" : th.text};font-weight:${active ? "700" : "600"};background:${active ? th.accentBg("#E74C3C") : "transparent"}" onmouseenter="if(!${active})this.style.background='${th.surfaceHover}'" onmouseleave="if(!${active})this.style.background='${active ? th.accentBg("#E74C3C") : "transparent"}'">${d.iconImg ? `<span style="width:20px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0"><img src="${d.iconImg}" style="width:${d.iconSize||16}px;height:${d.iconSize||16}px;object-fit:contain" /></span>` : `<span style="font-size:${d.iconSize||15}px;line-height:1">${d.icon}</span>`} ${d.label}${navSaleTag(d.id)}</button>`;
             }).join("")}
             </div>
           </div>
@@ -15212,7 +15253,7 @@ function renderSidebar(th) {
           return `<div>
             <button onclick="const sub=this.nextElementSibling;const open=sub.style.maxHeight!=='0px'&&sub.style.maxHeight!=='';const h=sub.scrollHeight;if(open){sub.style.maxHeight=sub.scrollHeight+'px';sub.offsetHeight;sub.style.maxHeight='0px';sub.style.opacity='0'}else{sub.style.maxHeight=h+'px';sub.style.opacity='1';setTimeout(()=>{sub.style.maxHeight='none'},300)};this.querySelector('.sb-arrow').style.transform=open?'rotate(-90deg)':'rotate(0deg)'" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;border:none;background:${isGroupActive ? th.accentBgSubtle("#E74C3C") : "transparent"};cursor:pointer;font-family:inherit;transition:background 0.15s ease;width:100%;text-align:left">
               <span style="font-size:20px">${t.icon}</span>
-              <span style="font-size:16px;font-weight:${isGroupActive ? "700" : "600"};color:${isGroupActive ? th.text : th.textSecondary};flex:1">${t.label}</span>
+              <span style="font-size:16px;font-weight:${isGroupActive ? "700" : "600"};color:${isGroupActive ? th.text : th.textSecondary};flex:1">${t.label}${t.id === "more" ? navSaleTag("store") : ""}</span>
               <svg class="sb-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="${th.textMuted}" stroke-width="2" stroke-linecap="round" style="transition:transform 0.2s ease;transform:${isCurrentOpen ? "rotate(0deg)" : "rotate(-90deg)"}"><path d="M3 4.5l3 3 3-3"/></svg>
             </button>
             <div style="display:flex;flex-direction:column;gap:2px;padding-left:20px;overflow:hidden;transition:max-height 0.3s cubic-bezier(0.25,0.46,0.45,0.94),opacity 0.25s ease;max-height:${isCurrentOpen ? "none" : "0px"};opacity:${isCurrentOpen ? "1" : "0"}">
@@ -15220,7 +15261,7 @@ function renderSidebar(th) {
                 onmouseenter="this.style.background='${th.surfaceHover}'"
                 onmouseleave="this.style.background='${state.tab === st.id ? th.accentBgSubtle("#E74C3C") : "transparent"}'">
                 ${st.iconImg ? `<span style="display:flex;align-items:center;justify-content:center;width:22px"><img src="${st.iconImg}" style="width:${st.iconSize||22}px;height:${st.iconSize||22}px;object-fit:contain;position:relative;top:-4px" alt="${st.label}" /></span>` : `<span style="font-size:${st.iconSize||18}px">${st.icon}</span>`}
-                <span style="font-size:15px;font-weight:${state.tab === st.id ? "700" : "600"};color:${state.tab === st.id ? th.text : th.textSecondary}">${st.label}</span>
+                <span style="font-size:15px;font-weight:${state.tab === st.id ? "700" : "600"};color:${state.tab === st.id ? th.text : th.textSecondary}">${st.label}</span>${navSaleTag(st.id)}
               </button>`).join("")}
             </div>
           </div>`;
@@ -15229,7 +15270,7 @@ function renderSidebar(th) {
         onmouseenter="this.style.background='${th.surfaceHover}'"
         onmouseleave="this.style.background='${state.tab === t.id ? th.accentBgSubtle("#E74C3C") : "transparent"}'">
         ${t.iconImg ? `<img src="${t.iconImg}" style="width:28px;height:28px;object-fit:contain" alt="${t.label}" />` : `<span style="font-size:20px">${t.icon}</span>`}
-        <span style="font-size:16px;font-weight:${state.tab === t.id ? "700" : "600"};color:${state.tab === t.id ? th.text : th.textSecondary}">${t.label}</span>
+        <span style="font-size:16px;font-weight:${state.tab === t.id ? "700" : "600"};color:${state.tab === t.id ? th.text : th.textSecondary}">${t.label}</span>${navSaleTag(t.id)}
       </button>`;
       }).join("")}
     </div>
