@@ -1428,6 +1428,12 @@
    "Ice"
   ]
  },
+ "Frillish": {
+  "types": [
+   "Water",
+   "Ghost"
+  ]
+ },
  "Froakie": {
   "types": [
    "Water"
@@ -3259,6 +3265,12 @@
    "Fairy"
   ]
  },
+ "Mimikyu": {
+  "types": [
+   "Ghost",
+   "Fairy"
+  ]
+ },
  "Minccino": {
   "types": [
    "Normal"
@@ -3271,6 +3283,11 @@
   "types": [
    "Rock",
    "Flying"
+  ]
+ },
+ "Minun": {
+  "types": [
+   "Electric"
   ]
  },
  "Moltres": {
@@ -3286,6 +3303,12 @@
   "types": [
    "Grass",
    "Fairy"
+  ]
+ },
+ "Morpeko": {
+  "types": [
+   "Electric",
+   "Dark"
   ]
  },
  "Mudbray": {
@@ -3311,6 +3334,11 @@
  "Munna": {
   "types": [
    "Psychic"
+  ]
+ },
+ "Nacli": {
+  "types": [
+   "Rock"
   ]
  },
  "Necrozma": {
@@ -3610,6 +3638,11 @@
   "cpBoost": "616–670",
   "weather": "Rain"
  },
+ "Pikachu Libre": {
+  "types": [
+   "Electric"
+  ]
+ },
  "Pikachu wearing a Cosmog-themed spacesuit": {
   "types": [
    "Electric"
@@ -3652,6 +3685,11 @@
  "Piplup": {
   "types": [
    "Water"
+  ]
+ },
+ "Plusle": {
+  "types": [
+   "Electric"
   ]
  },
  "Politoed": {
