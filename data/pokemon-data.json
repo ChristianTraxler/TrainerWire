@@ -1687,6 +1687,12 @@
    "Normal"
   ]
  },
+ "Gigantamax Toxtricity": {
+  "types": [
+   "Electric",
+   "Poison"
+  ]
+ },
  "Gigantamax Venusaur": {
   "types": [
    "Grass",
@@ -2813,6 +2819,12 @@
   "cpBoost": "3321–3445",
   "weather": "Windy"
  },
+ "Mega Drampa": {
+  "types": [
+   "Normal",
+   "Dragon"
+  ]
+ },
  "Mega Falinks": {
   "types": [
    "Fighting"
@@ -2820,6 +2832,12 @@
   "cp": "2010–2097",
   "cpBoost": "2512–2621",
   "weather": "Cloudy"
+ },
+ "Mega Froslass": {
+  "types": [
+   "Ice",
+   "Ghost"
+  ]
  },
  "Mega Gallade": {
   "types": [
