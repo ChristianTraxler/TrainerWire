@@ -5772,5 +5772,32 @@
    "Normal",
    "Fairy"
   ]
+ },
+ "Pyukumuku": {
+  "types": [
+   "Water"
+  ]
+ },
+ "Slowking": {
+  "types": [
+   "Water",
+   "Psychic"
+  ]
+ },
+ "Slakoth": {
+  "types": [
+   "Normal"
+  ]
+ },
+ "Lotad": {
+  "types": [
+   "Water",
+   "Grass"
+  ]
+ },
+ "Shroomish": {
+  "types": [
+   "Grass"
+  ]
  }
 }
