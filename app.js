@@ -1,7 +1,7 @@
 // --- CONSTANTS ---
 const COMMUNITY_NAME = "TrainerWire";
 const COMMUNITY_TAGLINE = "Your Local Pokémon GO Event & News Center";
-const APP_VERSION = "4.095";
+const APP_VERSION = "4.096";
 const REPORT_EMAIL = "reportissue2trainerwire@gmail.com";
 
 // --- POKEMON IMAGE LOOKUP ---
@@ -8367,6 +8367,11 @@ const GO_SHINY_RELEASE_AT = {
   pyukumuku: "2026-12-01T10:00:00", // Shiny Pyukumuku debuts at Tropical Paradise (EVENTS id 307)
   "inteleon-gigantamax": "2026-12-05T14:00:00" // Shiny Gigantamax Inteleon debuts at Gigantamax Inteleon Max Battle Day (EVENTS id 247)
 };
+// Forms whose shiny ART the sprite card may show before the release above. The "Shiny" availability
+// pill still waits for GO_SHINY_RELEASE_AT, so the art can be previewed without claiming it's catchable.
+const GO_SHINY_ART_PREVIEW = new Set([
+  "inteleon-gigantamax" // user request: preview the art now, pill flips to available Dec 5, 2026 at 2:00 p.m.
+]);
 // Single source of truth for "is this form's shiny actually catchable right now" — every caller
 // (the sprite card, the Pokedex Details availability pill, the Family grid's shiny chips) must
 // route through this rather than reading flags.isShinyReleased directly, so a scheduled release
@@ -12156,7 +12161,7 @@ function renderGoImageCard(go, data, primaryColor, th, isMobile) {
   // circle-and-slash placeholder instead of art, at the same box size, so the layout stays
   // identical either way rather than collapsing to a single sprite. goShinyReleased is the same
   // check the Pokedex Details availability pill uses, so the two never disagree.
-  const showShinyArt = goShinyReleased(go);
+  const showShinyArt = goShinyReleased(go) || !!(go && GO_SHINY_ART_PREVIEW.has(go.slug));
   // Shared by the row's own gap (spriteRowHtml below) and the mobile fluid-width calc so the two
   // can never drift out of sync with each other.
   const pairGap = isMobile ? 14 : 22;
